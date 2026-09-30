@@ -45,6 +45,10 @@ def segments(ids=None, force=False):
         if not frames_complete(sid):
             print('frames incomplete, skip', sid)
             continue
+        k = scene_base.all_ids().index(sid)
+        if k > 0 and not frames_complete(scene_base.all_ids()[k - 1]):
+            print('previous scene frames incomplete (cross-fade), skip', sid)
+            continue
         compose.compose(sid)
 
 
@@ -61,7 +65,7 @@ def srt(path=None):
     for sc in tl['scenes']:
         for b in sc['beats']:
             text = b['text']
-            parts = re.split(r'(?<=[.!?])\s+', text)
+            parts = re.split(r'(?<=[^.][.!?])\s+', text)
             # distribute the beat duration over sentences by length
             total = sum(len(p) for p in parts) or 1
             t = b['start']
@@ -72,8 +76,14 @@ def srt(path=None):
     path = path or os.path.join(C.OUTPUT, 'subsea_well_lifecycle.en.srt')
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'w') as fh:
+        import textwrap
         for i, (a, b, txt) in enumerate(cues, 1):
-            fh.write(f'{i}\n{fmt_ts(a)} --> {fmt_ts(b)}\n{txt}\n\n')
+            lines = textwrap.wrap(txt, 48)
+            if len(lines) > 2:
+                half = (len(txt) + 1) // 2
+                cut = txt.rfind(' ', 0, half + 10)
+                lines = [txt[:cut], txt[cut + 1:]]
+            fh.write(f'{i}\n{fmt_ts(a)} --> {fmt_ts(b)}\n' + '\n'.join(lines) + '\n\n')
     print('subtitles ->', path)
     return path
 
@@ -99,7 +109,9 @@ def chapters_meta(path):
                      f'title={title}\n\n')
 
 
-def final(crf=20, name='subsea_well_lifecycle_1080p.mp4', maxrate=None):
+def final(target_mb=95.0, name='subsea_well_lifecycle_1080p.mp4', audio_kbps=128):
+    """Concatenate segments, add soundtrack + chapters, 2-pass encode to a size target
+    (GitHub rejects files above 100 MB)."""
     import audio
     ids = scene_base.all_ids()
     missing = [s for s in ids if not os.path.exists(seg_path(s))]
@@ -119,14 +131,18 @@ def final(crf=20, name='subsea_well_lifecycle_1080p.mp4', maxrate=None):
     chapters_meta(meta)
     os.makedirs(C.OUTPUT, exist_ok=True)
     out = os.path.join(C.OUTPUT, name)
-    venc = ['-c:v', 'libx264', '-preset', 'slow', '-crf', str(crf), '-tune', 'animation',
-            '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-movflags', '+faststart']
-    if maxrate:
-        venc += ['-maxrate', maxrate, '-bufsize', maxrate]
+    dur = json.load(open(C.TIMELINE))['duration']
+    vk = int(target_mb * 8e3 / dur - audio_kbps - 8)
+    passlog = os.path.join(C.BUILD, 'x264pass')
+    common = ['-c:v', 'libx264', '-preset', 'slow', '-b:v', f'{vk}k', '-tune', 'animation',
+              '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-passlogfile', passlog]
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', joined] + common +
+                   ['-pass', '1', '-an', '-f', 'null', '/dev/null'], check=True)
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', joined, '-i', snd, '-i', meta,
-                    '-map', '0:v', '-map', '1:a', '-map_metadata', '2', '-map_chapters', '2'] + venc +
-                   ['-c:a', 'aac', '-b:a', '160k', '-shortest', out], check=True)
-    print('final ->', out, round(os.path.getsize(out) / 1e6, 1), 'MB')
+                    '-map', '0:v', '-map', '1:a', '-map_metadata', '2', '-map_chapters', '2'] +
+                   common + ['-pass', '2', '-movflags', '+faststart', '-c:a', 'aac',
+                             '-b:a', f'{audio_kbps}k', '-shortest', out], check=True)
+    print('final ->', out, round(os.path.getsize(out) / 1e6, 1), 'MB', f'(video {vk} kbps)')
     srt()
     return out
 

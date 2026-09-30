@@ -79,9 +79,9 @@ class S(Scene):
         cu.keyframe_insert('bevel_depth', frame=F(T['forever'] + 0.5))
 
         # camera
-        cam = bl.Cam((3.0, -6.2, 2.9), (0, 1.0, 1.95), lens=40)
-        cam.key(0, loc=(3.2, -6.4, 2.95), target=(0, 1.0, 2.0))
-        cam.key(F(3.2), loc=(2.2, -6.2, 2.6), target=(0, 1.0, 1.85))
+        cam = bl.Cam((5.5, -10.0, 6.5), (0, 2.5, 1.2), lens=35)
+        cam.key(0, loc=(6.0, -10.5, 7.0), target=(0, 2.5, 1.3))
+        cam.key(F(3.2), loc=(4.2, -9.5, 4.2), target=(0, 1.5, 1.0))
         cam.key(F(6.0), loc=(1.4, -9.5, 0.4), target=(0, 0.4, -1.2))
         cam.key(F(T['res'] - 0.4), loc=(2.6, -9.0, -13.2), target=(0, 0.2, -14.9))
         cam.key(F(T['plate'] - 1.0), loc=(3.2, -10.0, -12.6), target=(0, 0.3, -14.6))
