@@ -151,7 +151,7 @@ if __name__ == '__main__':
     a = sys.argv[1:]
     cmd = a[0] if a else 'final'
     if cmd == 'segments':
-        segments(a[1:] or None, force='--force' in a)
+        segments([x for x in a[1:] if not x.startswith('--')] or None, force='--force' in a)
     elif cmd == 'srt':
         srt()
     elif cmd == 'final':

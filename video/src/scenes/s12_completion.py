@@ -337,7 +337,8 @@ class S(Scene):
         for key, txt, t0, t1, off, sub in items:
             pt = a(A, key)
             if pt:
-                G.label(ctx, pt[0], pt[1], pt[0] + off[0], pt[1] + off[1], txt, G.prog(t, t0, 0.8),
+                ty = min(max(pt[1] + off[1], 250), 1000)   # keep clear of the depth tag
+                G.label(ctx, pt[0], pt[1], pt[0] + off[0], ty, txt, G.prog(t, t0, 0.8),
                         sub=sub, out=G.prog(t, t1, 0.4), size=30,
                         align='left' if off[0] > 0 else 'right')
         # perforation tunnels drawn on the cut face

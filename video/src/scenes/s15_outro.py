@@ -7,10 +7,10 @@ import palette as P
 from scene_base import Scene
 
 SUMMARY = [
-    'the drilling window · a telescope of casings · two barriers',
-    'a floating rig · the BOP · mud holding back the rock',
-    'liner · perforations · tubing · safety valve · christmas tree',
-    'permanent, rock-to-rock barriers · removed without a trace',
+    ('the drilling window · a telescope of casings', 'two independent barriers'),
+    ('a floating rig · the BOP', 'mud holding back the rock'),
+    ('liner · perforations · tubing', 'safety valve · christmas tree'),
+    ('permanent, rock-to-rock barriers', 'removed without a trace'),
 ]
 
 
@@ -54,8 +54,8 @@ class S(Scene):
         # right-hand recap panel
         pp = G.prog(t, T['recap'] - 0.3, 0.8) * (1 - G.prog(t, T['decades'] - 0.6, 0.6))
         if pp > 0:
-            x0, y0 = 1010, 120
-            G.panel(ctx, x0, y0, 840, 860, pp, alpha=0.94)
+            x0, y0 = 1060, 120
+            G.panel(ctx, x0, y0, 800, 860, pp, alpha=0.94)
             G.text(ctx, 'RECAP', x0 + 60, y0 + 90, 30, 'ExtraBold', P.INK_SOFT, alpha=pp,
                    tracking=0.25)
             G.text(ctx, 'The life of a subsea well', x0 + 60, y0 + 150, 44, 'ExtraBold', P.INK,
@@ -69,16 +69,15 @@ class S(Scene):
                 if p <= 0:
                     continue
                 a = pp * p
-                G.rrect(ctx, x0 + 40, y, 760, 128, 20)
+                G.rrect(ctx, x0 + 40, y, 720, 128, 20)
                 G.set_color(ctx, G.mix('#F3F6F9', col, 0.14 * hi), a)
                 ctx.fill()
                 G.circle(ctx, x0 + 112, y + 64, 46, fill=col, alpha=a)
                 O.icon(ctx, kind, x0 + 112, y + 64, 0.5, P.WHITE, a)
-                G.text(ctx, f'{i + 1}  {title.upper()}', x0 + 180, y + 55, 30, 'ExtraBold', col,
+                G.text(ctx, f'{i + 1}  {title.upper()}', x0 + 180, y + 48, 30, 'ExtraBold', col,
                        alpha=a, tracking=0.06)
-                lines = G.wrap(ctx, SUMMARY[i], 590, 22, 'SemiBold')
-                for k, ln in enumerate(lines[:2]):
-                    G.text(ctx, ln, x0 + 180, y + 90 + k * 28, 22, 'SemiBold', P.INK_SOFT, alpha=a)
+                for k, ln in enumerate(SUMMARY[i]):
+                    G.text(ctx, ln, x0 + 180, y + 84 + k * 27, 22, 'SemiBold', P.INK_SOFT, alpha=a)
         # end card
         ep = G.prog(t, T['decades'] - 0.4, 1.0)
         if ep > 0:

@@ -498,9 +498,13 @@ def tag(ctx, s, x, y, p=1.0, col=P.WHITE, bg=P.INK, size=26, weight='Bold', alig
         x -= bw
     rrect(ctx, x, y - bh / 2, bw * (0.6 + 0.4 * pe), bh, bh / 2)
     set_color(ctx, bg, alpha * pe)
-    ctx.fill()
+    ctx.fill_preserve()
+    ctx.save()
+    ctx.clip()      # the text is revealed as the pill grows
     text(ctx, s, x + padx, y, size, weight, col, valign='middle', alpha=alpha * pe,
          tracking=tracking)
+    ctx.restore()
+    ctx.new_path()
     return bw
 
 
