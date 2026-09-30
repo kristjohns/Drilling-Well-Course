@@ -13,15 +13,15 @@ TAU = math.tau
 
 def mats():
     return dict(
-        steel=bl.mat('eq_steel', '#9AA7B4', rough=0.3, metal=0.6),
-        steel_dark=bl.mat('eq_steel_dark', '#5E6B78', rough=0.35, metal=0.6),
+        steel=bl.mat('eq_steel', '#A7B4C1', rough=0.35, metal=0.15),
+        steel_dark=bl.mat('eq_steel_dark', '#6F7C89', rough=0.35, metal=0.15),
         cut=bl.mat('eq_cut', '#D5DDE5', rough=0.6),
         bop=bl.mat('eq_bop', P.BOP, rough=0.45),
-        bop_body=bl.mat('eq_bop_body', '#707E8C', rough=0.35, metal=0.5),
-        bop_dark=bl.mat('eq_bop_dark', '#3F4A55', rough=0.4, metal=0.4),
+        bop_body=bl.mat('eq_bop_body', '#7A8896', rough=0.35, metal=0.15),
+        bop_dark=bl.mat('eq_bop_dark', '#4C5763', rough=0.4, metal=0.15),
         rubber=bl.mat('eq_rubber', '#2A2E33', rough=0.8),
         packer=bl.mat('eq_packer', '#B23A2E', rough=0.7),
-        ram=bl.mat('eq_ram', '#C9D2DB', rough=0.3, metal=0.6),
+        ram=bl.mat('eq_ram', '#C9D2DB', rough=0.3, metal=0.2),
         blade=bl.mat('eq_blade', '#E8EDF2', rough=0.2, metal=0.8),
         xt=bl.mat('eq_xt', P.XT, rough=0.45),
         xt_dark=bl.mat('eq_xt_dark', P.XT_DARK, rough=0.45),
@@ -31,7 +31,7 @@ def mats():
         white=bl.mat('eq_white', '#EEF1F4', rough=0.5),
         grey=bl.mat('eq_grey', '#A9B3BD', rough=0.5),
         dark=bl.mat('eq_dark', P.RIG_DARK, rough=0.5),
-        pipe=bl.mat('eq_pipe', P.PIPE, rough=0.3, metal=0.6),
+        pipe=bl.mat('eq_pipe', '#66727E', rough=0.3, metal=0.2),
         glass=bl.mat('eq_glass', '#9FD3F0', rough=0.1),
         green=bl.mat('eq_green', '#3E8E5A', rough=0.5),
         orange=bl.mat('eq_orange', '#F07F2A', rough=0.45),
@@ -190,32 +190,34 @@ class BOP:
             self.rams[i] = (kind, blocks)
 
     def _ram_block(self, zc, s, kind, i):
-        """Ram block on side s (+1 = right). Origin at its retracted position."""
+        """Ram block on side s (+1 = right). Children (seal / blade) follow the block."""
         M = self.M
         L, W, Hh = 0.52, 0.56, 0.34
+        cutm = M.get('ram_cut', M['ram'])
         blk = bl.box('ram_%d_%d' % (i, s), (L, W, Hh), loc=(s * (0.26 + L / 2), 0, zc),
                      material=M['ram'])
+        extra = []
         if kind == 'pipe':
-            notch = bl.cyl('_notch', 0.09, 1.0, loc=(0, 0, zc), material=M['rubber'], seg=32)
+            notch = bl.cyl('_notch', 0.09, 1.0, loc=(s * 0.26, 0, zc), material=cutm, seg=32)
             bl.boolean(blk, notch)
-            # rubber face seal
-            seal = bl.box('ram_seal', (0.05, W, Hh * 0.98), loc=(s * (0.26 + 0.025), 0, zc),
-                          material=M['rubber'])
-            n2 = bl.cyl('_notch2', 0.09, 1.0, loc=(0, 0, zc), material=M['rubber'], seg=32)
+            seal = bl.box('ram_seal', (0.05, W * 0.999, Hh * 0.98),
+                          loc=(s * (0.26 + 0.026), 0, zc), material=M['rubber'])
+            n2 = bl.cyl('_notch2', 0.09, 1.0, loc=(s * 0.26, 0, zc), material=M['rubber'], seg=32)
             bl.boolean(seal, n2)
-            blk = bl.join([blk, seal])
+            extra.append(seal)
         else:
-            # shear blade: a wedge that overlaps the opposite blade vertically
             dz = 0.06 * s
-            blade = bl.box('blade', (0.14, W, Hh * 0.5), loc=(s * (0.26 + 0.07) - s * 0.10, 0,
-                                                               zc + dz),
-                           material=M['blade'])
-            blk.location.z += 0
-            blk = bl.join([blk, blade])
-        bl.cut_half(blk, M['cut'])
-        blk.name = 'ram_%d_%d' % (i, s)
+            blade = bl.box('blade', (0.16, W * 0.999, Hh * 0.45),
+                           loc=(s * (0.26 - 0.07), 0, zc + dz), material=M['blade'])
+            extra.append(blade)
+        bl.cut_half(blk, cutm)
+        for o in extra:
+            bl.cut_half(o, M['blade'] if kind != 'pipe' else M['rubber'])
         blk.parent = self.root
         self.parts.append(blk)
+        for o in extra:
+            o.parent = blk
+            o.matrix_parent_inverse = blk.matrix_world.inverted()
         return blk
 
     def _frame(self):

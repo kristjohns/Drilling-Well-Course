@@ -518,7 +518,8 @@ def panel(ctx, x, y, w, h, p=1.0, col=P.WHITE, alpha=0.92, r=22, shadow=True):
 
 # ------------------------------------------------------------------ titles
 
-def chapter_title(ctx, num, title, t, t_in, t_out, sub=None, accent=P.ACCENT, dark=False):
+def chapter_title(ctx, num, title, t, t_in, t_out, sub=None, accent=P.ACCENT, dark=False,
+                  backdrop=False):
     """Big chapter card: number badge + title + accent underline."""
     pin = prog(t, t_in, 0.9, ease_out)
     pout = prog(t, t_out, 0.6, ease_in)
@@ -527,6 +528,11 @@ def chapter_title(ctx, num, title, t, t_in, t_out, sub=None, accent=P.ACCENT, da
     a = 1 - pout
     col = P.WHITE if dark else P.INK
     cx, cy = W / 2, H / 2
+    if backdrop:
+        shadow_rrect(ctx, cx - 520, cy - 230, 1040, 420, 40, alpha=0.3 * a * pin)
+        rrect(ctx, cx - 520, cy - 230, 1040, 420, 40)
+        set_color(ctx, '#F4F7FA', 0.93 * a * pin)
+        ctx.fill()
     # number badge
     r = 54 * ease_out_back(pin)
     circle(ctx, cx, cy - 120, r, fill=accent, alpha=a)

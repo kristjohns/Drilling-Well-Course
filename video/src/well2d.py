@@ -232,3 +232,71 @@ def gauge(ctx, cx, cy, r, value, vmax, label=None, col=P.INK, needle=P.KICK, alp
     if label:
         G.text(ctx, label, cx, cy + r * 0.55, max(14, r * 0.2), 'Bold', '#2A3440', 'center',
                'middle', alpha=alpha)
+
+
+# ------------------------------------------------------------------ equipment icons (2D)
+
+def draw_bop(ctx, cx, y_base, s=1.0, closed=0.0, shear=0.0, alpha=1.0, pipe=True, cut=False):
+    """2D BOP stack standing on y_base (seabed/wellhead top). Height ~ 190*s px."""
+    body = '#6F7C8A'
+    yel = P.BOP
+    bore = 16 * s
+    def R(x, y, w, h, col, r=4):
+        G.rrect(ctx, cx + x * s, y_base - (y + h) * s, w * s, h * s, r * s)
+        G.set_color(ctx, col, alpha)
+        ctx.fill()
+    # frame
+    G.rect(ctx, cx - 70 * s, y_base - 175 * s, 140 * s, 175 * s, stroke=yel, lw=5 * s, alpha=alpha)
+    R(-42, 0, 84, 26, '#4A5663')                       # connector
+    for k, y in enumerate((30, 62, 94)):               # ram bodies
+        R(-40, y, 80, 28, body)
+        R(-66, y + 4, 24, 20, yel, 6)
+        R(42, y + 4, 24, 20, yel, 6)
+    R(-46, 126, 92, 38, '#3F4A55', 16)                 # annular
+    R(-22, 164, 44, 16, '#5E6B78')                     # flex / riser adapter
+    # bore
+    G.rect(ctx, cx - bore / 2, y_base - 180 * s, bore, 180 * s, fill='#DDE6EE', alpha=alpha)
+    if pipe:
+        G.rect(ctx, cx - 5 * s, y_base - 180 * s, 10 * s, 180 * s, fill=P.PIPE, alpha=alpha)
+    # rams closing (pipe rams at k=0,1; shear at k=2)
+    for k, y in enumerate((30, 62)):
+        w = (bore / 2 - (5 * s if pipe else 0)) * closed
+        for sg in (-1, 1):
+            x0 = cx + sg * bore / 2
+            G.rect(ctx, min(x0, x0 - sg * w), y_base - (y + 22) * s, w, 16 * s, fill='#C9D2DB',
+                   alpha=alpha)
+    if shear > 0:
+        w = bore / 2 * shear
+        for sg in (-1, 1):
+            x0 = cx + sg * bore / 2
+            G.rect(ctx, min(x0, x0 - sg * (w + 2 * s)), y_base - (94 + 22) * s, w + 2 * s, 16 * s,
+                   fill='#E8EDF2', alpha=alpha)
+
+
+def draw_xt(ctx, cx, y_base, s=1.0, alpha=1.0):
+    """2D subsea christmas tree icon standing on y_base."""
+    xt, dark = P.XT, P.XT_DARK
+    G.rect(ctx, cx - 60 * s, y_base - 120 * s, 120 * s, 120 * s, stroke=xt, lw=5 * s, alpha=alpha)
+    G.rrect(ctx, cx - 34 * s, y_base - 24 * s, 68 * s, 24 * s, 4 * s)
+    G.set_color(ctx, '#4A5663', alpha)
+    ctx.fill()
+    G.rect(ctx, cx - 22 * s, y_base - 104 * s, 44 * s, 80 * s, fill='#8795A3', alpha=alpha)
+    G.rect(ctx, cx + 22 * s, y_base - 74 * s, 60 * s, 14 * s, fill='#8795A3', alpha=alpha)
+    for x in (32, 56):
+        G.rect(ctx, cx + x * s, y_base - 82 * s, 14 * s, 30 * s, fill=dark, alpha=alpha)
+    for y in (40, 70):
+        G.rect(ctx, cx - 28 * s, y_base - (y + 12) * s, 56 * s, 12 * s, fill=dark, alpha=alpha)
+    G.rrect(ctx, cx - 26 * s, y_base - 122 * s, 52 * s, 18 * s, 6 * s)
+    G.set_color(ctx, dark, alpha)
+    ctx.fill()
+
+
+def draw_wellhead(ctx, cx, y_seabed, s=1.0, alpha=1.0):
+    G.rect(ctx, cx - 26 * s, y_seabed - 18 * s, 52 * s, 30 * s, fill='#5E6B78', alpha=alpha)
+    G.rect(ctx, cx - 20 * s, y_seabed - 34 * s, 40 * s, 18 * s, fill='#7E8B98', alpha=alpha)
+
+
+def envelope(ctx, pts, col, p=1.0, alpha=1.0, lw=7):
+    """Barrier envelope: bold line with a soft halo, drawn progressively."""
+    G.line(ctx, pts, col, lw * 2.8, alpha * 0.18, p)
+    G.line(ctx, pts, col, lw, alpha, p)

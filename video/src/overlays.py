@@ -186,3 +186,29 @@ def map_inset(ctx, x, y, w, h, p, t, marker=(3.0, 60.8), alpha=1.0):
     G.circle(ctx, mx, my, 4, fill='#FFFFFF', alpha=a)
     ctx.restore()
     return px(*marker)[0], px(*marker)[1] + (yy - y)
+
+
+def sky(ctx, y_h=None):
+    """Sky gradient background (horizon at y_h)."""
+    import cairo
+    y_h = 540 if y_h is None else y_h
+    g = cairo.LinearGradient(0, min(y_h, 1080) - 900, 0, y_h)
+    g.add_color_stop_rgba(0, *G.rgb('#6FAEDB'))
+    g.add_color_stop_rgba(1, *G.rgb('#E4F0F8'))
+    ctx.set_source(g)
+    ctx.paint()
+
+
+def haze(ctx, y_h, below=170, col='#CFE3F1'):
+    """Aerial-perspective haze hiding the far edge of the ocean plane."""
+    import cairo
+    if y_h is None:
+        return
+    g = cairo.LinearGradient(0, y_h - 30, 0, y_h + below)
+    g.add_color_stop_rgba(0, *G.rgb(col, 0.0))
+    g.add_color_stop_rgba(0.15, *G.rgb(col, 1.0))
+    g.add_color_stop_rgba(0.35, *G.rgb(col, 0.85))
+    g.add_color_stop_rgba(1, *G.rgb(col, 0.0))
+    ctx.rectangle(0, y_h - 30, 1920, below + 30)
+    ctx.set_source(g)
+    ctx.fill()

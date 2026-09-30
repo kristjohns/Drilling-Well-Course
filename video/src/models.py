@@ -186,7 +186,7 @@ class Diorama:
             bl.key(core, 'scale', max(0, int(fa) - 1), (1, 1, 1))
             bl.key(core, 'scale', int(round(fb)) + 1, (1, 1, 0.0))
             bl.linear_all(core)
-            bl.show(core, int(round(fb)) + 2, False)
+            bl.hide_at(core, int(round(fb)) + 2)
 
     def pre_drilled(self, upto_depth):
         for a, b, core in self.core_of:

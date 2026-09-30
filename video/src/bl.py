@@ -560,6 +560,12 @@ def show(obj, frame, visible=True, recursive=True):
                     kp.interpolation = 'CONSTANT'
 
 
+def hide_at(obj, frame, recursive=True):
+    """Visible until `frame`, hidden from then on."""
+    show(obj, 0, True, recursive)
+    show(obj, max(1, frame), False, recursive)
+
+
 def visible_between(obj, f_in, f_out=None, recursive=True):
     show(obj, 0, False, recursive)
     show(obj, f_in, True, recursive)
@@ -695,7 +701,15 @@ def export_anchors(path, anchors, f0, f1):
         sc.frame_set(f)
         fr = {}
         for name, a in anchors.items():
-            if isinstance(a, tuple) and len(a) == 2 and hasattr(a[0], 'matrix_world'):
+            if isinstance(a, tuple) and len(a) == 2 and a[0] == 'horizon':
+                m = cam.matrix_world
+                fwd = -(m.to_3x3() @ Vector((0, 0, 1)))
+                fwd.z = 0
+                fwd.normalize()
+                p = m.translation + fwd * a[1]
+                p.z = 0
+                vis = True
+            elif isinstance(a, tuple) and len(a) == 2 and hasattr(a[0], 'matrix_world'):
                 p = a[0].matrix_world @ Vector(a[1])
                 vis = not a[0].hide_render
             elif hasattr(a, 'matrix_world'):
