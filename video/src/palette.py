@@ -1,0 +1,65 @@
+"""Shared colour palette (sRGB hex) for 3D renders and 2D overlays."""
+
+# backgrounds
+BG_TOP = '#F4F7FA'
+BG_BOT = '#D3DEE8'
+SKY_TOP = '#8EC5E8'
+SKY_BOT = '#E9F3F9'
+SEA_TOP = '#2E86C1'
+SEA_DEEP = '#0A2540'
+INK = '#1B2631'          # main text colour
+INK_SOFT = '#4A5A6A'
+WHITE = '#FFFFFF'
+
+# earth
+WATER = '#3A93CF'
+SEAWATER_DARK = '#1E5F8C'
+SEABED = '#D8C7A0'
+SOFT_CLAY = '#C8B695'
+CLAYSTONE = '#A89A80'
+SILTSTONE = '#BFAE8A'
+CHALK = '#DCD5C3'
+SHALE = '#5F6E73'        # cap rock
+RESERVOIR = '#E2B45A'    # oil-bearing sandstone
+RESERVOIR_DARK = '#B7832C'
+WATER_ZONE = '#8FA3B3'
+BASEMENT = '#8C8173'
+
+# well
+STEEL = '#8E9CAB'
+STEEL_CUT = '#C3CDD7'
+STEEL_DARK = '#6A7886'
+PIPE = '#56626E'
+CEMENT = '#CFC9BB'
+CEMENT_DARK = '#A39E92'
+MUD = '#B8743C'
+MUD_LIGHT = '#D39A62'
+HEAVY_MUD = '#8A4E26'
+SEAWATER = '#6FB3DE'
+BRINE = '#9FD3E8'
+OIL = '#3A2A12'
+OIL_GLOW = '#F2A93B'
+GAS = '#F5D98E'
+CUTTINGS = '#8B7B66'
+KICK = '#E4432D'
+
+# equipment
+BOP = '#F2B705'
+BOP_DARK = '#C48F00'
+XT = '#EE7A2B'
+XT_DARK = '#B9561A'
+RIG_HULL = '#E7E9EC'
+RIG_RED = '#D2433B'
+RIG_DARK = '#39434D'
+RIG_YELLOW = '#F4C430'
+ROV = '#F5B800'
+RUBBER = '#2B2F33'
+
+# barriers (NORSOK D-010 convention)
+PRIMARY = '#1F7CE0'
+SECONDARY = '#E0342F'
+
+# accents
+ACCENT = '#00A7A0'
+ACCENT2 = '#FFB000'
+GOOD = '#2FAF5B'
