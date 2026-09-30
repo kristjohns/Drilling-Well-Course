@@ -69,7 +69,7 @@ def ffmpeg_writer(path):
     cmd = ['ffmpeg', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'bgra',
            '-s', f'{C.W}x{C.H}', '-r', str(C.FPS), '-i', '-',
            '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p',
-           '-x264-params', 'keyint=48:min-keyint=24', path]
+           '-x264-params', 'keyint=48:min-keyint=24', '-f', 'mp4', path]
     return subprocess.Popen(cmd, stdin=subprocess.PIPE)
 
 
@@ -96,14 +96,17 @@ def compose(sid, f_range=None, png=None):
     path = os.path.join(C.SEGMENTS, sid + '.mp4')
     if f_range:
         path = os.path.join(C.SEGMENTS, f'{sid}_{f_range[0]}_{f_range[1]}.mp4')
-    proc = ffmpeg_writer(path)
+    part = path + '.part'   # renamed when complete, so a half-written segment never counts
+    proc = ffmpeg_writer(part)
     t0 = time.time()
     for f in fr:
         out = _composite(R, prev, f, pcv)
         out.surface.flush()
         proc.stdin.write(bytes(out.surface.get_data()))
     proc.stdin.close()
-    proc.wait()
+    if proc.wait() != 0:
+        raise RuntimeError(f'ffmpeg failed for {sid}')
+    os.replace(part, path)
     dt = time.time() - t0
     print(f'[{sid}] composed {len(fr)} frames in {dt:.0f}s ({dt / max(1, len(fr)):.3f}s/f) -> {path}',
           flush=True)

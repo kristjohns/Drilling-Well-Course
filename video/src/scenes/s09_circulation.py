@@ -367,7 +367,8 @@ class S(Scene):
         c = a(A, 'cutter')
         if c:
             G.label(ctx, c[0], c[1], c[0] + 260, c[1] - 200, 'Diamond cutters',
-                    G.prog(t, T['diamond'] - 0.2, 0.8), sub='synthetic diamond tables', size=30)
+                    G.prog(t, T['diamond'] - 0.2, 0.8) * (1 - G.prog(t, self.t_bit1 - 0.5, 0.4)),
+                    sub='synthetic diamond tables', size=30)
         # shaving inset
         sp = G.window(t, T['plane'] - 0.5, self.t_bit1, 0.4)
         if sp > 0:

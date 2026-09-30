@@ -91,8 +91,8 @@ class S(Scene):
             wat = [(x, 0.9 / (1 + math.exp(-(x - 16) / 4))) for x in range(0, 31)]
             c.curve(ctx, oil, P.OIL_GLOW, 5, n, cp)
             c.curve(ctx, wat, '#3A93CF', 5, G.prog(t, T['water'] - 0.4, 3.0, G.linear), cp)
-            G.text(ctx, 'oil rate', 1300, 250, 24, 'Bold', P.OIL_GLOW, alpha=cp)
-            G.text(ctx, 'water cut', 1300, 285, 24, 'Bold', '#3A93CF',
+            G.text(ctx, 'oil rate', 1440, 250, 24, 'Bold', P.OIL_GLOW, alpha=cp)
+            G.text(ctx, 'water cut', 1440, 285, 24, 'Bold', '#3A93CF',
                    alpha=cp * G.prog(t, T['water'] - 0.2, 0.6))
             G.text(ctx, 'reservoir pressure falls', 1500, 590, 24, 'SemiBold', P.INK_SOFT, 'center',
                    alpha=cp * G.prog(t, T['pressure'], 0.6))
