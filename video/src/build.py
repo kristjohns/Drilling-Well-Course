@@ -109,6 +109,14 @@ def chapters_meta(path):
                      f'title={title}\n\n')
 
 
+def loudness(path):
+    """Integrated loudness (LUFS) of an audio file, measured with ffmpeg's EBU R128 filter."""
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', path, '-af',
+                        'ebur128=framelog=quiet', '-f', 'null', '-'],
+                       capture_output=True, text=True)
+    return float(re.findall(r'I:\s+(-?[\d.]+) LUFS', r.stderr)[-1])
+
+
 def final(target_mb=95.0, name='subsea_well_lifecycle_1080p.mp4', audio_kbps=128):
     """Concatenate segments, add soundtrack + chapters, 2-pass encode to a size target
     (GitHub rejects files above 100 MB)."""
@@ -133,6 +141,9 @@ def final(target_mb=95.0, name='subsea_well_lifecycle_1080p.mp4', audio_kbps=128
     out = os.path.join(C.OUTPUT, name)
     dur = json.load(open(C.TIMELINE))['duration']
     vk = int(target_mb * 8e3 / dur - audio_kbps - 8)
+    # normalise to -16 LUFS (typical for online video) with a -1.5 dBFS lookahead limiter
+    gain = -16.0 - loudness(snd)
+    af = f'volume={gain:.2f}dB,alimiter=limit=0.84:attack=3:release=60:level=false:latency=true'
     passlog = os.path.join(C.BUILD, 'x264pass')
     common = ['-c:v', 'libx264', '-preset', 'slow', '-b:v', f'{vk}k', '-tune', 'animation',
               '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-passlogfile', passlog]
@@ -140,9 +151,10 @@ def final(target_mb=95.0, name='subsea_well_lifecycle_1080p.mp4', audio_kbps=128
                    ['-pass', '1', '-an', '-f', 'null', '/dev/null'], check=True)
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', joined, '-i', snd, '-i', meta,
                     '-map', '0:v', '-map', '1:a', '-map_metadata', '2', '-map_chapters', '2'] +
-                   common + ['-pass', '2', '-movflags', '+faststart', '-c:a', 'aac',
+                   common + ['-pass', '2', '-movflags', '+faststart', '-af', af, '-c:a', 'aac',
                              '-b:a', f'{audio_kbps}k', '-shortest', out], check=True)
-    print('final ->', out, round(os.path.getsize(out) / 1e6, 1), 'MB', f'(video {vk} kbps)')
+    print('final ->', out, round(os.path.getsize(out) / 1e6, 1), 'MB', f'(video {vk} kbps,',
+          f'audio {loudness(out):.1f} LUFS)')
     srt()
     return out
 

@@ -1,0 +1,672 @@
+1
+00:00:03,000 --> 00:00:08,133
+Three kilometres beneath the floor of the North
+Sea lies a layer of sandstone.
+
+2
+00:00:08,133 --> 00:00:13,069
+Its pores are filled with oil and gas, trapped
+there for millions of years.
+
+3
+00:00:13,489 --> 00:00:22,100
+To reach it, we have to drill a hole barely wider than a dinner plate, through
+hundreds of metres of seawater, and kilometres of solid rock.
+
+4
+00:00:22,520 --> 00:00:27,196
+We have to do it without ever losing control of
+the enormous pressures down there.
+
+5
+00:00:27,616 --> 00:00:34,049
+And when the well has done its job, decades later, we have to
+seal it so well that it stays sealed... forever.
+
+6
+00:00:35,069 --> 00:00:41,711
+In this video, we'll follow one subsea well on the Norwegian
+Continental Shelf through its entire life.
+
+7
+00:00:42,131 --> 00:00:43,259
+How it's designed.
+
+8
+00:00:43,259 --> 00:00:44,325
+How it's drilled.
+
+9
+00:00:44,325 --> 00:00:45,516
+How it's completed.
+
+10
+00:00:45,516 --> 00:00:48,274
+And finally, how it's plugged and abandoned.
+
+11
+00:00:52,808 --> 00:00:53,955
+Let's set the scene.
+
+12
+00:00:54,675 --> 00:01:01,020
+Our well sits in about three hundred and fifty metres of water, and
+nothing of it will ever stick up above the waves.
+
+13
+00:01:01,440 --> 00:01:07,536
+Instead, everything, from the wellhead to the valves that
+control the flow, sits on the seabed.
+
+14
+00:01:07,536 --> 00:01:14,016
+The oil and gas travel through pipelines to a production
+facility, which can be many kilometres away.
+
+15
+00:01:14,016 --> 00:01:16,262
+That's what makes it a subsea well.
+
+16
+00:01:17,182 --> 00:01:22,570
+Our target is a sandstone reservoir, about three
+kilometres below the seabed.
+
+17
+00:01:22,570 --> 00:01:27,889
+Its pores, the tiny spaces between the grains of
+sand, hold the oil and gas.
+
+18
+00:01:28,309 --> 00:01:33,833
+And sitting right on top of it is a layer of
+dense, impermeable shale: the cap rock.
+
+19
+00:01:33,833 --> 00:01:36,924
+It's the reason the oil and gas are still here.
+
+20
+00:01:36,924 --> 00:01:40,343
+For millions of years, it has been nature's own
+lid.
+
+21
+00:01:40,763 --> 00:01:42,220
+Keep that idea in mind.
+
+22
+00:01:42,220 --> 00:01:47,414
+Because at the very end of this well's life, our
+job will be to put that lid back.
+
+23
+00:01:49,725 --> 00:01:54,779
+Before a single metre is drilled, the well is
+designed in painstaking detail.
+
+24
+00:01:54,779 --> 00:01:58,717
+And almost every decision comes down to one
+thing: pressure.
+
+25
+00:01:59,537 --> 00:02:01,753
+The fluids in the rock are under pressure.
+
+26
+00:02:01,753 --> 00:02:03,283
+We call it the pore pressure.
+
+27
+00:02:03,703 --> 00:02:10,671
+If the pressure in our wellbore ever falls below it, oil, gas or
+water will start pushing their way into the well.
+
+28
+00:02:10,671 --> 00:02:11,955
+That's called a kick.
+
+29
+00:02:11,955 --> 00:02:15,256
+And a kick that isn't controlled can become a
+blowout.
+
+30
+00:02:16,276 --> 00:02:20,154
+So we keep the well full of a heavy fluid called
+drilling mud.
+
+31
+00:02:20,154 --> 00:02:27,473
+The pressure at the bottom of a column of fluid is simply its
+density, times gravity, times the height of the column.
+
+32
+00:02:27,893 --> 00:02:36,790
+Take mud one and a half times as dense as water, three thousand metres deep, and
+the pressure at the bottom is about four hundred and forty bar.
+
+33
+00:02:36,790 --> 00:02:40,127
+That's like balancing a grand piano on your
+fingertip.
+
+34
+00:02:41,347 --> 00:02:44,533
+But we can't just make the mud as heavy as
+possible.
+
+35
+00:02:44,533 --> 00:02:47,289
+Push too hard, and we'll crack the rock open.
+
+36
+00:02:47,289 --> 00:02:49,066
+That's the fracture pressure.
+
+37
+00:02:49,066 --> 00:02:55,498
+Mud pours away into the formation, the level in the well
+drops... and that can trigger a kick of its own.
+
+38
+00:02:56,518 --> 00:03:03,092
+So the mud pressure must always stay inside a window: above the
+pore pressure, but below the fracture pressure.
+
+39
+00:03:03,512 --> 00:03:09,970
+Plot both against depth, and you get the single most important
+chart in well design: the drilling window.
+
+40
+00:03:13,475 --> 00:03:14,962
+Now here's the problem.
+
+41
+00:03:14,962 --> 00:03:17,159
+As we go deeper, the window moves.
+
+42
+00:03:18,379 --> 00:03:24,384
+Sooner or later, the mud weight we need at the bottom of the
+hole would fracture the weaker rock higher up.
+
+43
+00:03:24,804 --> 00:03:32,377
+The solution is to seal off the hole we've drilled so far with
+steel pipe, called casing, cemented firmly in place.
+
+44
+00:03:32,377 --> 00:03:35,999
+Then we carry on with a smaller bit, and a
+heavier mud.
+
+45
+00:03:37,019 --> 00:03:42,313
+Repeat that, step by step, and you get the
+classic telescope shape of an offshore well.
+
+46
+00:03:43,133 --> 00:03:53,789
+30" conductor · 20" surface casing · 13⅜" · 9⅝"
+· 7" liner
+
+47
+00:03:55,809 --> 00:03:59,017
+Every string is engineered for three load cases.
+
+48
+00:03:59,017 --> 00:04:00,889
+Burst, from pressure inside.
+
+49
+00:04:00,889 --> 00:04:03,028
+Collapse, from pressure outside.
+
+50
+00:04:03,028 --> 00:04:08,241
+And tension, from its own enormous weight, which
+can reach hundreds of tonnes.
+
+51
+00:04:10,975 --> 00:04:22,803
+Under the Norwegian standard NORSOK D-010, there must always be two independent,
+tested barriers between the reservoir and the outside world.
+
+52
+00:04:23,223 --> 00:04:25,243
+If one fails, the other one holds.
+
+53
+00:04:26,063 --> 00:04:31,725
+We draw them as two envelopes: the primary barrier in
+blue, and the secondary barrier in red.
+
+54
+00:04:31,725 --> 00:04:35,560
+And we'll keep checking them at every stage of
+the well's life.
+
+55
+00:04:39,083 --> 00:04:41,608
+With the design approved, it's time to drill.
+
+56
+00:04:42,628 --> 00:04:54,479
+The job is done by a semi-submersible drilling rig: a floating platform standing on huge
+pontoons, ballasted down below the waves so that it barely notices the North Sea swell.
+
+57
+00:04:54,899 --> 00:04:59,920
+It's held in position above the well by anchors,
+or by computer-controlled thrusters.
+
+58
+00:05:00,340 --> 00:05:02,150
+At its heart is the derrick.
+
+59
+00:05:02,150 --> 00:05:11,138
+Here, the top drive rotates the drill string: a chain of steel pipe, screwed
+together length by length, until it's several kilometres long.
+
+60
+00:05:13,850 --> 00:05:18,879
+The first sections are drilled riserless, with
+no pipe connecting the well to the rig.
+
+61
+00:05:19,299 --> 00:05:26,838
+A thirty-six inch hole is drilled into the soft sediments, and seawater
+and rock cuttings simply spill out onto the seabed.
+
+62
+00:05:28,058 --> 00:05:30,767
+The conductor is run and cemented in place.
+
+63
+00:05:30,767 --> 00:05:36,689
+It carries the low-pressure wellhead housing,
+and forms the structural foundation of the well.
+
+64
+00:05:37,709 --> 00:05:44,893
+Next comes a twenty-six inch hole, and the twenty-inch surface
+casing, crowned by the high-pressure wellhead housing.
+
+65
+00:05:44,893 --> 00:05:48,147
+This is the anchor point for everything that
+follows.
+
+66
+00:05:50,850 --> 00:05:58,359
+Before drilling any deeper, into rock that could hold pressure, we
+need our safety net: the blowout preventer, or BOP.
+
+67
+00:05:58,779 --> 00:06:06,650
+It's a stack of massive hydraulic valves, around fifteen metres tall and
+weighing several hundred tonnes, latched onto the wellhead.
+
+68
+00:06:07,470 --> 00:06:12,563
+Annular preventers can squeeze a rubber seal
+around almost anything in the hole.
+
+69
+00:06:12,563 --> 00:06:15,492
+Pipe rams close tightly around the drill pipe.
+
+70
+00:06:16,512 --> 00:06:23,346
+And as a last line of defence, the blind shear rams can cut
+straight through the pipe, and seal the well completely.
+
+71
+00:06:24,966 --> 00:06:33,019
+On top sits the marine riser: a wide steel pipe running all the way
+up to the rig, so the mud can return to the surface.
+
+72
+00:06:35,558 --> 00:06:39,782
+Now the real drilling begins, and the mud
+becomes the star of the show.
+
+73
+00:06:40,502 --> 00:06:44,532
+Powerful pumps push it down through the inside
+of the drill string.
+
+74
+00:06:44,532 --> 00:06:49,826
+It jets out through nozzles in the bit, cooling
+it, and flushing away the rock cuttings.
+
+75
+00:06:50,246 --> 00:06:57,544
+Then it carries those cuttings back up the annulus, the gap between the
+drill string and the wall, and up the riser to the rig.
+
+76
+00:06:57,964 --> 00:07:04,152
+There, shale shakers sieve out the rock, and the cleaned mud
+goes back to the pits, ready to go round again.
+
+77
+00:07:05,372 --> 00:07:13,834
+The bit itself is usually a PDC bit, studded with synthetic diamond
+cutters that shear the rock like a plane shaving wood.
+
+78
+00:07:15,054 --> 00:07:24,401
+Just behind it, sensors measure the well's direction and the properties of the rock, and
+send their data to the surface as pressure pulses in the mud itself.
+
+79
+00:07:25,421 --> 00:07:32,754
+And with a rotary steerable system, the driller can bend the well,
+gently, towards a target that may be kilometres away.
+
+80
+00:07:35,767 --> 00:07:39,021
+Section by section, the well goes deeper.
+
+81
+00:07:39,021 --> 00:07:39,497
+Drill.
+
+82
+00:07:39,497 --> 00:07:40,370
+Run casing.
+
+83
+00:07:40,370 --> 00:07:40,925
+Cement.
+
+84
+00:07:40,925 --> 00:07:41,322
+Test.
+
+85
+00:07:42,342 --> 00:07:45,597
+Every cement job follows the same choreography.
+
+86
+00:07:45,597 --> 00:07:53,352
+First a bottom plug, then the cement, then a top plug, and
+finally mud, to push the whole train down the casing.
+
+87
+00:07:54,372 --> 00:07:57,043
+When the top plug lands, the pressure spikes.
+
+88
+00:07:57,043 --> 00:07:58,350
+We've bumped the plug.
+
+89
+00:07:58,350 --> 00:08:03,455
+The cement has been squeezed up into the
+annulus, where it sets hard and seals it off.
+
+90
+00:08:04,675 --> 00:08:13,251
+Then, after drilling a few metres of new hole, a leak-off test checks that the
+rock below the casing shoe can take the heavier mud to come.
+
+91
+00:08:15,767 --> 00:08:17,385
+And if a kick does happen?
+
+92
+00:08:17,385 --> 00:08:20,311
+The first warning usually comes at the surface.
+
+93
+00:08:20,311 --> 00:08:22,427
+The mud pits start to gain volume.
+
+94
+00:08:23,647 --> 00:08:32,820
+The crew shuts in the well with the BOP, reads the pressures, and circulates the
+influx out through the choke line, while pumping in heavier kill mud.
+
+95
+00:08:34,240 --> 00:08:36,278
+The well is under control again.
+
+96
+00:08:36,278 --> 00:08:39,590
+And that is exactly why we always keep two
+barriers.
+
+97
+00:08:42,100 --> 00:08:47,530
+Once the reservoir section is drilled, the well
+is still just a hole lined with steel.
+
+98
+00:08:47,530 --> 00:08:49,803
+Completion turns it into a producer.
+
+99
+00:08:50,623 --> 00:08:54,639
+First, the seven-inch liner is cemented across
+the reservoir.
+
+100
+00:08:54,639 --> 00:08:58,458
+To connect the well to the rock, we fire
+perforating guns.
+
+101
+00:08:59,478 --> 00:09:08,307
+Each shaped charge fires a jet of metal at around seven kilometres per second,
+punching through steel and cement, and deep into the reservoir.
+
+102
+00:09:09,927 --> 00:09:11,956
+Next comes the upper completion.
+
+103
+00:09:11,956 --> 00:09:16,837
+The production tubing is the pipe the oil and
+gas will actually flow through.
+
+104
+00:09:17,257 --> 00:09:21,204
+A production packer seals the gap between the
+tubing and the casing.
+
+105
+00:09:22,424 --> 00:09:28,895
+A downhole safety valve, a few hundred metres below the
+seabed, is held open by hydraulic pressure.
+
+106
+00:09:28,895 --> 00:09:32,098
+Lose that pressure, and it snaps shut on its
+own.
+
+107
+00:09:33,518 --> 00:09:44,147
+The BOP and riser are then pulled, and in their place we install the subsea christmas
+tree: a compact assembly of valves that controls the flow from the well.
+
+108
+00:09:45,367 --> 00:09:53,734
+It's tied in to the production system with flowlines, and an umbilical
+supplies it with hydraulic power, electricity, and chemicals.
+
+109
+00:09:54,954 --> 00:09:58,239
+The well is cleaned up, tested, and handed over.
+
+110
+00:09:58,239 --> 00:09:59,950
+Two barriers, once again.
+
+111
+00:09:59,950 --> 00:10:02,962
+The tubing, packer and safety valve in blue.
+
+112
+00:10:02,962 --> 00:10:06,042
+The casing, cement, wellhead and tree in red.
+
+113
+00:10:09,342 --> 00:10:12,351
+For the next twenty or thirty years, the well
+produces.
+
+114
+00:10:13,371 --> 00:10:21,490
+The reservoir pressure slowly falls, more and more water comes with the
+oil, and eventually, every well reaches the end of its life.
+
+115
+00:10:22,510 --> 00:10:24,361
+And then comes the final chapter.
+
+116
+00:10:27,092 --> 00:10:33,392
+On the Norwegian shelf, plugging and abandonment, or
+P&A, comes with a remarkable requirement.
+
+117
+00:10:33,392 --> 00:10:36,877
+The well must be sealed with an eternal
+perspective.
+
+118
+00:10:37,297 --> 00:10:38,279
+Not for years.
+
+119
+00:10:38,279 --> 00:10:39,400
+Not for decades.
+
+120
+00:10:39,400 --> 00:10:41,574
+For as long as the rock itself.
+
+121
+00:10:42,794 --> 00:10:47,880
+First, the well is killed with heavy fluid to
+balance the reservoir pressure.
+
+122
+00:10:47,880 --> 00:10:53,890
+The christmas tree is removed, a BOP is installed once
+again, and the tubing is pulled out.
+
+123
+00:10:55,110 --> 00:10:58,973
+Just like during drilling, we need two
+independent barriers.
+
+124
+00:10:58,973 --> 00:11:06,570
+But this time they're permanent, and each one must seal the entire
+cross-section of the well, including every annulus.
+
+125
+00:11:06,570 --> 00:11:07,407
+Rock to rock.
+
+126
+00:11:08,627 --> 00:11:10,726
+And that's where it gets tricky.
+
+127
+00:11:10,726 --> 00:11:15,579
+Behind the casing, the original cement may be
+missing, or of poor quality.
+
+128
+00:11:15,579 --> 00:11:19,777
+A plug inside the pipe won't stop fluid sneaking
+up the outside.
+
+129
+00:11:20,797 --> 00:11:29,358
+So the casing is either milled away completely, or perforated, washed, and
+cemented, so the new cement bonds straight to the formation.
+
+130
+00:11:30,778 --> 00:11:38,899
+The primary barrier is set just above the reservoir, in the cap rock,
+where the rock is strong enough to hold the pressure below.
+
+131
+00:11:38,899 --> 00:11:41,039
+The secondary barrier backs it up.
+
+132
+00:11:41,039 --> 00:11:45,194
+Each one is a plug of solid cement, typically
+tens of metres long.
+
+133
+00:11:46,614 --> 00:11:51,189
+Near the seabed, a final surface plug seals the
+well off from the ocean.
+
+134
+00:11:52,409 --> 00:11:56,202
+Every plug is verified: tagged with weight, and
+pressure tested.
+
+135
+00:11:57,422 --> 00:12:03,421
+Finally, the casings are cut a few metres below the seabed,
+and the wellhead is lifted to the surface.
+
+136
+00:12:05,041 --> 00:12:07,347
+What's left is... just the seabed.
+
+137
+00:12:07,347 --> 00:12:09,450
+The cap rock has been restored.
+
+138
+00:12:09,450 --> 00:12:11,485
+Nature's lid is back in place.
+
+139
+00:12:15,517 --> 00:12:18,085
+So, let's recap the life of a subsea well.
+
+140
+00:12:19,005 --> 00:12:25,101
+It's designed around the drilling window, with a telescope
+of casings, and two barriers at all times.
+
+141
+00:12:26,121 --> 00:12:32,206
+It's drilled from a floating rig, through a blowout preventer,
+with mud holding back the pressure of the rock.
+
+142
+00:12:33,226 --> 00:12:38,673
+It's completed with a liner, perforations,
+tubing, a safety valve, and a christmas tree.
+
+143
+00:12:39,693 --> 00:12:45,891
+And at the end of its life, it's sealed with permanent,
+rock-to-rock barriers, and removed without a trace.
+
+144
+00:12:47,111 --> 00:12:50,465
+Decades of engineering, all for one hole in the
+ground.
+
+145
+00:12:50,465 --> 00:12:51,684
+Thanks for watching.
+

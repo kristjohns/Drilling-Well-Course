@@ -1,6 +1,6 @@
 # Drilling-Well-Course
 
-**The Life of a Subsea Well** is an animated course video, about 13 minutes long, on how a subsea well on the
+**The Life of a Subsea Well** is an animated course video (12 min 56 s) on how a subsea well on the
 Norwegian Continental Shelf (NCS) is **designed, drilled, completed and plugged & abandoned**. It is made in
 the style of *The Efficient Engineer*: clean 3D cutaways, animated diagrams, labels that point at the
 hardware, and a calm voice-over.
@@ -13,7 +13,7 @@ so the whole video can be edited and rebuilt.
 
 | File | Contents |
 |---|---|
-| `video/output/subsea_well_lifecycle_*.mp4` | The finished video with narration, music and chapter markers |
+| `video/output/subsea_well_lifecycle_1080p.mp4` | The finished video: 1080p, 24 fps, H.264 + AAC, narration, music, sound effects and chapter markers |
 | `video/output/subsea_well_lifecycle.en.srt` | English subtitles |
 | `video/script/narration.md` | Full narration script, sorted by chapter |
 
@@ -45,10 +45,11 @@ video/src/
   charts.py            the drilling-window chart
   scenes/sNN_*.py      one file per scene: build() for the 3D layer, draw() for the 2D layer
   run_blender.py       builds a scene in Blender, exports label anchors, renders frames
-  render_daemon.py     background render queue
+  render_daemon.py     background render queue (build/queue.txt)
   compose.py           background + 3D frames + overlays -> one video segment per scene
+  auto_compose.py      composes each segment as soon as its frames are rendered
   audio.py             procedural music bed, sound effects, ducking mix
-  build.py             concatenation, soundtrack, chapters, subtitles
+  build.py             concatenation, loudness normalisation, 2-pass encode, chapters, subtitles
 ```
 
 Animation is driven by the narration. Each scene reads the start and end times of its beats, and estimates
@@ -84,3 +85,7 @@ Tips:
 - Diameters are exaggerated in the cutaways so that the hardware is readable. Depth is compressed where
   noted.
 - Barrier envelopes follow the NORSOK D-010 convention: primary in blue, secondary in red.
+- The final encode is a two-pass H.264 encode sized to stay under GitHub's 100 MB file limit. The audio
+  is normalised to about -16 LUFS.
+- Rendering all the 3D scenes takes about 4–5 hours on a 4-core CPU without a GPU (Blender Workbench,
+  2 scenes in parallel). Compositing and the final encode take about 1 more hour.
