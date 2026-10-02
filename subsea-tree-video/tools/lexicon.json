@@ -1,0 +1,31 @@
+{
+  "_comment": "Pronunciation overrides for the Kokoro TTS. 'ipa' maps a word to Kokoro-vocabulary IPA (use U+0261 for g). 'text' maps a token to a spoken replacement.",
+  "ipa": {
+    "Equinor": "ˈɛkwɪnɔːɹ",
+    "Åsgard": "ˈoʊsɡɑːɹ",
+    "Snøhvit": "snˈɜːviːt",
+    "Johan": "jˈuːhɑːn",
+    "Castberg": "kˈɑːstbɛɹɡ",
+    "Troll": "tɹˈɔl",
+    "Norne": "nˈɔːɹnə",
+    "Aasta": "ˈɔːstɑ",
+    "Hansteen": "hˈɑːnstaɪn",
+    "Aker": "ˈɑːkɚ",
+    "NORSOK": "nˈɔːɹsɑːk"
+  },
+  "text": {
+    "ROV": "R O V",
+    "ROVs": "R O Vs",
+    "MEG": "M E G",
+    "DHSV": "D H S V",
+    "PMV": "P M V",
+    "PWV": "P W V",
+    "PSV": "P S V",
+    "AMV": "A M V",
+    "AWV": "A W V",
+    "XOV": "X O V",
+    "CIV": "C I V",
+    "ESD": "E S D",
+    "D-010": "D zero ten"
+  }
+}

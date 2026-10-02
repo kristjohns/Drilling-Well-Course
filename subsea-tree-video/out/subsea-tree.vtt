@@ -1,0 +1,839 @@
+WEBVTT
+
+1
+00:00:01.140 --> 00:00:05.820
+Three hundred metres below the
+North Sea, in cold, total darkness,
+
+2
+00:00:05.900 --> 00:00:08.903
+a steel structure is
+holding back a reservoir.
+
+3
+00:00:09.043 --> 00:00:12.518
+Inside, the pressure is
+measured in hundreds of bar.
+
+4
+00:00:12.757 --> 00:00:16.317
+There is nobody down there to
+turn a wheel, or pull a lever.
+
+5
+00:00:16.657 --> 00:00:21.087
+Yet this machine opens and closes,
+measures, injects chemicals,
+
+6
+00:00:21.177 --> 00:00:25.166
+and, if something goes wrong,
+shuts the well in, all by itself.
+
+7
+00:00:25.707 --> 00:00:28.051
+This is the subsea Christmas tree.
+
+8
+00:00:28.691 --> 00:00:30.651
+Let's find out how it works.
+
+9
+00:00:31.791 --> 00:00:35.479
+By the end of this video, you
+will be able to do five things.
+
+10
+00:00:35.519 --> 00:00:40.039
+Find the tree in a subsea production
+system, and name its four jobs.
+
+11
+00:00:40.179 --> 00:00:43.995
+Identify the main valves, and
+explain what each one does.
+
+12
+00:00:44.135 --> 00:00:48.740
+Explain why the valves are fail-safe
+closed, and how they are controlled.
+
+13
+00:00:48.880 --> 00:00:51.779
+Describe how the tree
+works as a well barrier.
+
+14
+00:00:51.919 --> 00:00:55.884
+And recognise the trees used
+on the Norwegian shelf today.
+
+15
+00:00:57.024 --> 00:00:59.197
+Let's start with the big picture.
+
+16
+00:00:59.287 --> 00:01:03.477
+Most subsea wells on the Norwegian
+shelf are tied back to a host:
+
+17
+00:01:03.707 --> 00:01:08.197
+a platform, a floating production
+vessel, or, like Snøhvit,
+
+18
+00:01:08.237 --> 00:01:12.212
+a plant onshore, 143 kilometres away.
+
+19
+00:01:12.353 --> 00:01:15.403
+On the seabed, wells are
+grouped in templates.
+
+20
+00:01:15.603 --> 00:01:19.625
+Each well has a wellhead, and on
+top of every wellhead sits a tree.
+
+21
+00:01:19.765 --> 00:01:23.625
+Oil and gas flow up from the
+reservoir, through the tubing,
+
+22
+00:01:23.665 --> 00:01:27.677
+through the tree, and into the
+flowline that carries them to the host.
+
+23
+00:01:27.817 --> 00:01:32.027
+Alongside runs an umbilical,
+bringing electrical power,
+
+24
+00:01:32.067 --> 00:01:37.009
+communication, hydraulic fluid and
+chemicals down from the host to the tree.
+
+25
+00:01:37.249 --> 00:01:42.388
+So the tree is the gateway between the well
+below, and the production system above.
+
+26
+00:01:43.427 --> 00:01:45.686
+A subsea tree has four jobs.
+
+27
+00:01:45.826 --> 00:01:47.536
+One: control the flow.
+
+28
+00:01:47.586 --> 00:01:50.005
+How much comes out of
+the well, or goes in.
+
+29
+00:01:50.245 --> 00:01:52.045
+Two: isolate the well.
+
+30
+00:01:52.175 --> 00:01:55.170
+The tree is a pressure-containing
+safety barrier.
+
+31
+00:01:55.410 --> 00:01:59.397
+Three: inject chemicals, and
+measure pressure and temperature.
+
+32
+00:01:59.637 --> 00:02:03.794
+And four: give access to the well,
+for maintenance and intervention.
+
+33
+00:02:04.234 --> 00:02:09.245
+And the name? The stack of valves and
+branches simply looks like a Christmas tree.
+
+34
+00:02:10.285 --> 00:02:11.946
+Let's open one up.
+
+35
+00:02:12.036 --> 00:02:16.986
+This is a vertical tree, the design
+Equinor now uses as its standard,
+
+36
+00:02:17.086 --> 00:02:21.143
+for example at Johan Castberg
+and on Troll Phase 3.
+
+37
+00:02:21.283 --> 00:02:25.718
+At the bottom, a hydraulic connector
+locks the tree onto the wellhead.
+
+38
+00:02:25.857 --> 00:02:28.647
+Inside the wellhead
+sits the tubing hanger.
+
+39
+00:02:28.937 --> 00:02:33.641
+It carries the weight of the production
+tubing, and seals off the space around it.
+
+40
+00:02:33.881 --> 00:02:36.609
+Two separate channels
+run up through the tree.
+
+41
+00:02:36.699 --> 00:02:40.899
+The production bore carries the well
+fluids, straight up from the tubing.
+
+42
+00:02:41.039 --> 00:02:46.370
+The annulus bore connects to the annulus:
+the space between the tubing and the casing.
+
+43
+00:02:46.560 --> 00:02:50.580
+Each bore has its own valves:
+a master valve at the bottom,
+
+44
+00:02:50.620 --> 00:02:54.877
+a wing valve leading out to the
+side, and a swab valve at the top.
+
+45
+00:02:55.117 --> 00:02:59.018
+The production wing leads through
+a choke, and out to the flowline.
+
+46
+00:02:59.959 --> 00:03:03.039
+Nearly every valve on the
+tree works in the same way,
+
+47
+00:03:03.079 --> 00:03:05.162
+so let's look at one in detail.
+
+48
+00:03:05.301 --> 00:03:09.348
+It is a gate valve: a flat
+steel gate with a hole in it,
+
+49
+00:03:09.388 --> 00:03:11.293
+sliding between two metal seats.
+
+50
+00:03:11.433 --> 00:03:14.588
+When the hole lines up
+with the bore, fluid flows.
+
+51
+00:03:14.728 --> 00:03:18.651
+Slide the gate across, and the
+solid steel blocks the flow.
+
+52
+00:03:18.891 --> 00:03:21.991
+The gate is moved by a hydraulic actuator.
+
+53
+00:03:22.241 --> 00:03:26.271
+Fluid pushes on a piston, and
+the piston pushes the gate open,
+
+54
+00:03:26.311 --> 00:03:28.382
+compressing a powerful spring.
+
+55
+00:03:28.621 --> 00:03:30.471
+Here is the key idea.
+
+56
+00:03:30.571 --> 00:03:33.201
+Hydraulic pressure holds the valve open.
+
+57
+00:03:33.371 --> 00:03:38.048
+Take the pressure away, for any reason,
+and the spring drives the gate shut.
+
+58
+00:03:38.288 --> 00:03:40.483
+We call this fail-safe closed.
+
+59
+00:03:40.723 --> 00:03:42.533
+Lose the signal? Closed.
+
+60
+00:03:42.573 --> 00:03:44.153
+Lose the hydraulic supply?
+
+61
+00:03:44.193 --> 00:03:45.811
+Closed. Lose everything?
+
+62
+00:03:45.851 --> 00:03:46.851
+Still closed.
+
+63
+00:03:47.061 --> 00:03:49.341
+The default state of the well is safe.
+
+64
+00:03:50.381 --> 00:03:55.050
+Now let's meet the valves, one at a
+time, starting with the production bore.
+
+65
+00:03:55.691 --> 00:03:58.151
+First, the production master valve.
+
+66
+00:03:58.311 --> 00:04:01.832
+It is the main door between the
+well and the rest of the system.
+
+67
+00:04:01.972 --> 00:04:05.142
+During production it stays open.
+
+68
+00:04:05.182 --> 00:04:09.649
+We avoid operating it while the well
+is flowing, to protect its seals,
+
+69
+00:04:09.689 --> 00:04:13.788
+and many trees have two master
+valves in series, for extra security.
+
+70
+00:04:14.428 --> 00:04:16.518
+Next, the production wing valve.
+
+71
+00:04:16.558 --> 00:04:18.351
+This is the working valve.
+
+72
+00:04:18.491 --> 00:04:22.431
+Whenever we need to shut the well
+in, the wing valve does the job,
+
+73
+00:04:22.471 --> 00:04:25.635
+so the master valve is
+kept in perfect condition.
+
+74
+00:04:26.275 --> 00:04:28.775
+Then the choke. It is
+not a shut-off valve.
+
+75
+00:04:28.815 --> 00:04:30.176
+It is the throttle.
+
+76
+00:04:30.316 --> 00:04:34.816
+By adjusting the opening, we set the
+flow rate, and the pressure upstream.
+
+77
+00:04:35.126 --> 00:04:39.896
+The flow is fast and abrasive, so
+choke parts use tungsten carbide,
+
+78
+00:04:39.936 --> 00:04:43.007
+and the insert can be replaced by an ROV.
+
+79
+00:04:43.647 --> 00:04:46.317
+At the top of the bore is the swab valve.
+
+80
+00:04:46.527 --> 00:04:50.417
+It gives straight vertical access
+to the well for wireline tools,
+
+81
+00:04:50.457 --> 00:04:52.796
+and stays closed during production.
+
+82
+00:04:53.436 --> 00:04:57.508
+The annulus bore has its own
+master, wing and swab valves.
+
+83
+00:04:57.598 --> 00:05:02.158
+The master valve is normally open,
+so we can monitor annulus pressure.
+
+84
+00:05:02.428 --> 00:05:07.131
+When the well heats up, the trapped
+fluid expands, and that pressure rises.
+
+85
+00:05:07.771 --> 00:05:11.886
+Linking the two sides is the
+crossover valve, normally closed.
+
+86
+00:05:11.976 --> 00:05:15.664
+Open it, and annulus pressure
+can be bled into the flowline.
+
+87
+00:05:16.304 --> 00:05:18.714
+Then the chemical injection valves.
+
+88
+00:05:18.854 --> 00:05:22.211
+They let the umbilical feed
+chemicals into the well stream.
+
+89
+00:05:22.351 --> 00:05:27.681
+At Snøhvit, glycol, or MEG,
+is injected at the wellhead,
+
+90
+00:05:27.781 --> 00:05:32.695
+so hydrates cannot block the
+143 kilometre pipeline to shore.
+
+91
+00:05:33.335 --> 00:05:37.895
+One more valve belongs to the family,
+even though it sits deep in the well:
+
+92
+00:05:37.995 --> 00:05:39.988
+the downhole safety valve.
+
+93
+00:05:40.128 --> 00:05:44.608
+A hydraulic control line runs from
+the tree, through the tubing hanger,
+
+94
+00:05:44.648 --> 00:05:45.648
+down to the valve.
+
+95
+00:05:45.748 --> 00:05:49.648
+Same principle: hydraulic
+pressure holds a flapper open,
+
+96
+00:05:49.688 --> 00:05:52.007
+and a spring closes it.
+
+97
+00:05:52.047 --> 00:05:55.132
+Lose the pressure, and the flapper
+snaps shut, sealing the tubing.
+
+98
+00:05:56.072 --> 00:05:58.416
+So how do the valves know what to do?
+
+99
+00:05:58.556 --> 00:06:00.826
+The tree has no brain of its own.
+
+100
+00:06:01.056 --> 00:06:05.646
+Commands come from the master control
+station, on the host or onshore,
+
+101
+00:06:05.686 --> 00:06:07.513
+and travel down the umbilical.
+
+102
+00:06:07.653 --> 00:06:11.533
+At the tree, a subsea control
+module receives each command.
+
+103
+00:06:11.823 --> 00:06:17.765
+Its electronics energise a small solenoid
+valve, which lets hydraulic fluid flow to
+
+104
+00:06:17.805 --> 00:06:19.682
+one specific actuator.
+
+105
+00:06:19.823 --> 00:06:23.362
+Pressure builds, the spring
+compresses, and the valve opens.
+
+106
+00:06:23.501 --> 00:06:28.362
+Sensors report back: pressure,
+temperature, and the state of every valve.
+
+107
+00:06:28.553 --> 00:06:31.903
+And remember, it is pressure
+that keeps the valves open.
+
+108
+00:06:32.123 --> 00:06:36.166
+Cut the power, or vent the
+hydraulics, and the springs take over.
+
+109
+00:06:36.356 --> 00:06:41.246
+If the control system is ever lost,
+an ROV can connect to the tree,
+
+110
+00:06:41.286 --> 00:06:43.329
+and operate the valves directly.
+
+111
+00:06:44.369 --> 00:06:46.379
+Why so much redundancy?
+
+112
+00:06:46.549 --> 00:06:50.404
+Because of one of the most important
+principles in well engineering.
+
+113
+00:06:50.544 --> 00:06:55.517
+There must always be two independent, tested
+barriers between the reservoir and the
+
+114
+00:06:55.557 --> 00:06:56.621
+environment.
+
+115
+00:06:56.861 --> 00:06:59.961
+Here is a simplified producing well.
+
+116
+00:07:00.001 --> 00:07:03.356
+The primary barrier, in blue,
+is the tubing and packer,
+
+117
+00:07:03.396 --> 00:07:05.456
+closed by the downhole safety valve.
+
+118
+00:07:05.596 --> 00:07:09.026
+The secondary barrier, in
+red, is the casing and cement,
+
+119
+00:07:09.066 --> 00:07:12.697
+the wellhead, the tubing hanger,
+and the tree, with its valves.
+
+120
+00:07:12.937 --> 00:07:17.265
+If one barrier fails, the other
+still holds, and we have time to act.
+
+121
+00:07:17.455 --> 00:07:20.895
+That is why barrier elements,
+including the tree valves,
+
+122
+00:07:20.935 --> 00:07:24.215
+are tested regularly, to
+prove they still work.
+
+123
+00:07:25.255 --> 00:07:28.965
+Let's put it all together, and
+follow one well through start-up,
+
+124
+00:07:29.005 --> 00:07:30.970
+and an emergency shutdown.
+
+125
+00:07:31.110 --> 00:07:36.669
+Start-up. From the control room,
+operators open the valves in sequence:
+
+126
+00:07:36.709 --> 00:07:39.981
+the downhole safety valve
+first, then the master valve,
+
+127
+00:07:40.021 --> 00:07:41.021
+then the wing valve.
+
+128
+00:07:41.082 --> 00:07:45.367
+Finally the choke opens gradually,
+and the well begins to flow.
+
+129
+00:07:45.907 --> 00:07:47.577
+Now something goes wrong.
+
+130
+00:07:47.697 --> 00:07:51.344
+A gas leak on the host
+triggers an emergency shutdown.
+
+131
+00:07:51.485 --> 00:07:52.685
+Pause for a moment.
+
+132
+00:07:52.725 --> 00:07:54.618
+Which valve should close first?
+
+133
+00:07:57.458 --> 00:08:01.167
+The wing valve. It is designed
+to close against the flow.
+
+134
+00:08:01.407 --> 00:08:03.317
+Next, the master valve.
+
+135
+00:08:03.447 --> 00:08:06.907
+And only when the flow has
+stopped, the downhole safety valve,
+
+136
+00:08:06.947 --> 00:08:08.658
+the last line of defence.
+
+137
+00:08:08.898 --> 00:08:11.128
+No operator action is needed.
+
+138
+00:08:11.268 --> 00:08:14.570
+The hydraulics are vented,
+and the springs do the rest.
+
+139
+00:08:15.610 --> 00:08:18.061
+Trees come in two basic designs.
+
+140
+00:08:18.201 --> 00:08:21.861
+In a vertical tree, the tubing
+hanger sits in the wellhead,
+
+141
+00:08:21.931 --> 00:08:24.193
+and the tree is installed on top.
+
+142
+00:08:24.383 --> 00:08:27.783
+In a horizontal tree,
+the tree goes on first.
+
+143
+00:08:27.993 --> 00:08:32.487
+The tubing hanger lands inside it,
+and the production flows out sideways.
+
+144
+00:08:32.727 --> 00:08:39.067
+The big advantage: the completion can be pulled
+without lifting the tree off the wellhead.
+
+145
+00:08:39.107 --> 00:08:45.140
+Norne, in 1997, was the first field on the
+Norwegian shelf to use horizontal trees.
+
+146
+00:08:45.380 --> 00:08:50.540
+Today, Equinor's standard is a vertical
+tree, developed with Aker Solutions.
+
+147
+00:08:50.680 --> 00:08:54.950
+It comes in two sizes,
+seven-by-five and seven-by-seven,
+
+148
+00:08:54.990 --> 00:09:00.000
+named after their bore sizes,
+and a flow module sets its duty:
+
+149
+00:09:00.040 --> 00:09:02.688
+producer, gas injector or water injector.
+
+150
+00:09:02.828 --> 00:09:07.548
+Aker Solutions says the design is
+roughly half the weight of earlier trees,
+
+151
+00:09:07.658 --> 00:09:10.988
+which makes it easier to
+install from smaller vessels,
+
+152
+00:09:11.058 --> 00:09:13.151
+an advantage in the Barents Sea.
+
+153
+00:09:14.191 --> 00:09:17.559
+Subsea trees are everywhere
+on the Norwegian shelf.
+
+154
+00:09:17.699 --> 00:09:22.419
+At Troll, in the North Sea, subsea
+templates feed Troll B and Troll C,
+
+155
+00:09:22.569 --> 00:09:26.614
+and since 2021, Phase 3
+has fed gas to Troll A.
+
+156
+00:09:26.753 --> 00:09:32.422
+At Åsgard, in the Norwegian Sea, the world's
+first subsea gas compression plant started
+
+157
+00:09:32.462 --> 00:09:33.940
+up in 2015.
+
+158
+00:09:34.080 --> 00:09:38.917
+At Aasta Hansteen, trees stand
+in 1,300 metres of water,
+
+159
+00:09:38.957 --> 00:09:40.307
+the deepest on the shelf.
+
+160
+00:09:40.447 --> 00:09:45.917
+And in the Barents Sea, Johan Castberg
+began producing in March 2025,
+
+161
+00:09:46.037 --> 00:09:49.724
+with thirty subsea wells,
+all on the new standard tree.
+
+162
+00:09:50.764 --> 00:09:52.214
+Time to test yourself.
+
+163
+00:09:52.254 --> 00:09:53.577
+Three questions.
+
+164
+00:09:53.817 --> 00:09:57.953
+Question one. What does fail-safe
+closed mean for a tree valve?
+
+165
+00:10:03.593 --> 00:10:08.348
+B. The valve closes automatically
+when hydraulic pressure is lost.
+
+166
+00:10:08.788 --> 00:10:13.500
+Question two. In an emergency
+shutdown, which valve closes last?
+
+167
+00:10:19.140 --> 00:10:22.956
+C. The downhole safety valve,
+the last line of defence.
+
+168
+00:10:23.396 --> 00:10:28.456
+Question three. Which valve do you open,
+together with the annulus master valve,
+
+169
+00:10:28.496 --> 00:10:31.159
+to bleed annulus pressure
+into the flowline?
+
+170
+00:10:36.799 --> 00:10:38.908
+B. The crossover valve.
+
+171
+00:10:40.148 --> 00:10:41.553
+Let's recap.
+
+172
+00:10:41.593 --> 00:10:45.922
+The tree controls the flow, isolates
+the well, injects and monitors,
+
+173
+00:10:45.962 --> 00:10:47.201
+and gives access.
+
+174
+00:10:47.341 --> 00:10:51.931
+Its valves are held open by hydraulic
+pressure, and closed by springs,
+
+175
+00:10:51.971 --> 00:10:53.696
+so the well fails safe.
+
+176
+00:10:53.836 --> 00:10:57.896
+In an emergency: wing valve,
+master valve, and last of all,
+
+177
+00:10:57.936 --> 00:10:59.785
+the downhole safety valve.
+
+178
+00:10:59.925 --> 00:11:05.255
+And together with the casing and the
+wellhead, the tree forms the second of the two
+
+179
+00:11:05.295 --> 00:11:07.688
+barriers that keep the
+reservoir where it belongs.
+
+180
+00:11:08.028 --> 00:11:09.817
+Thank you for watching.
+

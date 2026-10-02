@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Subsea tree – valve cheat sheet</title>
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+  @page { size: 297mm 210mm; margin: 0; }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#fff;color:#0F1B26;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  #sheet{width:1123px;height:794px;padding:28px 34px 22px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+  header{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:3px solid #0F1B26;padding-bottom:8px}
+  header h1{font:800 27px/1.05 'Inter';letter-spacing:-.02em;margin:0}
+  header .sub{font:600 12px 'Inter';letter-spacing:.14em;text-transform:uppercase;color:#5A6C7B}
+  .row1{display:grid;grid-template-columns:480px 1fr;gap:16px;height:470px;grid-template-rows:470px}
+  .tree{background:radial-gradient(520px 360px at 55% 30%,#0F3454,#071827 70%);border-radius:14px;position:relative;overflow:hidden}
+  .tree svg{position:absolute;inset:0}
+  table{border-collapse:collapse;width:100%;font-size:11px;line-height:1.28;table-layout:fixed}
+  th{font:700 9.5px 'Inter';letter-spacing:.1em;text-transform:uppercase;text-align:left;color:#5A6C7B;padding:0 6px 5px;border-bottom:2px solid #0F1B26}
+  td{padding:4px 6px;border-bottom:1px solid #D8E0E7;vertical-align:top}
+  td .nm{font:500 9.8px 'Inter';color:#5A6C7B;margin-top:1px}
+  td .sub{font:500 9.3px 'Inter';color:#5A6C7B}
+  td.n{width:26px}
+  .num{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#FFC857;color:#06121C;font:800 10.5px 'JetBrains Mono'}
+  td.v{width:132px}
+  td.v .tag{font:700 12px 'JetBrains Mono'}
+  .st{font:700 10.5px 'JetBrains Mono'}
+  .open{color:#0E9A52}.closed{color:#D6244B}.adj{color:#C26A0A}
+  .row2{display:grid;grid-template-columns:1.05fr 1.2fr 1.25fr .9fr;gap:12px;flex:1}
+  .box{border:1.5px solid #CBD6DF;border-radius:12px;padding:10px 12px;background:#F6F9FB}
+  .box h3{font:800 10px 'Inter';letter-spacing:.14em;text-transform:uppercase;margin:0 0 7px}
+  .chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .chip{padding:4px 8px;border-radius:8px;background:#fff;border:1.5px solid #B7C6D2;font:700 10.5px 'JetBrains Mono';white-space:nowrap}
+  .arrow{font:800 12px 'Inter';color:#8FA1AF}
+  .box p{margin:5px 0 0;font-size:10.5px;line-height:1.35;color:#2C3E4C}
+  .blue{color:#2F62E6}.red{color:#E0324F}
+  footer{font:500 9.5px 'Inter';color:#6B7C8A;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div id="sheet"></div>
+<script type="module" src="js/cheatsheet.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+build/
+out/frames/
+out/*.mp4
+*.log
+__pycache__/
+*.pyc

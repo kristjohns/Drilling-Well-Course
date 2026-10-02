@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "title": "The Subsea Christmas Tree: How It Works",
+    "subtitle": "Valves, barriers and control on the Norwegian Continental Shelf",
+    "voice": "af_heart",
+    "speed": 0.93,
+    "lang": "en-us"
+  },
+  "scenes": [
+    {
+      "id": "intro", "chapter": "Cold open", "lead": 1.2, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "Three hundred metres below the North Sea, in cold, total darkness, a steel structure is holding back a reservoir.", "post": 0.5 },
+        { "id": "b2", "text": "Inside, the pressure is measured in hundreds of bar.", "post": 0.6 },
+        { "id": "b3", "text": "There is nobody down there to turn a wheel, or pull a lever.", "post": 0.7 },
+        { "id": "b4", "text": "Yet this machine opens and closes, measures, injects chemicals, and, if something goes wrong, shuts the well in, all by itself.", "post": 0.9 },
+        { "id": "b5", "text": "This is the subsea Christmas tree.", "post": 1.0 },
+        { "id": "b6", "text": "Let's find out how it works.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "goals", "chapter": "What you will learn", "lead": 0.5, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "By the end of this video, you will be able to do five things.", "post": 0.4 },
+        { "id": "b2", "text": "Find the tree in a subsea production system, and name its four jobs.", "post": 0.5 },
+        { "id": "b3", "text": "Identify the main valves, and explain what each one does.", "post": 0.5 },
+        { "id": "b4", "text": "Explain why the valves are fail-safe closed, and how they are controlled.", "post": 0.5 },
+        { "id": "b5", "text": "Describe how the tree works as a well barrier.", "post": 0.5 },
+        { "id": "b6", "text": "And recognise the trees used on the Norwegian shelf today.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "system", "chapter": "The big picture", "lead": 0.5, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "Let's start with the big picture.", "post": 0.45 },
+        { "id": "b2", "text": "Most subsea wells on the Norwegian shelf are tied back to a host: a platform, a floating production vessel, or, like Snøhvit, a plant onshore, 143 kilometres away.", "post": 0.5 },
+        { "id": "b3", "text": "On the seabed, wells are grouped in templates. Each well has a wellhead, and on top of every wellhead sits a tree.", "post": 0.5 },
+        { "id": "b4", "text": "Oil and gas flow up from the reservoir, through the tubing, through the tree, and into the flowline that carries them to the host.", "post": 0.5 },
+        { "id": "b5", "text": "Alongside runs an umbilical, bringing electrical power, communication, hydraulic fluid and chemicals down from the host to the tree.", "post": 0.6 },
+        { "id": "b6", "text": "So the tree is the gateway between the well below, and the production system above.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "jobs", "chapter": "Four jobs", "lead": 0.4, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "A subsea tree has four jobs.", "post": 0.5 },
+        { "id": "b2", "text": "One: control the flow. How much comes out of the well, or goes in.", "post": 0.6 },
+        { "id": "b3", "text": "Two: isolate the well. The tree is a pressure-containing safety barrier.", "post": 0.6 },
+        { "id": "b4", "text": "Three: inject chemicals, and measure pressure and temperature.", "post": 0.6 },
+        { "id": "b5", "text": "And four: give access to the well, for maintenance and intervention.", "post": 0.8 },
+        { "id": "b6", "text": "And the name? The stack of valves and branches simply looks like a Christmas tree.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "anatomy", "chapter": "Anatomy of a vertical tree", "lead": 0.4, "tail": 0.5,
+      "beats": [
+        { "id": "b1", "text": "Let's open one up.", "post": 0.45 },
+        { "id": "b2", "text": "This is a vertical tree, the design Equinor now uses as its standard, for example at Johan Castberg and on Troll Phase 3.", "post": 0.5 },
+        { "id": "b3", "text": "At the bottom, a hydraulic connector locks the tree onto the wellhead.", "post": 0.5 },
+        { "id": "b4", "text": "Inside the wellhead sits the tubing hanger. It carries the weight of the production tubing, and seals off the space around it.", "post": 0.6 },
+        { "id": "b5", "text": "Two separate channels run up through the tree.", "post": 0.45 },
+        { "id": "b6", "text": "The production bore carries the well fluids, straight up from the tubing.", "post": 0.5 },
+        { "id": "b7", "text": "The annulus bore connects to the annulus: the space between the tubing and the casing.", "post": 0.55 },
+        { "id": "b8", "text": "Each bore has its own valves: a master valve at the bottom, a wing valve leading out to the side, and a swab valve at the top.", "post": 0.6 },
+        { "id": "b9", "text": "The production wing leads through a choke, and out to the flowline.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "gate", "chapter": "The fail-safe valve", "lead": 0.4, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "Nearly every valve on the tree works in the same way, so let's look at one in detail.", "post": 0.5 },
+        { "id": "b2", "text": "It is a gate valve: a flat steel gate with a hole in it, sliding between two metal seats.", "post": 0.5 },
+        { "id": "b3", "text": "When the hole lines up with the bore, fluid flows.", "post": 0.5 },
+        { "id": "b4", "text": "Slide the gate across, and the solid steel blocks the flow.", "post": 0.6 },
+        { "id": "b5", "text": "The gate is moved by a hydraulic actuator. Fluid pushes on a piston, and the piston pushes the gate open, compressing a powerful spring.", "post": 0.6 },
+        { "id": "b6", "text": "Here is the key idea. Hydraulic pressure holds the valve open. Take the pressure away, for any reason, and the spring drives the gate shut.", "post": 0.6 },
+        { "id": "b7", "text": "We call this fail-safe closed.", "post": 0.6 },
+        { "id": "b8", "text": "Lose the signal? Closed. Lose the hydraulic supply? Closed. Lose everything? Still closed.", "post": 0.6 },
+        { "id": "b9", "text": "The default state of the well is safe.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "valves", "chapter": "Meet the valves", "lead": 0.4, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "Now let's meet the valves, one at a time, starting with the production bore.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "pmv", "lead": 0.2, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "First, the production master valve. It is the main door between the well and the rest of the system.", "post": 0.5 },
+        { "id": "b2", "text": "During production it stays open. We avoid operating it while the well is flowing, to protect its seals, and many trees have two master valves in series, for extra security.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "pwv", "lead": 0.2, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "Next, the production wing valve. This is the working valve.", "post": 0.5 },
+        { "id": "b2", "text": "Whenever we need to shut the well in, the wing valve does the job, so the master valve is kept in perfect condition.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "choke", "lead": 0.2, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "Then the choke. It is not a shut-off valve. It is the throttle.", "post": 0.5 },
+        { "id": "b2", "text": "By adjusting the opening, we set the flow rate, and the pressure upstream. The flow is fast and abrasive, so choke parts use tungsten carbide, and the insert can be replaced by an ROV.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "psv", "lead": 0.2, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "At the top of the bore is the swab valve. It gives straight vertical access to the well for wireline tools, and stays closed during production.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "annulus", "lead": 0.2, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "The annulus bore has its own master, wing and swab valves.", "post": 0.45 },
+        { "id": "b2", "text": "The master valve is normally open, so we can monitor annulus pressure. When the well heats up, the trapped fluid expands, and that pressure rises.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "xov", "lead": 0.2, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "Linking the two sides is the crossover valve, normally closed.", "post": 0.45 },
+        { "id": "b2", "text": "Open it, and annulus pressure can be bled into the flowline.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "civ", "lead": 0.2, "tail": 0.3,
+      "beats": [
+        { "id": "b1", "text": "Then the chemical injection valves. They let the umbilical feed chemicals into the well stream.", "post": 0.5 },
+        { "id": "b2", "text": "At Snøhvit, glycol, or MEG, is injected at the wellhead, so hydrates cannot block the 143 kilometre pipeline to shore.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "dhsv", "lead": 0.2, "tail": 0.4,
+      "beats": [
+        { "id": "b1", "text": "One more valve belongs to the family, even though it sits deep in the well: the downhole safety valve.", "post": 0.5 },
+        { "id": "b2", "text": "A hydraulic control line runs from the tree, through the tubing hanger, down to the valve.", "post": 0.5 },
+        { "id": "b3", "text": "Same principle: hydraulic pressure holds a flapper open, and a spring closes it. Lose the pressure, and the flapper snaps shut, sealing the tubing.", "post": 0.5 }
+      ]
+    },
+    {
+      "id": "control", "chapter": "How the valves are controlled", "lead": 0.4, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "So how do the valves know what to do?", "post": 0.5 },
+        { "id": "b2", "text": "The tree has no brain of its own. Commands come from the master control station, on the host or onshore, and travel down the umbilical.", "post": 0.5 },
+        { "id": "b3", "text": "At the tree, a subsea control module receives each command. Its electronics energise a small solenoid valve, which lets hydraulic fluid flow to one specific actuator.", "post": 0.5 },
+        { "id": "b4", "text": "Pressure builds, the spring compresses, and the valve opens.", "post": 0.5 },
+        { "id": "b5", "text": "Sensors report back: pressure, temperature, and the state of every valve.", "post": 0.55 },
+        { "id": "b6", "text": "And remember, it is pressure that keeps the valves open. Cut the power, or vent the hydraulics, and the springs take over.", "post": 0.55 },
+        { "id": "b7", "text": "If the control system is ever lost, an ROV can connect to the tree, and operate the valves directly.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "barriers", "chapter": "The two-barrier principle", "lead": 0.4, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "Why so much redundancy? Because of one of the most important principles in well engineering.", "post": 0.5 },
+        { "id": "b2", "text": "There must always be two independent, tested barriers between the reservoir and the environment.", "post": 0.6 },
+        { "id": "b3", "text": "Here is a simplified producing well. The primary barrier, in blue, is the tubing and packer, closed by the downhole safety valve.", "post": 0.5 },
+        { "id": "b4", "text": "The secondary barrier, in red, is the casing and cement, the wellhead, the tubing hanger, and the tree, with its valves.", "post": 0.6 },
+        { "id": "b5", "text": "If one barrier fails, the other still holds, and we have time to act.", "post": 0.55 },
+        { "id": "b6", "text": "That is why barrier elements, including the tree valves, are tested regularly, to prove they still work.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "esd", "chapter": "Start-up and emergency shutdown", "lead": 0.4, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "Let's put it all together, and follow one well through start-up, and an emergency shutdown.", "post": 0.5 },
+        { "id": "b2", "text": "Start-up. From the control room, operators open the valves in sequence: the downhole safety valve first, then the master valve, then the wing valve.", "post": 0.5 },
+        { "id": "b3", "text": "Finally the choke opens gradually, and the well begins to flow.", "post": 0.9 },
+        { "id": "b4", "text": "Now something goes wrong. A gas leak on the host triggers an emergency shutdown.", "post": 0.5 },
+        { "id": "b5", "text": "Pause for a moment. Which valve should close first?", "post": 3.2 },
+        { "id": "b6", "text": "The wing valve. It is designed to close against the flow.", "post": 0.6 },
+        { "id": "b7", "text": "Next, the master valve. And only when the flow has stopped, the downhole safety valve, the last line of defence.", "post": 0.6 },
+        { "id": "b8", "text": "No operator action is needed. The hydraulics are vented, and the springs do the rest.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "types", "chapter": "Vertical or horizontal?", "lead": 0.4, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "Trees come in two basic designs.", "post": 0.5 },
+        { "id": "b2", "text": "In a vertical tree, the tubing hanger sits in the wellhead, and the tree is installed on top.", "post": 0.55 },
+        { "id": "b3", "text": "In a horizontal tree, the tree goes on first. The tubing hanger lands inside it, and the production flows out sideways.", "post": 0.6 },
+        { "id": "b4", "text": "The big advantage: the completion can be pulled without lifting the tree off the wellhead. Norne, in 1997, was the first field on the Norwegian shelf to use horizontal trees.", "post": 0.6 },
+        { "id": "b5", "text": "Today, Equinor's standard is a vertical tree, developed with Aker Solutions.", "post": 0.5 },
+        { "id": "b6", "text": "It comes in two sizes, seven-by-five and seven-by-seven, named after their bore sizes, and a flow module sets its duty: producer, gas injector or water injector.", "post": 0.5 },
+        { "id": "b7", "text": "Aker Solutions says the design is roughly half the weight of earlier trees, which makes it easier to install from smaller vessels, an advantage in the Barents Sea.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "ncs", "chapter": "On the Norwegian shelf", "lead": 0.4, "tail": 0.6,
+      "beats": [
+        { "id": "b1", "text": "Subsea trees are everywhere on the Norwegian shelf.", "post": 0.5 },
+        { "id": "b2", "text": "At Troll, in the North Sea, subsea templates feed Troll B and Troll C, and since 2021, Phase 3 has fed gas to Troll A.", "post": 0.5 },
+        { "id": "b3", "text": "At Åsgard, in the Norwegian Sea, the world's first subsea gas compression plant started up in 2015.", "post": 0.5 },
+        { "id": "b4", "text": "At Aasta Hansteen, trees stand in 1,300 metres of water, the deepest on the shelf.", "post": 0.5 },
+        { "id": "b5", "text": "And in the Barents Sea, Johan Castberg began producing in March 2025, with thirty subsea wells, all on the new standard tree.", "post": 0.4 }
+      ]
+    },
+    {
+      "id": "quiz", "chapter": "Check your understanding", "lead": 0.4, "tail": 0.5,
+      "beats": [
+        { "id": "b1", "text": "Time to test yourself. Three questions.", "post": 0.6 },
+        { "id": "q1", "text": "Question one. What does fail-safe closed mean for a tree valve?", "post": 6.0 },
+        { "id": "a1", "text": "B. The valve closes automatically when hydraulic pressure is lost.", "post": 0.8 },
+        { "id": "q2", "text": "Question two. In an emergency shutdown, which valve closes last?", "post": 6.0 },
+        { "id": "a2", "text": "C. The downhole safety valve, the last line of defence.", "post": 0.8 },
+        { "id": "q3", "text": "Question three. Which valve do you open, together with the annulus master valve, to bleed annulus pressure into the flowline?", "post": 6.0 },
+        { "id": "a3", "text": "B. The crossover valve.", "post": 0.6 }
+      ]
+    },
+    {
+      "id": "recap", "chapter": "Summary", "lead": 0.5, "tail": 1.0,
+      "beats": [
+        { "id": "b1", "text": "Let's recap.", "post": 0.4 },
+        { "id": "b2", "text": "The tree controls the flow, isolates the well, injects and monitors, and gives access.", "post": 0.5 },
+        { "id": "b3", "text": "Its valves are held open by hydraulic pressure, and closed by springs, so the well fails safe.", "post": 0.5 },
+        { "id": "b4", "text": "In an emergency: wing valve, master valve, and last of all, the downhole safety valve.", "post": 0.5 },
+        { "id": "b5", "text": "And together with the casing and the wellhead, the tree forms the second of the two barriers that keep the reservoir where it belongs.", "post": 0.7 },
+        { "id": "b6", "text": "Thank you for watching.", "post": 6.5 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "subsea-tree-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Educational animation: how a subsea Christmas tree works (NCS). Deterministic SVG/GSAP animation rendered to MP4 with Playwright + ffmpeg, narrated with Kokoro TTS.",
+  "type": "module",
+  "scripts": {
+    "tts": "python3 tools/tts.py",
+    "sfx": "node tools/dump-sfx.mjs",
+    "audio": "python3 tools/audio.py",
+    "captions": "python3 tools/captions.py",
+    "render": "node tools/render.mjs",
+    "encode": "bash tools/encode.sh",
+    "cheatsheet": "node tools/cheatsheet.mjs",
+    "qa": "bash tools/qa.sh",
+    "serve": "node tools/server.mjs 8080",
+    "frame": "node tools/frame.mjs"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "d3-geo": "^3.1.1",
+    "gsap": "^3.15.0",
+    "playwright": "^1.56.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  }
+}
