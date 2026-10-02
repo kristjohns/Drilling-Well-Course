@@ -6,9 +6,9 @@ English narration, burned-in or soft captions, chapter markers.
 
 | File | What it is |
 | --- | --- |
-| `out/subsea-tree_1080p.mp4` | Final video, clean (soft subtitle track + chapters) |
-| `out/subsea-tree_1080p_captions.mp4` | Same video with captions burned in |
-| `out/subsea-tree_720p.mp4` | Light copy for quick sharing |
+| `out/subsea-tree_1080p.mp4` | Final video, 1080p / 30 fps, clean picture (soft subtitle track + 14 chapters), 92 MiB, −16 LUFS |
+| `out/subsea-tree_1080p_captions.mp4` | Same video with captions burned in, for players that cannot show a subtitle track, 92 MiB |
+| `out/subsea-tree_720p.mp4` | Light copy for quick sharing (soft subtitles + chapters), 40 MiB |
 | `out/subsea-tree.srt` / `.vtt` | Captions (180 cues) |
 | `out/poster.png` | Title-card still for the course platform |
 | `out/subsea-tree_transcript.md` | Full transcript with chapter timestamps |
@@ -47,7 +47,7 @@ tools/dump-sfx.mjs        export sound-effect cues from the scene code
 tools/audio.py            synthesised foley + ambient bed + voice mix, ducking, -16 LUFS master
 tools/captions.py         SRT / VTT / ASS captions + chapter metadata from the word timings
 tools/render.mjs          parallel Playwright (Chromium) renderer -> ffmpeg
-tools/encode.sh           final encodes (clean + captioned) and poster
+tools/encode.sh           final two-pass, size-targeted encodes (clean, captioned, 720p) and poster
 tools/cheatsheet.mjs      renders src/cheatsheet.html -> out/valve-cheat-sheet.pdf
 ```
 
@@ -61,7 +61,7 @@ node tools/dump-sfx.mjs              # sound cues
 python3 tools/audio.py               # audio mix  -> build/audio_final.wav
 python3 tools/captions.py            # captions, chapters, caption font
 node tools/render.mjs                # ~25 min on 4 cores -> build/render/video.mp4
-bash tools/encode.sh                 # -> out/*.mp4, poster
+bash tools/encode.sh                 # ~25 min; 92 MiB per 1080p file (TARGET_MB=140 for more headroom) -> out/*.mp4, poster
 node tools/cheatsheet.mjs            # -> out/valve-cheat-sheet.pdf
 ```
 
@@ -83,6 +83,11 @@ A claim-by-claim sheet with the public pages consulted is in [`docs/fact-check.m
   * "Roughly half the weight of earlier trees" (attributed to Aker Solutions)
   * Troll Phase 3 (2021), Åsgard subsea gas compression (2015), Aasta Hansteen 1,300 m, Johan Castberg first oil March 2025 with 30 subsea wells
   * Shutdown order PWV → PMV → DHSV and "closes against the flow" wording (company procedures differ)
+* The narration is a **synthetic voice** (Kokoro-82M, American English). Norwegian names (Equinor, Åsgard, Snøhvit, Johan Castberg,
+  Aasta Hansteen, Norne, Aker, NORSOK) are spoken from hand-written pronunciations in `tools/lexicon.json`, which could not be
+  auditioned by a Norwegian speaker during the build — listen once, and adjust the entries if a name sounds wrong
+  (then rerun `tts.py`, `audio.py`, `captions.py`, `render.mjs`, `encode.sh`). For a human voice-over, keep the beat structure
+  of `src/data/script.json`; the scene timings are read from `src/data/timings.json`.
 * The tree, valve and facility drawings are **schematic**; facility layouts and field positions on the map are simplified.
 * No company logos or branding are used. Add course branding in `src/index.html` / `src/css/style.css` (the HUD has free space top-right).
 

@@ -1,7 +1,7 @@
 node_modules/
 build/
 out/frames/
-out/*.mp4
+# the finished videos in out/ are committed on purpose (each is below GitHub's 100 MiB file limit; check before adding more)
 *.log
 __pycache__/
 *.pyc
