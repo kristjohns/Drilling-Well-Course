@@ -8,6 +8,7 @@
 #
 #   bash tools/encode.sh                 (TARGET_MB=92 PRESET=slow)
 #   TARGET_MB=140 bash tools/encode.sh   (larger files, more headroom for fine detail)
+#   SKIP_PASS1=1 bash tools/encode.sh    (re-use the first-pass statistics in build/x264_*.log)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PRESET="${PRESET:-slow}"
@@ -22,24 +23,29 @@ VK=$(awk -v mb="$TARGET_MB" -v d="$DUR" -v a="$AUDIO_K" 'BEGIN { printf "%d", mb
 echo "target ${TARGET_MB} MiB over ${DUR} s -> picture ${VK} kbit/s + audio ${AUDIO_K} kbit/s"
 
 X264=(-c:v libx264 -preset "$PRESET" -tune animation -b:v "${VK}k" -maxrate 4000k -bufsize 8000k
-      -x264-params aq-mode=3:aq-strength=0.8 -pix_fmt yuv420p -profile:v high -level 4.1 -g 60 -bf 3
+      -pix_fmt yuv420p -profile:v high -level 4.1 -g 60 -bf 3
       -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv)
+# explicit x264 statistics files (ffmpeg's -pass/-passlogfile names them by global stream index, which differs
+# between the two passes when one command writes several outputs)
+XP="aq-mode=3:aq-strength=0.8"
 AUD=(-c:a aac -b:a "${AUDIO_K}k" -ar 48000)
 GRAPH="[0:v]split=2[v1][v2];[v2]subtitles=build/captions.ass:fontsdir=build/fonts[vc]"
-rm -f build/x264_clean-*.log* build/x264_caps-*.log*
 
-echo "pass 1/2 …"
-ffmpeg -y -hide_banner -loglevel error -stats -i "$V" -filter_complex "$GRAPH" \
-  -map "[v1]" -an "${X264[@]}" -pass 1 -passlogfile build/x264_clean -f null /dev/null \
-  -map "[vc]" -an "${X264[@]}" -pass 1 -passlogfile build/x264_caps -f null /dev/null
+if [ "${SKIP_PASS1:-0}" != 1 ]; then
+  rm -f build/x264_clean.log* build/x264_caps.log*
+  echo "pass 1/2 …"
+  ffmpeg -y -hide_banner -loglevel error -stats -i "$V" -filter_complex "$GRAPH" \
+    -map "[v1]" -an "${X264[@]}" -x264-params "$XP:pass=1:stats=build/x264_clean.log" -f null /dev/null \
+    -map "[vc]" -an "${X264[@]}" -x264-params "$XP:pass=1:stats=build/x264_caps.log" -f null /dev/null
+fi
 
 echo "pass 2/2 …"
 ffmpeg -y -hide_banner -loglevel error -stats \
   -i "$V" -i "$A" -i out/subsea-tree.srt -i build/chapters.ffmeta -filter_complex "$GRAPH" \
-  -map "[v1]" -map 1:a -map 2:s -map_metadata 3 -map_chapters 3 "${X264[@]}" -pass 2 -passlogfile build/x264_clean "${AUD[@]}" \
+  -map "[v1]" -map 1:a -map 2:s -map_metadata 3 -map_chapters 3 "${X264[@]}" -x264-params "$XP:pass=2:stats=build/x264_clean.log" "${AUD[@]}" \
       -c:s mov_text -metadata:s:s:0 language=eng -metadata:s:s:0 title=English -metadata:s:a:0 language=eng \
       -movflags +faststart out/subsea-tree_1080p.mp4 \
-  -map "[vc]" -map 1:a -map_metadata 3 -map_chapters 3 "${X264[@]}" -pass 2 -passlogfile build/x264_caps "${AUD[@]}" \
+  -map "[vc]" -map 1:a -map_metadata 3 -map_chapters 3 "${X264[@]}" -x264-params "$XP:pass=2:stats=build/x264_caps.log" "${AUD[@]}" \
       -metadata:s:a:0 language=eng -movflags +faststart out/subsea-tree_1080p_captions.mp4
 
 # poster: the title card (28.5 s in), taken from the near-lossless render
