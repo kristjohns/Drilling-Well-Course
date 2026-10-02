@@ -14,7 +14,7 @@ English narration, burned-in or soft captions, chapter markers.
 | `out/subsea-tree_transcript.md` | Full transcript with chapter timestamps |
 | `out/valve-cheat-sheet.pdf` | One-page A4 companion: valves, fail-safe logic, shutdown order, barriers, quiz answers |
 
-## Storyline (11:17)
+## Storyline (11:16)
 
 1. **Cold open** – 300 m down, a steel structure holds back a reservoir
 2. **Learning objectives**

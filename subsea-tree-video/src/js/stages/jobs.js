@@ -141,16 +141,17 @@ export function build(root, E) {
   const fir = S('path', { d: dd, pathLength: 1, fill: 'none', stroke: '#3BDB86', 'stroke-width': 9, 'stroke-linejoin': 'round', 'stroke-dasharray': 1, 'stroke-dashoffset': 1, opacity: 0.95 });
   const firGlow = S('path', { d: dd, pathLength: 1, fill: 'none', stroke: '#3BDB86', 'stroke-width': 24, 'stroke-linejoin': 'round', 'stroke-dasharray': 1, 'stroke-dashoffset': 1, opacity: 0.18 });
   world.append(firGlow, fir);
-  const tChr = T.word('jobs.b6', 'Christmas') - 0.3;
-  tl.fromTo([fir, firGlow], { attr: { 'stroke-dashoffset': 1 } }, { attr: { 'stroke-dashoffset': 0 }, duration: 1.5, ease: 'power2.inOut', immediateRender: true }, tChr);
+  // draw the outline while "simply looks like a Christmas tree" is spoken, complete before the scene ends
+  const tChr = T.word('jobs.b6', 'simply') - 0.15;
+  tl.fromTo([fir, firGlow], { attr: { 'stroke-dashoffset': 1 } }, { attr: { 'stroke-dashoffset': 0 }, duration: 1.25, ease: 'power2.inOut', immediateRender: true }, tChr);
   // star
   const star = S('g', { transform: 'translate(0 -1120)' });
   const starIn = S('g');
   star.append(starIn);
   starIn.append(S('circle', { r: 70, fill: 'url(#gGlowWarm)' }), S('path', { d: 'M0 -42 L12 -14 L42 -12 L19 8 L26 38 L0 22 L-26 38 L-19 8 L-42 -12 L-12 -14 Z', fill: '#FFC857', stroke: '#FF9A3C', 'stroke-width': 4, 'stroke-linejoin': 'round' }));
   world.append(star);
-  tl.fromTo(starIn, { scale: 0, opacity: 0, svgOrigin: '0 0' }, { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(3)', immediateRender: true }, tChr + 1.3);
-  sfx(tChr + 1.3, 'chime', 0.8);
+  tl.fromTo(starIn, { scale: 0, opacity: 0, svgOrigin: '0 0' }, { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(3)', immediateRender: true }, tChr + 1.15);
+  sfx(tChr + 1.15, 'chime', 0.8);
   // baubles on actuator positions (tree-local -> world y-900)
   const baub = [[-230, 270, '#FF4F6D'], [0, 430, '#2ED0FF'], [150, 430, '#FFC857'], [400, 270, '#BC8FFF'], [-400, 60, '#3BDB86'], [300, 70, '#FF9A3C'], [-560, 320, '#2ED0FF'], [540, 320, '#FF4F6D']];
   baub.forEach(([x, y, col], i) => {
@@ -163,5 +164,5 @@ export function build(root, E) {
   });
   // slow push-in
   cam.go(tTree, 2.0, { wy: -520, k: 0.62 }, 'power2.out');
-  fadeOut(fir, sc.end - 0.9, 0.8);
+  fadeOut(fir, sc.end - 0.5, 0.45);
 }

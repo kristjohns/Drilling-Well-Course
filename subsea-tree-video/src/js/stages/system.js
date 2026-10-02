@@ -63,8 +63,8 @@ export function build(root, E) {
     const f = Flow(svgA, d, { color: '#FF9A3C', w: 7 });
     f.show(t0 + 0.4, 0.5, 90);
   });
-  // 143 km dimension on the onshore card
-  const dim = tag(svgA, { x: 1560, y: 248, text: '143 km', sub: 'subsea to shore', anchor: 'c', size: 30, accent: '#FFC857', mono: true });
+  // 143 km dimension on the pipeline to the onshore plant
+  const dim = tag(svgA, { x: 1360, y: 826, text: '143 km', sub: 'pipeline to shore', anchor: 'c', size: 30, accent: '#FFC857', mono: true });
   show(dim.el, T.word('system.b2', 'kilometres') - 0.6, 0.6);
 
   /* ======================= PART B – cross-section ======================= */

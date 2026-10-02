@@ -2,7 +2,7 @@
  "meta": {
   "voice": "af_heart",
   "speed": 0.93,
-  "duration": 677.017,
+  "duration": 676.719,
   "sr": 24000
  },
  "scenes": [
@@ -7250,7 +7250,7 @@
    "id": "types",
    "chapter": "Vertical or horizontal?",
    "start": 495.27,
-   "end": 553.851,
+   "end": 553.552,
    "order": [
     "b1",
     "b2",
@@ -7738,148 +7738,143 @@
     },
     "b6": {
      "id": "b6",
-     "text": "It comes in two sizes, seven-by-five and seven-by-seven, named after their bore sizes, and a flow module sets its duty: producer, gas injector or water injector.",
+     "text": "It comes in two variants, seven-by-five and seven-by-seven, with the same interfaces, and a flow module sets its duty: producer, gas injector or water injector.",
      "start": 530.74,
-     "end": 542.388,
-     "dur": 11.648,
+     "end": 542.089,
+     "dur": 11.349,
      "words": [
       {
        "w": "It",
        "s": 0.0,
-       "e": 0.186
+       "e": 0.152
       },
       {
        "w": "comes",
-       "s": 0.186,
-       "e": 0.559
+       "s": 0.152,
+       "e": 0.457
       },
       {
        "w": "in",
-       "s": 0.559,
-       "e": 0.745
+       "s": 0.457,
+       "e": 0.609
       },
       {
        "w": "two",
-       "s": 0.745,
-       "e": 0.931
+       "s": 0.609,
+       "e": 0.761
       },
       {
-       "w": "sizes,",
-       "s": 0.931,
-       "e": 1.49
+       "w": "variants,",
+       "s": 0.761,
+       "e": 1.37
       },
       {
        "w": "seven-by-five",
-       "s": 1.82,
-       "e": 2.763
+       "s": 1.74,
+       "e": 2.666
       },
       {
        "w": "and",
-       "s": 2.763,
-       "e": 2.999
+       "s": 2.666,
+       "e": 2.897
       },
       {
        "w": "seven-by-seven,",
-       "s": 2.999,
-       "e": 4.02
+       "s": 2.897,
+       "e": 3.9
       },
       {
-       "w": "named",
-       "s": 4.31,
-       "e": 4.689
+       "w": "with",
+       "s": 4.16,
+       "e": 4.376
       },
       {
-       "w": "after",
-       "s": 4.689,
-       "e": 4.991
+       "w": "the",
+       "s": 4.376,
+       "e": 4.521
       },
       {
-       "w": "their",
-       "s": 4.991,
-       "e": 5.219
+       "w": "same",
+       "s": 4.521,
+       "e": 4.809
       },
       {
-       "w": "bore",
-       "s": 5.219,
-       "e": 5.446
-      },
-      {
-       "w": "sizes,",
-       "s": 5.446,
-       "e": 5.9
+       "w": "interfaces,",
+       "s": 4.809,
+       "e": 5.53
       },
       {
        "w": "and",
-       "s": 6.21,
-       "e": 6.485
+       "s": 5.88,
+       "e": 6.161
       },
       {
        "w": "a",
-       "s": 6.485,
-       "e": 6.668
+       "s": 6.161,
+       "e": 6.348
       },
       {
        "w": "flow",
-       "s": 6.668,
-       "e": 7.034
+       "s": 6.348,
+       "e": 6.723
       },
       {
        "w": "module",
-       "s": 7.034,
-       "e": 7.584
+       "s": 6.723,
+       "e": 7.285
       },
       {
        "w": "sets",
-       "s": 7.584,
-       "e": 7.95
+       "s": 7.285,
+       "e": 7.66
       },
       {
        "w": "its",
-       "s": 8.54,
-       "e": 8.827
+       "s": 8.24,
+       "e": 8.531
       },
       {
        "w": "duty:",
-       "s": 8.827,
-       "e": 9.21
+       "s": 8.531,
+       "e": 8.92
       },
       {
        "w": "producer,",
-       "s": 9.36,
-       "e": 9.825
+       "s": 9.05,
+       "e": 9.518
       },
       {
        "w": "gas",
-       "s": 9.986,
-       "e": 10.185
+       "s": 9.678,
+       "e": 9.879
       },
       {
        "w": "injector",
-       "s": 10.185,
-       "e": 10.717
+       "s": 9.879,
+       "e": 10.413
       },
       {
        "w": "or",
-       "s": 10.717,
-       "e": 10.85
+       "s": 10.413,
+       "e": 10.547
       },
       {
        "w": "water",
-       "s": 10.85,
-       "e": 11.116
+       "s": 10.547,
+       "e": 10.814
       },
       {
        "w": "injector.",
-       "s": 11.116,
-       "e": 11.648
+       "s": 10.814,
+       "e": 11.349
       }
      ]
     },
     "b7": {
      "id": "b7",
      "text": "Aker Solutions says the design is roughly half the weight of earlier trees, which makes it easier to install from smaller vessels, an advantage in the Barents Sea.",
-     "start": 542.888,
-     "end": 552.851,
+     "start": 542.589,
+     "end": 552.552,
      "dur": 9.963,
      "words": [
       {
@@ -8029,8 +8024,8 @@
   {
    "id": "ncs",
    "chapter": "On the Norwegian shelf",
-   "start": 553.851,
-   "end": 590.424,
+   "start": 553.552,
+   "end": 590.125,
    "order": [
     "b1",
     "b2",
@@ -8042,8 +8037,8 @@
     "b1": {
      "id": "b1",
      "text": "Subsea trees are everywhere on the Norwegian shelf.",
-     "start": 554.251,
-     "end": 557.259,
+     "start": 553.952,
+     "end": 556.96,
      "dur": 3.008,
      "words": [
       {
@@ -8091,8 +8086,8 @@
     "b2": {
      "id": "b2",
      "text": "At Troll, in the North Sea, subsea templates feed Troll B and Troll C, and since 2021, Phase 3 has fed gas to Troll A.",
-     "start": 557.759,
-     "end": 566.313,
+     "start": 557.46,
+     "end": 566.015,
      "dur": 8.555,
      "words": [
       {
@@ -8225,8 +8220,8 @@
     "b3": {
      "id": "b3",
      "text": "At Åsgard, in the Norwegian Sea, the world's first subsea gas compression plant started up in 2015.",
-     "start": 566.813,
-     "end": 573.64,
+     "start": 566.515,
+     "end": 573.341,
      "dur": 6.827,
      "words": [
       {
@@ -8319,8 +8314,8 @@
     "b4": {
      "id": "b4",
      "text": "At Aasta Hansteen, trees stand in 1,300 metres of water, the deepest on the shelf.",
-     "start": 574.14,
-     "end": 580.007,
+     "start": 573.841,
+     "end": 579.708,
      "dur": 5.867,
      "words": [
       {
@@ -8403,8 +8398,8 @@
     "b5": {
      "id": "b5",
      "text": "And in the Barents Sea, Johan Castberg began producing in March 2025, with thirty subsea wells, all on the new standard tree.",
-     "start": 580.507,
-     "end": 589.424,
+     "start": 580.208,
+     "end": 589.125,
      "dur": 8.917,
      "words": [
       {
@@ -8524,8 +8519,8 @@
   {
    "id": "quiz",
    "chapter": "Check your understanding",
-   "start": 590.424,
-   "end": 639.708,
+   "start": 590.125,
+   "end": 639.409,
    "order": [
     "b1",
     "q1",
@@ -8539,8 +8534,8 @@
     "b1": {
      "id": "b1",
      "text": "Time to test yourself. Three questions.",
-     "start": 590.824,
-     "end": 593.277,
+     "start": 590.525,
+     "end": 592.979,
      "dur": 2.453,
      "words": [
       {
@@ -8578,8 +8573,8 @@
     "q1": {
      "id": "q1",
      "text": "Question one. What does fail-safe closed mean for a tree valve?",
-     "start": 593.877,
-     "end": 597.653,
+     "start": 593.579,
+     "end": 597.355,
      "dur": 3.776,
      "words": [
       {
@@ -8642,8 +8637,8 @@
     "a1": {
      "id": "a1",
      "text": "B. The valve closes automatically when hydraulic pressure is lost.",
-     "start": 603.653,
-     "end": 608.048,
+     "start": 603.355,
+     "end": 607.749,
      "dur": 4.395,
      "words": [
       {
@@ -8701,8 +8696,8 @@
     "q2": {
      "id": "q2",
      "text": "Question two. In an emergency shutdown, which valve closes last?",
-     "start": 608.848,
-     "end": 613.2,
+     "start": 608.549,
+     "end": 612.901,
      "dur": 4.352,
      "words": [
       {
@@ -8760,8 +8755,8 @@
     "a2": {
      "id": "a2",
      "text": "C. The downhole safety valve, the last line of defence.",
-     "start": 619.2,
-     "end": 622.656,
+     "start": 618.901,
+     "end": 622.357,
      "dur": 3.456,
      "words": [
       {
@@ -8819,8 +8814,8 @@
     "q3": {
      "id": "q3",
      "text": "Question three. Which valve do you open, together with the annulus master valve, to bleed annulus pressure into the flowline?",
-     "start": 623.456,
-     "end": 630.859,
+     "start": 623.157,
+     "end": 630.56,
      "dur": 7.403,
      "words": [
       {
@@ -8928,8 +8923,8 @@
     "a3": {
      "id": "a3",
      "text": "B. The crossover valve.",
-     "start": 636.859,
-     "end": 638.608,
+     "start": 636.56,
+     "end": 638.309,
      "dur": 1.749,
      "words": [
       {
@@ -8959,8 +8954,8 @@
   {
    "id": "recap",
    "chapter": "Summary",
-   "start": 639.708,
-   "end": 677.017,
+   "start": 639.409,
+   "end": 676.719,
    "order": [
     "b1",
     "b2",
@@ -8973,8 +8968,8 @@
     "b1": {
      "id": "b1",
      "text": "Let's recap.",
-     "start": 640.208,
-     "end": 641.253,
+     "start": 639.909,
+     "end": 640.955,
      "dur": 1.045,
      "words": [
       {
@@ -8992,8 +8987,8 @@
     "b2": {
      "id": "b2",
      "text": "The tree controls the flow, isolates the well, injects and monitors, and gives access.",
-     "start": 641.653,
-     "end": 646.901,
+     "start": 641.355,
+     "end": 646.603,
      "dur": 5.248,
      "words": [
       {
@@ -9071,8 +9066,8 @@
     "b3": {
      "id": "b3",
      "text": "Its valves are held open by hydraulic pressure, and closed by springs, so the well fails safe.",
-     "start": 647.401,
-     "end": 653.396,
+     "start": 647.103,
+     "end": 653.097,
      "dur": 5.995,
      "words": [
       {
@@ -9165,8 +9160,8 @@
     "b4": {
      "id": "b4",
      "text": "In an emergency: wing valve, master valve, and last of all, the downhole safety valve.",
-     "start": 653.896,
-     "end": 659.485,
+     "start": 653.597,
+     "end": 659.187,
      "dur": 5.589,
      "words": [
       {
@@ -9249,8 +9244,8 @@
     "b5": {
      "id": "b5",
      "text": "And together with the casing and the wellhead, the tree forms the second of the two barriers that keep the reservoir where it belongs.",
-     "start": 659.985,
-     "end": 667.388,
+     "start": 659.687,
+     "end": 667.089,
      "dur": 7.403,
      "words": [
       {
@@ -9378,8 +9373,8 @@
     "b6": {
      "id": "b6",
      "text": "Thank you for watching.",
-     "start": 668.088,
-     "end": 669.517,
+     "start": 667.789,
+     "end": 669.219,
      "dur": 1.429,
      "words": [
       {

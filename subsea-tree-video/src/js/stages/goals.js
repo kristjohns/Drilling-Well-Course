@@ -18,7 +18,7 @@ export function build(root, E) {
   const items = [
     { ic: icons.template, col: '#2ED0FF', text: 'Place the tree in a subsea production system and name its four jobs', beat: 'b2' },
     { ic: icons.valve, col: '#34D8A8', text: 'Identify the main valves and explain what each one does', beat: 'b3' },
-    { ic: icons.spring, col: '#FFC857', text: 'Explain why valves fail safe closed and how they are controlled', beat: 'b4' },
+    { ic: icons.spring, col: '#FFC857', text: 'Explain why the valves are fail-safe closed and how they are controlled', beat: 'b4' },
     { ic: () => icons.shields(), col: '#FF4F6D', text: 'Describe how the tree works as a well barrier', beat: 'b5' },
     { ic: icons.pin, col: '#BC8FFF', text: 'Recognise the trees used on the Norwegian shelf today', beat: 'b6' },
   ];

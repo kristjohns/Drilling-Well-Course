@@ -194,7 +194,7 @@ export function build(root, E) {
     fade(pin.g, tIn - 0.8, tIn + 0.9);
     const g = ov(tIn + 0.3, tOut);
     const F = MAP.pins.asgard, Cmp = [746, 1348];
-    const fp = fpso(g, F[0] + 1, F[1] - 0.5, 'FPSO', 2.1);
+    const fp = platform(g, F[0] + 1, F[1] - 0.5, 'Åsgard B', 2.0);   // compressed gas goes to the Åsgard B semi-submersible
     gsapHide(fp); fadeIn(fp, tIn + 0.2, 0.5);
     const tps = [[740, 1324], [758, 1358], [730, 1340]];
     tps.forEach(([x, y], i) => template(g, x, y, CY, tIn + 0.5 + i * 0.15));
@@ -215,7 +215,7 @@ export function build(root, E) {
     show(t1.el, tc, 0.5, { y: 10 }); hide(t1.el, tOut - 0.2, 0.4);
     const t2 = tag(svg, { x: pr(F[0], F[1])[0] + 30, y: pr(F[0], F[1])[1] - 110, text: 'FIRST IN THE WORLD · 2015', accent: YEL, anchor: 'c', size: 24, mono: true });
     show(t2.el, w('b3', 'first') - 0.1, 0.5, { y: 10 }); hide(t2.el, tOut - 0.2, 0.4);
-    const t3 = tag(svg, { x: pr(F[0], F[1])[0] + 70, y: pr(F[0], F[1])[1] + 38, text: 'FPSO', accent: '#93A8B8', anchor: 'l', size: 22, mono: true });
+    const t3 = tag(svg, { x: pr(F[0], F[1])[0] + 70, y: pr(F[0], F[1])[1] + 38, text: 'ÅSGARD B', accent: '#93A8B8', anchor: 'l', size: 22, mono: true });
     show(t3.el, tIn + 0.5, 0.5, { y: 10 }); hide(t3.el, tOut - 0.2, 0.4);
     sfx(tc, 'chime', 0.5);
   }

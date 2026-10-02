@@ -239,21 +239,20 @@ export function build(root, E) {
   {
     const t0 = bt('b6').start;
     // bore-size chips
-    const mkSize = (txt, a, b, left) => {
-      const c = H('div', { class: 'abs', style: { left: left + 'px', top: '230px', width: '430px', padding: '28px 32px', borderRadius: '24px', background: 'linear-gradient(160deg,rgba(18,44,66,.9),rgba(8,24,38,.92))', border: `1.5px solid rgba(170,200,225,.22)` } });
-      const svgI = S('svg', { viewBox: '0 0 330 130', width: 330, height: 130, style: { display: 'block', overflow: 'visible', flex: 'none' } });
-      svgI.append(S('circle', { cx: 70, cy: 65, r: a * 8, fill: 'rgba(46,208,255,.12)', stroke: CY, 'stroke-width': 5 }), S('circle', { cx: 232, cy: 65, r: b * 8, fill: 'rgba(255,200,87,.12)', stroke: YEL, 'stroke-width': 5 }),
-        S('text', { x: 70, y: 74, 'text-anchor': 'middle', fill: CY, 'font-size': 28, 'font-weight': 800, style: { fontFamily: 'var(--mono)' }, text: a + '"' }), S('text', { x: 232, y: 74, 'text-anchor': 'middle', fill: YEL, 'font-size': 28, 'font-weight': 800, style: { fontFamily: 'var(--mono)' }, text: b + '"' }));
-      c.append(H('div', { style: { font: '800 84px var(--mono)', color: '#EEF4F9', marginBottom: '18px' }, text: txt }), svgI);
+    const mkSize = (txt, sub, left) => {
+      const c = H('div', { class: 'abs', style: { left: left + 'px', top: '230px', width: '430px', padding: '28px 32px 30px', borderRadius: '24px', background: 'linear-gradient(160deg,rgba(18,44,66,.9),rgba(8,24,38,.92))', border: `1.5px solid rgba(170,200,225,.22)` } });
+      c.append(H('div', { style: { font: '800 84px var(--mono)', color: '#EEF4F9', marginBottom: '14px' }, text: txt }),
+        H('div', { style: { display: 'flex', alignItems: 'center', gap: '12px', font: '600 28px var(--font)', color: '#AFC0CE' } },
+          H('span', { style: { width: '14px', height: '14px', borderRadius: '50%', background: CY, boxShadow: `0 0 10px ${CY}`, flex: 'none' } }), sub));
       el.append(c);
       return c;
     };
-    const s75 = mkSize('7 × 5', 7, 5, 940), s77 = mkSize('7 × 7', 7, 7, 1394);
+    const s75 = mkSize('7 × 5', 'leaner variant', 940), s77 = mkSize('7 × 7', 'full variant', 1394);
     show(s75, w('b6', 'seven-by-five') - 0.3, 0.6, { y: 24 });
     show(s77, w('b6', 'seven-by-seven') - 0.3, 0.6, { y: 24 });
-    const cap = H('div', { class: 'abs', style: { left: '940px', top: '560px', font: '500 32px var(--font)', color: '#AFC0CE' }, text: 'Named after their bore sizes (inches)' });
+    const cap = H('div', { class: 'abs', style: { left: '940px', top: '470px', font: '500 32px var(--font)', color: '#AFC0CE' }, text: 'Two variants of one 7-inch tree, with the same interfaces' });
     el.append(cap);
-    show(cap, w('b6', 'named') - 0.2, 0.5, { y: 10 });
+    show(cap, w('b6', 'same') - 0.2, 0.5, { y: 10 });
     [s75, s77, cap].forEach((e_) => hide(e_, w('b6', 'flow') - 0.5, 0.5));
     // flow module on the drawing: dashed box around the wing
     const mod = S('g', { opacity: 0 });

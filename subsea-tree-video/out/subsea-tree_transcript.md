@@ -1,6 +1,6 @@
 # The Subsea Christmas Tree: How It Works — transcript
 
-Running time 11:17. Timestamps are mm:ss.
+Running time 11:16. Timestamps are mm:ss.
 
 
 ## 00:00  Cold open
@@ -120,15 +120,15 @@ Running time 11:17. Timestamps are mm:ss.
 **[08:24]** In a horizontal tree, the tree goes on first. The tubing hanger lands inside it, and the production flows out sideways.  
 **[08:32]** The big advantage: the completion can be pulled without lifting the tree off the wellhead. Norne, in 1997, was the first field on the Norwegian shelf to use horizontal trees.  
 **[08:45]** Today, Equinor's standard is a vertical tree, developed with Aker Solutions.  
-**[08:50]** It comes in two sizes, seven-by-five and seven-by-seven, named after their bore sizes, and a flow module sets its duty: producer, gas injector or water injector.  
+**[08:50]** It comes in two variants, seven-by-five and seven-by-seven, with the same interfaces, and a flow module sets its duty: producer, gas injector or water injector.  
 **[09:02]** Aker Solutions says the design is roughly half the weight of earlier trees, which makes it easier to install from smaller vessels, an advantage in the Barents Sea.  
 
 ## 09:13  On the Norwegian shelf
 
-**[09:14]** Subsea trees are everywhere on the Norwegian shelf.  
+**[09:13]** Subsea trees are everywhere on the Norwegian shelf.  
 **[09:17]** At Troll, in the North Sea, subsea templates feed Troll B and Troll C, and since 2021, Phase 3 has fed gas to Troll A.  
 **[09:26]** At Åsgard, in the Norwegian Sea, the world's first subsea gas compression plant started up in 2015.  
-**[09:34]** At Aasta Hansteen, trees stand in 1,300 metres of water, the deepest on the shelf.  
+**[09:33]** At Aasta Hansteen, trees stand in 1,300 metres of water, the deepest on the shelf.  
 **[09:40]** And in the Barents Sea, Johan Castberg began producing in March 2025, with thirty subsea wells, all on the new standard tree.  
 
 ## 09:50  Check your understanding
@@ -137,15 +137,15 @@ Running time 11:17. Timestamps are mm:ss.
 **[09:53]** Question one. What does fail-safe closed mean for a tree valve?  
 **[10:03]** B. The valve closes automatically when hydraulic pressure is lost.  
 **[10:08]** Question two. In an emergency shutdown, which valve closes last?  
-**[10:19]** C. The downhole safety valve, the last line of defence.  
+**[10:18]** C. The downhole safety valve, the last line of defence.  
 **[10:23]** Question three. Which valve do you open, together with the annulus master valve, to bleed annulus pressure into the flowline?  
 **[10:36]** B. The crossover valve.  
 
 ## 10:39  Summary
 
-**[10:40]** Let's recap.  
+**[10:39]** Let's recap.  
 **[10:41]** The tree controls the flow, isolates the well, injects and monitors, and gives access.  
 **[10:47]** Its valves are held open by hydraulic pressure, and closed by springs, so the well fails safe.  
 **[10:53]** In an emergency: wing valve, master valve, and last of all, the downhole safety valve.  
 **[10:59]** And together with the casing and the wellhead, the tree forms the second of the two barriers that keep the reservoir where it belongs.  
-**[11:08]** Thank you for watching.  
+**[11:07]** Thank you for watching.  
