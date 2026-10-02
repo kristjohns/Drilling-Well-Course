@@ -42,6 +42,11 @@ export function build(ctx) {
 
   /* ---- b1: dive into the valve ------------------------------------------------------------ */
   cam.go(tG - 0.1, 2.5, SH, 'power3.inOut');
+  // soft dark scrim behind the chapter label: the zoomed-in art fills the whole frame in this scene
+  const scrim = H('div', { class: 'abs', style: { left: '0', top: '0', width: '860px', height: '170px', pointerEvents: 'none', background: 'radial-gradient(ellipse 620px 118px at 300px 76px, rgba(3,9,16,.88) 0%, rgba(3,9,16,.68) 55%, rgba(3,9,16,0) 100%)' } });
+  html.append(scrim);
+  fadeIn(scrim, tG + 0.1, 0.6);
+  fadeOut(scrim, T.scene('gate').end - 0.5, 0.5);
   const p1 = ctx.panel({ at: b('b1').start + 1.2, until: b('b2').start - 0.1, kicker: 'Inside a tree valve', title: 'Hydraulic<br>gate valve', body: 'Used for the master, wing and swab valves', top: 190, width: 460 });
 
   /* ---- b2: gate, hole, seats ------------------------------------------------------------ */
@@ -87,7 +92,7 @@ export function build(ctx) {
   op(T.word('gate.b5', 'Fluid') + 0.1, true, 2.6, 'power2.inOut');
   ctx.note({ shot: SH, at: T.word('gate.b5', 'piston') - 0.2, until: T.word('gate.b5', 'spring') + 1.0, tx: -174, ty: 470, dx: -90, dy: -190, label: 'Piston', color: '#EEF4F9', size: 28 });
   ctx.note({ shot: SH, at: T.word('gate.b5', 'spring') - 0.3, until: T.word('gate.b5', 'spring') + 1.0, tx: -150, ty: 520, dx: -40, dy: 190, label: 'Spring', sub: 'compressed', color: '#FFC857', size: 28 });
-  ctx.note({ shot: SH, at: T.word('gate.b5', 'Fluid') + 0.3, until: T.word('gate.b5', 'spring') + 1.0, tx: portTL[0], ty: portTL[1] - 10, dx: -110, dy: -70, label: 'Hydraulic port', color: '#2ED0FF', size: 26 });
+  ctx.note({ shot: SH, at: T.word('gate.b5', 'Fluid') + 0.3, until: T.word('gate.b5', 'spring') + 1.0, tx: portTL[0], ty: portTL[1] - 10, dx: -110, dy: -50, label: 'Hydraulic port', color: '#2ED0FF', size: 26 });
   sfx(T.word('gate.b5', 'Fluid') + 0.1, 'hiss', 0.7);
 
   /* ---- b6: pressure holds it open ... take it away ---------------------------------------------- */

@@ -107,7 +107,7 @@ export function build(ctx) {
   ctx.note({ shot: S7, at: t7 + 0.1, until: T.end('anatomy.b7') + 0.4, tx: 150, ty: 420, dx: 220, dy: -40, label: 'Annulus bore', color: '#34D8A8', size: 28 });
   ctx.note({ shot: S7, at: T.word('anatomy.b7', 'space') - 0.2, until: T.end('anatomy.b7') + 0.4, wx: 105, wy: 60, dx: 330, dy: 70, label: 'Annulus', sub: 'between tubing and casing', color: '#34D8A8', size: 28 });
   ctx.note({ shot: S7, at: T.word('anatomy.b7', 'tubing') - 0.2, until: T.end('anatomy.b7') + 0.4, wx: -33, wy: 90, dx: -260, dy: 60, label: 'Tubing', color: '#B3C4D2', size: 26 });
-  ctx.note({ shot: S7, at: T.word('anatomy.b7', 'casing') - 0.2, until: T.end('anatomy.b7') + 0.4, wx: 178, wy: 230, dx: 220, dy: 40, label: 'Production casing', color: '#B3C4D2', size: 26 });
+  ctx.note({ shot: S7, at: T.word('anatomy.b7', 'casing') - 0.2, until: T.end('anatomy.b7') + 0.4, wx: 178, wy: 110, dx: 230, dy: -120, label: 'Production casing', color: '#B3C4D2', size: 26 });
 
   /* b8 – valves on each bore ------------------------------------------------------------------------------------ */
   const t8 = T.start('anatomy.b8');

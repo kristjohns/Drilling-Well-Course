@@ -175,7 +175,7 @@ export function build(root, E) {
         S('path', { d: `M490 ${y0} H1360`, stroke: '#93A8B8', 'stroke-width': 26, fill: 'none' }), S('path', { d: `M490 ${y0} H1360`, stroke: '#050B11', 'stroke-width': 16, fill: 'none' }));
       const vAMV = GateValve(rg, { x: 700, y: y0, rot: 90, bw: 26, act: 'fs', f0: 0 });
       const vXOV = GateValve(rg, { x: 1090, y: y0, rot: 90, bw: 26, act: 'fs', f0: 0 });
-      const lab = (x, text, col) => S('text', { x, y: y0 + 56, 'text-anchor': 'middle', fill: col, 'font-size': 26, 'font-weight': 800, style: { fontFamily: 'var(--mono)' }, text });
+      const lab = (x, text, col) => S('text', { x, y: y0 + 100, 'text-anchor': 'middle', fill: col, 'font-size': 26, 'font-weight': 800, style: { fontFamily: 'var(--mono)' }, text });
       rg.append(lab(700, 'AMV', '#EEF4F9'), lab(1090, 'XOV', '#BC8FFF'));
       const f = Flow(rg, `M490 ${y0} H1360`, { color: TEAL, w: 9, gap: 24 });
       fadeIn(rg, a.start + 0.2, 0.5);

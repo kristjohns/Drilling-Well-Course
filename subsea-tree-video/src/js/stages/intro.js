@@ -95,7 +95,7 @@ export function build(root, E) {
   const baseY = 410;
   const seaBar = S('rect', { x: 62, y: baseY, width: 96, height: 0, rx: 6, fill: '#3C86D6' });
   const resBar = S('rect', { x: 250, y: baseY, width: 96, height: 0, rx: 6, fill: 'url(#gOrange)' });
-  const zig = S('path', { d: 'M250 112 l12 -14 l12 14 l12 -14 l12 14 l12 -14 l12 14 l12 -14 Z', fill: '#FFB067', opacity: 0 });
+  const zig = S('path', { d: 'M250 150 l12 -14 l12 14 l12 -14 l12 14 l12 -14 l12 14 l12 -14 Z', fill: '#FFB067', opacity: 0 });
   const sLab = S('text', { x: 110, y: 442, 'text-anchor': 'middle', fill: '#DCE6EE', 'font-size': 21, 'font-weight': 600, text: 'Seawater' });
   const sLab2 = S('text', { x: 110, y: 462, 'text-anchor': 'middle', fill: '#AFC0CE', 'font-size': 18, text: 'at 300 m' });
   const rLab = S('text', { x: 298, y: 442, 'text-anchor': 'middle', fill: '#DCE6EE', 'font-size': 21, 'font-weight': 600, text: 'Reservoir' });
@@ -107,7 +107,7 @@ export function build(root, E) {
   show(pcIn, T.start(b2) - 0.1, 0.7, { x: 30, y: 0 });
   tl.fromTo(seaBar, { attr: { y: baseY, height: 0 } }, { attr: { y: baseY - 30, height: 30 }, duration: 0.7, ease: 'power3.out', immediateRender: true }, T.start(b2) + 0.2);
   tl.to(sVal, { opacity: 1, duration: 0.4 }, T.start(b2) + 0.7);
-  tl.fromTo(resBar, { attr: { y: baseY, height: 0 } }, { attr: { y: baseY - 296, height: 296 }, duration: 1.5, ease: 'power3.in', immediateRender: true }, T.word(b2, 'hundreds') - 0.9);
+  tl.fromTo(resBar, { attr: { y: baseY, height: 0 } }, { attr: { y: baseY - 258, height: 258 }, duration: 1.5, ease: 'power3.in', immediateRender: true }, T.word(b2, 'hundreds') - 0.9);
   tl.to([rVal, rVal2, zig], { opacity: 1, duration: 0.35 }, T.word(b2, 'hundreds') + 0.5);
   hide(pcIn, T.start('intro.b3') + 0.3, 0.6);
 

@@ -49,6 +49,9 @@ tools/captions.py         SRT / VTT / ASS captions + chapter metadata from the w
 tools/render.mjs          parallel Playwright (Chromium) renderer -> ffmpeg
 tools/encode.sh           final two-pass, size-targeted encodes (clean, captioned, 720p) and poster
 tools/cheatsheet.mjs      renders src/cheatsheet.html -> out/valve-cheat-sheet.pdf
+tools/overlap-scan.mjs    QA: finds on-screen text that is covered by a line, label, ring or tag (whole video in ~90 s)
+tools/overlap-report.py   QA: short list of the persistent findings from that scan
+tools/qa.sh               QA of the final MP4: streams, chapters, loudness, sample frames
 ```
 
 Rebuild from scratch:

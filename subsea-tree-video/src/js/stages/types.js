@@ -327,11 +327,11 @@ export function build(root, E) {
       return g;
     };
     const mkV = (x, y, s_, col, sw) => { const wrap = S('g', { opacity: 0 }); const place = S('g', { transform: `translate(${x} ${y})` }); place.append(vess(s_, col, sw)); wrap.append(place); panel.append(wrap); return wrap; };
-    const vBig = mkV(P0.x + 250, P0.y + 560, 1.15, '#6F879A', 3), vSmall = mkV(P0.x + 650, P0.y + 560, 0.78, GRN, 4);
+    const vBig = mkV(P0.x + 250, P0.y + 532, 1.15, '#6F879A', 3), vSmall = mkV(P0.x + 650, P0.y + 532, 0.78, GRN, 4);
     const tv = w('b7', 'smaller') - 0.4;
     tl.fromTo(vBig, { opacity: 0 }, { opacity: 0.85, duration: 0.5, immediateRender: false }, tv - 0.8);
     tl.fromTo(vSmall, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out', immediateRender: false }, tv);
-    const vl = S('g', { opacity: 0 }, S('text', { x: P0.x + 650, y: P0.y + 618, 'text-anchor': 'middle', fill: GRN, 'font-size': 27, 'font-weight': 800, text: 'smaller vessels' }), S('text', { x: P0.x + 250, y: P0.y + 618, 'text-anchor': 'middle', fill: '#7F96A8', 'font-size': 27, 'font-weight': 700, text: 'larger vessel' }));
+    const vl = S('g', { opacity: 0 }, S('text', { x: P0.x + 650, y: P0.y + 628, 'text-anchor': 'middle', fill: GRN, 'font-size': 27, 'font-weight': 800, text: 'smaller vessels' }), S('text', { x: P0.x + 250, y: P0.y + 628, 'text-anchor': 'middle', fill: '#7F96A8', 'font-size': 27, 'font-weight': 700, text: 'larger vessel' }));
     panel.append(vl);
     tl.fromTo(vl, { opacity: 0 }, { opacity: 1, duration: 0.5, immediateRender: false }, tv + 0.5);
     // Barents Sea chip

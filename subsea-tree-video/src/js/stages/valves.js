@@ -40,7 +40,7 @@ export function build(ctx) {
   ];
   const tList = bt('valves.b1').start;
   // opaque-ish backing so tree art behind the dim rows does not clutter the list
-  const listBack = H('div', { class: 'abs', style: { left: '70px', top: '148px', width: '452px', height: '694px', borderRadius: '26px', background: 'rgba(4,12,20,.88)', border: '1.5px solid rgba(170,200,225,.14)', boxShadow: '0 20px 60px rgba(0,0,0,.4)' } });
+  const listBack = H('div', { class: 'abs', style: { left: '70px', top: '148px', width: '452px', height: '694px', borderRadius: '26px', background: 'rgba(4,12,20,.97)', border: '1.5px solid rgba(170,200,225,.14)', boxShadow: '0 20px 60px rgba(0,0,0,.4)' } });
   html.append(listBack);
   show(listBack, tList, 0.6, { x: -20, y: 0 });
   hide(listBack, bt('dhsv.b3').end + 0.1, 0.5, { x: -30 });
@@ -146,7 +146,7 @@ export function build(ctx) {
     wingShut(w('pwv.b2', 'shut') - 0.05);
     sfx(w('pwv.b2', 'shut') + 0.4, 'clunk', 0.8);
     ctx.tagAt({ x: P(S1, -330, 320)[0], y: P(S1, -330, 320)[1] - 190, text: 'WELL SHUT IN', color: '#FF3B5C', mono: true, size: 28, anchor: 'c', at: w('pwv.b2', 'shut') + 0.5, until: w('pwv.b2', 'master') - 0.3 });
-    const pg = gauge(annot, { x: 1700, y: 860, r: 62, max: 250, label: 'TREE PRESSURE', numeric: false, color: '#FF9A3C', v0: 120 });
+    const pg = gauge(annot, { x: 1700, y: 860, r: 62, max: 250, label: 'TREE PRESSURE', numeric: false, color: '#FF9A3C', v0: 120, labelBg: true });
     show(pg.g, w('pwv.b2', 'shut') + 0.2, 0.5, { y: 20 });
     pg.to(w('pwv.b2', 'shut') + 0.4, 1.8, 190, 'power2.out');
     hide(pg.g, bt('pwv.b2').end - 0.4, 0.4);
@@ -170,7 +170,7 @@ export function build(ctx) {
     ctx.note({ shot: S1, at: w('choke.b1', 'choke') - 0.2, until: t2 - 0.2, tx: -450, ty: 330, dx: -60, dy: -210, label: 'Production choke', color: '#FF9A3C', size: 30 });
     ctx.status({ name: 'CHOKE', shot: S1, tx: -400, ty: 320, dx: 20, dy: 200, at: t + 0.6, until: bt('choke.b2').end + 0.3, states: [{ t: 0, open: true }] });
     const na = P(S1, -440, 300);
-    badge({ at: w('choke.b1', 'shut-off') - 0.2, until: w('choke.b1', 'throttle') - 0.3, x: na[0] - 320, y: na[1] + 220, html: noIcon('#FF3B5C') + 'Not a shut-off valve', color: '#FF3B5C', size: 26 });
+    badge({ at: w('choke.b1', 'shut-off') - 0.2, until: w('choke.b1', 'throttle') - 0.3, x: na[0] - 530, y: na[1] + 220, html: noIcon('#FF3B5C') + 'Not a shut-off valve', color: '#FF3B5C', size: 26 });
     // throttle: wiggle the plug (steps are strictly chronological)
     const tt = w('choke.b1', 'throttle');
     let tcur = tt - 0.15;
@@ -276,7 +276,7 @@ export function build(ctx) {
     tl.to(tool, { opacity: 0, duration: 0.3 }, w('psv.b1', 'stays') + 0.8);
     V.PSV.close(w('psv.b1', 'stays') + 0.8, 0.9, 'power2.inOut');
     ctx.tagAt({ x: top[0] + 180, y: top[1] + 60, text: 'Wireline tool', sub: 'lowered into the well', color: '#FFC857', size: 26, at: tw + 0.6, until: w('psv.b1', 'stays') - 0.4 });
-    ctx.tagAt({ x: top[0] + 200, y: top[1] + 160, text: 'CLOSED during production', color: '#FF3B5C', mono: true, size: 24, at: w('psv.b1', 'stays') + 0.5, until: bt('psv.b1').end + 0.3 });
+    ctx.tagAt({ x: top[0] + 200, y: top[1] + 228, text: 'CLOSED during production', color: '#FF3B5C', mono: true, size: 24, at: w('psv.b1', 'stays') + 0.5, until: bt('psv.b1').end + 0.3 });
   }
 
   /* ====================================================================================== */
@@ -305,7 +305,7 @@ export function build(ctx) {
     ctx.status({ name: 'ASV', shot: S1, tx: 150, ty: 110, dx: -150, dy: -90, at: t2 + 0.2, until: bt('annulus.b2').end + 0.3, states: [{ t: 0, open: false }] });
     fadeIn(tree.overlays.sensors.g, w('annulus.b2', 'monitor') - 0.3, 0.6);
     ctx.note({ shot: S1, at: w('annulus.b2', 'monitor') - 0.2, until: w('annulus.b2', 'heats') - 0.3, tx: 217, ty: 410, dx: 190, dy: -50, label: 'Pressure sensor', color: '#FFC857', size: 26 });
-    annG = gauge(annot, { x: 1700, y: 760, r: 70, max: 250, label: 'ANNULUS PRESSURE', color: '#34D8A8', v0: 40, numeric: true });
+    annG = gauge(annot, { x: 1745, y: 800, r: 70, max: 250, label: 'ANNULUS PRESSURE', color: '#34D8A8', v0: 40, numeric: true });
     show(annG.g, w('annulus.b2', 'monitor') - 0.2, 0.5, { y: 20 });
     // thermometer
     const th = S('g', { transform: 'translate(1770 250)' });
@@ -321,7 +321,7 @@ export function build(ctx) {
     annG.to(w('annulus.b2', 'heats'), 3.6, 160, 'power1.in');
     tl.to(well.fills.annulus.els, { opacity: 0.55, duration: 2.0 }, w('annulus.b2', 'trapped'));
     tree.fills.a_mid.to(w('annulus.b2', 'trapped'), 1.0, 0.8);
-    ctx.tagAt({ x: 1700, y: 880, text: 'Trapped fluid expands', color: '#FF9A9A', anchor: 'c', size: 24, at: w('annulus.b2', 'trapped') - 0.2, until: bt('annulus.b2').end + 0.2 });
+    ctx.tagAt({ x: 1745, y: 944, text: 'Trapped fluid expands', color: '#FF9A9A', anchor: 'c', size: 24, at: w('annulus.b2', 'trapped') - 0.2, until: bt('annulus.b2').end + 0.2 });
   }
 
   /* ====================================================================================== */

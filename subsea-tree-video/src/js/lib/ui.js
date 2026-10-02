@@ -3,7 +3,7 @@ import { S, H } from './svg.js';
 import { tl } from '../engine.js';
 
 /** Round gauge in an SVG layer. value range [0,max]. Returns {g, to(t,d,value), show/hide via the engine}. */
-export function gauge(parent, { x, y, r = 78, max = 250, label = 'HYDRAULIC SUPPLY', unit = 'bar', color = '#2ED0FF', v0 = 0, numeric = true }) {
+export function gauge(parent, { x, y, r = 78, max = 250, label = 'HYDRAULIC SUPPLY', unit = 'bar', color = '#2ED0FF', v0 = 0, numeric = true, labelBg = false }) {
   const outer = S('g', { transform: `translate(${x} ${y})` });
   const g = S('g');
   outer.append(g);
@@ -24,6 +24,10 @@ export function gauge(parent, { x, y, r = 78, max = 250, label = 'HYDRAULIC SUPP
   const un = S('text', { x: 0, y: r * 0.55 + 22, 'text-anchor': 'middle', fill: '#9FB4C6', 'font-size': 16, 'font-weight': 600, text: unit });
   const lab = S('text', { x: 0, y: -r - 30, 'text-anchor': 'middle', fill: '#AFC0CE', 'font-size': 18, 'font-weight': 700, 'letter-spacing': '0.14em', text: label });
   g.append(arc, needle, hub, lab);
+  if (labelBg) {   // dark pill behind the label, for gauges that sit on busy artwork
+    const lw = lab.getComputedTextLength();
+    g.insertBefore(S('rect', { x: -lw / 2 - 12, y: -r - 30 - 19, width: lw + 24, height: 30, rx: 9, fill: 'rgba(5,16,26,.88)' }), lab);
+  }
   if (numeric) g.append(val, un);
   const api = {
     g, cur: v0,

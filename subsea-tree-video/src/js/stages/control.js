@@ -187,7 +187,7 @@ export function build(root, E) {
   const solBody = S('rect', { x: 650, y: 430, width: 150, height: 96, rx: 12, fill: '#2A2410', stroke: YEL, 'stroke-width': 3 });
   const solGlow = S('rect', { x: 650, y: 430, width: 150, height: 96, rx: 12, fill: YEL, opacity: 0 });
   sol.append(solBody, S('path', { d: 'M668 478 q10 -26 20 0 t20 0 t20 0 t20 0 t20 0 t20 0', fill: 'none', stroke: YEL, 'stroke-width': 5, 'stroke-linecap': 'round' }),
-    S('text', { x: 725, y: 576, 'text-anchor': 'middle', fill: '#FFE08A', 'font-size': 20, 'font-weight': 700, text: 'Solenoid pilot valve' }));
+    S('text', { x: 744, y: 562, 'text-anchor': 'start', fill: '#FFE08A', 'font-size': 20, 'font-weight': 700, text: 'Solenoid pilot valve' }));
   scmB.append(solGlow, sol);
   // directional control valve: in (left) / out (right) / vent (bottom); two internal states
   const dcvX = 610, dcvY = 620;
@@ -200,7 +200,7 @@ export function build(root, E) {
     S('path', { d: `M${dcvX + 80} ${dcvY + 40} h20 l-8 -8 m8 8 l-8 8`, fill: 'none', stroke: '#9FD8F0', 'stroke-width': 3, 'stroke-linecap': 'round' }));
   dcvBox.append(dcvVent, dcvSup, spool);
   const dcvBody = { vent: dcvVent, sup: dcvSup, spool };
-  scmB.append(dcvBox, S('text', { x: dcvX + 90, y: dcvY - 14, 'text-anchor': 'middle', fill: '#9FD8F0', 'font-size': 19, 'font-weight': 700, text: 'Directional control valve' }),
+  scmB.append(dcvBox, S('text', { x: 712, y: dcvY - 14, 'text-anchor': 'end', fill: '#9FD8F0', 'font-size': 19, 'font-weight': 700, text: 'Directional control valve' }),
     S('text', { x: dcvX + 8, y: dcvY + 100, fill: '#6FA9C2', 'font-size': 14, 'font-weight': 700, text: 'IN' }), S('text', { x: dcvX + 150, y: dcvY + 100, fill: '#6FA9C2', 'font-size': 14, 'font-weight': 700, text: 'OUT' }));
   const dcvSet = (t, energized, d = 0.4) => {
     tl.to(dcvSup, { opacity: energized ? 1 : 0, duration: d }, t);
@@ -214,8 +214,8 @@ export function build(root, E) {
   const lines = {
     pwr: line(pwrD, '#7A6420'), sig: line(sigD, '#7C8A97'), hyd: line(hydD, '#1C6E8C', 6), pilot: line(pilotD, '#6E5C16', 4), semSol: line(semSolD, '#6E5C16', 4), out: line(outD, '#1C6E8C', 6),
   };
-  [['pwr', 'POWER', YEL, 150, 330], ['sig', 'SIGNALS', WH, 236, 330], ['hyd', 'HYDRAULIC', CY, 318, 330]].forEach(([k, txt, col, x, y]) => {
-    svg.append(S('text', { x, y: y + 8, 'text-anchor': 'middle', fill: col, 'font-size': 14, 'font-weight': 800, 'letter-spacing': '0.1em', text: txt }));
+  [['pwr', 'POWER', YEL, 180], ['sig', 'SIGNALS', WH, 236], ['hyd', 'HYDRAULIC', CY, 292]].forEach(([k, txt, col, x]) => {
+    svg.append(S('text', { transform: `translate(${x + 13} 324) rotate(90)`, fill: col, 'font-size': 14, 'font-weight': 800, 'letter-spacing': '0.08em', text: txt }));
   });
   // dots flowing in the lines
   const fl = {
@@ -238,14 +238,14 @@ export function build(root, E) {
   tl.fromTo(bFill, { opacity: 0 }, { opacity: 0.5, duration: 0.6, immediateRender: false }, w('b4', 'valve') - 0.3);
   fBore[0].show(w('b4', 'opens') - 1.0, 0.4, 0);
   // gauge at actuator
-  const ag = gauge(svg, { x: 1100, y: 880, r: 62, max: 250, label: 'ACTUATOR PRESSURE', color: CY, v0: 0 });
+  const ag = gauge(svg, { x: 1100, y: 922, r: 62, max: 250, label: 'ACTUATOR PRESSURE', color: CY, v0: 0 });
   show(ag.g, w('b3', 'hydraulic') - 0.2, 0.5, { y: 20 });
   // sensors
   const sens = S('g');
   const mkS = (x, y, lab) => sens.append(S('line', { x1: VX + 39, y1: y, x2: x, y2: y, stroke: '#0B141C', 'stroke-width': 12 }), S('line', { x1: VX + 39, y1: y, x2: x, y2: y, stroke: '#51677A', 'stroke-width': 7 }), S('circle', { cx: x + 22, cy: y, r: 26, fill: '#E5A22A', stroke: '#0B141C', 'stroke-width': 4 }), S('text', { x: x + 22, y: y + 8, 'text-anchor': 'middle', fill: '#0B141C', 'font-size': 20, 'font-weight': 800, style: { fontFamily: 'var(--mono)' }, text: lab }));
   mkS(VX + 112, 470, 'PT'); mkS(VX + 112, 840, 'TT');
   svg.append(sens);
-  const sensRet = 'M1700 470 V300 H1000 V400 H470 V420';
+  const sensRet = 'M1694 443 V300 H1000 V400 H470 V420';
   tl.set(sens, { opacity: 0 }, 0);
   tl.fromTo(sens, { opacity: 0 }, { opacity: 1, duration: 0.5, immediateRender: false }, w('b5', 'Sensors') - 0.2);
   const retG = S('g');
@@ -265,7 +265,7 @@ export function build(root, E) {
   /* ---- sequence ---------------------------------------------------------------------- */
   // b3: command arrives
   const t3 = tB;
-  const lMod = tag(svg, { x: 650, y: 300, text: 'Subsea control module', sub: 'mounted on the tree', anchor: 'c', size: 28, accent: YEL });
+  const lMod = tag(svg, { x: 850, y: 290, text: 'Subsea control module', sub: 'mounted on the tree', anchor: 'c', size: 28, accent: YEL });
   show(lMod.el, w('b3', 'subsea') - 0.3, 0.5); hide(lMod.el, w('b3', 'electronics') - 0.4, 0.4);
   tl.fromTo(scmGlow, { opacity: 0 }, { opacity: 1, duration: 0.4, immediateRender: false }, w('b3', 'subsea') - 0.1);
   tl.to(scmGlow, { opacity: 0, duration: 0.5 }, w('b3', 'electronics') - 0.3);
@@ -279,7 +279,7 @@ export function build(root, E) {
   fl.semSol.show(tEn - 0.3, 0.4, 90);
   tl.fromTo(solGlow, { opacity: 0 }, { opacity: 0.35, duration: 0.4, immediateRender: false }, tEn);
   fl.pilot.show(tEn + 0.5, 0.4, 90);
-  const lSol = tag(svg, { x: 725, y: 400, text: 'Energised', anchor: 'c', size: 24, accent: YEL });
+  const lSol = tag(svg, { x: 818, y: 478, text: 'Energised', anchor: 'l', size: 24, accent: YEL });
   show(lSol.el, tEn - 0.1, 0.5); hide(lSol.el, w('b3', 'hydraulic') - 0.2, 0.4);
   // DCV shifts to supply position
   const tDcv = w('b3', 'valve,');
@@ -296,7 +296,7 @@ export function build(root, E) {
   show(lAct.el, tAct - 0.2, 0.5); hide(lAct.el, bt('b4').start + 0.3, 0.4);
   // b4: pressure builds -> spring compresses -> valve opens
   V.open(w('b4', 'spring') - 0.4, 2.2, 'power2.inOut');
-  const lPr = tag(svg, { x: 1000, y: 800, text: 'Pressure builds', anchor: 'r', size: 26, accent: CY });
+  const lPr = tag(svg, { x: 1008, y: 922, text: 'Pressure builds', anchor: 'r', size: 26, accent: CY });
   show(lPr.el, w('b4', 'Pressure') - 0.1, 0.5); hide(lPr.el, w('b4', 'valve') - 0.1, 0.4);
   fBore[0].speed(w('b4', 'opens') - 0.7, 80, 0.8);
   fBore[1].show(w('b4', 'opens') - 0.3, 0.4, 80);
@@ -310,7 +310,7 @@ export function build(root, E) {
     H('div', { style: { display: 'inline-block', padding: '12px 32px 14px', borderRadius: '16px', background: 'rgba(5,16,26,.9)', border: '2px solid #2ED0FF', font: '800 48px var(--font)', color: WH }, html: 'PRESSURE <span style="color:#2ED0FF">ON</span> = OPEN' }));
   elB.append(banner6);
   show(banner6, t6a - 0.2, 0.5, { y: -20 }); hide(banner6, tPow - 0.4, 0.4);
-  const cut = S('g', { stroke: '#FF3B5C', 'stroke-width': 9, 'stroke-linecap': 'round' }, S('path', { d: 'M150 380 l36 36 M186 380 l-36 36' }));
+  const cut = S('g', { stroke: '#FF3B5C', 'stroke-width': 9, 'stroke-linecap': 'round' }, S('path', { d: 'M168 390 l24 24 M192 390 l-24 24' }));
   svg.append(cut);
   tl.set(cut, { opacity: 0 }, 0);
   tl.fromTo(cut, { opacity: 0 }, { opacity: 1, duration: 0.25, immediateRender: false }, tPow);
@@ -333,7 +333,7 @@ export function build(root, E) {
   V.close(w('b6', 'springs') - 0.15, 0.8, 'power3.in');
   fBore[1].hide(w('b6', 'springs') + 0.3, 0.5); fBore[0].speed(w('b6', 'springs') + 0.2, 0, 0.4);
   tl.to(bFill, { opacity: 0.25, duration: 0.6 }, w('b6', 'springs') + 0.3);
-  const lSpr = tag(svg, { x: 1000, y: 540, text: 'Springs take over', anchor: 'r', size: 26, accent: YEL });
+  const lSpr = tag(svg, { x: 1285, y: 744, text: 'Springs take over', anchor: 't', size: 26, accent: YEL });
   show(lSpr.el, w('b6', 'springs') - 0.2, 0.4); hide(lSpr.el, bt('b7').start - 0.2, 0.4);
   sfx(w('b6', 'springs') - 0.1, 'clunk', 0.9);
 
@@ -342,7 +342,7 @@ export function build(root, E) {
   [scmB, mcs, retG, sens, ...Object.values(lines)].forEach((x) => tl.to(x, { opacity: 0.18, duration: 0.7 }, tL));
   Object.values(fl).forEach((f) => f.hide(tL - 0.05, 0.3));
   retFlow.hide(tL - 0.05, 0.3); retUp.hide(tL - 0.05, 0.3);
-  const lost = tag(svg, { x: 640, y: 300, text: 'CONTROL SYSTEM LOST', anchor: 'c', size: 34, accent: '#FF3B5C', mono: true });
+  const lost = tag(svg, { x: 1000, y: 226, text: 'CONTROL SYSTEM LOST', anchor: 'c', size: 34, accent: '#FF3B5C', mono: true });
   show(lost.el, tL - 0.1, 0.5); hide(lost.el, w('b7', 'ROV') + 1.5, 0.4);
   const rovWrap = S('g');
   svg.append(rovWrap);

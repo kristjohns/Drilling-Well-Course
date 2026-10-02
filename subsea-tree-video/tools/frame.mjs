@@ -8,7 +8,7 @@ import { chromium } from 'playwright';
 import { startServer } from './server.mjs';
 
 const args = process.argv.slice(2);
-let sheet = false, times = [], outDir = 'build/frames', scale = 1, query = '', cols = 3, every = 0, from = 0, to = 0, tw = 640;
+let sheet = false, times = [], outDir = 'build/frames', scale = 1, query = '', cols = 3, every = 0, from = 0, to = 0, tw = 640, per = 0;
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--sheet') sheet = true;
   else if (args[i] === '--out') outDir = args[++i];
@@ -19,6 +19,7 @@ for (let i = 0; i < args.length; i++) {
   else if (args[i] === '--from') from = Number(args[++i]);
   else if (args[i] === '--to') to = Number(args[++i]);
   else if (args[i] === '--tw') tw = Number(args[++i]);
+  else if (args[i] === '--per') per = Number(args[++i]);   // several sheets, `per` frames each: sheet_001.png ...
   else times.push(...args[i].split(',').filter(Boolean).map(Number));
 }
 fs.mkdirSync(outDir, { recursive: true });
@@ -46,7 +47,12 @@ for (const t of times) {
 }
 await browser.close(); srv.close();
 if (sheet && files.length) {
-  const cc = Math.min(cols, files.length);
-  execFileSync('montage', [...files, '-tile', `${cc}x`, '-geometry', `${tw}x${Math.round(tw * 9 / 16)}+4+4`, '-background', '#111', path.join(outDir, 'sheet.png')]);
-  console.log('wrote', path.join(outDir, 'sheet.png'));
+  const groups = per > 0 ? Array.from({ length: Math.ceil(files.length / per) }, (_, i) => files.slice(i * per, (i + 1) * per)) : [files];
+  groups.forEach((g, i) => {
+    const cc = Math.min(cols, g.length);
+    const out = path.join(outDir, per > 0 ? `sheet_${String(i + 1).padStart(3, '0')}.png` : 'sheet.png');
+    // label every tile with its time
+    execFileSync('montage', ['-label', '%t', ...g, '-tile', `${cc}x`, '-geometry', `${tw}x${Math.round(tw * 9 / 16)}+4+4`, '-background', '#111', '-fill', '#ddd', '-pointsize', '18', out]);
+    console.log('wrote', out);
+  });
 }

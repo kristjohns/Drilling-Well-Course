@@ -177,7 +177,7 @@ export function build(root, E) {
     // labels in screen space
     const pr = (x, y) => proj(SH.troll, x, y);
     const pill = (p, dx, dy, text, col, anchor, at, until) => { const t = tag(svg, { x: p[0] + dx, y: p[1] + dy, text, accent: col, anchor, size: 24, mono: true }); show(t.el, at, 0.45, { y: 10 }); hide(t.el, until, 0.4); };
-    pill(pr(...B), -74, 0, 'TROLL B', CY, 'r', w('b2', 'Troll', 1) - 0.1, tOut - 0.2);
+    pill(pr(...B), -150, 0, 'TROLL B', CY, 'r', w('b2', 'Troll', 1) - 0.1, tOut - 0.2);
     pill(pr(...C), 74, -4, 'TROLL C', CY, 'l', w('b2', 'Troll', 2) - 0.1, tOut - 0.2);
     pill(pr(...A), 74, 6, 'TROLL A', YEL, 'l', w('b2', 'Troll', 3) - 0.1, tOut - 0.2);
     pill(pr(563, 1662), -52, -118, 'SUBSEA TEMPLATES', CY, 'c', tw - 0.1, w('b2', 'since') - 0.1);
@@ -237,8 +237,8 @@ export function build(root, E) {
     const colX = P0.x + 190, colW = 120;
     const seabed = sy0 + 1300 * k;
     dp.append(S('defs', {}, S('linearGradient', { id: 'gDepthW', x1: 0, y1: 0, x2: 0, y2: 1 }, S('stop', { offset: 0, 'stop-color': '#3C86D6', 'stop-opacity': 0.55 }), S('stop', { offset: 1, 'stop-color': '#0A2540', 'stop-opacity': 0.95 }))));
-    dp.append(S('rect', { x: colX, y: sy0, width: colW, height: 1300 * k, fill: 'url(#gDepthW)' }), S('path', { d: `M${colX - 50} ${seabed} H${colX + colW + 50}`, stroke: '#7A6A52', 'stroke-width': 6 }),
-      S('rect', { x: colX - 50, y: seabed, width: colW + 100, height: 18, fill: '#3A3226' }));
+    dp.append(S('rect', { x: colX, y: sy0, width: colW, height: 1300 * k, fill: 'url(#gDepthW)' }), S('path', { d: `M${colX - 12} ${seabed} H${colX + colW + 84}`, stroke: '#7A6A52', 'stroke-width': 6 }),
+      S('rect', { x: colX - 12, y: seabed, width: colW + 96, height: 18, fill: '#3A3226' }));
     [0, 500, 1000, 1300].forEach((m) => { const y = sy0 + m * k; dp.append(S('path', { d: `M${colX - 14} ${y} H${colX}`, stroke: '#AFC0CE', 'stroke-width': 2 }), S('text', { x: colX - 22, y: y + 6, 'text-anchor': 'end', fill: '#AFC0CE', 'font-size': 18, 'font-weight': 600, style: { fontFamily: 'var(--mono)' }, text: m + ' m' })); });
     // spar platform at the surface + tree at the seabed
     dp.append(S('path', { d: `M${colX + 30} ${sy0 - 6} h60 v-34 h-60 z`, fill: '#C4D2DD', stroke: OUT, 'stroke-width': 2 }), S('rect', { x: colX + 50, y: sy0 - 6, width: 20, height: 74, fill: '#93A8B8', stroke: OUT, 'stroke-width': 2 }),
@@ -250,8 +250,8 @@ export function build(root, E) {
     dp.append(S('path', { d: `M${ex - 30} ${seabed} L${ex - 5} ${seabed - eh * 0.45} L${ex - 2} ${seabed - eh} L${ex + 2} ${seabed - eh} L${ex + 5} ${seabed - eh * 0.45} L${ex + 30} ${seabed} M${ex - 20} ${seabed - eh * 0.2} H${ex + 20} M${ex - 8} ${seabed - eh * 0.6} H${ex + 8}`, fill: 'none', stroke: '#8FA6B8', 'stroke-width': 2.4, 'stroke-linejoin': 'round' }),
       S('text', { x: ex, y: seabed - eh - 12, 'text-anchor': 'middle', fill: '#8FA6B8', 'font-size': 16, 'font-weight': 600, text: '330 m' }));
     // big number
-    const num = S('text', { x: P0.x + 26, y: P0.y + 628, fill: YEL, 'font-size': 64, 'font-weight': 800, style: { fontFamily: 'var(--mono)' }, text: '0 m' });
-    dp.append(num, S('text', { x: P0.x + 26, y: P0.y + 668, fill: '#AFC0CE', 'font-size': 20, 'font-weight': 600, text: '≈ four Eiffel Towers on top of each other' }));
+    const num = S('text', { x: P0.x + 26, y: P0.y + 650, fill: YEL, 'font-size': 64, 'font-weight': 800, style: { fontFamily: 'var(--mono)' }, text: '0 m' });
+    dp.append(num, S('text', { x: P0.x + 26, y: P0.y + 684, fill: '#AFC0CE', 'font-size': 18, 'font-weight': 600, text: '≈ four Eiffel Towers on top of each other' }));
     fadeIn(dp, tIn + 0.6, 0.7);
     fadeOut(dp, tOut, 0.5);
     const t = w('b4', '1,300') - 0.3;

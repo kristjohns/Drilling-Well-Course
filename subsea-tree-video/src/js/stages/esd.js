@@ -195,7 +195,7 @@ export function build(ctx) {
   show(hostCard, w('b4', 'gas') - 0.3, 0.5, { x: -24, y: 0 });
   animate(w('b4', 'gas'), bt('b5').start, (t) => { hostCard.style.borderColor = (Math.sin((t - w('b4', 'gas')) * 8) > 0 ? RED : '#7A1A2A'); });
   hide(hostCard, bt('b5').start - 0.1, 0.4, { x: -20 });
-  const bn = H('div', { class: 'abs', style: { left: '0', top: '112px', width: '1920px', textAlign: 'center' } },
+  const bn = H('div', { class: 'abs', style: { left: '0', top: '112px', width: '1920px', boxSizing: 'border-box', paddingLeft: '130px', textAlign: 'center' } },
     H('div', { style: { display: 'inline-block', padding: '12px 36px 14px', borderRadius: '16px', background: 'rgba(40,6,12,.94)', border: `3px solid ${RED}`, font: '800 50px var(--font)', color: '#fff', letterSpacing: '0.02em', boxShadow: '0 0 50px rgba(255,59,92,.5)' }, html: `EMERGENCY SHUTDOWN <span style="color:${RED}">· ESD</span>` }));
   html.append(bn);
   show(bn, w('b4', 'emergency') - 0.2, 0.5, { y: -20 });
