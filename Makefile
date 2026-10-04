@@ -7,11 +7,13 @@ PY    ?= python3
 VENV  ?= .venv
 VPY   := $(if $(wildcard $(VENV)/bin/python),$(VENV)/bin/python,$(PY))
 
-.PHONY: help doctor venv
+.PHONY: help doctor venv script lint-script
 
 help:
 	@echo "make doctor  report which required tools are installed / missing"
 	@echo "make venv    create $(VENV) with bpy 4.5 LTS + plotting deps (~1 GB download)"
+	@echo "make script  fit durations, lint, regenerate script/NARRATION.md, FLAGS.md, timeline.json"
+	@echo "make lint-script  lint only (budget sums, pacing, term-first-use)"
 
 doctor:
 	@echo "== binaries =="
@@ -32,3 +34,9 @@ venv:
 	$(PY) -m venv $(VENV)
 	$(VENV)/bin/pip install --upgrade pip
 	$(VENV)/bin/pip install -r requirements.txt
+
+script:
+	$(PY) script/scriptlib.py build
+
+lint-script:
+	$(PY) script/scriptlib.py lint

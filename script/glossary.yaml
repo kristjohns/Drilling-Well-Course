@@ -1,0 +1,338 @@
+# Term ledger. Key = canonical term. `def` = one-line definition shown as an on-screen term card
+# the first time the term is defined in the narration (the beat lists it under TERMS).
+# `aliases` = other spellings the first-use lint should catch. Keep keys lower-case.
+# Rule enforced by `make lint-script`: the FIRST beat whose narration contains any alias must list the key in TERMS.
+
+drilling fluid:
+  def: "The liquid circulated in the hole; also called mud. Its weight is chosen to control pressure."
+  aliases: [mud, drilling mud]
+kick:
+  def: "Unplanned flow of formation fluid into the well because hole pressure fell below pore pressure."
+  aliases: [kicks]
+mud weight window:
+  def: "The range of mud weights between the lower limit (pore pressure / collapse) and the fracture limit."
+  aliases: []
+target:
+  def: "The subsurface point (here a reservoir sandstone) the well is designed to reach."
+  aliases: []
+true vertical depth:
+  def: "Depth measured straight down, as opposed to measured depth along the hole path. Abbreviated TVD."
+  aliases: [tvd]
+hydrostatic pressure:
+  def: "Pressure from a fluid column at rest: density x gravity x height (about 1 bar per 10 m of water)."
+  aliases: []
+specific gravity (sg):
+  def: "Density relative to fresh water. Mud weight is quoted in sg here (1 sg = 0.0981 bar per metre of depth)."
+  aliases: [specific gravity, sg]
+pore pressure:
+  def: "Pressure of the fluid in the pores of a rock."
+  aliases: []
+overpressure:
+  def: "Pore pressure above the normal water-column pressure, usually from trapped fluid."
+  aliases: []
+effective stress:
+  def: "Stress carried by the rock grains: total stress minus pore pressure (Terzaghi)."
+  aliases: []
+fracture gradient:
+  def: "Pressure (as equivalent mud weight) at which the rock splits open at the wall of the hole."
+  aliases: []
+leak-off test:
+  def: "Pressurising the hole below a new casing shoe until the rock starts to take fluid, to measure its strength."
+  aliases: [leak off test, lot]
+equivalent mud weight:
+  def: "The mud weight that would give a stated pressure at a stated depth. Abbreviated EMW."
+  aliases: [emw]
+shallow gas:
+  def: "Gas pockets a few hundred metres below the seabed that can flow into the hole with little warning."
+  aliases: []
+casing:
+  def: "Steel pipe cemented in the hole to hold it open, contain pressure and isolate formations."
+  aliases: []
+casing shoe:
+  def: "The bottom end of a casing string."
+  aliases: [shoe]
+wildcat:
+  def: "An exploration well drilled to prove whether petroleum exists in a new prospect (no offset wells)."
+  aliases: []
+contingency string:
+  def: "A spare casing string planned in reserve in case the pressure window closes sooner than forecast."
+  aliases: [contingency strings]
+drill string:
+  def: "The pipe that carries drilling fluid down and rotates the bit."
+  aliases: []
+riserless drilling:
+  def: "Drilling the top hole with no riser: fluid and cuttings return to the seabed instead of the rig."
+  aliases: []
+blowout preventer:
+  def: "A stack of valves (BOP) on the wellhead that can close the well."
+  aliases: [bop]
+cuttings:
+  def: "Chips of rock produced by the bit and carried up by the drilling fluid."
+  aliases: []
+spud:
+  def: "To start drilling the well; the first metres of hole."
+  aliases: []
+guide base:
+  def: "A frame on the seabed that guides and aligns the drill string and the first casing strings."
+  aliases: []
+conductor:
+  def: "The first and largest casing string, driven or cemented in as the well's foundation."
+  aliases: []
+wellhead:
+  def: "The hardware at the top of the well that supports the casing strings and holds pressure."
+  aliases: []
+surface casing:
+  def: "The casing string that anchors the BOP and isolates shallow hazards."
+  aliases: []
+annulus:
+  def: "The ring-shaped gap between two pipes, or between a pipe and the rock."
+  aliases: [annuli]
+cement:
+  def: "A slurry pumped into the annulus that sets hard to support and seal the casing."
+  aliases: []
+ROV:
+  def: "Remotely operated vehicle: the subsea robot with cameras and tools."
+  aliases: [remotely operated vehicle]
+casing hanger:
+  def: "A profiled ring that suspends a casing string inside the wellhead and seals the gap behind it."
+  aliases: [casing hangers]
+marine riser:
+  def: "A large steel pipe connecting the BOP to the rig and carrying mud returns back up."
+  aliases: []
+annular preventer:
+  def: "A BOP element whose rubber packing squeezes closed around whatever is in the hole."
+  aliases: []
+ram:
+  def: "A BOP element: steel blocks that slide in to close around pipe or the open bore."
+  aliases: [rams]
+blind shear ram:
+  def: "The last-resort BOP ram: it cuts the pipe and seals the open bore."
+  aliases: [blind shear rams]
+accumulator:
+  def: "A gas-charged bottle storing hydraulic energy so the BOP can close without power."
+  aliases: [accumulators]
+leak-off point:
+  def: "The pressure at which the pressure-vs-volume line bends because fluid starts leaking into the rock."
+  aliases: []
+bottom-hole assembly:
+  def: "The lowest part of the drill string: bit, steering tool, instruments and drill collars. Abbreviated BHA."
+  aliases: [bha]
+drill collar:
+  def: "Very thick, heavy steel pipe at the bottom of the string that provides weight on the bit."
+  aliases: [drill collars, collars]
+PDC bit:
+  def: "A bit with polycrystalline-diamond cutters that shear the rock like a lathe tool."
+  aliases: [pdc bits]
+mud motor:
+  def: "A hydraulic motor in the string that turns the bit, often with a bent housing for steering."
+  aliases: []
+rotary steerable system:
+  def: "A tool that steers the bit while the whole drill string keeps rotating."
+  aliases: [rotary steerable tool, rotary steerable]
+directional drilling:
+  def: "Deliberately steering the well off the vertical to reach a target or avoid obstacles."
+  aliases: []
+dogleg severity:
+  def: "How sharply the well path bends, in degrees per 30 m (or per 100 ft)."
+  aliases: []
+measurement while drilling:
+  def: "Sensors in the string that measure well direction (and more) while drilling. Abbreviated MWD."
+  aliases: [measurement-while-drilling, mwd]
+barite:
+  def: "A dense mineral powder (barium sulphate) added to mud to raise its weight."
+  aliases: []
+water-based mud:
+  def: "Drilling fluid whose continuous phase is water or brine."
+  aliases: [water-based]
+oil-based mud:
+  def: "Drilling fluid whose continuous phase is oil; used in reactive shales and hot, deep sections."
+  aliases: [oil-based]
+equivalent circulating density:
+  def: "Bottom-hole pressure while circulating, expressed as mud weight: static mud weight plus annular friction. ECD."
+  aliases: [ecd]
+connection:
+  def: "The pause in drilling to add a length of pipe, with the pumps off."
+  aliases: [connections]
+managed pressure drilling:
+  def: "Drilling with a closed annulus and a choke so the pressure profile can be controlled precisely. MPD."
+  aliases: [mpd]
+choke:
+  def: "An adjustable valve that restricts flow to control back pressure on the well."
+  aliases: []
+back pressure:
+  def: "Extra pressure applied at the surface on top of the mud column."
+  aliases: []
+casing grade:
+  def: "The steel strength class of casing; the number is the minimum yield strength in thousands of psi."
+  aliases: [grade, grades]
+sour service:
+  def: "Operation in H2S-containing fluids, where hard steels can crack; limits steel hardness."
+  aliases: [sour-service]
+diameter-to-thickness ratio:
+  def: "Pipe outside diameter divided by wall thickness; it governs collapse resistance. D/t."
+  aliases: [d/t]
+design basis:
+  def: "The set of worst credible load cases that the casing design must withstand."
+  aliases: []
+shut-in:
+  def: "The well closed at the surface (BOP or valve) so nothing flows out."
+  aliases: [shut in]
+von Mises equivalent stress:
+  def: "A single stress that combines axial, radial and hoop stress for comparison against yield."
+  aliases: [von mises]
+design factor:
+  def: "The required ratio of capacity to load (e.g. yield / equivalent stress); set by the operator."
+  aliases: [design factors]
+tapered string:
+  def: "A casing string whose wall thickness or grade varies with depth to match the loads."
+  aliases: [tapered]
+premium connection:
+  def: "A casing thread with metal-to-metal seals and a torque shoulder, designed to be gas-tight."
+  aliases: [premium connections]
+torque-turn plot:
+  def: "A record of make-up torque against turns, used to check a connection was screwed together correctly."
+  aliases: []
+well barrier element:
+  def: "A single object (mud column, casing, cement, wellhead, BOP...) that contributes to preventing flow."
+  aliases: [well barrier elements, barrier element]
+spacer:
+  def: "A fluid pumped between mud and cement to keep them from mixing."
+  aliases: []
+float valve:
+  def: "A one-way valve at the bottom of casing that stops cement flowing back up the pipe (U-tubing)."
+  aliases: [float valves]
+wiper plug:
+  def: "A rubber plug that separates fluids and wipes the inside of the casing during cementing."
+  aliases: [plug, plugs]
+centraliser:
+  def: "A device on the casing that holds it in the middle of the hole."
+  aliases: [centralisers]
+channelling:
+  def: "A continuous path of mud left behind the casing when cement fails to displace it."
+  aliases: [channel, channeling]
+thickening time:
+  def: "How long a cement slurry stays pumpable at downhole temperature and pressure."
+  aliases: []
+cement bond log:
+  def: "A sonic log measuring how well cement is bonded to the casing (CBL)."
+  aliases: [cbl]
+ultrasonic cement log:
+  def: "A log using ultrasonic pulses to map cement quality in 360 degrees around the casing."
+  aliases: [ultrasonic tools, ultrasonic]
+microannulus:
+  def: "A hairline gap between casing and cement that can make a bond log look poor (or hide a leak path)."
+  aliases: []
+swabbing:
+  def: "Pulling the pipe so fast that it sucks formation fluid into the well, like a syringe."
+  aliases: [swab, swabbed]
+flow check:
+  def: "Stopping the pumps to see whether the well is still flowing; a simple kick test."
+  aliases: []
+drilling break:
+  def: "A sudden increase in drilling rate, possibly signalling a different, more porous rock."
+  aliases: []
+well barrier envelope:
+  def: "A set of well barrier elements that together prevent flow from a source to the surroundings."
+  aliases: [barrier envelope]
+primary barrier:
+  def: "The first well barrier; while drilling this is the drilling fluid column."
+  aliases: [primary well barrier]
+secondary barrier:
+  def: "The second, independent well barrier; while drilling: casing, cement, wellhead and BOP."
+  aliases: [secondary well barrier]
+shut-in drill pipe pressure:
+  def: "The stabilised pressure on the drill pipe gauge after shut-in; it reveals pore pressure. SIDPP."
+  aliases: [sidpp]
+kill mud:
+  def: "Heavier mud pumped to restore a pressure overbalance and end the kick."
+  aliases: []
+driller's method:
+  def: "A kill method that circulates the kick out first with the old mud, then circulates kill mud."
+  aliases: []
+kick tolerance:
+  def: "The largest kick that can be shut in and circulated out without fracturing the weakest point (the shoe)."
+  aliases: []
+negative pressure test:
+  def: "Lowering the pressure inside the well below the formation pressure to check the barriers hold."
+  aliases: []
+mud log:
+  def: "Real-time description of cuttings and gas coming up with the mud, prepared at the well site."
+  aliases: []
+lag time:
+  def: "The delay for cuttings to travel from the bit to the surface: annulus volume / flow rate."
+  aliases: []
+gas chromatograph:
+  def: "An instrument that separates and measures the gases (C1 to C5) in the mud."
+  aliases: []
+logging while drilling:
+  def: "Formation measurements made by sensors in the drill string while drilling. LWD."
+  aliases: [lwd]
+gamma ray:
+  def: "Natural radioactivity log; high in shales, low in clean sands."
+  aliases: []
+resistivity:
+  def: "How strongly the rock resists electric current; hydrocarbons raise it."
+  aliases: []
+porosity:
+  def: "The fraction of the rock that is pore space."
+  aliases: []
+water saturation:
+  def: "The fraction of the pore space filled with water. Sw."
+  aliases: []
+wireline:
+  def: "Logging tools run into the open hole on an electric cable."
+  aliases: []
+formation tester:
+  def: "A wireline tool that presses a probe to the wall to measure pressure and take fluid samples."
+  aliases: []
+free-water level:
+  def: "The depth where pressure in the water leg and the hydrocarbon leg are equal. FWL."
+  aliases: [free water level, fwl]
+core:
+  def: "A cylinder of rock cut with a hollow bit and brought to surface for lab measurement."
+  aliases: []
+permeability:
+  def: "How easily fluid flows through the rock."
+  aliases: []
+drill stem test:
+  def: "A temporary completion that flows the well to surface and records pressure to measure productivity. DST."
+  aliases: [dst]
+net pay:
+  def: "The reservoir thickness that passes cutoffs for shale content, porosity and water saturation."
+  aliases: []
+net-to-gross ratio:
+  def: "Net thickness divided by gross thickness of the interval."
+  aliases: [net to gross, net-to-gross]
+cutoff:
+  def: "A threshold on a log or core property used to decide what counts as reservoir or pay."
+  aliases: [cutoffs]
+discovery:
+  def: "(Norwegian Offshore Directorate) A deposit where testing, sampling or logging shows probable movable petroleum."
+  aliases: [discoveries]
+dry hole:
+  def: "A well that did not find movable hydrocarbons in the target."
+  aliases: []
+plugging and abandonment:
+  def: "Permanently sealing a well so it cannot leak. P&A."
+  aliases: [p and a, "p&a"]
+permanent well barrier:
+  def: "A barrier designed to last indefinitely, sealing across the full cross-section of the well."
+  aliases: [permanent barrier]
+rock to rock:
+  def: "A barrier that seals from formation to formation across every annulus."
+  aliases: [rock-to-rock]
+section milling:
+  def: "Cutting away a length of casing with a mill so a plug can bond directly to the rock."
+  aliases: []
+perforate wash cement:
+  def: "Perforate the casing, wash out the annulus, then cement it. PWC."
+  aliases: ["perforate, wash, cement", pwc]
+balanced plug:
+  def: "A cement plug placed through open-ended pipe with fluid levels equal inside and outside."
+  aliases: []
+tag the plug:
+  def: "Lowering pipe until it rests on the plug and loading it, to confirm depth and strength."
+  aliases: [tag it, tagging]
+cut and pull:
+  def: "Cutting casing below the seabed and retrieving it and the wellhead."
+  aliases: []
