@@ -122,8 +122,8 @@ def beat_loads(st, tl):
         x = xs[0]
         pipe = [st.rect(x - 0.5, 0.0, 0.08, 3.6, P.STEEL, 0.2), st.rect(x + 0.5, 0.0, 0.08, 3.6, P.STEEL, 0.2)]
         gas = st.rect(x, 0.0, 0.92, 3.6, P.GAS, 0.1, alpha=0.6)
-        sp = st.arrow(x, 3.1, x, 2.0, P.FRAC, 0.1, 0.3, 0.4)
-        spl = st.text("surface\npressure", x + 0.9, 2.5, 0.2, P.FRAC, 0.4, align="l", kind="bold")
+        sp = st.arrow(x, 2.25, x, 1.8, P.FRAC, 0.1, 0.3, 0.4)
+        spl = st.text("surface\npressure", x + 0.7, 2.05, 0.2, P.FRAC, 0.4, align="l", kind="bold")
         st.fade_in(pipe + [gas, spl] + sp, s[1] + 0.5, 0.4)
         # collapse: empty casing, mud outside
         x = xs[1]
@@ -134,9 +134,9 @@ def beat_loads(st, tl):
         st.fade_in(mud + pipe2 + [em] + ar, s[2] + 0.5, 0.4)
         # tension: string being run with overpull
         x = xs[2]
-        rod = st.rect(x, 2.0, 0.4, 3.6, P.STEEL, 0.2, anchor="t")
-        hook = st.arrow(x, 3.4, x, 2.2, P.PORE, 0.12, 0.32, 0.4)
-        ov = st.text("overpull + shock", x + 0.5, 2.8, 0.2, P.PORE, 0.4, align="l", kind="bold")
+        rod = st.rect(x, 1.7, 0.4, 3.4, P.STEEL, 0.2, anchor="t")
+        hook = st.arrow(x, 2.3, x, 1.75, P.PORE, 0.12, 0.32, 0.4)
+        ov = st.text("overpull + shock", x + 0.5, 2.05, 0.2, P.PORE, 0.4, align="l", kind="bold")
         st.fade_in([rod, ov] + hook, s[3] + 0.5, 0.4)
         st.move(rod, s[3] + 1.5, s[3] + 2.0, dy=0.12)
         st.move(rod, s[3] + 2.0, s[3] + 2.5, dy=-0.12)
@@ -155,12 +155,12 @@ def beat_vme(st, tl):
         # s0: uniaxial ratings = a box
         box = [st.rect(c.X(0), c.Y(1), c.X(1) - c.X(-1), 0.05, P.MUTED, 0.2), st.rect(c.X(0), c.Y(-1), c.X(1) - c.X(-1), 0.05, P.MUTED, 0.2),
                st.rect(c.X(1), c.Y(0), 0.05, c.Y(1) - c.Y(-1), P.MUTED, 0.2), st.rect(c.X(-1), c.Y(0), 0.05, c.Y(1) - c.Y(-1), P.MUTED, 0.2)]
-        bl = st.text("uniaxial ratings:\neach limit on its own", c.X(-0.55), c.Y(1.25), 0.22, P.MUTED, 0.3, kind="bold")
+        bl = st.text("uniaxial ratings: each limit on its own", c.X(0.0), c.Y(1.33), 0.2, P.MUTED, 0.3, kind="bold")
         st.fade_in(box + [bl], s[0], 0.5)
         # s1/s2: von Mises ellipse
         ell = st.line(vme_points(1.0), P.PORE, 0.08, 0.4, closed=True)
         st.draw_on(ell, s[2], s[2] + 2.5)
-        el = pill(st, c.X(-0.6), c.Y(-1.28), "von Mises: all stresses at once", P.PANEL2, P.PORE, 0.22, 0.5)
+        el = pill(st, c.X(0.0), c.Y(-1.36), "von Mises: all stresses at once", P.PANEL2, P.PORE, 0.2, 0.5)
         st.fade_in(el, s[2] + 1.0, 0.4)
         # design factor ellipse
         df = st.line(vme_points(0.8), P.WARN, 0.05, 0.4, closed=True)
@@ -173,14 +173,15 @@ def beat_vme(st, tl):
         d0 = st.arrow(c.X(0), c.Y(0), c.X(0), c.Y(y_c0), P.COLLAPSE, 0.05, 0.16, 0.5)
         d5 = st.arrow(c.X(x05), c.Y(0), c.X(x05), c.Y(y_c5), P.BAD, 0.05, 0.16, 0.5)
         pt = st.circle(c.X(0.75), c.Y(-0.75), 0.13, P.BAD, 0.6)
-        ptl = pill(st, c.X(0.55), c.Y(-1.25), "passes every uniaxial check,\nfails von Mises", P.BAD, "#ffffff", 0.2, 0.7, align="l")
+        ptl = pill(st, 4.7, 0.2, "passes every uniaxial check,\nfails von Mises", P.BAD, "#ffffff", 0.22, 0.7, align="c")
+        ld = st.line([(c.X(0.75) + 0.12, c.Y(-0.75)), (3.0, 0.2)], P.BAD, 0.04, 0.6)
         st.fade_in(d0 + d5, s[3], 0.5)
-        st.fade_in([pt] + ptl, s[3] + 1.5, 0.5)
+        st.fade_in([pt, ld] + ptl, s[3] + 1.5, 0.5)
         # right: equations
         e1 = st.text("σ_vme = √ ½ [ (σ_a−σ_θ)² + (σ_θ−σ_r)² + (σ_r−σ_a)² ]", 4.6, 2.2, 0.24, P.TEXT, 0.4, kind="mono", align="c")
         e2 = st.text("design factor = yield / σ_vme", 4.6, 1.4, 0.26, P.WARN, 0.4, kind="mono")
-        e3 = st.text("tension reduces\ncollapse resistance", 4.6, -0.8, 0.34, P.BAD, 0.4, kind="bold")
-        e4 = st.text("[plane stress, no bending or\nthermal load: simplified]", 4.6, -2.4, 0.18, P.SIM_BADGE, 0.4)
+        e3 = st.text("tension reduces\ncollapse resistance", 4.6, -1.4, 0.34, P.BAD, 0.4, kind="bold")
+        e4 = st.text("[plane stress, no bending or\nthermal load: simplified]", 4.6, -2.7, 0.18, P.SIM_BADGE, 0.4)
         st.fade_in([e1], s[2], 0.5)
         st.fade_in(e2, s[2] + 2.5, 0.5)
         st.fade_in(e3, s[3] + 0.8, 0.5)
@@ -287,7 +288,7 @@ def beat_barrier_element(st, tl):
             objs += col.string(p.name, p.shoe, b.start + 0.6 + 0.5 * i, b.start + 1.8 + 0.5 * i)
         ticks = []
         for i, p in enumerate(prog):
-            ticks.append(st.text("✓ tested", 4.2, ch.Y(p.shoe), 0.24, P.SAFE, 0.6, align="l", kind="mono"))
+            ticks.append(st.text("✓ tested", 3.3, ch.Y(p.shoe), 0.3, P.SAFE, 0.6, align="l", kind="mono"))
         for i, t in enumerate(ticks):
             st.fade_in(t, s[0] + 2.0 + 0.5 * i, 0.3)
         wb = pill(st, 4.6, 2.4, "well barrier element:\na single object that\nhelps stop flow", P.PANEL2, P.PORE, 0.26, 0.5)

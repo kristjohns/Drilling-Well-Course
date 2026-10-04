@@ -48,7 +48,7 @@ def beat_bha(st, tl):
         # buckling when pushed from the top
         px = 4.1
         pts = [(px + 0.45 * math.sin(i / 14 * math.pi * 4) * (0.4 + 0.6 * i / 14), 2.6 - i * 0.37) for i in range(15)]
-        bk = st.line(pts, P.BAD, 0.12, 0.4)
+        bk = st.line(pts, P.STEEL, 0.14, 0.4)
         push = st.arrow(px, 3.1, px, 2.6, P.BAD, 0.1, 0.3, 0.4)
         x1 = st.line([(px - 1.0, 2.7), (px + 1.0, -2.4)], P.BAD, 0.14, 0.5)
         x2 = st.line([(px - 1.0, -2.4), (px + 1.0, 2.7)], P.BAD, 0.14, 0.5)
@@ -299,16 +299,16 @@ def beat_mpd(st, tl):
     s = b.sent
     with st.span(b.start, b.end):
         wc = WindowChart(st, x=-5.3, y=-3.0, w=5.4, h=6.3)
-        objs = wc.axes() + [wc.curves()["pp"], wc.objs["fg"], wc.objs["pp_lbl"], wc.objs["fg_lbl"], wc.band()]
+        objs = wc.axes() + [wc.curves(labels=False)["pp"], wc.objs["fg"], wc.band()]
         st.fade_in(objs, b.start, 0.5)
         c = wc.c
         z = 4000
         off = st.rect(c.X(1.57), c.Y(z), 0.1, 0.5, P.PORE, 0.5)
         on = st.rect(c.X(1.74), c.Y(z), 0.1, 0.5, P.MUD, 0.5)
-        offl = st.text("pumps off:\nstill above pore pressure", c.X(1.57) - 0.15, c.Y(z) - 0.85, 0.2, P.PORE, 0.5, align="r", kind="bold")
-        onl = st.text("pumps on (ECD):\nunder the fracture limit", c.X(1.74) + 0.15, c.Y(z) + 0.8, 0.2, P.MUD, 0.5, align="r", kind="bold")
-        st.fade_in([off, offl], s[1], 0.5)
-        st.fade_in([on, onl], s[2], 0.5)
+        offl = pill(st, c.X(1.57) - 0.15, c.Y(z) - 1.25, "pumps off: still above\npore pressure", P.PANEL2, P.PORE, 0.2, 0.5, align="r")
+        onl = pill(st, c.X(1.74) + 0.15, c.Y(z) + 0.6, "pumps on (ECD): under\nthe fracture limit", P.PANEL2, P.MUD, 0.2, 0.5, align="r")
+        st.fade_in([off] + offl, s[1], 0.5)
+        st.fade_in([on] + onl, s[2], 0.5)
         sq = st.text("squeezed from both sides", c.X(1.35), c.Y(2700), 0.28, P.WARN, 0.5, kind="bold")
         st.fade_in(sq, s[0] + 0.3, 0.5)
         st.fade_in(st.text("sometimes no mud weight does both", c.X(1.4), c.Y(1500), 0.24, P.BAD, 0.5, kind="bold"), s[3], 0.5)
@@ -324,7 +324,7 @@ def beat_mpd(st, tl):
         chl = st.text("choke", mx + 2.25, 1.4, 0.22, P.WARN, 0.5, align="l", kind="bold")
         st.fade_in(mpd + mf + [rcd, rl, line, chk, chl], s[4], 0.5)
         # mini traces: pump rate falls, choke closes, BHP flat
-        c2 = Chart(st, mx + 0.1, -2.7, 3.2, 2.2, (0, 8), (0, 1))
+        c2 = Chart(st, mx + 0.1, -2.35, 3.2, 1.9, (0, 8), (0, 1))
         fr2 = c2.frame(xticks=[], yticks=[], grid=False)
         pump = c2.curve([0, 4, 4.4, 8], [0.85, 0.85, 0.15, 0.15], P.PORE, 0.07, 0.4)
         bhp = c2.curve([0, 8], [0.5, 0.5], P.MUD, 0.07, 0.4)
@@ -334,7 +334,7 @@ def beat_mpd(st, tl):
         st.draw_on(pump, s[4] + 2.2, s[4] + 5.0)
         st.draw_on(bhp, s[4] + 2.2, s[4] + 5.0)
         st.scale_to(chk, s[4] + 3.8, s[4] + 4.6, sy=0.35)     # choke closes as the pump stops
-        bpt = st.text("back pressure replaces the pump", mx + 1.8, -3.2, 0.2, P.WARN, 0.5, kind="bold")
+        bpt = st.text("back pressure replaces the pump", mx + 1.7, -3.3, 0.2, P.WARN, 0.5, kind="bold")
         st.fade_in(bpt, s[4] + 3.8, 0.4)
 
 

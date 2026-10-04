@@ -205,29 +205,29 @@ def beat_barriers(st, tl):
         st.fade_in(rock + [sand, mud] + csg + cem + [wh, bop, bopl] + src + [srl], b.start, 0.5)
         # primary envelope (blue outline): the mud column
         pe = _outline(st, cx - 0.5, -2.9, cx + 0.5, 2.55, P.PRIMARY_B, 0.08, 0.7)
-        pl = pill(st, cx + 2.1, 0.3, "PRIMARY: mud column", P.PANEL2, P.PRIMARY_B, 0.24, 0.5, align="l")
+        pl = pill(st, 0.0, 0.7, "PRIMARY: mud column", P.PANEL2, P.PRIMARY_B, 0.24, 0.5, align="l")
         # secondary envelope (red outline): casing + cement + wellhead + BOP
         se = _outline(st, cx - 0.98, -0.95, cx + 0.98, 3.7, P.SECOND_B, 0.08, 0.65)
-        sl = pill(st, cx + 2.1, 2.5, "SECONDARY: casing + cement\n+ wellhead + BOP", P.PANEL2, P.SECOND_B, 0.24, 0.5, align="l")
+        sl = pill(st, 0.0, 1.8, "SECONDARY: casing + cement\n+ wellhead + BOP", P.PANEL2, P.SECOND_B, 0.24, 0.5, align="l")
         st.fade_in(se + sl, s[2] + 0.2, 0.5)
         st.fade_in(pe + pl, s[2] + 2.0, 0.5)
         # s0/s1 captions
-        t0 = st.text("two independent well barriers, at all times", 3.3, 3.6, 0.3, P.TEXT, 0.5, kind="bold")
-        t1 = st.text("each: a well barrier envelope\n= elements that together stop flow", 3.3, 2.6, 0.24, P.MUTED, 0.5)
+        t0 = st.text("two independent well barriers, at all times", 3.6, 3.7, 0.3, P.TEXT, 0.5, kind="bold")
+        t1 = st.text("each: a well barrier envelope\n= elements that together stop flow", 3.6, 3.05, 0.22, P.MUTED, 0.5)
         st.fade_in(t0, s[0], 0.5)
         st.fade_in(t1, s[1], 0.5)
         # airlock cartoon (right)
         ax = 4.3
-        corridor = st.rect(ax, -0.2, 5.0, 1.3, P.PANEL, 0.0)
-        d1 = st.rect(ax - 1.4, -0.2, 0.2, 1.3, P.SAFE, 0.3)
-        d2 = st.rect(ax + 1.4, -0.2, 0.2, 1.3, P.SAFE, 0.3)
-        al = st.text("two airlock doors, never both open", ax, -1.3, 0.24, P.TEXT, 0.4, kind="bold")
+        corridor = st.rect(ax, -1.0, 5.0, 1.3, P.PANEL, 0.0)
+        d1 = st.rect(ax - 1.4, -1.0, 0.2, 1.3, P.SAFE, 0.3)
+        d2 = st.rect(ax + 1.4, -1.0, 0.2, 1.3, P.SAFE, 0.3)
+        al = st.text("two airlock doors, never both open", ax, -2.0, 0.24, P.TEXT, 0.4, kind="bold")
         st.fade_in([corridor, d1, d2, al], s[3], 0.5)
         st.move(d1, s[3] + 1.2, s[3] + 2.0, dy=1.0)
         st.move(d1, s[3] + 2.4, s[3] + 3.2, dy=-1.0)
         st.move(d2, s[3] + 3.4, s[3] + 4.2, dy=1.0)
         # s4 barrier lost banner
-        ban = pill(st, ax, -2.8, "barrier lost → stop work, restore it", P.BAD, "#ffffff", 0.26, 0.7)
+        ban = pill(st, ax, -3.0, "barrier lost → stop work, restore it", P.BAD, "#ffffff", 0.26, 0.7)
         st.fade_in(ban, s[4], 0.5)
         st.recolor(se[:2], s[4] + 1.5, s[4] + 2.2, P.MUTED)
 
@@ -239,11 +239,11 @@ def beat_shutin(st, tl):
     with st.span(b.start, b.end):
         # steps
         steps = ["1  stop drilling", "2  flow check", "3  close the preventer"]
-        sp = [st.text(t, -5.9, 3.5 - 0.5 * i, 0.26, P.TEXT, 0.4, align="l", kind="bold") for i, t in enumerate(steps)]
+        sp = [st.text(t, -6.0, 3.5 - 0.55 * i, 0.26, P.TEXT, 0.4, align="l", kind="bold") for i, t in enumerate(steps)]
         for i, t in enumerate(sp):
             st.fade_in(t, s[0] + 0.4 * i + 0.5, 0.4)
         # closing BOP block (simplified)
-        bx, by = -3.6, 0.8
+        bx, by = -2.0, 0.8
         bop = BopStack(st, bx, by - 2.0, s=0.55, pipe_top=by + 2.1)
         st.fade_in(bop.all, s[0] + 1.0, 0.4)
         bop.close_annular(s[0] + 2.5, s[0] + 3.5)
@@ -256,15 +256,15 @@ def beat_shutin(st, tl):
         ma = st.rect(ux + 1.0, 0.45, 0.6, 4.8, P.MUD, 0.25)
         mb = st.rect(ux, -2.5, 2.6, 0.55, P.MUD, 0.25)
         kick = st.rect(ux + 1.0, -1.9, 0.6, 0.6, P.WATER, 0.3)
-        lp = st.text("drill pipe", ux - 1.0, 3.2, 0.22, P.TEXT, 0.4, kind="bold")
-        la = st.text("annulus", ux + 1.0, 3.2, 0.22, P.TEXT, 0.4, kind="bold")
+        lp = st.text("drill pipe", ux - 1.0, 3.15, 0.22, P.TEXT, 0.4, kind="bold")
+        la = st.text("annulus", ux + 1.0, 3.15, 0.22, P.TEXT, 0.4, kind="bold")
         st.fade_in([pipe, ann, btm, mp, ma, mb, kick, lp, la], s[2], 0.5)
-        ut = st.text("a U-tube", ux, 3.85, 0.3, P.PORE, 0.5, kind="bold")
+        ut = st.text("a U-tube", ux, -3.35, 0.34, P.PORE, 0.5, kind="bold")
         st.fade_in(ut, s[2], 0.4)
         # gauges
-        g1 = st.text(f"SIDPP\n{SIDPP:.0f} bar", ux - 1.0, 2.15, 0.3, P.WARN, 0.5, kind="bold")
-        g2 = st.text("SICP", ux + 1.0, 2.15, 0.3, P.MUTED, 0.5, kind="bold")
-        st.fade_in([g1, g2], s[1] + 0.6, 0.5)
+        g1 = pill(st, ux - 1.0, 3.75, f"SIDPP {SIDPP:.0f} bar", P.PANEL2, P.WARN, 0.24, 0.5)
+        g2 = pill(st, ux + 1.0, 3.75, "SICP", P.PANEL2, P.MUTED, 0.24, 0.5)
+        st.fade_in(g1 + g2, s[1] + 0.6, 0.5)
         # equation card
         card = st.rect(5.6, 0.2, 3.7, 4.2, P.PANEL, 0.0)
         e1 = st.text("pressure at the bottom", 5.6, 2.0, 0.22, P.TEXT, 0.3, kind="bold")
@@ -294,8 +294,8 @@ def beat_kill(st, tl):
         inf_r = cut.static_gap("r", P.WATER, yb, yb + 1.3, 0.05)
         st.fade_in(base + [mb, ml, mr, inf_l, inf_r], b.start, 0.5)
         # equation
-        eq1 = st.text("kill mud weight = old weight + SIDPP / (g · depth)", 2.2, 3.5, 0.24, P.TEXT, 0.4, kind="mono", align="c")
-        eq2 = st.text(f"{MW_OLD:.2f} + {SIDPP:.1f} / (0.0981 × {TVD_KILL:,.0f}) = {KMW:.2f} sg", 2.2, 2.9, 0.3, P.KILL_MUD, 0.4, kind="mono", align="c")
+        eq1 = st.text("kill mud weight = old weight + SIDPP / (g · depth)", 2.6, 3.8, 0.22, P.TEXT, 0.4, kind="mono", align="c")
+        eq2 = st.text(f"{MW_OLD:.2f} + {SIDPP:.1f} / (0.0981 × {TVD_KILL:,.0f}) = {KMW:.2f} sg", 2.6, 3.25, 0.26, P.MUD, 0.4, kind="mono", align="c")
         st.fade_in([eq1], s[0], 0.5)
         st.fade_in([eq2], s[0] + 2.5, 0.5)
         # kill mud down the pipe, up the annulus (driller's method second circulation)
@@ -304,16 +304,16 @@ def beat_kill(st, tl):
         kl = cut.fill_gap("l", P.KILL_MUD, yb, yt, t1, t2, 0.12, interp="LINEAR")
         kr = cut.fill_gap("r", P.KILL_MUD, yb, yt, t1, t2, 0.12, interp="LINEAR")
         # choke + constant BHP
-        chk = st.poly([(cx + 2.0, 3.1), (cx + 2.6, 3.1), (cx + 2.3, 2.6)], P.WARN, 0.5)
-        cl = st.text("choke holds bottom-hole\npressure just above pore pressure", 2.2, 1.6, 0.24, P.WARN, 0.5, kind="bold")
+        chk = st.poly([(cx + 2.0, 2.65), (cx + 2.6, 2.65), (cx + 2.3, 2.15)], P.WARN, 0.5)
+        cl = st.text("choke holds bottom-hole\npressure just above pore pressure", 2.6, 1.3, 0.24, P.WARN, 0.5, kind="bold")
         bar = st.rect(5.6, -2.2, 0.6, 2.4, P.MUD, 0.3, anchor="b")
         bf = st.rect(5.6, -1.0, 0.64, 2.8, P.PANEL2, 0.2)
         bl = st.text("bottom-hole\npressure", 5.6, 0.7, 0.2, P.TEXT, 0.4, kind="bold")
         st.fade_in([chk, cl, bf, bar, bl], s[1] + 0.5, 0.5)
-        dm = st.text("driller's method:\ncirculates twice", 2.2, -0.2, 0.26, P.TEXT, 0.5, kind="bold")
+        dm = st.text("driller's method:\ncirculates twice", 1.2, -0.3, 0.26, P.TEXT, 0.5, kind="bold")
         st.fade_in(dm, s[2], 0.5)
         # subsea choke-line friction
-        line = st.line([(cut.hole[1] + 0.3, 3.0), (3.6, 3.0), (3.6, -0.8)], P.MUTED, 0.06, 0.4)
+        line = st.line([(cut.hole[1] + 0.3, 2.4), (3.6, 2.4), (3.6, -0.8)], P.MUTED, 0.06, 0.4)
         fr = st.arrow(3.9, 0.4, 3.9, -0.8, P.BAD, 0.07, 0.22, 0.5)
         ft = st.text("friction in the long choke\nline adds pressure:\npump slowly, correct for it", 4.15, -1.6, 0.22, P.BAD, 0.5, align="l", kind="bold")
         st.fade_in([line] + fr + [ft], s[3], 0.5)
@@ -339,7 +339,7 @@ def beat_tolerance(st, tl):
         slug = st.rect(gx, yb + 0.2, (cut.gap_r[1] - cut.gap_r[0]) * 0.8, 1.2, P.GAS, 0.4, anchor="b")
         st.fade_in(slug, s[1] - 0.5, 0.4)
         t_a, t_b = s[1], s[2] + 3.0
-        st.move(slug, t_a, t_b, dy=(yt - 0.6 - (yb + 0.2)), interp="LINEAR")
+        st.move(slug, t_a, t_b, dy=(yt - 1.2 - (yb + 0.2)), interp="LINEAR")
         # pressure at the shoe: rises to a peak when the slug top reaches the shoe
         c = Chart(st, 1.4, -2.6, 5.8, 5.0, (0, 10), (0, 10))
         fr = c.frame(xticks=[], yticks=[], xlabel="gas position", ylabel="pressure at the shoe", grid=False)
@@ -375,7 +375,7 @@ def beat_macondo(st, tl):
             bar = st.rect(0.8, y, 10.5, 0.95, P.SAFE, 0.2)
             label = st.text(f"{i + 1}   " + txt, -4.2, y, 0.36, "#06201c", 0.3, align="l", kind="bold")
             st.fade_in([bar, label], s[0] + 0.6 + 0.3 * i, 0.5)
-            st.recolor(bar, t, t + 0.8, P.STEEL_DK)
+            st.recolor(bar, t, t + 0.8, "#3a4659")
             st.recolor(label, t, t + 0.8, P.TEXT)
             bars.append(bar)
         loss = st.text("11 lives lost", 0.8, -2.5, 0.6, P.TEXT, 0.3, kind="bold")

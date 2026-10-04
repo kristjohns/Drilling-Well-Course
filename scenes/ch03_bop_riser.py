@@ -22,10 +22,10 @@ def beat_riser(st, tl):
         wh = [st.rect(cx, seabed + 0.25, 1.9, 0.5, P.STEEL_DK, 0.2), st.rect(cx, seabed + 0.55, 1.5, 0.15, "#9aa8bb", 0.22)]
         hole = st.rect(cx, seabed - 0.6, 0.45, 1.2, P.BG, 0.1)
         st.fade_in([sea, rock, sline] + wh + [hole], b.start, 0.5)
-        bop = BopStack(st, cx, seabed + 0.5 + 4.2, s=0.7, pipe_top=3.9)
+        bop = BopStack(st, cx, seabed + 0.5 + 4.2, s=0.95, pipe_top=3.9)
         riser_h = 6.0
         riser = [st.rect(cx - 0.62, bop.y_top + riser_h / 2, 0.08, riser_h, P.STEEL, 0.3), st.rect(cx + 0.62, bop.y_top + riser_h / 2, 0.08, riser_h, P.STEEL, 0.3)]
-        rl = st.text("marine riser", cx - 0.85, 1.9 + 2.0, 0.26, P.TEXT, 0.4, align="r", kind="bold")
+        rl = st.text("marine riser", cx - 0.85, bop.y_top + 1.0, 0.26, P.TEXT, 0.4, align="r", kind="bold")
         st.fade_in(bop.all + riser, b.start, 0.3)
         st.fade_in(rl, s[1], 0.4)
         stack_group = bop.all + riser + [rl]
@@ -115,7 +115,7 @@ def beat_test(st, tl):
         # ticks on each element
         ticks = []
         for name, yy in (("annular", bop.y_ann), ("pipe rams", (bop.y_ram1 + bop.y_ram2) / 2), ("blind shear rams", bop.y_bsr)):
-            ticks.append(st.text("✓ " + name, cx + 1.7, yy, 0.24, P.SAFE, 0.6, align="l", kind="mono"))
+            ticks.append(st.text("✓ " + name, cx + 1.7, yy, 0.3, P.SAFE, 0.6, align="l", kind="mono"))
         st.fade_in(ticks[2:3], b.start + 4.8, 0.3)
         st.fade_in(ticks[1:2], b.start + 5.3, 0.3)
         st.fade_in(ticks[0:1], b.start + 5.8, 0.3)
@@ -201,7 +201,7 @@ def beat_lot(st, tl):
         # right: window chart; the leak-off dot lands on the fracture curve at 1,000 m
         wc = WindowChart(st, x=4.0, y=-3.0, w=3.2, h=6.2)
         ax = wc.axes()
-        cu = wc.curves()
+        cu = wc.curves(labels=False)
         st.fade_in(ax + [cu["pp"], cu["fg"]], s[3], 0.5)
         mark = st.circle(c.X(3.4), c.Y(6.6), 0.12, P.WARN, 0.9)
         st.fade_in(mark, s[3] + 0.2, 0.2)

@@ -57,7 +57,7 @@ def beat_riserless(st, tl):
             st.fade_in(c, t, 0.2)
             st.move(c, t, t + 3.0, dx=rnd.uniform(-2.2, 3.2), dy=rnd.uniform(0.4, 1.8))
             st.fade_out(c, t + 1.8, 1.2)
-        pl = st.text("cuttings + seawater spill out at the seabed", 1.6, 1.45, 0.24, P.TEXT, 0.4, align="l", kind="bold")
+        pl = st.text("cuttings + seawater spill out\nat the seabed", -5.9, 1.55, 0.24, P.TEXT, 0.4, align="l", kind="bold")
         st.fade_in(pl, s[3], 0.4)
         # ghost BOP + riser, crossed out
         gh = st.dashed((4.8, 3.5), (4.8, -0.7), P.MUTED, 0.05, 0.2, 0.15, 0.3) + st.dashed((5.6, 3.5), (5.6, -0.7), P.MUTED, 0.05, 0.2, 0.15, 0.3)
@@ -68,7 +68,7 @@ def beat_riserless(st, tl):
         st.fade_in(gh + gb + [gl], s[1], 0.5)
         st.draw_on(x1, s[1] + 0.5, s[1] + 1.1)
         st.draw_on(x2, s[1] + 1.0, s[1] + 1.6)
-        bp = st.text("BOP: a stack of valves\nthat can close the well", 5.2, -1.6, 0.22, P.MUTED, 0.3)
+        bp = st.text("BOP: a stack of valves\nthat can close the well", 5.2, -1.6, 0.22, P.TEXT, 0.3)
         st.fade_in(bp, s[1] + 0.8, 0.5)
         ns = st.text("nothing returns to the rig", 5.2, -2.5, 0.24, P.WARN, 0.3, kind="bold")
         st.fade_in(ns, s[4], 0.5)
@@ -96,14 +96,14 @@ def beat_why(st, tl):
         st.scale_to(gauge, s[2], s[2] + 4.0, sy=3.4, interp="LINEAR")
         crack = st.line([(-2.9, -2.0), (-2.5, -1.2), (-2.9, -0.3), (-2.4, 0.5), (-2.8, 1.4)], P.BAD, 0.1, 0.4)
         st.draw_on(crack, s[2] + 2.8, s[2] + 4.4)
-        br = st.text("cracks the weak rock\nand breaks out beside the well", -2.9, -3.15, 0.22, P.BAD, 0.4, kind="bold")
+        br = pill(st, -2.9, -3.1, "cracks the weak rock and\nbreaks out beside the well", P.BAD, "#ffffff", 0.2, 0.5)
         st.fade_in(br, s[2] + 3.6, 0.5)
         # open: tank of kill mud + pump arrow
         tank = st.rect(5.9, 0.4, 1.3, 1.1, P.KILL_MUD, 0.3)
         tl_ = st.text("kill mud\nready to pump", 5.9, 0.4, 0.2, "#0b1220", 0.4, kind="bold")
         pa = st.arrow(5.25, 0.4, 3.9, 0.4, P.KILL_MUD, 0.1, 0.3, 0.3)
         st.fade_in([tank, tl_] + pa, s[4], 0.5)
-        ok = st.text("defences: a survey for gas first,\nand heavy mud ready to pump", 3.6, -3.15, 0.22, P.SAFE, 0.4, kind="bold")
+        ok = pill(st, 3.6, -3.1, "defences: a survey for gas first,\nand heavy mud ready to pump", P.SAFE, "#06201c", 0.2, 0.5)
         st.fade_in(ok, s[4] + 0.8, 0.5)
         weak = st.text("near the seabed the rock is weak:\nlittle weight above it except water", 0.8, 3.1, 0.22, P.WARN, 0.4)
         st.fade_in(weak, s[2] - 0.2, 0.5)
@@ -136,9 +136,9 @@ def beat_conductor(st, tl):
         soil = st.rect(rx, -1.5, 4.0, 4.0, P.SEABED, 0.0)
         sea = st.rect(rx, 2.4, 4.0, 2.8, P.SEA, 0.0)
         pile = st.rect(rx, 0.0, 0.42, 4.2, P.STEEL, 0.2)
-        stack = st.rect(rx, 2.3, 1.5, 1.0, P.PANEL2, 0.3)
-        stl = st.text("wellhead + BOP\nhundreds of tonnes", rx, 2.3, 0.2, P.TEXT, 0.4, kind="bold")
-        wt = st.arrow(rx, 3.9, rx, 2.85, P.WARN, 0.1, 0.3, 0.4)
+        stack = st.rect(rx, 2.1, 1.5, 1.0, P.PANEL2, 0.3)
+        stl = st.text("wellhead + BOP\nhundreds of tonnes", rx, 2.1, 0.2, P.TEXT, 0.4, kind="bold")
+        wt = st.arrow(rx, 3.5, rx, 2.65, P.WARN, 0.1, 0.3, 0.4)
         fr = []
         for y in (0.0, -0.7, -1.4, -2.1):
             fr += st.arrow(rx - 0.55, y - 0.35, rx - 0.55, y + 0.1, P.SAFE, 0.05, 0.16, 0.3) + st.arrow(rx + 0.55, y - 0.35, rx + 0.55, y + 0.1, P.SAFE, 0.05, 0.16, 0.3)
@@ -146,12 +146,12 @@ def beat_conductor(st, tl):
         for y in (-0.3, -1.0, -1.7):
             sp += [st.line([(rx - 1.1, y), (rx - 0.9, y + 0.07), (rx - 0.75, y - 0.07), (rx - 0.6, y)], P.WARN, 0.04, 0.3),
                    st.line([(rx + 1.1, y), (rx + 0.9, y + 0.07), (rx + 0.75, y - 0.07), (rx + 0.6, y)], P.WARN, 0.04, 0.3)]
-        wave = st.arrow(rx - 1.9, 2.3, rx - 0.85, 2.3, P.PORE, 0.1, 0.3, 0.4)
-        wl = st.text("riser pulls sideways\nwith every wave", rx - 1.5, 3.0, 0.2, P.PORE, 0.4, kind="bold")
+        wave = st.arrow(rx - 1.9, 2.1, rx - 0.85, 2.1, P.PORE, 0.1, 0.3, 0.4)
+        wl = st.text("riser pulls sideways\nwith every wave", rx - 1.7, 2.85, 0.2, P.PORE, 0.4, kind="bold")
         fl = st.text("soil friction carries the weight\nsoil springs resist the bending", rx, -3.2, 0.2, P.SAFE, 0.4, kind="bold")
         st.fade_in([soil, sea, pile, stack, stl] + wt, s[3] + 0.3, 0.6)
         st.fade_in(fr + sp + wave + [wl, fl], s[3] + 2.0, 0.6)
-        pl = st.text("a pile in mud", rx, 3.75, 0.3, P.TEXT, 0.4, kind="bold")
+        pl = st.text("a pile in mud", rx, 4.0, 0.3, P.TEXT, 0.4, kind="bold")
         st.fade_in(pl, s[3] + 1.0, 0.4)
 
 
@@ -173,7 +173,7 @@ def beat_surface_casing(st, tl):
         st.scale_to(hole, s[0], s[0] + 3.0, sy=3.9, interp="LINEAR")
         hl = st.text("26 in hole to about 1,000 m", 3.3, -1.5, 0.26, P.TEXT, 0.3, kind="bold")
         st.fade_in(hl, s[0] + 0.5, 0.4)
-        scale = st.text("(not to scale)", 3.3, -2.0, 0.18, P.MUTED, 0.3)
+        scale = st.text("(not to scale)", 3.3, -2.0, 0.2, P.TEXT, 0.3)
         st.fade_in(scale, s[0] + 0.5, 0.4)
         # 20 in casing + high-pressure wellhead housing lowered in
         w = 0.7
@@ -211,7 +211,7 @@ def beat_cement(st, tl):
         st.fade_in([mud_b, mud_l, mud_r, shoe], b.start, 0.5)
         # cement goes down the inside, around the shoe, up the outside
         t_down0, t_down1 = s[0] + 0.5, s[0] + 3.5
-        c_in = st.rect(cx, y_top, 0.86, 0.0001, P.CEMENT, 0.12, anchor="t")
+        c_in = st.rect(cx, y_top, 0.86, 0.0001, "#e3ddd0", 0.12, anchor="t")   # lighter tint so the pipe reads against annulus cement
         st.scale_to(c_in, t_down0, t_down1, sy=y_top - (y_bot + 0.45), interp="LINEAR")
         cl = cut.fill_gap("l", P.CEMENT, y_bot + 0.45, y_sb, t_down1, t_down1 + 3.0, 0.12, interp="LINEAR")
         cr = cut.fill_gap("r", P.CEMENT, y_bot + 0.45, y_sb, t_down1, t_down1 + 3.0, 0.12, interp="LINEAR")
@@ -235,7 +235,7 @@ def beat_cement(st, tl):
         an = st.text("annulus", cx - 1.6, -1.8, 0.24, P.TEXT, 0.4, align="r", kind="bold")
         ar = st.arrow(cx - 1.55, -1.8, cx - 0.95, -1.8, P.TEXT, 0.04, 0.16, 0.4)
         st.fade_in([an] + ar, s[2], 0.4)
-        jobs = st.text("supports the wellhead + seals shallow zones", 4.3, -2.6, 0.24, P.SAFE, 0.4, kind="bold")
+        jobs = pill(st, 4.4, -2.8, "supports the wellhead\n+ seals shallow zones", P.SAFE, "#06201c", 0.24, 0.5)
         st.fade_in(jobs, s[3], 0.5)
 
 

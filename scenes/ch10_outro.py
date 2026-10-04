@@ -24,7 +24,7 @@ def beat_seabed(st, tl):
             st.move(c, 0, b.end, dx=rnd.uniform(-0.3, 0.3), dy=rnd.uniform(0.2, 0.9), interp="LINEAR")
         # camera begins on the empty seabed (mirror of the opening shot) and slowly rises
         st.camera(0, 0.01, cy=bottom + 0.4, width=16)
-        st.camera(b.start + s[2] - b.start + 1.0, b.end - 0.5, cy=bottom + 5.0)
+        st.camera(b.end - 4.0, b.end - 0.5, cy=bottom + 5.0)
         # the window gauge from the opening dissolves into the seabed
         gx, gy = 0.0, bottom + 1.6
         kick = st.rect(gx, gy - 1.0, 0.9, 0.9, P.WATER, 0.3, alpha=0.9)

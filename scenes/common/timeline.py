@@ -9,6 +9,18 @@ LEAD, TAIL = 0.4, 0.3   # must match script/scriptlib.py
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 TIMELINE = os.path.join(ROOT, "script", "timeline.json")
+SENTENCES = os.path.join(ROOT, "audio", "sentences.json")    # real sentence starts from the TTS (audio/build_audio.py)
+_REAL: dict | None = None
+
+
+def _real_times() -> dict:
+    global _REAL
+    if _REAL is None:
+        try:
+            _REAL = json.load(open(SENTENCES))
+        except (OSError, ValueError):
+            _REAL = {}
+    return _REAL
 
 
 class _Clamped(list):
@@ -45,6 +57,9 @@ class Beat:
 
         Lets visuals key off the narration: `s = tl['1.02'].sent; st.fade_in(obj, s[2])`."""
         parts = [p for p in re.split(r"(?<=[.?!])\s+", self.vo.strip()) if p]
+        real = _real_times().get(self.id)
+        if real and len(real) == len(parts):        # measured from the narration audio: preferred
+            return _Clamped(list(real))                  # already chapter-relative
         counts = [max(len(p.split()), 1) for p in parts]
         total = sum(counts) or 1
         window = max(self.dur - LEAD - TAIL - self.pause, 0.5)

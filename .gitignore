@@ -9,6 +9,7 @@ renders/*
 !renders/.gitkeep
 audio/*
 !audio/.gitkeep
+!audio/*.py
 build/
 
 # Copyrighted standards / papers you drop in for me to cite from (NORSOK, API, ISO)

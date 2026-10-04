@@ -3,7 +3,9 @@
 **Working title:** *The Hole That Fights Back*: how an offshore exploration well is drilled, judged, and erased
 **Runtime target:** 30:00 · **Narration budget:** ≈ 4,200 words (≈ 140 wpm including pauses for visuals)
 
-> **Status: awaiting your approval.** Nothing is committed. Sections 6–7 list what I need from you.
+> **Status: superseded by execution.** Stage 1 was written for approval; the user then said "finish on your own", so the
+> recommended defaults for D1–D7 were taken (see `README.md`, "Decisions taken"). Stages 2–5 are complete. This file is kept as the record
+> of the plan, the environment audit and the render benchmark. Note: the benchmark below used 8 AA samples; the final render uses 5.
 
 ---
 

@@ -20,7 +20,7 @@ def _well(st, t0, cx=-1.4):
     sa = st.rect(cx, (ch.Y(M.SAND_A[0]) + ch.Y(M.SAND_A[1])) / 2, 2.2, max(ch.Y(M.SAND_A[0]) - ch.Y(M.SAND_A[1]), 0.06), P.SAND, 0.03)
     objs += [res, sa]
     for i, p in enumerate(M.programme()):
-        objs += col.string(p.name, p.shoe, t0 + 0.1 * i, t0 + 0.2 * i + 0.4)
+        objs += col.string(p.name, p.shoe, t0 + 0.1 * i, t0 + 0.2 * i + 0.4, labels=False)
     hole = st.rect(cx, (ch.Y(M.programme()[-1].shoe) + ch.Y(M.TD)) / 2, 0.14, ch.Y(M.programme()[-1].shoe) - ch.Y(M.TD), P.BG, 0.6)
     objs.append(hole)
     return ch, col, objs
@@ -36,9 +36,9 @@ def beat_why(st, tl):
         cx = col.cx
         gauge = pill(st, cx + 2.2, ch.Y(4030), f"reservoir: ~{M.bar(4000, M.pp(4000)):.0f} bar", P.PANEL2, P.WATER, 0.26, 0.5, align="l")
         st.fade_in(gauge, s[3], 0.5)
-        flow = st.arrow(cx + 1.05, ch.Y(3950), cx + 1.05, ch.Y(420), P.WATER, 0.1, 0.35, 0.6)
-        fl = st.text("a flow path to the seabed", cx + 1.3, ch.Y(2000), 0.26, P.WATER, 0.6, align="l", kind="bold")
-        sea = st.text("the sea", cx + 1.3, ch.Y(150), 0.24, P.TEXT, 0.6, align="l", kind="bold")
+        flow = st.arrow(cx - 1.25, ch.Y(3950), cx - 1.25, ch.Y(420), P.WATER, 0.1, 0.35, 0.6)
+        fl = st.text("a flow path\nto the seabed", cx - 1.5, ch.Y(2000), 0.26, P.WATER, 0.6, align="r", kind="bold")
+        sea = st.text("the sea", cx - 1.5, ch.Y(150), 0.24, P.TEXT, 0.6, align="r", kind="bold")
         st.fade_in(flow + [fl, sea], s[3] + 0.8, 0.6)
         # geological time + the P&A plan
         gt = st.text("must stay sealed for\ngeological time", 4.4, 1.2, 0.4, P.WARN, 0.5, kind="bold")
@@ -163,13 +163,15 @@ def beat_ways(st, tl):
                 bore = cut.static_bore(P.MUD, yt, yb, 0.03)
                 st.fade_in(g + [bore], t + 0.3, 0.4)
                 guns = [st.arrow(x - 0.1, 0.4, cut.pipe[0] - 0.3, 0.4, P.WARN, 0.06, 0.18, 0.5), st.arrow(x + 0.1, 0.4, cut.pipe[1] + 0.3, 0.4, P.WARN, 0.06, 0.18, 0.5)]
-                gl = st.text("perforate", x, -1.0, 0.2, P.WARN, 0.5, kind="bold")
-                st.fade_in([a for gg in guns for a in gg] + [gl], t + 0.8, 0.4)
-                wl = st.text("wash the annulus clean", x, -1.5, 0.2, P.PORE, 0.5, kind="bold")
+                gl = pill(st, x, -2.95, "1 perforate", P.PANEL2, P.WARN, 0.2, 0.5)
+                st.fade_in([a for gg in guns for a in gg] + gl, t + 0.8, 0.4)
+                wl = pill(st, x, -2.95, "2 wash the annulus clean", P.PANEL2, P.PORE, 0.2, 0.55)
                 st.fade_in(wl, t + 1.8, 0.4)
+                st.fade_out(gl, t + 1.7, 0.2)
                 st.recolor(g, t + 2.0, t + 2.8, P.PORE)
-                cl = st.text("cement it", x, -2.0, 0.2, P.CEMENT, 0.5, kind="bold")
+                cl = pill(st, x, -2.95, "3 cement it", P.PANEL2, P.CEMENT, 0.2, 0.6)
                 st.fade_in(cl, t + 3.0, 0.4)
+                st.fade_out(wl, t + 2.9, 0.2)
                 st.recolor(g, t + 3.0, t + 3.8, P.SAFE)
 
 
@@ -190,14 +192,14 @@ def beat_place(st, tl):
         plug0 = st.rect(cx, base_y, 1.96, 0.3, P.WARN, 0.35)
         slips = [st.poly([(cx - 0.98, base_y + 0.15), (cx - 0.7, base_y + 0.15), (cx - 0.98, base_y - 0.15)], P.TEXT, 0.4), st.poly([(cx + 0.98, base_y + 0.15), (cx + 0.7, base_y + 0.15), (cx + 0.98, base_y - 0.15)], P.TEXT, 0.4)]
         st.fade_in([plug0] + slips, s[0] + 0.8, 0.5)
-        pb = st.text("mechanical base", cx + 1.2, base_y, 0.22, P.WARN, 0.5, align="l", kind="bold")
+        pb = st.text("mechanical base", cx + 1.65, base_y, 0.22, P.WARN, 0.5, align="l", kind="bold")
         st.fade_in(pb, s[0] + 1.2, 0.4)
         # 2. open-ended drill pipe lowered to just above the base
         pipe = st.rect(cx, yt, 0.34, 0.0001, P.STEEL, 0.5, anchor="t")
         pend = base_y + 0.55
         t_down0, t_down1 = s[1], s[1] + 3.0
         st.scale_to(pipe, t_down0, t_down1, sy=yt - pend)
-        pl = st.text("open-ended drill pipe", cx + 1.2, 2.4, 0.22, P.TEXT, 0.5, align="l", kind="bold")
+        pl = st.text("open-ended drill pipe", cx + 1.65, 2.4, 0.22, P.TEXT, 0.5, align="l", kind="bold")
         st.fade_in(pl, t_down0 + 0.5, 0.4)
         # cement column around the pipe end: spacer, cement, spacer
         sp1 = st.rect(cx, base_y + 0.15, 1.9, 0.0001, P.SPACER, 0.45, anchor="b")
@@ -208,12 +210,12 @@ def beat_place(st, tl):
         st.scale_to(cem, t_c0 + 0.4, t_c1, sy=h_cem)
         sp2 = st.rect(cx, base_y + 0.15 + h_cem, 1.9, 0.0001, P.SPACER, 0.45, anchor="b")
         st.scale_to(sp2, t_c1, t_c1 + 0.4, sy=0.25)
-        bl = st.text("balanced: levels inside and\noutside the pipe match", cx + 1.2, 0.2, 0.22, P.PORE, 0.5, align="l", kind="bold")
+        bl = st.text("balanced: levels inside and\noutside the pipe match", cx + 1.65, 0.2, 0.22, P.PORE, 0.5, align="l", kind="bold")
         st.fade_in(bl, t_c0 + 1.0, 0.5)
         # 3. pull out slowly through the cement; the cement stays
         t_p0, t_p1 = s[2], s[2] + 4.5
         st.scale_to(pipe, t_p0, t_p1, sy=yt - (pend + 2.6))
-        pu = st.text("pull out slowly", cx + 1.2, 1.2, 0.22, P.SAFE, 0.5, align="l", kind="bold")
+        pu = st.text("pull out slowly", cx + 1.65, 1.2, 0.22, P.SAFE, 0.5, align="l", kind="bold")
         st.fade_in(pu, t_p0 + 0.3, 0.4)
         # clear excess above the plug (reverse circulation)
         rc = [st.arrow(cx + 0.3, base_y + 2.0, cx + 0.3, base_y + 3.3, P.PORE, 0.05, 0.16, 0.5)]
@@ -300,7 +302,7 @@ def beat_cut(st, tl):
         st.fade_in(st.text("last, the steel: cut and pull", 0.8, 3.6, 0.3, P.TEXT, 0.5, kind="bold"), s[0], 0.5)
         # cutter flashes below the seabed
         cutr = st.rect(cx, -0.8, 1.2, 0.12, P.BAD, 0.6, alpha=0.0)
-        cl = st.text("cut below the seabed", cx + 1.4, -0.8, 0.24, P.BAD, 0.6, align="l", kind="bold")
+        cl = pill(st, cx + 1.4, -0.8, "cut below the seabed", P.BAD, "#ffffff", 0.24, 0.6, align="l")
         st.fade_in([cutr], s[1] + 0.3, 0.2)
         st.fade_in(cl, s[1] + 0.3, 0.4)
         st.fade_out(cutr, s[1] + 1.4, 0.3)
@@ -314,12 +316,12 @@ def beat_cut(st, tl):
         cone = st.poly([(-5.2, 1.2), (-6.0, sb + 0.05), (-4.4, sb + 0.05)], P.TEXT, 0.4, 0.2)
         st.fade_in(rov + [cone], s[2], 0.5)
         st.move(rov + [cone], s[2] + 0.5, s[2] + 6.0, dx=10.0, interp="LINEAR")
-        cs = st.text("clean seabed: nothing for a trawl to catch", 2.2, -3.2, 0.26, P.SAFE, 0.5, kind="bold")
+        cs = pill(st, 2.2, -3.1, "clean seabed: nothing for a trawl to catch", P.SAFE, "#06201c", 0.26, 0.5)
         st.fade_in(cs, s[2] + 3.0, 0.5)
         # temporary abandonment limit
-        cal = st.rect(5.8, 1.6, 1.8, 1.4, P.PANEL2, 0.5)
-        cg = [st.rect(5.8, 2.0, 1.8, 0.3, P.NO_BADGE, 0.55)] + [st.circle(5.2 + 0.4 * i, 1.5 + 0.0 - 0.0, 0.07, P.TEXT, 0.55) for i in range(4)]
-        lm = pill(st, 5.8, 0.3, "temporary abandonment:\na limited lifetime", P.PANEL2, P.WARN, 0.22, 0.6)
+        cal = st.rect(-5.0, -1.4, 1.8, 1.4, P.PANEL2, 0.5)
+        cg = [st.rect(-5.0, -0.95, 1.8, 0.3, P.NO_BADGE, 0.55)] + [st.circle(-5.6 + 0.4 * i, -1.5, 0.07, P.TEXT, 0.55) for i in range(4)]
+        lm = pill(st, -4.4, -2.5, "temporary abandonment:\na limited lifetime", P.PANEL2, P.WARN, 0.22, 0.6)
         st.fade_in([cal] + cg + lm, s[3], 0.5)
 
 

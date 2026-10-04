@@ -70,10 +70,9 @@ def beat_utube(st, tl):
         tplug = st.rect(cx, y0 + 2.18, w, 0.12, P.BAD, 0.25)
         train = [spacer, bplug, cement, tplug]
         st.fade_in(train, s[2] - 0.3, 0.4)
-        names = [st.text("spacer", cx - 0.75, y0 + 0.25, 0.2, P.SPACER, 0.4, align="r", kind="bold"),
-                 st.text("bottom plug", cx - 0.75, y0 + 0.62, 0.2, P.WARN, 0.4, align="r", kind="bold"),
-                 st.text("cement", cx - 0.75, y0 + 1.37, 0.2, P.CEMENT, 0.4, align="r", kind="bold"),
-                 st.text("top plug", cx - 0.75, y0 + 2.18, 0.2, P.BAD, 0.4, align="r", kind="bold")]
+        names = []
+        for txt, dy, col in (("spacer", 0.25, P.SPACER), ("bottom plug", 0.62, P.WARN), ("cement", 1.37, P.CEMENT), ("top plug", 2.18, P.BAD)):
+            names += pill(st, cx + 1.45, y0 + dy, txt, P.PANEL2, col, 0.2, 0.7, align="l")
         st.fade_in(names, s[2] + 0.2, 0.4)
         t_move0, t_move1 = s[2] + 1.0, s[3] + 3.0
         drop = (y0 + 0.0) - (shoe_y + 0.45) - 0.0
@@ -148,7 +147,7 @@ def beat_displacement(st, tl):
         ch = [st.rect((gx0 + gx1) / 2, (ytop_ch + yt) / 2, gx1 - gx0 + 0.12, yt - ytop_ch + 0.1, P.BAD, 0.45, alpha=0.0)]
         outline = [st.rect((gx0 + gx1) / 2, yt + 0.05, gx1 - gx0 + 0.2, 0.05, P.BAD, 0.5), st.rect((gx0 + gx1) / 2, ytop_ch, gx1 - gx0 + 0.2, 0.05, P.BAD, 0.5),
                    st.rect(gx0 - 0.04, (ytop_ch + yt) / 2, 0.05, yt - ytop_ch, P.BAD, 0.5), st.rect(gx1 + 0.04, (ytop_ch + yt) / 2, 0.05, yt - ytop_ch, P.BAD, 0.5)]
-        ch_lab = pill(st, cxL + 2.0, -0.3, "a channel of mud left\nbehind the pipe:\na hidden path for fluid", P.BAD, "#ffffff", 0.22, 0.6, align="l")
+        ch_lab = pill(st, cxL, -3.42, "mud channel: a hidden leak path", P.BAD, "#ffffff", 0.22, 0.6)
         st.fade_in(outline + ch_lab, s[2] + 0.2, 0.5)
         # RIGHT: centralisers
         st.fade_in(tR, s[3], 0.4)
@@ -167,7 +166,7 @@ def beat_displacement(st, tl):
         ar = st.arrow(R.pipe[1] + 0.9, -0.2, R.pipe[1] + 0.9, 0.6, P.SAFE, 0.05, 0.18, 0.4) + st.arrow(R.pipe[1] + 0.9, 0.6, R.pipe[1] + 0.9, -0.2, P.SAFE, 0.05, 0.18, 0.4)
         st.fade_in([bl], s[3] + 0.6, 0.4)
         st.fade_in([mv] + ar, s[3] + 3.0, 0.4)
-        st.fade_in(st.text("clean sheath, no channel", cxR, -3.55, 0.26, P.SAFE, 0.4, kind="bold"), r1, 0.5)
+        st.fade_in(pill(st, cxR, -3.42, "clean sheath, no channel", P.SAFE, "#06201c", 0.22, 0.6), r1, 0.5)
 
 
 # ---------------------------------------------------------------- 6.04 window + lab tests

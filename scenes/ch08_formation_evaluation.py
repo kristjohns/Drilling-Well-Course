@@ -74,7 +74,7 @@ def beat_mudlog(st, tl):
         st.fade_in(fr + [gt], s[2], 0.4)
         for i, (bb, h) in enumerate(zip(bars, (9.0, 4.2, 2.6, 1.3, 0.6))):
             st.fade_in(bb, s[2] + 0.3, 0.1)
-            st.scale_to(bb, s[2] + 0.4 + 0.2 * i, s[2] + 0.9 + 0.2 * i, sy=c.Y(0) - c.Y(h))
+            st.scale_to(bb, s[2] + 0.4 + 0.2 * i, s[2] + 0.9 + 0.2 * i, sy=c.Y(h) - c.Y(0))
         # lag: a cutting travels up the annulus slowly
         gx = (cut.gap_r[0] + cut.gap_r[1]) / 2
         cp = st.circle(gx, yb + 0.5, 0.11, "#fff27a", 0.5)
@@ -343,7 +343,8 @@ def beat_dst(st, tl):
         sl = st.text("separator", -1.9, 2.4, 0.2, P.TEXT, 0.4, kind="bold")
         flame = st.poly([(-0.3, 1.9), (0.1, 1.9), (-0.1, 2.9)], P.FRAC, 0.4)
         fl = st.text("burner", -0.1, 1.5, 0.2, P.FRAC, 0.4, kind="bold")
-        st.fade_in([sep, sl, flame, fl], s[0] + 1.0, 0.5)
+        conn = st.line([(cx, 3.35), (cx, 3.75), (-1.9, 3.75), (-1.9, 2.85)], P.MUTED, 0.06, 0.3)
+        st.fade_in([sep, sl, flame, fl, conn], s[0] + 1.0, 0.5)
         # build-up plot
         c = Chart(st, 1.2, -2.8, 4.3, 3.4, (0, 10), (0, 10))
         fr = c.frame(xticks=[], yticks=[], xlabel="time", ylabel="pressure", grid=False)
@@ -393,11 +394,11 @@ def beat_netpay(st, tl):
                     run, run_start = key, z
             if run is not None:
                 parts.append(st.rect(x, (c.Y(run_start) + c.Y(LG.z[-1])) / 2, 0.45, abs(c.Y(run_start) - c.Y(LG.z[-1])), run, 0.3))
-            lab = st.text(label, x, 3.15, 0.2, P.TEXT, 0.3, kind="bold")
+            lab = st.text(label, x, 3.3, 0.17, P.TEXT, 0.3, kind="bold")
             st.fade_in(parts + [lab], t, 0.6)
-        flag_col(LG.net_sand, 1.5, lambda f: P.SAND, "net sand", s[1])
-        flag_col(LG.net_res, 2.2, lambda f: "#e08a2e", "net reservoir", s[1] + 1.5)
-        flag_col(LG.net_pay, 2.9, lambda f: {"gas": P.GAS, "oil": P.OIL}.get(f, P.WATER), "net pay", s[1] + 3.0)
+        flag_col(LG.net_sand, 1.3, lambda f: P.SAND, "net\nsand", s[1])
+        flag_col(LG.net_res, 2.15, lambda f: "#e08a2e", "net\nreservoir", s[1] + 1.5)
+        flag_col(LG.net_pay, 3.0, lambda f: {"gas": P.GAS, "oil": P.OIL}.get(f, P.WATER), "net\npay", s[1] + 3.0)
         # thickness bars
         bars = [("gross", sm["gross"], P.MUTED), ("net sand", sm["net_sand"], P.SAND), ("net reservoir", sm["net_reservoir"], "#e08a2e"), ("net pay", sm["net_pay"], P.OIL)]
         for i, (nm, v, col) in enumerate(bars):
@@ -406,10 +407,10 @@ def beat_netpay(st, tl):
             bar = st.rect(4.1, y, 0.0001, 0.3, col, 0.3, anchor="l")
             st.fade_in(tt, s[1] + 0.6 + 1.2 * i, 0.3)
             st.scale_to(bar, s[1] + 0.8 + 1.2 * i, s[1] + 1.8 + 1.2 * i, sx=3.4 * v / sm["gross"])
-        ntg = st.text(f"net-to-gross = net pay / gross = {sm['net_pay']:.0f} / {sm['gross']:.0f} = {sm['ntg']:.2f}", 5.6, -1.3, 0.28, P.WARN, 0.4, kind="bold")
-        ntg_bg = st.rect(5.6, -1.3, 5.0, 0.6, P.PANEL2, 0.35)
+        ntg = st.text(f"net-to-gross = net pay / gross\n= {sm['net_pay']:.0f} / {sm['gross']:.0f} = {sm['ntg']:.2f}", 5.7, -1.3, 0.26, P.WARN, 0.4, kind="bold")
+        ntg_bg = st.rect(5.7, -1.3, 3.8, 1.1, P.PANEL2, 0.35)
         st.fade_in([ntg_bg, ntg], s[2], 0.5)
-        st.fade_in(st.text("cutoffs are illustrative: real ones are field-specific", 5.6, -2.2, 0.22, P.SIM_BADGE, 0.4, kind="bold"), s[3], 0.5)
+        st.fade_in(st.text("cutoffs are illustrative:\nreal ones are field-specific", 5.7, -2.5, 0.22, P.SIM_BADGE, 0.4, kind="bold"), s[3], 0.5)
 
 
 # ---------------------------------------------------------------- 8.10 the verdict
@@ -433,7 +434,7 @@ def beat_verdict(st, tl):
         src = st.text("Norwegian Offshore Directorate (Sodir): technical, not commercial", 0.8, -1.25, 0.22, P.WARN, 0.3, kind="bold")
         st.fade_in([card, q, src], s[4], 0.6)
         dis = pill(st, -2.4, -3.0, "DISCOVERY (technical)", P.SAFE, "#06201c", 0.34, 0.5)
-        dry = pill(st, 4.0, -3.0, "DRY HOLE: still data about the basin", P.PANEL2, P.TEXT, 0.34, 0.5)
+        dry = pill(st, 3.9, -3.0, "DRY HOLE: still data", P.PANEL2, P.TEXT, 0.34, 0.5)
         st.fade_in(dis, s[5], 0.5)
         st.fade_in(dry, s[6], 0.5)
 

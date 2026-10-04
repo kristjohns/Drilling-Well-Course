@@ -69,7 +69,7 @@ def well_strip(st, t0, t1, strings=(), marker=None, td=False, plugs=(), cut_belo
 
 def term_card(st, t0, d, term, definition, slot=0):
     """Top-right card shown when a term is first defined in the narration."""
-    y = 3.62 - slot * 1.0
+    y = 3.45 - slot * 1.0
     with st.span(t0, t0 + d):
         parts = [
             st.rect(5.6, y, 4.5, 0.9, P.PANEL2, 0.6),
@@ -82,12 +82,14 @@ def term_card(st, t0, d, term, definition, slot=0):
         st.fade_out(parts, t0 + d - 0.35, 0.3)
 
 
-def badge(st, t0, t1, label, color, y, x=7.85):
+def badge(st, t0, t1, label, color, x_right=7.85, y=4.2):
+    """Scope badge in the header row (top-right), right edge at x_right. Returns its width."""
+    from .stage import TEXT_SCALE
+    w = 0.17 * TEXT_SCALE * len(label) * 0.62 + 0.4
     with st.span(t0, t1):
-        w = 0.17 * len(label) * 0.62 + 0.4
-        parts = [st.rect(x - w / 2, y, w, 0.34, color, 0.7), st.text(label, x - w / 2, y, 0.17, "#0b1220", 0.71, kind="bold")]
+        parts = [st.rect(x_right - w / 2, y, w, 0.34, color, 0.7), st.text(label, x_right - w / 2, y, 0.17, "#0b1220", 0.71, kind="bold")]
         st.fade_in(parts, t0, 0.25)
-        return parts
+    return w
 
 
 def auto_overlays(st, tl):
@@ -97,9 +99,8 @@ def auto_overlays(st, tl):
         for t in b.terms[:2]:
             term_card(st, b.start + 0.5, min(max(b.dur - 1.0, 3.0), 9.0), t["term"], t["def"], slot)
             slot += 1
-        y = -3.28
+        x_right = 7.85
         if "NO" in b.scope:
-            badge(st, b.start + 0.3, b.end - 0.2, "NORWAY / NORSOK-SPECIFIC", P.NO_BADGE, y)
-            y += 0.42
+            x_right -= badge(st, b.start + 0.3, b.end - 0.2, "NORWAY / NORSOK-SPECIFIC", P.NO_BADGE, x_right) + 0.15
         if b.sim:
-            badge(st, b.start + 0.3, b.end - 0.2, "SIMPLIFIED", P.SIM_BADGE, y)
+            badge(st, b.start + 0.3, b.end - 0.2, "SIMPLIFIED", P.SIM_BADGE, x_right)

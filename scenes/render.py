@@ -44,7 +44,7 @@ def main():
     ap.add_argument("--chapter", type=int, required=True)
     ap.add_argument("--res", default="1920x1080")
     ap.add_argument("--fps", type=int, default=12)
-    ap.add_argument("--samples", type=int, default=8)
+    ap.add_argument("--samples", type=int, default=5)
     ap.add_argument("--out", default=os.path.join(ROOT, "renders", "preview"))
     ap.add_argument("--t0", type=float, default=0.0, help="chapter-relative start (s)")
     ap.add_argument("--t1", type=float, default=None, help="chapter-relative end (s)")

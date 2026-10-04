@@ -51,13 +51,17 @@ class WindowChart:
             out.append(z1)
         return out
 
-    def curves(self, collapse=False):
+    def curves(self, collapse=False, labels=True):
         c, st = self.c, self.st
         zs = self._depths()
         self.objs["pp"] = c.curve([M.pp(z) for z in zs], zs, P.PORE, 0.07, 0.3)
         self.objs["fg"] = c.curve([M.fg(z) for z in zs], zs, P.FRAC, 0.07, 0.3)
         self.objs["pp_lbl"] = st.text("pore pressure", c.X(1.06) - 0.45, c.Y(1500), 0.22, P.PORE, 0.3, align="r")
         self.objs["fg_lbl"] = st.text("fracture", c.X(1.84) + 0.1, c.Y(1500), 0.22, P.FRAC, 0.3, align="l")
+        if not labels:   # small charts: drop the free-floating labels (the curves are colour-coded and labelled elsewhere)
+            for k in ("pp_lbl", "fg_lbl"):
+                self.objs[k].hide_render = True
+                self.objs[k].scale = (0, 0, 0)
         if collapse:
             self.objs["co"] = c.curve([M.collapse(z) for z in zs], zs, P.COLLAPSE, 0.05, 0.3)
             self.objs["co_lbl"] = st.text("collapse", c.X(1.05), c.Y(3500), 0.2, P.COLLAPSE, 0.3, align="r")
@@ -131,7 +135,7 @@ class CasingColumn:
         back.append(st.text("casing strings", self.cx, c.Y(0) + 0.3, 0.2, P.MUTED, 0.1, kind="bold"))
         return back
 
-    def string(self, name, shoe, t0, t1):
+    def string(self, name, shoe, t0, t1, labels=True):
         """Add one string; it grows downward from the seabed between t0 and t1. Returns its objects."""
         st, c = self.st, self.c
         w = STRING_W[name]
@@ -142,10 +146,12 @@ class CasingColumn:
         st.scale_to(bar, t0, t1, sy=length)
         shoe_mark = st.poly([(self.cx - w / 2 - 0.12, c.Y(shoe)), (self.cx - w / 2, c.Y(shoe)), (self.cx - w / 2, c.Y(shoe) + 0.14)], P.WARN, 0.5)
         shoe_mark2 = st.poly([(self.cx + w / 2 + 0.12, c.Y(shoe)), (self.cx + w / 2, c.Y(shoe)), (self.cx + w / 2, c.Y(shoe) + 0.14)], P.WARN, 0.5)
-        lab = st.text(f"{STRING_LABEL[name]} shoe {shoe:,.0f} m", self.cx + 1.15, c.Y(shoe), 0.19, P.TEXT, 0.5, align="l")
-        st.fade_in([shoe_mark, shoe_mark2, lab], t1 - 0.1, 0.3)
+        parts = [shoe_mark, shoe_mark2]
+        if labels:
+            parts.append(st.text(f"{STRING_LABEL[name]} shoe {shoe:,.0f} m", self.cx + 1.15, c.Y(shoe), 0.19, P.TEXT, 0.5, align="l"))
+        st.fade_in(parts, t1 - 0.1, 0.3)
         self.bars[name] = bar
-        return [bar, shoe_mark, shoe_mark2, lab]
+        return [bar] + parts
 
 
 # ======================================================================================================
@@ -154,7 +160,7 @@ class Cutaway:
 
     `eccentric` shifts the pipe sideways (positive = right) to make one gap wide and the other narrow."""
 
-    def __init__(self, st, cx, y_top, y_bot, hole_w=2.4, pipe_w=0.9, wall=0.07, eccentric=0.0, z=0.0, rock=P.ROCK, rock_w=1.6):
+    def __init__(self, st, cx, y_top, y_bot, hole_w=2.4, pipe_w=0.9, wall=0.11, eccentric=0.0, z=0.0, rock=P.ROCK, rock_w=1.6):
         self.st, self.cx, self.y_top, self.y_bot, self.z = st, cx, y_top, y_bot, z
         self.hole = (cx - hole_w / 2, cx + hole_w / 2)
         pc = cx + eccentric
