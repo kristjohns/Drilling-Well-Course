@@ -9,7 +9,7 @@ TERMS: plugging and abandonment
 
 ## 9.02 | 22.5 | anim
 VO: First, find every source of inflow. Not only the reservoir. A thin overpressured sand, here at about three thousand metres, can push fluid all the way to the seabed. Each source needs a permanent barrier, and where a hydrocarbon reservoir could flow, the Norwegian standard asks for two.
-SHOT: The well schematic with the reservoir interval (3,950 to 4,050 m) and the thin overburden "Sand A" (2,980 to 3,000 m) highlighted with flow-potential arrows heading up the wellbore. Two barrier brackets appear at the reservoir; one at Sand A.
+SHOT: The well schematic with the reservoir interval (3,950 to 4,110 m) and the thin overburden "Sand A" (2,980 to 3,000 m) highlighted with flow-potential arrows heading up the wellbore. Two barrier brackets appear at the reservoir; one at Sand A.
 FLAGS: NO; VERIFY: barrier count per source (two for a hydrocarbon-bearing reservoir, one for other flow potential) from memory of NORSOK D-010, not confirmed; no minimum lengths or test pressures are narrated
 TERMS: permanent well barrier
 

@@ -16,6 +16,7 @@ G = 0.0981  # bar per metre per sg
 WATER_DEPTH = 300.0   # seabed depth below sea level, m
 TD = 4200.0           # total depth, m
 RES_TOP = 3950.0      # top of reservoir sandstone
+RES_BASE = 4110.0     # base of the sand: water leg below the free-water level (4,052 m) is ~58 m thick
 GOC, FWL = 3990.0, 4052.0   # gas-oil contact, free-water level (pressure-defined)
 OWC = 4046.0          # oil-water contact is slightly above FWL (capillary transition) [SIM]
 SAND_A = (2980.0, 3000.0)   # thin overpressured overburden sand with flow potential (P&A, Ch 9)
