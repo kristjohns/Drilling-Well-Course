@@ -336,7 +336,7 @@ def beat_dst(st, tl):
         perf = [st.arrow(cx + 1.3, -2.4, cx + 0.5, -2.4, P.OIL, 0.07, 0.2, 0.4), st.arrow(cx - 1.3, -2.4, cx - 0.5, -2.4, P.OIL, 0.07, 0.2, 0.4)]
         sand = st.rect(cx, -2.7, 3.6, 0.8, P.SAND, 0.0)
         st.fade_in(csg + [string, packer, sand] + perf[0] + perf[1], s[0], 0.5)
-        pl = st.text("temporary completion:\npacker + test string", cx + 0.2, 3.5, 0.22, P.TEXT, 0.4, kind="bold")
+        pl = pill(st, cx + 1.0, 0.4, "temporary completion:\npacker + test string", P.PANEL2, P.TEXT, 0.2, 0.4, align="l")
         st.fade_in(pl, s[0], 0.5)
         # surface equipment
         sep = st.rect(-1.9, 2.4, 1.4, 0.8, P.PANEL2, 0.3)
@@ -346,7 +346,7 @@ def beat_dst(st, tl):
         conn = st.line([(cx, 3.35), (cx, 3.75), (-1.9, 3.75), (-1.9, 2.85)], P.MUTED, 0.06, 0.3)
         st.fade_in([sep, sl, flame, fl, conn], s[0] + 1.0, 0.5)
         # build-up plot
-        c = Chart(st, 1.2, -2.8, 4.3, 3.4, (0, 10), (0, 10))
+        c = Chart(st, 1.2, -1.9, 4.3, 3.0, (0, 10), (0, 10))
         fr = c.frame(xticks=[], yticks=[], xlabel="time", ylabel="pressure", grid=False)
         tr = c.curve([0, 0.5, 2.5, 4, 4.2, 4.6, 5.4, 7, 10], [9.2, 5.5, 4.9, 4.7, 4.8, 6.2, 8.0, 8.9, 9.2], P.PORE, 0.08, 0.4)
         c.label(2.3, 3.6, "flow", 0.2, P.PORE, "c")
@@ -356,9 +356,9 @@ def beat_dst(st, tl):
         res = st.text("permeability · near-well damage · boundaries", 3.4, 3.2, 0.24, P.SAFE, 0.4, kind="bold")
         st.fade_in(res, s[1], 0.5)
         # NO: burning + tax
-        cost = pill(st, 3.4, -3.55, "costly + burns hydrocarbons:\nemissions controlled and taxed on the NCS", P.NO_BADGE, "#ffffff", 0.24, 0.7)
+        cost = pill(st, 3.4, -3.25, "costly + burns hydrocarbons:\nemissions controlled and taxed on the NCS", P.NO_BADGE, "#ffffff", 0.24, 0.7)
         st.fade_in(cost, s[2], 0.5)
-        alt = st.text("often: logs  ·  pressures  ·  samples instead", 0.5, 4.0, 0.26, P.WARN, 0.4, kind="bold")
+        alt = st.text("often: logs  ·  pressures  ·  samples instead", 1.6, 4.0, 0.26, P.WARN, 0.4, kind="bold")
         st.fade_in(alt, s[3], 0.5)
 
 

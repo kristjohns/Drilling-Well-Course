@@ -176,7 +176,7 @@ def beat_detect(st, tl):
         c4.label(4.9, 9.2, "faster drilling", 0.2, P.PORE, "c")
         st.fade_in(f4, s[4] + 0.3, 0.4)
         st.draw_on(tr4, s[4] + 0.5, s[4] + 2.5)
-        st.fade_in(st.text("catch it while it is still small", 0.4, -3.9, 0.3, P.SAFE, 0.5, kind="bold"), s[5], 0.5)
+        st.fade_in(st.text("catch it while it is still small", -0.2, 3.7, 0.26, P.SAFE, 0.5, kind="bold"), s[5], 0.5)
 
 
 # ---------------------------------------------------------------- 7.04 the barrier schematic (outline-only panel style)
@@ -212,8 +212,8 @@ def beat_barriers(st, tl):
         st.fade_in(se + sl, s[2] + 0.2, 0.5)
         st.fade_in(pe + pl, s[2] + 2.0, 0.5)
         # s0/s1 captions
-        t0 = st.text("two independent well barriers, at all times", 3.6, 3.7, 0.3, P.TEXT, 0.5, kind="bold")
-        t1 = st.text("each: a well barrier envelope\n= elements that together stop flow", 3.6, 3.05, 0.22, P.MUTED, 0.5)
+        t0 = st.text("two independent well barriers,\nat all times", -1.2, 3.7, 0.26, P.TEXT, 0.5, align="l", kind="bold")
+        t1 = st.text("each: a well barrier envelope\n= elements that together stop flow", -1.2, 2.7, 0.2, P.MUTED, 0.5, align="l")
         st.fade_in(t0, s[0], 0.5)
         st.fade_in(t1, s[1], 0.5)
         # airlock cartoon (right)

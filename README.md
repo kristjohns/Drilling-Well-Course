@@ -16,8 +16,8 @@ Blender animations, audio, subtitles, final export) is generated from this repo.
 
 | Output | Where | Notes |
 |---|---|---|
-| Final video, 1080p24, subtitles burned in | `build/the_hole_that_fights_back_1080p.mp4` | 30:00, H.264 + AAC, -16 LUFS |
-| Same, no burned-in subtitles | `build/..._1080p_nosubs.mp4` | video stream-copied |
+| Final video, 1080p24, subtitles burned in | `build/the_hole_that_fights_back_1080p.mp4` | 30:00.0, 1920x1080 @ 24 fps, H.264 + AAC stereo, -16.0 LUFS (two-pass loudnorm), ~91 MB |
+| Same, no burned-in subtitles | `build/..._1080p_nosubs.mp4` | video stream-copied, ~80 MB |
 | Subtitles | `build/the_hole_that_fights_back_1080p.srt` | 365 cues, timed to the narration |
 | Narration script + shot list (timestamped) | `script/NARRATION.md` | 72 beats, 3,905 words |
 | Flagged claims ledger | `script/FLAGS.md` | `VERIFY` / `SEEN` / `SIM` |
@@ -41,10 +41,13 @@ Blender animations, audio, subtitles, final export) is generated from this repo.
 make venv        # .venv with bpy 4.5 LTS, numpy, matplotlib, Pillow, PyYAML (~1 GB)
 sudo apt install ffmpeg xvfb libttspico-utils   # (and espeak-ng as a fallback voice)
 make doctor      # what is installed / missing
-make final       # script -> audio -> subs -> 1080p render -> assemble   (render step: ~1.5 h on 4 CPU cores)
+make final       # script -> audio -> subs -> 1080p render -> assemble   (render ~1.5 h on 4 CPU cores, ffmpeg assembly ~30 min)
 ```
 
 Individual steps: `make script`, `make audio`, `make subs`, `make qa`, `make preview CH=1`, `make render`, `make assemble`.
+After an audio-only or subtitle-only change, `python scenes/assemble.py --reuse` skips re-encoding the per-chapter clips (~12 min instead of ~35).
+To change one scene: edit its `scenes/chNN_*.py`, delete that beat's `renders/final/chNN/frame_*.png` window (frame = 1 + 12 x seconds),
+re-run `make render CHAPTERS=N` (existing frames are skipped), then `assemble`.
 No GPU or Blender binary is needed: the pip `bpy` module renders headless under `xvfb-run` (software GL).
 
 ## How it works
@@ -84,6 +87,9 @@ No GPU or Blender binary is needed: the pip `bpy` module renders headless under 
   simple models (documented as `[SIM]` in the script), not simulations.
 * `[VERIFY]` claims (barrier counts per source in P&A, BOP test rules, riserless-top-hole barrier treatment, DST frequency on the
   NCS, "a few hundredths" HPHT window width, common-barrier-element wording, ...) need checking against the primary documents.
+* Layout QA was done on sampled frames (two settled frames per beat in Stage 4, then a collision scan of the subtitle band at every
+  subtitle cue). Some labels still sit close to chart edges or overlap curves briefly while a beat is animating; nothing was
+  checked frame by frame.
 * Equinor internal requirements (TR/WR series) are not public and are not used.
 
 ## Layout

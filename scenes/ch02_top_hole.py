@@ -148,9 +148,9 @@ def beat_conductor(st, tl):
                    st.line([(rx + 1.1, y), (rx + 0.9, y + 0.07), (rx + 0.75, y - 0.07), (rx + 0.6, y)], P.WARN, 0.04, 0.3)]
         wave = st.arrow(rx - 1.9, 2.1, rx - 0.85, 2.1, P.PORE, 0.1, 0.3, 0.4)
         wl = st.text("riser pulls sideways\nwith every wave", rx - 1.7, 2.85, 0.2, P.PORE, 0.4, kind="bold")
-        fl = st.text("soil friction carries the weight\nsoil springs resist the bending", rx, -3.2, 0.2, P.SAFE, 0.4, kind="bold")
+        fl = pill(st, rx, -3.0, "soil friction carries the weight\nsoil springs resist the bending", P.PANEL2, P.SAFE, 0.18, 0.45)
         st.fade_in([soil, sea, pile, stack, stl] + wt, s[3] + 0.3, 0.6)
-        st.fade_in(fr + sp + wave + [wl, fl], s[3] + 2.0, 0.6)
+        st.fade_in(fr + sp + wave + [wl] + fl, s[3] + 2.0, 0.6)
         pl = st.text("a pile in mud", rx, 4.0, 0.3, P.TEXT, 0.4, kind="bold")
         st.fade_in(pl, s[3] + 1.0, 0.4)
 

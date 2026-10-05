@@ -305,13 +305,13 @@ def beat_mpd(st, tl):
         z = 4000
         off = st.rect(c.X(1.57), c.Y(z), 0.1, 0.5, P.PORE, 0.5)
         on = st.rect(c.X(1.74), c.Y(z), 0.1, 0.5, P.MUD, 0.5)
-        offl = pill(st, c.X(1.57) - 0.15, c.Y(z) - 1.25, "pumps off: still above\npore pressure", P.PANEL2, P.PORE, 0.2, 0.5, align="r")
-        onl = pill(st, c.X(1.74) + 0.15, c.Y(z) + 0.6, "pumps on (ECD): under\nthe fracture limit", P.PANEL2, P.MUD, 0.2, 0.5, align="r")
+        offl = pill(st, c.X(1.57) - 0.15, c.Y(z) + 0.8, "pumps off: still above\npore pressure", P.PANEL2, P.PORE, 0.2, 0.5, align="r", alpha=0.8)
+        onl = pill(st, c.X(1.74) + 0.15, c.Y(z) + 1.9, "pumps on (ECD): under\nthe fracture limit", P.PANEL2, P.MUD, 0.2, 0.5, align="r", alpha=0.8)
         st.fade_in([off] + offl, s[1], 0.5)
         st.fade_in([on] + onl, s[2], 0.5)
-        sq = st.text("squeezed from both sides", c.X(1.35), c.Y(2700), 0.28, P.WARN, 0.5, kind="bold")
+        sq = st.text("squeezed from both sides", c.X(1.35), c.Y(2000), 0.28, P.WARN, 0.5, kind="bold")
         st.fade_in(sq, s[0] + 0.3, 0.5)
-        st.fade_in(st.text("sometimes no mud weight does both", c.X(1.4), c.Y(1500), 0.24, P.BAD, 0.5, kind="bold"), s[3], 0.5)
+        st.fade_in(pill(st, c.X(1.4), c.Y(1300), "sometimes no mud weight\ndoes both", P.BAD, "#ffffff", 0.22, 0.5), s[3], 0.5)
         # MPD schematic
         mx = 3.6
         cut = Cutaway(st, mx - 1.0, 2.6, -2.8, hole_w=1.6, pipe_w=0.7, rock_w=1.0)

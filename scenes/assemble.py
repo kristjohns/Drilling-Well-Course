@@ -33,6 +33,7 @@ def main():
     ap.add_argument("--tag", default="1080p")
     ap.add_argument("--crf", type=int, default=18)
     ap.add_argument("--skip-subbed", action="store_true")
+    ap.add_argument("--reuse", action="store_true", help="keep per-chapter clips already encoded in build/tmp_<tag> (audio/subtitle-only changes)")
     a = ap.parse_args()
     tl = json.load(open(os.path.join(ROOT, "script", "timeline.json")))
     chs = [c for c in tl["chapters"] if a.chapters is None or c["num"] in [int(x) for x in a.chapters.split(",")]]
@@ -45,6 +46,9 @@ def main():
     for c in chs:
         d = os.path.join(a.renders, f"ch{c['num']:02d}")
         out = os.path.join(tmp, f"ch{c['num']:02d}.mp4")
+        if a.reuse and os.path.exists(out):
+            parts.append(out)
+            continue
         if not os.path.exists(os.path.join(d, "frames.txt")):
             sys.exit(f"missing {d}/frames.txt: render chapter {c['num']} first")
         run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", os.path.join(d, "frames.txt"),
@@ -63,7 +67,16 @@ def main():
     print(f"{n} subtitle cues")
     # 3. narration slice, loudness-normalised, mono -> stereo, 48 kHz
     narr = os.path.join(ROOT, "audio", "narration.wav")
-    af = "loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,pan=stereo|c0=c0|c1=c0"
+    # mono -> stereo FIRST: duplicating channels after loudnorm would add +3 LU. Then a measured two-pass loudnorm
+    # (single-pass is inaccurate on speech with long pauses): measure the slice, apply the measured values linearly.
+    pre = "aresample=48000,pan=stereo|c0=c0|c1=c0"
+    ln = "loudnorm=I=-16:TP=-1.5:LRA=11"
+    meas = subprocess.run(["ffmpeg", "-nostats", "-hide_banner", "-ss", f"{t0}", "-t", f"{t1 - t0}", "-i", narr,
+                           "-af", f"{pre},{ln}:print_format=json", "-f", "null", "-"], capture_output=True, text=True).stderr
+    m = json.loads(meas[meas.rindex("{"):meas.rindex("}") + 1])
+    af = (f"{pre},{ln}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}"
+          f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true,aresample=48000")
+    print(f"narration {m['input_i']} LUFS (stereo) -> -16 LUFS two-pass", flush=True)
     nosubs = os.path.join(a.out, f"{NAME}_{a.tag}_nosubs.mp4")
     run(["ffmpeg", "-y", "-loglevel", "error", "-i", video, "-ss", f"{t0}", "-t", f"{t1 - t0}", "-i", narr,
          "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-af", af, "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", nosubs])

@@ -7,13 +7,13 @@ from .chart import Chart
 from .stage import TEXT_SCALE, MIN_TEXT
 
 
-def pill(st, x, y, text, bg=P.PANEL2, fg=P.TEXT, size=0.2, z=0.5, pad=0.22, kind="bold", align="c"):
+def pill(st, x, y, text, bg=P.PANEL2, fg=P.TEXT, size=0.2, z=0.5, pad=0.22, kind="bold", align="c", alpha=1.0):
     """Label on a rounded-ish rectangular plate. Returns [plate, text]."""
     ts = max(size * TEXT_SCALE, MIN_TEXT)
     w = ts * 0.58 * max(len(l) for l in text.split("\n")) + pad * 2
     h = ts * 1.25 * (text.count("\n") + 1) + pad
     cx = x if align == "c" else (x + w / 2 if align == "l" else x - w / 2)
-    return [st.rect(cx, y, w, h, bg, z), st.text(text, cx, y, size, fg, z + 0.01, kind=kind)]
+    return [st.rect(cx, y, w, h, bg, z, alpha=alpha), st.text(text, cx, y, size, fg, z + 0.01, kind=kind)]
 
 
 def cross_arrow(st, x0, y0, x1, y1, color, label=None, size=0.2, z=0.4):
