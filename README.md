@@ -16,7 +16,7 @@ Blender animations, audio, subtitles, final export) is generated from this repo.
 
 | Output | Where | Notes |
 |---|---|---|
-| Final video, 1080p24, subtitles burned in | `build/the_hole_that_fights_back_1080p.mp4` | 30:00.0, 1920x1080 @ 24 fps, H.264 + AAC stereo, -16.0 LUFS (two-pass loudnorm), ~91 MB |
+| Final video, 1080p24, subtitles burned in | `build/the_hole_that_fights_back_1080p.mp4` | 30:00.0, 1920x1080 @ 24 fps, H.264 + AAC stereo, -16.0 LUFS (two-pass loudnorm), ~90 MB |
 | Same, no burned-in subtitles | `build/..._1080p_nosubs.mp4` | video stream-copied, ~80 MB |
 | Subtitles | `build/the_hole_that_fights_back_1080p.srt` | 365 cues, timed to the narration |
 | Narration script + shot list (timestamped) | `script/NARRATION.md` | 72 beats, 3,905 words |
