@@ -1,6 +1,6 @@
 # Narration script and shot list (generated: do not edit; edit `chNN_*.md` and run `make script`)
 
-Runtime 36:42 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[NO]** Norway-specific · **[GEN]** general industry · **[SIM]** deliberate simplification · **[VERIFY]** not confirmed against a primary source · **[SEEN]** seen only in a secondary/web source
+Runtime 36:45 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[NO]** Norway-specific · **[GEN]** general industry · **[SIM]** deliberate simplification · **[VERIFY]** not confirmed against a primary source · **[SEEN]** seen only in a secondary/web source
 
 ## Ch 0: Cold open: the window  (0:00–1:49)
 
@@ -699,7 +699,7 @@ Runtime 36:42 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **VERIFY:** the exact reporting duty to the authorities not confirmed
 
-## Ch 10: Outro: the empty seabed  (36:02–36:42)
+## Ch 10: Outro: the empty seabed  (36:02–36:45)
 
 ### 10.01 · 36:02 · 34.8s · anim **[GEN]**
 
@@ -707,10 +707,10 @@ Runtime 36:42 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 **SHOT:** The window chart from the opening returns with the casing staircase drawn over it (section by section), then two barrier outlines, then a flow-in/flow-out needle. It dissolves into the seabed from Chapter 0: bare, still, a low mound of old cuttings; beneath the mud, faint ghosted plugs and cut casing stubs. The camera rises slowly through the water column to the surface.
 
-### 10.02 · 36:36 · 5.3s · still **[GEN]**
+### 10.02 · 36:36 · 9s · still **[GEN]**
 
 **VO:** *(none: visual only)*
 
 **SHOT:** End card on dark background: "THE HOLE THAT FIGHTS BACK", then small print: "Illustrative composite well: invented numbers, real physics. Norway-specific material carried a red NORWAY / NORSOK-SPECIFIC badge. Verify any requirement against NORSOK D-010 and the current regulations before relying on it." Credits line: "Voice: Kokoro-82M neural TTS · Animation: generated in code".
 
-*Total narration: 5605 words ≈ 153 wpm averaged over the runtime.*
+*Total narration: 5605 words ≈ 152 wpm averaged over the runtime.*

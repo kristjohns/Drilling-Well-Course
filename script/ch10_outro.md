@@ -8,9 +8,9 @@ FLAGS: GEN
 PAUSE: 2
 TERMS:
 
-## 10.02 | 7 | still
+## 10.02 | 12 | still
 VO:
 SHOT: End card on dark background: "THE HOLE THAT FIGHTS BACK", then small print: "Illustrative composite well: invented numbers, real physics. Norway-specific material carried a red NORWAY / NORSOK-SPECIFIC badge. Verify any requirement against NORSOK D-010 and the current regulations before relying on it." Credits line: "Voice: Kokoro-82M neural TTS · Animation: generated in code".
 FLAGS: GEN
-PAUSE: 4
+PAUSE: 9
 TERMS:

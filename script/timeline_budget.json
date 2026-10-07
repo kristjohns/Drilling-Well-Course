@@ -1830,11 +1830,11 @@
     {
      "id": "10.02",
      "start": 2446.0,
-     "dur": 7.0,
+     "dur": 12.0,
      "kind": "still",
      "vo": "",
      "shot": "End card on dark background: \"THE HOLE THAT FIGHTS BACK\", then small print: \"Illustrative composite well: invented numbers, real physics. Norway-specific material carried a red NORWAY / NORSOK-SPECIFIC badge. Verify any requirement against NORSOK D-010 and the current regulations before relying on it.\" Credits line: \"Voice: Kokoro-82M neural TTS \u00b7 Animation: generated in code\".",
-     "pause": 4.0,
+     "pause": 9.0,
      "scope": [
       "GEN"
      ],
