@@ -99,11 +99,14 @@ def summary(lg: Logs | None = None) -> dict:
     lg = lg or generate()
     gross = M.RES_BASE - M.RES_TOP
     ns, nr, npay = thickness(lg.net_sand), thickness(lg.net_res), thickness(lg.net_pay)
-    return dict(gross=gross, net_sand=ns, net_reservoir=nr, net_pay=npay, ntg=npay / gross)
+    return dict(gross=gross, net_sand=ns, net_reservoir=nr, net_pay=npay, ntg=nr / gross, pay_to_gross=npay / gross)
 
 
 # ---- pressure points + gradient fit ----------------------------------------------------------------------
-P_REF = M.bar(4000.0, M.pp(4000.0))                               # water-leg reference pressure at 4,000 m
+# Water-leg reference pressure at 4,000 m, chosen so the gas crest at the reservoir top reads exactly the forecast pore
+# pressure: the window charts of chapters 1, 4 and 7 and the measured pressures of chapter 8 then agree at the crest.
+P_REF = (M.bar(M.RES_TOP, M.pp(M.RES_TOP))
+         - (G_WATER * (M.FWL - 4000.0) - G_OIL * (M.FWL - M.GOC) - G_GAS * (M.GOC - M.RES_TOP)))
 
 
 def p_water(z):

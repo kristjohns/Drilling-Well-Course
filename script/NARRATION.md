@@ -519,198 +519,198 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 ## Ch 8: Formation evaluation: discovery or dry hole?  (30:44–34:44)
 
-### 8.01 · 30:44 · 18s · anim **[GEN]**
+### 8.01 · 30:44 · 23s · anim **[GEN]**
 
-**VO:** Now the question flips. Until now it was how to get there safely; now it is what we found. A well is an expensive way to buy measurements, bought in order from fast, cheap and uncertain, to slow, costly and definitive.
+**VO:** Now the question flips. Until now it was how to get there safely; now it is what we found. A well is an expensive way to buy measurements, and they rank from fast, cheap and uncertain, to slow, costly and definitive. The order on this ladder is by price, not by time.
 
-**SHOT:** A ladder diagram descending the screen: mud log, logging while drilling, wireline, pressure and samples, core, well test. Each rung has a time-to-result and a certainty bar; the cost bar grows.
+**SHOT:** A ladder diagram descending the screen: mud log, logging while drilling, wireline, pressures and samples, core, well test. Each rung has a time-to-result and a certainty bar; the cost bar grows. A small note: "ranked by cost and certainty, not by time".
 
-### 8.02 · 31:02 · 23.5s · anim **[GEN]** **[SIM]**
+### 8.02 · 31:08 · 23.5s · anim **[GEN]** **[SIM]**
 
 **VO:** First, the mud log. Geologists describe the cuttings coming up with the mud, and look at them under ultraviolet light, where oil glows. A gas chromatograph measures the gases in the mud. But there is a delay: the lag time, annulus volume divided by flow rate, means cuttings are old news when they arrive.
 
-**SHOT:** Cutaway annulus with a bit cutting a layer; a coloured cutting particle rises with the mud over a time counter ("lag"), arriving at a shaker minutes later. A UV-lit tray with a glowing yellow cutting. A chromatograph trace with peaks labelled C1 to C5.
+**SHOT:** Cutaway annulus with a bit cutting a layer; a coloured cutting particle rises with the mud (flow particles) over a time counter ("lag"), arriving at a shaker minutes later. A UV-lit tray with a glowing yellow cutting. A chromatograph trace with peaks labelled C1 to C5.
 
 **Terms introduced:** mud log; lag time; gas chromatograph
 
 - **SIM:** lag time shown as a single number; no recycled-gas or bit-metamorphism cautions in the narration
 
-### 8.03 · 31:26 · 28.5s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.03 · 31:31 · 40s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
-**VO:** Next, logging while drilling, LWD: sensors in the drill string reading the rock as it is cut. Gamma ray separates shale from sand. Resistivity: hydrocarbons conduct poorly, so high resistivity can mean oil or gas. Density and neutron give porosity, the fraction of the rock that is pore space. The data climbs the pipe as pressure pulses in the mud, a few bits per second.
+**VO:** Next, logging while drilling, LWD: sensors a few metres behind the bit, reading the rock minutes after it is cut. Gamma ray usually separates shale from sand. Resistivity: hydrocarbons conduct poorly, so high resistivity can mean oil or gas. Density and neutron give porosity, the fraction of the rock that is pore space; where the two curves cross over, that is the signature of gas. A thin stream of data climbs the pipe as pressure pulses in the mud, a few bits per second; the full log waits in the tool's memory.
 
-**SHOT:** Scrolling log tracks vs depth over the reservoir interval with synthetic curves (gamma ray, resistivity, density-neutron crossover) drawn on as the bit passes. A tiny modem-style data-rate counter on the mud pulse line reads "a few bits per second".
+**SHOT:** Scrolling log tracks vs depth over the reservoir interval with synthetic curves (gamma ray, resistivity, density-neutron) drawn on as the sensors pass, a few metres behind the bit. The density-neutron crossover in the gas leg is highlighted ("gas"). A mud-pulse line with a data-rate counter ("a few bits/s") and a memory chip icon ("full log in memory").
 
 **Terms introduced:** logging while drilling; gamma ray; resistivity; porosity
 
 - **SIM:** log curves are synthetic and generated from the well model
 - **VERIFY:** telemetry rate "a few bits per second" is a rounded memory figure
 
-### 8.04 · 31:54 · 22s · anim **[GEN]** **[SIM]**
+### 8.04 · 32:11 · 26s · anim **[GEN]** **[SIM]**
 
-**VO:** Why can resistivity find oil? Picture the rock as a sponge soaked in salty water. Current flows through the salt water. Replace some with oil, an insulator, and less current flows. Archie's equation turns that into numbers: water saturation depends on porosity and resistivity. Simplified: it fails in shaly sands.
+**VO:** Why can resistivity find oil? Picture the rock as a sponge soaked in salty water. Current flows through the salt water. Replace some with oil, an insulator, and less current flows. Archie's equation turns that into numbers: water saturation from porosity, measured resistivity and the salt water's own resistivity. Simplified: clays conduct too, so shaly sands need extended versions.
 
-**SHOT:** Sponge cartoon with a salty-water current path; oil droplets replace water and the current path narrows. Then the equation Sw = (a Rw / (phi^m Rt))^(1/n) with Sw highlighted. A caption: "simplified: shaly sands need other models".
+**SHOT:** Sponge cartoon with a salty-water current path (flow particles); oil droplets replace water and the current path narrows. Then the equation Sw = (a·Rw / (φ^m·Rt))^(1/n) with Sw highlighted and Rw labelled "salt water's resistivity", worked example from the model (Rw 0.05, φ 0.23, Rt 23.6 → Sw ≈ 0.20). A caption: "shaly sands: extended models".
 
 **Terms introduced:** water saturation
 
 - **SIM:** Archie only; no Simandoux or Waxman-Smits
 
-### 8.05 · 32:16 · 41s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.05 · 32:37 · 49s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
-**VO:** After the bottom section is drilled, more logs run on a cable: wireline. Then comes the best trick. A formation tester presses a probe against the rock and measures pressure at a series of depths. In a fluid column, pressure rises with depth at that fluid's own weight: gas, about a quarter of a bar per ten metres; oil, about three quarters; water, about one bar. Plot pressure against depth and the slopes differ. Where the oil line meets the water line is the free-water level: a contact the well never had to cross.
+**VO:** After the bottom section is drilled, more logs run on a cable: wireline. Then comes the best trick. A formation tester presses a probe against the rock and measures pressure at a series of depths. In a fluid column, pressure rises with depth at that fluid's own weight: gas, about a quarter of a bar per ten metres; oil, about three quarters; water, about one bar. Plot pressure against depth and the slopes differ. Where the oil line meets the water line is the free-water level, found from pressures alone. Here the well crossed it, but the same trick finds a contact a well never reached, using water pressures from a neighbouring well.
 
-**SHOT:** THE PRESSURE GRADIENT PLOT. A wireline formation tester probe sets on the wall at stations down the reservoir. Pressure (bar) vs depth (m): dots appear one by one in the gas leg, the oil leg and the water leg; three straight lines fit them (slopes 0.025, 0.076, 0.106 bar/m); the oil and water lines are extended until they cross at 4,052 m, a horizontal "FWL" line is drawn; and the gas/oil crossing marks the gas-oil contact at 3,990 m.
+**SHOT:** THE PRESSURE GRADIENT PLOT. A wireline formation tester probe sets on the wall at stations down the reservoir. Pressure (bar) vs depth (m): dots appear one by one in the gas leg, the oil leg and the water leg (the well crossed into the water leg); three straight lines fit them (slopes 0.025, 0.076, 0.106 bar/m); the oil and water lines meet at 4,052 m ("FWL"), the gas/oil crossing marks the gas-oil contact at 3,990 m. A last ghost example: oil points only, with the water line borrowed from a neighbouring well.
 
 **Terms introduced:** wireline; formation tester; free-water level
 
 - **SIM:** gradients (0.025 / 0.076 / 0.106 bar/m) and contacts are the model's invented values
 - **VERIFY:** typical reservoir-condition fluid gradients quoted from memory
 
-### 8.06 · 32:58 · 20.5s · anim **[GEN]** **[SIM]**
+### 8.06 · 33:26 · 26s · anim **[GEN]** **[SIM]**
 
-**VO:** The tool also pumps out samples, analysed downhole and in the lab. If two sands sit on different pressure lines, they are not connected. And the free-water level is a pressure surface: the oil-water contact on the logs is a little higher, because of capillary forces.
+**VO:** The tool also pumps out samples, analysed downhole and in the lab. If two sands sit on different pressure lines, they are not in pressure contact; sharing a line suggests a connection but does not prove one. And the free-water level is a pressure surface: the oil-water contact on the logs is a little higher, because of capillary forces.
 
-**SHOT:** Sample bottle filling in the tool with an optical-analysis dial; two pressure-vs-depth plots, one single line, one with a visible offset between two sands labelled "different compartments". A thin zoom on the contact: the FWL (pressure) and a slightly higher OWC (logs) with a small transition zone.
+**SHOT:** Sample bottle filling in the tool with an optical-analysis dial; two pressure-vs-depth plots, one single line, one with a visible offset between two sands labelled "not in pressure contact". A thin zoom on the contact: the FWL (pressure) and a slightly higher OWC (logs, 6 m above) with a small transition zone.
 
 - **SIM:** transition zone thickness illustrative (the model puts the OWC 6 m above the FWL)
 
-### 8.07 · 33:18 · 21.5s · anim **[GEN]**
+### 8.07 · 33:52 · 32s · anim **[GEN]**
 
-**VO:** A core is the only direct physical sample of the rock: a cylinder cut by a hollow bit. The lab gives porosity, permeability, how easily fluid flows through the rock, and, for a mechanical engineer's pleasure, triaxial strength tests that calibrate our fracture and collapse estimates. It takes weeks.
+**VO:** A core is the only large, intact piece of the rock: a cylinder cut by a hollow bit while the reservoir is being drilled, unlike crushed cuttings or thumb-sized sidewall plugs. The lab gives porosity, permeability, how easily fluid flows through the rock, and, for a mechanical engineer's pleasure, triaxial strength tests that calibrate our collapse and rock-strength models; the fracture limit still comes from leak-off tests. Routine results take weeks, special tests months.
 
-**SHOT:** A hollow core bit cutting a cylinder, the core barrel being pulled and laid out on a tray; a triaxial test cell with a stress-strain curve and a Mohr-Coulomb envelope; a permeability plug test cartoon.
+**SHOT:** A hollow core bit cutting a cylinder, the core barrel being pulled and laid out on a tray, next to crushed cuttings and small sidewall plugs for scale ("the only intact sample"). A triaxial test cell with a stress-strain curve and a Mohr-Coulomb envelope; a permeability plug test cartoon.
 
 **Terms introduced:** core; permeability
 
-### 8.08 · 33:40 · 29s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 8.08 · 34:24 · 36s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
-**VO:** The last test is a drill stem test, DST: a temporary completion lets the well flow to surface, then we shut it in and watch the pressure build up. That gives permeability, damage near the well, and boundaries. But it is costly, and it means burning hydrocarbons, and on the Norwegian shelf emissions are tightly controlled and taxed. So operators often rely on logs, pressures and samples.
+**VO:** The last rung is a drill stem test, DST. A liner is cemented across the reservoir, then temporary pipe, a seal called a packer and downhole valves let the well flow to surface. We shut it in and watch the pressure build up: that gives productivity, permeability, near-well damage and boundaries. But it is costly, it burns hydrocarbons, and in Norway emissions are tightly controlled and taxed. So operators often rely on logs, pressures and samples, and our example well does exactly that.
 
-**SHOT:** A test string in the cased hole with a packer, a downhole valve and surface test equipment (separator, burner) drawn simply. A rate-vs-time and a pressure build-up plot with the log-time derivative bump. A small flag icon "NO: flaring and CO2 tax".
+**SHOT:** A test string in a liner cemented across the reservoir (liner hung inside the 9⅝ in casing), with a packer, a downhole valve and surface test equipment (separator, burner) drawn simply. A rate-vs-time and a pressure build-up plot with the log-time derivative bump. A small "NO: flaring and CO2 tax" note. The test string fades: "our well: logs, pressures, samples".
 
-**Terms introduced:** drill stem test
+**Terms introduced:** drill stem test; liner; packer
 
 - **VERIFY:** how often DSTs are run on the NCS and the exact permit route are not confirmed; the narration avoids a frequency claim
 - **SEEN:** flaring prohibited except brief testing and safety (World Bank flaring summary)
 
-### 8.09 · 34:08 · 16s · anim **[GEN]** **[SIM]**
+### 8.09 · 35:00 · 23.5s · anim **[GEN]** **[SIM]**
 
-**VO:** Then interpretation. Apply cutoffs on shale content, porosity and water saturation: net sand, net reservoir, net pay. Net pay over gross thickness is the net-to-gross ratio. These cutoffs are illustrative; real ones depend on the field.
+**VO:** Then interpretation. Set cutoffs: rock with too much shale, too little porosity, or too much water does not count. Net reservoir over gross thickness is the net-to-gross ratio, here about nought point nine four. Net pay, eighty-nine metres, is the part that holds hydrocarbons. Our cutoffs are illustrative; real ones depend on the field.
 
-**SHOT:** The log tracks return with coloured flags added in three passes (sand in yellow, reservoir in orange, pay in red or green by fluid); a thickness bar chart for gross, net sand, net reservoir and net pay; the net-to-gross ratio computed live.
+**SHOT:** The log tracks return with coloured flags added in three passes (net sand, net reservoir, net pay coloured by fluid: gas crimson, oil green); a thickness bar chart for gross 160 m, net reservoir 151 m, net pay 89 m; "N/G = net reservoir / gross = 151 / 160 = 0.94" computed live; net pay shown separately.
 
-**Terms introduced:** net pay; net-to-gross ratio; cutoff
+**Terms introduced:** cutoff; net-to-gross ratio; net pay
 
 - **SIM:** cutoffs are invented (shale volume, porosity, water saturation); real cutoffs are field-specific
 
-### 8.10 · 34:24 · 20s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 8.10 · 35:24 · 30s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
-**VO:** So: is it a discovery? Are hydrocarbons present? Movable? How much? The Norwegian Offshore Directorate defines a discovery as a deposit where testing, sampling or logging shows probably movable petroleum. That is technical, not commercial. And a dry hole is still data about the basin.
+**VO:** So, is ours a discovery? Hydrocarbons present: about forty metres of gas over some fifty-five metres of oil. Movable: the tester pumped them out of the rock. The Norwegian Offshore Directorate calls that a discovery: probably movable petroleum, shown by testing, sampling or logging. That bar is technical: it says nothing yet about whether the find will pay. And a dry hole would still be data about the basin.
 
-**SHOT:** A decision tree lights its branches in turn: hydrocarbons present? movable? how much? The Sodir definition appears as a quote card; the final node splits into "DISCOVERY (technical)" and "DRY: still data". A badge "NO: classification by the Norwegian Offshore Directorate".
+**SHOT:** A decision tree lights its branches in turn: hydrocarbons present? (gas 40 m over oil ~56 m, from the model contacts) movable? (sample bottle) how much? The Sodir definition appears as a quote card ("covers technical and commercial discoveries"); the final node lights "DISCOVERY (technical)", with the "DRY: still data" branch greyed.
 
 **Terms introduced:** discovery; dry hole
 
 - **VERIFY:** well-result category names and discovery notification rules not confirmed
 - **SEEN:** Sodir definition of a discovery and of a wildcat well (Sodir pages in web search results)
 
-## Ch 9: Plugging and abandonment  (34:44–38:00)
+## Ch 9: Plugging and abandonment  (35:54–39:08)
 
-### 9.01 · 34:44 · 26.5s · anim **[GEN]** **[NO]** **[VERIFY]**
+### 9.01 · 35:54 · 39s · anim **[GEN]** **[NO]** **[VERIFY]**
 
-**VO:** The well has done its job. We have the data. Now comes the hardest requirement of all. A well is a pipe from a pressurised reservoir to the seabed, and it must stay sealed for geological time. That is plugging and abandonment, P and A. And the plan for it exists before the first metre is drilled.
+**VO:** Now the twist. We found oil, and we are going to seal this well for ever. Why? [pause 2] An exploration well is a measuring instrument, not a producer; if the field is developed, it gets new wells built for the job. So this one gets plugging and abandonment, P and A: sealed from reservoir to seabed, for geological time. And it is designed in from the start: an outline plan exists before the first metre is drilled, and the detailed programme is written once the logs tell us what we found.
 
-**SHOT:** The completed well schematic from Chapter 1's build, slowly transforming into a thin tube connecting the reservoir (high-pressure gauge) to the seabed (open end) with the caption "sealed for geological time". A planning-document icon labelled "P&A plan: written before spud".
+**SHOT:** The finished well schematic with the discovery highlighted (gas over oil); during the pause, a big "WHY?" question. Then the well becomes a thin tube connecting the reservoir (high-pressure gauge) to the seabed (open end) with the caption "sealed for geological time". A planning icon: "outline P&A plan before spud → detailed programme after logging".
 
 **Terms introduced:** plugging and abandonment
 
-- **VERIFY:** that NORSOK D-010 has an eternal-perspective design basis for permanent barriers, and that the P&A scheme / relief-well plan must exist before spud, are from memory, not confirmed
+- **VERIFY:** that NORSOK D-010 has an eternal-perspective design basis for permanent barriers, and when the P&A programme must exist, are from memory, not confirmed
 
-### 9.02 · 35:11 · 22.5s · anim **[NO]** **[VERIFY]**
+### 9.02 · 36:32 · 26s · anim **[NO]** **[VERIFY]**
 
-**VO:** First, find every source of inflow. Not only the reservoir. A thin overpressured sand, here at about three thousand metres, can push fluid all the way to the seabed. Each source needs a permanent barrier, and where a hydrocarbon reservoir could flow, the Norwegian standard asks for two.
+**VO:** First, find every source of inflow. Not only the reservoir: any permeable layer with pressure. In our well, a thin overpressured sand at three thousand metres, drilled through weeks ago, could push fluid all the way to the seabed. Under the Norwegian standard, a hydrocarbon zone, or an overpressured zone that can flow to the seabed, needs two permanent barriers.
 
-**SHOT:** The well schematic with the reservoir interval (3,950 to 4,110 m) and the thin overburden "Sand A" (2,980 to 3,000 m) highlighted with flow-potential arrows heading up the wellbore. Two barrier brackets appear at the reservoir; one at Sand A.
+**SHOT:** The well schematic with the reservoir interval (3,950 to 4,110 m) and the thin overpressured "Sand A" (2,980 to 3,000 m) highlighted with flow-potential arrows (flow particles) heading up the wellbore. Two barrier brackets at each source: primary (blue outline) and secondary (red outline); Sand A's secondary may be shared with a shallower plug.
 
 **Terms introduced:** permanent well barrier
 
-- **VERIFY:** barrier count per source (two for a hydrocarbon-bearing reservoir, one for other flow potential) from memory of NORSOK D-010, not confirmed; no minimum lengths or test pressures are narrated
+- **VERIFY:** barrier count per source (two for hydrocarbon-bearing or overpressured zones with flow potential to surface, one for other permeable zones) from memory of NORSOK D-010, not confirmed; no minimum lengths or test pressures are narrated
 
-### 9.03 · 35:34 · 27.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.03 · 36:58 · 29.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
-**VO:** A permanent barrier must seal across the whole cross-section of the well, including every annulus, and be bonded to solid rock on all sides: rock to rock. Think of sealing a tunnel. A door in the corridor is no use if pipes run along the wall. A plug inside the casing is no use if fluid can run behind it.
+**VO:** A permanent barrier must seal across the whole cross-section of the well, every annulus included, and sit against tight rock strong enough not to crack under the pressure below: rock to rock. Think of sealing a tunnel. A door in the corridor is no use if there is a gap behind the tunnel lining. A plug inside the casing is no use if fluid can run behind it.
 
-**SHOT:** Two cutaway cross-sections side by side: left, a plug inside casing with a leak path arrow running up the cement-casing annulus around it (fails, red); right, a plug spanning casing, annulus cement and rock on all sides (holds, green). A tunnel-with-pipes analogy sketch.
+**SHOT:** Two cutaway cross-sections side by side: left, a plug inside casing with a leak path arrow (flow particles) running up an uncemented annulus behind it (fails, red); right, a plug spanning casing, annulus cement and tight caprock on all sides (holds). A tunnel sketch with a door and a gap behind the lining. All cement grey; "holds" shown with a green outline and tick.
 
 **Terms introduced:** rock to rock
 
 - **VERIFY:** exact wording
 - **SEEN:** D-010 Rev 5 permanent barriers extend across the full cross-section, sealing vertically and horizontally with all annuli closed (secondary web summaries)
 
-### 9.04 · 36:01 · 31s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.04 · 37:28 · 36s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
-**VO:** There are three ways to get there. If the cement behind the casing was logged and is good, and in an exploration well it is only weeks old, it can form part of the barrier. Or we cut the casing away by section milling, and plug the open hole against the rock. Or we perforate the casing, wash the annulus clean, and pump cement: perforate, wash, cement.
+**VO:** In open hole, the plug already sits against the rock. Behind casing there are three ways. If the cement behind the casing is good, proven by a log and the job record over enough length, it can form part of the barrier; our overpressured sand is covered by the cement from chapter six. Or we mill a window in the casing, section milling, and plug against the rock. Or we perforate the casing, wash the annulus clean, and pump cement: perforate, wash, cement.
 
-**SHOT:** Three panels animate in sequence: (a) a bond log with a green interval and a plug placed across it; (b) a section mill cutting a window out of the casing and leaving open hole against the rock; (c) perforating guns firing, a wash tool jetting behind the casing, cement filling the cleaned annulus.
+**SHOT:** An open-hole plug against rock (no extra work). Then three cased-hole panels in sequence: (a) a bond log with a good interval across Sand A, top of cement above it, and a plug placed across it; (b) a section mill cutting a window out of the casing and leaving open hole against the rock; (c) perforating guns firing, a wash tool jetting behind the casing, cement filling the cleaned annulus.
 
 **Terms introduced:** section milling; perforate wash cement
 
 - **VERIFY:** any acceptance criteria and qualification matrix not read
 - **SEEN:** perforate-wash-cement recognised in NORSOK D-010 Rev 5 (vendor blog and SPE review)
 
-### 9.05 · 36:32 · 26s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 9.05 · 38:04 · 42s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
-**VO:** To place a plug, first set a mechanical base. Then cement is pumped through open-ended pipe as a balanced plug: balanced, so the levels inside and outside the pipe match. The pipe is pulled slowly out of the cement, and any excess is circulated out. In our drawing, the plug is about a hundred metres long.
+**VO:** To place a plug in casing, first set a mechanical base: a bridge plug, a steel-and-rubber plug that seals the casing and holds the cement up. In open hole, a thick, viscous pill does that job. Then cement is pumped through open-ended pipe as a balanced plug: the fluid columns inside and outside the pipe weigh the same, so, like the U-tube we met earlier, nothing surges up or drops out. The pipe is pulled slowly out of the cement, and any excess is circulated out. In our drawing, the plug is about a hundred metres long.
 
-**SHOT:** THE PLUG PLACEMENT ANIMATION. Well cutaway: a mechanical bridge plug sets in the 9-5/8 in casing; the drill pipe lowers to just above it; spacer, cement, spacer are pumped; levels inside the pipe and annulus equalise (balanced); the pipe is pulled up through the cement leaving a clean plug; a reverse-circulation arrow clears excess above. The plug length is dimensioned as ~100 m with a "drawing only" caption.
+**SHOT:** THE PLUG PLACEMENT ANIMATION, depicting the cased-hole plug across Sand A (~2,900 to 3,000 m in the 9⅝ in casing): a bridge plug sets; the drill pipe lowers to just above it; spacer, cement, spacer are pumped; the columns inside the pipe and in the annulus balance; the pipe is pulled up through the cement leaving a clean grey plug; a reverse-circulation arrow clears the excess above. Plug length dimensioned ~100 m, "drawing only". An inset: an open-hole plug resting on a viscous pill.
 
-**Terms introduced:** balanced plug
+**Terms introduced:** bridge plug; balanced plug
 
 - **SIM:** plug length of about 100 m is a drawing value, not a requirement
 - **VERIFY:** minimum plug lengths in NORSOK D-010 Rev 5 (a secondary search summary quotes 100 m open hole / 50 m cased on a mechanical base / 30 m with a qualifying bond log) are NOT narrated
 
-### 9.06 · 36:58 · 23s · anim **[NO]** **[VERIFY]**
+### 9.06 · 38:46 · 32.5s · anim **[NO]** **[VERIFY]**
 
-**VO:** And then we prove it. Tag it: lower the pipe until it rests on the plug, and load it with weight. Pressure test it, in the direction it has to hold where possible. Log the cement behind the casing. A barrier that has not been verified is not a barrier.
+**VO:** And then we prove it. Before the plug goes in, the cement behind the casing is logged. After it sets, we tag it: lower the pipe until it rests on the plug, and load it with weight. In casing, we pressure test it, usually from above, and where we can, with an inflow test from below. An open-hole plug is proven by the tag. A barrier that has not been verified is not a barrier.
 
-**SHOT:** Drill pipe set down on top of the plug with a weight indicator; a pressure test with a gauge holding flat; a bond-log tool logging the cement behind casing, with a green tick. A stamp reading "VERIFIED" lands on the plug.
+**SHOT:** Sequence: a bond-log tool logging the cement behind the casing ("logged before the plug"); drill pipe set down on top of the hardened plug with a weight indicator; a pressure test from above with a gauge holding flat; a small inflow-test arrow from below. A green "VERIFIED" outline and tick land on the plug.
 
 **Terms introduced:** tag the plug
 
 - **VERIFY:** tag weight and test pressure requirements deliberately not stated
 
-### 9.07 · 37:21 · 25.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.07 · 39:18 · 28.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
-**VO:** Last, the steel: cut and pull. We cut the casing and conductor below the seabed, and lift out the wellhead. A robot survey checks the seabed is clear, with nothing left for a fishing trawl to catch. And exploration wells are not left in limbo: temporary abandonment has a limited lifetime on the Norwegian shelf.
+**VO:** Last, the steel: cut and pull. We cut the casing and conductor below the seabed, and lift out the wellhead. An ROV survey checks the seabed is clear, with nothing left for a fishing trawl to catch. And a modern exploration well cannot sit in limbo: temporary abandonment, plugged but with the wellhead left so we can come back, is time-limited on the Norwegian shelf.
 
-**SHOT:** A casing cutter inside the strings cuts below the seabed; the wellhead and guide base lift away. ROV view sweeps the seabed: debris check, a clean seabed. A calendar icon with a "limit" tag for temporary abandonment.
+**SHOT:** A casing cutter inside the strings cuts below the seabed; the wellhead and guide base lift away. ROV view sweeps the seabed: debris check, a clean seabed with a low mound of old cuttings. A calendar icon with a "limit" tag for temporary abandonment.
 
-**Terms introduced:** cut and pull
+**Terms introduced:** cut and pull; temporary abandonment
 
 - **VERIFY:** cutting depth, seabed clearance requirement and who sets it not confirmed; the narration states no figures
 - **SEEN:** Havtil report states exploration wells begun after 1 January 2014 may not be temporarily abandoned longer than two years (search summary)
 
-### 9.08 · 37:46 · 13s · anim **[NO]** **[VERIFY]**
+### 9.08 · 39:47 · 18.5s · anim **[NO]** **[VERIFY]**
 
-**VO:** Finally, an as-abandoned drawing is filed. It is the last page in the well's life, and it has to be right for the long term.
+**VO:** Finally, a last plug just below the seabed seals the well off from the sea, and an as-abandoned drawing is filed. It is the last page in the well's life, and it has to be right for the long term.
 
-**SHOT:** The final as-abandoned schematic: plugs in the cased and open-hole sections drawn in solid green, the cut-off casing stubs below the seabed, the seabed clean. The drawing is stamped and filed into an archive icon.
+**SHOT:** The final as-abandoned schematic built from one plug list (the same as the well strip): reservoir plugs in open hole, the Sand A plug in casing, a shallow plug just below the seabed; all plugs in cement grey with green "verified" outlines; the cut-off casing stubs below the seabed, the seabed clean. The drawing is stamped and filed into an archive icon.
 
 - **VERIFY:** the exact reporting duty to the authorities not confirmed
 
-## Ch 10: Outro: the empty seabed  (38:00–38:30)
+## Ch 10: Outro: the empty seabed  (40:06–40:36)
 
-### 10.01 · 38:00 · 26s · anim **[GEN]**
+### 10.01 · 40:06 · 40.5s · anim **[GEN]**
 
-**VO:** A well is an argument with the Earth, about pressure, that you have to win every hour. And at the end, you make the win permanent. Three hundred metres down, in the dark, there is nothing here.
+**VO:** So how do you stay inside the window for four kilometres? You don't, not all at once. You win it a few hundred metres at a time, lock each stretch behind steel and cement, keep two barriers between the rock and the sea, and watch every barrel that comes back. A well is an argument with the Earth, about pressure, that you have to win every hour. And at the end, you seal the win so it lasts for ever. Three hundred metres down, there is barely a trace.
 
-**SHOT:** The seabed from Chapter 0 returns: bare, still. The window gauge from the opening dissolves into it. The camera rises slowly through the water column to the surface.
+**SHOT:** The window chart from the opening returns with the casing staircase drawn over it (section by section), then two barrier outlines, then a flow-in/flow-out needle. It dissolves into the seabed from Chapter 0: bare, still, a low mound of old cuttings; beneath the mud, faint ghosted plugs and cut casing stubs. The camera rises slowly through the water column to the surface.
 
-### 10.02 · 38:26 · 4s · still **[GEN]**
+### 10.02 · 40:46 · 7s · still **[GEN]**
 
 **VO:** *(none: visual only)*
 
-**SHOT:** End card on dark background: "THE HOLE THAT FIGHTS BACK", then small print: "Illustrative composite well: invented numbers, real physics. Norway-specific material is flagged [NO]. Verify any requirement against NORSOK D-010 and the current regulations before relying on it."
+**SHOT:** End card on dark background: "THE HOLE THAT FIGHTS BACK", then small print: "Illustrative composite well: invented numbers, real physics. Norway-specific material carried a red NORWAY / NORSOK-SPECIFIC badge. Verify any requirement against NORSOK D-010 and the current regulations before relying on it." Credits line: "Voice: Kokoro-82M neural TTS · Animation: generated in code".
 
-*Total narration: 5231 words ≈ 174 wpm averaged over the runtime.*
+*Total narration: 5605 words ≈ 187 wpm averaged over the runtime.*

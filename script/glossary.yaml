@@ -301,7 +301,7 @@ net pay:
   def: "The reservoir thickness that passes cutoffs for shale content, porosity and water saturation."
   aliases: []
 net-to-gross ratio:
-  def: "Net thickness divided by gross thickness of the interval."
+  def: "Net reservoir (or net sand) thickness divided by the gross thickness of the interval."
   aliases: [net to gross, net-to-gross]
 cutoff:
   def: "A threshold on a log or core property used to decide what counts as reservoir or pay."
@@ -317,7 +317,7 @@ plugging and abandonment:
   aliases: [p and a, "p&a"]
 permanent well barrier:
   def: "A barrier designed to last indefinitely, sealing across the full cross-section of the well."
-  aliases: [permanent barrier]
+  aliases: [permanent barrier, permanent barriers, permanent well barriers]
 rock to rock:
   def: "A barrier that seals from formation to formation across every annulus."
   aliases: [rock-to-rock]
@@ -347,4 +347,16 @@ shoe track:
   aliases: []
 full returns:
   def: "All the fluid pumped down comes back up the annulus to the rig: nothing is being lost to the rock."
+  aliases: []
+liner:
+  def: "A casing string hung inside the previous string instead of running all the way up to the wellhead."
+  aliases: []
+packer:
+  def: "A seal set between a pipe and the casing around it, isolating the section below."
+  aliases: []
+bridge plug:
+  def: "A mechanical steel-and-rubber plug set inside the casing to seal it and hold cement up."
+  aliases: []
+temporary abandonment:
+  def: "A well plugged with its wellhead left in place so it can be re-entered later; time-limited."
   aliases: []

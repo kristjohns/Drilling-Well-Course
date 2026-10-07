@@ -18,7 +18,7 @@ downloads it from the npm registry (voice styles from the official `kokoro-js` p
 `kokoro-fp32{a,b,c}-shards` packages, which redistribute onnx-community/Kokoro-82M-v1.0-ONNX `model.onnx`) and checks
 the reassembled file against the expected size and SHA-256.
 
-Environment: TTS_VOICE (default af_heart), TTS_SPEED (base speed, default 1.0), TTS_WPM (pacing target, default 165)
+Environment: TTS_VOICE (default af_heart), TTS_SPEED (base speed, default 1.0), TTS_WPM (pacing target, default 172)
 """
 from __future__ import annotations
 import argparse
@@ -51,7 +51,7 @@ NPM_PACKAGES = ["kokoro-js@1.2.1", "kokoro-fp32a-shards@1.0.0", "kokoro-fp32b-sh
 SR = 24000
 VOICE = os.environ.get("TTS_VOICE", "af_heart")
 SPEED = float(os.environ.get("TTS_SPEED", "1.0"))
-TARGET_WPM = float(os.environ.get("TTS_WPM", "165"))   # per-sentence pacing target (Kokoro rushes short sentences)
+TARGET_WPM = float(os.environ.get("TTS_WPM", "172"))   # per-sentence pacing target (Kokoro rushes short sentences)
 SPEED_MIN = 0.75
 LEAD, TAIL = 0.55, 0.65          # silence before / after the narration inside a beat
 GAP, GAP_Q = 0.34, 0.55          # pause after a sentence / after a question
