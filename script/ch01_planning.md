@@ -1,56 +1,56 @@
 # Ch 1: Planning: casing from the bottom up
 BUDGET: 240
 
-## 1.01 | 23 | anim
-VO: Before anyone drills, someone decides what the hole is for. Geologists have picked a target: a sandstone at about three thousand nine hundred and fifty metres. Depth here means true vertical depth, TVD: straight down, not along the hole. Our job is to reach it safely, and find out what is in it.
-SHOT: Cross-section of the North Sea: sea surface, seabed at 300 m, layered strata, a highlighted sandstone target at 3,950 m. Vertical dashed line labelled "TVD" and a wavy path labelled "measured depth" beside it. Depth ruler appears at left.
-FLAGS: GEN; SIM: all depths are TVD below sea level in a near-vertical well; rig-floor air gap ignored
+## 1.01 | 29 | anim
+VO: Before anyone drills, someone decides what the hole is for. Geologists have picked a target: a sandstone at about three thousand nine hundred and fifty metres. Depth here means true vertical depth below sea level, TVD: straight down, not along the hole. Real well plans usually measure from the rig floor instead. Our job is to reach the target safely, and find out what is in it.
+SHOT: Cross-section of the North Sea: sea surface, seabed at 300 m, layered strata, a highlighted sandstone target at 3,950 m. Vertical dashed line labelled "TVD" and a curved well path labelled "measured depth: along the hole" beside it; the two depth read-outs differ at the target. Depth ruler at left marked "m below sea level".
+FLAGS: GEN; SIM: all depths are TVD below sea level in a near-vertical well; NCS well plans reference the rig floor (m RKB)
 TERMS: target; true vertical depth
 
-## 1.02 | 29 | anim
-VO: Start with something you know. Dive ten metres and you feel one more bar. Hydrostatic pressure is density times gravity times depth. Mud is just a heavier liquid, and we quote its weight as specific gravity, sg: water is one. Rock pores hold fluid too, at a pore pressure. If they connect up to the sea, it is a column of water, and the pressure is normal.
-SHOT: A diver icon with a 1 bar per 10 m gauge; then a column of water and a column of amber mud side by side with pressure-vs-depth lines. Then a rock block with magnified pores filled with blue fluid and a pressure gauge, connected by a thin channel to the sea.
-FLAGS: GEN
+## 1.02 | 33 | anim
+VO: Start with something you know. Dive ten metres and you feel one more bar. Hydrostatic pressure is density times gravity times depth. Mud is just a heavier liquid, and we quote its weight as specific gravity, sg: fresh water is one. Rock pores hold fluid too, at a pore pressure. If the pores connect all the way up, the pressure is that of a column of salty water, about one point oh three sg: normal pressure.
+SHOT: A diver with a 1 bar per 10 m gauge (counter ticking); then a column of sea water and a column of amber mud side by side with pressure-vs-depth lines (sea water labelled 1.03 sg). Then a rock block with magnified pores filled with blue fluid and a gauge, connected through the pores to the sea.
+FLAGS: GEN; SIM: normal pore pressure drawn as a 1.03 sg brine column
 TERMS: hydrostatic pressure; specific gravity (sg); pore pressure
 
-## 1.03 | 26 | anim
-VO: But sometimes fluid is trapped. Picture a water-filled cylinder with a spring, closed by a piston with a tiny hole. Load the piston: the water carries it first, then leaks, and the spring takes over. Block the hole, and the water keeps carrying the load: overpressure. What the grains carry is the effective stress: total stress minus pore pressure.
-SHOT: Terzaghi piston-and-spring animation: load applied, pressure gauge jumps, water streams through the hole while the spring compresses and the gauge falls. Replay with the hole blocked: gauge stays high, spring barely moves. Equation appears after the animation: sigma-prime equals sigma minus p.
+## 1.03 | 37.5 | anim
+VO: But sometimes fluid is trapped. Picture a spring, the rock grains, in a cylinder of water, the pore fluid, under a piston with a tiny hole. Load it: at first the water takes the load, then it leaks away and the spring takes over. Bury sediment fast under tight shale, and the water cannot escape as fast as load is added, so it keeps carrying the load. That is overpressure. The grains carry only the effective stress: the weight of everything above, minus the pore pressure.
+SHOT: Terzaghi piston-and-spring, labelled as rock: spring = grains, water = pore fluid. Load applied: gauge jumps, water streams out through the hole, spring compresses, gauge falls. Replay with a much smaller hole ("tight shale"): gauge stays high, spring barely moves, "overpressure". Equation after the animation: σ′ = σ − p, with σ labelled "overburden".
 FLAGS: GEN; SIM: single-mechanism picture (disequilibrium compaction); other overpressure mechanisms exist and are not shown
 TERMS: overpressure; effective stress
 
-## 1.04 | 25.5 | anim
-VO: Now the other wall of the window. A hole in a plate concentrates stress, two to three times over, around its edge. Pressure inside the hole pushes back. Push hard enough and the rock splits: the fracture gradient. Too little, and the wall collapses. A leak-off test, pressurising the hole until the rock takes fluid, measures it directly.
-SHOT: Plate-with-hole stress contour cartoon around a borehole circle: hoop stress arrows concentrated at the wall. Then internal pressure slider raising: a split opens at the wall at high pressure; at low pressure the wall chips inward. Small teaser pressure-vs-volume curve labelled "leak-off test".
-FLAGS: GEN; SIM: the factor depends on the stress state: about two for equal horizontal stresses, up to three for a uniaxial field (Kirsch)
+## 1.04 | 37.5 | anim
+VO: Now the upper wall of the window. A hole in a plate concentrates stress, two to three times over, at its edge, and rock around a borehole is squeezed the same way. Mud pressure pushes back. Too little, and the concentrated stress crushes the wall: collapse. Too much, and the wall splits; that pressure, as a mud weight, is the fracture gradient. For planning it is predicted. Later, a leak-off test, pumping until the rock takes fluid, checks it at one depth in the real hole.
+SHOT: Plate-with-hole cartoon around a borehole circle: hoop-stress arrows concentrated at the wall ("2-3x"). An internal pressure gauge: at low pressure the wall chips inward (collapse); at high pressure a split opens at the wall (fracture). Small pressure-vs-volume curve labelled "leak-off test: one depth, after casing is set".
+FLAGS: GEN; SIM: the factor depends on the stress state: about two for equal horizontal stresses, up to three for a uniaxial field (Kirsch); leak-off pressure lies between the minimum horizontal stress and the breakdown pressure
 TERMS: fracture gradient; leak-off test
 
-## 1.05 | 30 | anim
-VO: Plot both limits against depth, as an equivalent mud weight, the mud weight that would give that pressure. Pore pressure on the left, fracture on the right. The mud must stay between them, with a margin each side. In an overpressured basin the window narrows with depth, because pore pressure climbs faster than the rock's strength against fracture. Simplified: I draw the lower limit as pore pressure alone.
-SHOT: THE CORE CHART. Axes: equivalent mud weight (sg) horizontal, depth vertical (down). Blue pore-pressure curve draws on from the seabed downwards, then the orange fracture curve, the green window fills between them and visibly narrows below 3,000 m. Margins appear as thin dashed offsets. Small caption: "lower limit drawn as pore pressure only".
-FLAGS: GEN; SIM: lower limit drawn as pore pressure only; model collapse curve exists in well_model but is shown from Ch 4 on
+## 1.05 | 36.5 | anim
+VO: Plot both limits against depth, as an equivalent mud weight: the mud weight that would give that pressure. Pore pressure on the left, fracture on the right. The mud must stay between them, with a margin each side. In our well the window is tight near the seabed, widest around two and a half kilometres, then pinches in where overpressure builds, because pore pressure climbs faster than the stress needed to open a fracture. Simplified: I draw the lower limit as pore pressure alone.
+SHOT: THE CORE CHART. Axes: equivalent mud weight (sg) horizontal, depth vertical (down). Blue pore-pressure curve draws on from the seabed downwards, then the orange fracture curve, the green window fills between them. Three width brackets: 0.17 sg near the seabed, ~0.59 sg around 2,400 m, ~0.19 sg at 3,900 m. Margins as thin dashed offsets. Small caption: "lower limit drawn as pore pressure only".
+FLAGS: GEN; SIM: lower limit drawn as pore pressure only; the model's collapse curve lies below pore pressure in this basin and is not drawn
 TERMS: equivalent mud weight
 
-## 1.06 | 19.5 | anim
-VO: Near the seabed, hazards must be ruled out first. Shallow gas: pockets only a few hundred metres down that can arrive fast, with little warning. Boulders left by glaciers. Soft, uneven seabed. A seabed survey looks for all of them before the rig arrives.
-SHOT: Seabed cutaway: a red gas pocket under a thin cap, boulders in glacial till, a pockmark. A survey ship icon with a dotted sonar fan sweeps over, hazards light up with labels.
-FLAGS: GEN; VERIFY: whether a seabed/shallow-gas survey is a Norwegian regulatory requirement (and its wording) not confirmed; SIM: shallow water flow, common in other basins, omitted
-TERMS: shallow gas
+## 1.06 | 49.5 | anim
+VO: Remember the question: how do you stay inside the window for four kilometres? You don't, not all at once. You stay inside it one section at a time, and lock each finished section behind steel pipe, casing, cemented in place. We design from the bottom up. The deepest section needs about one point six two sg: its highest pore pressure, one point five five, plus a margin. Draw that line up until it meets the fracture curve, less a margin and room for a gas kick. Above that point we could not safely shut in a kick, closing the well against it, so casing must end below it. Its bottom end is the casing shoe.
+SHOT: On the window chart, a vertical amber line at 1.62 sg ("deepest section: 1.55 sg pore + margin") rises from TD until it meets the yellow curve "fracture, less margin and kick allowance" at ~3,370 m; a red band marks "shoe too weak for a kick above here". A faint tick shows where plain fracture-minus-margin would cross (~2,420 m) to show that the kick allowance decides. A casing string with a shoe symbol telescopes down from the seabed to the first valid depth.
+FLAGS: GEN; SIM: margins are invented: 0.07 sg trip (swab) margin over pore pressure; 0.03 sg below fracture covering ECD and surge; plus a 150 m gas-kick term at the shoe (see well_model.py). Without the kick term the 1.62 sg line would cross fracture-less-margin near 2,420 m
+TERMS: casing; casing shoe; shut-in
 
-## 1.07 | 29.5 | anim
-VO: Now the clever part: where do we put steel pipe, called casing, to hold the hole open? We design from the bottom up. At total depth we need about one point six two sg. Draw that line up until it meets the fracture curve, less margins; above that the hole would crack. So casing must end below it. The bottom end of a casing string is its shoe.
-SHOT: On the window chart, a vertical amber line at 1.62 sg from TD 4,200 m rising until it meets the fracture curve minus margin (dashed) at about 3,370 m; a red band marks "would crack above here". A casing string with a shoe symbol telescopes down from the seabed to the first valid depth.
-FLAGS: GEN; SIM: margins are invented: 0.07 sg trip/ECD allowance on pore pressure, 0.03 sg below fracture, plus a 150 m gas-kick term (see well_model.py)
-TERMS: casing; casing shoe
+## 1.07 | 31 | anim
+VO: Near the top, pressure is not the only enemy. Shallow gas: pockets a few hundred metres below the seabed, reached before any blowout preventer, the well's big emergency seal-off stack, is in place, so a gas flow there cannot simply be shut in. Boulders left by glaciers. Soft, uneven seabed. A site survey, seabed mapping plus high-resolution seismic of the shallow layers, looks for all of them before the rig arrives.
+SHOT: Seabed cutaway: a red gas pocket under a thin cap, boulders in glacial till, a pockmark. A survey vessel tows a seismic streamer: sub-bottom wavefronts penetrate the sediment and light up the gas pocket (bright spot) while a multibeam fan maps the seabed; hazards light up with labels.
+FLAGS: GEN; VERIFY: whether a seabed/shallow-gas site survey is a Norwegian regulatory requirement (and its wording) not confirmed; SIM: shallow water flow, common in other basins, omitted
+TERMS: shallow gas; blowout preventer
 
-## 1.08 | 28.5 | anim
-VO: Set that string at about three thousand four hundred metres. The section above used lighter mud, one point four nine sg, so repeat: the next shoe lands at two thousand metres. The mud above that, one point one two sg, is so light that other things decide: shallow hazards, and anchoring the safety valves we add shortly. About a thousand metres. The result is a staircase.
-SHOT: Repeat of the stair-step: from 3,400 m the amber line steps left to 1.49 sg and rises to meet fracture at ~2,000 m (string 2 telescopes into place); step again to 1.12 sg: line meets fracture at 660 m, but a label "BOP anchor + shallow hazards: not shallower than 1,000 m" snaps the third shoe to 1,000 m. Three shoes + the conductor, drawn as nested strings.
+## 1.08 | 36 | anim
+VO: Then repeat. The deepest string ends at about three thousand four hundred metres. Above that shoe the mud can be lighter, one point four nine sg, and its line meets the fracture curve near two thousand metres: the next shoe. Above that, the mud, one point one two sg, is so light that pressure no longer decides. Shallow hazards do, and the need for a strong anchor for the seabed hardware and the preventer. About a thousand metres. The result is a staircase.
+SHOT: Repeat of the stair-step: from 3,400 m the amber line steps left to 1.49 sg and rises to meet the curve at ~2,000 m (string 2 telescopes into place); step again to 1.12 sg: the line would meet the curve at 660 m, but a label "shallow hazards + wellhead/BOP anchor: not shallower than 1,000 m" snaps the third shoe to 1,000 m. Three shoes + the conductor, drawn as nested strings: the staircase.
 FLAGS: GEN; SIM: the surface-casing depth floor of 1,000 m is an assumption standing in for hazard and kick-tolerance reasoning
 TERMS:
 
-## 1.09 | 29 | anim
-VO: The strings nest like a telescope, because each must pass through the one above. So the sizes step down: thirty inch, twenty, thirteen and three eighths, nine and five eighths, then eight and a half inch to the bottom. Every string costs diameter. And this is a wildcat, an exploration well with no neighbours to learn from, so the forecast is uncertain: the plan carries contingency strings.
-SHOT: Nested casing strings drawn to scale in a cross-section ring view and in a side telescoping view with size labels. A dashed "7 in liner" and "contingency" string appears in reserve. Caption: "wildcat = no offset wells".
+## 1.09 | 45 | anim
+VO: The strings nest like a telescope, because each must pass through the one above. So the sizes step down: thirty inch, twenty, thirteen and three eighths, nine and five eighths, each set in a bigger drilled hole, and finally an eight and a half inch open hole to the bottom. Every string costs diameter. And this is a wildcat, the first well into an untested prospect. Nearby wells help, but may sit in a different pressure compartment, so the forecast is uncertain. The plan keeps a spare, contingency string, in reserve, and that only fits if everything above is sized bigger from the start.
+SHOT: Nested casing strings to scale in a cross-section ring view and a side telescoping view, each string with its drilled hole size (36, 26, 17½, 12¼ in) and the 8½ in open hole. A dashed "contingency string (7 in)" appears in reserve. Caption: "wildcat: first well on an untested prospect".
 FLAGS: GEN; SIM: standard NCS-style size ladder is from general knowledge; the conductor shoe (390 m) is soil-driven, not pressure-driven
 TERMS: wildcat; contingency string

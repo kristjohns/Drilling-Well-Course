@@ -39,6 +39,7 @@ BEAT_RE = re.compile(r"^##\s+(\d+\.\d+)\s*\|\s*([\d.]+|auto)\s*\|\s*(anim|still)
 
 
 def words(text: str) -> int:
+    text = re.sub(r"\[pause\s+[\d.]+\]", "", text)          # inline pause markers are not words
     return len(re.findall(r"[A-Za-z0-9][A-Za-z0-9'’\-/.,]*", text.replace("—", " ")))
 
 
@@ -124,18 +125,15 @@ def fit(chapters) -> list[str]:
             hard = sum(hard_min(b) for b in ch["beats"])
             msgs.append(f"Ch {ch['num']}: natural pace needs {total_min:.1f}s > budget {budget}s "
                         f"(hard floor {hard:.1f}s) -> trim ~{(total_min-budget)*PACE_WPS:.0f} words")
-            if hard > budget:
-                continue
-            # compress: scale between hard floor and natural pace
-            floors = [hard_min(b) for b in ch["beats"]]
-            t = (budget - sum(floors)) / (total_min - sum(floors))
-            durs = [f + t * (m - f) for f, m in zip(floors, mins)]
+            # the voice decides the real timing (audio/build_audio.py); here we only keep sensible visual minimums
+            durs = mins
         else:
             slack = budget - total_min
             durs = [m + slack * m / total_min for m in mins]
-        # round to 0.5 s, then repair the sum on the longest beat
+        # round to 0.5 s, then repair the sum on the longest beat (only when the budget can be met)
         durs = [round(d * 2) / 2 for d in durs]
-        durs[max(range(len(durs)), key=lambda i: durs[i])] += budget - sum(durs)
+        if total_min <= budget:
+            durs[max(range(len(durs)), key=lambda i: durs[i])] += budget - sum(durs)
         for b, d in zip(ch["beats"], durs):
             b["dur"] = d
     return msgs
@@ -178,7 +176,7 @@ def lint(chapters) -> tuple[list[str], list[str]]:
             continue
         tot = sum(float(b["dur"]) for b in ch["beats"] if b["dur"] != "auto")
         if abs(tot - ch["budget"]) > 0.01:
-            errors.append(f"Ch {ch['num']}: durations sum {tot:g}s != BUDGET {ch['budget']}s (run `fit`)")
+            warns.append(f"Ch {ch['num']}: durations sum {tot:g}s vs BUDGET {ch['budget']}s (voice-first timing decides)")
         for b in ch["beats"]:
             if b["dur"] == "auto":
                 errors.append(f"{b['id']}: duration is 'auto' (run `fit`)")
@@ -192,7 +190,7 @@ def lint(chapters) -> tuple[list[str], list[str]]:
                 window = d - LEAD - TAIL - b["pause"]
                 need = b["words"] / TTS_WPS
                 if need > window * MAX_SPEEDUP + 1e-6:
-                    errors.append(f"{b['id']}: VO too long: {b['words']} words need {need:.1f}s, window {window:.1f}s")
+                    warns.append(f"{b['id']}: VO longer than its budget: {b['words']} words need {need:.1f}s, window {window:.1f}s")
                 elif b["words"] / max(window, 0.1) > 2.75:
                     warns.append(f"{b['id']}: brisk pace {b['words']/window:.2f} w/s ({b['words']} words in {window:.1f}s)")
             # term-first-use: terms listed must appear in VO; first appearance of any glossary term must be a defining beat
@@ -215,7 +213,7 @@ def lint(chapters) -> tuple[list[str], list[str]]:
     for k in unused:
         warns.append(f"glossary term {k!r} is never defined in a beat")
     if abs(t_abs - TOTAL_BUDGET) > 0.01:
-        errors.append(f"total runtime {t_abs:g}s != {TOTAL_BUDGET}s")
+        warns.append(f"budget runtime {t_abs:g}s vs {TOTAL_BUDGET}s (the voice-timed runtime is set by audio/build_audio.py)")
     return errors, warns
 
 
@@ -224,22 +222,31 @@ def tc(sec: float) -> str:
     return f"{sec // 60}:{sec % 60:02d}"
 
 
-def emit(chapters):
+def emit(chapters, timing=None):
+    """Write NARRATION.md (+ timeline.json and FLAGS.md unless `timing` is given).
+
+    timing: a voice-timed timeline.json (from audio/build_audio.py); NARRATION.md then shows the real timestamps."""
     gloss = load_glossary()
     t = 0.0
+    total_rt = timing["total"] if timing else TOTAL_BUDGET
+    tb = {b["id"]: b for c in timing["chapters"] for b in c["beats"]} if timing else {}
+    tc_ = {c["num"]: c for c in timing["chapters"]} if timing else {}
     timeline = {"total": TOTAL_BUDGET, "chapters": []}
     narr = ["# Narration script and shot list (generated: do not edit; edit `chNN_*.md` and run `make script`)", "",
-            f"Runtime {tc(TOTAL_BUDGET)} · tags: **[NO]** Norway-specific · **[GEN]** general industry · "
+            f"Runtime {tc(total_rt)}" + (f" (voice-timed: {timing.get('voice', '')})" if timing else "") + " · tags: **[NO]** Norway-specific · **[GEN]** general industry · "
             "**[SIM]** deliberate simplification · **[VERIFY]** not confirmed against a primary source · "
             "**[SEEN]** seen only in a secondary/web source", ""]
     flags_rows = []
     total_words = 0
     for ch in chapters:
-        cstart = t
-        narr += [f"## Ch {ch['num']}: {ch['title']}  ({tc(cstart)}–{tc(cstart + ch['budget'])})", ""]
+        cstart = tc_[ch["num"]]["start"] if timing else t
+        cdur = tc_[ch["num"]]["dur"] if timing else ch["budget"]
+        narr += [f"## Ch {ch['num']}: {ch['title']}  ({tc(cstart)}–{tc(cstart + cdur)})", ""]
         tl_ch = {"num": ch["num"], "title": ch["title"], "start": cstart, "dur": ch["budget"], "beats": []}
         for b in ch["beats"]:
-            d = float(b["dur"])
+            d = float(tb[b["id"]]["dur"]) if timing else float(b["dur"])
+            if timing:
+                t = tb[b["id"]]["start"]
             fl = b["flags"]
             tags = " ".join(f"**[{s}]**" for s in fl["scope"])
             if fl["SIM"]:
@@ -248,7 +255,7 @@ def emit(chapters):
                 tags += " **[VERIFY]**"
             if fl["SEEN"]:
                 tags += " **[SEEN]**"
-            narr += [f"### {b['id']} · {tc(t)} · {d:g}s · {b['kind']} {tags}", ""]
+            narr += [f"### {b['id']} · {tc(t)} · {round(d, 1):g}s · {b['kind']} {tags}", ""]
             narr += [f"**VO:** {b['vo']}" if b["vo"] else "**VO:** *(none: visual only)*", "",
                      f"**SHOT:** {b['shot']}", ""]
             if b["terms"]:
@@ -267,8 +274,10 @@ def emit(chapters):
             })
             t += d
         timeline["chapters"].append(tl_ch)
-    narr.append(f"*Total narration: {total_words} words ≈ {total_words / (TOTAL_BUDGET / 60):.0f} wpm averaged over the runtime.*")
+    narr.append(f"*Total narration: {total_words} words ≈ {total_words / (total_rt / 60):.0f} wpm averaged over the runtime.*")
     open(os.path.join(HERE, "NARRATION.md"), "w", encoding="utf-8").write("\n".join(narr) + "\n")
+    if timing:
+        return total_words, 0
     json.dump(timeline, open(os.path.join(HERE, "timeline.json"), "w"), indent=1)
     # flags ledger
     order = {"VERIFY": 0, "SEEN": 1, "SIM": 2}
@@ -286,6 +295,14 @@ def emit(chapters):
 def main(argv):
     cmd = argv[1] if len(argv) > 1 else "build"
     chapters = load_chapters()
+    if cmd == "narration":
+        timing = json.load(open(os.path.join(HERE, "timeline.json")))
+        if not timing.get("voice_timed"):
+            print("timeline.json is not voice-timed yet (run audio/build_audio.py)")
+            return 1
+        nwords, _ = emit(chapters, timing)
+        print(f"NARRATION.md: real timestamps, {nwords} words, runtime {tc(timing['total'])}")
+        return 0
     if cmd in ("fit", "build"):
         for m in fit(chapters):
             print("FIT:", m)

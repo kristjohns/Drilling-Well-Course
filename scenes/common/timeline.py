@@ -10,7 +10,21 @@ LEAD, TAIL = 0.4, 0.3   # must match script/scriptlib.py
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 TIMELINE = os.path.join(ROOT, "script", "timeline.json")
 SENTENCES = os.path.join(ROOT, "audio", "sentences.json")    # real sentence starts from the TTS (audio/build_audio.py)
+CUES = os.path.join(ROOT, "audio", "cues.json")              # real sentence start/end (absolute) from the TTS
 _REAL: dict | None = None
+_CUES: dict | None = None
+
+
+def _cues() -> dict:
+    global _CUES
+    if _CUES is None:
+        _CUES = {}
+        try:
+            for c in json.load(open(CUES)):
+                _CUES.setdefault(c["beat"], []).append(c)
+        except (OSError, ValueError):
+            pass
+    return _CUES
 
 
 def _real_times() -> dict:
@@ -56,7 +70,7 @@ class Beat:
         """Chapter-relative start time of each narrated sentence (uniform speech rate over the VO window).
 
         Lets visuals key off the narration: `s = tl['1.02'].sent; st.fade_in(obj, s[2])`."""
-        parts = [p for p in re.split(r"(?<=[.?!])\s+", self.vo.strip()) if p]
+        parts = self._sentences()
         real = _real_times().get(self.id)
         if real and len(real) == len(parts):        # measured from the narration audio: preferred
             return _Clamped(list(real))                  # already chapter-relative
@@ -73,6 +87,34 @@ class Beat:
         """Time at a fraction (0-1) of the beat."""
         return self.start + self.dur * frac
 
+    def _sentences(self):
+        vo = re.sub(r"\s*\[pause\s+[\d.]+\]", "", self.vo)
+        return [p for p in re.split(r"(?<=[.?!])\s+", vo.strip()) if p]
+
+    @property
+    def sent_end(self) -> list:
+        """Chapter-relative end time of each narrated sentence (measured when available)."""
+        parts = self._sentences()
+        cues = _cues().get(self.id)
+        off = self.abs_start - self.start
+        if cues and len(cues) == len(parts):
+            return _Clamped([c["end"] - off for c in cues])
+        s = list(self.sent)
+        return _Clamped([(s[i + 1] - 0.3) if i + 1 < len(s) else self.end - 0.3 for i in range(len(s))])
+
+    def word(self, i: int, needle: str, frac: float = 0.0) -> float:
+        """Estimated chapter-relative time at which `needle` is spoken in sentence i (character-proportional inside the
+        measured sentence; good to a few tenths of a second). frac=1 gives the end of the phrase."""
+        parts = self._sentences()
+        i = max(0, min(i, len(parts) - 1))
+        txt = parts[i]
+        k = txt.lower().find(needle.lower())
+        if k < 0:
+            k = 0
+        k = k + frac * len(needle)
+        a, b = self.sent[i], self.sent_end[i]
+        return a + (b - a) * k / max(len(txt), 1)
+
 
 @dataclass
 class ChapterTL:
@@ -81,6 +123,7 @@ class ChapterTL:
     abs_start: float
     dur: float
     beats: list = field(default_factory=list)
+    intro: float = 0.0          # title-card seconds at the chapter start (voice-timed timelines)
 
     def beat(self, bid: str) -> Beat:
         for b in self.beats:
@@ -104,7 +147,7 @@ def load_chapter(num: int, path: str = TIMELINE) -> ChapterTL:
     data = load_timeline(path)
     for ch in data["chapters"]:
         if ch["num"] == num:
-            tl = ChapterTL(ch["num"], ch["title"], ch["start"], ch["dur"])
+            tl = ChapterTL(ch["num"], ch["title"], ch["start"], ch["dur"], intro=ch.get("intro", 0.0))
             for b in ch["beats"]:
                 tl.beats.append(Beat(b["id"], b["start"] - ch["start"], b["dur"], b["kind"], b["vo"], b["shot"],
                                      b["scope"], b["sim"], b["verify"], b["terms"], abs_start=b["start"], pause=b.get("pause", 0.0)))

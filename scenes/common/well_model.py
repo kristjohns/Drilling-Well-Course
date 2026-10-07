@@ -60,8 +60,9 @@ def bar(z, sg):  # hydrostatic pressure of an sg column at depth z (from sea lev
 
 
 # ---- bottom-up casing design (Ch 1) ------------------------------------------------------
-TRIP_ECD_MARGIN = 0.07   # sg added to pore pressure for mud weight (trip + ECD allowance) [SIM]
-FRAC_MARGIN = 0.03       # sg below fracture the shoe LOT must clear [SIM]
+TRIP_MARGIN = 0.07       # sg added to pore pressure for mud weight: trip (swab) margin [SIM]
+TRIP_ECD_MARGIN = TRIP_MARGIN   # old name (ECD belongs on the fracture side; see FRAC_MARGIN)
+FRAC_MARGIN = 0.03       # sg below fracture the shoe must clear; covers ECD and surge [SIM]
 KICK_HEIGHT = 150.0      # m of gas influx used for the simple kick-tolerance term [SIM]
 RHO_GAS = 0.25           # sg, gas at depth [SIM]
 MIN_SURFACE_SHOE = 1000.0  # shallow hazards + BOP anchor: surface casing no shallower [SIM]
@@ -78,7 +79,7 @@ def design_bottom_up(td=TD, step=10.0, min_surface=MIN_SURFACE_SHOE):
     Shoe = shallowest depth where fg(z) >= required_shoe_emw(z, MW of the section below it)."""
     steps, bottom = [], td
     while True:
-        mw = max(pp(z) for z in range(int(WATER_DEPTH), int(bottom) + 1, 10)) + TRIP_ECD_MARGIN
+        mw = max(pp(z) for z in range(int(WATER_DEPTH), int(bottom) + 1, 10)) + TRIP_MARGIN
         mw = round(mw, 2)
         z = bottom - step
         # walk up while the shallower depth is still strong enough
@@ -133,7 +134,7 @@ def check_programme():
     strings = [st for st in programme() if "conductor" not in st.name]
     below_td = [st.shoe for st in strings[1:]] + [TD]
     for st, td_below in zip(strings, below_td):
-        mw = round(max(pp(z) for z in range(int(WATER_DEPTH), int(td_below) + 1, 10)) + TRIP_ECD_MARGIN, 2)
+        mw = round(max(pp(z) for z in range(int(WATER_DEPTH), int(td_below) + 1, 10)) + TRIP_MARGIN, 2)
         need = required_shoe_emw(st.shoe, mw)
         assert fg(st.shoe) >= need - 1e-9 or st.shoe == MIN_SURFACE_SHOE, (st, mw, need, fg(st.shoe))
     return True
@@ -145,7 +146,7 @@ def section_mud_weights():
     tds = [st.shoe for st in strings[1:]] + [TD]
     out = {}
     for st, td in zip(strings, tds):
-        out[st.name] = round(max(pp(z) for z in range(int(WATER_DEPTH), int(td) + 1, 10)) + TRIP_ECD_MARGIN, 2)
+        out[st.name] = round(max(pp(z) for z in range(int(WATER_DEPTH), int(td) + 1, 10)) + TRIP_MARGIN, 2)
     return out
 
 if __name__ == "__main__":

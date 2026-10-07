@@ -43,7 +43,7 @@ SHOT: Annulus with a gas slug rising; a pressure trace at the casing shoe climbs
 FLAGS: GEN; SIM: kick tolerance shown as a concept, no calculation
 TERMS: kick tolerance
 
-## 7.08 | 31.5 | anim
+## 7.08 | 32 | anim
 VO: In twenty ten, on the Macondo well in the Gulf of Mexico, the barriers failed in a chain. Cement and the shoe track did not isolate the reservoir. A negative pressure test, which lowers the pressure in the well to check the barriers hold, was misread. The blowout preventer did not seal. Eleven people died. Barriers do not fail one at a time. They fail when we stop checking.
 SHOT: A restrained, factual timeline graphic on the barrier schematic: three barrier elements turn grey one by one with labels (cement/shoe track, verification test misread, BOP failure to seal). A simple text card: "Macondo, 2010 - 11 lives lost". No dramatic imagery.
 FLAGS: GEN; SEEN: facts match CSB / BP / IADC summaries in web search results (cement and shoe-track barrier failure, negative pressure test misinterpreted, BOP failure, eleven fatalities); primary investigation reports not read in this environment

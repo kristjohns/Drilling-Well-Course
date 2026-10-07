@@ -285,7 +285,7 @@ def beat_window(st, tl):
 
 # ----------------------------------------------------------------------------- 1.06 shallow hazards
 def beat_hazards(st, tl):
-    b = tl["1.06"]
+    b = tl["1.07"]
     s = b.sent
     with st.span(b.start, b.end):
         sea = st.rect(0.8, 2.6, 14.0, 2.0, P.SEA, 0.0)
@@ -321,7 +321,7 @@ def beat_hazards(st, tl):
 
 # ----------------------------------------------------------------------------- 1.07 / 1.08 bottom-up stair-step
 def beat_bottom_up(st, tl):
-    b7, b8 = tl["1.07"], tl["1.08"]
+    b7, b8 = tl["1.06"], tl["1.08"]
     s7, s8 = b7.sent, b8.sent
     t0, t1 = b7.start, b8.end
     prog = M.programme()
@@ -442,7 +442,7 @@ def beat_telescope(st, tl):
 # ----------------------------------------------------------------------------- build
 def build(st, tl):
     F.header(st, tl)
-    b7, b8, b9 = tl["1.07"], tl["1.08"], tl["1.09"]
+    b7, b8, b9 = tl["1.06"], tl["1.08"], tl["1.09"]
     s8 = b8.sent
     # well strip progression (persistent "well so far")
     T1 = b7.sent[4] + 1.8

@@ -10,10 +10,10 @@ from .stage import TEXT_SCALE, MIN_TEXT
 def pill(st, x, y, text, bg=P.PANEL2, fg=P.TEXT, size=0.2, z=0.5, pad=0.22, kind="bold", align="c", alpha=1.0):
     """Label on a rounded-ish rectangular plate. Returns [plate, text]."""
     ts = max(size * TEXT_SCALE, MIN_TEXT)
-    w = ts * 0.58 * max(len(l) for l in text.split("\n")) + pad * 2
-    h = ts * 1.25 * (text.count("\n") + 1) + pad
+    w = st.measure(text, size, kind) + pad * 2 + 0.06
+    h = ts * 1.22 * (text.count("\n") + 1) + pad
     cx = x if align == "c" else (x + w / 2 if align == "l" else x - w / 2)
-    return [st.rect(cx, y, w, h, bg, z, alpha=alpha), st.text(text, cx, y, size, fg, z + 0.01, kind=kind)]
+    return [st.rect(cx, y, w, h, bg, z, alpha=alpha, role="pill"), st.text(text, cx, y, size, fg, z + 0.01, kind=kind)]
 
 
 def cross_arrow(st, x0, y0, x1, y1, color, label=None, size=0.2, z=0.4):
@@ -77,7 +77,7 @@ class WindowChart:
     def margins(self):
         zs = self._depths()
         c, st = self.c, self.st
-        a = [st.line([c.pt(M.pp(z) + M.TRIP_ECD_MARGIN, z) for z in zs], P.PORE, 0.025, 0.25, 0.6)]
+        a = [st.line([c.pt(M.pp(z) + M.TRIP_MARGIN, z) for z in zs], P.PORE, 0.025, 0.25, 0.6)]
         b = [st.line([c.pt(M.fg(z) - M.FRAC_MARGIN, z) for z in zs], P.FRAC, 0.025, 0.25, 0.6)]
         self.objs["margins"] = a + b
         return a + b
@@ -206,7 +206,10 @@ class Cutaway:
 
 
 class BopStack:
-    """Subsea BOP stack cutaway with a drill pipe through the bore. Rams / annular / shear rams really close."""
+    """Subsea BOP stack cutaway with a drill pipe through the bore. Rams / annular / shear rams really close.
+
+    Order, bottom to top (typical subsea stack, simplified): wellhead connector, two pipe rams, blind shear rams, annular,
+    flex joint / LMRP. Shear rams sit above the pipe rams so the string can be hung off on a pipe ram and sheared above it."""
     BORE = 0.8
 
     def __init__(self, st, cx, cy, s=1.0, z=0.3, pipe_top=None, label=False):
@@ -219,16 +222,16 @@ class BopStack:
 
         def body(h, color=P.PANEL2):
             nonlocal y
-            o = st.rect(cx, y + h * S / 2, W, h * S, color, z)
+            o = st.rect(cx, y + h * S / 2, W, h * S, color, z, role="solid" if color == P.PANEL2 else None)
             c = y + h * S / 2
             y += h * S
             return o, c
         o, _ = body(0.45, P.STEEL_DK)
         parts["connector"] = o
         self.y_connector = cy + 0.225 * S
-        o, c = body(0.6); parts["bsr_body"] = o; self.y_bsr = c
         o, c = body(0.6); parts["ram1_body"] = o; self.y_ram1 = c
         o, c = body(0.6); parts["ram2_body"] = o; self.y_ram2 = c
+        o, c = body(0.6); parts["bsr_body"] = o; self.y_bsr = c
         o, c = body(0.9); parts["ann_body"] = o; self.y_ann = c
         o, c = body(0.4, P.STEEL_DK); parts["flex"] = o; self.y_flex = c
         self.y_top = y
@@ -275,11 +278,13 @@ class BopStack:
             st.move(pr[1], t0, t1, to=(cx + (self.pipe_w / 2 + 0.45 * S), pr[1].location[1]))
 
     def shear(self, t0, t1, t_fall=None):
+        """Blind shear rams close and cut the pipe body; the upper pipe is then picked up out of the stack while the lower
+        stub stays hung off below (in the pipe rams). The bore at the shear rams is sealed with no pipe through it."""
         S, st, cx = self.s, self.st, self.cx
         st.move(self.bsr[0], t0, t1, to=(cx - 0.45 * S, self.y_bsr))
         st.move(self.bsr[1], t0, t1, to=(cx + 0.45 * S, self.y_bsr))
         tf = t1 if t_fall is None else t_fall
-        st.move(self.pipe_top, tf, tf + 1.0, dy=-0.9 * S)
+        st.move(self.pipe_top, tf, tf + 1.2, dy=1.1 * S)
 
     def open_all(self, t0, t1):
         S, st, cx = self.s, self.st, self.cx

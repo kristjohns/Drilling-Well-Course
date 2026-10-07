@@ -93,7 +93,7 @@ def beat_bop(st, tl):
 
 # ---------------------------------------------------------------- 3.03 tested before trusted
 def beat_test(st, tl):
-    b = tl["3.03"]
+    b = tl["3.04"]
     s = b.sent
     with st.span(b.start, b.end):
         cx = -3.0
@@ -125,7 +125,7 @@ def beat_test(st, tl):
 
 # ---------------------------------------------------------------- 3.04 why the closed loop matters
 def beat_closed_loop(st, tl):
-    b = tl["3.04"]
+    b = tl["3.03"]
     s = b.sent
     with st.span(b.start, b.end):
         xs = (-3.9, 0.9, 5.7)

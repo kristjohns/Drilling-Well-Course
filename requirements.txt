@@ -1,6 +1,7 @@
-# bpy 4.5.14 LTS was installed and benchmarked headless on Python 3.11 (Stage 1).
-bpy==4.5.14
+# Rendering: skia (2-D vector engine). Voice: Kokoro-82M via kokoro-onnx + onnxruntime (CPU).
+skia-python>=144
+kokoro-onnx==0.6.1
+onnxruntime>=1.20
 numpy
-matplotlib
 Pillow
 PyYAML

@@ -1,45 +1,45 @@
 # Ch 5: Casing and tubular design
 BUDGET: 165
 
-## 5.01 | 24.5 | anim
-VO: Casing is the well's tunnel lining. It holds the hole open, contains pressure, and isolates formations. Its grade is a number: P one-ten means a minimum yield of one hundred and ten thousand psi, about seven hundred and sixty megapascals. Sour-service grades limit hardness, because hydrogen sulphide cracks hard steel.
-SHOT: Tunnel-lining cutaway analogy morphs into the casing string in the hole. A pipe tag reads "P110: 110 ksi = 758 MPa". A hardness-vs-cracking sketch for sour service with an H2S molecule label.
-FLAGS: GEN; VERIFY: grade list and yield conversion are from memory of API 5CT / ISO 11960 (110 ksi = 758 MPa is arithmetic and exact); sour-service rule wording (ISO 15156) not checked
+## 5.01 | 30 | anim
+VO: Casing is the well's tunnel lining. It holds the hole open, contains pressure, and isolates formations. Its grade is a letter and a number: P one-ten means a minimum yield of one hundred and ten thousand psi, about seven hundred and sixty megapascals. Hydrogen sulphide drives hydrogen into hard steel and cracks it, so sour-service grades cap hardness, and P one-ten is too hard for most sour wells.
+SHOT: Tunnel-lining cutaway analogy morphs into the casing string in the hole. A pipe tag reads "P110: 110 ksi ≈ 758 MPa". A hardness-vs-cracking sketch for sour service: H2S at the surface, hydrogen atoms diffusing into a hard steel lattice, a crack opening; a "sour grades: hardness capped" note.
+FLAGS: GEN; VERIFY: grade list and yield conversion are from memory of API 5CT / ISO 11960 (110 ksi = 758 MPa is arithmetic and exact); sour-service rule wording (ISO 15156-2) not checked
 TERMS: casing grade; sour service
 
-## 5.02 | 30.5 | anim
-VO: Three loads, three mechanisms. Burst is internal pressure, a thin-wall yield problem, and the API rating already includes a twelve and a half percent wall tolerance. Collapse is external pressure, and it is a buckling problem set by the diameter-to-thickness ratio, like crushing a can from outside. Tension is the string's own weight, limited by the pipe body and, usually, by the connection.
-SHOT: Three cross-section panels in sequence: a ring with outward arrows swelling then yielding (burst, with the Barlow-type formula 0.875 x 2 Y t / D appearing after); a ring with inward arrows buckling into an oval (collapse) with a D/t slider moving the failure pressure; a hanging string with a stretch indicator and a connection highlighted (tension).
-FLAGS: GEN; VERIFY: the 0.875 factor and the "four collapse regimes" are from memory of API TR 5C3 / ISO 10400; SIM: only the elastic-collapse picture is drawn
+## 5.02 | 40 | anim
+VO: Three loads, three ways to fail. Burst: pressure inside exceeds pressure outside, and the wall yields, like an over-pressured pipeline. Its rating is worked out on a wall twelve and a half percent thinner than nominal, the mill tolerance. Collapse: pressure outside, and the pipe gives way. Thin pipe buckles like a crushed can; thick pipe yields first. The diameter-to-thickness ratio decides which, and most casing sits in between. Tension: the string's weight hanging in mud, plus any pull on it, limited by the pipe body or, often, by the weaker connection.
+SHOT: Three cross-section panels in sequence: a ring with net outward arrows (inside minus outside) swelling then yielding, with the Barlow-type formula 0.875 × 2Yt/D after; a ring with inward arrows: a thin ring buckles into an oval, a thick ring yields, a D/t slider shows the regime changing; a hanging string with a buoyed-weight arrow, a stretch indicator and a connection highlighted.
+FLAGS: GEN; VERIFY: the 0.875 factor and the four collapse regimes (yield, plastic, transition, elastic) are from memory of API TR 5C3 / ISO 10400
 TERMS: diameter-to-thickness ratio
 
-## 5.03 | 22 | anim
-VO: The design basis picks the worst credible cases. For burst: a gas kick, with the well shut in, meaning closed at the surface. For collapse: the pipe emptied by lost circulation, with heavy mud outside. For tension: running in the hole, with overpull and shock.
-SHOT: Three load-case cartoons on the well schematic: shut-in gas column with surface pressure arrow (burst); evacuated casing with heavy mud outside (collapse); string being run with an overpull arrow (tension). A small "design basis" table fills in.
-FLAGS: GEN
-TERMS: design basis; shut-in
+## 5.03 | 38 | anim
+VO: The design basis picks the worst credible cases. For burst: typically a gas kick, with the well shut in, or the casing pressure test itself. For collapse: lost circulation, where mud drains away into cracked rock, lets the level inside the pipe fall, partly or completely, while the full mud column outside pushes in. For tension: the string's weight as it is lowered in, shock from sudden stops, and overpull, the extra pull needed to free it if it sticks.
+SHOT: Three load-case cartoons on the well schematic: shut-in gas column with a surface pressure arrow (burst); the mud level inside the casing falling (partial, then full evacuation) with heavy mud outside (collapse); a string being lowered with a buoyed-weight arrow down at mid-string and an overpull arrow UP at the top (tension). A small "design basis" table fills in.
+FLAGS: GEN; SIM: one load case per mode; real design bases list several per string
+TERMS: design basis; lost circulation
 
-## 5.04 | 22.5 | anim
-VO: But those ratings are uniaxial. Real casing feels axial, radial and hoop stress at once. So we check the von Mises equivalent stress against yield, with a design factor. Plotted as an ellipse of axial force against pressure, it shows something odd: tension reduces collapse resistance.
-SHOT: A VME ellipse in the axial-force vs differential-pressure plane with burst and collapse intercepts. Adding tension tilts and shifts the ellipse so the collapse intercept moves inward. Load-case dots from beat 5.03 appear inside; a shrunken inner ellipse labelled "design factor" appears. The von Mises expression is shown after the picture.
-FLAGS: GEN; SIM: ellipse is the simplified VME yield envelope without bending or thermal load; design factors are shown unlabelled as "operator-specific"
+## 5.04 | 40 | anim
+VO: But those ratings are one load at a time. Real casing is pulled, squeezed and pressurised at once. So we check the von Mises equivalent stress against yield, with a design factor. Plotted as an ellipse of axial force against pressure, it answers a puzzle. Does pulling on a pipe make it easier or harder to crush? [pause 2] Easier. Steel already stretched along its length has less strength left to resist being squeezed, so the collapse rating is corrected for tension too.
+SHOT: The VME ellipse centred on the origin of an axial-force vs differential-pressure plane, touching the tension and compression yield lines at zero pressure, bulging beyond the API burst line in the tension quadrant and falling inside the collapse line there. The uniaxial rectangle for comparison; a red dot that passes uniaxial but fails von Mises in the tension-collapse corner. A shrunken inner ellipse labelled "design factor". The puzzle question on screen during the pause, then the answer.
+FLAGS: GEN; SIM: ellipse is the simplified VME yield envelope without bending or thermal load; collapse instability is checked separately (API/ISO collapse with tension correction); design factors are shown unlabelled as "operator-specific"
 TERMS: von Mises equivalent stress; design factor
 
-## 5.05 | 19.5 | anim
-VO: That creates a trap. The top of a string carries the most tension, which cuts its collapse capacity, while the pressures are greatest deep down. So strings are tapered: heavier wall, or stronger steel, only where it is needed.
-SHOT: A casing string with colour-coded sections: heavy wall at the top (tension) and at the bottom (collapse), lighter in the middle. A depth-vs-utilisation plot shows each load as a curve staying under the section capacity steps.
+## 5.05 | 24 | anim
+VO: Each load peaks in a different place. Tension, and often burst, are worst at the top, where tension also eats into collapse strength. Collapse is worst at the bottom. So long strings are often tapered: thicker wall, or stronger steel, only where it is needed.
+SHOT: A depth vs load/capacity plot: burst load peaking near the top, tension largest at the top, collapse largest at the bottom; a single-weight capacity line fails at both ends, then morphs into steps (stronger at top and bottom, lighter in the middle) that sit above every load curve. A casing string beside it colour-coded by section.
 FLAGS: GEN
 TERMS: tapered string
 
-## 5.06 | 28 | anim
-VO: And then the connections. Basic threaded couplings seal with thread compound. Premium connections add metal-to-metal seals and a torque shoulder, to stay gas-tight; they are qualified to ISO thirteen six seven nine, and checked as they are screwed together with a torque-turn plot: torque against turns. The pipe may be fine. The connection is where leaks start.
-SHOT: Thread cross-section: API round thread with a spiral leak path and thread compound; then a premium connection with a metal-to-metal seal ring and torque shoulder. A torque-vs-turns plot with a sharp shoulder-engagement kink and an acceptance window.
-FLAGS: GEN; VERIFY: ISO 13679 as the connection-testing standard is from memory; "premium connections leak less" is a generalisation
+## 5.06 | 34 | anim
+VO: And then the connections, here meaning the threaded joints between pipes. Basic threaded couplings seal with thread compound. Premium connections add metal-to-metal seals and a torque shoulder, to stay gas-tight. They are qualified by testing to ISO thirteen six seven nine, and checked during make-up, as they are screwed together, on a torque-turn plot: torque against turns. The pipe body may be fine; connections are where most leaks start.
+SHOT: Thread cross-section: API round thread with a spiral leak path filled by thread compound; then a premium connection with a conical metal-to-metal seal at the pin nose and a torque shoulder (separate labels with leader lines). A torque-vs-turns plot with a sharp shoulder-engagement kink and an acceptance window.
+FLAGS: GEN; VERIFY: ISO 13679 as the connection-testing standard is from memory; "most leaks start at connections" is a generalisation
 TERMS: premium connection; torque-turn plot
 
-## 5.07 | 18 | anim
-VO: In the barrier language of the next chapters, every string is itself a well barrier element, a single object that helps stop flow, with a documented design and a pressure test to prove it.
-SHOT: The casing strings of the well schematic light up in blue one by one with a small "tested" tick; label "well barrier element".
+## 5.07 | 20 | anim
+VO: In the barrier language of chapter seven, the casing that seals off the well becomes a well barrier element: one object that helps stop flow, accepted on a documented design and a pressure test. The conductor is structure, not barrier.
+SHOT: The well schematic: the last-set casing and its cement light up in blue with a "tested" tick and the label "well barrier element"; the 30 in conductor stays grey, labelled "structural, not a barrier".
 FLAGS: NO; VERIFY: element acceptance criteria wording in NORSOK D-010 for casing (design + test) not confirmed
 PAUSE: 1
 TERMS: well barrier element

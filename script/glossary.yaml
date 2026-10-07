@@ -98,7 +98,7 @@ casing hanger:
   aliases: [casing hangers]
 marine riser:
   def: "A large steel pipe connecting the BOP to the rig and carrying mud returns back up."
-  aliases: []
+  aliases: [riser]
 annular preventer:
   def: "A BOP element whose rubber packing squeezes closed around whatever is in the hole."
   aliases: []
@@ -175,7 +175,7 @@ design basis:
   def: "The set of worst credible load cases that the casing design must withstand."
   aliases: []
 shut-in:
-  def: "The well closed at the surface (BOP or valve) so nothing flows out."
+  def: "Closing the well (BOP or valve) so nothing flows out."
   aliases: [shut in]
 von Mises equivalent stress:
   def: "A single stress that combines axial, radial and hoop stress for comparison against yield."
@@ -205,7 +205,7 @@ wiper plug:
   def: "A rubber plug that separates fluids and wipes the inside of the casing during cementing."
   aliases: [plug, plugs]
 centraliser:
-  def: "A device on the casing that holds it in the middle of the hole."
+  def: "A device on the casing that keeps it close to the centre of the hole (improves standoff)."
   aliases: [centralisers]
 channelling:
   def: "A continuous path of mud left behind the casing when cement fails to displace it."
@@ -335,4 +335,16 @@ tag the plug:
   aliases: [tag it, tagging]
 cut and pull:
   def: "Cutting casing below the seabed and retrieving it and the wellhead."
+  aliases: []
+filter cake:
+  def: "A thin layer of mud solids plastered on a permeable wall; it limits fluid loss into the rock."
+  aliases: []
+lost circulation:
+  def: "Mud draining away into cracked or very permeable rock instead of returning up the hole."
+  aliases: [losses]
+shoe track:
+  def: "The short length of casing between the float collar and the shoe, deliberately left full of cement."
+  aliases: []
+full returns:
+  def: "All the fluid pumped down comes back up the annulus to the rig: nothing is being lost to the rock."
   aliases: []
