@@ -201,7 +201,7 @@ def beat_target(st, tl):
             y = SEA_Y01 + (y_t - SEA_Y01) * f
             stroke(c, look, [(XT, SEA_Y01), (XT, y)], P.TEXT, 0.95 * a, 0.045, dash=(0.16, 0.1), glow=False)
             z = (SEA_Y01 - y) / U01
-            text(c, look, f"TVD {z:,.0f} m", XT + 0.2, min(y + 0.28, 2.1), 0.22, P.TEXT, a, "l", "mono")
+            text(c, look, f"TVD {z:,.0f} m", XT + 0.2, min(y + 0.28, 0.75), 0.22, P.TEXT, a, "l", "mono")
         st.procedural(t_tvd0 - 0.05, b.end, 0.45, draw_tvd)
         tvd_l = pill(st, XT + 0.2, 0.15, "TVD: straight down", P.PANEL2, P.TEXT, 0.22, 0.5, align="l")
         st.fade_in(tvd_l, W(b, 2, "straight down"), 0.4)
@@ -387,7 +387,7 @@ def beat_hydrostatic(st, tl):
             st.fade_in(gl, W(b, 4, "pore pressure") + 1.2, 0.4)
             t_norm = W(b, 5, "normal pressure")
             st.ripple(c.X(M.bar(ZG, 1.03)), c.Y(ZG), t_norm - 0.2, b.end, P.PORE, period=1.1, r0=0.1, r1=0.6)
-            nl = pill(st, 5.45, -2.55, "normal pore pressure = a sea-water column", P.PANEL2, P.PORE, 0.2, 0.5)
+            nl = pill(st, 5.35, -2.55, "normal pore pressure =\na sea-water column", P.PANEL2, P.PORE, 0.2, 0.5)
             st.fade_in(nl, W(b, 5, "salty water"), 0.4)
             st.recolor(l1, t_norm, t_norm + 0.4, P.TEXT)
             st.recolor(l1, t_norm + 0.6, t_norm + 1.0, P.PORE)
@@ -552,16 +552,16 @@ def beat_terzaghi(st, tl):
         st.ripple(BX + 1.25, YB3 + 2.4, t_ov - 0.1, t_ov + 2.5, P.PORE, period=0.8, r0=0.15, r1=0.8)
         # ---------- effective stress (s5): σ′ = σ − p, σ labelled overburden
         EX, EY = 5.55, -1.05
-        card = st.rect(EX, EY, 4.0, 2.75, P.PANEL, 0.35)
+        card = st.rect(EX + 0.05, EY, 4.4, 2.75, P.PANEL, 0.35)
         eq = st.text("σ′ = σ − p", EX, EY + 0.85, 0.5, P.TEXT, 0.4, kind="bold")
         st.fade_in([card, eq], s[5] - 0.1, 0.5)
         rows = [("σ′", "effective stress: carried by the grains", P.STEEL, W(b, 5, "effective stress")),
-                ("σ", "overburden: weight of everything above", P.TEXT, W(b, 5, "weight of everything above")),
+                ("σ", "overburden: everything above", P.TEXT, W(b, 5, "weight of everything above")),
                 ("p", "pore pressure", P.PORE, W(b, 5, "pore pressure"))]
         for k, (sym, txt, colr, t) in enumerate(rows):
             y = EY + 0.12 - k * 0.48
-            o = [st.text(sym, EX - 1.75, y, 0.24, colr, 0.4, align="l", kind="bold"),
-                 st.text(txt, EX - 1.35, y, 0.17, P.TEXT if k < 2 else P.PORE, 0.4, align="l")]
+            o = [st.text(sym, EX - 1.85, y, 0.24, colr, 0.4, align="l", kind="bold"),
+                 st.text(txt, EX - 1.45, y, 0.16, P.TEXT if k < 2 else P.PORE, 0.4, align="l")]
             st.fade_in(o, t - 0.1, 0.4)
 
 
@@ -698,11 +698,10 @@ def beat_fracture(st, tl):
         st.ripple(PX, PY, t_sp, t_sp + 1.6, P.FRAC, period=0.6, r0=0.5, r1=1.6)
         fgp = pill(st, PX, PY - HR - 0.95, "too much: the wall splits, fracture", P.PANEL2, P.FRAC, 0.2, 0.5)
         st.fade_in(fgp, t_sp + 0.1, 0.3)
-        fg2 = pill(st, GX + 1.6, GY1 - 0.95, "this pressure, as a mud weight:\nthe fracture gradient", P.PANEL2, P.FRAC, 0.18, 0.5, align="l")
-        fgl = leader(st, (GX + 0.2, GY1 - 0.4), (GX + 1.6, GY1 - 0.95), P.FRAC, 0.49, 0.7)
-        st.fade_in(fg2 + [fgl], W(b, 4, "as a mud weight"), 0.4)
+        fg2 = pill(st, GX - 0.15, GY0 - 0.75, "the 'too much' pressure, as a mud weight:\nthe fracture gradient", P.PANEL2, P.FRAC, 0.18, 0.5)
+        st.fade_in(fg2, W(b, 4, "as a mud weight"), 0.4)
         # ---------- s5: for planning it is predicted
-        pr = pill(st, GX + 1.6, GY1 - 1.75, "for planning: predicted", P.PANEL2, P.MUTED, 0.18, 0.5, align="l")
+        pr = pill(st, GX - 0.15, GY0 - 1.5, "for planning: predicted", P.PANEL2, P.MUTED, 0.18, 0.5)
         st.fade_in(pr, s[5], 0.4)
         # ---------- s6: leak-off test, one depth, after casing is set
         t_lot = W(b, 6, "leak-off test")
@@ -1023,8 +1022,8 @@ def beat_bottom_up(st, tl):
         t_mg = W(b, 4, "plus a margin")
         mar = st.arrow(c.X(pp_max) + 0.1, c.Y(z_pp), c.X(mw1) - 0.04, c.Y(z_pp), P.TEXT, 0.035, 0.12, 0.5)
         st.fade_in(mar, t_mg - 0.1, 0.3)
-        dp = pill(st, -3.25, c.Y(3950), "deepest section:\n1.55 sg pore + margin", P.PANEL2, P.MUD, 0.19, 0.5)
-        dl = leader(st, (-2.05, c.Y(3950) - 0.05), (c.X(mw1) - 0.14, c.Y(M.TD) + 0.06), P.MUD, 0.49, 0.6)
+        dp = pill(st, -3.5, c.Y(3950), "deepest section:\n1.55 sg pore + margin", P.PANEL2, P.MUD, 0.19, 0.5)
+        dl = leader(st, (-2.3, c.Y(3950) - 0.05), (c.X(mw1) - 0.14, c.Y(M.TD) + 0.06), P.MUD, 0.49, 0.6)
         st.fade_in(dp + [dl], t_mg + 0.3, 0.4)
         # ---------- s5: draw that line up until it meets fracture, less a margin and room for a gas kick
         t_up0 = W(b, 5, "Draw that line up")
@@ -1035,8 +1034,8 @@ def beat_bottom_up(st, tl):
         t_y0 = W(b, 5, "fracture curve") - 0.2
         _req_curve(st, c, t_y0, b.end, lambda t: mw1, draw=(t_y0, t_y0 + 2.2), alpha_fn=lambda t: env(t, t_y0, b.end + 1, 0.1, 0))
         t_gk = W(b, 5, "gas kick")
-        yl = pill(st, c.X(1.30), c.Y(2120), "fracture, less margin\nand kick allowance", P.PANEL2, P.WARN, 0.19, 0.5)
-        yll = leader(st, (c.X(1.30) + 0.6, c.Y(2120) - 0.32), (c.X(_req(2380, mw1)) - 0.04, c.Y(2380) + 0.04), P.WARN, 0.49, 0.7)
+        yl = pill(st, c.X(1.30), c.Y(1980), "fracture, less margin\nand kick allowance", P.PANEL2, P.WARN, 0.19, 0.5)
+        yll = leader(st, (c.X(1.30) + 0.6, c.Y(1980) - 0.32), (c.X(_req(2380, mw1)) - 0.04, c.Y(2380) + 0.04), P.WARN, 0.49, 0.7)
         st.fade_in(yl + [yll], t_gk - 0.5, 0.4)
         meet = st.ring(c.X(mw1), c.Y(z1), 0.15, 0.045, P.TEXT, 0.55)
         st.pop_in(meet, t_up1 - 0.1, 0.4)
@@ -1048,8 +1047,8 @@ def beat_bottom_up(st, tl):
         rp = pill(st, c.X(mw1), c.Y(720), "shoe too weak for\na kick above here", P.BAD, "#ffffff", 0.19, 0.55)
         st.fade_in(rp, W(b, 6, "could not safely shut in") - 0.2, 0.4)
         tick = st.rect(c.X(mw1), c.Y(z_nk), 0.42, 0.03, P.TEXT, 0.4, alpha=0.6)
-        tkl = st.text("fracture − margin\nalone would allow this", c.X(1.96), c.Y(z_nk) - 0.02, 0.15, P.MUTED, 0.4, align="r")
-        tkd = leader(st, (c.X(mw1) + 0.22, c.Y(z_nk)), (c.X(1.96) - st.measure("alone would allow this", 0.15) - 0.05, c.Y(z_nk) - 0.02), P.MUTED, 0.39, 0.6)
+        tkl = st.text("without kick allowance", c.X(mw1) - 0.3, c.Y(z_nk), 0.15, P.MUTED, 0.4, align="r")
+        tkd = leader(st, (c.X(mw1) - 0.27, c.Y(z_nk)), (c.X(mw1) - 0.2, c.Y(z_nk)), P.MUTED, 0.39, 0.6)
         st.fade_in([tick, tkl, tkd], W(b, 6, "closing the well") - 0.2, 0.5)
         t_cs = W(b, 6, "casing must end")
         shl = st.dashed(c.pt(XR[0], z1), c.pt(mw1 - 0.03, z1), P.TEXT, 0.025, 0.08, 0.06, 0.4, alpha=0.8)
@@ -1404,16 +1403,17 @@ def beat_telescope(st, tl):
         wc = pill(st, RX, RY - 36 * KR / 2 - 0.85, "wildcat: first well on an untested prospect", P.PANEL2, P.TEXT, 0.2, 0.5)
         st.fade_in(wc, t_wc, 0.4)
         # ---------- s4: nearby wells help, but may sit in a different pressure compartment: the forecast is uncertain
-        fx0, fy0 = 4.6, -3.05
-        fc = Chart(st, fx0, fy0, 2.6, 2.2, (1.0, 1.8), (2000.0, M.TD), invert_y=True)
-        ffr = fc.frame(xticks=[], yticks=[], xlabel="", ylabel="", grid=False)
+        fx0, fy0 = 5.0, -3.15
+        fc = Chart(st, fx0, fy0, 2.3, 1.55, (1.0, 1.8), (2000.0, M.TD), invert_y=True)
+        ffr = fc.frame(xticks=[], yticks=[], xlabel="", ylabel="", grid=False, panel=False)
+        ffr.append(st.rect(fx0 + 1.15, fy0 + 1.0, 2.9, 2.5, P.PANEL, fc.z - 0.04))
         t_nw = W(b, 4, "Nearby wells")
         zf = [2000.0 + 50 * i for i in range(int((M.TD - 2000) / 50) + 1)]
         unc = lambda z: 0.02 + 0.10 * max(0.0, (z - 2400) / 1800)
         band = fc.band([(M.pp(z) - unc(z), z) for z in zf], [(M.pp(z) + unc(z), z) for z in zf], P.PORE, 0.1, 0.25)
         fcur = fc.curve([M.pp(z) for z in zf], zf, P.PORE, 0.05, 0.2)
         nb = st.line([fc.pt(M.pp(z) - (0.0 if z < 2900 else 0.09 * min(1.0, (z - 2900) / 400)), z) for z in zf], P.MUTED, 0.035, 0.19)
-        ft = st.text("pore pressure forecast", fx0 + 1.3, fy0 + 2.45, 0.17, P.PORE, 0.3, kind="bold")
+        ft = st.text("pore pressure forecast", fx0 + 1.15, fy0 + 2.0, 0.17, P.PORE, 0.3, kind="bold")
         st.fade_in(ffr + [ft, fcur], t_nw - 0.3, 0.4)
         st.draw_on(nb, t_nw, t_nw + 1.2)
         nbl = st.text("nearby well", fc.X(1.12), fc.Y(3700), 0.15, P.MUTED, 0.3, align="c")
@@ -1434,14 +1434,14 @@ def beat_telescope(st, tl):
             g6 += st.dashed((SX + sg * 6.0 * KW / 2, ys(zl1)), (SX + sg * 6.0 * KW / 2, ys(M.TD)), P.MUTED, 0.02, 0.07, 0.06, 0.5)
         st.fade_in(ghost, t_cs - 0.2, 0.4)
         st.fade_in(g6, t_cs + 0.6, 0.4)
-        cl = pill(st, LX + 1.85, ys(3700), 'contingency string (7 in)\nin reserve', P.PANEL2, P.WARN, 0.17, 0.55, align="l")
-        cll = leader(st, (SX + w7 / 2 + 0.05, ys(3650)), (LX + 1.85, ys(3700)), P.WARN, 0.54, 0.7)
+        cl = pill(st, LX + 1.85, ys(3800), 'contingency\nstring (7 in)', P.PANEL2, P.WARN, 0.17, 0.55, align="l")
+        cll = leader(st, (SX + w7 / 2 + 0.05, ys(3650)), (LX + 1.85, ys(3800)), P.WARN, 0.54, 0.7)
         st.fade_in(cl + [cll], t_cs, 0.4)
         r7 = st.ring(RX, RY, 7.0 * KR / 2, 0.045, P.WARN, 0.3, alpha=0.9)
         st.pop_in(r7, t_cs + 0.2, 0.4)
         t_fit = W(b, 5, "only fits")
         st.ripple(RX, RY, t_fit, t_fit + 2.5, P.WARN, period=0.8, r0=0.3, r1=1.5)
-        fit = pill(st, RX, RY - 36 * KR / 2 - 0.85, "it only fits if every size above is bigger from the start", P.PANEL2, P.WARN, 0.18, 0.5)
+        fit = pill(st, RX, RY - 36 * KR / 2 - 0.85, "it only fits if every size above\nis bigger from the start", P.PANEL2, P.WARN, 0.18, 0.5)
         st.fade_out(wc, t_fit - 0.3, 0.3)
         st.fade_in(fit, t_fit, 0.4)
 

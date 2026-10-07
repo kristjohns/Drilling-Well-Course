@@ -236,7 +236,7 @@ def _spill(st, x0, y0, t0, t1, gap, chip=CUTTINGS, cloud=SILT, rate=9.0, life=2.
 
 def _mound(st, x0, y0, t0, t1, color=CUTTINGS, hmax=0.3, width=1.5, gap=0.5, z=0.52, t_end=None):
     """A pile building up on the seabed around the hole mouth (both sides), from t0 (empty) to t1 (full)."""
-    t_end = t_end if t_end is not None else t1 + 999
+    t_end = t_end if t_end is not None else t1
 
     def draw(c, t, look):
         f = _ramp(t, t0, t1)
@@ -766,10 +766,11 @@ def beat_why(st, tl):
                  st.poly([(wx - 0.3, sb + 0.3), (wx, sb + 0.42), (wx - 0.3, sb + 0.54)], P.TEXT, 0.62),
                  st.poly([(wx + 0.3, sb + 0.3), (wx, sb + 0.42), (wx + 0.3, sb + 0.54)], P.TEXT, 0.62)]
         st.pop_in(valve, t_shut, 0.4)
-        _callout(st, wx + 0.62, sb + 0.42, "shut", t_shut + 0.2, fg=P.BAD, size=0.18)
+        shut_c = _callout(st, wx + 0.62, sb + 0.42, "shut", t_shut + 0.2, fg=P.BAD, size=0.18)
+        tC1 = s[6] - 0.1                                  # section C ends (its particles stop with it)
         t_gas = _w(b, 4, "gas flow")
         for sd in (-1, 1):
-            _stream(st, [(wx + sd * 1.1, -2.35), (wx + sd * 0.16, -2.3), (wx + sd * 0.12, sb + 0.1)], t_gas, b.end, P.GAS,
+            _stream(st, [(wx + sd * 1.1, -2.35), (wx + sd * 0.16, -2.3), (wx + sd * 0.12, sb + 0.1)], t_gas, tC1, P.GAS,
                     rate=4.0, speed=1.3, r=0.045, z=0.5, seed=20 + sd, tail_fade=0.4)
         cap = st.rect(wx, sb + 0.2, 0.42, 0.0001, P.GAS, 0.48, anchor="t", alpha=0.55)
         t_crack = _w(b, 4, "crack the rock")
@@ -800,10 +801,10 @@ def beat_why(st, tl):
         frl = st.line(fpts, P.FRAC, 0.06, 0.45)
         st.draw_on(frl, t_crack, t_crack + 0.9, "BEZIER")
         t_out = _w(b, 4, "outside the well")
-        _stream(st, [(wx - 0.18, shoe - 0.2)] + fpts[1:], t_out - 0.6, b.end, P.GAS, rate=4.5, speed=1.1, r=0.045, z=0.5, seed=31)
+        _stream(st, [(wx - 0.18, shoe - 0.2)] + fpts[1:], t_out - 0.6, tC1, P.GAS, rate=4.5, speed=1.1, r=0.045, z=0.5, seed=31)
         crater = st.ellipse(wx - 0.6, sb + 0.01, 0.22, 0.07, P.BG, 0.3, role="hole")
         st.fade_in(crater, t_out, 0.3)
-        _bubbles(st, wx - 0.6, sb + 0.05, t_out, b.end, P.GAS, rate=7.0, rise=0.75, life=3.4, spread=0.15, seed=33,
+        _bubbles(st, wx - 0.6, sb + 0.05, t_out, tC1, P.GAS, rate=7.0, rise=0.75, life=3.4, spread=0.15, seed=33,
                  y_max=L["top"] - 0.15, r=0.04)
         t_stop = _w(b, 4, "nothing can stop it")
         st.ripple(wx - 0.6, sb + 0.05, t_stop - 0.2, t_stop + 2.5, P.BAD, period=0.9, r0=0.15, r1=0.8, z=0.7)
@@ -812,11 +813,11 @@ def beat_why(st, tl):
         R = _gas_panel(st, 0.25, 6.0, "LEFT OPEN", P.SAFE, s[5] - 0.3)
         rwx, rsb = R["wx"], R["sb"]
         t_bub = _w(b, 5, "bubble out")
-        _stream(st, [(rwx + 1.2, -2.35), (rwx + 0.16, -2.3), (rwx + 0.12, rsb - 0.02)], t_bub - 2.2, b.end, P.GAS, rate=4.0,
+        _stream(st, [(rwx + 1.2, -2.35), (rwx + 0.16, -2.3), (rwx + 0.12, rsb - 0.02)], t_bub - 2.2, tC1, P.GAS, rate=4.0,
                 speed=1.5, r=0.045, z=0.5, seed=41)
-        _stream(st, [(rwx - 1.2, -2.35), (rwx - 0.16, -2.3), (rwx - 0.12, rsb - 0.02)], t_bub - 2.0, b.end, P.GAS, rate=4.0,
+        _stream(st, [(rwx - 1.2, -2.35), (rwx - 0.16, -2.3), (rwx - 0.12, rsb - 0.02)], t_bub - 2.0, tC1, P.GAS, rate=4.0,
                 speed=1.5, r=0.045, z=0.5, seed=42)
-        _bubbles(st, rwx, rsb + 0.28, t_bub, b.end, P.GAS, rate=8.0, rise=0.7, life=3.2, spread=0.2, seed=43, y_max=2.3,
+        _bubbles(st, rwx, rsb + 0.28, t_bub, tC1, P.GAS, rate=8.0, rise=0.7, life=3.2, spread=0.2, seed=43, y_max=2.3,
                  drift=0.08, r=0.04)
         t_far = _w(b, 5, "far below the rig")
         dimx = R["cx"] - 1.95
@@ -827,7 +828,7 @@ def beat_why(st, tl):
         dlab = pill(st, dimx + 0.2, (R["top"] + rsb) / 2 - 0.15, f"{WD:.0f} m", P.PANEL2, P.TEXT, 0.2, 2.0, align="l")
         st.fade_in(dlab, t_far, 0.4)
         okl = _callout(st, R["cx"], -3.0, "it vents at the seabed, far below the rig", t_bub + 0.3, fg=P.SAFE, align="c")
-        C = L["objs"] + R["objs"] + valve + [cap, needle, hub, dl, fl, frl, crater] + dial + brl + dim + dlab + okl
+        C = L["objs"] + R["objs"] + valve + [cap, needle, hub, dl, fl, frl, crater] + dial + brl + dim + dlab + okl + shut_c
         st.fade_out(C, s[6] - 0.3, 0.4)
 
         # ---- D: the defences come first (four tiles, each on its words)
@@ -840,7 +841,7 @@ def beat_why(st, tl):
         for i, (tx, ty, ttl, sub, tt) in enumerate(tiles):
             w, h = 6.7, 2.55
             plate = st.rect(tx, ty, w, h, P.PANEL2, 0.3)
-            num = st.text(f"0{i + 1}", tx - w / 2 + 0.25, ty + h / 2 - 0.3, 0.15, P.MUTED, 0.4, align="l", kind="mono")
+            num = st.text(f"0{i + 1}", tx - 0.8, ty + 0.95, 0.15, P.MUTED, 0.4, align="l", kind="mono")
             ttl_o = st.text(ttl, tx - 0.8, ty + 0.5, 0.25, P.TEXT, 0.4, align="l", kind="bold")
             sub_o = st.text(wrap_to(sub, 0.17, 3.7), tx - 0.8, ty + 0.05, 0.17, P.MUTED, 0.4, align="l", valign="t")
             st.fade_in([plate, num], tt - 0.25, 0.4)
@@ -1030,7 +1031,7 @@ def beat_conductor(st, tl):
         st.move(wl, t_j0, t_j1, dy=-shift)
         t_wt = _w(b, 3, "its own weight")
         st.fade_in(wt + [wl], t_wt - 0.2, 0.4)
-        _callout(st, ax - 0.65, -3.0, "water jets at the tip", _w(b, 3, "water jets"), target=(ax - 0.2, a_shoe_f - 0.1), align="c")
+        _callout(st, ax - 0.65, -3.0, "water jets at the tip", _w(b, 3, "water jets"), target=(ax - 0.2, a_shoe_f - 0.1), align="c", t_out=tB1 - 0.05)
         # (b) our well: drill a 36 in hole, run the conductor, cement it to the seabed
         bx = 0.7
         HWb, CWb = 1.2, 0.95
@@ -1211,10 +1212,10 @@ def beat_surface_casing(st, tl):
         st.ripple(WX, LPT + 0.06, t_land, t_land + 1.2, P.TEXT, period=0.6, r0=0.3, r1=1.2, z=0.8)
         _callout(st, WX - 1.0, -1.5, "20 in surface casing", _w(b, 1, "surface casing"), target=(WX - 10 * u, -1.5), align="r")
         t_hp = max(_w(b, 1, "high-pressure"), t_land - 0.3)
-        hp1 = _callout(st, WX - 1.0, HP_B + 0.45, "high-pressure\nwellhead housing", t_hp, target=(WX - 0.6, HP_B + 0.45), align="r",
+        hp1 = _callout(st, WX + 1.0, HP_B + 0.45, "high-pressure\nwellhead housing", t_hp, target=(WX + 0.6, HP_B + 0.45), align="l",
                        t_out=s[2] + 0.4)
-        hp2 = _callout(st, WX - 1.0, HP_B + 0.45, "the first hardware that\ncan contain pressure", s[2] + 0.6, fg=P.WARN,
-                       target=(WX - 0.6, HP_B + 0.45), align="r")
+        hp2 = _callout(st, WX + 1.0, HP_B + 0.45, "the first hardware that\ncan contain pressure", s[2] + 0.6, fg=P.WARN,
+                       target=(WX + 0.6, HP_B + 0.45), align="l")
         st.ripple(WX, HP_B + 0.4, s[2] + 0.5, s[2] + 3.0, P.WARN, period=0.9, r0=0.45, r1=1.1, z=0.8)
         # everything else will hang from it: ghost BOP above, ghost later strings inside
         t_hang = _w(b, 2, "hang from it")
@@ -1536,7 +1537,7 @@ def beat_wellhead(st, tl):
         st.move(hp_l + [ld], b.start, t_hp, dy=0.0)
         st.fade_in(hp_l + [ld], t_hp, 0.4)
         st.move(hp_l + [ld], t_hp, t_land, dy=-D)
-        _callout(st, lx, 0.15, "low-pressure housing\n(on the 30 in conductor)", _w(b, 1, "low-pressure"), target=(CX + 2.03, 0.15))
+        _callout(st, lx, 0.15, "low-pressure housing\n(on the 30 in conductor)", _w(b, 1, "low-pressure"), target=(CX + 2.03, 0.15), t_out=tA1)
         # each later string hangs on a casing hanger; a seal closes the gap behind it
         t_h0 = _w(b, 2, "hang inside")
         t_h1 = _w(b, 2, "casing hanger", 1.0) + 0.2
@@ -1564,7 +1565,7 @@ def beat_wellhead(st, tl):
         st.recolor(seal, t_close, t_close + 0.4, P.SAFE)
         for sd in (-1, 1):
             st.ripple(CX + sd * 0.945, -0.1, t_close, t_close + 1.6, P.SAFE, period=0.7, r0=0.1, r1=0.5, z=0.8)
-        _callout(st, lx, -1.85, "seal assembly: closes the gap\nbehind the hanger", t_seal + 0.2, target=(CX + 0.945, -0.1))
+        _callout(st, lx, -1.85, "seal assembly: closes the gap\nbehind the hanger", t_seal + 0.2, target=(CX + 0.945, -0.1), t_out=tA1)
         iso = [st.rect(CX + sd * 0.86, (BOT - 0.55) / 2 - 0.0, 0.2, -0.55 - BOT, P.SAFE, 0.39, alpha=0.3) for sd in (-1, 1)]
         st.fade_in(iso, t_close + 0.2, 0.5)
         ghost = _dashed_rect(st, CX - 1.0, 0.4, CX - 0.62, 1.0, P.MUTED, 0.5) + _dashed_rect(st, CX + 0.62, 0.4, CX + 1.0, 1.0, P.MUTED, 0.5)
@@ -1644,7 +1645,7 @@ def beat_wellhead(st, tl):
             c.drawPath(path, p)
             look.draw_particles(c, [(tx1, tyc + amp(t) / 0.45)], P.WARN, 0.06, a, True)
         st.procedural(t_bent - 0.4, b.end, 0.5, trace)
-        rng_l = st.text("stress range, every cycle", tx0, 0.8 - 0.05, 0.16, P.TEXT, 0.5, align="l")
+        rng_l = st.text("stress range, every cycle", tx1, gy1 - 0.32, 0.16, P.TEXT, 0.5, align="r")
         st.fade_in(rng_l, t_bent + 1.0, 0.4)
         dmg_bg = st.rect((tx0 + tx1) / 2, -2.25, tx1 - tx0, 0.22, P.GRID, 0.45, role="pill")
         dmg = st.rect(tx0, -2.25, 0.0001, 0.22, P.WARN, 0.46, anchor="l", role="pill")
