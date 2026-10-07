@@ -106,7 +106,7 @@ def plucks(n, t0_abs, voice_env, rng):
     env[: int(0.004 * SR)] *= np.linspace(0, 1, int(0.004 * SR))
     while t < n / SR - 2:
         i = int(t * SR)
-        if voice_env[i] < 0.02:
+        if i < len(voice_env) and voice_env[i] < 0.02:
             chord = CHORDS[int((t + t0_abs) // CHORD_LEN) % len(CHORDS)]
             m = chord[rng.integers(2, len(chord))] + 12
             f = midi_hz(m)
@@ -163,7 +163,7 @@ def tick():
 def main():
     tl = json.load(open(os.path.join(ROOT, "script", "timeline.json")))
     voice = read_wav_mono(os.path.join(HERE, "narration.wav"))
-    total = int(round(tl["total"] * SR))
+    total = max(int(round(tl["total"] * SR)), max(int(round((c["start"] + c["dur"]) * SR)) for c in tl["chapters"]))
     voice = np.pad(voice, (0, max(total - len(voice), 0)))[:total]
     rng = np.random.default_rng(7)
     venv = smooth(np.abs(voice), 0.25)
@@ -186,8 +186,6 @@ def main():
             env *= fin * fade_in
             bed[i0:i1] += seg * (env * g)[:, None]
         bed *= duck[:, None]
-        if tl["chapters"]:
-            last = tl["chapters"][-1]
     fx = np.zeros((total, 2), dtype=np.float32)
     if SFX:
         w = whoosh(rng)

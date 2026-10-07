@@ -310,219 +310,222 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 ## Ch 5: Casing and tubular design  (18:45–21:30)
 
-### 5.01 · 18:45 · 24.5s · anim **[GEN]** **[VERIFY]**
+### 5.01 · 18:45 · 29.5s · anim **[GEN]** **[VERIFY]**
 
-**VO:** Casing is the well's tunnel lining. It holds the hole open, contains pressure, and isolates formations. Its grade is a number: P one-ten means a minimum yield of one hundred and ten thousand psi, about seven hundred and sixty megapascals. Sour-service grades limit hardness, because hydrogen sulphide cracks hard steel.
+**VO:** Casing is the well's tunnel lining. It holds the hole open, contains pressure, and isolates formations. Its grade is a letter and a number: P one-ten means a minimum yield of one hundred and ten thousand psi, about seven hundred and sixty megapascals. Hydrogen sulphide drives hydrogen into hard steel and cracks it, so sour-service grades cap hardness, and P one-ten is too hard for most sour wells.
 
-**SHOT:** Tunnel-lining cutaway analogy morphs into the casing string in the hole. A pipe tag reads "P110: 110 ksi = 758 MPa". A hardness-vs-cracking sketch for sour service with an H2S molecule label.
+**SHOT:** Tunnel-lining cutaway analogy morphs into the casing string in the hole. A pipe tag reads "P110: 110 ksi ≈ 758 MPa". A hardness-vs-cracking sketch for sour service: H2S at the surface, hydrogen atoms diffusing into a hard steel lattice, a crack opening; a "sour grades: hardness capped" note.
 
 **Terms introduced:** casing grade; sour service
 
-- **VERIFY:** grade list and yield conversion are from memory of API 5CT / ISO 11960 (110 ksi = 758 MPa is arithmetic and exact); sour-service rule wording (ISO 15156) not checked
+- **VERIFY:** grade list and yield conversion are from memory of API 5CT / ISO 11960 (110 ksi = 758 MPa is arithmetic and exact); sour-service rule wording (ISO 15156-2) not checked
 
-### 5.02 · 19:10 · 30.5s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 5.02 · 19:14 · 40s · anim **[GEN]** **[VERIFY]**
 
-**VO:** Three loads, three mechanisms. Burst is internal pressure, a thin-wall yield problem, and the API rating already includes a twelve and a half percent wall tolerance. Collapse is external pressure, and it is a buckling problem set by the diameter-to-thickness ratio, like crushing a can from outside. Tension is the string's own weight, limited by the pipe body and, usually, by the connection.
+**VO:** Three loads, three ways to fail. Burst: pressure inside exceeds pressure outside, and the wall yields, like an over-pressured pipeline. Its rating is worked out on a wall twelve and a half percent thinner than nominal, the mill tolerance. Collapse: pressure outside, and the pipe gives way. Thin pipe buckles like a crushed can; thick pipe yields first. The diameter-to-thickness ratio decides which, and most casing sits in between. Tension: the string's weight hanging in mud, plus any pull on it, limited by the pipe body or, often, by the weaker connection.
 
-**SHOT:** Three cross-section panels in sequence: a ring with outward arrows swelling then yielding (burst, with the Barlow-type formula 0.875 x 2 Y t / D appearing after); a ring with inward arrows buckling into an oval (collapse) with a D/t slider moving the failure pressure; a hanging string with a stretch indicator and a connection highlighted (tension).
+**SHOT:** Three cross-section panels in sequence: a ring with net outward arrows (inside minus outside) swelling then yielding, with the Barlow-type formula 0.875 × 2Yt/D after; a ring with inward arrows: a thin ring buckles into an oval, a thick ring yields, a D/t slider shows the regime changing; a hanging string with a buoyed-weight arrow, a stretch indicator and a connection highlighted.
 
 **Terms introduced:** diameter-to-thickness ratio
 
-- **SIM:** only the elastic-collapse picture is drawn
-- **VERIFY:** the 0.875 factor and the "four collapse regimes" are from memory of API TR 5C3 / ISO 10400
+- **VERIFY:** the 0.875 factor and the four collapse regimes (yield, plastic, transition, elastic) are from memory of API TR 5C3 / ISO 10400
 
-### 5.03 · 19:40 · 22s · anim **[GEN]**
+### 5.03 · 19:54 · 34.5s · anim **[GEN]** **[SIM]**
 
-**VO:** The design basis picks the worst credible cases. For burst: a gas kick, with the well shut in, meaning closed at the surface. For collapse: the pipe emptied by lost circulation, with heavy mud outside. For tension: running in the hole, with overpull and shock.
+**VO:** The design basis picks the worst credible cases. For burst: typically a gas kick, with the well shut in, or the casing pressure test itself. For collapse: lost circulation, where mud drains away into cracked rock, lets the level inside the pipe fall, partly or completely, while the full mud column outside pushes in. For tension: the string's weight as it is lowered in, shock from sudden stops, and overpull, the extra pull needed to free it if it sticks.
 
-**SHOT:** Three load-case cartoons on the well schematic: shut-in gas column with surface pressure arrow (burst); evacuated casing with heavy mud outside (collapse); string being run with an overpull arrow (tension). A small "design basis" table fills in.
+**SHOT:** Three load-case cartoons on the well schematic: shut-in gas column with a surface pressure arrow (burst); the mud level inside the casing falling (partial, then full evacuation) with heavy mud outside (collapse); a string being lowered with a buoyed-weight arrow down at mid-string and an overpull arrow UP at the top (tension). A small "design basis" table fills in.
 
-**Terms introduced:** design basis
+**Terms introduced:** design basis; lost circulation
 
-### 5.04 · 20:02 · 22.5s · anim **[GEN]** **[SIM]**
+- **SIM:** one load case per mode; real design bases list several per string
 
-**VO:** But those ratings are uniaxial. Real casing feels axial, radial and hoop stress at once. So we check the von Mises equivalent stress against yield, with a design factor. Plotted as an ellipse of axial force against pressure, it shows something odd: tension reduces collapse resistance.
+### 5.04 · 20:29 · 35s · anim **[GEN]** **[SIM]**
 
-**SHOT:** A VME ellipse in the axial-force vs differential-pressure plane with burst and collapse intercepts. Adding tension tilts and shifts the ellipse so the collapse intercept moves inward. Load-case dots from beat 5.03 appear inside; a shrunken inner ellipse labelled "design factor" appears. The von Mises expression is shown after the picture.
+**VO:** But those ratings are one load at a time. Real casing is pulled, squeezed and pressurised at once. So we check the von Mises equivalent stress against yield, with a design factor. Plotted as an ellipse of axial force against pressure, it answers a puzzle. Does pulling on a pipe make it easier or harder to crush? [pause 2] Easier. Steel already stretched along its length has less strength left to resist being squeezed, so the collapse rating is corrected for tension too.
+
+**SHOT:** The VME ellipse centred on the origin of an axial-force vs differential-pressure plane, touching the tension and compression yield lines at zero pressure, bulging beyond the API burst line in the tension quadrant and falling inside the collapse line there. The uniaxial rectangle for comparison; a red dot that passes uniaxial but fails von Mises in the tension-collapse corner. A shrunken inner ellipse labelled "design factor". The puzzle question on screen during the pause, then the answer.
 
 **Terms introduced:** von Mises equivalent stress; design factor
 
-- **SIM:** ellipse is the simplified VME yield envelope without bending or thermal load; design factors are shown unlabelled as "operator-specific"
+- **SIM:** ellipse is the simplified VME yield envelope without bending or thermal load; collapse instability is checked separately (API/ISO collapse with tension correction); design factors are shown unlabelled as "operator-specific"
 
-### 5.05 · 20:24 · 19.5s · anim **[GEN]**
+### 5.05 · 21:04 · 20s · anim **[GEN]**
 
-**VO:** That creates a trap. The top of a string carries the most tension, which cuts its collapse capacity, while the pressures are greatest deep down. So strings are tapered: heavier wall, or stronger steel, only where it is needed.
+**VO:** Each load peaks in a different place. Tension, and often burst, are worst at the top, where tension also eats into collapse strength. Collapse is worst at the bottom. So long strings are often tapered: thicker wall, or stronger steel, only where it is needed.
 
-**SHOT:** A casing string with colour-coded sections: heavy wall at the top (tension) and at the bottom (collapse), lighter in the middle. A depth-vs-utilisation plot shows each load as a curve staying under the section capacity steps.
+**SHOT:** A depth vs load/capacity plot: burst load peaking near the top, tension largest at the top, collapse largest at the bottom; a single-weight capacity line fails at both ends, then morphs into steps (stronger at top and bottom, lighter in the middle) that sit above every load curve. A casing string beside it colour-coded by section.
 
 **Terms introduced:** tapered string
 
-### 5.06 · 20:44 · 28s · anim **[GEN]** **[VERIFY]**
+### 5.06 · 21:24 · 30s · anim **[GEN]** **[VERIFY]**
 
-**VO:** And then the connections. Basic threaded couplings seal with thread compound. Premium connections add metal-to-metal seals and a torque shoulder, to stay gas-tight; they are qualified to ISO thirteen six seven nine, and checked as they are screwed together with a torque-turn plot: torque against turns. The pipe may be fine. The connection is where leaks start.
+**VO:** And then the connections, here meaning the threaded joints between pipes. Basic threaded couplings seal with thread compound. Premium connections add metal-to-metal seals and a torque shoulder, to stay gas-tight. They are qualified by testing to ISO thirteen six seven nine, and checked during make-up, as they are screwed together, on a torque-turn plot: torque against turns. The pipe body may be fine; connections are where most leaks start.
 
-**SHOT:** Thread cross-section: API round thread with a spiral leak path and thread compound; then a premium connection with a metal-to-metal seal ring and torque shoulder. A torque-vs-turns plot with a sharp shoulder-engagement kink and an acceptance window.
+**SHOT:** Thread cross-section: API round thread with a spiral leak path filled by thread compound; then a premium connection with a conical metal-to-metal seal at the pin nose and a torque shoulder (separate labels with leader lines). A torque-vs-turns plot with a sharp shoulder-engagement kink and an acceptance window.
 
 **Terms introduced:** premium connection; torque-turn plot
 
-- **VERIFY:** ISO 13679 as the connection-testing standard is from memory; "premium connections leak less" is a generalisation
+- **VERIFY:** ISO 13679 as the connection-testing standard is from memory; "most leaks start at connections" is a generalisation
 
-### 5.07 · 21:12 · 18s · anim **[NO]** **[VERIFY]**
+### 5.07 · 21:54 · 18.5s · anim **[NO]** **[VERIFY]**
 
-**VO:** In the barrier language of the next chapters, every string is itself a well barrier element, a single object that helps stop flow, with a documented design and a pressure test to prove it.
+**VO:** In the barrier language of chapter seven, the casing that seals off the well becomes a well barrier element: one object that helps stop flow, accepted on a documented design and a pressure test. The conductor is structure, not barrier.
 
-**SHOT:** The casing strings of the well schematic light up in blue one by one with a small "tested" tick; label "well barrier element".
+**SHOT:** The well schematic: the last-set casing and its cement light up in blue with a "tested" tick and the label "well barrier element"; the 30 in conductor stays grey, labelled "structural, not a barrier".
 
 **Terms introduced:** well barrier element
 
 - **VERIFY:** element acceptance criteria wording in NORSOK D-010 for casing (design + test) not confirmed
 
-## Ch 6: Cementing  (21:30–24:00)
+## Ch 6: Cementing  (22:12–24:42)
 
-### 6.01 · 21:30 · 18s · anim **[GEN]** **[NO]** **[VERIFY]**
+### 6.01 · 22:12 · 24.5s · anim **[GEN]** **[NO]** **[VERIFY]**
 
-**VO:** Cement does three jobs. It supports the pipe. It seals the gap, so nothing flows along the outside. And it protects the steel from corrosion. The seal is the point: the cement behind the casing is itself a barrier.
+**VO:** Cement does three jobs. It holds the pipe in place, stopping it from buckling or moving. It seals the gap, so nothing flows along the outside. And it shields the steel from corrosive fluids. The seal is the point: if it is long enough and verified, the cement behind the casing is a well barrier element.
 
-**SHOT:** Cutaway of casing, cement sheath and rock with three labelled arrows (support, isolation, protection). The sheath glows as a barrier ring.
+**SHOT:** Cutaway of casing, cement sheath and rock with three labelled arrows (holds in place, seals, protects). The sheath then glows blue as a barrier element over a verified length, with the label "casing cement = a well barrier element".
 
 - **VERIFY:** NORSOK D-010 requirements for casing cement as a well barrier element (required length/height and verification) not confirmed
 
-### 6.02 · 21:48 · 30s · anim **[GEN]** **[SIM]**
+### 6.02 · 22:37 · 40.5s · anim **[GEN]** **[SIM]**
 
-**VO:** To place it, we pump down the inside and up the outside, a U-tube. Pipeline engineers will recognise the trick. Plugs, like pigs, keep cement and mud apart: a bottom plug ahead of the cement, a top plug behind it, with spacer fluid between. A float valve stops the heavy cement flowing back. When the top plug lands and pressure jumps, the displacement is complete.
+**VO:** To place it, we pump down the inside and up the outside: a U-tube. Spacer goes first, to push the mud away. Then rubber plugs keep cement and mud apart, and pipeline engineers will recognise them: they are pigs. A bottom plug runs ahead of the cement, a top plug behind. A one-way float valve stops the heavier cement U-tubing back. When the top plug lands on the float collar, at the calculated volume, pressure jumps: displacement is complete. The few joints below it, the shoe track, stay full of cement on purpose.
 
-**SHOT:** U-tube cutaway: fluids in colour: mud (amber), spacer (white), cement (grey). Bottom plug, cement, top plug travel down the string; the bottom plug ruptures at the float collar; cement rises in the annulus. A one-way check valve symbol on the float collar. A pump-pressure trace spikes ("plug bumped") when the top plug lands.
+**SHOT:** U-tube cutaway, fluids in colour: mud (amber), spacer (white), cement (grey). Order down the pipe: spacer, bottom plug, cement, top plug, then displacement mud. The bottom plug's membrane ruptures at the float collar; cement turns the corner at the shoe and rises in the annulus (flow particles). A one-way valve symbol on the float collar. The top plug lands on the float collar; a pump-pressure trace spikes ("plug bump"). The shoe track below the float collar stays grey.
 
-**Terms introduced:** spacer; float valve; wiper plug
+**Terms introduced:** spacer; wiper plug; float valve; shoe track
 
-- **SIM:** single-stage primary job; multi-stage tools and foam cement omitted
+- **SIM:** single-stage primary job; multi-stage tools and foam cement omitted; on a floater the plugs are subsea-release plugs at the casing running tool, launched by darts from the rig
 
-### 6.03 · 22:18 · 25s · anim **[GEN]** **[SIM]**
+### 6.03 · 23:18 · 34.5s · anim **[GEN]** **[SIM]**
 
-**VO:** The hard part is displacement. If the pipe sits off-centre, mud on the narrow side barely moves, while cement races up the wide side. That leaves a channel of mud behind the pipe: a path for fluid, hidden. Centralisers hold the pipe in the middle, and moving the pipe helps sweep the mud out.
+**VO:** The hard part is mud removal: getting every bit of mud out of the annulus. If the pipe sits off-centre, mud on the narrow side barely moves, while cement races up the wide side. That leaves a channel of mud behind the pipe: a path for fluid, hidden. Centralisers push the pipe back towards the middle. Conditioning the mud, a well-designed spacer and a high pump rate do the rest; on land wells and liners, moving the pipe helps too.
 
-**SHOT:** THE CEMENT DISPLACEMENT ANIMATION. A vertical slice of an eccentric annulus (wide gap left, narrow gap right) with an inset top-down circle. Cement fronts rise: left front races ahead, right front lags, a mud channel is left trapped on the narrow side (red outline "channel"). Replay with centralisers (bow-springs drawn on the pipe): fronts rise nearly level and a clean grey sheath forms.
+**SHOT:** THE CEMENT DISPLACEMENT ANIMATION. A vertical slice of an eccentric annulus (wide gap left, narrow gap right) with an inset top-down ring. Cement fronts rise: the wide-side front races ahead, the narrow-side front lags; a mud channel is left trapped on the narrow side (red outline "channel"). Replay with bow-spring centralisers on the pipe: standoff improves, fronts rise nearly level and a clean grey sheath forms.
 
 **Terms introduced:** centraliser; channelling
 
 - **SIM:** front speeds are invented ratios; a real eccentric displacement needs CFD or a hydraulics simulator
 
-### 6.04 · 22:43 · 29s · anim **[GEN]** **[VERIFY]**
+### 6.04 · 23:52 · 46s · anim **[GEN]** **[VERIFY]**
 
-**VO:** Cement is bound by the window too. Its column has to stay under the fracture limit, so the first slurry is lightweight. The recipe is tested in the lab at the well's temperature: how long it stays pumpable, its thickening time, and how fast it gains strength. Above about a hundred and ten degrees, silica is added, so the strength does not fade away.
+**VO:** Cement is bound by the window too. While it is pumped, its column plus friction must stay below the fracture limit and above pore pressure. So a lighter lead slurry fills the upper annulus, and a dense, strong tail goes at the shoe, with the top of cement placed above every zone it must seal, like a thin overpressured sand near three thousand metres. Lab tests at downhole temperature and pressure measure how long it stays pumpable, its thickening time, and how fast it gains strength. Above about a hundred and ten degrees, as in our deepest sections, silica is added, so the strength does not fade.
 
-**SHOT:** Window chart with a cement-column pressure line (hydrostatic plus friction) kept under the fracture curve at the shoe. A lab panel: a thickening-time curve rising sharply (consistometer) and a compressive-strength curve vs time; a temperature axis with a mark at ~110 C and a "silica" tag.
+**SHOT:** Window chart with the cement-column pressure line (hydrostatic plus friction) between pore and fracture for the 9⅝ in job; lead (lighter) and tail (denser) slurries in the annulus with a "top of cement" marker above a thin sand at ~2,980 m ("Sand A"). A lab panel: a thickening-time curve rising sharply (pressurised consistometer) and a compressive-strength curve vs time; a temperature axis with a mark at ~110 °C and a "silica" tag.
 
 **Terms introduced:** thickening time
 
 - **VERIFY:** silica addition above roughly 110 C is general industry knowledge from memory (strength retrogression), not checked against API/ISO cement standards
 
-### 6.05 · 23:12 · 21.5s · anim **[GEN]** **[SIM]**
+### 6.05 · 24:38 · 32s · anim **[GEN]** **[SIM]**
 
-**VO:** There is a dangerous hour. As cement turns from liquid to gel to solid, it stops passing pressure down before it becomes impermeable. In that gap, gas can migrate in, and leave a path. This is simplified, but it is why cement jobs are designed around timing.
+**VO:** Then comes a dangerous period, minutes to hours long. As cement sets, it starts to hold itself up, like concrete stiffening in a bucket. Its weight stops pressing down, so the pressure holding gas back falls, but it is not yet solid enough to block gas. If that pressure drops below a gas zone's, gas can slip in and leave a path. So timing is everything: good slurries set fast through that gap.
 
-**SHOT:** Time axis with three coloured phases of the cement column: liquid (full hydrostatic), gel (pressure support fading, pore pressure line crossing it), solid. At the crossing a gas bubble trail enters the cement column through the wall; the finished sheath keeps a thin leak channel.
+**SHOT:** Time axis with three coloured phases of the cement column: liquid (full hydrostatic), gel (the cement holds itself up, a pressure counter falls and crosses the gas-zone pressure line), solid. At the crossing, gas bubbles enter the cement through the wall and leave a thin channel. A second, fast-setting slurry closes the gap before the crossing.
 
 - **SIM:** gel-strength mechanics reduced to one picture; no numbers given
 
-### 6.06 · 23:34 · 26.5s · anim **[GEN]** **[SIM]**
+### 6.06 · 25:10 · 40.5s · anim **[GEN]** **[SIM]**
 
-**VO:** How do we know it worked? Logs. A cement bond log listens to sound travelling along the casing: good cement damps the signal. Ultrasonic tools scan around the pipe. But a quiet log is not proof of a seal. A thin gap, a microannulus, can fool the tool. So we combine logs with returns, volumes, and pressure tests.
+**VO:** How do we know it worked? First, the job record: full returns, meaning no mud lost to the rock, the right volumes, a plug bump on time. Then, where it matters, logs. A cement bond log listens to sound travelling along the casing: good cement damps it. Ultrasonic tools map all round the pipe. But a log measures contact, not seal. A hairline gap, a microannulus, can make good cement look bad, and a narrow channel can slip past the tool. So we weigh it all together, with the pressure test at the shoe.
 
-**SHOT:** A logging tool in the casing emitting sound: waveform panels for free pipe (ringing) vs bonded pipe (damped). A 360-degree ultrasonic unrolled map with a coloured channel stripe. A micro-gap sketch labelled "microannulus". A checklist of "returns, volumes, bump pressure, pressure test".
+**SHOT:** A job-record checklist ticks first (full returns, volumes, plug bump). A logging tool in the casing emitting sound: waveform panels for free pipe (ringing) vs bonded pipe (damped). A 360° ultrasonic map with a coloured channel stripe. A microannulus sketch: a hairline gap makes good cement read "free pipe". Final checklist: returns, volumes, plug bump, shoe pressure test (LOT/FIT), logs.
 
-**Terms introduced:** cement bond log; ultrasonic cement log; microannulus
+**Terms introduced:** full returns; cement bond log; ultrasonic cement log; microannulus
 
 - **SIM:** log responses are schematic, not real data
 
-## Ch 7: Well control and barriers  (24:00–27:15)
+## Ch 7: Well control and barriers  (25:50–29:06)
 
-### 7.01 · 24:00 · 16s · anim **[GEN]**
+### 7.01 · 25:50 · 18.5s · anim **[GEN]** **[SIM]**
 
-**VO:** Suppose the window lied. Pore pressure was higher than forecast, or pulling the pipe swabbed the hole like a syringe. Formation fluid enters the well. If we do not stop it, a kick becomes a blowout.
+**VO:** Suppose the window lied: pore pressure is higher than forecast. Or pulling the pipe swabbed the hole like a syringe, or losses dropped the mud level. Formation fluid enters the well. Unchecked, that kick becomes a blowout: a flow nobody can stop.
 
-**SHOT:** The window chart with the pore-pressure curve jumping right past the amber mud-weight line: blue influx arrows enter the hole. A syringe cartoon shows pipe withdrawal sucking fluid in (swab). A small "kick -> blowout" arrow.
+**SHOT:** The window chart around the open hole: the planned mud-weight staircase (1.49 sg to 3,400 m, then 1.62 sg to TD); a red "actual pore pressure" curve (forecast + 0.12 sg below 3,000 m) crosses the 1.62 sg line near 3,700 m; gas influx (crimson flow particles) enters the hole. A syringe cartoon: pipe withdrawal sucks fluid in (swab). A falling mud level from losses. A small "kick → blowout" arrow.
 
 **Terms introduced:** swabbing
 
-### 7.02 · 24:16 · 23s · anim **[GEN]** **[SIM]**
+- **SIM:** the "actual" pore pressure is the forecast + 0.12 sg below 3,000 m, invented for this example
 
-**VO:** A kick is easy to miss, because gas behaves strangely. At four kilometres it is compressed hundreds of times, and expands as it rises: tiny at the bottom, enormous near the surface. In oil-based mud it is worse: the gas dissolves, and hides until it comes out of solution near the top.
+### 7.02 · 26:09 · 34.5s · anim **[GEN]** **[SIM]**
 
-**SHOT:** THE KICK PROPAGATING UP THE ANNULUS. A tall annulus; a small gas bubble at the bottom; as it rises it grows (volume vs pressure), the pit-gain trace next to it stays flat for most of the trip, then spikes in the last stretch. A second variant bubble is shaded "dissolved" (invisible) until a flash-point depth where it suddenly appears.
+**VO:** A gas kick is deceptive. Here is a puzzle: a bubble of gas at four kilometres, where the pressure is over six hundred bar. How much bigger is it at the surface? [pause 2] Hundreds of times. So the pits first show only a small gain, then as the gas rises it expands, slowly at first, then violently near the top. In oil-based mud it dissolves and hides, then breaks out near the top, sometimes in the riser, above the preventer.
 
-- **SIM:** expansion factor is ideal-gas Boyle with no compressibility factor, no slip velocity, no mud solubility curve
+**SHOT:** THE KICK PROPAGATING UP THE ANNULUS. A tall annulus with a depth axis; a small crimson gas bubble at the bottom with a pressure counter (~640 bar) and a volume counter; during the pause the question "how much bigger at the surface?". As it rises it grows (Boyle), the pit-gain trace next to it shows a small step at influx, stays nearly flat, then spikes in the last few hundred metres ("expansion is back-loaded"). A second variant: the bubble is shaded "dissolved in oil-based mud" until a break-out depth near the top, above the BOP in the riser.
 
-### 7.03 · 24:39 · 19.5s · anim **[GEN]** **[VERIFY]**
+- **SIM:** expansion factor is ideal-gas Boyle with no temperature or compressibility factor, no slip velocity, no mud solubility curve
 
-**VO:** So we watch. Flow out greater than flow in. A rising pit level. The well flowing with the pumps off, called a flow check. A sudden faster drilling rate, a drilling break. The aim is to catch a kick while it is still small.
+### 7.03 · 26:44 · 29.5s · anim **[GEN]** **[VERIFY]**
 
-**SHOT:** A dashboard of four gauges: flow in vs flow out difference needle; pit volume trace; a "pumps off - still flowing" flow check indicator; rate-of-penetration spike. Each lights red as the kick occurs.
+**VO:** So we watch. Flow out greater than flow in. A rising level in the mud tanks, the pits. On a trip, a hole that takes less mud than the steel we pulled out. A sudden faster drilling rate, a drilling break, is a warning: stop the pumps and watch the well. That is a flow check. The aim is to catch a kick while it is still small.
 
-**Terms introduced:** flow check; drilling break
+**SHOT:** A dashboard of gauges lighting up in turn: flow in vs flow out difference needle; pit volume trace (counter); trip tank: mud taken vs steel volume pulled; rate-of-penetration spike labelled "warning"; then a flow check: pumps off, the well keeps flowing, red. Caption: "catch it while it is still small".
+
+**Terms introduced:** drilling break; flow check
 
 - **VERIFY:** no numeric detection-volume target is claimed
 
-### 7.04 · 24:58 · 31.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 7.04 · 27:13 · 47.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
-**VO:** The Norwegian rule is blunt: two independent well barriers, at all times. Each is a well barrier envelope: a set of elements that together stop flow. While drilling, the primary barrier is the mud column, and the secondary barrier is casing, cement, wellhead and preventer. Independence is the whole point: two airlock doors that must never fail together. Barriers must be tested, and if one fails, work stops until it is restored.
+**VO:** Remember the two barriers? In Norway the rule is blunt: wherever a formation could flow to the surface, two independent well barriers must stand in the way. Each is a well barrier envelope: a set of elements that together stop flow. While drilling, the primary barrier is the mud column. The secondary barrier is the rock just below the last casing shoe, the casing cement, the casing, the wellhead and the preventer. Independence is the whole point: two airlock doors that must never fail together. Barriers must be tested, and if one fails, the only work allowed is restoring it. A kick is exactly that: the mud barrier has failed.
 
-**SHOT:** THE BARRIER SCHEMATIC. Flat 2D panel style (outline only): the well schematic with the primary envelope outlined in blue around the mud column, and the secondary envelope outlined in red around casing, cement, wellhead and BOP. An airlock cartoon with two doors and an interlock. A "barrier lost - stop work" banner.
+**SHOT:** THE BARRIER SCHEMATIC. Flat 2-D panel (outline only): the well schematic with the primary envelope outlined in blue around the mud column, and the secondary envelope outlined in red around the formation at the shoe (the outline closes across the open hole just below the shoe, labelled "formation at shoe, tested by leak-off"), casing cement, casing, wellhead and BOP. An airlock cartoon with two doors and an interlock. A "barrier lost: only restoration work" banner, then the blue envelope breaks where the kick enters.
 
 **Terms introduced:** well barrier envelope; primary barrier; secondary barrier
 
-- **VERIFY:** whether NORSOK D-010 permits "common" well barrier elements with a risk assessment, or the regulations require none, appears to conflict between sources; the narration says only "independent". Blue/red colour convention for primary/secondary is from memory
+- **VERIFY:** the in-situ formation below the shoe as a secondary well barrier element while drilling is from memory of the NORSOK D-010 drilling schematic; whether D-010 permits "common" well barrier elements with a risk assessment is not confirmed; the narration says only "independent". Blue/red colour convention for primary/secondary is from memory
 - **SEEN:** Activities Regulations s.85 (tested barriers with sufficient independence; if one fails only restoration work may continue) and Facilities Regulations s.48
 
-### 7.05 · 25:30 · 25s · anim **[GEN]** **[VERIFY]**
+### 7.05 · 28:00 · 38.5s · anim **[GEN]** **[SIM]**
 
-**VO:** When a kick is detected: stop drilling, flow check, close the preventer. Now the well is shut in, and the pipe pressure shows something remarkable. The drill pipe is a U-tube. Pressure at the bottom equals the mud in the pipe plus the shut-in drill pipe pressure. So pore pressure is the hydrostatic pressure plus that reading.
+**VO:** When a kick is suspected: lift the bit off bottom so no pipe joint sits in the preventer, stop the pumps, check for flow, and close the well. Now it is shut in, and the gauges hide a gift. The annulus holds gas of unknown size, but the drill pipe holds clean mud we know. Drill pipe and annulus form a U-tube: once the gauges settle, pressure at the bottom is that clean mud column plus the shut-in drill pipe pressure. One reading, and we know the pore pressure.
 
-**SHOT:** U-tube manometer drawing: the drill pipe on one side, the annulus on the other, both gauges at the surface (SIDPP and SICP), bottom pressure balancing. The BOP closes (reuse of 3.02). An equation line: P_pore = P_hyd(pipe) + SIDPP.
+**SHOT:** Shut-in sequence icons (bit off bottom, pumps off, flow check, BOP closes). Then a U-tube: the drill pipe leg full of clean amber mud, the annulus leg with a crimson gas slug; two surface gauges (SIDPP, SICP) settle. An equation card built from the well model: mud in the pipe 636 bar (1.62 sg, 4,000 m) + SIDPP 18 bar = pore pressure 654 bar.
 
 **Terms introduced:** shut-in drill pipe pressure
 
-- **VERIFY:** hard vs soft shut-in practice on the NCS not stated
+- **SIM:** numbers from the illustrative "actual" pore pressure (forecast + 0.12 sg); float valves in the BHA and hard vs soft shut-in practice not covered
 
-### 7.06 · 25:55 · 27s · anim **[GEN]** **[SIM]**
+### 7.06 · 28:39 · 41.5s · anim **[GEN]** **[SIM]**
 
-**VO:** To kill the well we need kill mud: heavier mud, weighing the old weight plus the shut-in pressure divided by gravity and depth. Pump it down, using the choke to hold bottom-hole pressure just above pore pressure. The driller's method circulates twice. With a subsea preventer, friction in the long choke line adds pressure, so we pump slowly and correct for it.
+**VO:** To kill the well we need kill mud: just heavy enough to balance the pore pressure on its own. That is the old weight plus the shut-in drill pipe pressure divided by g times the true vertical depth. The driller's method does it in two circulations: first, the old mud carries the kick out while the choke holds bottom-hole pressure just above pore pressure; then kill mud replaces the old mud. Wait-and-weight does both at once. With a subsea preventer, friction in the long choke line adds pressure, so we pump slowly and correct for it.
 
-**SHOT:** Two-column well with colours changing: old mud amber, kill mud darker amber displacing it down the pipe and up the annulus; a choke gauge and bottom-hole pressure stay level. A choke-line friction arrow along the long line from the seabed to the surface. Equation: KMW = MW + SIDPP / (g x TVD).
+**SHOT:** Equation: KMW = MW + SIDPP / (g · TVD) = 1.62 + 18.3 / (0.0981 × 4,000) ≈ 1.67 sg. Two-column well: circulation 1, the crimson gas leaves up the annulus with the old amber mud through the choke (flow particles) while a BHP gauge stays level; circulation 2, darker kill mud (KILL_MUD) displaces the old mud down the pipe and up the annulus. A choke-line friction arrow along the long line from the seabed to the rig. A small "wait-and-weight: one circulation" note.
 
 **Terms introduced:** kill mud; driller's method
 
-- **SIM:** no numbers; wait-and-weight, volumetric method and bullheading mentioned only on screen as text labels
+- **SIM:** volumetric method and bullheading not covered; the kill-mud weight ignores a safety margin
 
-### 7.07 · 26:22 · 21.5s · anim **[GEN]** **[SIM]**
+### 7.07 · 29:20 · 38.5s · anim **[GEN]** **[SIM]**
 
-**VO:** The weak point is the shoe. As the gas reaches it, the pressure there peaks. Take too big a kick, and the rock cracks, the test we saw in chapter three. That is what kick tolerance means, and it is why casing seats were chosen from the bottom up.
+**VO:** The weak point is the shoe, the top of the open hole. Rising gas expands, so the choke adds pressure to hold the bottom steady, and that pressure peaks at the shoe as the gas arrives. Take too big a kick, or one too far above our mud weight, and the shoe pressure passes the limit a leak-off test measures, repeated below every shoe: the rock cracks and fluid escapes underground. The biggest kick that survives is the kick tolerance, one of the margins built into chapter one's staircase.
 
-**SHOT:** Annulus with a gas slug rising; a pressure trace at the casing shoe climbs as the top of the slug reaches the shoe and touches the fracture line from the window chart; label "kick tolerance = biggest kick that keeps this below the fracture line".
+**SHOT:** Annulus with a gas slug rising during circulation; a pressure trace at the 9⅝ in shoe (3,400 m) climbs as the top of the slug approaches and peaks as it arrives, against the shoe limit line (fracture 1.71 sg, measured by the leak-off test). A bigger slug pushes the peak over the line: a crack and losses underground. Label "kick tolerance = biggest kick that keeps this peak below the line".
 
 **Terms introduced:** kick tolerance
 
 - **SIM:** kick tolerance shown as a concept, no calculation
 
-### 7.08 · 26:44 · 32s · anim **[GEN]** **[SEEN]**
+### 7.08 · 29:59 · 45.5s · anim **[GEN]** **[SEEN]**
 
-**VO:** In twenty ten, on the Macondo well in the Gulf of Mexico, the barriers failed in a chain. Cement and the shoe track did not isolate the reservoir. A negative pressure test, which lowers the pressure in the well to check the barriers hold, was misread. The blowout preventer did not seal. Eleven people died. Barriers do not fail one at a time. They fail when we stop checking.
+**VO:** In twenty ten, on the Macondo well in the Gulf of Mexico, barriers failed one after another. The cement at the bottom of the well did not seal the reservoir. A negative pressure test, on the Norwegian shelf called an inflow test, drops the pressure inside the well below the rock's to prove the seal holds. Its warnings were explained away, and the heavy mud was replaced with seawater. The kick went unnoticed for about forty minutes. The preventer did not seal. Eleven people died. No single failure did that: every barrier had a flaw, and every warning was explained away.
 
-**SHOT:** A restrained, factual timeline graphic on the barrier schematic: three barrier elements turn grey one by one with labels (cement/shoe track, verification test misread, BOP failure to seal). A simple text card: "Macondo, 2010 - 11 lives lost". No dramatic imagery.
+**SHOT:** A restrained, factual timeline on the barrier schematic: elements turn grey one by one with labels (bottom cement / shoe track, inflow test misread, mud displaced to seawater, kick missed ~40 min, BOP failed to seal). A simple text card: "Macondo, 2010 · 11 lives lost". No dramatic imagery.
 
 **Terms introduced:** negative pressure test
 
-- **SEEN:** facts match CSB / BP / IADC summaries in web search results (cement and shoe-track barrier failure, negative pressure test misinterpreted, BOP failure, eleven fatalities); primary investigation reports not read in this environment
+- **SEEN:** facts match CSB / BP / IADC summaries in web search results (bottom cement and shoe-track barrier failure, negative pressure test misinterpreted, displacement to seawater, kick indications missed for roughly 40 minutes, BOP failure, eleven fatalities); primary investigation reports not read in this environment
 
-## Ch 8: Formation evaluation: discovery or dry hole?  (27:16–31:16)
+## Ch 8: Formation evaluation: discovery or dry hole?  (30:44–34:44)
 
-### 8.01 · 27:16 · 18s · anim **[GEN]**
+### 8.01 · 30:44 · 18s · anim **[GEN]**
 
 **VO:** Now the question flips. Until now it was how to get there safely; now it is what we found. A well is an expensive way to buy measurements, bought in order from fast, cheap and uncertain, to slow, costly and definitive.
 
 **SHOT:** A ladder diagram descending the screen: mud log, logging while drilling, wireline, pressure and samples, core, well test. Each rung has a time-to-result and a certainty bar; the cost bar grows.
 
-### 8.02 · 27:34 · 23.5s · anim **[GEN]** **[SIM]**
+### 8.02 · 31:02 · 23.5s · anim **[GEN]** **[SIM]**
 
 **VO:** First, the mud log. Geologists describe the cuttings coming up with the mud, and look at them under ultraviolet light, where oil glows. A gas chromatograph measures the gases in the mud. But there is a delay: the lag time, annulus volume divided by flow rate, means cuttings are old news when they arrive.
 
@@ -532,7 +535,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** lag time shown as a single number; no recycled-gas or bit-metamorphism cautions in the narration
 
-### 8.03 · 27:57 · 28.5s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.03 · 31:26 · 28.5s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** Next, logging while drilling, LWD: sensors in the drill string reading the rock as it is cut. Gamma ray separates shale from sand. Resistivity: hydrocarbons conduct poorly, so high resistivity can mean oil or gas. Density and neutron give porosity, the fraction of the rock that is pore space. The data climbs the pipe as pressure pulses in the mud, a few bits per second.
 
@@ -543,7 +546,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** log curves are synthetic and generated from the well model
 - **VERIFY:** telemetry rate "a few bits per second" is a rounded memory figure
 
-### 8.04 · 28:26 · 22s · anim **[GEN]** **[SIM]**
+### 8.04 · 31:54 · 22s · anim **[GEN]** **[SIM]**
 
 **VO:** Why can resistivity find oil? Picture the rock as a sponge soaked in salty water. Current flows through the salt water. Replace some with oil, an insulator, and less current flows. Archie's equation turns that into numbers: water saturation depends on porosity and resistivity. Simplified: it fails in shaly sands.
 
@@ -553,7 +556,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** Archie only; no Simandoux or Waxman-Smits
 
-### 8.05 · 28:48 · 41s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.05 · 32:16 · 41s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** After the bottom section is drilled, more logs run on a cable: wireline. Then comes the best trick. A formation tester presses a probe against the rock and measures pressure at a series of depths. In a fluid column, pressure rises with depth at that fluid's own weight: gas, about a quarter of a bar per ten metres; oil, about three quarters; water, about one bar. Plot pressure against depth and the slopes differ. Where the oil line meets the water line is the free-water level: a contact the well never had to cross.
 
@@ -564,7 +567,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** gradients (0.025 / 0.076 / 0.106 bar/m) and contacts are the model's invented values
 - **VERIFY:** typical reservoir-condition fluid gradients quoted from memory
 
-### 8.06 · 29:28 · 20.5s · anim **[GEN]** **[SIM]**
+### 8.06 · 32:58 · 20.5s · anim **[GEN]** **[SIM]**
 
 **VO:** The tool also pumps out samples, analysed downhole and in the lab. If two sands sit on different pressure lines, they are not connected. And the free-water level is a pressure surface: the oil-water contact on the logs is a little higher, because of capillary forces.
 
@@ -572,7 +575,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** transition zone thickness illustrative (the model puts the OWC 6 m above the FWL)
 
-### 8.07 · 29:49 · 21.5s · anim **[GEN]**
+### 8.07 · 33:18 · 21.5s · anim **[GEN]**
 
 **VO:** A core is the only direct physical sample of the rock: a cylinder cut by a hollow bit. The lab gives porosity, permeability, how easily fluid flows through the rock, and, for a mechanical engineer's pleasure, triaxial strength tests that calibrate our fracture and collapse estimates. It takes weeks.
 
@@ -580,7 +583,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 **Terms introduced:** core; permeability
 
-### 8.08 · 30:10 · 29s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 8.08 · 33:40 · 29s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** The last test is a drill stem test, DST: a temporary completion lets the well flow to surface, then we shut it in and watch the pressure build up. That gives permeability, damage near the well, and boundaries. But it is costly, and it means burning hydrocarbons, and on the Norwegian shelf emissions are tightly controlled and taxed. So operators often rely on logs, pressures and samples.
 
@@ -591,7 +594,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** how often DSTs are run on the NCS and the exact permit route are not confirmed; the narration avoids a frequency claim
 - **SEEN:** flaring prohibited except brief testing and safety (World Bank flaring summary)
 
-### 8.09 · 30:40 · 16s · anim **[GEN]** **[SIM]**
+### 8.09 · 34:08 · 16s · anim **[GEN]** **[SIM]**
 
 **VO:** Then interpretation. Apply cutoffs on shale content, porosity and water saturation: net sand, net reservoir, net pay. Net pay over gross thickness is the net-to-gross ratio. These cutoffs are illustrative; real ones depend on the field.
 
@@ -601,7 +604,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** cutoffs are invented (shale volume, porosity, water saturation); real cutoffs are field-specific
 
-### 8.10 · 30:56 · 20s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 8.10 · 34:24 · 20s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** So: is it a discovery? Are hydrocarbons present? Movable? How much? The Norwegian Offshore Directorate defines a discovery as a deposit where testing, sampling or logging shows probably movable petroleum. That is technical, not commercial. And a dry hole is still data about the basin.
 
@@ -612,9 +615,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** well-result category names and discovery notification rules not confirmed
 - **SEEN:** Sodir definition of a discovery and of a wildcat well (Sodir pages in web search results)
 
-## Ch 9: Plugging and abandonment  (31:16–34:30)
+## Ch 9: Plugging and abandonment  (34:44–38:00)
 
-### 9.01 · 31:16 · 26.5s · anim **[GEN]** **[NO]** **[VERIFY]**
+### 9.01 · 34:44 · 26.5s · anim **[GEN]** **[NO]** **[VERIFY]**
 
 **VO:** The well has done its job. We have the data. Now comes the hardest requirement of all. A well is a pipe from a pressurised reservoir to the seabed, and it must stay sealed for geological time. That is plugging and abandonment, P and A. And the plan for it exists before the first metre is drilled.
 
@@ -624,7 +627,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** that NORSOK D-010 has an eternal-perspective design basis for permanent barriers, and that the P&A scheme / relief-well plan must exist before spud, are from memory, not confirmed
 
-### 9.02 · 31:42 · 22.5s · anim **[NO]** **[VERIFY]**
+### 9.02 · 35:11 · 22.5s · anim **[NO]** **[VERIFY]**
 
 **VO:** First, find every source of inflow. Not only the reservoir. A thin overpressured sand, here at about three thousand metres, can push fluid all the way to the seabed. Each source needs a permanent barrier, and where a hydrocarbon reservoir could flow, the Norwegian standard asks for two.
 
@@ -634,7 +637,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** barrier count per source (two for a hydrocarbon-bearing reservoir, one for other flow potential) from memory of NORSOK D-010, not confirmed; no minimum lengths or test pressures are narrated
 
-### 9.03 · 32:04 · 27.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.03 · 35:34 · 27.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** A permanent barrier must seal across the whole cross-section of the well, including every annulus, and be bonded to solid rock on all sides: rock to rock. Think of sealing a tunnel. A door in the corridor is no use if pipes run along the wall. A plug inside the casing is no use if fluid can run behind it.
 
@@ -645,7 +648,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** exact wording
 - **SEEN:** D-010 Rev 5 permanent barriers extend across the full cross-section, sealing vertically and horizontally with all annuli closed (secondary web summaries)
 
-### 9.04 · 32:32 · 31s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.04 · 36:01 · 31s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** There are three ways to get there. If the cement behind the casing was logged and is good, and in an exploration well it is only weeks old, it can form part of the barrier. Or we cut the casing away by section milling, and plug the open hole against the rock. Or we perforate the casing, wash the annulus clean, and pump cement: perforate, wash, cement.
 
@@ -656,7 +659,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** any acceptance criteria and qualification matrix not read
 - **SEEN:** perforate-wash-cement recognised in NORSOK D-010 Rev 5 (vendor blog and SPE review)
 
-### 9.05 · 33:03 · 26s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 9.05 · 36:32 · 26s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** To place a plug, first set a mechanical base. Then cement is pumped through open-ended pipe as a balanced plug: balanced, so the levels inside and outside the pipe match. The pipe is pulled slowly out of the cement, and any excess is circulated out. In our drawing, the plug is about a hundred metres long.
 
@@ -667,7 +670,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** plug length of about 100 m is a drawing value, not a requirement
 - **VERIFY:** minimum plug lengths in NORSOK D-010 Rev 5 (a secondary search summary quotes 100 m open hole / 50 m cased on a mechanical base / 30 m with a qualifying bond log) are NOT narrated
 
-### 9.06 · 33:29 · 23s · anim **[NO]** **[VERIFY]**
+### 9.06 · 36:58 · 23s · anim **[NO]** **[VERIFY]**
 
 **VO:** And then we prove it. Tag it: lower the pipe until it rests on the plug, and load it with weight. Pressure test it, in the direction it has to hold where possible. Log the cement behind the casing. A barrier that has not been verified is not a barrier.
 
@@ -677,7 +680,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** tag weight and test pressure requirements deliberately not stated
 
-### 9.07 · 33:52 · 25.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.07 · 37:21 · 25.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** Last, the steel: cut and pull. We cut the casing and conductor below the seabed, and lift out the wellhead. A robot survey checks the seabed is clear, with nothing left for a fishing trawl to catch. And exploration wells are not left in limbo: temporary abandonment has a limited lifetime on the Norwegian shelf.
 
@@ -688,7 +691,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** cutting depth, seabed clearance requirement and who sets it not confirmed; the narration states no figures
 - **SEEN:** Havtil report states exploration wells begun after 1 January 2014 may not be temporarily abandoned longer than two years (search summary)
 
-### 9.08 · 34:18 · 13s · anim **[NO]** **[VERIFY]**
+### 9.08 · 37:46 · 13s · anim **[NO]** **[VERIFY]**
 
 **VO:** Finally, an as-abandoned drawing is filed. It is the last page in the well's life, and it has to be right for the long term.
 
@@ -696,18 +699,18 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** the exact reporting duty to the authorities not confirmed
 
-## Ch 10: Outro: the empty seabed  (34:30–35:00)
+## Ch 10: Outro: the empty seabed  (38:00–38:30)
 
-### 10.01 · 34:30 · 26s · anim **[GEN]**
+### 10.01 · 38:00 · 26s · anim **[GEN]**
 
 **VO:** A well is an argument with the Earth, about pressure, that you have to win every hour. And at the end, you make the win permanent. Three hundred metres down, in the dark, there is nothing here.
 
 **SHOT:** The seabed from Chapter 0 returns: bare, still. The window gauge from the opening dissolves into it. The camera rises slowly through the water column to the surface.
 
-### 10.02 · 34:56 · 4s · still **[GEN]**
+### 10.02 · 38:26 · 4s · still **[GEN]**
 
 **VO:** *(none: visual only)*
 
 **SHOT:** End card on dark background: "THE HOLE THAT FIGHTS BACK", then small print: "Illustrative composite well: invented numbers, real physics. Norway-specific material is flagged [NO]. Verify any requirement against NORSOK D-010 and the current regulations before relying on it."
 
-*Total narration: 4681 words ≈ 156 wpm averaged over the runtime.*
+*Total narration: 5231 words ≈ 174 wpm averaged over the runtime.*
