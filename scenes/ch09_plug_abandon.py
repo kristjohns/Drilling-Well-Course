@@ -178,6 +178,9 @@ def reservoir_fluids(st):
 def plug_objs(st, p, z=0.1):
     """A plug (cement grey) in the schematic, with its bridge plug for cased-hole plugs."""
     hw = plug_hw(p)
+    if p.hole == "open" and p.top < SHOE_958 < p.base:        # runs up inside the 9 5/8 in shoe: casing ID above it
+        idw = _strings()[-1][1] - WALL
+        return [_vrect(st, SX - idw, SX + idw, p.top, SHOE_958, P.CEMENT, z), _vrect(st, SX - hw, SX + hw, SHOE_958, p.base, P.CEMENT, z)]
     out = [_vrect(st, SX - hw, SX + hw, p.top, p.base, P.CEMENT, z)]
     if p.hole == "cased":
         out.append(_vrect(st, SX - hw, SX + hw, p.base, p.base + max(BP_LEN, 25), P.STEEL_DK, z + 0.005))
@@ -246,14 +249,14 @@ def beat_why(st, tl):
         for j, (x0, amp, colr) in enumerate(((0.0, 0.32, P.TEXT), (1.25, 0.28, P.MUTED), (2.5, 0.3, P.TEXT))):
             pts, v = [], 0.0
             for k in range(40):
-                yv = 1.15 - k * 0.07
+                yv = 1.15 - k * 0.058
                 v = 0.6 * v + rnd.uniform(-1, 1)
-                if -0.95 > yv > -1.5:
+                if -0.45 > yv > -0.9:
                     v = 1.6
                 pts.append((-0.3 + x0 + amp + amp * 0.6 * max(-1.4, min(1.4, v)), yv))
             ln = st.line(pts, colr, 0.03, 0.3)
             logs.append(ln)
-            logs.append(st.rect(-0.3 + x0 + amp, (1.15 - 39 * 0.07 + 1.15) / 2, 0.012, 39 * 0.07, P.GRID, 0.25))
+            logs.append(st.rect(-0.3 + x0 + amp, (1.15 - 39 * 0.058 + 1.15) / 2, 0.012, 39 * 0.058, P.GRID, 0.25))
         st.fade_in([cA, aT, aS] + logs[1::2], t_meas - 0.4, 0.4)
         for j, ln in enumerate(logs[0::2]):
             st.draw_on(ln, t_meas + 0.1 * j, t_meas + 2.4 + 0.1 * j)
@@ -1167,19 +1170,23 @@ def beat_cut(st, tl):
         st.fade_out(ctag, s[2], 0.3)
         # ROV survey: a clean seabed (only the old cuttings mound)
         t_rov = s[2]
-        rv = [st.rect(-7.2, 2.35, 1.25, 0.55, P.PANEL2, 0.6, role="solid"), st.rect(-7.2, 2.6, 1.25, 0.1, P.WARN, 0.61),
-              st.circle(-6.67, 2.3, 0.08, P.WARN, 0.62), st.text("ROV", -7.3, 2.3, 0.15, P.TEXT, 0.62, kind="bold")]
-        beam = st.poly([(-6.7, 2.1), (-7.6, sb + 0.04), (-5.6, sb + 0.04)], P.TEXT, 0.58, alpha=0.12)
+        r0 = -5.2
+        rv = [st.rect(r0, 2.35, 1.25, 0.55, P.PANEL2, 0.6, role="solid"), st.rect(r0, 2.6, 1.25, 0.1, P.WARN, 0.61),
+              st.circle(r0 + 0.53, 2.3, 0.08, P.WARN, 0.62), st.text("ROV", r0 - 0.1, 2.3, 0.15, P.TEXT, 0.62, kind="bold")]
+        beam = st.poly([(r0 + 0.5, 2.1), (r0 - 0.4, sb + 0.04), (r0 + 1.6, sb + 0.04)], P.TEXT, 0.58, alpha=0.12)
         st.fade_in(rv + [beam], t_rov - 0.2, 0.3)
-        st.move(rv + [beam], t_rov, b.word(2, "catch", 1.0) + 0.3, dx=12.4, interp="LINEAR")
+        st.move(rv + [beam], t_rov, b.word(2, "catch", 1.0) + 0.3, dx=11.0, interp="LINEAR")
         st.fade_out(rv + [beam], b.word(2, "catch", 1.0) + 0.1, 0.3)
         cut_l = tag(st, cx + 3.6, sb + 0.45, "old cuttings", P.MUTED, 0.15, align="c")
         st.fade_in(cut_l, t_rov + 1.2, 0.4)
         t_tr = W(b, 2, "fishing trawl")
-        net = [st.line([(-7.0, 1.3), (-4.8, 1.05), (-4.8, sb + 0.12), (-7.0, sb + 0.3)], P.MUTED, 0.03, 0.57, closed=True),
-               st.line([(-7.0, 1.3), (-9.0, 3.9)], P.MUTED, 0.02, 0.57), st.line([(-4.8, 1.05), (-6.0, 3.9)], P.MUTED, 0.02, 0.57)]
+        # a bottom trawl towed to the right: cod end trailing, mouth ahead, warps up to the (off-screen) vessel
+        m = -3.9
+        net = [st.line([(m, sb + 0.08), (m, sb + 0.95), (m - 1.7, sb + 0.6), (m - 2.0, sb + 0.42), (m - 1.7, sb + 0.25)], P.MUTED, 0.03, 0.57, closed=True)]
+        net += [st.line([(m - 0.45 * k, sb + 0.08 + 0.05 * k), (m - 0.45 * k, sb + 0.95 - 0.1 * k)], P.MUTED, 0.015, 0.57) for k in (1, 2, 3)]
+        net += [st.line([(m, sb + 0.95), (m + 2.2, 3.8)], P.MUTED, 0.02, 0.57), st.line([(m, sb + 0.08), (m + 2.6, 3.8)], P.MUTED, 0.02, 0.57)]
         st.fade_in(net, t_tr - 0.2, 0.3)
-        st.move(net, t_tr - 0.2, s[3] - 0.2, dx=9.5, interp="LINEAR")
+        st.move(net, t_tr - 0.2, s[3] - 0.2, dx=8.0, interp="LINEAR")
         st.fade_out(net, s[3] - 0.5, 0.3)
         cs = pill(st, 2.6, 2.45, "clear seabed: nothing for a trawl to catch", P.SAFE, "#06201c", 0.18, 0.6)
         st.fade_in(cs, t_tr + 0.6, 0.4)
@@ -1197,14 +1204,14 @@ def beat_cut(st, tl):
         st.fade_in([card, ttl, mini_sb] + mini, t_ta - 0.3, 0.4)
         st.fade_in(mwh, W(b, 3, "wellhead left"), 0.4)
         st.ripple(cxp, -0.85, W(b, 3, "wellhead left"), W(b, 3, "wellhead left") + 1.4, P.TEXT, period=0.7, r0=0.2, r1=0.6)
-        wl = st.text("wellhead left on", cxp + 0.4, -0.85, 0.15, P.TEXT, 0.74, align="l")
+        wl = st.text("wellhead left on", cxp + 0.45, -0.85, 0.17, P.TEXT, 0.74, align="l", kind="bold")
         st.fade_in(wl, W(b, 3, "wellhead left") + 0.2, 0.3)
         t_back = W(b, 3, "come back")
-        ret = st.line([(cxp + 0.9, -0.3), (cxp + 0.3, -0.55), (cxp + 0.05, -0.62)], P.TEXT, 0.03, 0.75)
-        st.draw_on(ret, t_back - 0.2, t_back + 0.5)
+        ret = st.text("so we can come back", cxp + 0.45, -1.2, 0.15, P.MUTED, 0.74, align="l")
+        st.fade_in(ret, t_back - 0.1, 0.4)
         # calendar + limit
         kx, ky = 5.85, -1.75
-        cal = [st.rect(kx, ky, 1.5, 1.4, P.PANEL2, 0.73), st.rect(kx, ky + 0.55, 1.5, 0.3, P.NO_BADGE, 0.74)]
+        cal = [st.rect(kx, ky, 1.5, 1.4, P.PANEL2, 0.73), st.rect(kx, ky + 0.55, 1.5, 0.3, P.MUTED, 0.74)]
         for r_ in range(3):
             for c_ in range(5):
                 cal.append(st.rect(kx - 0.52 + c_ * 0.26, ky + 0.15 - r_ * 0.28, 0.14, 0.14, P.MUTED, 0.74, alpha=0.6))
@@ -1243,42 +1250,50 @@ def beat_filed(st, tl):
             labs += o
         st.fade_in(labs[:4], t_last + 0.4, 0.4)
         st.fade_in(labs[4:], b.start + 0.6, 0.4)
-        # zoom inset: the top of the well
-        ix, iy = 2.35, 2.45
-        ins = [st.rect(ix, iy, 3.4, 2.2, P.PANEL, 0.3), st.text("TOP OF THE WELL", ix - 1.55, iy + 0.85, 0.14, P.MUTED, 0.31, align="l", kind="bold")]
-        sea_ = st.rect(ix, iy + 0.45, 3.0, 0.5, P.SEA, 0.31)
-        mud_ = st.rect(ix, iy - 0.5, 3.0, 1.4, P.SEABED, 0.31)
+        # zoom inset: the top of the well (casing stubs cut below the seabed, surface plug inside, seabed clear)
+        ix, iy, iw, ih = 4.6, 2.2, 5.6, 3.0
+        ins = [st.rect(ix, iy, iw, ih, P.PANEL, 0.3),
+               st.text("TOP OF THE WELL, ZOOMED IN", ix - iw / 2 + 0.25, iy + ih / 2 - 0.25, 0.15, P.MUTED, 0.31, align="l", kind="bold")]
+        gx, gw = ix - 0.9, 3.4                              # drawing window inside the card
+        ysb = iy + 0.35
+        sea_ = st.rect(gx, (ysb + iy + 1.0) / 2, gw, iy + 1.0 - ysb, P.SEA, 0.31)
+        mud_ = st.rect(gx, (ysb + iy - 1.3) / 2, gw, ysb - (iy - 1.3), P.SEABED, 0.31)
+        ycut = ysb - 0.35
         stubs = []
-        for i, hw in enumerate((1.05, 0.75, 0.5, 0.34)):
+        for i, hw in enumerate((1.1, 0.8, 0.56, 0.4)):
             for sg in (-1, 1):
-                stubs.append(st.rect(ix + sg * hw, iy - 0.6, 0.05, 1.2, P.STEEL, 0.33))
-        cemi = st.rect(ix, iy - 0.75, 0.62, 0.9, P.CEMENT, 0.32)
-        ver = outline(st, ix - 0.33, iy - 0.28, ix + 0.33, iy - 1.18, P.SAFE, 0.34, 0.03)
-        cutl = st.dashed((ix - 1.3, iy - 0.02), (ix + 1.3, iy - 0.02), P.WARN, 0.025, 0.1, 0.07, 0.34)
-        il = [st.text("seabed: clear", ix + 1.45, iy + 0.28, 0.13, P.TEXT, 0.34, align="r"),
-              st.text("casing cut below the seabed", ix, iy + 0.09, 0.12, P.WARN, 0.34)]
-        lk = st.line([(SX + 0.6, 3.3), (ix - 1.7, iy)], P.MUTED, 0.018, 0.3, alpha=0.7)
-        st.fade_in(ins + [sea_, mud_] + stubs + [cemi, lk] + cutl + il, t_last + 0.6, 0.5)
+                stubs.append(st.rect(gx + sg * hw, (ycut + iy - 1.3) / 2, 0.06, ycut - (iy - 1.3), P.STEEL, 0.33))
+        cemi = st.rect(gx, (ycut - 0.06 + iy - 1.3) / 2, 0.74, ycut - 0.06 - (iy - 1.3), P.CEMENT, 0.32)
+        ver = outline(st, gx - 0.39, ycut - 0.04, gx + 0.39, iy - 1.28, P.SAFE, 0.34, 0.03)
+        cutl = st.dashed((gx - 1.45, ycut), (gx + 1.45, ycut), P.WARN, 0.025, 0.1, 0.07, 0.34)
+        lx2 = gx + gw / 2 + 0.15
+        il = [st.text("seabed: clear", lx2, ysb + 0.2, 0.16, P.TEXT, 0.34, align="l", kind="bold"),
+              st.text(wrap_to("strings cut below the seabed", 0.16, 1.9), lx2, ycut - 0.25, 0.16, P.WARN, 0.34, align="l", kind="bold"),
+              st.text("surface plug", lx2, iy - 0.95, 0.16, P.TEXT, 0.34, align="l", kind="bold")]
+        il += leader(st, lx2 - 0.05, iy - 0.95, gx + 0.3, iy - 0.95, z=0.35)
+        st.fade_in(ins + [sea_, mud_] + stubs + [cemi] + cutl + il, t_last + 0.6, 0.5)
         st.fade_in(ver, t_last + 1.3, 0.3)
         # the drawing is stamped and filed
         t_draw = W(b, 0, "as-abandoned drawing")
-        sx_, sy_ = 5.9, -0.6
+        sx_, sy_ = 3.0, -1.05
         sheet = [st.rect(sx_, sy_, 1.5, 1.95, P.TEXT, 0.5, role="flat")]
         for k in range(5):
-            sheet.append(st.rect(sx_ - 0.05, sy_ + 0.55 - 0.25 * k, 0.9, 0.03, P.MUTED, 0.51))
+            sheet.append(st.rect(sx_ + 0.15, sy_ + 0.55 - 0.25 * k, 0.8, 0.03, P.MUTED, 0.51))
         sheet.append(st.rect(sx_ - 0.45, sy_ - 0.1, 0.12, 1.4, P.STEEL_DK, 0.51))
+        for k in range(3):
+            sheet.append(st.rect(sx_ - 0.45, sy_ + 0.3 - 0.4 * k, 0.24, 0.16, P.CEMENT, 0.52))
         st.fade_in(sheet, t_draw - 0.4, 0.4)
-        stamp = pill(st, sx_, sy_ - 0.2, "AS-ABANDONED", P.SAFE, "#06201c", 0.17, 0.53)
+        stamp = pill(st, sx_, sy_ - 0.35, "AS-ABANDONED", P.SAFE, "#06201c", 0.16, 0.53)
         st.pop_in(stamp, t_draw + 0.4, 0.4)
         st.fade_in(stamp, t_draw + 0.4, 0.2)
-        box = [st.rect(sx_, -2.75, 2.2, 0.9, P.PANEL2, 0.6), st.text("WELL ARCHIVE", sx_, -2.75, 0.16, P.MUTED, 0.61, kind="bold")]
+        box = [st.rect(sx_, -3.05, 2.2, 0.7, P.PANEL2, 0.6), st.text("WELL ARCHIVE", sx_, -3.05, 0.16, P.MUTED, 0.61, kind="bold")]
         t_fil = W(b, 0, "filed")
         st.fade_in(box, t_fil - 0.6, 0.4)
         st.move(sheet + stamp, t_fil + 0.2, t_fil + 1.4, dy=-1.6)
         st.fade_out(sheet + stamp, t_fil + 1.0, 0.4)
-        lt = st.text(wrap_to("the last page in the well's life", 0.3, 4.0, "bold"), 3.75, -0.4, 0.3, P.TEXT, 0.5, align="l", kind="bold")
+        lt = st.text(wrap_to("the last page in the well's life", 0.3, 3.4, "bold"), 4.3, -0.75, 0.3, P.TEXT, 0.5, align="l", kind="bold")
         st.fade_in(lt, W(b, 1, "last page"), 0.5)
-        lt2 = st.text("right for the long term", 3.75, -1.25, 0.24, P.WARN, 0.5, align="l", kind="bold")
+        lt2 = st.text("right for the long term", 4.3, -1.75, 0.24, P.WARN, 0.5, align="l", kind="bold")
         st.fade_in(lt2, W(b, 1, "long term"), 0.5)
 
 
