@@ -1,16 +1,16 @@
 # Narration script and shot list (generated: do not edit; edit `chNN_*.md` and run `make script`)
 
-Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry · **[SIM]** deliberate simplification · **[VERIFY]** not confirmed against a primary source · **[SEEN]** seen only in a secondary/web source
+Runtime 36:42 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[NO]** Norway-specific · **[GEN]** general industry · **[SIM]** deliberate simplification · **[VERIFY]** not confirmed against a primary source · **[SEEN]** seen only in a secondary/web source
 
-## Ch 0: Cold open: the window  (0:00–1:30)
+## Ch 0: Cold open: the window  (0:00–1:49)
 
-### 0.01 · 0:00 · 20.5s · anim **[GEN]**
+### 0.01 · 0:00 · 17.8s · anim **[GEN]**
 
 **VO:** This is the North Sea floor, three hundred metres down. Soon a drill will reach almost four kilometres into the rock beneath it. A few months from now, the rig will be gone, the steel cut off below the seabed, and you will barely find a trace.
 
 **SHOT:** Eased dive from the sea surface through drifting marine snow (parallax layers) to a bare seabed, landing on "three hundred metres" with a "seabed · 300 m" callout. Camera pulls out to true vertical scale: a dashed well path draws down 4 km with a depth counter. A rig and wellhead silhouette fade in, then out (time-lapse), and the camera returns to the same empty seabed. Title: "THE HOLE THAT FIGHTS BACK / how an offshore exploration well is drilled, judged, and sealed for ever".
 
-### 0.02 · 0:20 · 18.5s · anim **[GEN]**
+### 0.02 · 0:18 · 16s · anim **[GEN]**
 
 **VO:** Almost everything in between comes back to one problem. The rock squeezes in on the hole, and the fluid in its pores pushes to get in. Our defence is a liquid, drilling fluid, or mud, and we choose how heavy it is.
 
@@ -18,7 +18,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 **Terms introduced:** drilling fluid
 
-### 0.03 · 0:39 · 25.5s · anim **[GEN]** **[SIM]**
+### 0.03 · 0:34 · 22.2s · anim **[GEN]** **[SIM]**
 
 **VO:** Deep down, the fluid in the rock's pores is under pressure. Make the mud too light, and that fluid pushes into the hole: a kick. Make it too heavy, and you crack the rock. The mud drains into the crack, the level in the hole falls, the pressure at the bottom drops, and the fluid comes in anyway.
 
@@ -28,7 +28,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** one loss zone and one kicking sand; the fracture is drawn larger than life
 
-### 0.04 · 1:04 · 35s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 0.04 · 0:56 · 30.4s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** So the weight must live inside a window: the mud weight window. In the deepest part of our well, the gap between too light and too heavy is only about a tenth of the mud's weight. In high-pressure wells, and in fields already drained by production, it can be just a few per cent. And the window moves with every metre. Pause, and guess: how do you stay inside it, for four kilometres?
 
@@ -39,7 +39,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** "about a tenth": in the deepest (8½ in) section the mud must stay above the highest pore pressure in the open hole (1.55 sg at 3,900 m) and below the weakest rock, the 9⅝ in shoe at 3,400 m (1.71 sg): 0.16 sg on 1.62 sg of mud ≈ 10 %
 - **VERIFY:** "a few per cent" for high-pressure and depleted wells is general knowledge, no primary source read
 
-### 0.05 · 1:40 · 26s · anim **[GEN]** **[SIM]**
+### 0.05 · 1:26 · 22.4s · anim **[GEN]** **[SIM]**
 
 **VO:** That is our question: how do you drill four kilometres through rock whose fluids want to push in, and that cracks if you push back too hard, then leave the hole so safe nobody ever has to think about it again? Our well is invented; the physics is real. First, a plan.
 
@@ -47,9 +47,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** composite wildcat; every number in the video comes from one made-up well model (scenes/common/well_model.py)
 
-## Ch 1: Planning: casing from the bottom up  (2:06–6:06)
+## Ch 1: Planning: casing from the bottom up  (1:49–6:46)
 
-### 1.01 · 2:06 · 29s · anim **[GEN]** **[SIM]**
+### 1.01 · 1:52 · 26.2s · anim **[GEN]** **[SIM]**
 
 **VO:** Before anyone drills, someone decides what the hole is for. Geologists have picked a target: a sandstone at about three thousand nine hundred and fifty metres. Depth here means true vertical depth below sea level, TVD: straight down, not along the hole. Real well plans usually measure from the rig floor instead. Our job is to reach the target safely, and find out what is in it.
 
@@ -59,7 +59,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** all depths are TVD below sea level in a near-vertical well; NCS well plans reference the rig floor (m RKB)
 
-### 1.02 · 2:34 · 33s · anim **[GEN]** **[SIM]**
+### 1.02 · 2:18 · 30.2s · anim **[GEN]** **[SIM]**
 
 **VO:** Start with something you know. Dive ten metres and you feel one more bar. Hydrostatic pressure is density times gravity times depth. Mud is just a heavier liquid, and we quote its weight as specific gravity, sg: fresh water is one. Rock pores hold fluid too, at a pore pressure. If the pores connect all the way up, the pressure is that of a column of salty water, about one point oh three sg: normal pressure.
 
@@ -69,7 +69,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** normal pore pressure drawn as a 1.03 sg brine column
 
-### 1.03 · 3:08 · 37.5s · anim **[GEN]** **[SIM]**
+### 1.03 · 2:48 · 32.5s · anim **[GEN]** **[SIM]**
 
 **VO:** But sometimes fluid is trapped. Picture a spring, the rock grains, in a cylinder of water, the pore fluid, under a piston with a tiny hole. Load it: at first the water takes the load, then it leaks away and the spring takes over. Bury sediment fast under tight shale, and the water cannot escape as fast as load is added, so it keeps carrying the load. That is overpressure. The grains carry only the effective stress: the weight of everything above, minus the pore pressure.
 
@@ -79,7 +79,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** single-mechanism picture (disequilibrium compaction); other overpressure mechanisms exist and are not shown
 
-### 1.04 · 3:45 · 37.5s · anim **[GEN]** **[SIM]**
+### 1.04 · 3:21 · 32.2s · anim **[GEN]** **[SIM]**
 
 **VO:** Now the upper wall of the window. A hole in a plate concentrates stress, two to three times over, at its edge, and rock around a borehole is squeezed the same way. Mud pressure pushes back. Too little, and the concentrated stress crushes the wall: collapse. Too much, and the wall splits; that pressure, as a mud weight, is the fracture gradient. For planning it is predicted. Later, a leak-off test, pumping until the rock takes fluid, checks it at one depth in the real hole.
 
@@ -89,7 +89,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** the factor depends on the stress state: about two for equal horizontal stresses, up to three for a uniaxial field (Kirsch); leak-off pressure lies between the minimum horizontal stress and the breakdown pressure
 
-### 1.05 · 4:22 · 36.5s · anim **[GEN]** **[SIM]**
+### 1.05 · 3:53 · 31.2s · anim **[GEN]** **[SIM]**
 
 **VO:** Plot both limits against depth, as an equivalent mud weight: the mud weight that would give that pressure. Pore pressure on the left, fracture on the right. The mud must stay between them, with a margin each side. In our well the window is tight near the seabed, widest around two and a half kilometres, then pinches in where overpressure builds, because pore pressure climbs faster than the stress needed to open a fracture. Simplified: I draw the lower limit as pore pressure alone.
 
@@ -99,7 +99,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** lower limit drawn as pore pressure only; the model's collapse curve lies below pore pressure in this basin and is not drawn
 
-### 1.06 · 4:59 · 49.5s · anim **[GEN]** **[SIM]**
+### 1.06 · 4:24 · 43.8s · anim **[GEN]** **[SIM]**
 
 **VO:** Remember the question: how do you stay inside the window for four kilometres? You don't, not all at once. You stay inside it one section at a time, and lock each finished section behind steel pipe, casing, cemented in place. We design from the bottom up. The deepest section needs about one point six two sg: its highest pore pressure, one point five five, plus a margin. Draw that line up until it meets the fracture curve, less a margin and room for a gas kick. Above that point we could not safely shut in a kick, closing the well against it, so casing must end below it. Its bottom end is the casing shoe.
 
@@ -109,7 +109,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** margins are invented: 0.07 sg trip (swab) margin over pore pressure; 0.03 sg below fracture covering ECD and surge; plus a 150 m gas-kick term at the shoe (see well_model.py). Without the kick term the 1.62 sg line would cross fracture-less-margin near 2,420 m
 
-### 1.07 · 5:48 · 31s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 1.07 · 5:08 · 28.3s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** Near the top, pressure is not the only enemy. Shallow gas: pockets a few hundred metres below the seabed, reached before any blowout preventer, the well's big emergency seal-off stack, is in place, so a gas flow there cannot simply be shut in. Boulders left by glaciers. Soft, uneven seabed. A site survey, seabed mapping plus high-resolution seismic of the shallow layers, looks for all of them before the rig arrives.
 
@@ -120,7 +120,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** shallow water flow, common in other basins, omitted
 - **VERIFY:** whether a seabed/shallow-gas site survey is a Norwegian regulatory requirement (and its wording) not confirmed
 
-### 1.08 · 6:20 · 36s · anim **[GEN]** **[SIM]**
+### 1.08 · 5:36 · 31.8s · anim **[GEN]** **[SIM]**
 
 **VO:** Then repeat. The deepest string ends at about three thousand four hundred metres. Above that shoe the mud can be lighter, one point four nine sg, and its line meets the fracture curve near two thousand metres: the next shoe. Above that, the mud, one point one two sg, is so light that pressure no longer decides. Shallow hazards do, and the need for a strong anchor for the seabed hardware and the preventer. About a thousand metres. The result is a staircase.
 
@@ -128,7 +128,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** the surface-casing depth floor of 1,000 m is an assumption standing in for hazard and kick-tolerance reasoning
 
-### 1.09 · 6:56 · 45s · anim **[GEN]** **[SIM]**
+### 1.09 · 6:08 · 38.4s · anim **[GEN]** **[SIM]**
 
 **VO:** The strings nest like a telescope, because each must pass through the one above. So the sizes step down: thirty inch, twenty, thirteen and three eighths, nine and five eighths, each set in a bigger drilled hole, and finally an eight and a half inch open hole to the bottom. Every string costs diameter. And this is a wildcat, the first well into an untested prospect. Nearby wells help, but may sit in a different pressure compartment, so the forecast is uncertain. The plan keeps a spare, contingency string, in reserve, and that only fits if everything above is sized bigger from the start.
 
@@ -138,9 +138,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** standard NCS-style size ladder is from general knowledge; the conductor shoe (390 m) is soil-driven, not pressure-driven
 
-## Ch 2: Top hole: drilling with no safety net  (7:40–10:56)
+## Ch 2: Top hole: drilling with no safety net  (6:46–10:15)
 
-### 2.01 · 7:40 · 37.5s · anim **[GEN]** **[SIM]**
+### 2.01 · 6:49 · 32.7s · anim **[GEN]** **[SIM]**
 
 **VO:** Now we drill. The first section is the strangest. The drill string, the pipe that turns the bit, hangs in open sea, with no riser, the big pipe that would carry the mud back up to the rig, and no blowout preventer. This is riserless drilling. Seawater, with slugs of thick gel to sweep the hole clean, is pumped down the pipe, out of the bit, and back up around it, spilling the cuttings, the chips of rock, onto the seabed. Usually, nothing returns to the rig.
 
@@ -150,7 +150,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** riserless mud recovery (used on some NCS wells) not shown
 
-### 2.02 · 8:18 · 51s · anim **[GEN]** **[VERIFY]**
+### 2.02 · 7:22 · 46.7s · anim **[GEN]** **[VERIFY]**
 
 **VO:** Pause and think. We are about to drill seven hundred metres below the seabed with nothing that can close the well. Why is that allowed? [pause 2] This shallow, only a thin layer of sediment presses down, so the grains are barely squeezed and the rock splits at low pressure. Shut in a gas flow here, and the trapped pressure would crack the rock and send gas up outside the well, where nothing can stop it. Better to let it bubble out at the seabed, far below the rig. So the defences come first: a survey for gas, a narrow pilot hole where in doubt, a remotely operated vehicle, an ROV, watching the hole, and heavy mud ready to pump.
 
@@ -160,7 +160,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** how NORSOK D-010 treats the barrier status of the riserless top hole (one fluid barrier? conditions?) is NOT confirmed; the narration describes the physics only and does not cite the standard
 
-### 2.03 · 9:09 · 55s · anim **[GEN]** **[SIM]**
+### 2.03 · 8:08 · 45.9s · anim **[GEN]** **[SIM]**
 
 **VO:** It starts with the spud, the first metres of the well. Often a guide base, a steel frame on the seabed, helps guide the pipe and keep everything aligned. Then comes the conductor, a thirty inch pipe that is the well's foundation. It is either jetted, washed down by water jets at its tip while its own weight sinks it into soft clay, or, as in our well, drilled in a thirty-six inch hole and cemented, about ninety metres deep. Think of it as a pile. Soil friction on it, later helped by the cemented casing inside, carries the wellhead, the hardware at the top of the well, and then a blowout preventer of hundreds of tonnes, while the moving rig and riser bend it back and forth.
 
@@ -170,7 +170,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** BOP weight given only as "hundreds of tonnes" [memory]; guide-base variants (temporary, permanent, guideline-less, suction-anchor foundations) not shown
 
-### 2.04 · 10:04 · 24.5s · anim **[GEN]**
+### 2.04 · 8:54 · 21.4s · anim **[GEN]**
 
 **VO:** Next, drilling through the conductor, a twenty-six inch hole goes down to a thousand metres below sea level, seven hundred below the seabed. Into it goes the twenty inch surface casing, with the high-pressure wellhead housing at its top. That housing is the first hardware that can contain pressure, and everything else will hang from it.
 
@@ -178,7 +178,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 **Terms introduced:** surface casing
 
-### 2.05 · 10:28 · 30s · anim **[GEN]** **[VERIFY]**
+### 2.05 · 9:16 · 26.7s · anim **[GEN]** **[VERIFY]**
 
 **VO:** Then we cement it: pumped down the inside of the pipe and up the outside, until grey cement appears at the seabed, spotted by the camera on the ROV. Cement fills the annulus, the ring-shaped gap around a pipe: here, between the casing and the rock, and up inside the conductor. It supports the wellhead, and seals off shallow zones. We will see how cement behaves in chapter six.
 
@@ -188,7 +188,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** the practice of cementing to the seabed with ROV-confirmed returns on current NCS wells is from general knowledge, not confirmed
 
-### 2.06 · 10:58 · 37s · anim **[GEN]** **[SIM]**
+### 2.06 · 9:42 · 32.6s · anim **[GEN]** **[SIM]**
 
 **VO:** A wellhead is nested seats, like stacked bowls. The high-pressure housing, on top of the twenty inch casing, lands inside the low-pressure conductor housing. Each later string will hang inside it on a casing hanger, with a seal that closes the gap behind it. One more thing for a subsea engineer: once the preventer and riser are on, this becomes a tall slender column bent back and forth by rig motion and currents, so fatigue of the wellhead and conductor is a real design driver.
 
@@ -198,9 +198,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** cuttable sidebar (fatigue) if the cut is over budget
 
-## Ch 3: BOP, riser, and the closed loop  (11:36–13:36)
+## Ch 3: BOP, riser, and the closed loop  (10:15–12:49)
 
-### 3.01 · 11:36 · 22s · anim **[GEN]** **[SIM]**
+### 3.01 · 10:18 · 19.5s · anim **[GEN]** **[SIM]**
 
 **VO:** Now we close the loop. The blowout preventer is lowered on the marine riser and latches onto the wellhead. For the first time the mud makes a full circuit: down the drill pipe, up the annulus and the riser, and back to the rig's tanks instead of onto the seabed.
 
@@ -208,7 +208,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** the circulation loop is closed, but the riser top is open to atmosphere at the rig (not a sealed system)
 
-### 3.02 · 11:58 · 32s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 3.02 · 10:37 · 28.9s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** A blowout preventer is a stack of valves, each with a job. The annular preventer squeezes a rubber element around whatever is in the hole. Pipe rams close around the drill pipe. And the last resort: the blind shear rams, which can cut through the drill pipe body, though not its thick joints, and seal the hole. Gas-charged accumulators store hydraulic energy, so the preventers close fast, even if the rig loses power.
 
@@ -219,7 +219,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** stack drawn with one annular, the blind shear rams above two pipe rams; real NCS stacks have more cavities (casing shear, second annular)
 - **VERIFY:** Norwegian requirements on BOP configuration (shear-ram redundancy, test pressure, test interval) not confirmed against NORSOK D-010 / D-001 / Activities Regulations
 
-### 3.03 · 12:30 · 49s · anim **[GEN]** **[SIM]**
+### 3.03 · 11:06 · 43.8s · anim **[GEN]** **[SIM]**
 
 **VO:** Why does the closed loop matter? Three reasons. The mud comes back, so we can afford a real, weighted mud and tune it to control pressure. We can compare the flow we pump in with the flow coming back, and watch the tank level: our earliest warning of a kick. And if something goes wrong, we can shut the well in at the seabed and circulate the kick out through the choke, an adjustable valve on a line back to the rig, not up the riser. From here on, two barriers, things that can each stop flow, stand between the reservoir and the sea: the mud, and behind it steel, cement and this preventer.
 
@@ -229,7 +229,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** the two-barrier picture is introduced informally here and made precise in Ch 7
 
-### 3.04 · 13:18 · 15s · anim **[GEN]** **[SEEN]**
+### 3.04 · 11:50 · 13.7s · anim **[GEN]** **[SEEN]**
 
 **VO:** None of it counts until it is tested. A barrier you have not tested is a hope, not a barrier. So every preventer is pressure-tested, and the rock gets tested too.
 
@@ -237,7 +237,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SEEN:** Activities Regulations s.85 requires tested well barriers (search summary)
 
-### 3.05 · 13:34 · 52.5s · anim **[GEN]** **[SIM]**
+### 3.05 · 12:04 · 45.8s · anim **[GEN]** **[SIM]**
 
 **VO:** Then we drill out the cement at the bottom of the twenty inch, and a few metres of fresh rock, and test it: the rock, and the cement seal at the shoe. Close the well and pump slowly. Pressure rises in a straight line, because we are squeezing a sealed volume of slightly compressible mud, until the line bends: fluid has started to leak into the formation. That is the leak-off point. Add the surface reading, about thirty-seven bar, to the weight of the mud column, and it converts to about one point five sg at the shoe. That one point checks our fracture forecast at this depth, and it caps the mud weight and the kick size for the next section.
 
@@ -247,9 +247,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** leak-off point plotted exactly on the model curve; real tests scatter and are usually stopped at the first deviation from the line
 
-## Ch 4: Drilling the deep sections  (14:26–17:26)
+## Ch 4: Drilling the deep sections  (12:49–16:41)
 
-### 4.01 · 14:26 · 39.5s · anim **[GEN]**
+### 4.01 · 12:52 · 36s · anim **[GEN]**
 
 **VO:** At the bottom of the drill string is the bottom-hole assembly, the BHA: the bit, a steering tool, measurement sensors, and heavy steel drill collars. A puzzle: we need tonnes of force on the bit. Do we push from the rig? [pause 1.5] No. The rig holds the pipe back. It hangs in tension, like a plumb line, and only part of the heavy collars' weight rests on the bit. In a vertical hole, push down with the slender pipe instead and it would buckle, so we keep the compression in the collars.
 
@@ -257,7 +257,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 **Terms introduced:** bottom-hole assembly; drill collar
 
-### 4.02 · 15:06 · 46.5s · anim **[GEN]** **[SIM]**
+### 4.02 · 13:28 · 41.4s · anim **[GEN]** **[SIM]**
 
 **VO:** Why steer at all? To reach a target that is not straight below, to stay clear of other wells, and, in a vertical wildcat like ours, to keep the hole straight. That is directional drilling. To steer, we tilt the bit or push it sideways. A mud motor, driven by the mud flowing through it, has a slight bend in its housing: stop turning the pipe and just slide, and the hole curves. A rotary steerable tool pushes pads against the wall, so it steers while the whole string turns. At the tip, a PDC bit, polycrystalline diamond compact, shears rock with diamond cutters, like a lathe tool.
 
@@ -267,7 +267,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** our example well is nearly vertical; steering is shown as concept only
 
-### 4.03 · 15:52 · 49.5s · anim **[GEN]** **[SIM]**
+### 4.03 · 14:10 · 43.7s · anim **[GEN]** **[SIM]**
 
 **VO:** A curved hole has a cost. Pulling pipe through a bend is like a rope around a capstan: the tension needed multiplies by e to the mu theta, where theta is the total angle the hole turns through. The sharpness of the bend, in degrees per thirty metres, is the dogleg severity. Pipe rotating through a sharp bend is flexed back and forth on every turn, which breeds fatigue cracks, so we limit it. To know where we are, measurement-while-drilling sensors, MWD, measure the hole's inclination and direction, and we compute the path from those angles. Each survey carries a small error, so the uncertainty in our position, an ellipse, grows the farther we drill.
 
@@ -277,7 +277,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** friction factor and dogleg numbers are illustrative
 
-### 4.04 · 16:42 · 40.5s · anim **[GEN]** **[NO]** **[VERIFY]**
+### 4.04 · 14:53 · 34.3s · anim **[GEN]** **[NO]** **[VERIFY]**
 
 **VO:** Meanwhile the mud is the hardest-working part of the system. Its weight holds back the formation fluids and props up the wall, which it seals with a thin filter cake. It carries cuttings up, cools the bit, and carries signals to the surface. It may be water-based, or oil-based in deep sections, and most of its extra weight comes from barite, a mineral powder about four times as dense as water. On the Norwegian shelf, cuttings coated in oil-based mud may not be dumped at sea: they are shipped to shore or injected underground.
 
@@ -287,7 +287,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** the NCS ban on discharging oil-based-mud cuttings (OSPAR Decision 2000/3, Norwegian activities rules) is from memory, not checked against the primary text
 
-### 4.05 · 17:22 · 36s · anim **[GEN]** **[SIM]**
+### 4.05 · 15:28 · 32.3s · anim **[GEN]** **[SIM]**
 
 **VO:** Now the twist. With the pumps on, the mud has to push its way up the narrow gap around the pipe. Friction adds pressure at the bottom. So bottom-hole pressure is higher while we pump than when we stop. Expressed as an equivalent mud weight, that pumping pressure is the equivalent circulating density, ECD. And every time we stop the pumps to screw on another stand of pipe, about twenty-eight metres, a pause drillers call a connection, the pressure at the bottom drops.
 
@@ -297,7 +297,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** Newtonian-style friction picture; real annular hydraulics use Herschel-Bulkley rheology
 
-### 4.06 · 17:58 · 47s · anim **[GEN]** **[NO]** **[SIM]** **[VERIFY]**
+### 4.06 · 16:00 · 40.9s · anim **[GEN]** **[NO]** **[SIM]** **[VERIFY]**
 
 **VO:** So the real window is squeezed from both sides. With the pumps off, or worse, while pulling pipe out, pressure must still beat the pore pressure. With the pumps on, it must stay under the fracture limit at the weakest point, usually the last casing shoe. In a narrow window, sometimes no mud weight does both. Managed pressure drilling, MPD, adds a knob. A rotating seal closes the top of the annulus around the turning pipe, the returns go through a choke, and when the pumps stop the choke adds back pressure at the surface, holding bottom-hole pressure steady. Then the mud alone is no longer the whole barrier.
 
@@ -308,9 +308,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** MPD variants collapsed into one concept
 - **VERIFY:** NORSOK D-010 treatment of managed pressure drilling (dedicated section in Rev 5?) not confirmed
 
-## Ch 5: Casing and tubular design  (18:45–21:30)
+## Ch 5: Casing and tubular design  (16:41–19:55)
 
-### 5.01 · 18:45 · 29.5s · anim **[GEN]** **[VERIFY]**
+### 5.01 · 16:44 · 27.2s · anim **[GEN]** **[VERIFY]**
 
 **VO:** Casing is the well's tunnel lining. It holds the hole open, contains pressure, and isolates formations. Its grade is a letter and a number: P one-ten means a minimum yield of one hundred and ten thousand psi, about seven hundred and sixty megapascals. Hydrogen sulphide drives hydrogen into hard steel and cracks it, so sour-service grades cap hardness, and P one-ten is too hard for most sour wells.
 
@@ -320,7 +320,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** grade list and yield conversion are from memory of API 5CT / ISO 11960 (110 ksi = 758 MPa is arithmetic and exact); sour-service rule wording (ISO 15156-2) not checked
 
-### 5.02 · 19:14 · 40s · anim **[GEN]** **[VERIFY]**
+### 5.02 · 17:11 · 37.3s · anim **[GEN]** **[VERIFY]**
 
 **VO:** Three loads, three ways to fail. Burst: pressure inside exceeds pressure outside, and the wall yields, like an over-pressured pipeline. Its rating is worked out on a wall twelve and a half percent thinner than nominal, the mill tolerance. Collapse: pressure outside, and the pipe gives way. Thin pipe buckles like a crushed can; thick pipe yields first. The diameter-to-thickness ratio decides which, and most casing sits in between. Tension: the string's weight hanging in mud, plus any pull on it, limited by the pipe body or, often, by the weaker connection.
 
@@ -330,7 +330,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** the 0.875 factor and the four collapse regimes (yield, plastic, transition, elastic) are from memory of API TR 5C3 / ISO 10400
 
-### 5.03 · 19:54 · 34.5s · anim **[GEN]** **[SIM]**
+### 5.03 · 17:48 · 30.7s · anim **[GEN]** **[SIM]**
 
 **VO:** The design basis picks the worst credible cases. For burst: typically a gas kick, with the well shut in, or the casing pressure test itself. For collapse: lost circulation, where mud drains away into cracked rock, lets the level inside the pipe fall, partly or completely, while the full mud column outside pushes in. For tension: the string's weight as it is lowered in, shock from sudden stops, and overpull, the extra pull needed to free it if it sticks.
 
@@ -340,7 +340,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** one load case per mode; real design bases list several per string
 
-### 5.04 · 20:29 · 35s · anim **[GEN]** **[SIM]**
+### 5.04 · 18:19 · 33.9s · anim **[GEN]** **[SIM]**
 
 **VO:** But those ratings are one load at a time. Real casing is pulled, squeezed and pressurised at once. So we check the von Mises equivalent stress against yield, with a design factor. Plotted as an ellipse of axial force against pressure, it answers a puzzle. Does pulling on a pipe make it easier or harder to crush? [pause 2] Easier. Steel already stretched along its length has less strength left to resist being squeezed, so the collapse rating is corrected for tension too.
 
@@ -350,7 +350,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** ellipse is the simplified VME yield envelope without bending or thermal load; collapse instability is checked separately (API/ISO collapse with tension correction); design factors are shown unlabelled as "operator-specific"
 
-### 5.05 · 21:04 · 20s · anim **[GEN]**
+### 5.05 · 18:53 · 18s · anim **[GEN]**
 
 **VO:** Each load peaks in a different place. Tension, and often burst, are worst at the top, where tension also eats into collapse strength. Collapse is worst at the bottom. So long strings are often tapered: thicker wall, or stronger steel, only where it is needed.
 
@@ -358,7 +358,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 **Terms introduced:** tapered string
 
-### 5.06 · 21:24 · 30s · anim **[GEN]** **[VERIFY]**
+### 5.06 · 19:11 · 27.9s · anim **[GEN]** **[VERIFY]**
 
 **VO:** And then the connections, here meaning the threaded joints between pipes. Basic threaded couplings seal with thread compound. Premium connections add metal-to-metal seals and a torque shoulder, to stay gas-tight. They are qualified by testing to ISO thirteen six seven nine, and checked during make-up, as they are screwed together, on a torque-turn plot: torque against turns. The pipe body may be fine; connections are where most leaks start.
 
@@ -368,7 +368,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** ISO 13679 as the connection-testing standard is from memory; "most leaks start at connections" is a generalisation
 
-### 5.07 · 21:54 · 18.5s · anim **[NO]** **[VERIFY]**
+### 5.07 · 19:39 · 16.7s · anim **[NO]** **[VERIFY]**
 
 **VO:** In the barrier language of chapter seven, the casing that seals off the well becomes a well barrier element: one object that helps stop flow, accepted on a documented design and a pressure test. The conductor is structure, not barrier.
 
@@ -378,9 +378,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** element acceptance criteria wording in NORSOK D-010 for casing (design + test) not confirmed
 
-## Ch 6: Cementing  (22:12–24:42)
+## Ch 6: Cementing  (19:55–23:07)
 
-### 6.01 · 22:12 · 24.5s · anim **[GEN]** **[NO]** **[VERIFY]**
+### 6.01 · 19:58 · 21.2s · anim **[GEN]** **[NO]** **[VERIFY]**
 
 **VO:** Cement does three jobs. It holds the pipe in place, stopping it from buckling or moving. It seals the gap, so nothing flows along the outside. And it shields the steel from corrosive fluids. The seal is the point: if it is long enough and verified, the cement behind the casing is a well barrier element.
 
@@ -388,7 +388,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** NORSOK D-010 requirements for casing cement as a well barrier element (required length/height and verification) not confirmed
 
-### 6.02 · 22:37 · 40.5s · anim **[GEN]** **[SIM]**
+### 6.02 · 20:19 · 36.4s · anim **[GEN]** **[SIM]**
 
 **VO:** To place it, we pump down the inside and up the outside: a U-tube. Spacer goes first, to push the mud away. Then rubber plugs keep cement and mud apart, and pipeline engineers will recognise them: they are pigs. A bottom plug runs ahead of the cement, a top plug behind. A one-way float valve stops the heavier cement U-tubing back. When the top plug lands on the float collar, at the calculated volume, pressure jumps: displacement is complete. The few joints below it, the shoe track, stay full of cement on purpose.
 
@@ -398,7 +398,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** single-stage primary job; multi-stage tools and foam cement omitted; on a floater the plugs are subsea-release plugs at the casing running tool, launched by darts from the rig
 
-### 6.03 · 23:18 · 34.5s · anim **[GEN]** **[SIM]**
+### 6.03 · 20:56 · 29.5s · anim **[GEN]** **[SIM]**
 
 **VO:** The hard part is mud removal: getting every bit of mud out of the annulus. If the pipe sits off-centre, mud on the narrow side barely moves, while cement races up the wide side. That leaves a channel of mud behind the pipe: a path for fluid, hidden. Centralisers push the pipe back towards the middle. Conditioning the mud, a well-designed spacer and a high pump rate do the rest; on land wells and liners, moving the pipe helps too.
 
@@ -408,7 +408,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** front speeds are invented ratios; a real eccentric displacement needs CFD or a hydraulics simulator
 
-### 6.04 · 23:52 · 46s · anim **[GEN]** **[VERIFY]**
+### 6.04 · 21:25 · 39.1s · anim **[GEN]** **[VERIFY]**
 
 **VO:** Cement is bound by the window too. While it is pumped, its column plus friction must stay below the fracture limit and above pore pressure. So a lighter lead slurry fills the upper annulus, and a dense, strong tail goes at the shoe, with the top of cement placed above every zone it must seal, like a thin overpressured sand near three thousand metres. Lab tests at downhole temperature and pressure measure how long it stays pumpable, its thickening time, and how fast it gains strength. Above about a hundred and ten degrees, as in our deepest sections, silica is added, so the strength does not fade.
 
@@ -418,7 +418,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** silica addition above roughly 110 C is general industry knowledge from memory (strength retrogression), not checked against API/ISO cement standards
 
-### 6.05 · 24:38 · 32s · anim **[GEN]** **[SIM]**
+### 6.05 · 22:04 · 27.5s · anim **[GEN]** **[SIM]**
 
 **VO:** Then comes a dangerous period, minutes to hours long. As cement sets, it starts to hold itself up, like concrete stiffening in a bucket. Its weight stops pressing down, so the pressure holding gas back falls, but it is not yet solid enough to block gas. If that pressure drops below a gas zone's, gas can slip in and leave a path. So timing is everything: good slurries set fast through that gap.
 
@@ -426,7 +426,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** gel-strength mechanics reduced to one picture; no numbers given
 
-### 6.06 · 25:10 · 40.5s · anim **[GEN]** **[SIM]**
+### 6.06 · 22:32 · 35.4s · anim **[GEN]** **[SIM]**
 
 **VO:** How do we know it worked? First, the job record: full returns, meaning no mud lost to the rock, the right volumes, a plug bump on time. Then, where it matters, logs. A cement bond log listens to sound travelling along the casing: good cement damps it. Ultrasonic tools map all round the pipe. But a log measures contact, not seal. A hairline gap, a microannulus, can make good cement look bad, and a narrow channel can slip past the tool. So we weigh it all together, with the pressure test at the shoe.
 
@@ -436,9 +436,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** log responses are schematic, not real data
 
-## Ch 7: Well control and barriers  (25:50–29:06)
+## Ch 7: Well control and barriers  (23:07–27:28)
 
-### 7.01 · 25:50 · 18.5s · anim **[GEN]** **[SIM]**
+### 7.01 · 23:10 · 16.6s · anim **[GEN]** **[SIM]**
 
 **VO:** Suppose the window lied: pore pressure is higher than forecast. Or pulling the pipe swabbed the hole like a syringe, or losses dropped the mud level. Formation fluid enters the well. Unchecked, that kick becomes a blowout: a flow nobody can stop.
 
@@ -448,7 +448,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** the "actual" pore pressure is the forecast + 0.12 sg below 3,000 m, invented for this example
 
-### 7.02 · 26:09 · 34.5s · anim **[GEN]** **[SIM]**
+### 7.02 · 23:27 · 32.1s · anim **[GEN]** **[SIM]**
 
 **VO:** A gas kick is deceptive. Here is a puzzle: a bubble of gas at four kilometres, where the pressure is over six hundred bar. How much bigger is it at the surface? [pause 2] Hundreds of times. So the pits first show only a small gain, then as the gas rises it expands, slowly at first, then violently near the top. In oil-based mud it dissolves and hides, then breaks out near the top, sometimes in the riser, above the preventer.
 
@@ -456,7 +456,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** expansion factor is ideal-gas Boyle with no temperature or compressibility factor, no slip velocity, no mud solubility curve
 
-### 7.03 · 26:44 · 29.5s · anim **[GEN]** **[VERIFY]**
+### 7.03 · 23:59 · 25.9s · anim **[GEN]** **[VERIFY]**
 
 **VO:** So we watch. Flow out greater than flow in. A rising level in the mud tanks, the pits. On a trip, a hole that takes less mud than the steel we pulled out. A sudden faster drilling rate, a drilling break, is a warning: stop the pumps and watch the well. That is a flow check. The aim is to catch a kick while it is still small.
 
@@ -466,7 +466,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** no numeric detection-volume target is claimed
 
-### 7.04 · 27:13 · 47.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 7.04 · 24:25 · 41.4s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** Remember the two barriers? In Norway the rule is blunt: wherever a formation could flow to the surface, two independent well barriers must stand in the way. Each is a well barrier envelope: a set of elements that together stop flow. While drilling, the primary barrier is the mud column. The secondary barrier is the rock just below the last casing shoe, the casing cement, the casing, the wellhead and the preventer. Independence is the whole point: two airlock doors that must never fail together. Barriers must be tested, and if one fails, the only work allowed is restoring it. A kick is exactly that: the mud barrier has failed.
 
@@ -477,7 +477,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** the in-situ formation below the shoe as a secondary well barrier element while drilling is from memory of the NORSOK D-010 drilling schematic; whether D-010 permits "common" well barrier elements with a risk assessment is not confirmed; the narration says only "independent". Blue/red colour convention for primary/secondary is from memory
 - **SEEN:** Activities Regulations s.85 (tested barriers with sufficient independence; if one fails only restoration work may continue) and Facilities Regulations s.48
 
-### 7.05 · 28:00 · 38.5s · anim **[GEN]** **[SIM]**
+### 7.05 · 25:06 · 32.6s · anim **[GEN]** **[SIM]**
 
 **VO:** When a kick is suspected: lift the bit off bottom so no pipe joint sits in the preventer, stop the pumps, check for flow, and close the well. Now it is shut in, and the gauges hide a gift. The annulus holds gas of unknown size, but the drill pipe holds clean mud we know. Drill pipe and annulus form a U-tube: once the gauges settle, pressure at the bottom is that clean mud column plus the shut-in drill pipe pressure. One reading, and we know the pore pressure.
 
@@ -487,7 +487,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** numbers from the illustrative "actual" pore pressure (forecast + 0.12 sg); float valves in the BHA and hard vs soft shut-in practice not covered
 
-### 7.06 · 28:39 · 41.5s · anim **[GEN]** **[SIM]**
+### 7.06 · 25:39 · 36.2s · anim **[GEN]** **[SIM]**
 
 **VO:** To kill the well we need kill mud: just heavy enough to balance the pore pressure on its own. That is the old weight plus the shut-in drill pipe pressure divided by g times the true vertical depth. The driller's method does it in two circulations: first, the old mud carries the kick out while the choke holds bottom-hole pressure just above pore pressure; then kill mud replaces the old mud. Wait-and-weight does both at once. With a subsea preventer, friction in the long choke line adds pressure, so we pump slowly and correct for it.
 
@@ -497,7 +497,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** volumetric method and bullheading not covered; the kill-mud weight ignores a safety margin
 
-### 7.07 · 29:20 · 38.5s · anim **[GEN]** **[SIM]**
+### 7.07 · 26:15 · 32.3s · anim **[GEN]** **[SIM]**
 
 **VO:** The weak point is the shoe, the top of the open hole. Rising gas expands, so the choke adds pressure to hold the bottom steady, and that pressure peaks at the shoe as the gas arrives. Take too big a kick, or one too far above our mud weight, and the shoe pressure passes the limit a leak-off test measures, repeated below every shoe: the rock cracks and fluid escapes underground. The biggest kick that survives is the kick tolerance, one of the margins built into chapter one's staircase.
 
@@ -507,7 +507,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** kick tolerance shown as a concept, no calculation
 
-### 7.08 · 29:59 · 45.5s · anim **[GEN]** **[SEEN]**
+### 7.08 · 26:47 · 40.4s · anim **[GEN]** **[SEEN]**
 
 **VO:** In twenty ten, on the Macondo well in the Gulf of Mexico, barriers failed one after another. The cement at the bottom of the well did not seal the reservoir. A negative pressure test, on the Norwegian shelf called an inflow test, drops the pressure inside the well below the rock's to prove the seal holds. Its warnings were explained away, and the heavy mud was replaced with seawater. The kick went unnoticed for about forty minutes. The preventer did not seal. Eleven people died. No single failure did that: every barrier had a flaw, and every warning was explained away.
 
@@ -517,15 +517,15 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SEEN:** facts match CSB / BP / IADC summaries in web search results (bottom cement and shoe-track barrier failure, negative pressure test misinterpreted, displacement to seawater, kick indications missed for roughly 40 minutes, BOP failure, eleven fatalities); primary investigation reports not read in this environment
 
-## Ch 8: Formation evaluation: discovery or dry hole?  (30:44–34:44)
+## Ch 8: Formation evaluation: discovery or dry hole?  (27:28–32:16)
 
-### 8.01 · 30:44 · 23s · anim **[GEN]**
+### 8.01 · 27:30 · 20.4s · anim **[GEN]**
 
 **VO:** Now the question flips. Until now it was how to get there safely; now it is what we found. A well is an expensive way to buy measurements, and they rank from fast, cheap and uncertain, to slow, costly and definitive. The order on this ladder is by price, not by time.
 
 **SHOT:** A ladder diagram descending the screen: mud log, logging while drilling, wireline, pressures and samples, core, well test. Each rung has a time-to-result and a certainty bar; the cost bar grows. A small note: "ranked by cost and certainty, not by time".
 
-### 8.02 · 31:08 · 23.5s · anim **[GEN]** **[SIM]**
+### 8.02 · 27:51 · 20.8s · anim **[GEN]** **[SIM]**
 
 **VO:** First, the mud log. Geologists describe the cuttings coming up with the mud, and look at them under ultraviolet light, where oil glows. A gas chromatograph measures the gases in the mud. But there is a delay: the lag time, annulus volume divided by flow rate, means cuttings are old news when they arrive.
 
@@ -535,7 +535,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** lag time shown as a single number; no recycled-gas or bit-metamorphism cautions in the narration
 
-### 8.03 · 31:31 · 40s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.03 · 28:12 · 36.2s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** Next, logging while drilling, LWD: sensors a few metres behind the bit, reading the rock minutes after it is cut. Gamma ray usually separates shale from sand. Resistivity: hydrocarbons conduct poorly, so high resistivity can mean oil or gas. Density and neutron give porosity, the fraction of the rock that is pore space; where the two curves cross over, that is the signature of gas. A thin stream of data climbs the pipe as pressure pulses in the mud, a few bits per second; the full log waits in the tool's memory.
 
@@ -546,7 +546,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** log curves are synthetic and generated from the well model
 - **VERIFY:** telemetry rate "a few bits per second" is a rounded memory figure
 
-### 8.04 · 32:11 · 26s · anim **[GEN]** **[SIM]**
+### 8.04 · 28:48 · 26.8s · anim **[GEN]** **[SIM]**
 
 **VO:** Why can resistivity find oil? Picture the rock as a sponge soaked in salty water. Current flows through the salt water. Replace some with oil, an insulator, and less current flows. Archie's equation turns that into numbers: water saturation from porosity, measured resistivity and the salt water's own resistivity. Simplified: clays conduct too, so shaly sands need extended versions.
 
@@ -556,7 +556,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** Archie only; no Simandoux or Waxman-Smits
 
-### 8.05 · 32:37 · 49s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.05 · 29:15 · 41.8s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** After the bottom section is drilled, more logs run on a cable: wireline. Then comes the best trick. A formation tester presses a probe against the rock and measures pressure at a series of depths. In a fluid column, pressure rises with depth at that fluid's own weight: gas, about a quarter of a bar per ten metres; oil, about three quarters; water, about one bar. Plot pressure against depth and the slopes differ. Where the oil line meets the water line is the free-water level, found from pressures alone. Here the well crossed it, but the same trick finds a contact a well never reached, using water pressures from a neighbouring well.
 
@@ -567,7 +567,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** gradients (0.025 / 0.076 / 0.106 bar/m) and contacts are the model's invented values
 - **VERIFY:** typical reservoir-condition fluid gradients quoted from memory
 
-### 8.06 · 33:26 · 26s · anim **[GEN]** **[SIM]**
+### 8.06 · 29:56 · 22s · anim **[GEN]** **[SIM]**
 
 **VO:** The tool also pumps out samples, analysed downhole and in the lab. If two sands sit on different pressure lines, they are not in pressure contact; sharing a line suggests a connection but does not prove one. And the free-water level is a pressure surface: the oil-water contact on the logs is a little higher, because of capillary forces.
 
@@ -575,7 +575,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** transition zone thickness illustrative (the model puts the OWC 6 m above the FWL)
 
-### 8.07 · 33:52 · 32s · anim **[GEN]**
+### 8.07 · 30:18 · 31.3s · anim **[GEN]**
 
 **VO:** A core is the only large, intact piece of the rock: a cylinder cut by a hollow bit while the reservoir is being drilled, unlike crushed cuttings or thumb-sized sidewall plugs. The lab gives porosity, permeability, how easily fluid flows through the rock, and, for a mechanical engineer's pleasure, triaxial strength tests that calibrate our collapse and rock-strength models; the fracture limit still comes from leak-off tests. Routine results take weeks, special tests months.
 
@@ -583,7 +583,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 **Terms introduced:** core; permeability
 
-### 8.08 · 34:24 · 36s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 8.08 · 30:50 · 33.1s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** The last rung is a drill stem test, DST. A liner is cemented across the reservoir, then temporary pipe, a seal called a packer and downhole valves let the well flow to surface. We shut it in and watch the pressure build up: that gives productivity, permeability, near-well damage and boundaries. But it is costly, it burns hydrocarbons, and in Norway emissions are tightly controlled and taxed. So operators often rely on logs, pressures and samples, and our example well does exactly that.
 
@@ -594,7 +594,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** how often DSTs are run on the NCS and the exact permit route are not confirmed; the narration avoids a frequency claim
 - **SEEN:** flaring prohibited except brief testing and safety (World Bank flaring summary)
 
-### 8.09 · 35:00 · 23.5s · anim **[GEN]** **[SIM]**
+### 8.09 · 31:23 · 23.2s · anim **[GEN]** **[SIM]**
 
 **VO:** Then interpretation. Set cutoffs: rock with too much shale, too little porosity, or too much water does not count. Net reservoir over gross thickness is the net-to-gross ratio, here about nought point nine four. Net pay, eighty-nine metres, is the part that holds hydrocarbons. Our cutoffs are illustrative; real ones depend on the field.
 
@@ -604,7 +604,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **SIM:** cutoffs are invented (shale volume, porosity, water saturation); real cutoffs are field-specific
 
-### 8.10 · 35:24 · 30s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 8.10 · 31:46 · 30.1s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** So, is ours a discovery? Hydrocarbons present: about forty metres of gas over some fifty-five metres of oil. Movable: the tester pumped them out of the rock. The Norwegian Offshore Directorate calls that a discovery: probably movable petroleum, shown by testing, sampling or logging. That bar is technical: it says nothing yet about whether the find will pay. And a dry hole would still be data about the basin.
 
@@ -615,9 +615,9 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** well-result category names and discovery notification rules not confirmed
 - **SEEN:** Sodir definition of a discovery and of a wildcat well (Sodir pages in web search results)
 
-## Ch 9: Plugging and abandonment  (35:54–39:08)
+## Ch 9: Plugging and abandonment  (32:16–36:02)
 
-### 9.01 · 35:54 · 39s · anim **[GEN]** **[NO]** **[VERIFY]**
+### 9.01 · 32:19 · 35.9s · anim **[GEN]** **[NO]** **[VERIFY]**
 
 **VO:** Now the twist. We found oil, and we are going to seal this well for ever. Why? [pause 2] An exploration well is a measuring instrument, not a producer; if the field is developed, it gets new wells built for the job. So this one gets plugging and abandonment, P and A: sealed from reservoir to seabed, for geological time. And it is designed in from the start: an outline plan exists before the first metre is drilled, and the detailed programme is written once the logs tell us what we found.
 
@@ -627,7 +627,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** that NORSOK D-010 has an eternal-perspective design basis for permanent barriers, and when the P&A programme must exist, are from memory, not confirmed
 
-### 9.02 · 36:32 · 26s · anim **[NO]** **[VERIFY]**
+### 9.02 · 32:55 · 23.5s · anim **[NO]** **[VERIFY]**
 
 **VO:** First, find every source of inflow. Not only the reservoir: any permeable layer with pressure. In our well, a thin overpressured sand at three thousand metres, drilled through weeks ago, could push fluid all the way to the seabed. Under the Norwegian standard, a hydrocarbon zone, or an overpressured zone that can flow to the seabed, needs two permanent barriers.
 
@@ -637,7 +637,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** barrier count per source (two for hydrocarbon-bearing or overpressured zones with flow potential to surface, one for other permeable zones) from memory of NORSOK D-010, not confirmed; no minimum lengths or test pressures are narrated
 
-### 9.03 · 36:58 · 29.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.03 · 33:18 · 25.8s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** A permanent barrier must seal across the whole cross-section of the well, every annulus included, and sit against tight rock strong enough not to crack under the pressure below: rock to rock. Think of sealing a tunnel. A door in the corridor is no use if there is a gap behind the tunnel lining. A plug inside the casing is no use if fluid can run behind it.
 
@@ -648,7 +648,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** exact wording
 - **SEEN:** D-010 Rev 5 permanent barriers extend across the full cross-section, sealing vertically and horizontally with all annuli closed (secondary web summaries)
 
-### 9.04 · 37:28 · 36s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.04 · 33:44 · 31.1s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** In open hole, the plug already sits against the rock. Behind casing there are three ways. If the cement behind the casing is good, proven by a log and the job record over enough length, it can form part of the barrier; our overpressured sand is covered by the cement from chapter six. Or we mill a window in the casing, section milling, and plug against the rock. Or we perforate the casing, wash the annulus clean, and pump cement: perforate, wash, cement.
 
@@ -659,7 +659,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** any acceptance criteria and qualification matrix not read
 - **SEEN:** perforate-wash-cement recognised in NORSOK D-010 Rev 5 (vendor blog and SPE review)
 
-### 9.05 · 38:04 · 42s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 9.05 · 34:15 · 36.1s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** To place a plug in casing, first set a mechanical base: a bridge plug, a steel-and-rubber plug that seals the casing and holds the cement up. In open hole, a thick, viscous pill does that job. Then cement is pumped through open-ended pipe as a balanced plug: the fluid columns inside and outside the pipe weigh the same, so, like the U-tube we met earlier, nothing surges up or drops out. The pipe is pulled slowly out of the cement, and any excess is circulated out. In our drawing, the plug is about a hundred metres long.
 
@@ -670,7 +670,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **SIM:** plug length of about 100 m is a drawing value, not a requirement
 - **VERIFY:** minimum plug lengths in NORSOK D-010 Rev 5 (a secondary search summary quotes 100 m open hole / 50 m cased on a mechanical base / 30 m with a qualifying bond log) are NOT narrated
 
-### 9.06 · 38:46 · 32.5s · anim **[NO]** **[VERIFY]**
+### 9.06 · 34:51 · 28.5s · anim **[NO]** **[VERIFY]**
 
 **VO:** And then we prove it. Before the plug goes in, the cement behind the casing is logged. After it sets, we tag it: lower the pipe until it rests on the plug, and load it with weight. In casing, we pressure test it, usually from above, and where we can, with an inflow test from below. An open-hole plug is proven by the tag. A barrier that has not been verified is not a barrier.
 
@@ -680,7 +680,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** tag weight and test pressure requirements deliberately not stated
 
-### 9.07 · 39:18 · 28.5s · anim **[NO]** **[VERIFY]** **[SEEN]**
+### 9.07 · 35:20 · 26.3s · anim **[NO]** **[VERIFY]** **[SEEN]**
 
 **VO:** Last, the steel: cut and pull. We cut the casing and conductor below the seabed, and lift out the wellhead. An ROV survey checks the seabed is clear, with nothing left for a fishing trawl to catch. And a modern exploration well cannot sit in limbo: temporary abandonment, plugged but with the wellhead left so we can come back, is time-limited on the Norwegian shelf.
 
@@ -691,7 +691,7 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 - **VERIFY:** cutting depth, seabed clearance requirement and who sets it not confirmed; the narration states no figures
 - **SEEN:** Havtil report states exploration wells begun after 1 January 2014 may not be temporarily abandoned longer than two years (search summary)
 
-### 9.08 · 39:47 · 18.5s · anim **[NO]** **[VERIFY]**
+### 9.08 · 35:46 · 15.7s · anim **[NO]** **[VERIFY]**
 
 **VO:** Finally, a last plug just below the seabed seals the well off from the sea, and an as-abandoned drawing is filed. It is the last page in the well's life, and it has to be right for the long term.
 
@@ -699,18 +699,18 @@ Runtime 30:00 · tags: **[NO]** Norway-specific · **[GEN]** general industry ·
 
 - **VERIFY:** the exact reporting duty to the authorities not confirmed
 
-## Ch 10: Outro: the empty seabed  (40:06–40:36)
+## Ch 10: Outro: the empty seabed  (36:02–36:42)
 
-### 10.01 · 40:06 · 40.5s · anim **[GEN]**
+### 10.01 · 36:02 · 34.8s · anim **[GEN]**
 
 **VO:** So how do you stay inside the window for four kilometres? You don't, not all at once. You win it a few hundred metres at a time, lock each stretch behind steel and cement, keep two barriers between the rock and the sea, and watch every barrel that comes back. A well is an argument with the Earth, about pressure, that you have to win every hour. And at the end, you seal the win so it lasts for ever. Three hundred metres down, there is barely a trace.
 
 **SHOT:** The window chart from the opening returns with the casing staircase drawn over it (section by section), then two barrier outlines, then a flow-in/flow-out needle. It dissolves into the seabed from Chapter 0: bare, still, a low mound of old cuttings; beneath the mud, faint ghosted plugs and cut casing stubs. The camera rises slowly through the water column to the surface.
 
-### 10.02 · 40:46 · 7s · still **[GEN]**
+### 10.02 · 36:36 · 5.3s · still **[GEN]**
 
 **VO:** *(none: visual only)*
 
 **SHOT:** End card on dark background: "THE HOLE THAT FIGHTS BACK", then small print: "Illustrative composite well: invented numbers, real physics. Norway-specific material carried a red NORWAY / NORSOK-SPECIFIC badge. Verify any requirement against NORSOK D-010 and the current regulations before relying on it." Credits line: "Voice: Kokoro-82M neural TTS · Animation: generated in code".
 
-*Total narration: 5605 words ≈ 187 wpm averaged over the runtime.*
+*Total narration: 5605 words ≈ 153 wpm averaged over the runtime.*
