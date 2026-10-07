@@ -22,7 +22,7 @@ ROOT = os.path.dirname(HERE)
 SR = 48000
 MUSIC = os.environ.get("MUSIC", "1") != "0"
 SFX = os.environ.get("SFX", "1") != "0"
-MUSIC_DB = -25.0          # pad level relative to the voice (before ducking)
+MUSIC_DB = -18.0          # pad level (before ducking): ~14 dB under the voice in gaps, ~20 dB under it while speaking
 DUCK_DB = -7.0            # extra attenuation while the voice is speaking
 
 # progression (MIDI notes), each chord ~9.6 s: D maj9 - B min7 - G maj7(#11) - A sus2 ; wonder without drama
@@ -160,6 +160,24 @@ def tick():
     return np.stack([s, s], axis=1).astype(np.float32)
 
 
+def card_times(tl):
+    """Absolute times at which term cards appear (the same rule the renderer uses: when the term is first spoken)."""
+    out = []
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "scenes"))
+        from common import timeline as T, furniture as F
+        for ch in tl["chapters"]:
+            ctl = T.load_chapter(ch["num"])
+            for b in ctl.beats:
+                for term in b.terms[:3]:
+                    t0 = min(max(F.spoken_at(b, term["term"]) - 0.3, b.start + 0.3), b.end - 3.0)
+                    out.append(ch["start"] + t0 + 0.12)
+    except Exception as e:   # renderer modules unavailable: fall back to the beat start
+        print("mix: term-card times from beat starts (" + str(e) + ")")
+        out = [b["start"] + 0.5 for ch in tl["chapters"] for b in ch["beats"] if b.get("terms")]
+    return out
+
+
 def main():
     tl = json.load(open(os.path.join(ROOT, "script", "timeline.json")))
     voice = read_wav_mono(os.path.join(HERE, "narration.wav"))
@@ -195,11 +213,10 @@ def main():
                 i = max(int(round(ch["start"] * SR)) - int(0.15 * SR), 0)
                 j = min(i + len(w), total)
                 fx[i:j] += w[: j - i] * 0.8
-            for b in ch["beats"]:
-                if b.get("terms"):
-                    i = int(round((b["start"] + 0.5) * SR))
-                    j = min(i + len(tk), total)
-                    fx[i:j] += tk[: j - i]
+        for t in card_times(tl):
+            i = int(round(t * SR))
+            j = min(i + len(tk), total)
+            fx[i:j] += tk[: j - i]
     mix = np.stack([voice, voice], axis=1) + bed + fx
     peak = np.abs(mix).max()
     if peak > 0.98:
