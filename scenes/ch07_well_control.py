@@ -229,8 +229,7 @@ def beat_lied(st, tl):
         mud_c = st.rect(SX, shoe_y, 0.64, top - 0.15 - shoe_y, P.MUD, 0.05, anchor="b")
         pipe = st.rect(SX, (top + bot + 0.45) / 2, 0.12, top - (bot + 0.45), P.STEEL, 0.3)
         bit = st.poly([(SX - 0.27, bot + 0.45), (SX + 0.27, bot + 0.45), (SX + 0.2, bot + 0.2), (SX - 0.2, bot + 0.2)], P.STEEL_DK, 0.31)
-        wl = st.text("the well", SX, top + 0.22, 0.17, P.MUTED, 0.3, kind="bold")
-        well = rock + sand + [hole, csg_bg, mud_c, pipe, bit, wl] + csg
+        well = rock + sand + [hole, csg_bg, mud_c, pipe, bit] + csg
         st.fade_in(well, b.start + 0.4, 0.5)
         # rows
         RX = 3.6
@@ -273,7 +272,7 @@ def beat_lied(st, tl):
         st.draw_on(crack, t_ls, t_ls + 0.6)
         st.flow([(SX, fy + 0.5), (SX + 0.25, fy), (SX + 0.8, fy - 0.02)], t_ls + 0.3, s[2] + 0.5, P.MUD, n=6, speed=0.6, r=0.035, z=0.36)
         st.scale_to(mud_c, t_ls + 0.3, t_ls + 2.2, sy=(top - 0.15 - shoe_y) - 1.2)
-        lvl = st.arrow(SX, top - 0.25, SX, top - 1.05, P.MUD, 0.05, 0.16, 0.5)
+        lvl = st.arrow(SX - 0.19, top - 0.2, SX - 0.19, top - 1.2, P.MUD, 0.05, 0.16, 0.5)
         st.fade_in(lvl, t_ls + 0.8, 0.3)
         st.fade_out(lvl, s[2], 0.4)
         # formation fluid enters the well; unchecked it reaches surface
@@ -334,11 +333,12 @@ def beat_kick(st, tl):
         bop = [st.rect(CX2 - HR2 - 0.22, Y_SB + 0.2, 0.44, 0.4, P.STEEL_DK, 0.25), st.rect(CX2 + HR2 + 0.22, Y_SB + 0.2, 0.44, 0.4, P.STEEL_DK, 0.25)]
         pipe = st.rect(CX2, (Y_SURF + 0.15 + Y_BOT + 0.3) / 2, 0.2, Y_SURF + 0.15 - (Y_BOT + 0.3), P.STEEL, 0.3)
         bit = st.poly([(CX2 - 0.3, Y_BOT + 0.3), (CX2 + 0.3, Y_BOT + 0.3), (CX2 + 0.22, Y_BOT + 0.08), (CX2 - 0.22, Y_BOT + 0.08)], P.STEEL_DK, 0.31)
-        bopl = st.text("BOP", CX2 + HR2 + 0.55, Y_SB + 0.2, 0.17, P.TEXT, 0.3, align="l", kind="bold")
-        rl = st.text("riser", CX2 + HR2 + 0.55, (Y_SURF + Y_SB) / 2 + 0.25, 0.17, P.MUTED, 0.3, align="l", kind="bold")
+        bopl = st.text("BOP", x0c - 0.1, Y_SB + 0.2, 0.17, P.TEXT, 0.3, align="r", kind="bold")
+        rl = st.text("riser", x0c - 0.1, (Y_SURF + Y_SB) / 2 + 0.25, 0.17, P.MUTED, 0.3, align="r", kind="bold")
         ticks = []
-        for z, lab in ((0, "0 m"), (300, "300"), (1000, "1,000"), (2000, "2,000"), (3000, "3,000"), (4000, "4,000")):
-            ticks.append(st.text(lab, x0c - 0.1, ycol(z), 0.15, P.MUTED, 0.3, align="r"))
+        for z, lab in ((0, "0 m"), (300, "300 m"), (1000, "1,000"), (2000, "2,000"), (3000, "3,000"), (4000, "4,000 m")):
+            ticks.append(st.text(lab, x1c + 0.1, ycol(z), 0.15, P.MUTED, 0.3, align="l"))
+            ticks.append(st.rect(x1c + 0.03, ycol(z), 0.06, 0.02, P.MUTED, 0.3))
         col_objs = [sea, mud, bit, pipe, bopl, rl] + rock + riser + bop + ticks
         st.fade_in(col_objs, b.start + 0.1, 0.5)
 
@@ -347,7 +347,6 @@ def beat_kick(st, tl):
         t_p = W(b, 1, "six hundred")
         t_q = s[2]
         t_ans = s[3]
-        t_pits = W(b, 4, "pits")
         t_step = W(b, 4, "small gain")
         t_r0 = W(b, 4, "gas rises") - 0.2
         t_r1 = W(b, 4, "near the top", 1.0)
@@ -380,11 +379,15 @@ def beat_kick(st, tl):
             xc, yc, rx, ry = bubble_geom(z)
             _orb(cv, look, xc, yc, rx, ry, P.GAS, a)
         st.procedural(t_bub - 0.2, t_r1 + 0.7, 0.28, draw_bubble)
-        bl = tag(st, CX2 + 1.4, Y_BOT + 0.25, "gas bubble", P.GAS, 0.18)
-        st.fade_in(bl, t_bub, 0.4)
-        st.fade_out(bl, t_r0, 0.4)
+        bl = tag(st, CX2 + 2.1, Y_BOT + 0.85, "gas bubble", P.GAS, 0.18)
+        bll = leader(st, CX2 + 2.05, Y_BOT + 0.85, CX2 + 0.45, Y_BOT + 0.25, P.GAS)
+        st.fade_in(bl + bll, t_bub, 0.4)
+        st.fade_out(bl + bll, t_r0, 0.4)
+        st.ripple(CX2 + 0.36, Y_BOT + 0.2, t_bub, t_bub + 1.8, P.GAS, period=0.6, r0=0.08, r1=0.5)
 
         # HUD: depth / pressure / volume, all from the same z(t)
+        t_up0 = t_step - 1.0
+        t_sm0 = t_step - 0.6
         hud_x = [0.0, 2.55, 5.1]
 
         def draw_hud(cv, t, look):
@@ -393,29 +396,33 @@ def beat_kick(st, tl):
                 return
             z = z_rise(t)
             p = p_open(z)
-            look.draw_text(cv, "GAS AT", hud_x[0], 3.55, 0.13, P.MUTED, a, "l", "bold")
-            look.draw_text(cv, f"{z:,.0f} m", hud_x[0], 3.12, 0.32, P.TEXT, a, "l", "mono")
-            ap = a * min(1.0, max(0.0, (t - t_p + 0.2) / 0.4))
-            if ap > 0:
-                look.draw_text(cv, "PRESSURE", hud_x[1], 3.55, 0.13, P.MUTED, ap, "l", "bold")
-                look.draw_text(cv, f"{p:,.0f} bar", hud_x[1], 3.12, 0.32, P.TEXT, ap, "l", "mono")
-            av = a * min(1.0, max(0.0, (t - t_q + 0.2) / 0.4))
-            if av > 0:
-                look.draw_text(cv, "VOLUME", hud_x[2], 3.55, 0.13, P.MUTED, av, "l", "bold")
-                look.draw_text(cv, f"×{p_open(TVD) / p:,.0f}" if t > t_r0 else ("× 1" if t < t_q + 0.6 else "× ?"), hud_x[2], 3.12, 0.32, P.GAS, av,
-                               "l", "mono")
+            # big rows mid-screen during the puzzle, then a small top row while the chart runs (cross-fade, no slide)
+            ab = 1.0 - min(1.0, max(0.0, (t - t_up0) / 0.4))
+            asm = min(1.0, max(0.0, (t - t_sm0) / 0.4))
+            vol = f"×{p_open(TVD) / p:,.0f}" if t > t_r0 else ("× 1" if t < t_q + 0.6 else "× ?")
+            items = [("GAS AT", f"{z:,.0f} m", P.TEXT, t_bub), ("PRESSURE", f"{p:,.0f} bar", P.TEXT, t_p), ("VOLUME", vol, P.GAS, t_q)]
+            for i, (lab, val, colr, ti) in enumerate(items):
+                ai = a * min(1.0, max(0.0, (t - ti + 0.2) / 0.4))
+                if ai <= 0:
+                    continue
+                if ab > 0:
+                    yb = 2.75 - 0.95 * i
+                    look.draw_text(cv, lab, 0.7, yb, 0.18, P.MUTED, ai * ab, "l", "bold")
+                    look.draw_text(cv, val, 3.0, yb, 0.46, colr, ai * ab, "l", "mono")
+                if asm > 0:
+                    look.draw_text(cv, lab, hud_x[i], 3.55, 0.13, P.MUTED, ai * asm, "l", "bold")
+                    look.draw_text(cv, val, hud_x[i], 3.12, 0.32, colr, ai * asm, "l", "mono")
         st.procedural(t_bub - 0.1, t_obm + 0.4, 0.6, draw_hud)
 
         # the puzzle (during the pause) and its answer
-        q = st.text("How much bigger\nat the surface?", 3.6, 0.5, 0.46, P.TEXT, 0.5, kind="bold")
+        q = st.text("How much bigger\nat the surface?", 3.6, -1.35, 0.46, P.TEXT, 0.5, kind="bold")
         st.fade_in(q, t_q + 0.2, 0.5)
         st.fade_out(q, t_ans - 0.25, 0.3)
-        ans = st.text(f"≈ {round(RATIO, -1):,.0f} ×", 3.6, 0.8, 0.9, P.GAS, 0.5, kind="bold")
-        ans2 = st.text("ideal gas: volume × pressure stays constant", 3.6, -0.35, 0.2, P.MUTED, 0.5, kind="bold")
+        ans = st.text(f"≈ {round(RATIO, -1):,.0f} × bigger", 3.6, -1.2, 0.8, P.GAS, 0.5, kind="bold")
+        ans2 = st.text("ideal gas: pressure × volume stays the same", 3.6, -2.25, 0.2, P.MUTED, 0.5, kind="bold")
         st.pop_in(ans, t_ans - 0.05, 0.4)
         st.fade_in(ans2, t_ans + 0.4, 0.4)
-        st.fade_out([ans, ans2], t_pits - 0.35, 0.35)
-        st.ripple(3.6, 0.8, t_ans, t_ans + 1.2, P.GAS, period=0.6, r0=0.6, r1=2.4)
+        st.fade_out([ans, ans2], t_step - 1.0, 0.35)
 
         # pit gain vs depth of the gas (linear depth; m3)
         ymax = 20.0
@@ -423,8 +430,8 @@ def beat_kick(st, tl):
         fr = c.frame(xticks=[4000, 3000, 2000, 1000, 0], yticks=[0, 5, 10, 15, 20], xlabel="depth of the gas (m)", ylabel="pit gain (m³)",
                      fx="{:,.0f}", tick_size=0.17)
         rz = st.rect((c.X(M.WATER_DEPTH) + c.X(0)) / 2, c.y + c.h / 2, c.X(0) - c.X(M.WATER_DEPTH), c.h, P.SEA, 0.07, alpha=0.45, role="flat")
-        rzl = st.text("riser", (c.X(M.WATER_DEPTH) + c.X(0)) / 2, c.y + c.h + 0.17, 0.14, P.MUTED, 0.3, kind="bold")
-        st.fade_in(fr + [rz, rzl], t_pits - 0.3, 0.5)
+        rzl = st.text("riser", (c.X(M.WATER_DEPTH) + c.X(0)) / 2, c.y + 0.2, 0.14, P.TEXT, 0.3, kind="bold")
+        st.fade_in(fr + [rz, rzl], t_step - 0.6, 0.5)
         V0 = V_KICK
 
         def wbm_pts(t):
@@ -518,9 +525,9 @@ def beat_kick(st, tl):
         hid = tag(st, CX2 + 1.4, ycol(2600), "dissolved: hidden", P.GAS, 0.17)
         st.fade_in(hid, W(b, 5, "dissolves"), 0.4)
         st.fade_out(hid, t_bo - 0.2, 0.3)
-        g4 = tag(st, c.X(2600), c.Y(3.0), "oil-based mud: almost flat…", P.GAS, 0.17, align="c")
+        g4 = tag(st, c.X(2900), c.Y(6.0), "oil-based mud: almost flat…", P.GAS, 0.17, align="c")
         st.fade_in(g4, W(b, 5, "hides"), 0.4)
-        bo_l = tag(st, CX2 + 1.4, Y_SB + 0.75, "breaks out in the riser,\nabove the BOP", P.GAS, 0.17)
+        bo_l = tag(st, CX2 + 2.1, Y_SB + 0.75, "breaks out in the riser,\nabove the BOP", P.GAS, 0.17)
         st.fade_in(bo_l, W(b, 5, "riser") - 0.2, 0.4)
         st.ripple(CX2, ycol(Z_BO), t_bo, t_bo + 1.6, P.GAS, period=0.6, r0=0.3, r1=1.2)
 
@@ -550,7 +557,7 @@ def beat_detect(st, tl):
         B = (-1.35, 0.95, 3.1, 3.65)
         C = (-6.15, -2.05, -1.65, 0.65)
         D = (-1.35, -2.05, 3.1, 0.65)
-        E = (3.4, -2.05, 7.75, 0.95)
+        E = (3.4, -2.55, 7.75, 0.5)
         ca, da = _card(st, *A, "FLOW OUT vs FLOW IN", t0)
         cb, db = _card(st, *B, "PIT LEVEL", t0 + 0.1)
         cc, dc = _card(st, *C, "TRIP TANK (on a trip)", t0 + 0.2)
@@ -591,54 +598,54 @@ def beat_detect(st, tl):
         # 3 trip tank: steel pulled out vs mud taken to fill the hole
         t3 = s[3]
         bx0 = C[0] + 0.9
-        base = C[1] + 0.45
+        base = C[1] + 0.62
         steel = st.rect(bx0 + 0.3, base, 0.75, 0.0001, P.STEEL, 0.2, anchor="b")
         mudt = st.rect(bx0 + 1.6, base, 0.75, 0.0001, P.MUD, 0.2, anchor="b")
-        ls = st.text("steel pulled out", bx0 + 0.3, base - 0.2, 0.15, P.MUTED, 0.3, kind="bold")
-        lm = st.text("mud taken", bx0 + 1.6, base - 0.2, 0.15, P.MUTED, 0.3, kind="bold")
+        ls = st.text("steel\npulled out", bx0 + 0.3, base - 0.3, 0.15, P.MUTED, 0.3, kind="bold")
+        lm = st.text("mud\ntaken", bx0 + 1.6, base - 0.3, 0.15, P.MUTED, 0.3, kind="bold")
         st.fade_in([steel, mudt, ls, lm], t3, 0.3)
-        st.scale_to(steel, W(b, 3, "takes"), W(b, 3, "takes") + 1.0, sy=1.7)
-        st.scale_to(mudt, W(b, 3, "less mud"), W(b, 3, "less mud") + 1.0, sy=1.15)
-        gap = st.rect(bx0 + 1.6, base + 1.15 + 0.275, 0.75, 0.55, P.BAD, 0.21, alpha=0.35, role="flat")
-        gapl = st.text("missing:\nsomething\nflowed in", bx0 + 2.3, base + 1.42, 0.16, P.BAD, 0.4, align="l", kind="bold")
+        st.scale_to(steel, W(b, 3, "takes"), W(b, 3, "takes") + 1.0, sy=1.45)
+        st.scale_to(mudt, W(b, 3, "less mud"), W(b, 3, "less mud") + 1.0, sy=0.95)
+        gap = st.rect(bx0 + 1.6, base + 0.95 + 0.25, 0.75, 0.5, P.BAD, 0.21, alpha=0.35, role="flat")
+        gapl = st.text("missing:\nsomething\nflowed in", bx0 + 2.3, base + 1.2, 0.16, P.BAD, 0.4, align="l", kind="bold")
         st.fade_in([gap, gapl], W(b, 3, "steel we pulled"), 0.4)
         _alarm(st, dc, W(b, 3, "steel we pulled") + 0.3)
         # 4 drilling break: rate of penetration jumps and stays high
         t4 = s[4]
-        cD = Chart(st, D[0] + 0.75, -1.55, 3.4, 1.65, (0, 10), (0, 10))
+        cD = Chart(st, D[0] + 0.75, -1.6, 3.4, 1.4, (0, 10), (0, 10))
         frD = cD.frame(grid=False, panel=False)
-        capD = [st.text("time →", cD.x + cD.w, cD.y - 0.2, 0.15, P.MUTED, 0.3, align="r"),
-                st.text("rate of penetration", cD.x + 0.05, cD.y + cD.h + 0.08, 0.15, P.MUTED, 0.3, align="l")]
+        capD = [st.text("time →", cD.x + cD.w, cD.y - 0.2, 0.15, P.MUTED, 0.3, align="r")]
         trD = cD.curve([0, 2, 4, 4.8, 5.1, 6.5, 8, 10], [2.4, 2.6, 2.3, 2.5, 7.6, 7.9, 7.4, 7.8], P.TEXT, 0.06, 0.3)
         st.fade_in(frD + capD, t4, 0.4)
         st.draw_on(trD, t4 + 0.2, W(b, 4, "drilling break", 1.0))
-        wb = tag(st, cD.X(5.2), cD.Y(9.2) + 0.15, "drilling break: a warning", P.WARN, 0.17, align="c")
+        wb = tag(st, cD.X(10.0), cD.y + cD.h + 0.12, "drilling break: a warning", P.WARN, 0.16, align="r")
         st.fade_in(wb, W(b, 4, "warning") - 0.2, 0.3)
         _alarm(st, dd, W(b, 4, "warning"))
         # 5 the response: a flow check
         t_stop = W(b, 4, "stop the pumps")
         ce, de = _card(st, *E, "FLOW CHECK", t_stop - 0.3)
-        arr = st.arrow(D[2] - 0.15, -0.6, E[0] + 0.25, -0.6, P.WARN, 0.06, 0.2, 0.5)
+        arr = st.arrow(D[2] - 0.15, -0.7, E[0] + 0.25, -0.7, P.WARN, 0.06, 0.2, 0.5)
         st.fade_in(arr, t_stop - 0.3, 0.3)
-        wx = E[0] + 1.3
-        wy0, wy1 = -1.75, 0.15
-        hole = st.rect(wx, (wy0 + wy1) / 2, 0.7, wy1 - wy0, P.BG, 0.1)
-        ann = [st.rect(wx - 0.25, (wy0 + wy1) / 2, 0.2, wy1 - wy0, P.MUD, 0.12), st.rect(wx + 0.25, (wy0 + wy1) / 2, 0.2, wy1 - wy0, P.MUD, 0.12)]
-        dp = st.rect(wx, (wy0 + wy1 + 0.5) / 2, 0.22, wy1 + 0.5 - wy0, P.STEEL, 0.2)
-        fl = st.rect(wx + 1.15, wy1 - 0.08, 1.7, 0.12, P.STEEL_DK, 0.15)
-        st.fade_in([hole, dp, fl] + ann, t_stop - 0.1, 0.4)
-        st.flow([(wx, wy1 + 0.5), (wx, wy0 + 0.1)], t_stop - 0.1, t_stop + 0.9, P.MUD, n=5, speed=0.9, r=0.035, z=0.3, glow=False)
-        po = tag(st, E[0] + 0.3, 0.25, "pumps OFF", P.MUTED, 0.17)
+        wx = E[0] + 0.9
+        wy0, wy1 = -2.35, -0.55
+        hole = st.rect(wx, (wy0 + wy1) / 2, 0.72, wy1 - wy0, P.BG, 0.1)
+        ann = [st.rect(wx - 0.24, (wy0 + wy1) / 2, 0.2, wy1 - wy0, P.MUD, 0.12), st.rect(wx + 0.24, (wy0 + wy1) / 2, 0.2, wy1 - wy0, P.MUD, 0.12)]
+        dp = st.rect(wx, (wy0 + 0.1 + wy1 + 0.45) / 2, 0.2, wy1 + 0.45 - wy0 - 0.1, P.STEEL, 0.2)
+        fl = st.rect(wx + 1.3, wy1 - 0.1, 2.0, 0.14, P.STEEL_DK, 0.15)
+        fll = st.text("returns", wx + 2.4, wy1 - 0.1, 0.14, P.MUTED, 0.3, align="l", kind="bold")
+        st.fade_in([hole, dp, fl, fll] + ann, t_stop - 0.1, 0.4)
+        st.flow([(wx, wy1 + 0.45), (wx, wy0 + 0.15)], t_stop - 0.1, t_stop + 0.9, P.MUD, n=5, speed=0.9, r=0.035, z=0.3, glow=False)
+        po = tag(st, wx + 0.5, -0.27, "pumps OFF", P.MUTED, 0.16)
         st.fade_in(po, t_stop + 0.4, 0.3)
         t_watch = W(b, 4, "watch the well")
-        st.flow([(wx + 0.25, wy0 + 0.2), (wx + 0.25, wy1 - 0.08), (wx + 2.0, wy1 - 0.08)], t_stop - 0.1, b.end, P.MUD, n=8, speed=0.5, r=0.035,
+        st.flow([(wx + 0.24, wy0 + 0.2), (wx + 0.24, wy1 - 0.1), (wx + 2.3, wy1 - 0.1)], t_stop - 0.1, b.end, P.MUD, n=8, speed=0.5, r=0.035,
                 z=0.3, glow=False)
-        sf = tag(st, wx + 0.75, -0.75, "still flowing:\nshut the well in", P.BAD, 0.17)
+        sf = tag(st, wx + 0.7, -1.55, "still flowing:\nshut the well in", P.BAD, 0.17)
         st.fade_in(sf, s[5] + 0.2, 0.4)
-        st.ripple(wx + 1.6, wy1 - 0.08, t_watch + 0.4, t_watch + 3.0, P.BAD, period=0.8, r0=0.1, r1=0.55)
+        st.ripple(wx + 1.8, wy1 - 0.1, t_watch + 0.4, t_watch + 3.0, P.BAD, period=0.8, r0=0.1, r1=0.55)
         _alarm(st, de, s[5] + 0.3)
         # the aim
-        aim = tag(st, -1.4, -3.0, "catch it while it is still small", P.SAFE, 0.26, align="c")
+        aim = tag(st, -1.4, -3.1, "catch it while it is still small", P.SAFE, 0.26, align="c")
         st.fade_in(aim, s[6] + 0.1, 0.5)
 
 
@@ -671,13 +678,14 @@ class Schematic:
         objs = [o["sea"], o["rock"]] + ([o["sand"]] if sand_y else [])
         # 17 1/2in hole: cement then mud above, 13-3/8 casing
         y_top = self.y_wh0
-        objs.append(st.rect(cx, (y_top + self.y_s13) / 2, 2 * self.r17, y_top - self.y_s13, P.MUD, 0.02, alpha=0.75))
+        objs.append(st.rect(cx, (y_top + self.y_s13) / 2, 2 * self.r17, y_top - self.y_s13, P.MUD, 0.02, alpha=0.3))
         objs.append(st.rect(cx, (self.y_toc13 + self.y_s13) / 2, 2 * self.r17, self.y_toc13 - self.y_s13, P.CEMENT, 0.03))
         # 12 1/4in hole below the 13-3/8 shoe
-        objs.append(st.rect(cx, (self.y_s13 + self.y_s9) / 2, 2 * self.r12, self.y_s13 - self.y_s9, P.MUD, 0.02, alpha=0.75))
+        objs.append(st.rect(cx, (self.y_s13 + self.y_s9) / 2, 2 * self.r12, self.y_s13 - self.y_s9, P.MUD, 0.02, alpha=0.3))
         objs.append(st.rect(cx, (self.y_toc9 + self.y_s9) / 2, 2 * self.r12, self.y_toc9 - self.y_s9, P.CEMENT, 0.03))
         # inside the 13-3/8: the 9-5/8 x 13-3/8 annulus (mud)
-        objs.append(st.rect(cx, (y_top + self.y_s13) / 2, 2 * self.r13i, y_top - self.y_s13, P.MUD, 0.035, alpha=0.75))
+        objs.append(st.rect(cx, (y_top + self.y_s13) / 2, 2 * self.r13i, y_top - self.y_s13, P.BG, 0.034))
+        objs.append(st.rect(cx, (y_top + self.y_s13) / 2, 2 * self.r13i, y_top - self.y_s13, P.MUD, 0.035, alpha=0.3))
         if self.y_toc9 > self.y_s13:
             objs.append(st.rect(cx, (self.y_toc9 + self.y_s13) / 2, 2 * self.r13i, self.y_toc9 - self.y_s13, P.CEMENT, 0.036))
         # casing walls
@@ -741,7 +749,7 @@ class Schematic:
         bands = []
         for sd in (-1, 1):
             xa, xb = cx + sd * (self.r_oh + 0.02), cx + sd * xr_c
-            bands.append(st.rect((xa + xb) / 2, (ys + yb) / 2, abs(xb - xa), ys - yb, P.SECOND_B, 0.58, alpha=0.32, role="flat"))
+            bands.append(st.rect((xa + xb) / 2, (ys + yb) / 2, abs(xb - xa), ys - yb, P.SECOND_B, 0.58, alpha=0.5, role="flat"))
         return line, bands
 
 
@@ -820,9 +828,9 @@ def beat_barriers(st, tl):
         st.move(d2, s[6] - 0.3, s[6] + 0.3, dy=-1.0)
         # s6: tested; if one fails, only restoration work
         t6 = s[6]
-        tk = [tag(st, 3.5, -1.3, "✓ tested", P.SAFE, 0.18)]
+        tk = tag(st, 3.5, -1.35, "✓ both tested", P.SAFE, 0.18)
         st.fade_in(tk, W(b, 6, "tested") - 0.1, 0.4)
-        ban = tag(st, 3.5, -2.0, "one fails → the only work allowed: restoring it", P.WARN, 0.18)
+        ban = tag(st, 3.5, -2.05, "one fails → only restoration work", P.WARN, 0.18)
         st.fade_in(ban, W(b, 6, "only work") - 0.2, 0.4)
         # s7: a kick = the mud barrier has failed
         t7 = s[7]
@@ -833,8 +841,8 @@ def beat_barriers(st, tl):
         for xo in (-0.18, 0.18):
             st.flow([(cx + xo, sch.y_td - 0.1), (cx + xo, sch.y_td + 0.3), (cx + xo * 1.2, sch.y_s9 + 0.6)], t7 + 0.2, b.end, P.GAS, n=8, speed=0.8,
                     r=0.045, z=0.65)
-        st.ripple(cx, sch.y_td + 0.05, t7 + 0.2, b.end, P.GAS, period=0.9, r0=0.2, r1=0.9)
-        lost = tag(st, 3.5, -2.85, "primary lost: the secondary now holds the well", P.BAD, 0.18)
+        st.ripple(cx, sch.y_td + 0.35, t7 + 0.2, b.end, P.GAS, period=0.9, r0=0.15, r1=0.6)
+        lost = tag(st, 3.5, -2.75, "primary lost: secondary holds", P.BAD, 0.18)
         st.fade_in(lost, tf - 0.1, 0.4)
         st.fade(pl, tf, tf + 0.4, 1.0, 0.4)
 
@@ -890,7 +898,7 @@ def beat_shutin(st, tl):
 
         # ---- the U-tube: drill pipe (known mud) | annulus (gas of unknown size)
         t_u = t_out + 0.4
-        xp, xa = -4.3, -1.7
+        xp, xa = -4.65, -1.25
         wp, wa = 0.75, 1.15
         ytop, ybot = 1.6, -2.6
         yb0 = ybot - 0.55
@@ -928,13 +936,15 @@ def beat_shutin(st, tl):
                                  StrokeCap=skia.Paint.kRound_Cap)
                 cv.drawLine(gx, 2.75, x1, y1, pnt)
                 cv.drawCircle(gx, 2.75, 0.05, skia.Paint(Color=col(hex_rgb(P.WARN), a), AntiAlias=True))
-                look.draw_text(cv, f"{name}  {v:4.0f} bar", gx + 0.55, 2.75, 0.2, P.TEXT, a, "l", "mono")
+                look.draw_text(cv, f"{name} {v:.0f} bar", gx, 3.45, 0.2, P.TEXT, a, "c", "mono")
             st.procedural(t_u, b.end, 0.4, draw_g)
         st.ripple(xp, 2.75, t_g, t_g + 1.6, P.WARN, period=0.8, r0=0.45, r1=1.0)
         st.ripple(xa, 2.75, t_g, t_g + 1.6, P.WARN, period=0.8, r0=0.45, r1=1.0)
         # s2: unknown gas vs known mud
         t_unk = W(b, 2, "unknown")
-        q = tag(st, xa + wa / 2 + 0.2, ybot + 0.6, "gas: unknown size", P.GAS, 0.17)
+        q = tag(st, (xp + xa) / 2 - 0.15, ybot + 0.6, "gas: unknown size", P.GAS, 0.17, align="c")
+        ql = st.line([((xp + xa) / 2 + 0.95, ybot + 0.6), (xa - 0.1, ybot + 0.6)], P.GAS, 0.022, 0.45)
+        q = q + [ql]
         st.fade_in(q, t_unk - 0.2, 0.4)
         st.ripple(xa, ybot + 0.6, t_unk, t_unk + 1.4, P.GAS, period=0.7, r0=0.3, r1=0.9)
         t_kn = W(b, 2, "clean mud")
@@ -944,7 +954,7 @@ def beat_shutin(st, tl):
         t_ut = W(b, 3, "U-tube")
         u = st.line([(xp, ytop - 0.1), (xp, ybot - 0.28), (xa, ybot - 0.28), (xa, ytop - 0.1)], P.TEXT, 0.035, 0.35, alpha=0.8)
         st.draw_on(u, t_ut - 0.3, t_ut + 1.2, "BEZIER")
-        utl = st.text("a U-tube", (xp + xa) / 2, -1.0, 0.3, P.TEXT, 0.4, kind="bold")
+        utl = st.text("a U-tube", (xp + xa) / 2, -0.4, 0.28, P.TEXT, 0.4, kind="bold")
         st.fade_in(utl, t_ut + 0.4, 0.4)
         st.fade_out([u, utl], W(b, 3, "pressure at the bottom") - 0.2, 0.4)
         t_bhp = W(b, 3, "pressure at the bottom")
@@ -955,8 +965,11 @@ def beat_shutin(st, tl):
         ex0, ex1 = 0.55, 7.6
         card = st.rect((ex0 + ex1) / 2, -0.85, ex1 - ex0, 4.4, P.PANEL, 0.0)
         hd = st.text("BOTTOM-HOLE PRESSURE, SHUT IN", ex0 + 0.35, 1.0, 0.18, P.MUTED, 0.3, align="l", kind="bold")
-        st.fade_in([card, hd], t_bhp - 0.2, 0.4)
-        t_col = W(b, 3, "clean mud column")
+        st.fade_in([card, hd], t_unk - 0.4, 0.4)
+        anote = st.text("the annulus gauge (SICP) includes gas of unknown size:\nit cannot give the pore pressure", ex0 + 0.35, -2.7, 0.15, P.MUTED,
+                        0.3, align="l", kind="bold")
+        st.fade_in(anote, t_unk, 0.4)
+        t_col = t_kn
         r1a = st.text("mud column in the pipe", ex0 + 0.35, 0.35, 0.22, P.TEXT, 0.3, align="l", kind="bold")
         r1b = st.text(f"{MW:.2f} sg × 0.0981 × {TVD:,.0f} m", ex0 + 0.35, -0.08, 0.17, P.MUTED, 0.3, align="l", kind="mono")
         st.fade_in([r1a, r1b], t_col - 0.1, 0.4)
@@ -996,7 +1009,8 @@ def beat_kill(st, tl):
         st.scale_to(kb, t_km, t_km + 1.5, sx=P_PORE * k)
         st.fade_in([pb, pbl], t_bal - 0.4, 0.3)
         st.scale_to(pb, t_bal - 0.3, t_bal + 0.9, sx=P_PORE * k)
-        st.counter(bx0 + P_PORE * k + 0.15, -0.3, t_km, t_km + 1.5, 0, M.bar(TVD, KMW), fmt="{:.0f} bar", size=0.24, color=P.KILL_MUD, align="l")
+        st.counter(bx0 + P_PORE * k + 0.15, -0.3, t_km, t_km + 1.5, 0, M.bar(TVD, KMW), fmt="{:.0f} bar", size=0.24, color=P.KILL_MUD, align="l",
+                   hold=s[2] - 0.2)
         st.counter(bx0 + P_PORE * k + 0.15, -1.15, t_bal - 0.3, t_bal + 0.9, 0, P_PORE, fmt="{:.0f} bar", size=0.24, color=P.PORE, align="l",
                    hold=s[2] - 0.2)
         eq_ok = tag(st, bx0, -2.4, "balanced on its own: no help from the choke needed", P.SAFE, 0.18)
@@ -1040,7 +1054,8 @@ def beat_kill(st, tl):
         chk_line = st.line([(WX + 0.6, y_cl), (xcl, y_cl), (xcl, ydeck + 0.25)], P.STEEL, 0.07, 0.22)
         choke = st.poly([(xcl - 0.2, ydeck + 0.25), (xcl + 0.2, ydeck + 0.25), (xcl, ydeck + 0.45)], P.WARN, 0.3)
         choke2 = st.poly([(xcl - 0.2, ydeck + 0.65), (xcl + 0.2, ydeck + 0.65), (xcl, ydeck + 0.45)], P.WARN, 0.3)
-        chl = st.text("choke", xcl + 0.3, ydeck + 0.45, 0.16, P.WARN, 0.3, align="l", kind="bold")
+        chl = st.text("choke", xcl - 0.28, ydeck + 0.45, 0.16, P.WARN, 0.3, align="r", kind="bold")
+        sep = st.text("to the mud-gas separator", xcl + 1.4, ydeck + 0.45, 0.14, P.MUTED, 0.3, align="l", kind="bold")
         pump = st.rect(WX - 1.4, ydeck + 0.35, 0.6, 0.4, P.PANEL2, 0.3, role="solid")
         pumpl = st.text("pump", WX - 1.4, ydeck + 0.35, 0.14, P.TEXT, 0.31, kind="bold")
         sp = st.line([(WX - 1.1, ydeck + 0.35), (WX, ydeck + 0.35), (WX, ydeck)], P.STEEL, 0.06, 0.22)
@@ -1052,13 +1067,13 @@ def beat_kill(st, tl):
         pipe = st.rect(WX, (ydeck + y_bit) / 2, 2 * rp, ydeck - y_bit, P.STEEL, 0.3)
         bit = st.poly([(WX - 0.3, y_bit + 0.1), (WX + 0.3, y_bit + 0.1), (WX + 0.22, y_bit - 0.1), (WX - 0.22, y_bit - 0.1)], P.STEEL_DK, 0.31)
         shoe_l = st.text("9⅝ in shoe", WX - rh - 0.45, yshoe, 0.15, P.MUTED, 0.3, align="r", kind="bold")
-        well = [sea, rock, deck, hole_bg, bopl, chk_line, choke, choke2, chl, pump, pumpl, sp, mud_bot, pipe, bit, shoe_l] + cem + csg + bop + \
+        well = [sea, rock, deck, hole_bg, bopl, chk_line, choke, choke2, chl, sep, pump, pumpl, sp, mud_bot, pipe, bit, shoe_l] + cem + csg + bop + \
             ann_el + riser + mud_ann + mud_ann_r
         st.fade_in(well, t2 - 0.1, 0.5)
         ann_closed = [WX - rp - 0.04, WX + rp + 0.04]
         st.move(ann_el[0], t2 - 0.1, t2, to=(ann_closed[0] - 0.06, ysb + 0.5))
         st.move(ann_el[1], t2 - 0.1, t2, to=(ann_closed[1] + 0.06, ysb + 0.5))
-        kl = tag(st, WX - 2.05, 2.95, f"kill mud {KMW:.2f} sg", P.KILL_MUD, 0.17)
+        kl = tag(st, -1.2, 1.4, f"kill mud {KMW:.2f} sg (from the formula)", P.KILL_MUD, 0.17)
         st.fade_in(kl, t2, 0.4)
         st.fade_out(res, t2 - 0.35, 0.3)
         # circulation timing
@@ -1073,8 +1088,10 @@ def beat_kill(st, tl):
         up_l = [(WX - rp - 0.16, y_bit), (WX - rp - 0.16, y_cl), (WX + 0.6, y_cl), (xcl, y_cl), (xcl, ydeck + 0.45), (xcl + 1.3, ydeck + 0.45)]
         st.flow(down, t_c1, t_c2, P.MUD, n=12, speed=0.9, r=0.035, z=0.6, glow=False)
         st.flow(down, t_c2, b.end, P.KILL_MUD, n=12, speed=0.9, r=0.035, z=0.6, glow=False)
-        st.flow(up_r, t_c1, b.end, P.MUD, n=18, speed=0.8, r=0.035, z=0.6, glow=False)
-        st.flow(up_l, t_c1, b.end, P.MUD, n=18, speed=0.8, r=0.035, z=0.6, glow=False)
+        t_k2_ = min(b.end - 1.0, s[4] + 2.6)
+        for path in (up_r, up_l):
+            st.flow(path, t_c1, t_k2_, P.MUD, n=18, speed=0.8, r=0.035, z=0.6, glow=False)
+            st.flow(path, t_k2_ - 0.2, b.end, P.KILL_MUD, n=18, speed=0.5, r=0.035, z=0.6, glow=False)
         # the gas: rises with the old mud, expands, leaves through the choke line
         h_px = 0.0016                                            # world units per metre (below the seabed, approx.)
 
@@ -1086,19 +1103,20 @@ def beat_kill(st, tl):
             return (TVD - KICK_H) * (1 - f) + M.WATER_DEPTH * f * 0.98
 
         def draw_gas(cv, t, look):
-            if t < t_c1 - 0.6 or t > t_gas_out + 0.6:
+            if t < t2 or t > t_gas_out + 0.6:
                 return
-            a = _env(t, t_c1 - 0.6, t_gas_out + 0.4, 0.4)
+            a = _env(t, t2, t_gas_out + 0.4, 0.4)
             zt = gas_top(t)
             h = gas_h(KICK_H, zt)
-            y1 = zy(zt)
-            y0 = max(zy(min(zt + h, TVD)), y_bit)
+            hv = 0.3 + 0.0035 * h                                # drawn taller than true scale so it can be seen
+            y0 = max(zy(min(zt + h, TVD)), y_bit - 0.05)
+            y1 = min(y0 + hv, y_cl + 0.1)
             y0 = min(y0, y1 - 0.12)
             for sd in (-1, 1):
                 xa = WX + sd * (rp + 0.02)
                 xb = WX + sd * (rh - 0.02)
                 _slug(cv, look, min(xa, xb), y0, max(xa, xb), y1, P.GAS, a)
-        st.procedural(t_c1 - 0.6, t_gas_out + 0.7, 0.55, draw_gas)
+        st.procedural(t2, t_gas_out + 0.7, 0.55, draw_gas)
         st.flow([(WX + 0.6, y_cl), (xcl, y_cl), (xcl, ydeck + 0.45), (xcl + 1.3, ydeck + 0.45)], t_gas_out - 1.4, t_gas_out + 0.6, P.GAS, n=10,
                 speed=1.4, r=0.05, z=0.62)
         # circulation 2: kill mud down the pipe, then up the annulus
@@ -1117,13 +1135,14 @@ def beat_kill(st, tl):
         st.fade(c1, t_c2, t_c2 + 0.4, 1.0, 0.45)
         st.fade_in(c2, t_c2, 0.4)
         # bottom-hole pressure held just above pore pressure; choke pressure from the model
-        cx0, cy0, cw, chh = 0.1, -3.05, 5.3, 2.05
-        cB = Chart(st, cx0, cy0, cw, chh, (0.0, 1.0), (630.0, 670.0))
-        frB = cB.frame(yticks=[640, 654, 670], xlabel="", ylabel="", tick_size=0.15, grid=False)
-        bl = st.text("BOTTOM-HOLE PRESSURE (bar)", cx0, cy0 + chh + 0.3, 0.16, P.MUTED, 0.3, align="l", kind="bold")
+        cx0, cy0, cw, chh = 0.0, -3.15, 6.6, 1.55
+        cB = Chart(st, cx0, cy0, cw, chh, (0.0, 1.0), (636.0, 668.0))
+        bpan = st.rect(cx0 + cw / 2 - 0.25, cy0 + chh / 2 + 0.2, cw + 1.4, chh + 1.0, P.PANEL, 0.0)
+        frB = [bpan] + cB.frame(yticks=[640, 654, 668], xlabel="", ylabel="", tick_size=0.15, grid=False, panel=False)
+        bl = st.text("BOTTOM-HOLE PRESSURE (bar) DURING THE KILL", cx0 - 0.8, cy0 + chh + 0.35, 0.15, P.MUTED, 0.3, align="l", kind="bold")
         ppl = cB.hline(P_PORE, P.PORE, 0.035, 0.2)
         ppt = st.text("pore pressure", cx0 + cw - 0.05, cB.Y(P_PORE) - 0.22, 0.15, P.PORE, 0.3, align="r", kind="bold")
-        st.fade_in(frB + [bl, ppl, ppt], W(b, 2, "choke holds") - 0.6, 0.4)
+        st.fade_in(frB + [bl, ppl, ppt], t_c1 - 0.5, 0.4)
         T0, T1 = t_c1, t_k2
 
         def draw_bhp(cv, t, look):
@@ -1158,19 +1177,19 @@ def beat_kill(st, tl):
         st.procedural(t2, b.end, 0.62, draw_choke)
         st.ripple(xcl, ydeck + 0.45, W(b, 2, "choke holds"), W(b, 2, "choke holds") + 1.8, P.WARN, period=0.7, r0=0.2, r1=0.7)
         # s3: wait-and-weight
-        ww = tag(st, -1.2, -0.45, "wait-and-weight: kill mud in ONE circulation", P.MUTED, 0.17)
+        ww = tag(st, -1.2, -0.45, "wait-and-weight: kill mud in ONE circulation", P.TEXT, 0.17)
         st.fade_in(ww, s[3] - 0.1, 0.4)
         # s4: choke-line friction (subsea): flow goes UP the long line; friction adds back-pressure
         t4 = s[4]
         hl = st.line([(WX + 0.6, y_cl), (xcl, y_cl), (xcl, ydeck + 0.25)], P.WARN, 0.05, 0.23)
         st.draw_on(hl, W(b, 4, "choke line") - 0.3, W(b, 4, "choke line") + 0.8)
         chev = []
-        for yy in (1.95, 2.45):
+        for yy in (2.15, 2.75):
             chev.append(st.line([(xcl - 0.18, yy + 0.1), (xcl, yy - 0.06), (xcl + 0.18, yy + 0.1)], P.BAD, 0.04, 0.63))
         st.fade_in(chev, W(b, 4, "friction") - 0.1, 0.4)
-        fr_t = tag(st, xcl + 0.35, 2.2, "friction in the long choke line\nadds back-pressure", P.BAD, 0.17)
+        fr_t = tag(st, xcl + 0.35, 2.6, "friction in the long choke line\nadds back-pressure", P.BAD, 0.17)
         st.fade_in(fr_t, W(b, 4, "friction"), 0.4)
-        sl = tag(st, xcl + 0.35, 1.35, "pump slowly, open the choke to correct", P.TEXT, 0.17)
+        sl = tag(st, xcl + 0.35, 2.0, "pump slowly, open the choke to correct", P.TEXT, 0.17)
         st.fade_in(sl, W(b, 4, "pump slowly") - 0.1, 0.4)
 
 
@@ -1194,8 +1213,8 @@ def beat_tolerance(st, tl):
         mud_o = st.rect(WX, (ys + YB) / 2, 2 * (rh - 0.02), ys - YB, P.MUD, 0.05)
         pipe = st.rect(WX, (YT + YB + 0.3) / 2, 2 * rp, YT - YB - 0.3, P.STEEL, 0.3)
         shoe = [st.poly([(WX + sd * (rh + 0.09), ys), (WX + sd * (rh + 0.25), ys), (WX + sd * (rh + 0.09), ys + 0.18)], P.STEEL, 0.22) for sd in (-1, 1)]
-        dl = [st.text(f"{Z0 + 50:,.0f} m", WX - 1.7, zy(Z0 + 50), 0.15, P.MUTED, 0.3, align="l"),
-              st.text(f"{TVD:,.0f} m", WX - 1.7, zy(TVD) + 0.12, 0.15, P.MUTED, 0.3, align="l")]
+        dl = [st.text(f"{Z0 + 50:,.0f} m", WX + 1.7, zy(Z0 + 50), 0.15, P.MUTED, 0.3, align="l"),
+              st.text(f"{TVD:,.0f} m", WX + 1.7, zy(TVD) + 0.12, 0.15, P.MUTED, 0.3, align="l")]
         objs = [rock, mud_c, mud_o, pipe] + cem + csg + shoe + dl
         st.fade_in(objs, b.start + 0.1, 0.5)
         sl = tag(st, WX + 1.75, ys, "9⅝ in shoe\n3,400 m", P.TEXT, 0.16)
@@ -1209,19 +1228,19 @@ def beat_tolerance(st, tl):
         st.fade_in(wk, t_wk, 0.4)
 
         # the chart: shoe pressure vs the depth of the gas top
-        c = Chart(st, 0.75, -2.75, 6.1, 4.0, (Z1, Z0), (556.0, 576.0))
+        c = Chart(st, 0.75, -2.75, 6.1, 3.3, (Z1, Z0), (556.0, 576.0))
         fr = c.frame(xticks=[4000, 3800, 3600, 3400, 3200, 3000], yticks=[560, 565, 570, 575], xlabel="depth of the top of the gas (m)",
                      ylabel="pressure at the shoe (bar)", fx="{:,.0f}", tick_size=0.15)
         lim = c.hline(P_FRAC_SHOE, P.FRAC, 0.05, 0.3)
-        liml = st.text(f"leak-off limit {FG_SHOE:.2f} sg = {P_FRAC_SHOE:.0f} bar", c.X(3010), c.Y(P_FRAC_SHOE) + 0.22, 0.16, P.FRAC, 0.3, align="r",
+        liml = st.text(f"leak-off limit\n{FG_SHOE:.2f} sg = {P_FRAC_SHOE:.0f} bar", c.X(3010), c.Y(P_FRAC_SHOE) - 0.38, 0.16, P.FRAC, 0.3, align="r",
                        kind="bold")
         sv = st.dashed(c.pt(SHOE, 556), c.pt(SHOE, 576), P.MUTED, 0.02, 0.1, 0.08, 0.15, 0.8)
-        svl = st.text("gas top\nat the shoe", c.X(SHOE) + 0.08, c.Y(558.5), 0.14, P.MUTED, 0.3, align="l", kind="bold")
+        svl = st.text("gas top\nat the shoe", c.X(SHOE) - 0.1, c.Y(558.3), 0.14, P.MUTED, 0.3, align="r", kind="bold")
         t1 = s[1]
-        st.fade_in(fr + [lim, svl] + sv, t1 - 0.3, 0.5)
-        st.fade_in(liml, W(b, 2, "leak-off") - 0.3, 0.4)
+        st.fade_in(fr + [lim, svl, liml] + sv, t1 - 0.3, 0.5)
+        st.ripple(c.X(3150), c.Y(P_FRAC_SHOE), W(b, 2, "leak-off"), W(b, 2, "leak-off") + 1.6, P.FRAC, period=0.8, r0=0.1, r1=0.6)
         # gas rising during circulation (small kick, then a bigger one)
-        gx0, gx1 = WX + rp + 0.02, WX + rh - 0.04
+        gx0, gx1 = rp + 0.02, rh - 0.04
         t_a0, t_a1 = t1 + 0.2, W(b, 1, "as the gas arrives", 1.0) + 0.6
         t_a2 = s[2] - 0.2
         t_b0, t_b1 = W(b, 2, "too big") - 0.2, W(b, 2, "passes the limit", 1.0)
@@ -1274,7 +1293,7 @@ def beat_tolerance(st, tl):
                 _trace(cv, look, curve_pts(BIG_H, zs_big, t_b0, min(t, t_b2)), P.TEXT, a, 0.06)
         st.procedural(t1 - 0.4, b.end, 0.32, draw_gas)
         st.procedural(t_a0, b.end, 0.4, draw_curves)
-        pk = tag(st, c.X(SHOE) - 0.2, c.Y(shoe_p(KICK_H, SHOE)) + 0.55, f"{KICK_H:.0f} m of gas: peak as it arrives", P.SAFE, 0.16, align="r")
+        pk = tag(st, c.X(3720), c.Y(562.4), f"{KICK_H:.0f} m of gas: peaks as it arrives", P.SAFE, 0.16, align="c")
         st.fade_in(pk, W(b, 1, "peaks") - 0.1, 0.4)
         st.fade(pk, t_b0, t_b0 + 0.4, 1.0, 0.5)
         # choke adds pressure as the gas expands
@@ -1291,7 +1310,7 @@ def beat_tolerance(st, tl):
             look.draw_text(cv, f"{P_PORE:.0f} bar, held", 3.2, 2.35, 0.26, P.MUD, a, "l", "mono")
         st.procedural(t_ch - 0.3, t_b0, 0.6, draw_choke)
         # too big a kick: past the limit -> crack and losses underground
-        bigl = tag(st, c.X(3990), c.Y(574.6), f"{BIG_H:.0f} m of gas", P.TEXT, 0.16)
+        bigl = tag(st, c.X(3990), c.Y(568.6), f"too big: {BIG_H:.0f} m of gas", P.TEXT, 0.16)
         st.fade_in(bigl, t_b0 + 0.2, 0.4)
         t_cr = W(b, 2, "rock cracks")
         st.ripple(c.X(SHOE), c.Y(P_FRAC_SHOE), t_b1 - 0.2, t_b1 + 2.0, P.BAD, period=0.7, r0=0.1, r1=0.7)
@@ -1305,13 +1324,11 @@ def beat_tolerance(st, tl):
         st.fade_in(esc, W(b, 2, "escapes") - 0.1, 0.4)
         # kick tolerance
         t_kt = W(b, 3, "kick tolerance")
-        kt = tag(st, 0.75, -3.35, f"kick tolerance here ≈ {KT_H:.0f} m of gas (≈ {KT_V:.1f} m³): the biggest kick that keeps the peak under the line",
-                 P.TEXT, 0.15)
+        kt = tag(st, 0.75, 1.6, f"KICK TOLERANCE here ≈ {KT_H:.0f} m of gas (≈ {KT_V:.1f} m³):\nthe biggest kick whose peak stays under the line\n"
+                 "(one of the margins built into the chapter 1 casing design)", P.TEXT, 0.17, align="l")
         st.fade_in(kt, t_kt - 0.3, 0.4)
         ktm = st.ring(c.X(SHOE), c.Y(P_FRAC_SHOE), 0.13, 0.03, P.TEXT, 0.45)
         st.pop_in(ktm, t_kt)
-        ch1 = st.text("a margin built into the chapter 1 casing design", 0.75, 0.75 + 0.6, 0.15, P.MUTED, 0.4, align="l", kind="bold")
-        st.fade_in(ch1, W(b, 3, "margins") - 0.2, 0.4)
 
 
 # ---------------------------------------------------------------- 7.08 Macondo (restrained, factual)
@@ -1331,12 +1348,14 @@ def beat_macondo(st, tl):
         csg = [st.rect(WX + sd * (rh + 0.04), (ysb + ytd) / 2, 0.07, ysb - ytd, P.STEEL, 0.2) for sd in (-1, 1)]
         cem_a = [st.rect(WX + sd * (rh + 0.22), ytd + 0.55, 0.3, 1.1, P.CEMENT, 0.05) for sd in (-1, 1)]
         cem_s = st.rect(WX, ytd + 0.3, 2 * rh, 0.6, P.CEMENT, 0.05)
-        mud = st.rect(WX, (ysb + ytd + 0.6) / 2, 2 * rh, ysb - ytd - 0.6, P.MUD, 0.05)
+        y_sw = ysb - 0.62 * (ysb - ytd - 0.6)                     # displaced to seawater down to here (illustrative)
+        mud = st.rect(WX, (ysb + y_sw) / 2, 2 * rh, ysb - y_sw, P.MUD, 0.05)
+        mud_lo = st.rect(WX, (y_sw + 0.06 + ytd + 0.6) / 2, 2 * rh, y_sw + 0.06 - ytd - 0.6, P.MUD, 0.049)
         bop = st.rect(WX, ysb + 0.35, 1.5, 0.7, P.PANEL2, 0.25, role="solid")
         bopl = st.text("BOP", WX, ysb + 0.35, 0.17, P.TEXT, 0.27, kind="bold")
         riser = [st.rect(WX + sd * 0.35, (ysb + 0.7 + 3.05) / 2, 0.06, 3.05 - ysb - 0.7, P.STEEL, 0.2) for sd in (-1, 1)]
         rmud = st.rect(WX, (ysb + 0.7 + 3.05) / 2, 0.64, 3.05 - ysb - 0.7, P.MUD, 0.05)
-        well = [sea, rock, sand, cem_s, mud, bop, bopl, rmud] + csg + cem_a + riser
+        well = [sea, rock, sand, cem_s, mud, mud_lo, bop, bopl, rmud] + csg + cem_a + riser
         st.fade_in(well, s[0] + 0.3, 0.6)
         nts = st.text("schematic", WX, -3.55, 0.14, P.MUTED, 0.3)
         st.fade_in(nts, s[0] + 0.6, 0.4)
@@ -1366,21 +1385,21 @@ def beat_macondo(st, tl):
         # 2 the negative (inflow) test: pressure inside dropped below the rock's
         t_nt = W(b, 2, "drops the pressure")
         gx, gy = -1.6, 2.35
-        gp = st.rect(gx + 1.6, gy, 4.0, 1.0, P.PANEL, 0.0)
+        gp = st.rect(0.375, gy, 4.55, 1.0, P.PANEL, 0.0)
         lab_r = st.text("rock", gx - 0.2, gy + 0.22, 0.15, P.PORE, 0.3, align="l", kind="bold")
         lab_w = st.text("inside the well", gx - 0.2, gy - 0.22, 0.15, P.MUD, 0.3, align="l", kind="bold")
         bar_r = st.rect(gx + 1.3, gy + 0.22, 2.2, 0.16, P.PORE, 0.1, anchor="l")
         bar_w = st.rect(gx + 1.3, gy - 0.22, 2.6, 0.16, P.MUD, 0.1, anchor="l")
         st.fade_in([gp, lab_r, lab_w, bar_r, bar_w], s[2] + 0.2, 0.4)
         st.scale_to(bar_w, t_nt, t_nt + 1.2, sx=1.6)
-        prove = st.text("no flow back = the seal holds", gx + 1.6, gy - 0.75, 0.15, P.MUTED, 0.3, kind="bold")
+        prove = st.text("no flow back = the seal holds", 0.375, gy - 0.75, 0.15, P.MUTED, 0.3, kind="bold")
         st.fade_in(prove, W(b, 2, "prove") - 0.2, 0.4)
         # 3 warnings explained away (pressure came back); mud replaced by seawater
         t_w = W(b, 3, "warnings")
         st.scale_to(bar_w, t_w, t_w + 0.8, sx=2.0)
         st.recolor(prove, t_w, t_w + 0.3, P.BAD)
         t_sw = W(b, 3, "seawater")
-        st.recolor([mud, rmud], t_sw - 0.2, t_sw + 1.6, "#2b5d8f")
+        st.recolor([mud, rmud], t_sw - 0.2, t_sw + 1.6, P.SEA)
         swl = tag(st, WX + 0.75, 1.2, "seawater", P.TEXT, 0.15)
         st.fade_in(swl, t_sw + 0.4, 0.4)
         st.fade_out([gp, lab_r, lab_w, bar_r, bar_w, prove], s[4] - 0.3, 0.4)
@@ -1392,7 +1411,7 @@ def beat_macondo(st, tl):
         # 5 the BOP did not seal
         t_b = times[4]
         st.recolor(bop, t_b - 0.1, t_b + 0.4, "#5a2333")
-        st.flow([(WX - 0.1, ysb), (WX - 0.1, 3.05), (WX - 0.4, 3.6)], t_b, b.end, P.GAS, n=8, speed=1.2, r=0.045, z=0.45)
+        st.flow([(WX - 0.1, ysb), (WX - 0.1, 3.05)], t_b, b.end, P.GAS, n=6, speed=1.0, r=0.045, z=0.45)
         st.ripple(WX, ysb + 0.35, t_b, t_b + 1.5, P.BAD, period=0.7, r0=0.3, r1=1.0)
         # 6 eleven people died
         t_d = s[6]

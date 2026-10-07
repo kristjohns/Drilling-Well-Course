@@ -567,7 +567,7 @@ def beat_bop(st, tl):
     with st.span(b.start, b.end):
         view = View(st, b.start, b.end, z=0.2)
         with view:
-            stk = Stack(st, CX2, Y02, S=1.0, z=0.3, pipe=(-4.6, 3.9), joint=2.0)
+            stk = Stack(st, CX2, Y02, S=1.0, z=0.3, pipe=(-4.6, 3.9), joint=1.8)
             # wellhead below, riser above (stubs)
             st.rect(CX2, Y02 - 0.3, 1.5, 0.75, P.STEEL_DK, 0.25)
             st.rect(CX2, Y02 - 0.3, stk.BR, 0.75, P.BG, 0.26)
@@ -596,7 +596,7 @@ def beat_bop(st, tl):
                 arrs += st.arrow(CX2 + dx_, stk.y["bsr"] - 1.05, CX2 + dx_, stk.y["bsr"] - 0.3, P.TEXT, 0.05, 0.16, 0.55)
             st.fade_in(arrs, t_seal + 0.3, 0.4)
             # the tool joint: too thick to shear
-            tj_ring = st.ring(CX2, 2.0 + 0.55, 0.42, 0.04, P.WARN, 0.6)
+            tj_ring = st.ring(CX2, 1.8 + 0.55, 0.42, 0.04, P.WARN, 0.6)
             st.fade_in(tj_ring, t_tj - 0.2, 0.3)
             st.fade_out(tj_ring, t_tj + 2.2, 0.4)
         # ---- labels (screen space, follow the stack)
@@ -628,10 +628,10 @@ def beat_bop(st, tl):
                 objs.append(sb)
             labs[key] = objs
         # pipe body vs tool joint
-        pj = pill(st, CX2 + 0.75, 2.55, "tool joint: too thick to cut", P.PANEL2, P.WARN, 0.18, 0.6, align="l")
+        pj = pill(st, CX2 + 0.75, 2.35, "tool joint: too thick to cut", P.PANEL2, P.WARN, 0.18, 0.6, align="l")
         st.fade_in(pj, t_tj - 0.1, 0.4)
         st.fade_out(pj, t_acc - 0.5, 0.4)
-        view.follow(pj, CX2 + 0.75, 2.55)
+        view.follow(pj, CX2 + 0.75, 2.35)
         sealp = pill(st, CX2 - stk.half - 0.15, stk.y["bsr"], "sealed", P.PANEL2, P.SAFE, 0.2, 0.6, align="r")
         st.fade_in(sealp, t_seal + 0.2, 0.4)
         view.follow(sealp, CX2 - stk.half - 0.15, stk.y["bsr"])
@@ -683,27 +683,37 @@ def _accumulator(st, b, stk, t_acc, t_pow, t_fast):
     pw_pl = pill(st, px, py, "rig power", P.PANEL2, P.SAFE, 0.21, 0.55)
     pdot = st.circle(px - 0.75, py, 0.07, P.SAFE, 0.57)
     st.fade_in(pw_pl + [pdot], t_acc + 0.5, 0.4)
-    rch = [(px - 0.2, py - 0.3), (px - 0.2, ay - 1.3), (ax + aw / 2 + 0.05, ay - 1.3)]
+    rch = [(px + 0.85, py - 0.25), (px + 0.85, ay - 1.3), (ax + aw / 2 + 0.05, ay - 1.3)]
     rl = st.line(rch, P.STEEL_DK, 0.05, 0.47)
     st.fade_in(rl, t_acc + 0.5, 0.4)
-    st.flow(rch, t_acc + 0.7, t_pow, HYD, n=6, speed=0.7, r=0.035, z=0.6)
+    # the rig's pumps charge the bottle: fluid in, nitrogen squeezed, gauge up
+    t_ch0, t_ch1 = t_acc + 0.9, _w(b, 4, "store") + 2.2
+    st.flow(rch, t_acc + 0.7, t_pow, HYD, n=6, speed=0.9, r=0.035, z=0.6)
+    up = 0.35
+    st.move(sep, t_ch0, t_ch1, dy=up)
+    st.scale_to(gas, t_ch0, t_ch1, sy=top - 0.08 - (y_sep0 + up))
+    st.scale_to(liq, t_ch0, t_ch1, sy=y_sep0 + up - bot - 0.08)
+    st.move(gl, t_ch0, t_ch1, dy=up / 2)
+    st.move(ll, t_ch0, t_ch1, dy=up / 2)
+    st.rotate(nd, t_ch0, t_ch1, 22)
+    # the gas expands and pushes the fluid out, fast, into the stack ...
+    t_go = t_fast - 0.15
+    dy = -0.95
+    st.move(sep, t_go, t_go + 1.5, dy=dy)
+    st.scale_to(gas, t_go, t_go + 1.5, sy=top - 0.08 - (y_sep0 + up + dy))
+    st.scale_to(liq, t_go, t_go + 1.5, sy=y_sep0 + up + dy - bot - 0.08)
+    st.move(gl, t_go, t_go + 1.5, dy=dy / 2)
+    st.move(ll, t_go, t_go + 1.5, dy=dy / 2)
+    st.rotate(nd, t_go, t_go + 1.5, 70)
+    st.flow(line_pts, t_go, b.end, HYD, n=18, speed=2.6, r=0.04, z=0.62)
+    st.ripple(stk.cx, stk.y_pr, t_go + 0.6, b.end, HYD, period=0.9, r0=0.3, r1=1.5, width=0.03, z=0.62)
+    # ... and keeps doing it with the rig's power gone
     st.recolor([pw_pl[1], pdot], t_pow, t_pow + 0.3, P.BAD)
-    xo = _x_mark(st, px, py, 0.32, t_pow + 0.1, z=0.7, width=0.06)
-    lost = st.text("power lost", px, py - 0.55, 0.19, P.BAD, 0.6, kind="bold")
+    xo = _x_mark(st, px - 0.75, py, 0.13, t_pow + 0.1, z=0.7, width=0.05)
+    lost = st.text("power lost", px, py - 0.5, 0.19, P.BAD, 0.6, kind="bold")
     st.fade_in(lost, t_pow + 0.3, 0.3)
-    # the gas expands and pushes the fluid out, fast, into the stack
-    t_go = t_pow + 0.35
-    dy = -0.7
-    st.move(sep, t_go, t_go + 1.6, dy=dy)
-    st.scale_to(gas, t_go, t_go + 1.6, sy=top - 0.08 - (y_sep0 + dy))
-    st.scale_to(liq, t_go, t_go + 1.6, sy=y_sep0 + dy - bot - 0.08)
-    st.move(gl, t_go, t_go + 1.6, dy=dy / 2)
-    st.move(ll, t_go, t_go + 1.6, dy=dy / 2)
-    st.rotate(nd, t_go, t_go + 1.6, 62)
-    st.flow(line_pts, t_go, b.end, HYD, n=16, speed=2.4, r=0.04, z=0.62)
-    st.ripple(stk.cx, stk.y_pr, t_fast, b.end, HYD, period=0.9, r0=0.3, r1=1.5, width=0.03, z=0.62)
     fast = pill(st, ax - 0.75, bot - 0.6, "the preventers still close, fast", P.PANEL2, P.TEXT, 0.21, 0.6, align="l")
-    st.fade_in(fast, t_fast, 0.4)
+    st.fade_in(fast, t_pow + 0.2, 0.4)
 
 
 # ====================================================================================================== 3.03 why the closed loop matters
@@ -712,12 +722,12 @@ def beat_closed_loop(st, tl):
     s = b.sent
     with st.span(b.start, b.end):
         # left column: the three reasons
-        hd = st.text("WHY THE CLOSED LOOP MATTERS", -6.05, 1.95, 0.17, P.MUTED, 0.5, align="l", kind="bold")
+        hd = st.text("WHY THE CLOSED LOOP MATTERS", -6.05, 1.4, 0.17, P.MUTED, 0.5, align="l", kind="bold")
         st.fade_in(hd, s[0], 0.4)
         chips = []
         names = ["a real, weighted mud", "flow in vs flow out", "shut in at the seabed"]
         for i, nm in enumerate(names):
-            y = 1.2 - i * 0.95
+            y = 0.7 - i * 0.95
             card = st.rect(-4.45, y, 3.3, 0.72, P.PANEL2, 0.4)
             orb = st.circle(-5.75, y, 0.18, P.GRID, 0.45)
             num = st.text(str(i + 1), -5.75, y - 0.005, 0.15, P.TEXT, 0.46, kind="bold")
@@ -777,7 +787,7 @@ def _reason_mud(st, b, t0, t1):
         st.scale_to(bar, t_w - 0.2, t_w + 1.4, sy=Y(p_mw) - by0)
         st.counter(bx - 0.5, Y(p_mw) + 0.0, t_w - 0.2, t_w + 1.4, p_sw, p_mw, fmt="{:.0f} bar", size=0.2, color=P.MUD, align="r", hold=t1 + 0.4)
         t_c = _w(b, 2, "control pressure")
-        ok = pill(st, bx + 0.7, Y(p_mw) + 0.25, "above pore pressure", P.PANEL2, P.SAFE, 0.17, 0.55, align="l")
+        ok = pill(st, bx + 0.55, Y(p_mw) + 0.1, "above pore pressure", P.PANEL2, P.SAFE, 0.16, 0.55, align="l")
         st.fade_in(ok, t_c - 0.2, 0.4)
         objs += ttl + face + ticks + [nd, hub, cap, sw, frame, bar, pore, pl, cap2, brk] + ok
         st.fade_out(objs, t1, 0.4)
@@ -878,7 +888,7 @@ def _reason_shut(st, b, t0, t1):
         # shut in at the seabed
         stk.close_rams(t_shut - 0.1, t_shut + 0.6, keys=("pr2",))
         st.ripple(cx, stk.y["pr2"], t_shut + 0.5, t_shut + 1.6, P.TEXT, period=0.6, r0=0.15, r1=0.8, width=0.03, z=0.7)
-        sh = pill(st, cx - stk.half - 0.1, stk.y["pr2"], "shut in at the seabed", P.PANEL2, P.TEXT, 0.18, 0.6, align="r")
+        sh = pill(st, cx + 1.95, stk.y["pr2"] + 0.12, "shut in at the seabed", P.PANEL2, P.TEXT, 0.18, 0.6, align="l")
         st.fade_in(sh, t_shut + 0.4, 0.3)
         # circulate the kick out through the choke line
         st.flow([(cx, 2.2), (cx, -3.15)], t_circ, t1 + 0.4, P.MUD, n=16, speed=0.8, r=0.03, z=0.7)
@@ -942,28 +952,32 @@ def beat_test(st, tl):
     s = b.sent
     t_rock = _w(b, 2, "the rock")
     with st.span(b.start, b.end):
-        cx, y0, S = -3.7, -2.35, 0.62
-        stk = Stack(st, cx, y0, S=S, z=0.3, pipe=(y0 - 0.32, 3.9))
-        ry0 = stk.y_top
-        riser = [st.rect(cx, (ry0 + 3.9) / 2, 0.7, 3.9 - ry0, P.STEEL, 0.24), st.rect(cx, (ry0 + 3.9) / 2, 0.54, 3.9 - ry0, P.BG, 0.245)]
-        wh = [st.rect(cx, y0 - 0.35, 1.0, 0.75, P.STEEL_DK, 0.25), st.rect(cx, y0 - 0.35, stk.BR, 0.75, P.BG, 0.26),
-              st.rect(cx, y0 - 1.05, 0.75, 0.75, P.STEEL, 0.24), st.rect(cx, y0 - 1.05, stk.BR * 0.9, 0.75, P.BG, 0.245)]
-        plug = [st.rect(cx, y0 - 0.38, stk.BR + 0.02, 0.24, P.STEEL_DK, 0.36, role="solid"),
-                st.rect(cx, y0 - 0.28, stk.BR + 0.06, 0.05, RUBBER, 0.37, role="solid")]
-        mud = st.rect(cx, (y0 - 0.26 + stk.y_top) / 2, stk.BR, stk.y_top - y0 + 0.26, P.MUD, 0.33, alpha=0.18)
+        cx, y0, S = -3.6, -2.25, 0.75
+        view = View(st, b.start, b.end, z=0.2)
+        with view:
+            stk = Stack(st, cx, y0, S=S, z=0.3, pipe=(y0 - 0.32, 4.2))
+            ry0 = stk.y_top
+            riser = [st.rect(cx, (ry0 + 4.3) / 2, 0.8, 4.3 - ry0, P.STEEL, 0.24), st.rect(cx, (ry0 + 4.3) / 2, 0.62, 4.3 - ry0, P.BG, 0.245)]
+            wh = [st.rect(cx, y0 - 0.38, 1.2, 0.8, P.STEEL_DK, 0.25), st.rect(cx, y0 - 0.38, stk.BR, 0.8, P.BG, 0.26),
+                  st.rect(cx, y0 - 1.15, 0.9, 0.8, P.STEEL, 0.24), st.rect(cx, y0 - 1.15, stk.BR * 0.9, 0.8, P.BG, 0.245)]
+            yp = y0 - 0.45
+            plug = [st.rect(cx, yp, stk.BR + 0.04, 0.3, P.STEEL, 0.36),
+                    st.rect(cx, yp + 0.1, stk.BR + 0.08, 0.06, RUBBER, 0.37, role="solid")]
+            mud = st.rect(cx, (yp + 0.15 + stk.y_top) / 2, stk.BR, stk.y_top - yp - 0.15, P.MUD, 0.33, alpha=0.18)
         st.fade_in(riser + wh + stk.all + plug + [mud], b.start + 0.1, 0.5)
         lx = cx + stk.half + 0.25
-        pl = st.text("test plug in the wellhead", lx, y0 - 0.38, 0.18, P.MUTED, 0.5, align="l", kind="bold")
-        st.fade_in(pl, b.start + 0.5, 0.4)
+        pl = pill(st, lx, yp, "test plug in the wellhead", P.PANEL2, P.MUTED, 0.17, 0.5, align="l")
+        lead = st.line([(cx + stk.BR / 2 + 0.06, yp), (lx, yp)], P.TEXT, 0.022, 0.45, alpha=0.7)
+        st.fade_in(pl + [lead], b.start + 0.5, 0.4)
         # chart: pressure vs time with a dashed test line
-        c = Chart(st, 1.4, -1.0, 5.6, 3.2, (0.0, 1.0), (0.0, 1.0))
+        c = Chart(st, 2.0, -0.85, 5.1, 3.0, (0.0, 1.0), (0.0, 1.0))
         fr = c.frame(xlabel="time", ylabel="pressure", grid=False)
         tline = st.dashed(c.pt(0.0, 0.8), c.pt(1.0, 0.8), P.MUTED, 0.03, 0.14, 0.09, 0.2)
         tll = st.text("test pressure", c.X(1.0), c.Y(0.8) + 0.22, 0.17, P.MUTED, 0.25, align="r")
         st.fade_in(fr + tline + [tll], b.start + 0.3, 0.5)
         # three tests: annular, pipe rams, then the shear rams on an empty bore
         tA = b.start + 0.7
-        tests = [("ann", "annular", tA), ("pr2", "pipe rams", tA + 3.6), ("bsr", "blind shear rams, empty bore", s[2] - 0.1)]
+        tests = [("ann", "annular", tA), ("pr2", "pipe rams", tA + 3.6), ("bsr", "blind shear rams", s[2] - 0.1)]
         T0, T1 = tests[0][2], tests[2][2] + 3.2
         X = lambda t: (t - T0) / (T1 - T0)
         segs = []
@@ -1007,14 +1021,14 @@ def beat_test(st, tl):
                     a = _clamp((td + 0.6 - t) / 0.4, 0.0, 1.0)
                     if a <= 0:
                         continue
-                    hx, hy = c.X(X((tb + tc) / 2)), c.Y(0.8) + 0.55
+                    hx, hy = c.X(X((tb + tc) / 2)), c.Y(0.8) - 0.6
                     r = 0.2
                     cv.drawCircle(hx, hy, r, skia.Paint(Color=col(hex_rgb(P.GRID), a), AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=0.05))
                     arc = skia.Path()
                     arc.addArc(skia.Rect(hx - r, hy - r, hx + r, hy + r), 90, -360 * f)
                     cv.drawPath(arc, skia.Paint(Color=col(hex_rgb(P.SAFE), a), AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=0.06,
                                                 StrokeCap=skia.Paint.kRound_Cap))
-                    look.draw_text(cv, "HOLD", hx, hy + 0.36, 0.13, P.MUTED, a, "c", "bold")
+                    look.draw_text(cv, "HOLD", hx, hy - 0.36, 0.13, P.MUTED, a, "c", "bold")
         st.procedural(T0, b.end, 0.4, draw_trace)
         # the elements close / open in turn; the volume below the closed element is pressured
         (t, ta, tb, tc, td) = segs[0]
@@ -1031,12 +1045,16 @@ def beat_test(st, tl):
         for i, (key, nm, _) in enumerate(tests):
             (t, ta, tb, tc, td) = segs[i]
             yk = stk.y[key]
-            prs = st.rect(cx, (y0 - 0.26 + yk) / 2, stk.BR, yk - y0 + 0.26, P.MUD, 0.335, alpha=0.6)
+            with view:
+                prs = st.rect(cx, (yp + 0.15 + yk) / 2, stk.BR, yk - yp - 0.15, P.MUD, 0.335, alpha=0.6)
             st.fade_in(prs, ta, tb - ta)
             st.fade_out(prs, tc, td - tc)
             ck = _check(st, lx + 0.15, yk + (0.0 if key != "pr2" else -0.18), tc, s=0.15, z=0.6)
             lab = st.text(nm, lx + 0.45, yk + (0.0 if key != "pr2" else -0.18), 0.21, P.TEXT, 0.6, align="l", kind="bold")
             st.fade_in(lab, t - 0.1, 0.3)
+            if key == "bsr":
+                eb = st.text("on an empty bore: pipe pulled", lx + 0.45, yk - 0.3, 0.16, P.MUTED, 0.6, align="l")
+                st.fade_in(eb, t + 0.1, 0.3)
         # the line that matters
         q = st.text("A barrier you have not tested\nis a hope, not a barrier.", 4.2, -2.75, 0.3, P.WARN, 0.5, kind="bold")
         st.fade_in(q, s[1], 0.5)
@@ -1066,26 +1084,34 @@ def beat_lot(st, tl):
     t_conv = _w(b, 4, "converts")
     t_chk = _w(b, 5, "checks")
     t_cap = _w(b, 5, "caps")
+    t_out = t_sr - 0.6                     # the cutaway has done its job: the charts take the frame
     with st.span(b.start, b.end):
-        view = View(st, b.start, b.end, z=0.2, clip=(-6.3, -3.62, -2.6, 3.9))
+        # ================================================================ the shoe cutaway (its own camera)
+        view = View(st, b.start, b.end, z=0.2)
         cx = -4.45
         y_csg_top, y_shoe, y_oh = 2.0, -0.3, -1.75
         with view:
-            st.rect(cx, (3.9 + -3.62) / 2, 3.8, 3.9 + 3.62, P.ROCK2, 0.0)
+            rock = st.rect(cx, (3.9 + -3.62) / 2, 3.8, 3.9 + 3.62, P.ROCK2, 0.0)
             cem = [st.rect(cx + sd * 0.62, (y_csg_top + y_shoe) / 2, 0.3, y_csg_top - y_shoe, P.CEMENT, 0.1) for sd in (-1, 1)]
             csg = [st.rect(cx + sd * 0.42, (y_csg_top + y_shoe) / 2, 0.1, y_csg_top - y_shoe, P.STEEL, 0.15) for sd in (-1, 1)]
             shoe = [st.poly([(cx + sd * 0.37, y_shoe), (cx + sd * 0.56, y_shoe), (cx + sd * 0.37, y_shoe + 0.2)], P.WARN, 0.2) for sd in (-1, 1)]
             bore = st.rect(cx, (y_csg_top + y_shoe) / 2, 0.74, y_csg_top - y_shoe, P.MUD, 0.05, alpha=0.55)
-            track = st.rect(cx, y_shoe, 0.74, 0.0001 + 0.85, P.CEMENT, 0.12, anchor="b")
+            track = st.rect(cx, y_shoe, 0.74, 0.85, P.CEMENT, 0.12, anchor="b")
             fc = st.rect(cx, y_shoe + 0.85, 0.74, 0.06, P.STEEL_DK, 0.13)
-            brk = [st.line([(cx - 1.6, y_csg_top + 0.15), (cx + 1.6, y_csg_top - 0.05)], P.BG, 0.12, 0.3, role="solid")]
+            # depth break above: the casing runs on up to the wellhead
+            brk = []
+            for dy in (0.0, 0.14):
+                brk.append(st.line([(cx - 1.9, y_csg_top + 0.12 + dy), (cx - 0.6, y_csg_top + 0.2 + dy), (cx + 0.6, y_csg_top + 0.04 + dy),
+                                    (cx + 1.9, y_csg_top + 0.12 + dy)], P.BG, 0.05, 0.3, role="solid"))
+            above = [st.rect(cx + sd * 0.42, (y_csg_top + 0.35 + 3.95) / 2, 0.1, 3.95 - y_csg_top - 0.35, P.STEEL, 0.15) for sd in (-1, 1)]
+            above.append(st.rect(cx, (y_csg_top + 0.35 + 3.95) / 2, 0.74, 3.95 - y_csg_top - 0.35, P.MUD, 0.05, alpha=0.55))
             oh = st.rect(cx, y_shoe, 0.6, 0.0001, P.MUD, 0.06, anchor="t", alpha=0.6)
             # drill string
             dp = st.rect(cx, 3.95, 0.18, 3.95 - (y_shoe + 0.95), P.STEEL, 0.3, anchor="t")
             bit = st.poly([(cx - 0.3, y_shoe + 0.95), (cx + 0.3, y_shoe + 0.95), (cx + 0.2, y_shoe + 0.75), (cx - 0.2, y_shoe + 0.75)], P.STEEL_DK, 0.31)
-            st.fade_in(cem + csg + shoe + [bore, track, fc, dp, bit, oh] + brk, b.start + 0.1, 0.5)
-            # drill out: the bit grinds through the float collar and shoe track, then a few metres of new rock
-            d1 = 0.95 - 0.2                      # bit from above the float collar to the shoe
+            cut_all = [rock, bore, track, fc, dp, bit, oh] + cem + csg + shoe + brk + above
+            st.fade_in(cut_all, b.start + 0.1, 0.5)
+            # drill out: through the float collar and the shoe track, then a few metres of new (narrower) hole
             ta, tb = t_drill - 0.2, t_rock - 0.3
             st.scale_to(dp, ta, tb, sy=3.95 - (y_shoe + 0.95) + 1.05, interp="LINEAR")
             st.move(bit, ta, tb, dy=-1.05, interp="LINEAR")
@@ -1095,28 +1121,34 @@ def beat_lot(st, tl):
             st.scale_to(dp, tb, tc_, sy=3.95 - (y_shoe + 0.95) + 1.05 + (y_shoe - y_oh) - 0.1, interp="LINEAR")
             st.move(bit, tb, tc_, dy=-(y_shoe - y_oh) + 0.1, interp="LINEAR")
             st.scale_to(oh, tb, tc_, sy=y_shoe - y_oh, interp="LINEAR")
-            st.flow([(cx, 3.9), (cx, y_oh + 0.4)], ta, tc_ + 0.5, P.MUD, n=12, speed=1.4, r=0.035, z=0.35)
+            # circulation while drilling: down the pipe, out at the bit, up the annulus (never ahead of the bit)
+            st.flow([(cx, 3.9), (cx, y_shoe + 0.8)], ta, tc_, P.MUD, n=10, speed=1.4, r=0.035, z=0.35)
+            st.flow([(cx, 3.9), (cx, y_oh + 0.35)], tc_ - 0.2, t_close - 0.6, P.MUD, n=12, speed=1.4, r=0.035, z=0.35)
             for sd in (-1, 1):
-                st.flow([(cx + sd * 0.25, y_shoe - 0.2), (cx + sd * 0.25, 3.9)], ta, tc_ + 0.5, P.MUD, n=10, speed=1.4, r=0.035, z=0.35)
+                st.flow([(cx + sd * 0.25, y_shoe + 0.8), (cx + sd * 0.25, 3.9)], ta, tc_, P.MUD, n=8, speed=1.4, r=0.035, z=0.35)
+                st.flow([(cx + sd * 0.2, y_oh + 0.3), (cx + sd * 0.25, y_shoe), (cx + sd * 0.25, 3.9)], tc_ - 0.2, t_close - 0.6, P.MUD, n=11,
+                        speed=1.4, r=0.035, z=0.35)
             # pull back into the casing, close the well, pump slowly
-            st.scale_to(dp, t_close - 0.6, t_close + 0.3, sy=3.95 - (y_shoe + 0.6))
-            st.move(bit, t_close - 0.6, t_close + 0.3, to=(cx, bit.location[1] + (y_oh - 0.1 - (y_shoe + 0.75)) * -1 + 0.0))
-            st.flow([(cx, 3.9), (cx, y_shoe + 0.4), (cx + 0.15, y_shoe - 0.3), (cx + 0.1, y_oh + 0.15)], t_pump, t_leak + 2.5, P.MUD, n=12, speed=0.35, r=0.035, z=0.35)
+            y_bit_in = y_shoe + 0.6
+            st.scale_to(dp, t_close - 0.6, t_close + 0.3, sy=3.95 - (y_bit_in + 0.2))
+            st.move(bit, t_close - 0.6, t_close + 0.3, dy=(y_bit_in - 0.2) - (y_oh + 0.1 - 0.2))
+            st.flow([(cx, 3.9), (cx, y_bit_in), (cx + 0.12, y_shoe - 0.3), (cx + 0.08, y_oh + 0.15)], t_pump, t_out + 0.5, P.MUD, n=12, speed=0.35, r=0.035, z=0.35)
             # fluid starts to leak into the rock below the shoe
             fy = y_oh + 0.45
             fr_ = []
             for sd in (-1, 1):
-                w = st.poly([(cx + sd * 0.3, fy + 0.12), (cx + sd * 1.25, fy + 0.02), (cx + sd * 0.3, fy - 0.1)], P.MUD, 0.08)
-                e = st.line([(cx + sd * 0.3, fy + 0.12), (cx + sd * 1.25, fy + 0.02), (cx + sd * 0.3, fy - 0.1)], P.FRAC, 0.035, 0.09)
+                w = st.poly([(cx + sd * 0.3, fy + 0.08), (cx + sd * 1.15, fy + 0.02), (cx + sd * 0.3, fy - 0.06)], P.MUD, 0.08)
+                e = st.line([(cx + sd * 0.3, fy + 0.08), (cx + sd * 1.15, fy + 0.02), (cx + sd * 0.3, fy - 0.06)], P.FRAC, 0.03, 0.09)
                 st.pop_in(w, t_leak, 0.6)
                 st.draw_on(e, t_leak - 0.1, t_leak + 0.6)
                 fr_ += [w, e]
-                st.flow([(cx + sd * 0.3, fy + 0.01), (cx + sd * 1.15, fy + 0.02)], t_leak + 0.2, t_lop + 3.0, P.MUD, n=4, speed=0.4, r=0.03, z=0.1)
+                st.flow([(cx + sd * 0.3, fy + 0.01), (cx + sd * 1.05, fy + 0.02)], t_leak + 0.2, t_out + 0.5, P.MUD, n=4, speed=0.4, r=0.03, z=0.1)
+        st.fade_out(cut_all + fr_, t_out, 0.6)
         # labels (screen space) for the cutaway
         lx = cx + 0.95
         l_tr = pill(st, lx, y_shoe + 0.5, "shoe-track cement", P.PANEL2, P.CEMENT, 0.17, 0.6, align="l")
         st.fade_in(l_tr, b.start + 0.6, 0.4)
-        st.fade_out(l_tr, t_drill + 1.0, 0.4)
+        st.fade_out(l_tr, t_rock - 0.6, 0.4)
         view.follow(l_tr, lx, y_shoe + 0.5)
         l_nr = pill(st, lx, (y_shoe + y_oh) / 2 - 0.1, "a few metres\nof new rock", P.PANEL2, P.TEXT, 0.17, 0.6, align="l")
         st.fade_in(l_nr, t_rock, 0.4)
@@ -1128,24 +1160,42 @@ def beat_lot(st, tl):
         st.fade_in(l_cs, t_seal - 0.1, 0.3)
         view.follow(l_rk, lx, y_oh + 0.2)
         view.follow(l_cs, lx, y_shoe + 0.2)
-        st.fade_out(l_rk + l_cs, t_close - 0.3, 0.3)
-        sh = pill(st, lx, y_shoe - 0.05, f"20 in shoe · {SHOE_20:,.0f} m", P.PANEL2, P.MUTED, 0.16, 0.6, align="l")
+        st.fade_out(l_rk + l_cs, t_close - 0.6, 0.3)
+        sh = pill(st, lx - 0.1, y_shoe - 0.05, f"{SHOE_20:,.0f} m", P.PANEL2, P.MUTED, 0.16, 0.6, align="l")
         st.fade_in(sh, t_close + 0.2, 0.4)
-        view.follow(sh, lx, y_shoe - 0.05)
+        st.fade_out(sh, t_out, 0.4)
+        view.follow(sh, lx - 0.1, y_shoe - 0.05)
         # camera: close on the shoe during the drill-out, then back
-        view.camera(b.start + 0.2, t_drill + 0.6, focus=(cx, y_shoe - 0.3), at=(-0.2, -0.3), scale=1.55)
+        view.camera(b.start + 0.2, t_drill + 0.6, focus=(cx, y_shoe - 0.3), at=(-1.7, -0.3), scale=1.55)
         view.home(s[1] - 0.8, s[1] + 0.6)
         view.finish()
-        # with the camera wide, the cutaway frame lives on the left; the clip keeps it there
-        # ---- the well is closed at the top: a small BOP badge
+        # the procedure, step by step as it is spoken (right column while the cutaway is big)
+        RX = 3.65
+        hd = st.text("THE LEAK-OFF TEST", RX, 2.35, 0.17, P.MUTED, 0.6, align="l", kind="bold")
+        st.fade_in(hd, t_drill - 0.3, 0.4)
+        steps = [("drill out the shoe track", t_drill - 0.2), ("a few metres of new rock", t_rock - 0.1),
+                 ("test the rock + cement seal", t_test - 0.1), ("close the well, pump slowly", t_close - 0.1)]
+        rows = [hd]
+        prev = None
+        for i, (txt, t) in enumerate(steps):
+            yy = 1.6 - i * 0.72
+            o = _orb(st, RX + 0.17, yy, i + 1, t, color=P.TEXT, r=0.16)
+            tx = st.text(txt, RX + 0.48, yy, 0.21, P.TEXT, 0.6, align="l", kind="bold")
+            st.fade_in(tx, t, 0.4)
+            if prev is not None:
+                st.recolor(prev, t, t + 0.3, P.MUTED)
+            prev = tx
+            rows += o + [tx]
+        st.fade_out(rows, s[1] + 0.9, 0.5)
+        # the well is closed at the top and pumped slowly
         bop_ic = pill(st, cx, 3.45, "BOP closed", P.PANEL2, P.TEXT, 0.18, 0.6)
         st.fade_in(bop_ic, t_close, 0.3)
         pump = pill(st, cx, 2.85, "pump slowly ↓", P.PANEL2, P.MUD, 0.18, 0.6)
         st.fade_in(pump, t_pump, 0.3)
-        # ---- pressure vs volume pumped
-        c = Chart(st, -1.2, -1.75, 4.6, 3.75, (0.0, 1.0), (0.0, 50.0))
-        fr = c.frame(yticks=[0, 10, 20, 30, 40, 50], xlabel="volume pumped", ylabel="surface pressure (bar)", grid=True, fy="{:.0f}")
-        st.fade_in(fr, t_close + 0.1, 0.5)
+        st.fade_out(bop_ic + pump, t_out, 0.4)
+        # ================================================================ pressure vs volume pumped (its own camera: it moves left later)
+        v2 = View(st, b.start, b.end, z=0.3)
+        SHIFT = -3.4
         v_lo = 0.62
         k = P_LOT / v_lo
 
@@ -1153,11 +1203,11 @@ def beat_lot(st, tl):
             if v <= v_lo:
                 return k * v
             u = v - v_lo
-            return P_LOT + k * u * 0.35 - k * 0.6 * u * u
-        v_end = 0.82
+            return P_LOT + k * u * 0.25 - k * 0.5 * u * u
+        v_end = 0.8
         T_a, T_b = t_lin - 0.3, t_bend + 0.6        # straight line, then the bend
         T_c = t_lop + 0.2                           # pumps stopped just after leak-off
-        T_d = T_c + 1.2                             # shut-in decline
+        T_d = T_c + 1.4                             # shut-in: pressure bleeds back a little
 
         def v_at(t):
             if t <= T_a:
@@ -1166,88 +1216,110 @@ def beat_lot(st, tl):
                 return v_lo * (t - T_a) / (T_b - T_a) * 0.985
             return min(v_end, v_lo * 0.985 + (v_end - v_lo * 0.985) * (t - T_b) / (T_c - T_b))
 
-        def draw_pv(cv, t, look):
-            v = v_at(t)
-            if v <= 0:
-                return
-            n = max(2, int(120 * v))
-            pts = [c.pt(v * i / (n - 1), curve(v * i / (n - 1))) for i in range(n)]
-            if t > T_c:                                      # pumps off: pressure bleeds back a little
-                f = _clamp((t - T_c) / (T_d - T_c), 0.0, 1.0)
-                pe = curve(v_end)
-                for j in range(1, 11):
-                    ff = f * j / 10
-                    pts.append(c.pt(v_end, pe - 6.0 * (1 - math.exp(-3 * ff))))
-            path = skia.Path()
-            path.moveTo(*pts[0])
-            for p in pts[1:]:
-                path.lineTo(*p)
-            rgb = hex_rgb(P.MUD)
-            cv.drawPath(path, skia.Paint(Color=col(rgb, 0.35), AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=0.16,
-                                         StrokeJoin=skia.Paint.kRound_Join, StrokeCap=skia.Paint.kRound_Cap,
-                                         MaskFilter=skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 4.0, False)))
-            cv.drawPath(path, skia.Paint(Color=col(rgb, 1.0), AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=0.065,
-                                         StrokeJoin=skia.Paint.kRound_Join, StrokeCap=skia.Paint.kRound_Cap))
-            if t < T_c:
-                x, y = pts[-1]
-                cv.drawCircle(x, y, 0.07, skia.Paint(Color=col((1, 0.95, 0.8), 1.0), AntiAlias=True))
-            # live read-out of the surface gauge
-            pv = curve(v) if t <= T_c else curve(v_end)
-            look.draw_text(cv, f"{pv:4.1f} bar", c.X(0.03), c.Y(46.5), 0.24, P.MUD, 1.0, "l", "mono")
-        st.procedural(T_a, b.end, 0.4, draw_pv)
-        ext = st.dashed(c.pt(v_lo, P_LOT), c.pt(0.9, k * 0.9), P.MUTED, 0.03, 0.12, 0.08, 0.35)
+        def p_shut(t):
+            f = _clamp((t - T_c) / (T_d - T_c), 0.0, 1.0)
+            return curve(v_end) - 5.0 * (1 - math.exp(-3 * f))
+        with v2:
+            c = Chart(st, -0.7, -1.75, 3.9, 3.75, (0.0, 1.0), (0.0, 50.0))
+            fr = c.frame(yticks=[0, 10, 20, 30, 40, 50], xlabel="volume pumped", ylabel="surface pressure (bar)", grid=True, fy="{:.0f}")
+
+            def draw_pv(cv, t, look):
+                v = v_at(t)
+                if v <= 0:
+                    return
+                n = max(2, int(120 * v))
+                pts = [c.pt(v * i / (n - 1), curve(v * i / (n - 1))) for i in range(n)]
+                if t > T_c:
+                    pe = curve(v_end)
+                    for j in range(1, 13):
+                        tt = T_c + (min(t, T_d) - T_c) * j / 12
+                        pts.append(c.pt(v_end + 0.02 * (tt - T_c) / (T_d - T_c), p_shut(tt)))
+                path = skia.Path()
+                path.moveTo(*pts[0])
+                for p in pts[1:]:
+                    path.lineTo(*p)
+                rgb = hex_rgb(P.MUD)
+                cv.drawPath(path, skia.Paint(Color=col(rgb, 0.35), AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=0.16,
+                                             StrokeJoin=skia.Paint.kRound_Join, StrokeCap=skia.Paint.kRound_Cap,
+                                             MaskFilter=skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 4.0, False)))
+                cv.drawPath(path, skia.Paint(Color=col(rgb, 1.0), AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=0.065,
+                                             StrokeJoin=skia.Paint.kRound_Join, StrokeCap=skia.Paint.kRound_Cap))
+                if t < T_c:
+                    x, y = pts[-1]
+                    cv.drawCircle(x, y, 0.07, skia.Paint(Color=col((1, 0.95, 0.8), 1.0), AntiAlias=True))
+                pv = curve(v) if t <= T_c else p_shut(t)
+                a = _clamp((T_c + 0.8 - t) / 0.4, 0.0, 1.0)       # the read-out bows out once the leak-off point is marked
+                if a > 0:
+                    look.draw_text(cv, f"{pv:4.1f} bar", c.X(0.03), c.Y(46.5), 0.24, P.MUD, a, "l", "mono")
+                    look.draw_text(cv, "surface gauge", c.X(0.03), c.Y(41.5), 0.14, P.MUTED, a, "l", "sans")
+            st.procedural(T_a, b.end, 0.4, draw_pv)
+            ext = st.dashed(c.pt(v_lo, P_LOT), c.pt(0.8, k * 0.8), P.MUTED, 0.03, 0.12, 0.08, 0.35)
+            lin = st.text("compressing the mud", c.X(0.3) + 0.1, c.Y(k * 0.3) - 0.3, 0.18, P.MUD, 0.45, align="l", kind="bold")
+            dot = st.circle(c.X(v_lo), c.Y(P_LOT), 0.12, P.FRAC, 0.6)
+            st.ripple(c.X(v_lo), c.Y(P_LOT), t_lop, t_lop + 1.6, P.FRAC, period=0.8, r0=0.15, r1=0.7, width=0.03, z=0.6)
+            lop = pill(st, c.X(v_lo) + 0.25, c.Y(P_LOT) - 0.55, f"leak-off point · {P_LOT:.0f} bar at surface", P.PANEL2, P.FRAC, 0.17, 0.6, align="l")
+        st.fade_in(fr, t_close + 0.1, 0.5)
         st.fade_in(ext, t_lop - 0.2, 0.4)
-        lin = st.text("compressing the mud", c.X(0.24) - 0.1, c.Y(k * 0.24) + 0.32, 0.18, P.MUD, 0.45, align="r", kind="bold")
         st.fade_in(lin, t_sq - 0.2, 0.4)
-        dot = st.circle(c.X(v_lo), c.Y(P_LOT), 0.12, P.FRAC, 0.6)
         st.pop_in(dot, t_lop - 0.15, 0.4)
-        st.ripple(c.X(v_lo), c.Y(P_LOT), t_lop, t_lop + 1.6, P.FRAC, period=0.8, r0=0.15, r1=0.7, width=0.03, z=0.6)
-        lop = pill(st, c.X(v_lo) + 0.25, c.Y(P_LOT) - 0.55, f"leak-off point · {P_LOT:.0f} bar at surface", P.PANEL2, P.FRAC, 0.17, 0.6, align="l")
         st.fade_in(lop, t_lop + 0.1, 0.4)
-        # ---- equation card
-        ey = -3.05
-        card = st.rect(1.0, ey, 7.9, 0.95, P.PANEL2, 0.5)
-        st.fade_in(card, t_sr - 0.3, 0.4)
-        e1 = st.text(f"{P_LOT:.0f} bar", -2.7, ey + 0.13, 0.28, P.FRAC, 0.55, align="l", kind="bold")
-        e2 = st.text(f"+  mud column ({MW_NEXT:.2f} sg × {SHOE_20:,.0f} m)", -1.75, ey + 0.13, 0.24, P.MUD, 0.55, align="l", kind="bold")
-        e3 = st.text(f"=  {FG_SHOE:.2f} sg at the shoe", 2.45, ey + 0.13, 0.28, P.TEXT, 0.55, align="l", kind="bold")
-        s1_ = st.text("surface reading", -2.7, ey - 0.25, 0.15, P.MUTED, 0.55, align="l")
-        s2_ = st.text(f"= {P_COL:.0f} bar", -1.42, ey - 0.25, 0.15, P.MUTED, 0.55, align="l")
-        s3_ = st.text(f"{P_LOT + P_COL:.0f} bar at {SHOE_20:,.0f} m, as a mud weight", 2.82, ey - 0.25, 0.15, P.MUTED, 0.55, align="l")
-        st.fade_in([e1, s1_], t_sr - 0.1, 0.4)
-        st.fade_in([e2, s2_], t_col - 0.2, 0.4)
-        st.fade_in([e3, s3_], t_conv, 0.4)
-        # ---- the window chart: the measured point lands on the forecast fracture line at 1,000 m
-        wc = Chart(st, 4.75, -2.15, 2.75, 4.35, (1.0, 1.7), (0.0, 2200.0), invert_y=True)
-        wfr = wc.frame(xticks=[1.0, 1.2, 1.4, 1.6], yticks=[0, 1000, 2000], xlabel="mud weight (sg)", ylabel="depth (m)", fx="{:.1f}", tick_size=0.17)
+        v2.camera(t_out, t_out + 1.2, focus=(0.0, 0.0), at=(SHIFT, 0.0), scale=1.0)
+        v2.finish()
+        # ================================================================ equation card (top)
+        ey, ex0 = 3.15, -5.9
+        parts = [(f"{P_LOT:.0f} bar", P.FRAC, 0.25, "surface reading", t_sr - 0.1),
+                 (f"+  mud column ({MW_NEXT:.2f} sg × {SHOE_20:,.0f} m)", P.MUD, 0.21, f"= {P_COL:.0f} bar", t_col - 0.2),
+                 (f"=  {FG_SHOE:.2f} sg at the shoe", P.TEXT, 0.25, f"{P_LOT + P_COL:.0f} bar at {SHOE_20:,.0f} m", t_conv)]
+        x = ex0 + 0.3
+        objs, ends = [], []
+        for txt, colr, size, sub, t in parts:
+            o = st.text(txt, x, ey + 0.12, size, colr, 0.55, align="l", kind="bold")
+            sx = x + (st.measure(txt[:3], size, "bold") if txt.startswith(("+", "=")) else 0.0)
+            so = st.text(sub, sx, ey - 0.27, 0.15, P.MUTED, 0.55, align="l")
+            st.fade_in([o, so], t, 0.4)
+            objs += [o, so]
+            x = max(x + st.measure(txt, size, "bold"), sx + st.measure(sub, 0.15, "sans")) + 0.3
+            ends.append(x)
+        card = st.rect(ex0, ey, ends[1] - ex0, 0.95, P.PANEL2, 0.5, anchor="l")      # grows when the result arrives
+        st.fade_in(card, t_sr - 0.35, 0.4)
+        st.scale_to(card, t_conv - 0.35, t_conv + 0.05, sx=ends[2] - ex0)
+        # ================================================================ the window chart: the point lands on the forecast at 1,000 m
+        wc = Chart(st, 1.6, -2.55, 5.0, 4.4, (1.0, 2.0), (0.0, 2200.0), invert_y=True)
+        wfr = wc.frame(xticks=[1.0, 1.2, 1.4, 1.6, 1.8, 2.0], yticks=[0, 1000, 2000], xlabel="equivalent mud weight (sg)", ylabel="depth (m)",
+                       fx="{:.1f}", tick_size=0.17)
         zs = [M.WATER_DEPTH + 25 * i for i in range(int((2200 - M.WATER_DEPTH) / 25) + 1)]
         band = wc.band([(M.pp(z), z) for z in zs], [(M.fg(z), z) for z in zs], P.SAFE, 0.08, 0.28)
         ppc = wc.curve([M.pp(z) for z in zs], zs, P.PORE, 0.05, 0.15)
         fgc = wc.curve([M.fg(z) for z in zs], zs, P.FRAC, 0.05, 0.15)
-        sea = st.rect(wc.X(1.35), (wc.Y(0) + wc.Y(M.WATER_DEPTH)) / 2, wc.w, wc.Y(0) - wc.Y(M.WATER_DEPTH), P.SEA, 0.06, alpha=0.5)
-        ppl = wc.label(1.06, 1900, "pore", 0.17, P.PORE, "l", "bold")
-        fgl = wc.label(1.6, 1750, "fracture", 0.17, P.FRAC, "r", "bold", dx=-0.1)
-        t_w0 = max(t_lop + 7.6, t_conv - 0.6)
-        st.fade_in(wfr + [band, sea, ppl, fgl], t_w0, 0.5)
+        sea = st.rect(wc.X(1.5), (wc.Y(0) + wc.Y(M.WATER_DEPTH)) / 2, wc.w, wc.Y(0) - wc.Y(M.WATER_DEPTH), P.SEA, 0.06, alpha=0.5)
+        leg = []
+        lxx = wc.X(1.0) + 0.05
+        for nm, colr in (("pore pressure", P.PORE), ("fracture", P.FRAC), ("mud weight", P.MUD)):
+            leg.append(st.rect(lxx + 0.15, wc.y + wc.h + 0.22, 0.3, 0.05, colr, 0.2, role="shaft"))
+            leg.append(st.text(nm, lxx + 0.38, wc.y + wc.h + 0.22, 0.15, colr, 0.2, align="l", kind="bold"))
+            lxx += 0.38 + st.measure(nm, 0.15, "bold") + 0.35
+        t_w0 = t_out + 1.2
+        st.fade_in(wfr + [band, sea] + leg, t_w0, 0.5)
         st.draw_on([ppc, fgc], t_w0 + 0.1, t_w0 + 1.2, "BEZIER")
-        mark = st.circle(c.X(v_lo), c.Y(P_LOT), 0.12, P.FRAC, 0.9)
-        st.fade_in(mark, t_chk - 0.9, 0.1)
-        st.move(mark, t_chk - 0.8, t_chk + 0.6, to=(wc.X(FG_SHOE), wc.Y(SHOE_20)))
+        x_lo, y_lo = c.X(v_lo) + SHIFT, c.Y(P_LOT)
+        mark = st.circle(x_lo, y_lo, 0.13, P.FRAC, 0.9)
+        st.fade_in(mark, t_chk - 1.0, 0.1)
+        st.move(mark, t_chk - 0.9, t_chk + 0.6, to=(wc.X(FG_SHOE), wc.Y(SHOE_20)))
         st.ripple(wc.X(FG_SHOE), wc.Y(SHOE_20), t_chk + 0.6, t_chk + 2.2, P.FRAC, period=0.8, r0=0.15, r1=0.6, width=0.03, z=0.95)
-        ml = pill(st, wc.X(FG_SHOE) + 0.2, wc.Y(SHOE_20) - 0.42, f"measured {FG_SHOE:.2f} sg: forecast holds", P.PANEL2, P.FRAC, 0.15, 0.9, align="r")
+        ml = pill(st, wc.X(FG_SHOE) + 0.25, wc.Y(SHOE_20), f"measured {FG_SHOE:.2f} sg = forecast", P.PANEL2, P.FRAC, 0.16, 0.9, align="l")
         st.fade_in(ml, t_chk + 0.7, 0.4)
-        # caps the next section: its mud weight (and any kick) must stay below the shoe strength
+        # caps the next section: its mud weight, plus any kick, must stay below the shoe strength
         mwl = st.rect(wc.X(MW_NEXT), wc.Y(SHOE_20), 0.06, 0.0001, P.MUD, 0.3, anchor="t")
         st.fade_in(mwl, t_cap - 0.2, 0.2)
         st.scale_to(mwl, t_cap - 0.2, t_cap + 0.9, sy=wc.Y(SHOE_20) - wc.Y(SHOE_13))
-        cap_ = st.dashed((wc.X(FG_SHOE), wc.Y(SHOE_20)), (wc.X(FG_SHOE), wc.Y(SHOE_13)), P.FRAC, 0.04, 0.12, 0.08, 0.3)
-        st.fade_in(cap_, t_cap, 0.4)
-        room = st.line([(wc.X(MW_NEXT), wc.Y(SHOE_20) + 0.0), (wc.X(FG_SHOE), wc.Y(SHOE_20))], P.TEXT, 0.03, 0.3, role="hair")
-        st.draw_on(room, t_cap + 0.4, t_cap + 1.0)
-        rl = pill(st, wc.X((MW_NEXT + FG_SHOE) / 2), wc.Y(1500), "room for\nmud + kick", P.PANEL2, P.TEXT, 0.15, 0.9)
-        st.fade_in(rl, t_cap + 0.8, 0.4)
-        mwt = st.text(f"next section\n{MW_NEXT:.2f} sg", wc.X(MW_NEXT) + 0.08, wc.Y(SHOE_13) + 0.3, 0.14, P.MUD, 0.9, align="l", kind="bold")
+        mwt = st.text(f"{MW_NEXT:.2f} sg", wc.X(MW_NEXT) + 0.1, wc.Y(1900), 0.16, P.MUD, 0.9, align="l", kind="bold")
         st.fade_in(mwt, t_cap + 0.6, 0.4)
+        room = st.line([(wc.X(MW_NEXT), wc.Y(SHOE_20)), (wc.X(FG_SHOE), wc.Y(SHOE_20))], P.TEXT, 0.03, 0.3, role="hair")
+        st.draw_on(room, t_cap + 0.3, t_cap + 0.9)
+        rl = pill(st, wc.X((MW_NEXT + FG_SHOE) / 2), wc.Y(1300), "room for\nmud + kick", P.PANEL2, P.TEXT, 0.15, 0.9)
+        st.fade_in(rl, t_cap + 0.8, 0.4)
+        nxt = st.text("next section", wc.X(MW_NEXT) + 0.1, wc.Y(1720), 0.15, P.MUTED, 0.9, align="l")
+        st.fade_in(nxt, t_cap + 0.6, 0.4)
 
 
 def build(st, tl):
