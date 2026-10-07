@@ -289,11 +289,18 @@ def beat_why(st, tl):
         st.flow([(SX - 0.07, zy(4040)), (SX - 0.07, 3.3), (SX - 0.3, 3.58)], t4 + 0.8, t_sealed + 0.3, P.OIL, n=16, speed=1.6, r=0.04, z=0.45)
         st.flow([(SX + 0.07, zy(3970)), (SX + 0.07, 3.3), (SX + 0.3, 3.58)], t4 + 0.9, t_sealed + 0.3, P.GAS, n=12, speed=1.9, r=0.04, z=0.45)
         gy = zy(4030)
-        gp = [st.rect(-0.6, gy, 2.1, 0.5, P.PANEL2, 0.5, role="pill"), st.text("reservoir", -1.45, gy, 0.18, P.MUTED, 0.51, align="l", kind="bold")]
+        gp = tag(st, -1.6, gy, "reservoir", P.TEXT, 0.18)
         gl = leader(st, -1.65, gy, SX + 0.3, gy)
         st.fade_in(gp + gl, t4 + 0.5, 0.4)
-        st.counter(0.35, gy, t4 + 0.6, t4 + 2.0, 0, M.bar(4000, M.pp(4000)), fmt="≈{:.0f} bar", size=0.2, color=P.TEXT, z=0.52, align="r",
-                   hold=s[5] - 0.2)
+        # big readout: a pipe from a pressurised reservoir to the open sea
+        rd = [st.text("A PIPE FROM", -0.6, 2.75, 0.24, P.MUTED, 0.5, align="l", kind="bold"),
+              st.text("reservoir pressure", -0.6, 1.25, 0.2, P.MUTED, 0.5, align="l"),
+              st.text("TO THE OPEN SEA", -0.6, 0.55, 0.34, P.TEXT, 0.5, align="l", kind="bold")]
+        st.fade_in(rd[:2], t4 + 0.5, 0.4)
+        st.fade_in(rd[2], t4 + 1.4, 0.4)
+        st.counter(-0.6, 1.95, t4 + 0.6, t4 + 2.2, 0, M.bar(4000, M.pp(4000)), fmt="≈ {:.0f} bar", size=0.62, color=P.PORE, z=0.52,
+                   align="l", hold=W(b, 4, "geological") - 0.35)
+        st.fade_out(rd, W(b, 4, "geological") - 0.6, 0.4)
         op = tag(st, -1.6, 3.3, "open to the sea", P.TEXT, 0.18)
         ol = leader(st, -1.65, 3.3, SX + 0.3, 3.3)
         st.fade_in(op + ol, t4 + 1.0, 0.4)
@@ -372,11 +379,12 @@ def beat_sources(st, tl):
         st.fade_in(sc + sl, t_sa + 0.2, 0.4)
         t_push = W(b, 2, "push fluid")
         t_op = W(b, 3, "overpressured zone")
-        ax = _strings()[-1][1] + 0.03
+        # flow potential: from the sand into the well and up the wellbore to the seabed
         for sgn in (-1, 1):
-            st.flow([(SX + sgn * ax, sy_), (SX + sgn * ax, 3.3), (SX + sgn * 0.5, 3.58)], t_push - 0.2, t_op + 0.4, P.WATER, n=11, speed=1.5, r=0.035, z=0.46)
-        pp_ = tag(st, -1.6, sy_ + 1.0, "possible path behind the casing", P.WATER, 0.17)
-        pl = leader(st, -1.65, sy_ + 1.0, SX + ax, sy_ + 1.0)
+            st.flow([(SX + sgn * 1.1, sy_), (SX + sgn * 0.12, sy_), (SX + sgn * 0.12, 3.3), (SX + sgn * 0.35, 3.58)],
+                    t_push - 0.2, t_op + 0.4, P.WATER, n=12, speed=1.5, r=0.035, z=0.46)
+        pp_ = tag(st, -1.6, sy_ + 1.0, "could flow up the well to the seabed", P.WATER, 0.17)
+        pl = leader(st, -1.65, sy_ + 1.0, SX + 0.15, sy_ + 1.0)
         st.fade_in(pp_ + pl, t_push + 0.3, 0.4)
         st.fade_out(pp_ + pl, t_op - 0.2, 0.3)
         # two permanent barriers for each source
@@ -387,8 +395,8 @@ def beat_sources(st, tl):
         st.pop_in(envs["sa_s"], t_op + 0.5, 0.4)
         for k in DEEP:
             st.fade_in(envs[k], (t_hc if k.startswith("res") else t_op) + (0.5 if k.endswith("s") else 0.0), 0.2)
-        x2r = tag(st, 1.95, ry, "× 2", P.TEXT, 0.22)
-        x2s = tag(st, 2.95, sy_, "× 2", P.TEXT, 0.22)
+        x2r = tag(st, -1.6 + st.measure("RESERVOIR: gas and oil", 0.2, "bold") + 0.65, ry, "× 2", P.TEXT, 0.22)
+        x2s = tag(st, -1.6 + st.measure("SAND A: 2,980–3,000 m, overpressured", 0.2, "bold") + 0.65, sy_, "× 2", P.TEXT, 0.22)
         st.fade_in(x2r, t_hc + 0.8, 0.3)
         st.fade_in(x2s, t_op + 0.8, 0.3)
         lg = [outline(st, -1.55, 2.95, -1.0, 2.65, P.PRIMARY_B, 0.5), st.text("primary barrier", -0.85, 2.8, 0.2, P.PRIMARY_B, 0.5, align="l", kind="bold"),
@@ -495,7 +503,7 @@ def beat_rock(st, tl):
         leak = []
         for sg in (-1, 1):
             xa = FX + sg * (OD + HH) / 2
-            leak.append([(FX + sg * 0.25, -2.6), (xa, -1.6), (xa, 2.9)])
+            leak.append([(FX + sg * (HH + 0.45), -2.75), (xa, -2.2), (xa, 2.9)])     # from the sand, up the open annulus
         for pth in leak:
             st.flow(pth, W(b, 3, "run behind") - 0.6, b.end, P.BAD, n=12, speed=1.3, r=0.04, z=0.4)
         fp = pill(st, FX, -3.3, "✕ FAILS: fluid runs behind it", P.BAD, "#ffffff", 0.2, 0.5)
@@ -622,31 +630,34 @@ def beat_ways(st, tl):
         ar = st.arrow(ox - 1.0, 0.0, ox - 0.45, 0.0, P.TEXT, 0.04, 0.14, 0.2) + st.arrow(ox + 1.0, 0.0, ox + 0.45, 0.0, P.TEXT, 0.04, 0.14, 0.2)
         rl = st.text(wrap_to("cement meets the rock", 0.17, 2.2), ox, -2.95, 0.17, P.TEXT, 0.1)
         st.fade_in(ar + [rl], W(b, 0, "against the rock"), 0.4)
-        st.fade(rock + [oplug, ttl, rl] + ar, s[1] - 0.2, s[1] + 0.4, 1.0, 0.45)
-        # method list (right column, below the term cards)
+        st.fade(rock + [oplug, ttl, rl] + ar, s[1] - 0.2, s[1] + 0.4, 1.0, 0.55)
+        # method list (right column, below the term-card zone)
         items = ["logged, good cement behind the casing", "section milling", "perforate, wash, cement"]
         times = [s[2], s[3], s[4]]
-        method_list(st, 3.1, 0.25, items, times, s[1])
+        method_list(st, 3.3, -0.3, items, times, s[1], dy=0.85)
         # (a) logged good cement behind the casing: Sand A, our well
-        Z = Zoom(st, -1.75, 2560.0, 3060.0, 2.9, -2.9, hh=0.95, od=0.62, wl=0.08, rw=1.6)
+        Z = Zoom(st, -1.75, 2480.0, 3060.0, 2.9, -2.9, hh=0.95, od=0.62, wl=0.08, rw=1.6)
         za = Z.base(s[1], toc=TOC["9-5/8in intermediate"], ticks=False)
         csg = tag(st, Z.cx, 3.25, "9⅝ in casing at Sand A", P.TEXT, 0.17, align="c")
         st.fade_in(csg, s[1] + 0.3, 0.4)
+        ytoc = Z.Y(TOC["9-5/8in intermediate"])
+        t_good = W(b, 2, "cement behind the casing is good")
+        for sg in (-1, 1):
+            st.ripple(Z.cx + sg * (Z.od + Z.hh) / 2, (ytoc + Z.yb) / 2, t_good, t_good + 1.6, P.TEXT, period=0.8, r0=0.1, r1=0.5)
         t_log = W(b, 2, "proven by a log")
-        trk_x0, trk_x1 = 0.2, 1.3
+        trk_x0, trk_x1 = 0.15, 1.15
         trk = [st.rect((trk_x0 + trk_x1) / 2, 0.0, trk_x1 - trk_x0, 5.8, P.PANEL, 0.1),
                st.text("BOND LOG", (trk_x0 + trk_x1) / 2, 3.12, 0.15, P.MUTED, 0.2, kind="bold")]
         st.fade_in(trk, t_log - 0.5, 0.4)
-        ytoc = Z.Y(TOC["9-5/8in intermediate"])
         pts = []
         import random
         rnd = random.Random(11)
         for k in range(59):
-            y = 2.9 - k * 0.1
-            a = 1.08 if y > ytoc else 0.36 + rnd.uniform(-0.06, 0.06)
+            y = 2.85 - k * 0.0975
+            a = 0.98 + rnd.uniform(-0.03, 0.03) if y > ytoc else 0.33 + rnd.uniform(-0.05, 0.05)
             pts.append((a, y))
         curve = st.line(pts, P.TEXT, 0.03, 0.3)
-        t_l0, t_l1 = t_log, t_log + 3.2
+        t_l0, t_l1 = t_log, t_log + 3.0
         st.draw_on(curve, t_l0, t_l1)
         tool = [st.rect(Z.cx, 2.6, 0.22, 0.6, P.STEEL_DK, 0.36)]
         wire = st.rect(Z.cx, 2.9, 0.025, 0.0001, P.MUTED, 0.35, anchor="t")
@@ -654,45 +665,50 @@ def beat_ways(st, tl):
         st.move(tool, t_l0, t_l1, dy=-5.2, interp="LINEAR")
         st.scale_to(wire, t_l0, t_l1, sy=5.2, interp="LINEAR")
         st.fade_out(tool + [wire], t_l1 + 0.2, 0.4)
-        gb = st.text(wrap_to("low = cement bonded", 0.14, 1.1), (trk_x0 + trk_x1) / 2, -0.9, 0.14, P.TEXT, 0.35)
-        fp = st.text("free pipe", (trk_x0 + trk_x1) / 2, 2.0, 0.14, P.MUTED, 0.35)
-        st.fade_in([gb, fp], t_l1 - 0.8, 0.4)
-        tocl = st.dashed((Z.cx - Z.rw, ytoc), (trk_x1, ytoc), P.TEXT, 0.025, 0.12, 0.08, 0.32)
-        toct = tag(st, trk_x1 + 0.12, ytoc, "top of cement (ch. 6)", P.TEXT, 0.15)
-        st.fade_in(tocl + toct, t_l0 + 0.6, 0.4)
+        fp = st.text("free pipe", 0.88, ytoc + 0.35, 0.12, P.MUTED, 0.35, align="r")
+        gb = st.text("bonded", 0.5, ytoc - 0.6, 0.13, P.TEXT, 0.35, align="l", kind="bold")
+        st.fade_in(fp, t_l0 + 0.6, 0.4)
+        st.fade_in(gb, t_l0 + 1.4, 0.4)
         t_rec = W(b, 2, "job record")
-        rec = tag(st, trk_x1 + 0.12, 1.1, "+ cement job record", P.TEXT, 0.15)
+        rec = tag(st, trk_x1 + 0.15, 1.0, "+ cement job record", P.TEXT, 0.15)
         st.fade_in(rec, t_rec, 0.4)
         t_len = W(b, 2, "enough length")
-        pa, pb_ = Z.Y(PLUG["sa_p"].top) + 0.45, Z.Y(M.SAND_A[1]) - 0.1
+        pa, pb_ = Z.Y(PLUG["sa_p"].top), Z.Y(M.SAND_A[0])
         brk = st.line([(trk_x1 + 0.12, pa), (trk_x1 + 0.22, pa), (trk_x1 + 0.22, pb_), (trk_x1 + 0.12, pb_)], P.TEXT, 0.03, 0.35)
         st.draw_on(brk, t_len - 0.2, t_len + 0.6)
         lnt = st.text(wrap_to("enough length", 0.15, 1.0), trk_x1 + 0.35, (pa + pb_) / 2, 0.15, P.TEXT, 0.35, align="l")
         st.fade_in(lnt, t_len + 0.2, 0.4)
-        t_sand = W(b, 2, "overpressured sand")
-        ysa = Z.Y(sum(M.SAND_A) / 2)
-        sat = tag(st, trk_x1 + 0.12, ysa - 0.35, "Sand A", P.SAND, 0.16)
-        st.fade_in(sat, t_sand, 0.4)
-        st.ripple(Z.cx + Z.hh + 0.3, ysa, t_sand, t_sand + 1.6, P.SAND, period=0.8, r0=0.1, r1=0.6)
-        # ... and a plug across it, with the logged cement behind: the primary barrier
-        t_pl = W(b, 2, "chapter six", 1.0)
+        # ... it can form part of the barrier: a plug on a bridge plug across the logged interval
+        t_pl = W(b, 2, "form part")
         bp = Z.bridge_plug(PLUG["sa_p"].base, z=0.2)
-        st.fade_in(bp, t_pl - 0.2, 0.3)
+        st.fade_in(bp, t_pl - 0.4, 0.3)
         y_top, y_bp = Z.Y(PLUG["sa_p"].top), Z.Y(PLUG["sa_p"].base)
         pl = st.rect(Z.cx, y_bp, 2 * Z.id, 0.0001, P.CEMENT, 0.15, anchor="b")
         st.fade_in(pl, t_pl, 0.1)
         st.scale_to(pl, t_pl, t_pl + 1.2, sy=y_top - y_bp)
-        env = outline(st, Z.cx - Z.hh - 0.12, y_top, Z.cx + Z.hh + 0.12, Z.Y(M.SAND_A[1]), P.PRIMARY_B, 0.4)
-        st.draw_on(env, t_pl + 1.0, t_pl + 1.8)
-        envt = tag(st, Z.cx, -3.3, "plug + logged cement = primary barrier", P.PRIMARY_B, 0.16, align="c")
-        st.fade_in(envt, t_pl + 1.4, 0.4)
+        env = outline(st, Z.cx - Z.hh - 0.12, y_top + 0.04, Z.cx + Z.hh + 0.12, y_bp - 0.04, P.PRIMARY_B, 0.4)
+        st.draw_on(env, t_pl + 0.9, t_pl + 1.7)
+        envt = tag(st, Z.cx, -3.3, "plug + logged cement behind it = barrier", P.PRIMARY_B, 0.16, align="c")
+        st.fade_in(envt, t_pl + 1.3, 0.4)
+        # our overpressured sand is covered by the cement from chapter six
+        t_sand = W(b, 2, "our overpressured")
+        ysa = Z.Y(sum(M.SAND_A) / 2)
+        sat = tag(st, trk_x1 + 0.15, ysa, "Sand A", P.SAND, 0.16)
+        st.fade_in(sat, t_sand, 0.4)
+        st.ripple(Z.cx + Z.hh + 0.3, ysa, t_sand, t_sand + 1.6, P.SAND, period=0.8, r0=0.1, r1=0.6)
+        t_cov = W(b, 2, "covered by")
+        tocl = st.dashed((Z.cx - Z.rw, ytoc), (trk_x1, ytoc), P.TEXT, 0.025, 0.12, 0.08, 0.32)
+        toct = tag(st, trk_x1 + 0.15, ytoc, "top of cement (ch. 6)", P.TEXT, 0.15)
+        st.fade_in(tocl, t_l0 + 0.5, 0.4)
+        st.fade_in(toct, t_cov, 0.4)
+        st.ripple(Z.cx + (Z.od + Z.hh) / 2, ytoc, t_cov, t_cov + 1.6, P.TEXT, period=0.8, r0=0.1, r1=0.5)
         a_objs = za + [csg] + trk + [curve, gb, fp] + tocl + toct + rec + [brk, lnt] + sat + bp + [pl, env] + envt
         st.fade_out(a_objs, s[3] - 0.5, 0.4)
         # (b) section milling: poor cement behind casing -> mill a window -> plug against the rock
         t_b = s[3] - 0.2
         Zb = Zoom(st, -1.75, 2560.0, 3060.0, 2.9, -2.9, hh=0.95, od=0.62, wl=0.08, rw=1.6)
         zb = Zb.base(t_b, ann=P.MUD, ticks=False, sand=False)
-        poor = tag(st, Zb.cx, 3.25, "poor or no cement behind the casing", P.MUD, 0.16, align="c")
+        poor = tag(st, Zb.cx, 3.25, "poor or no cement behind the casing", P.TEXT, 0.16, align="c")
         st.fade_in(poor, t_b + 0.2, 0.4)
         w0, w1 = 0.7, -1.2
         cut_parts = []
@@ -732,7 +748,7 @@ def beat_ways(st, tl):
         t_c = s[4] - 0.2
         Zc = Zoom(st, -1.75, 2560.0, 3060.0, 2.9, -2.9, hh=0.95, od=0.62, wl=0.08, rw=1.6)
         zc = Zc.base(t_c, ann=P.MUD, ticks=False, sand=False)
-        poor2 = tag(st, Zc.cx, 3.25, "poor or no cement behind the casing", P.MUD, 0.16, align="c")
+        poor2 = tag(st, Zc.cx, 3.25, "poor or no cement behind the casing", P.TEXT, 0.16, align="c")
         st.fade_in(poor2, t_c + 0.2, 0.4)
         t_perf = W(b, 4, "perforate the casing")
         gun = st.rect(Zc.cx, (w0 + w1) / 2, 0.3, w0 - w1 + 0.2, P.STEEL_DK, 0.4)
@@ -760,9 +776,10 @@ def beat_ways(st, tl):
         wt = [st.rect(Zc.cx, w0 + 0.2, 0.3, 0.4, P.STEEL_DK, 0.4)]
         st.fade_in(wt, t_wash - 0.2, 0.3)
         st.move(wt, t_wash, t_wash + 1.6, dy=-(w0 - w1), interp="LINEAR")
-        for sg in (-1, 1):
-            st.flow([(Zc.cx + sg * 0.15, (w0 + w1) / 2), (Zc.cx + sg * (Zc.od + Zc.hh) / 2, (w0 + w1) / 2),
-                     (Zc.cx + sg * (Zc.od + Zc.hh) / 2, 2.85)], t_wash, t_wash + 2.2, P.SPACER, n=14, speed=1.8, r=0.035, z=0.45)
+        for sg in (-1, 1):       # jets out through the lower holes, up the annulus, back in through the upper holes, up the bore
+            xa = Zc.cx + sg * (Zc.od + Zc.hh) / 2
+            st.flow([(Zc.cx + sg * 0.15, w1 + 0.25), (xa, w1 + 0.25), (xa, w0 - 0.2), (Zc.cx + sg * 0.3, w0 - 0.2), (Zc.cx + sg * 0.3, 2.85)],
+                    t_wash, t_wash + 2.2, P.SPACER, n=16, speed=1.8, r=0.035, z=0.45)
         t_cem = W(b, 4, "pump cement")
         st.fade_out(wt, t_cem - 0.4, 0.3)
         bpc = st.rect(Zc.cx, w1 - 0.52, 2 * Zc.id, 0.12, P.STEEL_DK, 0.2)
@@ -819,14 +836,14 @@ def beat_place(st, tl):
         bpl = lab(-1.75, "bridge plug: steel slips, rubber seal", PCX + 0.3, Z.Y(pz.base + 6), W(b, 0, "steel-and-rubber"), s[3])
         hold = lab(-1.15, "holds the cement up", PCX, y_bp + 0.05, W(b, 0, "holds the cement"), s[2])
         # right column: the steps
-        rx = 3.75
-        steps = [("set a bridge plug: the mechanical base", t_mb), ("pump spacer, cement, spacer", s[2]),
-                 ("balance: same level inside and outside", W(b, 2, "weigh the same")), ("pull the pipe out slowly", s[3]),
+        rx = 3.4
+        steps = [("bridge plug: the mechanical base", t_mb), ("pump spacer, cement, spacer", s[2]),
+                 ("balance: same level in and out", W(b, 2, "weigh the same")), ("pull the pipe out slowly", s[3]),
                  ("circulate the excess out", W(b, 3, "excess"))]
         for i, (txt, t) in enumerate(steps):
             yy = 1.2 - i * 0.48
             n = st.text(str(i + 1), rx + 0.12, yy, 0.22, P.WARN, 0.5, kind="bold")
-            tx = st.text(txt, rx + 0.42, yy, 0.17, P.TEXT, 0.5, align="l", kind="bold")
+            tx = st.text(txt, rx + 0.42, yy, 0.18, P.TEXT, 0.5, align="l", kind="bold")
             st.fade_in([n, tx], t, 0.4)
             if i + 1 < len(steps):
                 st.recolor(tx, steps[i + 1][1], steps[i + 1][1] + 0.4, P.MUTED)
@@ -847,6 +864,7 @@ def beat_place(st, tl):
               st.text("cement", ix + 1.12, iy - 0.05, 0.15, P.TEXT, 0.3, align="l", kind="bold")]
         st.fade_in(il[0], W(b, 1, "viscous pill") + 0.2, 0.3)
         st.fade_in(il[1], W(b, 1, "does that job"), 0.3)
+        st.fade_out(inset + [visc, ocem] + hatch + il, W(b, 2, "U-tube") - 0.9, 0.4)
         # 3. open-ended drill pipe runs in to just above the bridge plug (during the inset)
         t_run0, t_run1 = s[1] + 0.2, s[2] - 0.2
         PO, PW = 0.27, 0.06
@@ -920,18 +938,28 @@ def beat_place(st, tl):
         eql = lab(0.55, "same level inside and outside", PCX + Z.id + 0.2, y_ct, t_eq, s[3], colr=P.WARN)
         # mini U-tube (we met it in ch. 5)
         t_u = W(b, 2, "U-tube")
-        ux, uy = 1.15, -1.55
-        ut = [st.line([(ux - 0.45, uy + 0.75), (ux - 0.45, uy - 0.35), (ux + 0.45, uy - 0.35), (ux + 0.45, uy + 0.75)], P.TEXT, 0.03, 0.45),
-              st.line([(ux - 0.45, uy + 0.25), (ux - 0.3, uy + 0.25)], P.WARN, 0.03, 0.46), st.line([(ux + 0.3, uy + 0.25), (ux + 0.45, uy + 0.25)], P.WARN, 0.03, 0.46),
-              st.text("U-tube: levels balance", ux, uy - 0.65, 0.15, P.MUTED, 0.46)]
-        st.fade_in(ut, t_u - 0.2, 0.4)
-        st.fade_out(ut, s[3], 0.4)
+        ux, uy = 5.65, -2.05
+        ut = [st.rect(ux, -2.15, 3.8, 2.45, P.PANEL, 0.2), st.text("U-TUBE (ch. 6)", ux - 1.7, -1.17, 0.15, P.MUTED, 0.3, align="l", kind="bold")]
+        ux0 = ux - 0.6
+        UW, UH = 0.22, 1.1                                   # U-tube: two legs joined at the bottom, cement grey at equal levels
+        for sg in (-1, 1):
+            ut.append(st.rect(ux0 + sg * 0.55, uy - 0.05, UW, UH, P.CEMENT, 0.3))
+            ut.append(st.rect(ux0 + sg * 0.55, uy + 0.5 + 0.15, UW, 0.3, P.SPACER, 0.3))
+        ut.append(st.rect(ux0, uy - 0.6 - UW / 2 + 0.11, 1.1 + UW, UW, P.CEMENT, 0.3))
+        ut.append(st.line([(ux0 - 0.55 - UW / 2 - 0.03, uy + 0.95), (ux0 - 0.55 - UW / 2 - 0.03, uy - 0.75), (ux0 + 0.55 + UW / 2 + 0.03, uy - 0.75),
+                           (ux0 + 0.55 + UW / 2 + 0.03, uy + 0.95)], P.TEXT, 0.03, 0.32))
+        ut.append(st.line([(ux0 - 0.55 + UW / 2 + 0.03, uy + 0.95), (ux0 - 0.55 + UW / 2 + 0.03, uy - 0.47), (ux0 + 0.55 - UW / 2 - 0.03, uy - 0.47),
+                           (ux0 + 0.55 - UW / 2 - 0.03, uy + 0.95)], P.TEXT, 0.03, 0.32))
+        ut += st.dashed((ux0 - 0.85, uy + 0.5), (ux0 + 0.85, uy + 0.5), P.WARN, 0.025, 0.1, 0.06, 0.33)
+        ut.append(st.text(wrap_to("equal weight both sides: nothing moves", 0.15, 1.3), ux0 + 1.65, uy + 0.0, 0.15, P.TEXT, 0.33))
+        st.fade_in(ut, t_u - 0.4, 0.4)
+        st.fade_out(ut, s[3] + 0.4, 0.4)
         # 5. pull out slowly; 6. reverse-circulate the excess
         st.scale_to(pwalls, t_u0, t_u1, sy=3.5 - y_out)
         for sg in (-1, 1):
             xa = PCX + sg * (PO + Z.id) / 2
             st.flow([(xa, 3.45), (xa, y_out - 0.1), (PCX, y_out - 0.15), (PCX, 3.45)], t_r0, t_r1, P.MUD, n=12, speed=1.6, r=0.035, z=0.39)
-        rc = lab(1.9, "reverse circulation: excess out up the pipe", PCX + 0.1, 2.4, t_r0, b.end - 0.3, colr=P.MUD)
+        rc = lab(1.9, "reverse circulation: excess out up the pipe", PCX + 0.1, 2.4, t_r0, s[4] + 0.6, colr=P.MUD)
         # 7. the plug: ~100 m, drawing value
         t_dim = W(b, 4, "hundred metres")
         dx = PCX + Z.rw + 0.15
@@ -940,7 +968,6 @@ def beat_place(st, tl):
         dt = [st.text("≈ 100 m", dx + 0.15, (y_ct + y_bp) / 2 + 0.15, 0.24, P.TEXT, 0.46, align="l", kind="bold"),
               st.text("drawing only", dx + 0.15, (y_ct + y_bp) / 2 - 0.2, 0.15, P.MUTED, 0.46, align="l")]
         st.fade_in(dt, t_dim - 0.3, 0.4)
-        st.fade_out(bpl + hold, s[4] - 0.3, 0.3)
 
 
 # ====================================================================================== 9.06 verification
@@ -952,14 +979,14 @@ def beat_verify(st, tl):
         zo = Z.base(b.start + 0.05)
         pz = PLUG["sa_p"]
         y_ct, y_bp = Z.Y(pz.top), Z.Y(pz.base)
-        rx = 3.75
+        rx = 3.4
         steps = [("LOG the cement behind the casing", s[1]), ("TAG: set down weight", W(b, 2, "tag it")),
-                 ("PRESSURE TEST from above", W(b, 3, "pressure test")), ("INFLOW TEST from below, where possible", W(b, 3, "inflow test")),
-                 ("VERIFIED", s[5])]
+                 ("PRESSURE TEST from above", W(b, 3, "pressure test")), ("INFLOW TEST from below", W(b, 3, "inflow test")),
+                 ("VERIFIED", W(b, 5, "verified"))]
         for i, (txt, t) in enumerate(steps):
             yy = 1.2 - i * 0.48
             n = st.text(str(i + 1) if i < 4 else "✓", rx + 0.12, yy, 0.22, P.WARN if i < 4 else P.SAFE, 0.5, kind="bold")
-            tx = st.text(txt, rx + 0.42, yy, 0.17, P.TEXT if i < 4 else P.SAFE, 0.5, align="l", kind="bold")
+            tx = st.text(txt, rx + 0.42, yy, 0.18, P.TEXT if i < 4 else P.SAFE, 0.5, align="l", kind="bold")
             st.fade_in([n, tx], t, 0.4)
             if i + 1 < len(steps) - 1:
                 st.recolor(tx, steps[i + 1][1], steps[i + 1][1] + 0.4, P.MUTED)
@@ -1041,11 +1068,20 @@ def beat_verify(st, tl):
         st.fade_in(ia, t_in - 0.2, 0.3)
         il = tag(st, -0.55, y_bp - 0.75, "inflow test: pressure from below", P.PORE, 0.16) + leader(st, -0.6, y_bp - 0.75, PCX + 0.1, y_bp - 0.75)
         st.fade_in(il, t_in, 0.4)
-        # 5. open hole: proven by the tag
+        # 5. open hole: proven by the tag (the instrument slot shows an open-hole plug being tagged)
         t_oh = s[4]
-        ohc = [st.rect(1.3, 2.05, 3.5, 1.05, P.PANEL2, 0.4), st.text("OPEN-HOLE PLUG", 1.3, 2.3, 0.18, P.TEXT, 0.41, kind="bold"),
-               st.text("proven by the tag", 1.3, 1.88, 0.17, P.MUTED, 0.41)]
-        st.fade_in(ohc, t_oh, 0.4)
+        st.fade_out(ch + ax + [tr, hf], t_oh - 0.3, 0.4)
+        oh = [st.rect(ix, iy, 3.8, 2.45, P.PANEL, 0.2), st.text("OPEN-HOLE PLUG", ix - 1.7, iy + 0.98, 0.15, P.MUTED, 0.3, align="l", kind="bold")]
+        ox = ix - 0.8
+        oh += [st.rect(ox - 0.5, iy - 0.15, 0.65, 1.85, P.SHALE, 0.25), st.rect(ox + 0.5, iy - 0.15, 0.65, 1.85, P.SHALE, 0.25),
+               st.rect(ox, iy - 0.15, 0.36, 1.85, P.MUD, 0.26, alpha=0.6), st.rect(ox, iy - 0.6, 0.36, 0.95, P.CEMENT, 0.27)]
+        st.fade_in(oh, t_oh - 0.2, 0.4)
+        opw = [st.rect(ox + sg * 0.11, iy + 0.8, 0.05, 0.0001, P.STEEL, 0.3, anchor="t") for sg in (-1, 1)]
+        st.fade_in(opw, t_oh + 0.2, 0.2)
+        st.scale_to(opw, t_oh + 0.2, t_oh + 1.2, sy=iy + 0.8 - (iy - 0.13))
+        st.ripple(ox, iy - 0.13, t_oh + 1.2, t_oh + 2.2, P.TEXT, period=0.5, r0=0.1, r1=0.5)
+        oht = st.text(wrap_to("proven by the tag", 0.18, 1.6), ix + 0.85, iy - 0.15, 0.18, P.TEXT, 0.3)
+        st.fade_in(oht, t_oh + 1.0, 0.4)
         # 6. verified: the green outline lands on the plug
         t_v = W(b, 5, "verified")
         vo = outline(st, PCX - Z.id - 0.06, y_ct + 0.05, PCX + Z.id + 0.06, y_bp - 0.05, P.SAFE, 0.45, 0.045)
