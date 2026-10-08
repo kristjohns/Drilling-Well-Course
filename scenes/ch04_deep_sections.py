@@ -29,7 +29,7 @@ import skia
 
 from scenes.common import palette as P, well_model as M, furniture as F
 from scenes.common.chart import Chart
-from scenes.common.shapes import pill, WindowChart, Cutaway, loop_move
+from scenes.common.shapes import pill
 from scenes.common.stage import Track, as_list, ease_inout
 from scenes.common.look import wrap_to, col, hex_rgb, lighten, darken
 
@@ -1550,50 +1550,339 @@ def beat_ecd(st, tl):
         st.ripple(c.X(t_off1 + 0.5), c.Y(P_STATIC), t_drop - 0.3, t_drop + 1.0, P.MUD, period=0.6, r0=0.1, r1=0.6)
 
 
-# ---------------------------------------------------------------- 4.06 squeezed window + MPD
+# ====================================================================================================== 4.06 squeezed window + MPD
+WX0, WX1, WY0, WY1 = -4.45, 0.75, -3.0, 3.05          # window-chart plot area (world)
+W_FULL = ((0.9, 2.0), (0.0, 4200.0))                   # the Ch 1 window chart ...
+W_ZOOM = ((1.30, 1.95), (3150.0, 4200.0))              # ... zoomed on the open hole below the 9 5/8 in shoe
+SWAB = 0.035                                           # [SIM] drawn only (no number): pulling pipe lowers BHP
+HYP_PP, HYP_FG = 0.07, 0.06                            # [SIM] hypothetical narrower window: pore up, fracture down
+P_BP = P_ECD - P_STATIC                                # MPD back pressure that replaces the lost friction (~20 bar)
+HC, HHW, PHW = -3.55, 0.78, 0.22                       # MPD cutaway: hole centre, hole half width, pipe half width
+Y_GL, Y_SP, Y_RCD, Y_HB = 0.3, 0.62, 1.27, -3.2        # ground, flow spool, rotating seal, hole bottom
+CHK = (0.35, Y_SP)                                     # the choke on the return line
+
+
+def _dash_stroke(color, alpha, width, on=0.12, off=0.08):
+    p = _stroke(color, alpha, width, cap=False)
+    p.setPathEffect(skia.DashPathEffect.Make([on, off], 0.0))
+    return p
+
+
 def beat_mpd(st, tl):
     b = tl["4.06"]
     s = b.sent
-    with st.span(b.start, b.end):
-        wc = WindowChart(st, x=-5.3, y=-3.0, w=5.4, h=6.3)
-        objs = wc.axes() + [wc.curves(labels=False)["pp"], wc.objs["fg"], wc.band()]
-        st.fade_in(objs, b.start, 0.5)
-        c = wc.c
-        z = 4000
-        off = st.rect(c.X(1.57), c.Y(z), 0.1, 0.5, P.PORE, 0.5)
-        on = st.rect(c.X(1.74), c.Y(z), 0.1, 0.5, P.MUD, 0.5)
-        offl = pill(st, c.X(1.57) - 0.15, c.Y(z) + 0.8, "pumps off: still above\npore pressure", P.PANEL2, P.PORE, 0.2, 0.5, align="r", alpha=0.8)
-        onl = pill(st, c.X(1.74) + 0.15, c.Y(z) + 1.9, "pumps on (ECD): under\nthe fracture limit", P.PANEL2, P.MUD, 0.2, 0.5, align="r", alpha=0.8)
-        st.fade_in([off] + offl, s[1], 0.5)
-        st.fade_in([on] + onl, s[2], 0.5)
-        sq = st.text("squeezed from both sides", c.X(1.35), c.Y(2000), 0.28, P.WARN, 0.5, kind="bold")
-        st.fade_in(sq, s[0] + 0.3, 0.5)
-        st.fade_in(pill(st, c.X(1.4), c.Y(1300), "sometimes no mud weight\ndoes both", P.BAD, "#ffffff", 0.22, 0.5), s[3], 0.5)
-        # MPD schematic
-        mx = 3.6
-        cut = Cutaway(st, mx - 1.0, 2.6, -2.8, hole_w=1.6, pipe_w=0.7, rock_w=1.0)
-        mpd = cut.draw(pipe_bottom=-2.4)
-        mf = [cut.static_gap("l", P.MUD, 2.6, -2.8, 0.03), cut.static_gap("r", P.MUD, 2.6, -2.8, 0.03), cut.static_bore(P.MUD, 2.6, -2.4, 0.03)]
-        rcd = st.rect(mx - 1.0, 2.75, 1.9, 0.35, P.BAD, 0.5)
-        rl = st.text("sealed top: rotating control device", mx - 1.0, 3.3, 0.2, P.BAD, 0.5, kind="bold")
-        line = st.line([(cut.hole[1] - 0.05, 2.5), (mx + 1.6, 2.5), (mx + 1.6, 1.4)], P.MUD, 0.1, 0.4)
-        chk = st.poly([(mx + 1.3, 1.6), (mx + 1.9, 1.6), (mx + 1.6, 1.2)], P.WARN, 0.5)
-        chl = st.text("choke", mx + 2.25, 1.4, 0.22, P.WARN, 0.5, align="l", kind="bold")
-        st.fade_in(mpd + mf + [rcd, rl, line, chk, chl], s[4], 0.5)
-        # mini traces: pump rate falls, choke closes, BHP flat
-        c2 = Chart(st, mx + 0.1, -2.35, 3.2, 1.9, (0, 8), (0, 1))
-        fr2 = c2.frame(xticks=[], yticks=[], grid=False)
-        pump = c2.curve([0, 4, 4.4, 8], [0.85, 0.85, 0.15, 0.15], P.PORE, 0.07, 0.4)
-        bhp = c2.curve([0, 8], [0.5, 0.5], P.MUD, 0.07, 0.4)
-        c2.label(0.2, 0.9, "pump", 0.18, P.PORE, "l")
-        c2.label(0.2, 0.62, "BHP: held flat", 0.18, P.MUD, "l")
-        st.fade_in(fr2, s[4] + 2.0, 0.4)
-        st.draw_on(pump, s[4] + 2.2, s[4] + 5.0)
-        st.draw_on(bhp, s[4] + 2.2, s[4] + 5.0)
-        st.scale_to(chk, s[4] + 3.8, s[4] + 4.6, sy=0.35)     # choke closes as the pump stops
-        bpt = st.text("back pressure replaces the pump", mx + 1.7, -3.3, 0.2, P.WARN, 0.5, kind="bold")
-        st.fade_in(bpt, s[4] + 3.8, 0.4)
+    t_sq = W(b, 0, "squeezed")
+    t_off, t_pull, t_pore = W(b, 1, "pumps off"), W(b, 1, "pulling pipe"), W(b, 1, "pore pressure")
+    t_on, t_frac, t_weak, t_shoe = W(b, 2, "pumps on"), W(b, 2, "fracture limit"), W(b, 2, "weakest point"), W(b, 2, "casing shoe")
+    t_narrow, t_none = W(b, 3, "narrow window"), W(b, 3, "no mud weight")
+    t_mpd, t_knob = s[4], W(b, 4, "knob")
+    t_seal, t_turn, t_ret = W(b, 5, "rotating seal"), W(b, 5, "turning pipe"), W(b, 5, "returns")
+    t_choke, t_stop, t_bp, t_hold = W(b, 5, "a choke"), W(b, 5, "pumps stop"), W(b, 5, "back pressure"), W(b, 5, "holding")
+    t_alone = W(b, 6, "mud alone")
+    tz0, tz1 = b.start + 0.7, t_sq + 1.0                 # zoom on the open hole
+    end_w = t_mpd - 0.35                                  # the window part ends as MPD is named
+    th0, th1 = t_narrow - 0.35, t_narrow + 0.75           # the hypothetical narrower window squeezes in
 
+    def offset(t):                                       # the mud-weight pair slides left, then right: nothing fits
+        return -0.05 * (_ramp(t, t_none - 0.25, t_none + 0.45) - _ramp(t, t_none + 0.75, t_none + 1.35)) \
+            + 0.035 * (_ramp(t, t_none + 0.75, t_none + 1.35) - _ramp(t, t_none + 1.6, t_none + 2.0))
+
+    def rng(t):
+        f = _ramp(t, tz0, tz1)
+        (xa0, xa1), (za0, za1) = W_FULL
+        (xb0, xb1), (zb0, zb1) = W_ZOOM
+        return (xa0 + (xb0 - xa0) * f, xa1 + (xb1 - xa1) * f), (za0 + (zb0 - za0) * f, za1 + (zb1 - za1) * f), f
+
+    XZ = lambda v: WX0 + (v - W_ZOOM[0][0]) / (W_ZOOM[0][1] - W_ZOOM[0][0]) * (WX1 - WX0)     # zoomed mapping (static objs)
+    YZ = lambda z: WY1 - (z - W_ZOOM[1][0]) / (W_ZOOM[1][1] - W_ZOOM[1][0]) * (WY1 - WY0)
+
+    with st.span(b.start, b.end):
+        # ================================================================ the window chart, zooming on the open hole
+        with st.span(b.start, end_w + 0.5):
+            card = st.rect((WX0 - 0.7 + WX1 + 0.12) / 2, -0.02, WX1 + 0.12 - (WX0 - 0.7), 7.25, P.PANEL, 0.0)
+            ytl = st.text("depth (m)", WX0 - 0.1, WY1 + 0.3, 0.15, P.MUTED, 0.3, align="l", kind="bold")
+            xtl = st.text("equivalent mud weight (sg)", (WX0 + WX1) / 2, WY0 - 0.5, 0.15, P.MUTED, 0.3, kind="bold")
+            st.fade_in([card, ytl, xtl], b.start + 0.05, 0.45)
+
+            def chart(c, t, look):
+                a = _env(t, b.start + 0.1, end_w + 0.4, 0.4)
+                if a <= 0:
+                    return
+                (x0, x1), (z0, z1), f = rng(t)
+                X = lambda v: WX0 + (v - x0) / (x1 - x0) * (WX1 - WX0)
+                Y = lambda z: WY1 - (z - z0) / (z1 - z0) * (WY1 - WY0)
+                # grid + tick labels: the full-chart set cross-fades into the zoomed set
+                for xs_, zs_, k in (((1.0, 1.2, 1.4, 1.6, 1.8, 2.0), (0, 1000, 2000, 3000, 4000), 1.0 - _ramp(f, 0.0, 0.35)),
+                                    ((1.4, 1.5, 1.6, 1.7, 1.8, 1.9), (3200, 3400, 3600, 3800, 4000, 4200), _ramp(f, 0.65, 1.0))):
+                    if k <= 0.01:
+                        continue
+                    for v in xs_:
+                        if x0 - 1e-6 <= v <= x1 + 1e-6:
+                            c.drawLine(X(v), WY0, X(v), WY1, _stroke(P.GRID, 0.8 * a * k, 0.012, cap=False))
+                            look.draw_text(c, f"{v:.1f}", X(v), WY0 - 0.2, 0.14, P.MUTED, a * k, "c", "sans")
+                    for z in zs_:
+                        if z0 - 1e-6 <= z <= z1 + 1e-6:
+                            c.drawLine(WX0, Y(z), WX1, Y(z), _stroke(P.GRID, 0.8 * a * k, 0.012, cap=False))
+                            look.draw_text(c, f"{z:,.0f}", WX0 - 0.1, Y(z), 0.14, P.MUTED, a * k, "r", "sans")
+                c.drawLine(WX0, WY0, WX1, WY0, _stroke(P.MUTED, a, 0.03, cap=False))
+                c.drawLine(WX0, WY0, WX0, WY1, _stroke(P.MUTED, a, 0.03, cap=False))
+                c.save()
+                c.clipRect(skia.Rect.MakeLTRB(WX0, WY0, WX1, WY1))
+                h = _ramp(t, th0, th1)
+                dp, df = HYP_PP * h, HYP_FG * h
+                zt = max(z0, M.WATER_DEPTH)
+                zs = [zt + (z1 - zt) * i / 140 for i in range(141)]
+                band = [(X(M.pp(z) + dp), Y(z)) for z in zs] + [(X(M.fg(z) - df), Y(z)) for z in reversed(zs)]
+                c.drawPath(_path(band, True), _fill(P.SAFE, 0.32 * a))
+                if h > 0:
+                    for fn, colr in ((M.pp, P.PORE), (M.fg, P.FRAC)):
+                        c.drawPath(_path([(X(fn(z)), Y(z)) for z in zs]), _dash_stroke(colr, 0.45 * a * h, 0.03, 0.08, 0.07))
+                for fn, sh, colr in ((M.pp, dp, P.PORE), (M.fg, -df, P.FRAC)):
+                    pth = _path([(X(fn(z) + sh), Y(z)) for z in zs])
+                    c.drawPath(pth, _glow(look, colr, a, 0.05))
+                    c.drawPath(pth, _stroke(colr, a, 0.05))
+                # cased hole above the shoe (zoomed view only)
+                if f > 0.01:
+                    c.drawRect(skia.Rect.MakeLTRB(WX0, Y(SHOE), WX1, WY1), _fill(P.BG, 0.45 * a * f))
+                    c.drawLine(WX0, Y(SHOE), WX1, Y(SHOE), _dash_stroke(P.TEXT, 0.75 * a * f, 0.025, 0.1, 0.07))
+                # the two mud-weight markers: pumps off (dashed) and pumps on / ECD (solid), both amber
+                o = offset(t)
+                for mw, t_in, dashed in ((MW, t_off, True), (ECD, t_on, False)):
+                    g = _ramp(t, t_in - 0.15, t_in + 0.9)
+                    if g <= 0:
+                        continue
+                    xm, ya, yb = X(mw + o), Y(SHOE), Y(SHOE + g * (M.TD - SHOE))
+                    pnt = _dash_stroke(P.MUD, a, 0.065, 0.16, 0.09) if dashed else _stroke(P.MUD, a, 0.065, cap=False)
+                    c.drawLine(xm, ya, xm, yb, _glow(look, P.MUD, 0.7 * a, 0.05))
+                    c.drawLine(xm, ya, xm, yb, pnt)
+                # swab: pulling pipe out pulls the pumps-off pressure lower still
+                sw = _ramp(t, t_pull - 0.1, t_pull + 0.6) * (1 - _ramp(t, t_pore + 0.4, t_pore + 1.2))
+                if sw > 0:
+                    xs = X(MW - SWAB * sw)
+                    c.drawLine(xs, Y(SHOE), xs, Y(M.TD), _dash_stroke(P.MUD, 0.55 * a * sw, 0.04, 0.1, 0.08))
+                    for zz in (3650, 3950):
+                        c.drawLine(X(MW) - 0.06, Y(zz), xs + 0.07, Y(zz), _stroke(P.TEXT, 0.9 * a * sw, 0.03))
+                        c.drawPath(_path([(xs, Y(zz)), (xs + 0.12, Y(zz) + 0.07), (xs + 0.12, Y(zz) - 0.07)], True), _fill(P.TEXT, a * sw))
+                # where a marker breaks a limit: red (kick side: below pore; losses side: above fracture)
+                if h > 0.05:
+                    for z_a, z_b in ((SHOE, M.TD),):
+                        bad_l, bad_r = [], []
+                        for z in [z_a + (z_b - z_a) * i / 80 for i in range(81)]:
+                            lo, hi = M.pp(z) + dp, M.fg(z) - df
+                            bad_l.append((z, MW + o, lo) if MW + o < lo else None)
+                            bad_r.append((z, ECD + o, hi) if ECD + o > hi else None)
+                        for seq in (bad_l, bad_r):
+                            run = []
+                            for item in seq + [None]:
+                                if item is None:
+                                    if len(run) > 1:
+                                        poly = [(X(m), Y(z)) for z, m, _ in run] + [(X(lim), Y(z)) for z, _, lim in reversed(run)]
+                                        c.drawPath(_path(poly, True), _fill(P.BAD, 0.75 * a))
+                                    run = []
+                                else:
+                                    run.append(item)
+                # weakest point: the fracture limit at the last casing shoe
+                gw = _ramp(t, t_weak - 0.2, t_weak + 0.4)
+                if gw > 0:
+                    px, py = X(M.fg(SHOE) - df), Y(SHOE)
+                    c.drawCircle(px, py, 0.11, _fill(P.FRAC, a * gw))
+                    c.drawCircle(px, py, 0.2, _stroke(P.FRAC, a * gw, 0.03))
+                c.restore()
+            st.procedural(b.start, end_w + 0.5, 0.2, chart)
+
+            # labels in the zoomed chart
+            cased = st.text("inside the 9⅝ in casing", (XZ(M.pp(3220)) + XZ(M.fg(3220))) / 2, YZ(3220), 0.15, P.MUTED, 0.3)
+            shl = st.text(f"9⅝ in shoe · {SHOE:,.0f} m", XZ(M.fg(SHOE)) - 0.3, YZ(SHOE) + 0.2, 0.15, P.TEXT, 0.3, align="r", kind="bold")
+            ohl = tag(st, WX0 + 0.1, YZ(4130), "OPEN HOLE", P.TEXT, 0.15)
+            st.fade_in([cased, shl] + ohl, tz1 - 0.3, 0.4)
+            st.fade_out(ohl, t_off - 0.2, 0.3)
+            zq = 3820
+            sq = st.arrow(WX0 + 0.25, YZ(zq), XZ(M.pp(zq)) - 0.15, YZ(zq), P.PORE, 0.07, 0.22, 0.4) + \
+                st.arrow(WX1 - 0.1, YZ(zq), XZ(M.fg(zq)) + 0.14, YZ(zq), P.FRAC, 0.07, 0.22, 0.4)
+            st.fade_in(sq, t_sq - 0.1, 0.35)
+            st.fade_out(sq, t_off - 0.4, 0.35)
+            st.ripple(XZ(M.fg(SHOE)), YZ(SHOE), t_weak - 0.1, t_shoe + 1.2, P.FRAC, period=0.8, r0=0.15, r1=0.75)
+            hyp = tag(st, WX1, WY1 + 0.3, "HYPOTHETICAL: a narrower window", P.WARN, 0.15, align="r")
+            st.fade_in(hyp, th0, 0.35)
+
+            # the rules, one row per sentence (right column)
+            rx = 1.15
+            rows = []
+
+            def row(y, swatch, title, sub, t_in, colr):
+                objs = swatch + [st.text(title, rx + 0.75, y, 0.22, colr, 0.4, align="l", kind="bold"),
+                                 st.text(sub, rx + 0.75, y - 0.38, 0.16, P.MUTED, 0.4, align="l")]
+                st.fade_in(objs, t_in - 0.1, 0.4)
+                rows.extend(objs)
+                return objs
+            ra = row(2.15, st.dashed((rx, 2.15), (rx + 0.5, 2.15), P.MUD, 0.065, 0.16, 0.09, 0.4),
+                     f"pumps off: {MW:.2f} sg", "must still beat the pore pressure", t_off, P.MUD)
+            ra2 = st.text("pulling pipe out lowers it further", rx + 0.75, 2.15 - 0.7, 0.16, P.TEXT, 0.4, align="l")
+            st.fade_in(ra2, t_pull + 0.1, 0.4)
+            rows.append(ra2)
+            row(0.55, [st.line([(rx, 0.55), (rx + 0.5, 0.55)], P.MUD, 0.065, 0.4)],
+                f"pumps on (ECD): ≈ {ECD:.2f} sg", "must stay under the fracture limit", t_on, P.MUD)
+            row(-0.95, [st.circle(rx + 0.25, -0.95, 0.11, P.FRAC, 0.4), st.ring(rx + 0.25, -0.95, 0.2, 0.03, P.FRAC, 0.4)],
+                "weakest point: the last casing shoe", f"{SHOE:,.0f} m · fracture ≈ {FG_SHOE:.2f} sg", t_weak, P.TEXT)
+            st.fade(rows, th0, th0 + 0.5, 1.0, 0.3)
+            none = pill(st, rx + 2.9, -2.35, "a narrow window: no mud weight does both", P.BAD, "#ffffff", 0.19, 0.5)
+            st.pop_in(none, t_none - 0.1, 0.35)
+            st.fade_out([cased, shl, hyp[0], hyp[1], card, ytl, xtl] + rows + none, end_w, 0.45)
+
+        # ================================================================ MPD: sealed top, choke on the returns
+        t0m = end_w + 0.25
+        with st.span(t0m, b.end):
+            ttl = st.text("MPD adds a knob", -5.85, 3.45, 0.3, P.TEXT, 0.4, align="l", kind="bold")
+            st.fade_in(ttl, t_mpd, 0.4)
+            L, R = HC - HHW, HC + HHW
+            rock = [st.rect(L - 0.5, (Y_GL + Y_HB - 0.35) / 2, 1.0, Y_GL - Y_HB + 0.35, P.ROCK, 0.0),
+                    st.rect(R + 0.5, (Y_GL + Y_HB - 0.35) / 2, 1.0, Y_GL - Y_HB + 0.35, P.ROCK, 0.0),
+                    st.rect(HC, Y_HB - 0.18, 2 * HHW, 0.36, P.ROCK, 0.0)]
+            hole = st.rect(HC, (Y_SP + 0.3 + Y_HB) / 2, 2 * HHW, Y_SP + 0.3 - Y_HB, P.BG, 0.01)
+            mud = st.rect(HC, (Y_SP + 0.3 + Y_HB) / 2, 2 * HHW, Y_SP + 0.3 - Y_HB, P.MUD, 0.02, alpha=0.3, role="flat")
+            spool = [st.rect(L - 0.17, Y_SP, 0.34, 0.62, P.STEEL_DK, 0.15), st.rect(R + 0.17, Y_SP, 0.34, 0.62, P.STEEL_DK, 0.15)]
+            brk = [st.line([(L - 1.1, y - 0.05), (R + 1.1, y + 0.05)], P.MUTED, 0.03, 0.3) for y in (-0.55, -0.4)]
+            brb = st.rect(HC, -0.475, 2 * HHW + 2.3, 0.13, P.BG, 0.29, role="flat")
+            kml = st.text("kilometres of hole", R + 1.2, -0.475, 0.14, P.MUTED, 0.3, align="l")
+            pipe = [st.rect(HC - PHW + 0.04, (3.05 + Y_HB + 0.45) / 2, 0.08, 3.05 - Y_HB - 0.45, P.STEEL, 0.2),
+                    st.rect(HC + PHW - 0.04, (3.05 + Y_HB + 0.45) / 2, 0.08, 3.05 - Y_HB - 0.45, P.STEEL, 0.2)]
+            bit = st.poly([(HC - 0.3, Y_HB + 0.45), (HC + 0.3, Y_HB + 0.45), (R - 0.03, Y_HB + 0.3), (R - 0.03, Y_HB + 0.04),
+                           (L + 0.03, Y_HB + 0.04), (L + 0.03, Y_HB + 0.3)], P.STEEL_DK, 0.21)
+            inlet = st.line([(-5.85, 3.05), (HC, 3.05)], P.STEEL, 0.14, 0.19)
+            inl = st.text("mud in", -5.85, 2.75, 0.15, P.MUD, 0.3, align="l", kind="bold")
+            base = rock + [hole, mud, bit, inlet, inl, brb, kml] + spool + brk + pipe
+            st.fade_in(base, t0m, 0.5)
+            # the rotating seal on top of the annulus, around the turning pipe
+            rcd = [st.rect(HC, Y_RCD, 2 * HHW + 0.68, 0.66, P.STEEL_DK, 0.3, role="solid"),
+                   st.rect(HC - PHW - 0.16, Y_RCD, 0.3, 0.5, RUBBER, 0.32, role="solid"),
+                   st.rect(HC + PHW + 0.16, Y_RCD, 0.3, 0.5, RUBBER, 0.32, role="solid")]
+            rcl = tag(st, HC + HHW + 0.55, Y_RCD + 0.1, "rotating seal", P.TEXT, 0.18)
+            st.pop_in(rcd, t_seal - 0.15, 0.35)
+            st.fade_in(rcl, t_seal + 0.1, 0.4)
+            st.ripple(HC, Y_RCD, t_seal, t_seal + 1.2, P.TEXT, period=0.6, r0=0.3, r1=1.1)
+            # the return line and its choke (the knob)
+            rl = st.line([(R + 0.34, Y_SP), (CHK[0] - 0.3, Y_SP)], P.STEEL_DK, 0.2, 0.17)
+            rl2 = st.line([(CHK[0] + 0.3, Y_SP), (1.55, Y_SP)], P.STEEL_DK, 0.2, 0.17)
+            sh = st.text("to the shakers", 1.55, Y_SP - 0.35, 0.14, P.MUTED, 0.3, align="r")
+            st.fade_in([rl, rl2, sh], t_mpd + 0.4, 0.4)
+
+            def choke(c, t, look):
+                a = _env(t, t_mpd + 0.3, b.end + 1.0, 0.35)
+                if a <= 0:
+                    return
+                cx, cy = CHK
+                close = _ramp(t, t_stop - 0.1, t_bp + 0.8)
+                for sx in (-1, 1):
+                    c.drawPath(_path([(cx, cy), (cx + sx * 0.3, cy + 0.22), (cx + sx * 0.3, cy - 0.22)], True), _fill(P.WARN, a))
+                c.drawLine(cx - 0.32, cy - 0.3, cx + 0.3, cy + 0.32, _stroke(P.TEXT, a, 0.035))
+                c.drawPath(_path([(cx + 0.36, cy + 0.38), (cx + 0.14, cy + 0.32), (cx + 0.3, cy + 0.16)], True), _fill(P.TEXT, a))
+                # the knob above it turns as the choke closes
+                kx, ky = cx, cy + 0.75
+                c.drawLine(cx, cy + 0.05, kx, ky - 0.2, _stroke(P.MUTED, a, 0.04))
+                c.drawCircle(kx, ky, 0.2, _fill("#3a4456", a))
+                c.drawCircle(kx, ky, 0.2, _stroke(P.WARN, a, 0.035))
+                ang = math.radians(135 - 200 * close)
+                c.drawLine(kx, ky, kx + 0.16 * math.cos(ang), ky + 0.16 * math.sin(ang), _stroke(P.WARN, a, 0.045))
+            st.procedural(t_mpd + 0.3, b.end, 0.35, choke)
+            chl = tag(st, CHK[0] + 0.32, CHK[1] + 0.78, "choke", P.WARN, 0.18, align="l")
+            st.fade_in(chl, t_choke, 0.4)
+            st.ripple(CHK[0], CHK[1], t_knob - 0.2, t_knob + 1.0, P.WARN, period=0.6, r0=0.15, r1=0.7)
+
+            # pumps on: down the pipe, up the annulus, out through the choke; the pipe turns
+            t_pe = t_stop + 0.5
+            st.flow([(-5.85, 3.05), (HC, 3.05), (HC, Y_HB + 0.5)], t0m + 0.3, t_pe, P.MUD, n=22, speed=1.1, r=0.045, z=0.25)
+            st.flow([(HC + 0.48, Y_HB + 0.15), (HC + 0.48, Y_SP), (1.55, Y_SP)], t0m + 0.4, t_pe, P.MUD, n=24, speed=1.0, r=0.04, z=0.25)
+            st.flow([(HC - 0.48, Y_HB + 0.15), (HC - 0.48, Y_SP + 0.1)], t0m + 0.4, t_pe, P.MUD, n=12, speed=1.0, r=0.04, z=0.25)
+
+            def spin(c, t, look):
+                a = _env(t, t0m + 0.2, b.end + 1.0, 0.35)
+                if a <= 0:
+                    return
+                tt = min(t, t_stop + 0.6)
+                c.save()
+                c.clipRect(skia.Rect.MakeLTRB(HC - PHW + 0.01, Y_RCD + 0.34, HC + PHW - 0.01, 2.98))
+                for k in range(4):
+                    u = ((tt * 0.9) + k / 4) % 1.0
+                    x = HC - PHW + 2 * PHW * u
+                    c.drawLine(x, Y_RCD + 0.34, x - 0.08, 2.98, _stroke("#8a97ab", a * math.sin(math.pi * u), 0.035, cap=False))
+                c.restore()
+            st.procedural(t0m, b.end, 0.22, spin)
+            trn = st.text("turning", HC - PHW - 0.12, 2.2, 0.15, P.MUTED, 0.3, align="r")
+            st.fade_in(trn, t_turn - 0.1, 0.4)
+            st.fade_out(trn, t_stop + 0.3, 0.3)
+
+            # read-outs: back pressure at the choke, bottom-hole pressure
+            bpl = st.text("BACK PRESSURE", CHK[0] - 0.75, 2.45, 0.13, P.MUTED, 0.4, align="l", kind="bold")
+            st.fade_in(bpl, t_choke + 0.2, 0.4)
+
+            def bp_read(c, t, look):
+                a = _env(t, t_choke + 0.2, b.end + 1.0, 0.35)
+                if a <= 0:
+                    return
+                v = P_BP * _ramp(t, t_stop - 0.1, t_bp + 0.8)
+                look.draw_text(c, f"{v:3.0f} bar", CHK[0] - 0.75, 2.12, 0.24, P.WARN, a, "l", "mono")
+            st.procedural(t_choke, b.end, 0.45, bp_read)
+            dot = st.circle(HC, Y_HB + 0.04, 0.06, P.TEXT, 0.4, role="solid")
+            lead = st.line([(HC + 0.06, Y_HB + 0.04), (-1.75, Y_HB + 0.04)], P.MUTED, 0.022, 0.39)
+            bhl = st.text("BOTTOM-HOLE PRESSURE", -1.65, Y_HB + 0.62, 0.13, P.MUTED, 0.45, align="l", kind="bold")
+            st.fade_in([dot, lead, bhl], t0m + 0.4, 0.4)
+            st.counter(-1.65, Y_HB + 0.22, t0m + 0.4, t0m + 0.5, P_ECD, P_ECD, fmt="{:.0f} bar", size=0.28, color=P.MUD,
+                       align="l", hold=b.end + 1.0)
+            stdy = tag(st, -1.65, Y_HB - 0.3, "steady", P.MUD, 0.15)
+            st.fade_in(stdy, t_hold, 0.4)
+
+            # three lanes: pump rate falls, choke back pressure rises, bottom-hole pressure stays flat
+            lx0, lx1 = 2.55, 7.45
+            lanes = [(1.75, "pump rate", "#b8c4d6"), (0.05, "choke back pressure", P.WARN), (-1.65, "bottom-hole pressure", P.MUD)]
+            tA, tB = t_ret - 0.4, b.end - 0.2
+            lobjs = []
+            for y, name, colr in lanes:
+                lobjs += [st.rect((lx0 + lx1) / 2, y - 0.62, lx1 - lx0, 0.02, P.GRID, 0.3),
+                          st.text(name, lx0, y + 0.18, 0.17, colr, 0.3, align="l", kind="bold")]
+            tax = st.text("time →", lx1, -2.62, 0.14, P.MUTED, 0.3, align="r")
+            st.fade_in(lobjs + [tax], tA - 0.3, 0.4)
+            stop_x = lx0 + (lx1 - lx0) * (t_stop - tA) / (tB - tA)
+            conn = [st.rect((stop_x + lx1) / 2, -0.25, lx1 - stop_x, 4.3, P.PANEL2, 0.25, alpha=0.55, role="flat"),
+                    st.text("pumps stopped", stop_x + 0.08, -2.62, 0.14, P.TEXT, 0.3, align="l", kind="bold")]
+            st.fade_in(conn, t_stop, 0.4)
+
+            def lanes_draw(c, t, look):
+                a = _env(t, tA - 0.3, b.end + 1.0, 0.35)
+                if a <= 0 or t < tA:
+                    return
+                te = min(t, tB)
+                n = max(2, int((te - tA) / 0.06))
+                for y, name, colr in lanes:
+                    pts = []
+                    for i in range(n + 1):
+                        tt = tA + (te - tA) * i / n
+                        q = _ramp(tt, t_stop - 0.1, t_stop + 1.0)
+                        g = _ramp(tt, t_stop - 0.1, t_bp + 0.8)
+                        if name == "pump rate":
+                            v = 0.85 * (1 - q)
+                        elif name == "choke back pressure":
+                            v = 0.85 * g
+                        else:
+                            v = 0.55
+                        pts.append((lx0 + (lx1 - lx0) * (tt - tA) / (tB - tA), y - 0.55 + v * 0.5))
+                    pa = _path(pts)
+                    c.drawPath(pa, _glow(look, colr, a, 0.05))
+                    c.drawPath(pa, _stroke(colr, a, 0.05))
+                    c.drawCircle(pts[-1][0], pts[-1][1], 0.07, _fill("#ffffff", a))
+            st.procedural(tA - 0.3, b.end, 0.35, lanes_draw)
+            ebp = st.text(f"+{P_BP:.0f} bar", lx1, 0.05 + 0.25, 0.16, P.WARN, 0.4, align="r", kind="bold")
+            st.fade_in(ebp, t_bp + 0.8, 0.4)
+            ebh = st.text(f"{P_ECD:.0f} bar throughout", lx1, -1.65 + 0.18, 0.16, P.MUD, 0.4, align="r", kind="bold")
+            st.fade_in(ebh, t_hold + 0.2, 0.4)
+
+            # the mud alone is no longer the whole barrier: the envelope now takes in the sealed top and the choke
+            env = [(L - 0.06, Y_HB - 0.05), (L - 0.06, 0.95), (HC - 1.18, 0.95), (HC - 1.18, Y_RCD + 0.4), (HC + 1.18, Y_RCD + 0.4),
+                   (HC + 1.18, Y_SP + 0.16), (CHK[0] + 0.36, Y_SP + 0.16), (CHK[0] + 0.36, Y_SP - 0.16), (R + 0.06, Y_SP - 0.16),
+                   (R + 0.06, Y_HB - 0.05), (L - 0.06, Y_HB - 0.05)]
+            envl = st.line(env, P.PRIMARY_B, 0.05, 0.5, role="glow")
+            st.draw_on(envl, t_alone - 0.2, t_alone + 1.6, "BEZIER")
+            bl = tag(st, -1.6, -1.25, "primary barrier: mud\n+ sealed top + choke", P.PRIMARY_B, 0.16)
+            st.fade_in(bl, t_alone + 0.8, 0.4)
 
 
 def build(st, tl):

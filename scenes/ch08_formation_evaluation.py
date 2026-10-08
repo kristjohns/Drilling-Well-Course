@@ -165,15 +165,16 @@ def _xmap(x0, w, lo, hi, logscale=False):
     return f
 
 
-def _track_frame(st, x0, w, title, color=CURVE, ticks=(), unit=None, z=0.05):
+def _track_frame(st, x0, w, title, color=CURVE, ticks=(), unit=None, z=0.05, title_y=None):
     """A log track: card, vertical grid, depth grid, title + unit, tick labels. Returns objects."""
     out = [st.rect(x0 + w / 2, (LY0 + LY1) / 2, w + 0.12, LY0 - LY1 + 0.12, P.PANEL, z - 0.02)]
     for zz in (3950, 4000, 4050, 4100):
         out.append(st.rect(x0 + w / 2, Yd(zz), w, 0.012, P.GRID, z))
     for (xv, txt) in ticks:
         out.append(st.rect(xv, (LY0 + LY1) / 2, 0.012, LY0 - LY1, P.GRID, z))
-        out.append(st.text(txt, xv, LY1 - 0.2, 0.13, P.MUTED, z + 0.01))
-    out.append(st.text(title, x0 + w / 2, LY0 + 0.42, 0.17, color, z + 0.01, kind="bold"))
+        al = "l" if abs(xv - x0) < 1e-6 else ("r" if abs(xv - (x0 + w)) < 1e-6 else "c")
+        out.append(st.text(txt, xv + (0.03 if al == "l" else -0.03 if al == "r" else 0.0), LY1 - 0.2, 0.13, P.MUTED, z + 0.01, align=al))
+    out.append(st.text(title, x0 + w / 2, LY0 + 0.42 if title_y is None else title_y, 0.17, color, z + 0.01, kind="bold"))
     if unit:
         out.append(st.text(unit, x0 + w / 2, LY0 + 0.18, 0.13, P.MUTED, z + 0.01))
     return out
@@ -228,16 +229,16 @@ def beat_ladder(st, tl):
                 ("pressures + samples", "days", 0.64, 0.33),
                 ("core", "weeks", 0.80, 0.55),
                 ("well test", "weeks", 0.95, 1.00)]
-        y0, dy = 2.35, 0.98
+        y0, dy = 2.45, 0.9
         ys = [y0 - dy * i for i in range(len(rows))]
         RX = -5.75
         rails = [st.rect(RX - 0.22, (ys[0] + ys[-1]) / 2, 0.06, ys[0] - ys[-1] + 0.9, P.STEEL_DK, 0.2, role="steel"),
                  st.rect(RX + 0.22, (ys[0] + ys[-1]) / 2, 0.06, ys[0] - ys[-1] + 0.9, P.STEEL_DK, 0.2, role="steel")]
         st.fade_in(rails, t_lad, 0.5)
         hx = {"time": 0.55, "cert": 2.85, "cost": 5.75}
-        heads = [st.text("time to result", hx["time"], 3.3, 0.17, P.MUTED, 0.4, kind="bold"),
-                 st.text("certainty", hx["cert"], 3.3, 0.17, P.SAFE, 0.4, kind="bold"),
-                 st.text("cost", hx["cost"], 3.3, 0.17, P.WARN, 0.4, kind="bold")]
+        heads = [st.text("time to result", hx["time"], 3.5, 0.17, P.MUTED, 0.4, kind="bold"),
+                 st.text("certainty", hx["cert"], 3.5, 0.17, P.SAFE, 0.4, kind="bold"),
+                 st.text("cost", hx["cost"], 3.5, 0.17, P.WARN, 0.4, kind="bold")]
         st.fade_in(heads, t_lad + 0.2, 0.5)
         t_row0 = s[2] + 0.4
         t_rowN = _w(b, 2, "slow") - 0.2
@@ -255,13 +256,13 @@ def beat_ladder(st, tl):
             tr_k = st.rect(hx["cost"] - 1.6, y, 3.2, 0.22, P.PANEL2, 0.3, anchor="l", role="pill")
             bc = st.rect(hx["cert"] - 1.0, y, 0.0001, 0.22, P.SAFE, 0.32, anchor="l", role="pill")
             bk = st.rect(hx["cost"] - 1.6, y, 0.0001, 0.22, P.WARN, 0.32, anchor="l", role="pill")
-            st.fade_in([rung, num, lab, tr_c, tr_k] + tag, t, 0.35)
+            st.fade_in([rung, num, lab, tr_c, tr_k, bc, bk] + tag, t, 0.35)
             st.scale_to(bc, t + 0.15, t + 0.85, sx=2.0 * cert)
             st.scale_to(bk, t + 0.25, t + 0.95, sx=3.2 * cost)
         # the two ends of the ladder
         t_fast = _w(b, 2, "fast")
-        top = _lbl(st, 3.8, ys[0] + 0.62, "fast · cheap · uncertain", P.PORE, 0.17, z=0.6)
-        bot = _lbl(st, 3.8, ys[-1] - 0.6, "slow · costly · definitive", P.WARN, 0.17, z=0.6)
+        top = _lbl(st, 3.8, ys[0] + 0.5, "fast · cheap · uncertain", P.TEXT, 0.17, z=0.6)
+        bot = _lbl(st, 3.8, ys[-1] - 0.55, "slow · costly · definitive", P.WARN, 0.17, z=0.6)
         st.fade_in(top, max(t_fast, t_row0 + 0.3), 0.4)
         st.fade_in(bot, _w(b, 2, "slow"), 0.4)
         # ranked by price, not by time: the time column lights up out of order
@@ -285,9 +286,9 @@ def beat_mudlog(st, tl):
     with st.span(b.start, b.end):
         t_in = b.start + 0.1
         # rock column with a sand layer at the bit
-        rock = [st.rect(CX, (YT + 0.0) / 2 + 0.2, 2.9, YT - 0.0 + 0.4, P.ROCK2, 0.0),
+        rock = [st.rect(CX, YT / 2, 2.9, YT, P.ROCK2, 0.0),
                 st.rect(CX, (0.0 - 1.7) / 2, 2.9, 1.7, P.SHALE, 0.0),
-                st.rect(CX, (-1.7 - 3.35) / 2, 2.9, 1.65, P.SAND, 0.0)]
+                st.rect(CX, (-1.7 - 3.15) / 2, 2.9, 1.45, P.SAND, 0.0)]
         hole = st.rect(CX, (YT + YB) / 2, 2 * HW, YT - YB, P.BG, 0.02)
         ann = st.rect(CX, (YT + YB) / 2, 2 * HW, YT - YB, P.MUD, 0.03, alpha=0.28, role="flat")
         pipe = [st.rect(CX - PW, (YT + 0.3 + YB + 0.3) / 2, 0.06, YT + 0.3 - (YB + 0.3), P.STEEL, 0.2),
@@ -319,7 +320,7 @@ def beat_mudlog(st, tl):
         st.fade_out(cl, s[3] - 0.4, 0.3)
 
         # UV tray (middle column, top)
-        TX, TY, TW, TH = 0.15, 2.05, 4.4, 2.0
+        TX, TY, TW, TH = 0.3, 2.05, 3.9, 2.0
         tray = st.rect(TX, TY, TW, TH, UV_BG, 0.1, role="card")
         uv_lab = st.text("UV light box", TX - TW / 2 + 0.2, TY + TH / 2 - 0.22, 0.13, "#b9a6ff", 0.2, align="l", kind="bold")
         chips = []
@@ -348,8 +349,9 @@ def beat_mudlog(st, tl):
         st.fade_in(gl, t_glow, 0.4)
 
         # gas chromatograph (right, under the term cards)
-        c = Chart(st, 3.75, -2.75, 3.75, 2.55, (0.0, 6.0), (0.0, 1.1))
-        fr = c.frame(xticks=[], yticks=[], xlabel="retention time  →", grid=False, panel=True)
+        c = Chart(st, 4.35, -2.75, 3.2, 2.55, (0.0, 6.0), (0.0, 1.1))
+        fr = c.frame(xticks=[], yticks=[], xlabel="", grid=False, panel=True)
+        fr.append(st.text("retention time  →", c.X(3.0), c.y - 0.3, 0.15, P.MUTED, 0.3))
         ttl = st.text("gas chromatograph", c.X(3.0), 0.38, 0.2, P.GAS, 0.3, kind="bold")
         heights = (1.0, 0.46, 0.27, 0.14, 0.07)
         xs = [i * 0.02 for i in range(301)]
@@ -387,7 +389,7 @@ def beat_mudlog(st, tl):
             look.draw_ring(c, x, y, 0.14, 0.035, P.TEXT, a)
             c.drawCircle(x, y, 0.09, skia.Paint(Color=col(hex_rgb(P.SAND), a), AntiAlias=True))
         st.procedural(t_a - 0.3, b.end, 0.6, draw_tag)
-        LX, LY = 0.15, -1.25
+        LX, LY = 0.3, -1.25
         ring = st.ring(LX - 1.45, LY, 0.42, 0.05, P.MUTED, 0.3)
         hand = st.rect(LX - 1.45, LY, 0.05, 0.36, P.TEXT, 0.32, anchor="b")
         st.fade_in([ring, hand], t_a, 0.3)
@@ -398,10 +400,10 @@ def beat_mudlog(st, tl):
         illu = st.text("at 4 km: about an hour (illustrative)", LX - 0.85, LY - 0.55, 0.13, P.MUTED, 0.35, align="l")
         st.fade_in(illu, t_b - 0.6, 0.4)
         t_form = _w(b, 3, "annulus volume")
-        form = _lbl(st, LX, -0.18, "lag time = annulus volume ÷ flow rate", P.TEXT, 0.18, kind="mono")
+        form = _lbl(st, LX, -0.18, "lag = annulus volume ÷ flow rate", P.TEXT, 0.16, kind="mono")
         st.fade_in(form, t_form - 0.2, 0.4)
         t_old = _w(b, 3, "old news")
-        old = _lbl(st, LX, -2.65, "cuttings are old news when they arrive", P.WARN, 0.18)
+        old = _lbl(st, LX, -2.65, "cuttings are old news when they arrive", P.WARN, 0.17)
         st.fade_in(old, t_old - 0.1, 0.4)
         st.ripple(SX - 0.3, SY, t_b - 0.1, t_b + 0.5, P.WARN, period=0.6, r0=0.12, r1=0.6)
 
@@ -423,7 +425,7 @@ def beat_lwd(st, tl):
 
         def zs_at(t):
             f = _clamp((t - t_d0) / (t_d1 - t_d0), 0.0, 1.0)
-            return LZ0 + (L.Z1 - LZ0) * f
+            return LZ0 + (L.Z1 - OFF - LZ0) * f
 
         dl = _depth_labels(st)
         zl = _zoom_link(st, t0, b.end, LZ0, LZ1, LY0, LY1)
@@ -432,13 +434,13 @@ def beat_lwd(st, tl):
         Xr = _xmap(RX, RW, 0.2, 200, True)
         f_rt = _track_frame(st, RX, RW, "resistivity", CURVE, [(Xr(v), f"{v:g}") for v in dec], "Ω·m, log scale")
         Xn = _xmap(NX, NW, 0.45, -0.15)
-        f_dn = _track_frame(st, NX, NW, "density · neutron", CURVE, [(Xn(v), f"{v:g}") for v in (0.45, 0.15, -0.15)], "porosity")
-        leg = [st.rect(NX + 0.35, LY0 + 0.18, 0.3, 0.04, CURVE, 0.1), st.rect(NX + NW - 0.35, LY0 + 0.18, 0.3, 0.04, NEUTRON, 0.1)]
-        f_dn[-1].data["s"] = "density      neutron"
+        f_dn = _track_frame(st, NX, NW, "density · neutron", CURVE, [(Xn(v), f"{v:g}") for v in (0.45, 0.15, -0.15)], None)
+        leg = [st.text("density φ", NX + 0.5, LY0 + 0.18, 0.13, CURVE, 0.1, kind="bold"),
+               st.text("neutron φ", NX + NW - 0.5, LY0 + 0.18, 0.13, NEUTRON, 0.1, kind="bold")]
         st.fade_in(dl + f_gr + f_rt + f_dn + leg, t0, 0.5)
 
         # BHA column: the hole grows with the bit; pipe, sensor collar and bit move down together (linear)
-        y_s0, y_s1 = Yd(LZ0), Yd(L.Z1)
+        y_s0, y_s1 = Yd(LZ0), Yd(L.Z1 - OFF)
         hole = st.rect(BX, LY0 + 0.05, 0.5, (LY0 + 0.05) - (y_s0 - OFF * k - 0.12), P.BG, 0.1, anchor="t")
         pipe = st.rect(BX, LY0 + 0.05, 0.13, (LY0 + 0.05) - (y_s0 + 0.25), P.STEEL, 0.2, anchor="t")
         collar = st.rect(BX, y_s0 - OFF * k / 2 + 0.05, 0.26, OFF * k + 0.45, P.STEEL_DK, 0.21)
@@ -474,11 +476,12 @@ def beat_lwd(st, tl):
 
         # sensors a few metres behind the bit
         t_sens = _w(b, 0, "sensors")
-        br = st.line([(BX + 0.42, y_s0 - 0.02), (BX + 0.52, y_s0 - 0.02), (BX + 0.52, y_s0 - OFF * k - 0.12), (BX + 0.42, y_s0 - OFF * k - 0.12)],
+        br = st.line([(BX - 0.3, y_s0 - 0.02), (BX - 0.4, y_s0 - 0.02), (BX - 0.4, y_s0 - OFF * k - 0.12), (BX - 0.3, y_s0 - OFF * k - 0.12)],
                      P.WARN, 0.025, 0.4, role="hair")
+        st.move(br, t_d0, t_d1, dy=dz, interp="LINEAR")
 
         # BHA detail on the right
-        DX = 3.0
+        DX = 2.75
         det = [st.rect(DX, 0.78, 0.2, 0.5, P.STEEL, 0.2),
                st.rect(DX, 0.27, 0.42, 0.55, P.STEEL_DK, 0.21),
                st.rect(DX, -1.22, 0.42, 2.45, P.STEEL, 0.2),
@@ -491,10 +494,10 @@ def beat_lwd(st, tl):
                 "dn": st.text("density · neutron", DX + 0.45, -1.85, 0.17, P.MUTED, 0.3, align="l", kind="bold")}
         dbr = st.line([(DX + 0.32, -1.95), (DX + 0.42, -1.95), (DX + 0.42, -2.85), (DX + 0.32, -2.85)], P.WARN, 0.025, 0.4, role="hair")
         dbl = st.text("a few metres", DX + 0.55, -2.4, 0.16, P.WARN, 0.4, align="l", kind="bold")
-        cap = st.text("LWD TOOL", DX, 1.25, 0.14, P.MUTED, 0.3, kind="bold")
+        cap = st.text("LWD TOOL", DX - 0.25, 1.25, 0.14, P.MUTED, 0.3, kind="bold")
         st.fade_in(det + bands["rt"] + bands["gr"] + bands["dn"] + list(labs.values()) + [cap], t0 + 0.3, 0.5)
         st.fade_in([dbr, dbl, br], t_sens, 0.4)
-        sens_l = _lbl(st, DX + 0.1, -3.3, "sensors read the rock minutes after it is cut", P.TEXT, 0.16)
+        sens_l = _lbl(st, 5.05, -3.3, "sensors read the rock minutes after it is cut", P.TEXT, 0.16)
         st.fade_in(sens_l, _w(b, 0, "reading"), 0.4)
         st.fade_out(sens_l, s[1] - 0.3, 0.3)
         for key, tt, te in (("gr", t_gr, t_rt), ("rt", t_rt, t_dn), ("dn", t_dn, s[4])):
@@ -550,7 +553,7 @@ def beat_lwd(st, tl):
             a = _env(t, t_tel, b.end, 0.4, 0.3)
             if a <= 0:
                 return
-            ys_ = Yd(L.Z1) + 0.2
+            ys_ = Yd(L.Z1 - OFF) + 0.2
             for kk in range(8):
                 yy = ys_ + ((t - t_tel) * 1.6 + kk * 0.8) % (LY0 - ys_)
                 look.draw_particles(c, [(BX, yy)], P.MUD, 0.05, a, True)
@@ -586,7 +589,7 @@ def beat_lwd(st, tl):
         st.procedural(t_tel + 0.3, b.end, 0.4, draw_trace)
         rate = _lbl(st, 5.5, 1.67, "a few bits per second", P.MUD, 0.17, z=0.45)
         st.fade_in(rate, _w(b, 4, "a few bits"), 0.4)
-        t_mem = _w(b, 4, "memory")
+        t_mem = _w(b, 4, "full log")
         chip = [st.rect(DX + 0.75, -3.25, 0.36, 0.3, P.PANEL2, 0.4, role="card")]
         for kk in range(3):
             chip += [st.rect(DX + 0.65 + 0.1 * kk, -3.07, 0.03, 0.08, P.STEEL, 0.41), st.rect(DX + 0.65 + 0.1 * kk, -3.43, 0.03, 0.08, P.STEEL, 0.41)]
@@ -602,6 +605,9 @@ def beat_archie(st, tl):
     SX0, SX1, SY0, SY1 = -5.85, -0.75, -2.15, 1.95
     with st.span(b.start, b.end):
         t0 = s[1] - 0.2
+        # the sponge starts centred and a little larger, then slides left when the equation arrives
+        view = View(st, b.start, b.end, z=0.2, clip=(-6.32, -3.7, 8.0, 3.93))
+        view.__enter__()
         brine = st.rect((SX0 + SX1) / 2, (SY0 + SY1) / 2, SX1 - SX0, SY1 - SY0, P.WATER, 0.05, alpha=0.8)
         grains = []
         rows, dy_ = 5, (SY1 - SY0) / 5
@@ -655,6 +661,7 @@ def beat_archie(st, tl):
         ol = _lbl(st, (SX0 + SX1) / 2, SY0 - 0.32, "oil is an insulator: fewer paths, less current", P.OIL, 0.17)
         st.fade_in(ol, _w(b, 3, "less current") - 0.2, 0.4)
         st.fade_out(ol, s[5] - 0.3, 0.3)
+        view.__exit__()
 
         # equation card
         CXc, CYc, CWc, CHc = 3.95, -0.5, 7.3, 5.55
@@ -695,6 +702,7 @@ def beat_archie(st, tl):
         st.fade_in(gas_l, t_ex + 1.9, 0.4)
         # shaly sands: clay conducts too
         t_sh = s[5]
+        view.__enter__()
         rnd = random.Random(5)
         clays = []
         for _ in range(9):
@@ -706,6 +714,9 @@ def beat_archie(st, tl):
             st.flow([(SX0, chan_y[i] + 0.13), (SX1, chan_y[i] + 0.13)], _w(b, 5, "conduct"), b.end, CLAY, n=6, speed=0.7, r=0.03, z=0.41)
         sh = _lbl(st, (SX0 + SX1) / 2, SY0 - 0.32, "clays conduct too: shaly sands need extended models", P.WARN, 0.16)
         st.fade_in(sh, _w(b, 5, "shaly") - 0.2, 0.4)
+        view.__exit__()
+        view.camera(b.start, b.start + 0.01, focus=(-3.3, 0.0), at=(0.0, 0.1), scale=1.06)
+        view.home(t_eq - 1.0, t_eq + 0.2)
 
 
 # ====================================================================================================== 8.05 gradients
@@ -900,7 +911,7 @@ def beat_gradients(st, tl):
             st.fade_in(plug, t_gh, 0.5)
             stop = _lbl(st, TXc, Yc(4085), "another well:\nstops in oil", P.MUTED, 0.14, z=0.6)
             st.fade_in(stop, t_gh + 0.2, 0.4)
-            t_nb = _w(b, 6, "neighbouring")
+            t_nb = _w(b, 6, "water pressures") + 0.6
             nb_z = (4074, 4092, 4110)
             nbs = [st.ring(c.X(L.p_water(z)), c.Y(z), 0.1, 0.035, P.WATER, 0.5) for z in nb_z]
             for i, o in enumerate(nbs):
@@ -912,7 +923,7 @@ def beat_gradients(st, tl):
             st.fade_in(nbt, t_nb, 0.4)
             st.ripple(fpt[0], fpt[1], t_nb + 0.6, b.end, P.TEXT, period=0.9, r0=0.15, r1=0.7)
         # push in on the crossing while the FWL is explained, back out for the last sentence
-        view.camera(t_meet - 0.6, t_meet + 1.2, focus=fpt, at=(fpt[0] + 0.2, fpt[1] + 0.3), scale=1.28)
+        view.camera(t_meet - 0.6, t_meet + 1.2, focus=fpt, at=(fpt[0] + 0.2, fpt[1] + 0.7), scale=1.2)
         view.camera(s[6] - 0.4, s[6] + 0.8, focus=fpt, at=fpt, scale=1.0)
 
         # gradient legend (right, below the term cards)
@@ -1080,7 +1091,7 @@ def beat_samples(st, tl):
         wat_t = st.text("water", (CX0 + CX1) / 2, Yc(4055), 0.15, P.TEXT, 0.4, kind="bold")
         st.fade_in([oil_t, wat_t], t_c + 0.6, 0.4)
         st.fade_in(tz + [wo], t_cap, 0.4)
-        cap = _lbl(st, 4.25, -3.4, "capillary forces hold water above the FWL", P.TEXT, 0.15)
+        cap = st.text("capillary forces\nhold water above\nthe FWL", 5.95, 1.35, 0.15, P.MUTED, 0.4, align="l", kind="bold")
         st.fade_in(cap, t_cap + 0.4, 0.4)
 
 
@@ -1092,9 +1103,9 @@ def beat_core(st, tl):
     with st.span(b.start, b.end):
         t0 = b.start + 0.1
         # ---- phase 1: coring with a hollow bit
-        CX = -4.1
+        CX = -3.8
         Y_TOP = 0.9                      # top of the sand / start of the core run
-        rock = [st.rect(CX, (3.8 + Y_TOP) / 2, 3.6, 3.8 - Y_TOP, P.ROCK2, 0.0), st.rect(CX, (Y_TOP - 3.4) / 2, 3.6, Y_TOP + 3.4, P.SAND, 0.0)]
+        rock = [st.rect(CX, (3.8 + Y_TOP) / 2, 3.0, 3.8 - Y_TOP, P.ROCK2, 0.0), st.rect(CX, (Y_TOP - 3.2) / 2, 3.0, Y_TOP + 3.2, P.SAND, 0.0)]
         hole = st.rect(CX, (3.8 + Y_TOP) / 2, 1.5, 3.8 - Y_TOP, P.BG, 0.02)
         RO, RI = 0.68, 0.36              # outer / inner radius of the crown (kerf between them)
         y_c0 = Y_TOP
@@ -1120,7 +1131,7 @@ def beat_core(st, tl):
         st.fade_in(core_l, t_cut0 + 1.2, 0.4)
         lab1 = _lbl(st, CX, 3.35, "hollow bit: the core rises inside", P.TEXT, 0.16)
         st.fade_in(lab1, t_cut0 + 0.2, 0.4)
-        lab2 = _lbl(st, CX, -3.35, "cut while drilling the reservoir", P.WARN, 0.16)
+        lab2 = _lbl(st, CX, -2.98, "cut while drilling the reservoir", P.WARN, 0.16)
         st.fade_in(lab2, _w(b, 0, "while the reservoir"), 0.4)
         # comparison: cuttings, sidewall plug, core (side by side, to scale-ish)
         t_cmp = _w(b, 0, "unlike")
@@ -1194,7 +1205,8 @@ def beat_core(st, tl):
         st.fade_in(tri, t_tri - 0.3, 0.45)
         # stress-strain
         cs = Chart(st, -3.3, -2.95, 2.4, 2.35, (0, 10), (0, 10))
-        fr = cs.frame(xticks=[], yticks=[], xlabel="axial strain", grid=False, panel=False)
+        fr = cs.frame(xticks=[], yticks=[], xlabel="", grid=False, panel=False)
+        fr.append(st.text("axial strain", cs.X(5), cs.Y(0) - 0.22, 0.14, P.MUTED, 0.2))
         ylab = st.text("stress", -3.45, -0.75, 0.14, P.MUTED, 0.2, align="r")
         ssx = [0, 1, 2, 3, 4, 5, 5.8, 6.5, 7.5, 8.5, 10]
         ssy = [0, 2.3, 4.5, 6.3, 7.7, 8.6, 8.9, 8.7, 7.4, 6.6, 6.2]
@@ -1233,7 +1245,7 @@ def beat_core(st, tl):
         s_end = (62.0 - coh) / math.tan(phi)
         env = st.line([cm.pt(0, coh), cm.pt(s_end, 62.0)], P.COLLAPSE, 0.045, 0.35)
         st.draw_on(env, t_m + 1.3, t_m + 2.0, "BEZIER")
-        envl = st.text("failure envelope", cm.X(s_end) - 0.15, cm.Y(62.0) - 0.05, 0.15, P.COLLAPSE, 0.35, align="r", kind="bold")
+        envl = st.text("failure envelope", cm.X(s_end) + 0.12, cm.Y(62.0) - 0.22, 0.15, P.COLLAPSE, 0.35, align="l", kind="bold")
         cohl = st.text("c", cm.X(0) + 0.12, cm.Y(coh) + 0.12, 0.14, P.COLLAPSE, 0.35, align="l", kind="bold")
         st.fade_in([envl, cohl], t_m + 1.8, 0.35)
         mohr_t = st.text("Mohr circles", cm.X(70), cm.Y(0) - 0.22, 0.14, P.MUTED, 0.2)
@@ -1253,40 +1265,72 @@ def beat_core(st, tl):
 
 
 # ====================================================================================================== 8.08 DST
+def _loglog_curves():
+    """Synthetic but self-consistent build-up diagnostic: the derivative d = dΔp/dln(Δt) has a unit-slope storage start,
+    a hump (skin, near-well damage), a flat radial-flow plateau (permeability) and a step up (a sealing boundary doubles
+    it); Δp is its integral, so Δp is always above the derivative once storage ends."""
+    def softmin(a, b, k=6.0):
+        return -math.log10(10 ** (-k * a) + 10 ** (-k * b)) / k
+
+    def f(x):
+        g = 0.5 * math.exp(-((x + 0.75) / 0.5) ** 2) + 0.3 / (1 + math.exp(-(x - 1.1) / 0.15))
+        return softmin(x + 1.1, g)
+    xs = [-3.0 + i * 0.01 for i in range(501)]
+    d = [10 ** f(x) for x in xs]
+    p = [d[0]]
+    for i in range(1, len(xs)):
+        p.append(p[-1] + 0.5 * (d[i] + d[i - 1]) * math.log(10) * 0.01)
+    keep = [i for i, x in enumerate(xs) if x >= -2.0 - 1e-9 and i % 4 == 0]
+    return [xs[i] for i in keep], [math.log10(p[i]) for i in keep], [math.log10(d[i]) for i in keep]
+
+
 def beat_dst(st, tl):
     b = tl["8.08"]
     s = b.sent
-    WX = -4.6
+    WX = -4.75
+    EW = 2.6                                    # earth strip width
     Y_SURF, Y_SB, Y_SHOE, Y_HANG = 3.3, 2.55, -0.45, -0.1
-    Y_RT, Y_RB, Y_BOT = -1.55, -2.85, -3.25
+    Y_RT, Y_RB, Y_BOT = -1.55, -2.85, -3.2
+    Y_VALVE, Y_PK = 0.25, -1.15
+    LX = -3.25                                  # labels column (left-aligned), right of the well
     with st.span(b.start, b.end):
         t0 = b.start + 0.1
         # earth, seabed, sea
-        sea = st.rect(WX, (3.85 + Y_SB) / 2, 3.2, 3.85 - Y_SB, P.SEA, 0.0)
-        earth = [st.rect(WX, (Y_SB + Y_RT) / 2, 3.2, Y_SB - Y_RT, P.ROCK2, 0.0),
-                 st.rect(WX, (Y_RT + Y_RB) / 2, 3.2, Y_RT - Y_RB, P.SAND, 0.0),
-                 st.rect(WX, (Y_RB + Y_BOT - 0.15) / 2, 3.2, Y_RB - Y_BOT + 0.15, P.SHALE, 0.0)]
+        sea = st.rect(WX, (3.85 + Y_SB) / 2, EW, 3.85 - Y_SB, P.SEA, 0.0)
+        earth = [st.rect(WX, (Y_SB + Y_RT) / 2, EW, Y_SB - Y_RT, P.ROCK2, 0.0),
+                 st.rect(WX, (Y_RT + Y_RB) / 2, EW, Y_RT - Y_RB, P.SAND, 0.0),
+                 st.rect(WX, (Y_RB + Y_BOT - 0.15) / 2, EW, Y_RB - Y_BOT + 0.15, P.SHALE, 0.0)]
         hole_up = st.rect(WX, (Y_SB + Y_SHOE) / 2, 1.5, Y_SB - Y_SHOE, P.BG, 0.02)
         hole_dn = st.rect(WX, (Y_SHOE + Y_BOT) / 2, 1.12, Y_SHOE - Y_BOT, P.BG, 0.02)
         csg = [st.rect(WX - 0.6, (Y_SB + Y_SHOE) / 2, 0.08, Y_SB - Y_SHOE, P.STEEL, 0.1),
                st.rect(WX + 0.6, (Y_SB + Y_SHOE) / 2, 0.08, Y_SB - Y_SHOE, P.STEEL, 0.1)]
-        cem9 = [st.rect(WX - 0.7, (0.6 + Y_SHOE) / 2, 0.11, 0.6 - Y_SHOE, P.CEMENT, 0.05), st.rect(WX + 0.7, (0.6 + Y_SHOE) / 2, 0.11, 0.6 - Y_SHOE, P.CEMENT, 0.05)]
-        shoe_l = st.text("9⅝ in shoe", WX + 1.75, Y_SHOE, 0.14, P.MUTED, 0.3, align="r")
-        sb_l = st.text("seabed", WX - 1.55, Y_SB + 0.15, 0.13, P.MUTED, 0.3, align="l")
-        res_l = st.text("reservoir", WX - 1.55, Y_RT - 0.2, 0.13, "#5b4a2a", 0.3, align="l", kind="bold")
-        base = [sea] + earth + [hole_up, hole_dn] + csg + cem9 + [shoe_l, sb_l, res_l]
+        cem9 = [st.rect(WX - 0.7, (0.6 + Y_SHOE) / 2, 0.11, 0.6 - Y_SHOE, P.CEMENT, 0.05),
+                st.rect(WX + 0.7, (0.6 + Y_SHOE) / 2, 0.11, 0.6 - Y_SHOE, P.CEMENT, 0.05)]
+        sb_l = st.text("seabed", WX - EW / 2 + 0.1, Y_SB + 0.15, 0.13, P.MUTED, 0.3, align="l")
+        res_l = st.text("reservoir", WX - EW / 2 + 0.1, Y_RT - 0.2, 0.13, "#5b4a2a", 0.3, align="l", kind="bold")
+        shoe_lead = st.line([(WX + 0.66, Y_SHOE), (LX - 0.08, Y_SHOE)], P.MUTED, 0.015, 0.3, role="hair")
+        shoe_l = st.text("9⅝ in casing shoe", LX, Y_SHOE, 0.14, P.MUTED, 0.3, align="l")
+        base = [sea] + earth + [hole_up, hole_dn] + csg + cem9 + [sb_l, res_l, shoe_lead, shoe_l]
         st.fade_in(base, t0, 0.5)
+
+        def callout(y, x_from, text, t, color=P.TEXT):
+            ln = st.line([(x_from, y), (LX - 0.08, y)], P.MUTED, 0.015, 0.3, role="hair")
+            pl = _lbl(st, LX + 0.02, y, text, color, 0.14, align="l")
+            st.draw_on(ln, t - 0.1, t + 0.2)
+            st.fade_in(pl, t, 0.3)
+            return [ln] + pl
+
         # liner hung inside the 9-5/8 in casing, cemented across the reservoir
         t_lin = _w(b, 1, "liner")
         lin = [st.rect(WX - 0.4, (Y_HANG + Y_BOT) / 2, 0.06, Y_HANG - Y_BOT, P.STEEL, 0.12),
                st.rect(WX + 0.4, (Y_HANG + Y_BOT) / 2, 0.06, Y_HANG - Y_BOT, P.STEEL, 0.12)]
         hang = [st.rect(WX - 0.5, Y_HANG, 0.16, 0.12, P.STEEL_DK, 0.13), st.rect(WX + 0.5, Y_HANG, 0.16, 0.12, P.STEEL_DK, 0.13)]
-        cem = [st.rect(WX - 0.5, Y_SHOE, 0.13, 0.0001, P.CEMENT, 0.06, anchor="t"), st.rect(WX + 0.5, Y_SHOE, 0.13, 0.0001, P.CEMENT, 0.06, anchor="t")]
+        cem = [st.rect(WX - 0.5, Y_HANG - 0.07, 0.13, 0.0001, P.CEMENT, 0.06, anchor="t"),
+               st.rect(WX + 0.5, Y_HANG - 0.07, 0.13, 0.0001, P.CEMENT, 0.06, anchor="t")]
         st.fade_in(lin + hang, t_lin - 0.2, 0.4)
         st.fade_in(cem, t_lin, 0.1)
-        st.scale_to(cem, t_lin + 0.1, t_lin + 1.3, sy=Y_SHOE - Y_BOT)
-        lin_l = _lbl(st, WX + 1.05, -1.0, "liner, cemented", P.TEXT, 0.14, align="l")
-        st.fade_in(lin_l, t_lin + 0.4, 0.3)
+        st.scale_to(cem, t_lin + 0.1, t_lin + 1.3, sy=Y_HANG - 0.07 - Y_BOT)
+        lin_c = callout(-1.85, WX + 0.57, "liner, cemented", t_lin + 0.4)
         # perforations through liner and cement into the sand
         t_pipe = _w(b, 1, "temporary pipe")
         perfs = []
@@ -1294,22 +1338,20 @@ def beat_dst(st, tl):
             for sx in (-1, 1):
                 perfs.append(st.rect(WX + sx * 0.6, yy, 0.42, 0.06, P.BG, 0.14))
         st.fade_in(perfs, t_pipe - 0.6, 0.3)
-        # test string, packer, tester valve
+        # test string, packer, downhole valve
         tub = [st.rect(WX - 0.14, (Y_SURF + (-1.4)) / 2, 0.05, Y_SURF + 1.4, P.STEEL, 0.15),
                st.rect(WX + 0.14, (Y_SURF + (-1.4)) / 2, 0.05, Y_SURF + 1.4, P.STEEL, 0.15)]
         t_pk = _w(b, 1, "packer")
         t_vl = _w(b, 1, "valves")
-        pk = [st.rect(WX - 0.27, -1.15, 0.2, 0.3, RUBBER, 0.16, role="flat"), st.rect(WX + 0.27, -1.15, 0.2, 0.3, RUBBER, 0.16, role="flat")]
-        valve = st.circle(WX, -0.55, 0.13, P.STEEL_DK, 0.17, role="disc")
-        vbore = st.rect(WX, -0.55, 0.055, 0.24, P.BG, 0.18)
+        pk = [st.rect(WX - 0.27, Y_PK, 0.2, 0.3, RUBBER, 0.16, role="flat"), st.rect(WX + 0.27, Y_PK, 0.2, 0.3, RUBBER, 0.16, role="flat")]
+        valve = st.circle(WX, Y_VALVE, 0.13, P.STEEL_DK, 0.17, role="disc")
+        vbore = st.rect(WX, Y_VALVE, 0.055, 0.24, P.BG, 0.18)
         head = st.rect(WX, Y_SURF + 0.12, 0.5, 0.26, P.STEEL_DK, 0.2)
         st.fade_in(tub + [head], t_pipe - 0.2, 0.4)
         st.fade_in(pk, t_pk - 0.2, 0.3)
         st.fade_in([valve, vbore], t_vl - 0.2, 0.3)
-        pk_l = _lbl(st, WX - 1.0, -1.15, "packer", P.TEXT, 0.14, align="r")
-        vl_l = _lbl(st, WX - 1.0, -0.55, "valve", P.TEXT, 0.14, align="r")
-        st.fade_in(pk_l, t_pk, 0.3)
-        st.fade_in(vl_l, t_vl, 0.3)
+        pk_c = callout(Y_PK, WX + 0.4, "packer", t_pk)
+        vl_c = callout(Y_VALVE, WX + 0.16, "downhole valve", t_vl)
         # surface: separator and burner
         SEPX, BURX, SY = -1.75, 1.6, 3.3
         fl1 = st.rect((WX + 0.25 + SEPX - 0.65) / 2, SY + 0.12, SEPX - 0.65 - (WX + 0.25), 0.07, P.STEEL_DK, 0.2)
@@ -1321,10 +1363,10 @@ def beat_dst(st, tl):
         t_surf = _w(b, 1, "flow to surface")
         st.fade_in([fl1, sep, sep_l, fl2, boom, bur_l], t_surf - 0.8, 0.4)
         t_shut = _w(b, 2, "shut it in")
-        # flow: sand -> perforations -> liner -> tubing -> separator -> burner (gas + oil burned)
+        # flow: sand -> perforations -> liner -> up the test string -> separator -> burner
         for yy in (-1.8, -2.15, -2.5):
             for sx in (-1, 1):
-                st.flow([(WX + sx * 1.3, yy), (WX + sx * 0.2, yy), (WX, -1.45)], t_surf - 0.3, t_shut + 0.2, P.OIL, n=4, speed=0.9, r=0.035, z=0.3)
+                st.flow([(WX + sx * 1.25, yy), (WX + sx * 0.2, yy), (WX, -1.45)], t_surf - 0.3, t_shut + 0.2, P.OIL, n=4, speed=0.9, r=0.035, z=0.3)
         st.flow([(WX, -1.4), (WX, Y_SURF + 0.12), (SEPX - 0.6, SY + 0.12)], t_surf - 0.2, t_shut + 0.2, P.OIL, n=22, speed=2.0, r=0.035, z=0.3)
         st.flow([(SEPX + 0.6, SY + 0.12), (BURX, SY + 0.12)], t_surf + 0.4, t_shut + 0.6, P.GAS, n=6, speed=1.2, r=0.035, z=0.3)
         t_flame0 = t_surf + 0.6
@@ -1347,21 +1389,22 @@ def beat_dst(st, tl):
                 r = (0.12 - 0.08 * ph) * boost
                 look.draw_particles(c, [(x, y)], FLAME if ph < 0.6 else "#ff9b54", r, on * (1 - ph) * 0.9, True)
         st.procedural(t_flame0, b.end, 0.4, draw_flame)
-        # shut-in: valve turns
+        # shut-in: the downhole valve closes
         st.rotate(vbore, t_shut - 0.1, t_shut + 0.4, 90)
         st.recolor(valve, t_shut - 0.1, t_shut + 0.3, P.WARN)
-        si = _lbl(st, WX - 1.0, -0.55, "valve shut", P.WARN, 0.14, align="r")
-        st.fade_out(vl_l, t_shut - 0.1, 0.2)
+        si = _lbl(st, LX + 0.02, Y_VALVE, "valve shut", P.WARN, 0.14, align="l")
+        st.fade_out(vl_c[1:], t_shut - 0.1, 0.2)
         st.fade_in(si, t_shut + 0.1, 0.3)
-        st.ripple(WX, -0.55, t_shut, t_shut + 1.2, P.WARN, period=0.6, r0=0.12, r1=0.6)
+        st.ripple(WX, Y_VALVE, t_shut, t_shut + 1.2, P.WARN, period=0.6, r0=0.12, r1=0.6)
         # rate + pressure vs time (middle column)
         t_pl = t_surf - 0.3
-        cr = Chart(st, -1.55, 0.55, 4.4, 1.15, (0.0, 10.0), (0.0, 1.2))
+        CX0, CW = -0.75, 3.75
+        cr = Chart(st, CX0, 0.55, CW, 1.15, (0.0, 10.0), (0.0, 1.2))
         crf = [st.rect(cr.X(5), cr.Y(0), cr.w, 0.025, P.MUTED, 0.2), st.rect(cr.X(0), cr.Y(0.6), 0.025, cr.h, P.MUTED, 0.2),
                st.text("rate", cr.X(0) - 0.1, cr.Y(0.6), 0.14, P.MUTED, 0.2, align="r")]
-        cp = Chart(st, -1.55, -2.85, 4.4, 2.9, (0.0, 10.0), (0.0, 10.0))
+        cp = Chart(st, CX0, -2.85, CW, 2.9, (0.0, 10.0), (0.0, 10.0))
         cpf = [st.rect(cp.X(5), cp.Y(0), cp.w, 0.025, P.MUTED, 0.2), st.rect(cp.X(0), cp.Y(5), 0.025, cp.h, P.MUTED, 0.2),
-               st.text("pressure", cp.X(0) - 0.1, cp.Y(5), 0.14, P.MUTED, 0.2, align="r"),
+               st.text("downhole\npressure", cp.X(0) - 0.1, cp.Y(5), 0.14, P.MUTED, 0.2, align="r"),
                st.text("time →", cp.X(10), cp.Y(0) - 0.22, 0.14, P.MUTED, 0.2, align="r")]
         st.fade_in(crf + cpf, t_pl, 0.4)
         T_SI = 4.0
@@ -1386,55 +1429,61 @@ def beat_dst(st, tl):
         t_prod = _w(b, 2, "productivity")
         prl = _lbl(st, cr.X(7.4), cr.Y(0.62), "productivity", P.TEXT, 0.14)
         st.fade_in(prl, t_prod - 0.1, 0.3)
-        # log-log derivative (right, below the term cards)
-        cd = Chart(st, 4.05, -2.9, 3.4, 2.15, (-2.0, 2.0), (-1.0, 1.4))
-        cdf = [st.rect(cd.X(0), cd.Y(-1), cd.w, 0.025, P.MUTED, 0.2), st.rect(cd.X(-2), cd.Y(0.2), 0.025, cd.h, P.MUTED, 0.2),
+        # log-log diagnostic: Δp and its derivative (right, below the term cards)
+        cd = Chart(st, 4.2, -2.85, 3.3, 2.2, (-2.0, 2.0), (-1.0, 1.25))
+        cdf = [st.rect(cd.X(0), cd.Y(-1), cd.w, 0.025, P.MUTED, 0.2), st.rect(cd.X(-2), cd.Y(0.125), 0.025, cd.h, P.MUTED, 0.2),
                st.text("log Δt", cd.X(2), cd.Y(-1) - 0.2, 0.13, P.MUTED, 0.2, align="r"),
-               st.text("log Δp, derivative", cd.X(-2) + 0.08, cd.Y(1.4) + 0.12, 0.13, P.MUTED, 0.2, align="l")]
-        lx = [-2.0 + i * 0.05 for i in range(81)]
-        dpy = [min(0.15 + 0.95 * (x + 2.0), 0.55 + 0.32 * (x + 0.5) + (0.2 * (x - 1.0) if x > 1.0 else 0.0)) for x in lx]
-        dvy = [(-0.55 + 1.0 * (x + 2.0)) if x < -1.35 else
-               (0.1 + 0.5 * math.exp(-((x + 1.0) / 0.42) ** 2) + (0.42 * (x - 0.9) if x > 0.9 else 0.0)) for x in lx]
-        for i in range(1, len(dvy)):          # smooth the joints
-            dvy[i] = 0.6 * dvy[i] + 0.4 * dvy[i - 1]
+               st.text("log-log build-up", cd.X(-2) + 0.08, cd.Y(1.25) + 0.12, 0.13, P.MUTED, 0.2, align="l", kind="bold")]
+        lx, lp, ld = _loglog_curves()
         t_der = _w(b, 2, "permeability") - 1.2
         st.fade_in(cdf, t_der - 0.4, 0.4)
-        dpc = cd.curve(lx, dpy, P.PORE, 0.035, 0.3)
-        dvc = cd.curve(lx, dvy, P.WARN, 0.04, 0.31)
+        dpc = cd.curve(lx, lp, P.PORE, 0.035, 0.3)
+        dvc = cd.curve(lx, ld, P.WARN, 0.04, 0.31)
         st.draw_on([dpc, dvc], t_der, t_der + 1.6)
-        lb = [(_w(b, 2, "permeability"), cd.X(0.15), cd.Y(0.1) - 0.24, "flat: permeability"),
-              (_w(b, 2, "near-well damage"), cd.X(-1.0), cd.Y(0.6) + 0.22, "hump: near-well damage"),
-              (_w(b, 2, "boundaries"), cd.X(1.55), cd.Y(0.42) + 0.0, "boundary")]
-        for t, x, y, txt in lb:
-            o = st.text(txt, x, y, 0.13, P.WARN, 0.35, kind="bold")
+        leg = [st.text("Δp", cd.X(2.0) + 0.08, cd.Y(lp[-1]), 0.13, P.PORE, 0.35, align="l", kind="bold"),
+               st.text("derivative", cd.X(2.0) - 0.05, cd.Y(ld[-1]) - 0.2, 0.13, P.WARN, 0.35, align="r", kind="bold")]
+        st.fade_in(leg, t_der + 1.4, 0.3)
+        lb = [(_w(b, 2, "permeability"), cd.X(0.35), cd.Y(-0.3), "flat: permeability", "c"),
+              (_w(b, 2, "near-well damage"), cd.X(-0.95), cd.Y(0.78), "hump:\nnear-well damage", "r"),
+              (_w(b, 2, "boundaries"), cd.X(1.5), cd.Y(0.62), "boundary", "c")]
+        lbo = []
+        for t, x, y, txt, al in lb:
+            o = st.text(txt, x, y, 0.13, P.WARN, 0.35, align=al, kind="bold")
             st.fade_in(o, t - 0.1, 0.3)
+            lbo.append(o)
         # the cost: Norway
         cst = _lbl(st, 5.6, 2.55, "costly  ·  burns hydrocarbons", P.WARN, 0.18)
         st.fade_in(cst, _w(b, 3, "costly") - 0.1, 0.35)
         no = _lbl(st, 5.6, 1.75, "NORWAY: emissions controlled and taxed", "#ffffff", 0.16, bg=P.NO_BADGE)
         st.fade_in(no, _w(b, 3, "Norway") - 0.1, 0.35)
-        # our well: logs, pressures, samples (the test string fades)
-        test_parts = lin + hang + cem + perfs + tub + pk + [valve, vbore, head, fl1, sep, sep_l, fl2, boom, bur_l, lin_l, pk_l, si]
-        st.fade(test_parts, t_fade - 0.2, t_fade + 0.8, 1.0, 0.12)
-        plots = crf + cpf + [rate, dd, bu, flw, bul, si_line, sil] + prl + cdf + [dpc, dvc]
-        st.fade(plots, t_fade - 0.2, t_fade + 0.6, 1.0, 0.25)
-        oh = _lbl(st, WX + 1.05, -2.2, "our well: open hole", P.TEXT, 0.14, align="l")
-        st.fade_in(oh, _w(b, 4, "our example well") - 0.2, 0.4)
+        # our well: logs, pressures, samples (the test string and the test plots leave)
+        test_parts = (lin + hang + cem + perfs + tub + pk + [valve, vbore, head, fl1, sep, sep_l, fl2, boom, bur_l] + lin_c + pk_c
+                      + [vl_c[0]] + si)
+        st.fade(test_parts, t_fade - 0.2, t_fade + 0.8, 1.0, 0.1)
+        plots = crf + cpf + [rate, dd, bu, flw, bul, si_line, sil] + prl + cdf + [dpc, dvc] + leg + lbo + cst + no
+        st.fade_out(plots, t_fade - 0.2, 0.6)
+        oh = callout(-2.5, WX + 0.57, "our well: open hole", _w(b, 4, "our example well") - 0.2)
+        ow = st.text("our well: logs, pressures, samples", 2.6, 1.0, 0.3, P.SAFE, 0.8, kind="bold")
+        st.fade_in(ow, _w(b, 4, "exactly") - 0.3, 0.4)
         items = [("logs", _w(b, 4, "logs")), ("pressures", _w(b, 4, "pressures")), ("samples", _w(b, 4, "samples"))]
         for i, (txt, t) in enumerate(items):
-            x = -0.4 + 2.15 * i
-            p_ = _lbl(st, x, -0.1, txt, P.TEXT, 0.24, z=0.8)
+            x = 0.4 + 2.2 * i
+            p_ = _lbl(st, x, -0.2, txt, P.TEXT, 0.24, z=0.8)
             st.fade_in(p_, t - 0.1, 0.35)
-            _check(st, x + 0.75, 0.3, t + 0.15, s=0.13)
-        ow = st.text("our well: logs, pressures, samples", 1.75, 0.8, 0.26, P.SAFE, 0.8, kind="bold")
-        st.fade_in(ow, _w(b, 4, "exactly") - 0.3, 0.4)
+            _check(st, x + 0.78, 0.22, t + 0.15, s=0.13)
+        fo = st.text("often instead of a well test", 2.6, -1.0, 0.18, P.MUTED, 0.8)
+        st.fade_in(fo, _w(b, 4, "exactly") + 0.2, 0.4)
 
 
 # ====================================================================================================== 8.09 net pay
+NET_RES = "#ecdcaa"      # net reservoir flag: a paler sand (rock that passes the porosity cutoff too)
+
+
 def beat_netpay(st, tl):
     b = tl["8.09"]
     s = b.sent
-    VX, PX, SX, TW = -5.35, -3.85, -2.35, 1.3
+    VX, PX, SX, TW = -5.2, -3.75, -2.3, 1.25
+    FX = (-0.7, 0.05, 0.8)                      # flag columns
     with st.span(b.start, b.end):
         t0 = b.start + 0.1
         dl = _depth_labels(st)
@@ -1442,26 +1491,28 @@ def beat_netpay(st, tl):
         Xv = _xmap(VX, TW, 0.0, 1.0)
         Xp = _xmap(PX, TW, 0.0, 0.35)
         Xs = _xmap(SX, TW, 0.0, 1.0)
-        fv = _track_frame(st, VX, TW, "shale volume", P.MUTED, [(VX, "0"), (VX + TW, "1")])
-        fp = _track_frame(st, PX, TW, "porosity", CURVE, [(PX, "0"), (PX + TW, "0.35")])
-        fs = _track_frame(st, SX, TW, "water sat.", P.WATER, [(SX, "0"), (SX + TW, "1")])
+        ty = LY0 + 0.52
+        fv = _track_frame(st, VX, TW, "shale volume", P.MUTED, [(VX, "0"), (VX + TW, "1")], title_y=ty)
+        fp = _track_frame(st, PX, TW, "porosity", CURVE, [(PX, "0"), (PX + TW, "0.35")], title_y=ty)
+        fs = _track_frame(st, SX, TW, "water sat.", P.WATER, [(SX, "0"), (SX + TW, "1")], title_y=ty)
         st.fade_in(dl + fv + fp + fs, t0, 0.5)
-        _log_curve(st, LG.vsh, LG.z, Xv, P.MUTED, 0.03, t0, b.end, lambda t: L.Z0 + (L.Z1 - L.Z0) * _clamp((t - t0 - 0.3) / 2.0, 0, 1), glow=False)
-        _log_curve(st, LG.phi, LG.z, Xp, CURVE, 0.03, t0, b.end, lambda t: L.Z0 + (L.Z1 - L.Z0) * _clamp((t - t0 - 0.3) / 2.0, 0, 1), glow=False)
-        _log_curve(st, LG.sw, LG.z, Xs, P.WATER, 0.03, t0, b.end, lambda t: L.Z0 + (L.Z1 - L.Z0) * _clamp((t - t0 - 0.3) / 2.0, 0, 1), glow=False)
+        front = lambda t: L.Z0 + (L.Z1 - L.Z0) * _clamp((t - t0 - 0.3) / 2.0, 0, 1)
+        _log_curve(st, LG.vsh, LG.z, Xv, P.MUTED, 0.03, t0, b.end, front, glow=False)
+        _log_curve(st, LG.phi, LG.z, Xp, CURVE, 0.03, t0, b.end, front, glow=False)
+        _log_curve(st, LG.sw, LG.z, Xs, P.WATER, 0.03, t0, b.end, front, glow=False)
         # contacts across the tracks
         for zc, name in ((M.GOC, "GOC"), (M.OWC, "OWC")):
-            ln = st.dashed((VX, Yd(zc)), (0.75, Yd(zc)), P.TEXT, 0.015, 0.08, 0.06, 0.2, alpha=0.5)
-            tx = st.text(name, 0.85, Yd(zc), 0.13, P.MUTED, 0.3, align="l", kind="bold")
+            ln = st.dashed((VX, Yd(zc)), (FX[-1] + 0.3, Yd(zc)), P.TEXT, 0.015, 0.08, 0.06, 0.2, alpha=0.5)
+            tx = st.text(name, FX[-1] + 0.38, Yd(zc), 0.13, P.MUTED, 0.3, align="l", kind="bold")
             st.fade_in(ln + [tx], t0 + 1.5, 0.5)
         # cutoffs and flag columns, three passes
-        flags = [("net\nsand", LG.net_sand, -0.75, lambda f: P.SAND, VX, Xv(L.CUT_VSH), f"Vsh < {L.CUT_VSH:g}", _w(b, 1, "shale")),
-                 ("net\nreservoir", LG.net_res, -0.15, lambda f: "#e0a458", PX, Xp(L.CUT_PHI), f"φ > {L.CUT_PHI:g}", _w(b, 1, "porosity")),
-                 ("net\npay", LG.net_pay, 0.45, lambda f: {"gas": P.GAS, "oil": P.OIL}.get(f, P.WATER), SX, Xs(L.CUT_SW), f"Sw < {L.CUT_SW:g}",
+        flags = [("net\nsand", LG.net_sand, FX[0], lambda f: P.SAND, VX, Xv(L.CUT_VSH), f"Vsh < {L.CUT_VSH:g}", _w(b, 1, "shale")),
+                 ("net\nreservoir", LG.net_res, FX[1], lambda f: NET_RES, PX, Xp(L.CUT_PHI), f"φ > {L.CUT_PHI:g}", _w(b, 1, "porosity")),
+                 ("net\npay", LG.net_pay, FX[2], lambda f: {"gas": P.GAS, "oil": P.OIL}.get(f, P.WATER), SX, Xs(L.CUT_SW), f"Sw < {L.CUT_SW:g}",
                   _w(b, 1, "water"))]
         for name, fl, x, cfn, tx0, xc, ctxt, t in flags:
             cl = st.rect(xc, (LY0 + LY1) / 2, 0.035, LY0 - LY1, P.WARN, 0.3, alpha=0.9)
-            ct = _lbl(st, tx0 + TW / 2, LY1 - 0.45, ctxt, P.WARN, 0.14, z=0.5)
+            ct = _lbl(st, tx0 + TW / 2, LY0 + 0.17, ctxt, P.WARN, 0.14, z=0.5)
             st.fade_in([cl] + ct, t - 0.3, 0.35)
             parts, run, run_start = [], None, None
             for zz, f_, flu in zip(LG.z + [LG.z[-1] + L.STEP], fl + [False], LG.fluid + ["none"]):
@@ -1470,13 +1521,13 @@ def beat_netpay(st, tl):
                     if run is not None:
                         parts.append(st.rect(x, (Yd(run_start) + Yd(zz)) / 2, 0.42, abs(Yd(run_start) - Yd(zz)), run, 0.3, role="flat"))
                     run, run_start = key, zz
-            hd = st.text(name, x, LY0 + 0.3, 0.13, P.TEXT, 0.3, kind="bold")
+            hd = st.text(name, x, LY0 + 0.32, 0.13, P.TEXT, 0.3, kind="bold")
             frame = st.rect(x, (LY0 + LY1) / 2, 0.46, LY0 - LY1 + 0.04, P.PANEL, 0.25)
             st.fade_in([frame, hd], t - 0.3, 0.3)
             for i, p_ in enumerate(parts):
                 st.fade_in(p_, t + 0.15 + 0.02 * i, 0.25)
-        # thickness bars (right, below the term cards)
-        BX0, BW = 3.2, 4.3
+        # thickness bars (right; the gross bar sits below the lowest term card)
+        LBX, BX0, BW = 1.95, 3.75, 3.3
         k = BW / SUM["gross"]
         t_nr = _w(b, 2, "Net reservoir")
         t_gr = _w(b, 2, "gross thickness")
@@ -1486,31 +1537,34 @@ def beat_netpay(st, tl):
         t_89 = _w(b, 3, "eighty-nine")
         g_pay = sum(1 for f_, p_ in zip(LG.fluid, LG.net_pay) if p_ and f_ == "gas") * L.STEP
         o_pay = sum(1 for f_, p_ in zip(LG.fluid, LG.net_pay) if p_ and f_ == "oil") * L.STEP
-        rows = [("gross", SUM["gross"], P.MUTED, t_gr, 0.25), ("net reservoir", SUM["net_reservoir"], "#e0a458", t_nr, -0.6)]
+        rows = [("gross", SUM["gross"], P.MUTED, t_gr, 0.35), ("net reservoir", SUM["net_reservoir"], NET_RES, t_nr, -0.45)]
         for name, v, colr, t, y in rows:
-            lab = st.text(name, 1.35, y, 0.18, P.TEXT, 0.4, align="l", kind="bold")
+            lab = st.text(name, LBX, y, 0.18, P.TEXT, 0.4, align="l", kind="bold")
             bar = st.rect(BX0, y, 0.0001, 0.32, colr, 0.4, anchor="l", role="pill")
             st.fade_in([lab, bar], t - 0.2, 0.3)
             st.scale_to(bar, t, t + 0.9, sx=k * v)
             st.counter(BX0 + k * v + 0.12, y, t, t + 0.9, 0, v, fmt="{:.0f} m", size=0.17, color=P.TEXT, align="l")
-        y = -1.45
-        lab = st.text("net pay", 1.35, y, 0.18, P.TEXT, 0.4, align="l", kind="bold")
+        y = -1.25
+        lab = st.text("net pay", LBX, y, 0.18, P.TEXT, 0.4, align="l", kind="bold")
         bg_ = st.rect(BX0, y, 0.0001, 0.32, P.GAS, 0.4, anchor="l", role="pill")
         bo_ = st.rect(BX0 + k * g_pay, y, 0.0001, 0.32, P.OIL, 0.4, anchor="l", role="pill")
         st.fade_in([lab, bg_, bo_], t_np - 0.1, 0.3)
         st.scale_to(bg_, t_np, t_np + 0.7, sx=k * g_pay)
         st.scale_to(bo_, t_np + 0.6, t_np + 1.3, sx=k * o_pay)
         st.counter(BX0 + k * SUM["net_pay"] + 0.12, y, t_np, t_89 + 0.3, 0, SUM["net_pay"], fmt="{:.0f} m", size=0.17, color=P.TEXT, align="l")
-        sub = st.text(f"{g_pay:.0f} m gas + {o_pay:.0f} m oil", BX0, y - 0.36, 0.14, P.MUTED, 0.4, align="l")
+        sub = st.text(f"{g_pay:.0f} m gas + {o_pay:.0f} m oil: the part that holds hydrocarbons", LBX, y - 0.38, 0.14, P.MUTED, 0.4, align="l")
         st.fade_in(sub, t_89 + 0.3, 0.4)
-        # N/G computed live
-        ntg_txt = f"N/G = net reservoir / gross = {SUM['net_reservoir']:.0f} / {SUM['gross']:.0f} ="
-        nw = st.measure(ntg_txt, 0.18, "mono")
-        plate = st.rect(1.35 + (nw + 0.9) / 2 - 0.15, -2.45, nw + 0.95, 0.5, P.PANEL2, 0.45, role="pill")
-        ntg = st.text(ntg_txt, 1.35, -2.45, 0.18, P.TEXT, 0.5, align="l", kind="mono")
-        st.fade_in([plate, ntg], t_ntg - 0.2, 0.4)
-        st.counter(1.35 + nw + 0.12, -2.45, t_094 - 0.4, t_094 + 0.6, 0.0, SUM["ntg"], fmt="{:.2f}", size=0.2, color=P.WARN, align="l", kind="mono")
-        sim = _lbl(st, 4.5, -3.25, "cutoffs illustrative: real ones depend on the field", P.SIM_BADGE, 0.15)
+        # N/G computed live, on its own card
+        plate = st.rect((LBX - 0.15 + 7.6) / 2, -2.55, 7.6 - (LBX - 0.15), 1.05, P.PANEL2, 0.45)
+        l1 = st.text("net-to-gross = net reservoir ÷ gross", LBX + 0.1, -2.27, 0.17, P.MUTED, 0.5, align="l", kind="bold")
+        eq_txt = f"= {SUM['net_reservoir']:.0f} / {SUM['gross']:.0f} ="
+        l2 = st.text(eq_txt, LBX + 0.1, -2.75, 0.24, P.TEXT, 0.5, align="l", kind="mono")
+        st.fade_in([plate, l1], t_ntg - 0.3, 0.4)
+        st.fade_in(l2, t_094 - 0.9, 0.4)
+        ew = st.measure(eq_txt, 0.24, "mono")
+        st.counter(LBX + 0.1 + ew + 0.18, -2.75, t_094 - 0.4, t_094 + 0.6, 0.0, SUM["ntg"], fmt="{:.2f}", size=0.3, color=P.WARN, align="l",
+                   kind="mono")
+        sim = _lbl(st, (LBX - 0.15 + 7.6) / 2, -3.38, "cutoffs illustrative: real ones depend on the field", P.SIM_BADGE, 0.15)
         st.fade_in(sim, s[4] - 0.1, 0.4)
 
 
@@ -1537,7 +1591,7 @@ def beat_verdict(st, tl):
         # evidence 1: the columns from the model contacts
         t_g = _w(b, 1, "forty")
         t_o = _w(b, 1, "fifty-five")
-        EX, EY = -3.85, 0.05
+        EX, EY = -3.6, 0.05
         k_ = 0.016
         gas_c = st.rect(EX - 1.0, EY + 0.45, 0.42, 0.0001, P.GAS, 0.5, anchor="t")
         oil_c = st.rect(EX - 1.0, EY + 0.45 - k_ * (M.GOC - M.RES_TOP), 0.42, 0.0001, P.OIL, 0.5, anchor="t")
@@ -1565,14 +1619,15 @@ def beat_verdict(st, tl):
         st.recolor(c1, b.sent_end[2] - 0.3, b.sent_end[2], P.SAFE)
         # Sodir definition card
         t_def = s[3]
-        CY = -1.95
-        card = st.rect(1.0, CY, 13.0, 1.45, P.PANEL2, 0.45)
-        bar = st.rect(-5.38, CY, 0.06, 1.1, P.SAFE, 0.46, role="shaft")
-        qt = st.text("“A discovery: a petroleum deposit in which testing, sampling or logging has shown the probability of mobile petroleum.”",
-                     -5.15, CY + 0.25, 0.18, P.TEXT, 0.47, align="l", kind="bold")
-        src = st.text("Norwegian Offshore Directorate (Sodir) — covers both technical and commercial discoveries", -5.15, CY - 0.3, 0.14, P.MUTED,
+        CY = -1.85
+        card = st.rect(1.3, CY, 12.4, 1.55, P.PANEL2, 0.45)
+        bar = st.rect(-4.65, CY, 0.06, 1.2, P.SAFE, 0.46, role="shaft")
+        qt = [st.text("“A discovery: a petroleum deposit in which testing, sampling or logging", -4.4, CY + 0.42, 0.2, P.TEXT, 0.47, align="l",
+                      kind="bold"),
+              st.text("has shown the probability of mobile petroleum.”", -4.4, CY + 0.06, 0.2, P.TEXT, 0.47, align="l", kind="bold")]
+        src = st.text("Norwegian Offshore Directorate (Sodir) — covers both technical and commercial discoveries", -4.4, CY - 0.42, 0.14, P.MUTED,
                       0.47, align="l")
-        st.fade_in([card, bar, qt, src], t_def - 0.1, 0.45)
+        st.fade_in([card, bar] + qt + [src], t_def - 0.1, 0.45)
         # the outcome
         t_dis = _w(b, 3, "a discovery")
         st.draw_on(c2, t_dis - 0.6, t_dis - 0.1)
@@ -1589,9 +1644,9 @@ def beat_verdict(st, tl):
         st.fade_in(pay, t_pay - 0.6, 0.35)
         # dry hole: still data (greyed branch)
         t_dry = _w(b, 5, "dry hole")
-        c4 = st.dashed((-5.85, NY - 0.05), (-5.85, -3.05), P.MUTED, 0.03, 0.1, 0.08, 0.4, alpha=0.7)
-        nol = st.text("no", -5.7, 0.4, 0.14, P.MUTED, 0.4, align="l", kind="bold")
-        dry = _lbl(st, -5.85, -3.3, "DRY HOLE: still data about the basin", P.MUTED, 0.18, align="l", z=0.6)
+        c4 = st.dashed((-5.2, NY - 0.22), (-5.2, -3.1), P.MUTED, 0.03, 0.1, 0.08, 0.4, alpha=0.7)
+        nol = st.text("no", -5.35, 0.9, 0.14, P.MUTED, 0.4, align="r", kind="bold")
+        dry = _lbl(st, -4.95, -3.1, "DRY HOLE: still data about the basin", P.MUTED, 0.18, align="l", z=0.6)
         st.fade_in(c4 + [nol], t_dry - 0.5, 0.35)
         st.fade_in(dry, t_dry - 0.2, 0.4)
 
