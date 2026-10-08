@@ -182,6 +182,9 @@ def plug_objs(st, p, z=0.1):
         idw = _strings()[-1][1] - WALL
         return [_vrect(st, SX - idw, SX + idw, p.top, SHOE_958, P.CEMENT, z), _vrect(st, SX - hw, SX + hw, SHOE_958, p.base, P.CEMENT, z)]
     out = [_vrect(st, SX - hw, SX + hw, p.top, p.base, P.CEMENT, z)]
+    if p.role == "surface":       # rock to rock: the inner annuli are cemented across the surface plug too (under the casing walls)
+        hw20 = _strings()[1][1] - WALL
+        out.append(_vrect(st, SX - hw20, SX + hw20, p.top, p.base, P.CEMENT, min(z, 0.11)))
     if p.hole == "cased":
         out.append(_vrect(st, SX - hw, SX + hw, p.base, p.base + max(BP_LEN, 25), P.STEEL_DK, z + 0.005))
     return out
@@ -301,7 +304,7 @@ def beat_why(st, tl):
               st.text("TO THE OPEN SEA", -0.6, 0.55, 0.34, P.TEXT, 0.5, align="l", kind="bold")]
         st.fade_in(rd[:2], t4 + 0.5, 0.4)
         st.fade_in(rd[2], t4 + 1.4, 0.4)
-        st.counter(-0.6, 1.95, t4 + 0.6, t4 + 2.2, 0, M.bar(4000, M.pp(4000)), fmt="≈ {:.0f} bar", size=0.62, color=P.PORE, z=0.52,
+        st.counter(-0.6, 1.95, t4 + 0.6, t4 + 2.2, 0, M.bar(4000, M.pp(4000)), fmt="≈ {:.0f} bar", size=0.56, color=P.PORE, z=0.52,
                    align="l", hold=W(b, 4, "geological") - 0.35)
         st.fade_out(rd, W(b, 4, "geological") - 0.6, 0.4)
         op = tag(st, -1.6, 3.3, "open to the sea", P.TEXT, 0.18)
@@ -328,8 +331,8 @@ def beat_why(st, tl):
             st.fade_in([d, tx], min(t, s[5] + 0.6), 0.4)
 
         def doc(x, y, title, sub, colr, t):
-            o = [st.rect(x, y, 0.55, 0.72, P.PANEL2, 0.45)] + [st.rect(x, y + 0.2 - 0.14 * k, 0.32, 0.025, P.MUTED, 0.46) for k in range(4)]
-            o += [st.text(title, x, y + 0.75, 0.21, colr, 0.46, kind="bold"), st.text(sub, x, ty - 0.8, 0.17, P.MUTED, 0.46)]
+            o = [st.rect(x, y, 0.8, 1.0, P.PANEL2, 0.45)] + [st.rect(x, y + 0.28 - 0.18 * k, 0.48, 0.03, P.MUTED, 0.46) for k in range(4)]
+            o += [st.text(title, x, y + 0.85, 0.22, colr, 0.46, kind="bold"), st.text(sub, x, ty - 0.8, 0.17, P.MUTED, 0.46)]
             st.fade_in(o, t, 0.45)
             return o
         doc(-0.4, 0.55, "outline P&A plan", "before the first metre", P.WARN, W(b, 5, "outline plan"))
@@ -433,7 +436,7 @@ def beat_rock(st, tl):
     b = tl["9.03"]
     s = b.sent
     with st.span(b.start, b.end):
-        HX, FX = -0.6, -4.4
+        HX, FX = -0.6, -4.0
         H = cutaway(st, HX, True, b.start + 0.1)
         RW, HH, OD, WL, yt, yb = H["dims"]
         # plan view: the whole cross-section, seen from above
@@ -509,7 +512,7 @@ def beat_rock(st, tl):
             leak.append([(FX + sg * (HH + 0.45), -2.75), (xa, -2.2), (xa, 2.9)])     # from the sand, up the open annulus
         for pth in leak:
             st.flow(pth, W(b, 3, "run behind") - 0.6, b.end, P.BAD, n=12, speed=1.3, r=0.04, z=0.4)
-        fp = pill(st, FX, -3.3, "✕ FAILS: fluid runs behind it", P.BAD, "#ffffff", 0.2, 0.5)
+        fp = pill(st, FX, -3.3, "✕ FAILS: leaks behind it", P.BAD, "#ffffff", 0.18, 0.5)
         st.fade_in(fp, W(b, 3, "no use") , 0.4)
         ua = tag(st, FX, 2.65, "uncemented annulus", P.MUD, 0.16, align="c", z=0.55)
         st.fade_in(ua, W(b, 3, "run behind"), 0.3)
@@ -932,8 +935,8 @@ def beat_place(st, tl):
             fill(c, look, PCX - Z.id, PCX + Z.id, y_ct, y_st, P.SPACER, fa)
         st.procedural(t_p0, b.end, 0.2, draw_cols)
         st.flow([(PCX, 3.45), (PCX, y_pb + 0.1)], t_p0, t_p1 - 0.3, P.SPACER, n=10, speed=2.2, r=0.03, z=0.39)
-        sp = lab(1.3, "spacer", PCX + PO + 0.3, (y_ct + y_st) / 2, t_p0 + 2.0, s[3])
-        cm = lab(-0.45, "cement", PCX + PO + 0.3, -0.45, t_p0 + 2.4, s[3])
+        sp = lab(1.3, "spacer", PCX + PO + 0.3, (y_ct + y_st) / 2, t_p1 - 0.4, s[3])
+        cm = lab(-0.45, "cement", PCX + PO + 0.3, -0.45, t_p1 - 0.2, s[3])
         t_eq = W(b, 2, "inside and outside")
         eq = st.dashed((PCX - Z.id, y_ct), (PCX + Z.id + 0.2, y_ct), P.WARN, 0.03, 0.12, 0.07, 0.45)
         st.fade_in(eq, t_eq - 0.2, 0.3)
@@ -941,7 +944,7 @@ def beat_place(st, tl):
         eql = lab(0.55, "same level inside and outside", PCX + Z.id + 0.2, y_ct, t_eq, s[3], colr=P.WARN)
         # mini U-tube (we met it in ch. 5)
         t_u = W(b, 2, "U-tube")
-        ux, uy = 5.65, -2.05
+        ux, uy = 5.65, -2.35
         ut = [st.rect(ux, -2.15, 3.8, 2.45, P.PANEL, 0.2), st.text("U-TUBE (ch. 6)", ux - 1.7, -1.17, 0.15, P.MUTED, 0.3, align="l", kind="bold")]
         ux0 = ux - 0.6
         UW, UH = 0.22, 1.1                                   # U-tube: two legs joined at the bottom, cement grey at equal levels
@@ -954,7 +957,7 @@ def beat_place(st, tl):
         ut.append(st.line([(ux0 - 0.55 + UW / 2 + 0.03, uy + 0.95), (ux0 - 0.55 + UW / 2 + 0.03, uy - 0.47), (ux0 + 0.55 - UW / 2 - 0.03, uy - 0.47),
                            (ux0 + 0.55 - UW / 2 - 0.03, uy + 0.95)], P.TEXT, 0.03, 0.32))
         ut += st.dashed((ux0 - 0.85, uy + 0.5), (ux0 + 0.85, uy + 0.5), P.WARN, 0.025, 0.1, 0.06, 0.33)
-        ut.append(st.text(wrap_to("equal weight both sides: nothing moves", 0.15, 1.3), ux0 + 1.65, uy + 0.0, 0.15, P.TEXT, 0.33))
+        ut.append(st.text(wrap_to("equal weight both sides: nothing moves", 0.15, 1.6), ux0 + 1.8, uy + 0.0, 0.15, P.TEXT, 0.33))
         st.fade_in(ut, t_u - 0.4, 0.4)
         st.fade_out(ut, s[3] + 0.4, 0.4)
         # 5. pull out slowly; 6. reverse-circulate the excess
@@ -1083,7 +1086,7 @@ def beat_verify(st, tl):
         st.fade_in(opw, t_oh + 0.2, 0.2)
         st.scale_to(opw, t_oh + 0.2, t_oh + 1.2, sy=iy + 0.8 - (iy - 0.13))
         st.ripple(ox, iy - 0.13, t_oh + 1.2, t_oh + 2.2, P.TEXT, period=0.5, r0=0.1, r1=0.5)
-        oht = st.text(wrap_to("proven by the tag", 0.18, 1.6), ix + 0.85, iy - 0.15, 0.18, P.TEXT, 0.3)
+        oht = st.text(wrap_to("proven by the tag", 0.18, 2.1), ix + 0.85, iy - 0.15, 0.18, P.TEXT, 0.3)
         st.fade_in(oht, t_oh + 1.0, 0.4)
         # 6. verified: the green outline lands on the plug
         t_v = W(b, 5, "verified")
@@ -1114,8 +1117,8 @@ def beat_cut(st, tl):
         hole = strs[0][2]
         lower.append(st.rect(cx, (ycut - 3.45) / 2, 2 * hole, ycut + 3.45, P.BG, 0.05))
         upper.append(st.rect(cx, (sb + ycut) / 2, 2 * hole, sb - ycut, P.BG, 0.05))
-        # annuli: conductor + 20 in cemented; inner annuli and the bore hold mud (drawing of this well)
-        ann_col = [P.CEMENT, P.CEMENT, MUD_DIM, MUD_DIM]
+        # annuli: conductor + 20 in cemented to the seabed; the inner annuli are cemented across the surface plug (rock to rock)
+        ann_col = [P.CEMENT, P.CEMENT, P.CEMENT, P.CEMENT]
         bounds = [hole] + [od - 0.07 for _, od, _ in strs[:-1]]
         for i, (n, od, hl) in enumerate(strs):
             outer = bounds[i]
@@ -1125,7 +1128,7 @@ def beat_cut(st, tl):
                 lower.append(st.rect((x0 + x1) / 2, (ycut - 3.45) / 2, x1 - x0, ycut + 3.45, ann_col[i], 0.06 + 0.01 * i, alpha=a))
                 upper.append(st.rect((x0 + x1) / 2, (sb + ycut) / 2, x1 - x0, sb - ycut, ann_col[i], 0.06 + 0.01 * i, alpha=a))
         idh = strs[-1][1] - 0.07
-        y_pt = ycut - 0.18
+        y_pt = ycut - 0.08
         lower.append(st.rect(cx, (y_pt - 3.45) / 2, 2 * idh, y_pt + 3.45, P.CEMENT, 0.1))
         lower.append(st.rect(cx, (ycut + y_pt) / 2, 2 * idh, ycut - y_pt, MUD_DIM, 0.1, alpha=0.8))
         upper.append(st.rect(cx, (sb + ycut) / 2, 2 * idh, sb - ycut, MUD_DIM, 0.1, alpha=0.8))
@@ -1161,10 +1164,11 @@ def beat_cut(st, tl):
         st.fade_in(ctag, t_cut + 0.3, 0.4)
         # lift out the wellhead with the cut stubs
         t_lift = W(b, 1, "lift out")
-        pull = upper + [pipe] + cutter + blades + list(cl)
-        st.move(pull, t_lift, t_lift + 2.4, dy=4.5)
-        st.fade_out(pull + whl, t_lift + 1.5, 0.9)
-        fillsed = st.rect(cx, (sb + ycut) / 2, 2 * hole + 0.02, sb - ycut, P.SEABED, 0.08)
+        pull = upper + cutter + blades + list(cl)
+        st.move(pull, t_lift, t_lift + 2.0, dy=1.25)                       # lifted (and out of the frame, below the header)
+        st.scale_to(pipe, t_lift, t_lift + 2.0, sy=3.85 - ycut - 0.15 - 1.25)
+        st.fade_out(pull + [pipe] + whl, t_lift + 0.9, 1.0)
+        fillsed = st.rect(cx, (sb - 0.03 - 3.45) / 2, 2 * hole + 0.02, sb - 0.03 + 3.45, P.SEABED, 0.04)      # same extent as the seabed: seamless
         st.fade_in(fillsed, t_lift + 2.2, 0.8)
         st.fade_in(stays, t_lift + 1.6, 0.4)
         st.fade_out(ctag, s[2], 0.3)
@@ -1263,19 +1267,19 @@ def beat_filed(st, tl):
         for i, hw in enumerate((1.1, 0.8, 0.56, 0.4)):
             for sg in (-1, 1):
                 stubs.append(st.rect(gx + sg * hw, (ycut + iy - 1.3) / 2, 0.06, ycut - (iy - 1.3), P.STEEL, 0.33))
-        cemi = st.rect(gx, (ycut - 0.06 + iy - 1.3) / 2, 0.74, ycut - 0.06 - (iy - 1.3), P.CEMENT, 0.32)
-        ver = outline(st, gx - 0.39, ycut - 0.04, gx + 0.39, iy - 1.28, P.SAFE, 0.34, 0.03)
+        cemi = st.rect(gx, (ycut - 0.06 + iy - 1.3) / 2, 2.2, ycut - 0.06 - (iy - 1.3), P.CEMENT, 0.32)      # bore + annuli
+        ver = outline(st, gx - 1.18, ycut - 0.04, gx + 1.18, iy - 1.28, P.SAFE, 0.34, 0.03)
         cutl = st.dashed((gx - 1.45, ycut), (gx + 1.45, ycut), P.WARN, 0.025, 0.1, 0.07, 0.34)
         lx2 = gx + gw / 2 + 0.15
         il = [st.text("seabed: clear", lx2, ysb + 0.2, 0.16, P.TEXT, 0.34, align="l", kind="bold"),
               st.text(wrap_to("strings cut below the seabed", 0.16, 1.9), lx2, ycut - 0.25, 0.16, P.WARN, 0.34, align="l", kind="bold"),
               st.text("surface plug", lx2, iy - 0.95, 0.16, P.TEXT, 0.34, align="l", kind="bold")]
-        il += leader(st, lx2 - 0.05, iy - 0.95, gx + 0.3, iy - 0.95, z=0.35)
+        il += leader(st, lx2 - 0.05, iy - 0.95, gx + 0.95, iy - 0.95, z=0.35)
         st.fade_in(ins + [sea_, mud_] + stubs + [cemi] + cutl + il, t_last + 0.6, 0.5)
         st.fade_in(ver, t_last + 1.3, 0.3)
         # the drawing is stamped and filed
         t_draw = W(b, 0, "as-abandoned drawing")
-        sx_, sy_ = 3.0, -1.05
+        sx_, sy_ = 4.75, -1.05
         sheet = [st.rect(sx_, sy_, 1.5, 1.95, P.TEXT, 0.5, role="flat")]
         for k in range(5):
             sheet.append(st.rect(sx_ + 0.15, sy_ + 0.55 - 0.25 * k, 0.8, 0.03, P.MUTED, 0.51))
@@ -1291,9 +1295,9 @@ def beat_filed(st, tl):
         st.fade_in(box, t_fil - 0.6, 0.4)
         st.move(sheet + stamp, t_fil + 0.2, t_fil + 1.4, dy=-1.6)
         st.fade_out(sheet + stamp, t_fil + 1.0, 0.4)
-        lt = st.text(wrap_to("the last page in the well's life", 0.3, 3.4, "bold"), 4.3, -0.75, 0.3, P.TEXT, 0.5, align="l", kind="bold")
+        lt = st.text(wrap_to("the last page in the well's life", 0.3, 3.0, "bold"), 4.7, -0.65, 0.3, P.TEXT, 0.5, align="l", kind="bold")
         st.fade_in(lt, W(b, 1, "last page"), 0.5)
-        lt2 = st.text("right for the long term", 4.3, -1.75, 0.24, P.WARN, 0.5, align="l", kind="bold")
+        lt2 = st.text("right for\nthe long term", 4.7, -1.85, 0.26, P.WARN, 0.5, align="l", kind="bold")
         st.fade_in(lt2, W(b, 1, "long term"), 0.5)
 
 
