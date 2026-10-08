@@ -6,16 +6,21 @@
      (weight on bit) below it; only part of the BHA weight rests on the bit
 4.02 WHY first (plan-view map: offset target, neighbour well; our vertical wildcat kept straight), then HOW (tilt or push
      the bit): one continuous rotate / slide / rotate path drilled by a bent-housing motor, a rotary steerable pushing
-     pads while it turns, and finally the PDC cutter shearing rock like a lathe tool
+     pads while it turns, and finally the PDC bit: its face, one cutter shearing a layer off the rock (side view) and a
+     lathe tool cutting a turning steel bar with the same raked-back geometry
 4.03 the capstan (wrap angle grows, T2 grows as e^(mu theta)), the same law in a curved well, a push-in on the bend for
      dogleg severity (deg per 30 m) and fibre-stress reversal on every turn, MWD inclination / direction, a plan view of
      survey stations whose uncertainty ellipses grow along the path
 4.04 the circulating mud in a cutaway: overbalance and filter cake on the sand, cuttings, cooling, mud-pulse signals;
      water- vs oil-based mud, barite raising the density (1.00 -> 1.62 sg), oily cuttings shipped to shore
 4.05 pumps on / off in a cutaway with a live bottom-hole-pressure trace (636 -> 655 bar), ECD equation, a connection
-4.06 the window chart zooms on the open hole below the 9 5/8 in shoe: pumps-off 1.62 sg and pumps-on 1.67 sg (amber),
-     weakest point at the shoe (1.71 sg); a hypothetical narrower window where no mud weight works; then MPD
-     (rotating seal, choke on the return line, back pressure rising as the pumps stop, BHP flat)
+4.06 the Ch 1 window chart zooms (procedurally) on the open hole below the 9 5/8 in shoe: pumps-off 1.62 sg (dashed amber)
+     and a swab nudge while pulling pipe, pumps-on ECD 1.67 sg (solid amber), weakest point = fracture at the shoe
+     (1.71 sg); a HYPOTHETICAL narrower window squeezes in and the mud-weight pair slides left (kick side turns red) and
+     right (losses side turns red): no mud weight does both. Then MPD: rotating seal on the annulus around the turning
+     pipe, returns through a choke (the knob); when the pumps stop the choke closes, back pressure rises 0 -> 20 bar
+     (= the lost annular friction) and BHP stays at 655 bar (three lanes: pump rate, choke back pressure, BHP); finally
+     the primary-barrier envelope (blue outline) takes in the sealed top and the choke
 
 Colour notes (one meaning per colour): mechanical quantities are neutral (tension = white, compression / weight on bit
 = gold WARN, 'slide' = gold, 'rotate' = white); mud and ECD are amber, pore pressure light blue, fracture orange.
@@ -328,8 +333,8 @@ def beat_bha(st, tl):
                 st.fade_in([d, tx], t - 0.1, 0.35)
                 lab += [d, tx]
             view.camera(t_bha - 0.5, t_bha + 1.1, focus=(SX + 1.0, -1.72), at=(-3.0, -0.75), scale=1.5)
-            st.fade_out(brk + [ttl] + lab, s[1] - 0.6, 0.4)
-            view.home(s[1] - 0.45, s[1] + 0.9)
+            st.fade_out(brk + [ttl] + lab, s[1] + 0.5, 0.4)
+            view.home(s[1] + 0.4, s[1] + 1.6)
 
             # ---- s1: tonnes of force on the bit
             need = st.arrow(SX + 0.8, -1.95, SX + 0.8, Y_BIT + 0.02, COMP, 0.08, 0.26, 0.45)
@@ -412,6 +417,16 @@ def beat_bha(st, tl):
             ttint = st.line([(SX, Y_RIG - 0.05), (SX, Y_NP)], TENS, 0.05, 0.24, alpha=0.55)
             ctint = st.line([(SX, Y_NP), (SX, Y_ST + 0.05)], COMP, 0.06, 0.24)
             st.draw_on(ttint, t_tens - 0.2, t_tens + 1.8, "BEZIER")
+            # on the string itself: stretched pipe (arrows pulling apart), squeezed collars (arrows pushing together)
+            pairs_t, pairs_c = [], []
+            for y in (2.0, 0.25):
+                pairs_t += st.arrow(SX - 0.3, y + 0.04, SX - 0.3, y + 0.36, TENS, 0.035, 0.11, 0.45) + \
+                    st.arrow(SX - 0.3, y - 0.04, SX - 0.3, y - 0.36, TENS, 0.035, 0.11, 0.45)
+            yc = (Y_NP + Y_C) / 2
+            pairs_c += st.arrow(SX - 0.33, yc + 0.4, SX - 0.33, yc + 0.06, COMP, 0.035, 0.11, 0.45) + \
+                st.arrow(SX - 0.33, yc - 0.4, SX - 0.33, yc - 0.06, COMP, 0.035, 0.11, 0.45)
+            st.fade_in(pairs_t, t_tens + 0.2, 0.4)
+            st.fade_in(pairs_c, t_part + 0.3, 0.4)
             st.draw_on(ccurve, t_part - 0.1, t_part + 1.0, "BEZIER")
             st.draw_on(ctint, t_part - 0.1, t_part + 1.0, "BEZIER")
             st.fade_in(cfill, t_part + 0.6, 0.5)
@@ -727,8 +742,9 @@ def beat_steering(st, tl):
             st.fade_out([card, rockd, holed, body, tv, sfl, pl] + stx + ttl + sf, endC, 0.45)
 
         # ================================================================ the PDC bit: shearing like a lathe tool
+        # grid: bit face (left) | one cutter, side view (centre, full height) | a lathe tool on steel (right, below the cards)
         with st.span(endC, b.end):
-            bfx, bfy, bfr = -3.75, 0.45, 1.45
+            bfx, bfy, bfr = -4.45, 1.85, 1.15
 
             def bitface(c, t, look):
                 a = _env(t, endC + 0.2, b.end + 1.0, 0.4)
@@ -741,32 +757,41 @@ def beat_steering(st, tl):
                     ang = rot + k * 2 * math.pi / 5
                     ca, sa = math.cos(ang), math.sin(ang)
                     nxx, nyy = -sa, ca
-                    blade = [(bfx + 0.18 * ca - 0.16 * nxx, bfy + 0.18 * sa - 0.16 * nyy), (bfx + (bfr - 0.05) * ca - 0.2 * nxx, bfy + (bfr - 0.05) * sa - 0.2 * nyy),
-                             (bfx + (bfr - 0.05) * ca + 0.2 * nxx, bfy + (bfr - 0.05) * sa + 0.2 * nyy), (bfx + 0.18 * ca + 0.16 * nxx, bfy + 0.18 * sa + 0.16 * nyy)]
+                    blade = [(bfx + 0.16 * ca - 0.14 * nxx, bfy + 0.16 * sa - 0.14 * nyy), (bfx + (bfr - 0.05) * ca - 0.17 * nxx, bfy + (bfr - 0.05) * sa - 0.17 * nyy),
+                             (bfx + (bfr - 0.05) * ca + 0.17 * nxx, bfy + (bfr - 0.05) * sa + 0.17 * nyy), (bfx + 0.16 * ca + 0.14 * nxx, bfy + 0.16 * sa + 0.14 * nyy)]
                     c.drawPath(_path(blade, True), _fill("#71839c", a))
                     for j in range(4):
-                        rr = 0.42 + j * 0.28
-                        x, y = bfx + rr * ca + 0.1 * nxx, bfy + rr * sa + 0.1 * nyy
-                        c.drawCircle(x, y, 0.1, _fill("#1d2129", a))
-                        c.drawCircle(x, y, 0.1, _stroke("#c9d4e1", a, 0.022))
+                        rr = 0.36 + j * 0.24
+                        x, y = bfx + rr * ca + 0.08 * nxx, bfy + rr * sa + 0.08 * nyy
+                        c.drawCircle(x, y, 0.085, _fill("#1d2129", a))
+                        c.drawCircle(x, y, 0.085, _stroke("#c9d4e1", a, 0.02))
                     nz = ang + math.pi / 5
-                    c.drawCircle(bfx + 0.7 * math.cos(nz), bfy + 0.7 * math.sin(nz), 0.07, _fill(P.BG, a))
-                c.drawCircle(bfx, bfy, 0.2, _fill("#56667d", a))
+                    c.drawCircle(bfx + 0.6 * math.cos(nz), bfy + 0.6 * math.sin(nz), 0.06, _fill(P.BG, a))
+                c.drawCircle(bfx, bfy, 0.17, _fill("#56667d", a))
+                # the cutter shown in close-up is highlighted on the face
+                if t > t_pdc + 0.6:
+                    ang = rot
+                    x, y = bfx + 1.08 * math.cos(ang) + 0.08 * -math.sin(ang), bfy + 1.08 * math.sin(ang) + 0.08 * math.cos(ang)
+                    c.drawCircle(x, y, 0.15, _stroke(P.WARN, a * _ramp(t, t_pdc + 0.6, t_pdc + 1.0), 0.035))
             st.procedural(endC, b.end, 0.2, bitface)
             bl = st.text("PDC bit, seen from below", bfx, bfy - bfr - 0.32, 0.18, P.TEXT, 0.4, kind="bold")
-            bl2 = st.text("diamond cutters on steel blades", bfx, bfy - bfr - 0.7, 0.15, P.MUTED, 0.4)
+            bl2 = st.text("diamond cutters on steel blades", bfx, bfy - bfr - 0.66, 0.15, P.MUTED, 0.4)
             st.fade_in([bl, bl2], t_pdc + 0.1, 0.4)
-            # the cutter close-up: shearing a layer off the rock
-            card = st.rect(3.35, -0.3, 8.4, 6.1, P.PANEL, 0.0)
-            y0, doc = -1.0, 0.3
-            rockb = st.rect(3.35, -2.05, 8.0, 2.1, P.ROCK, 0.05)
-            xr = 7.35
-            x_a, x_b = 0.3, 5.0
+            cl = pill(st, bfx, -1.3, "PDC: polycrystalline\ndiamond compact", P.PANEL2, P.TEXT, 0.17)
+            st.fade_in(cl, t_poly - 0.2, 0.4)
+
+            # one cutter, side view: it moves along the rock and shears a layer off
+            cbx0, cbx1 = -2.65, 3.08
+            card = st.rect((cbx0 + cbx1) / 2, -0.2, cbx1 - cbx0, 6.2, P.PANEL, 0.0)
+            ctl = tag(st, cbx0 + 0.18, 2.55, "ONE CUTTER · side view", P.MUTED, 0.15)
+            y0, doc = -1.05, 0.3
+            rockb = st.rect((cbx0 + cbx1) / 2, (y0 - 3.15) / 2, cbx1 - cbx0 - 0.2, y0 + 3.15, P.ROCK, 0.05)
+            xr = cbx1 - 0.1
+            x_a, x_b = -1.7, 2.05
             ta, tb = t_pdc + 0.4, b.end - 0.2
             layer = st.rect(xr, y0 + doc / 2, xr - x_a, doc, P.ROCK2, 0.06, anchor="r")
-            st.fade_in([card, rockb, layer], endC + 0.1, 0.5)
+            st.fade_in([card, rockb, layer] + ctl, endC + 0.1, 0.5)
             st.scale_to(layer, ta, tb, sx=xr - x_b, interp="LINEAR")
-            rake = math.radians(20)
 
             def cutter(c, t, look):
                 a = _env(t, endC + 0.2, b.end + 1.0, 0.4)
@@ -774,69 +799,91 @@ def beat_steering(st, tl):
                     return
                 f = min(max((t - ta) / (tb - ta), 0.0), 1.0)
                 xc = x_a + (x_b - x_a) * f
-                fu = (-math.sin(rake), math.cos(rake))          # up the face
-                fb = (-math.cos(rake), -math.sin(rake))         # back into the cutter
-                tip = (xc, y0 + 0.01)
-                Lf, T, Td = 1.0, 0.55, 0.1
-                p0 = tip
-                p1 = (tip[0] + fu[0] * Lf, tip[1] + fu[1] * Lf)
-                q0 = (p0[0] + fb[0] * T, p0[1] + fb[1] * T)
-                q1 = (p1[0] + fb[0] * T, p1[1] + fb[1] * T)
-                d0 = (p0[0] + fb[0] * Td, p0[1] + fb[1] * Td)
-                d1 = (p1[0] + fb[0] * Td, p1[1] + fb[1] * Td)
-                # the blade that holds the cutter (part of the bit body)
-                bl_ = [q0, (q0[0] - 0.45, q0[1] + 0.12), (q1[0] - 0.55, 1.25), (p1[0] + 0.1, 1.25), p1]
-                c.drawPath(_path(bl_, True), _fill("#56667d", a))
-                c.drawPath(_path(bl_, True), _stroke("#98a9bf", a, 0.025))
-                c.drawPath(_path([d0, q0, q1, d1], True), _fill("#c4d0de", a))      # carbide substrate
-                c.drawPath(_path([p0, d0, d1, p1], True), _fill("#1d2129", a))      # diamond table
-                c.drawLine(p0[0], p0[1], p1[0], p1[1], _stroke("#e8eef6", 0.8 * a, 0.02))
-                if t > ta:
-                    # the sheared chip: a ribbon curling up the face
-                    fn = (math.cos(rake), math.sin(rake))
-                    pts = []
-                    for k in range(0, 26):
-                        u = k / 25
-                        if u < 0.45:
-                            d_ = Lf * 0.75 * u / 0.45
-                            pts.append((tip[0] + fu[0] * d_ + fn[0] * 0.08, tip[1] + 0.04 + fu[1] * d_ + fn[1] * 0.08))
-                        else:
-                            v = (u - 0.45) / 0.55
-                            top = (tip[0] + fu[0] * Lf * 0.75 + fn[0] * 0.08, tip[1] + 0.04 + fu[1] * Lf * 0.75 + fn[1] * 0.08)
-                            cc = (top[0] + fn[0] * 0.22, top[1] + fn[1] * 0.22)
-                            r_ = 0.22 * (1 - 0.35 * v)
-                            th = math.atan2(top[1] - cc[1], top[0] - cc[0]) - 1.9 * math.pi * v
-                            pts.append((cc[0] + r_ * math.cos(th), cc[1] + r_ * math.sin(th)))
-                    for k in range(9):
-                        u = ((t * 0.9) + k / 9) % 1.0
-                        (qx, qy), _ = _polyline_at(pts, u * _plen(pts))
-                        rr = 0.07 - 0.03 * u
-                        rot_ = 3.0 * u + k
-                        frag = [(qx + rr * math.cos(rot_ + j * 2.1), qy + rr * 0.8 * math.sin(rot_ + j * 2.1)) for j in range(3)]
-                        c.drawPath(_path(frag, True), _fill("#b49b7b", a * (1 - 0.5 * u)))
-                    rnd = random.Random(int(t * 6))
-                    for k in range(4):
-                        u = ((t * 1.3) + k / 4) % 1.0
-                        c.drawCircle(tip[0] - 0.1 - u * 0.9 + rnd.uniform(-0.05, 0.05), y0 + 0.9 + u * 0.7, 0.03 + 0.02 * (k % 2), _fill("#b49b7b", a * (1 - u)))
-                    c.drawLine(x_a, y0 + 0.004, xc - 0.02, y0 + 0.004, _stroke("#c9d4e1", 0.35 * a, 0.02))
+                _shear_tool(c, t, a, (xc, y0 + 0.01), 1.25, ("#56667d", "#c4d0de", "#1d2129"), "#b49b7b", t > ta, 2.55)
+                c.drawLine(cbx0 + 0.2, y0 + 0.004, xc - 0.02, y0 + 0.004, _stroke("#c9d4e1", 0.35 * a, 0.02))
             st.procedural(endC, b.end, 0.3, cutter)
-            cl = tag(st, -0.65, 2.25, "PDC = polycrystalline diamond compact", P.TEXT, 0.18)
-            st.fade_in(cl, t_poly - 0.2, 0.4)
             dl = st.text("depth of cut", xr - 0.12, y0 + doc + 0.25, 0.15, P.MUTED, 0.3, align="r")
-            dbr = [st.line([(xr + 0.08, y0), (xr + 0.08, y0 + doc)], P.MUTED, 0.022, 0.3)]
-            dt = st.text("diamond cutter, raked back", x_a - 0.25, 1.55, 0.15, P.TEXT, 0.4, align="l", kind="bold")
-            st.fade_out(dt, t_lathe - 0.8, 0.4)
-            sh = st.text("shears a layer off the rock", 3.35, -2.75, 0.2, P.TEXT, 0.4, kind="bold")
-            st.fade_in([dl, dt] + dbr, t_poly + 0.6, 0.4)
+            dbr = [st.line([(xr + 0.06, y0), (xr + 0.06, y0 + doc)], P.MUTED, 0.022, 0.3)]
+            dt = tag(st, cbx0 + 0.18, 2.0, "diamond table, raked back", P.TEXT, 0.15)
+            st.fade_in([dl] + dt + dbr, t_poly + 0.6, 0.4)
+            sh = st.text("shears a layer off the rock", (cbx0 + cbx1) / 2, -2.75, 0.2, P.TEXT, 0.4, kind="bold")
             st.fade_in(sh, t_shear - 0.1, 0.4)
-            # like a lathe tool: a small ghost, same geometry
-            lx, ly = 1.15, 1.2
-            lathe = [st.rect(lx, ly, 2.2, 0.56, P.STEEL, 0.2), st.ring(lx - 1.25, ly, 0.36, 0.035, P.MUTED, 0.2),
-                     st.poly([(lx + 0.3, ly - 0.29), (lx + 0.62, ly - 0.62), (lx + 0.12, ly - 0.62)], "#1d2129", 0.22),
-                     st.rect(lx + 0.37, ly - 0.86, 0.5, 0.48, "#56667d", 0.21),
-                     st.line(_arc(lx + 0.05, ly - 0.42, 0.13, 90, 400, 20), "#8c96a6", 0.05, 0.23)]
-            ll = st.text("a lathe tool on steel: the same cut", lx - 0.2, ly + 0.55, 0.15, P.MUTED, 0.3, kind="bold")
-            st.fade_in(lathe + [ll], t_lathe - 0.4, 0.4)
+
+            # like a lathe tool: a turning steel workpiece, the same geometry
+            lcx0, lcx1, lcy0, lcy1 = 3.4, 7.65, -3.3, 0.85
+            lcard = st.rect((lcx0 + lcx1) / 2, (lcy0 + lcy1) / 2, lcx1 - lcx0, lcy1 - lcy0, P.PANEL, 0.0)
+            ltl = tag(st, lcx0 + 0.18, lcy1 - 0.35, "LATHE TOOL · on steel", P.MUTED, 0.15)
+            wx, wy, wr = 5.1, -2.05, 1.0
+            st.fade_in([lcard] + ltl, t_shear + 0.3, 0.45)
+
+            def lathe(c, t, look):
+                a = _env(t, t_shear + 0.35, b.end + 1.0, 0.4)
+                if a <= 0:
+                    return
+                c.save()
+                c.clipRect(skia.Rect.MakeLTRB(lcx0 + 0.05, lcy0 + 0.05, lcx1 - 0.05, lcy1 - 0.05))
+                om = 1.3 * t                                    # turning anticlockwise: the top surface runs into the tool
+                rim = [(wx + (wr + 0.18) * math.cos(math.radians(d)), wy + (wr + 0.18) * math.sin(math.radians(d))) for d in range(-250, 89, 6)]
+                rim += [(wx + (wr - 0.02) * math.cos(math.radians(d)), wy + (wr - 0.02) * math.sin(math.radians(d))) for d in range(88, -251, -6)]
+                c.drawPath(_path(rim, True), _fill("#8c96a6", a))                 # the layer still to be cut
+                c.drawCircle(wx, wy, wr, _fill("#b5c0cf", a))
+                for k in range(6):
+                    q = om + k * math.pi / 3
+                    c.drawLine(wx + 0.25 * math.cos(q), wy + 0.25 * math.sin(q), wx + (wr - 0.08) * math.cos(q), wy + (wr - 0.08) * math.sin(q),
+                               _stroke("#8c96a6", 0.8 * a, 0.03))
+                c.drawCircle(wx, wy, 0.2, _fill("#56667d", a))
+                _shear_tool(c, t, a, (wx, wy + wr + 0.01), 0.75, ("#56667d", "#98a9bf", "#3a4456"), "#d6dde8", True, lcy1 - 0.1)
+                c.restore()
+            st.procedural(t_shear + 0.3, b.end, 0.3, lathe)
+            same = tag(st, lcx1 - 0.2, -0.55, "the same cut", P.TEXT, 0.17, align="r")
+            st.fade_in(same, t_lathe - 0.2, 0.4)
+            st.ripple(wx, wy + wr, t_lathe - 0.2, t_lathe + 0.4, P.WARN, period=0.6, r0=0.12, r1=0.6)
+
+
+def _shear_tool(c, t, a, tip, sc, cols, chip_col, live, top):
+    """A cutting tool raked back 20 degrees, its tip at `tip`, cutting towards +x (the work runs into it from the right):
+    holder, substrate and cutting table, plus the chip curling up the rake face when `live`."""
+    holder, substrate, table = cols
+    rake = math.radians(20)
+    fu = (-math.sin(rake), math.cos(rake))          # up the rake face
+    fb = (-math.cos(rake), -math.sin(rake))         # back into the tool
+    Lf, T, Td = 0.8 * sc, 0.44 * sc, 0.08 * sc
+    p0 = tip
+    p1 = (tip[0] + fu[0] * Lf, tip[1] + fu[1] * Lf)
+    q0 = (p0[0] + fb[0] * T, p0[1] + fb[1] * T)
+    q1 = (p1[0] + fb[0] * T, p1[1] + fb[1] * T)
+    d0 = (p0[0] + fb[0] * Td, p0[1] + fb[1] * Td)
+    d1 = (p1[0] + fb[0] * Td, p1[1] + fb[1] * Td)
+    hold = [q0, (q0[0] - 0.36 * sc, q0[1] + 0.1 * sc), (q1[0] - 0.44 * sc, top), (p1[0] + 0.08 * sc, top), p1]
+    c.drawPath(_path(hold, True), _fill(holder, a))
+    c.drawPath(_path(hold, True), _stroke("#98a9bf", a, 0.025))
+    c.drawPath(_path([d0, q0, q1, d1], True), _fill(substrate, a))
+    c.drawPath(_path([p0, d0, d1, p1], True), _fill(table, a))
+    c.drawLine(p0[0], p0[1], p1[0], p1[1], _stroke("#e8eef6", 0.8 * a, 0.02))
+    if not live:
+        return
+    fn = (math.cos(rake), math.sin(rake))
+    pts = []
+    for k in range(26):
+        u = k / 25
+        if u < 0.45:
+            d_ = Lf * 0.75 * u / 0.45
+            pts.append((tip[0] + fu[0] * d_ + fn[0] * 0.07 * sc, tip[1] + 0.03 * sc + fu[1] * d_ + fn[1] * 0.07 * sc))
+        else:
+            v = (u - 0.45) / 0.55
+            top_ = (tip[0] + fu[0] * Lf * 0.75 + fn[0] * 0.07 * sc, tip[1] + 0.03 * sc + fu[1] * Lf * 0.75 + fn[1] * 0.07 * sc)
+            cc = (top_[0] + fn[0] * 0.2 * sc, top_[1] + fn[1] * 0.2 * sc)
+            r_ = 0.2 * sc * (1 - 0.35 * v)
+            th = math.atan2(top_[1] - cc[1], top_[0] - cc[0]) - 1.9 * math.pi * v
+            pts.append((cc[0] + r_ * math.cos(th), cc[1] + r_ * math.sin(th)))
+    c.drawPath(_path(pts), _stroke(chip_col, 0.35 * a, 0.05 * sc))
+    for k in range(9):
+        u = ((t * 0.9) + k / 9) % 1.0
+        (qx, qy), _ = _polyline_at(pts, u * _plen(pts))
+        rr = (0.06 - 0.025 * u) * sc
+        rot_ = 3.0 * u + k
+        frag = [(qx + rr * math.cos(rot_ + j * 2.1), qy + rr * 0.8 * math.sin(rot_ + j * 2.1)) for j in range(3)]
+        c.drawPath(_path(frag, True), _fill(chip_col, a * (1 - 0.5 * u)))
 
 
 # ====================================================================================================== 4.03 drag, dogleg, surveys
@@ -928,13 +975,23 @@ def beat_drag(st, tl):
             # ---- dogleg severity: change of direction over a 30 m course
             a1, a2 = 12.0, 38.0
             ticks = []
+            dirs = []
             for a in (a1, a2):
                 (x, y) = _arc_pt(a)
-                d = (math.sin(math.radians(a)), -math.cos(math.radians(a)))
-                ticks += [st.line([(x - d[0] * 0.55, y - d[1] * 0.55), (x + d[0] * 0.55, y + d[1] * 0.55)], P.WARN, 0.035, 0.32),
-                          st.circle(x, y, 0.06, P.WARN, 0.33)]
-            br = st.line([_arc_pt(a, KR + 0.32) for a in [a1 + (a2 - a1) * i / 16 for i in range(17)]], P.TEXT, 0.025, 0.32)
-            brl = st.text("30 m", _arc_pt((a1 + a2) / 2, KR + 0.62)[0], _arc_pt((a1 + a2) / 2, KR + 0.62)[1], 0.17, P.TEXT, 0.32, kind="bold")
+                ticks.append(st.circle(x, y, 0.06, P.WARN, 0.33))
+                d = (math.sin(math.radians(a)), -math.cos(math.radians(a)))           # direction of the hole here
+                o = _arc_pt(a, KR + 0.5)                                              # drawn just outside the bend
+                dirs.append((o, d))
+                ticks += [st.line([(x, y), o], P.WARN, 0.018, 0.32, alpha=0.6)]
+                ticks += st.arrow(o[0], o[1], o[0] + d[0] * 0.75, o[1] + d[1] * 0.75, P.WARN, 0.035, 0.12, 0.33)
+            (o2, d2), (o1, d1) = dirs[1], dirs[0]
+            ghost = st.dashed(o2, (o2[0] + d1[0] * 0.75, o2[1] + d1[1] * 0.75), P.MUTED, 0.025, 0.08, 0.06, 0.32)
+            ang = st.line(_arc(o2[0], o2[1], 0.5, math.degrees(math.atan2(d1[1], d1[0])), math.degrees(math.atan2(d2[1], d2[0])), 12),
+                          P.WARN, 0.03, 0.33)
+            angl = st.text("change of\ndirection", o2[0] - 0.12, o2[1] - 0.5, 0.1, P.WARN, 0.33, align="r", kind="bold")
+            ticks += ghost + [ang, angl]
+            br = st.line([_arc_pt(a, KR - 0.3) for a in [a1 + (a2 - a1) * i / 16 for i in range(17)]], P.TEXT, 0.025, 0.32)
+            brl = st.text("30 m", _arc_pt((a1 + a2) / 2, KR - 0.6)[0], _arc_pt((a1 + a2) / 2, KR - 0.6)[1], 0.17, P.TEXT, 0.32, kind="bold")
             st.fade_in(ticks, t_sharp + 0.6, 0.4)
             st.fade_in([br, brl], t_deg, 0.4)
             # ---- rotating pipe in the bend: one fibre swings from stretched to squeezed on every turn
@@ -992,8 +1049,8 @@ def beat_drag(st, tl):
             st.fade_in([drum, hub, cap_t], tc0, 0.4)
             th0, th1 = t_cap + 0.6, t_emu + 0.6
 
-            def theta(t):
-                return math.radians(90 + 180 * _ramp(t, th0, th1))
+            def theta(t):                     # wrap angle grows from a quarter turn to two-thirds of a turn
+                return math.radians(90 + 150 * _ramp(t, th0, th1))
 
             def rope(c, t, look):
                 a = _env(t, tc0, endcap + 0.4, 0.4)
@@ -1004,11 +1061,11 @@ def beat_drag(st, tl):
                 y_top = DCY + 0.75
                 pts = [(DCX - r, y_top), (DCX - r, DCY)]
                 n = 40
-                for i in range(1, n + 1):
-                    ang = math.pi - th * i / n
+                for i in range(1, n + 1):      # the rope arrives down the left side and wraps on round the drum
+                    ang = math.pi + th * i / n
                     pts.append((DCX + r * math.cos(ang), DCY + r * math.sin(ang)))
-                al = math.pi - th
-                dvec = (math.sin(al), -math.cos(al))
+                al = math.pi + th
+                dvec = (-math.sin(al), math.cos(al))
                 tail = (pts[-1][0] + dvec[0] * 0.8, pts[-1][1] + dvec[1] * 0.8)
                 pts.append(tail)
                 c.drawPath(_path(pts), _stroke("#7a6a4a", a, 0.12))
@@ -1025,7 +1082,8 @@ def beat_drag(st, tl):
                     if lab == "T₂":
                         look.draw_text(c, "T₂: pulling", x1 - 0.2, y1 - 0.1, 0.19, TENS, a, "r", "bold")
                     else:
-                        look.draw_text(c, "T₁: holding", x1 + uy * 0.35 + ux * 0.1, y1 - ux * 0.3 - 0.05, 0.19, TENS, a, "c", "bold")
+                        mx_, my_ = (pts[-2][0] + tail[0]) / 2 + math.cos(al) * 0.45, (pts[-2][1] + tail[1]) / 2 + math.sin(al) * 0.45
+                        look.draw_text(c, "T₁: holding", mx_, my_, 0.19, TENS, a, "c", "bold")
                 deg = math.degrees(th)
                 look.draw_text(c, f"θ = {deg:3.0f}°", DCX - 0.15, DCY - DR - 0.75, 0.22, P.WARN, a, "r", "mono")
                 look.draw_text(c, f"T₂ = {ratio:3.1f} × T₁", DCX + 0.15, DCY - DR - 0.75, 0.22, TENS, a, "l", "mono")
@@ -1044,13 +1102,13 @@ def beat_drag(st, tl):
             st.fade_in(dls, t_sharp + 0.5, 0.4)
             st.fade_in(unit, t_deg, 0.4)
             # cross-section of the rotating pipe + the stress on one fibre
-            cx_, cy_ = -5.0, -0.45
+            cx_, cy_ = -4.6, -0.45
             ring = st.ring(cx_, cy_, 0.42, 0.13, "#98a9bf", 0.4)
             o_l = st.text("outside of the bend", cx_, cy_ + 0.68, 0.14, TENS, 0.4, kind="bold")
             i_l = st.text("inside", cx_, cy_ - 0.68, 0.14, COMP, 0.4, kind="bold")
-            ax = [st.line([(-4.3, cy_), (-2.0, cy_)], P.MUTED, 0.02, 0.4)]
-            sl = [st.text("stretched", -3.15, cy_ + 0.62, 0.14, TENS, 0.4), st.text("squeezed", -3.15, cy_ - 0.62, 0.14, COMP, 0.4)]
-            cap2 = st.text("every turn: one full load cycle", -4.0, cy_ - 1.2, 0.16, P.TEXT, 0.4, kind="bold")
+            ax = [st.line([(-3.9, cy_), (-2.0, cy_)], P.MUTED, 0.02, 0.4)]
+            sl = [st.text("stretched", -2.95, cy_ + 0.62, 0.14, TENS, 0.4), st.text("squeezed", -2.95, cy_ - 0.62, 0.14, COMP, 0.4)]
+            cap2 = st.text("every turn: one full load cycle", -3.75, cy_ - 1.2, 0.16, P.TEXT, 0.4, kind="bold")
             st.fade_in([ring, o_l, i_l] + ax, t_rot + 0.1, 0.4)
             st.fade_in(cap2, t_flex + 0.4, 0.4)
             T0 = t_rot + 0.2
@@ -1064,7 +1122,7 @@ def beat_drag(st, tl):
                 v = math.sin(ph)
                 c.drawCircle(fx, fy, 0.08, _fill(TENS if v > 0 else COMP, a))
                 span_t = 3.2
-                x0, x1 = -4.25, -2.05
+                x0, x1 = -3.85, -2.05
                 pts = []
                 for i in range(0, 81):
                     tt = t - span_t + span_t * i / 80
@@ -1093,12 +1151,12 @@ def beat_drag(st, tl):
             pv = tag(st, -5.8, 1.27, "PLAN VIEW · from above", P.MUTED, 0.15)
             nxp, nyp = -1.45, 0.8
             north = st.arrow(nxp, nyp - 0.25, nxp, nyp + 0.3, P.TEXT, 0.035, 0.15, 0.4) + [st.text("N", nxp, nyp - 0.45, 0.16, P.TEXT, 0.4, kind="bold")]
-            st.fade_in([card] + pv + north, t_dir - 1.0, 0.45)
+            st.fade_in([card] + pv + north, t_mwd + 0.8, 0.45)
             w0 = (-5.0, 0.55)
             az = math.radians(120)
             dvec = (math.sin(az), math.cos(az))
             wh = _platform(st, *w0, r=0.12)
-            st.fade_in(wh, t_dir - 0.8, 0.4)
+            st.fade_in(wh, t_mwd + 1.1, 0.4)
             nref = st.dashed(w0, (w0[0], w0[1] + 0.8), P.MUTED, 0.025, 0.1, 0.07, 0.3)
             azl = st.line(_arc(w0[0], w0[1], 0.55, 90, 90 - 120, 24), P.WARN, 0.045, 0.31)
             azt = st.text("direction", w0[0] + 0.62, w0[1] + 0.35, 0.16, P.WARN, 0.31, align="l", kind="bold")
@@ -1123,7 +1181,7 @@ def beat_drag(st, tl):
                     return
                 g = 0.25 + 0.75 * _ramp(t, t_err + 0.2, t_ell + 1.5)
                 for (x, y, sv), tt in zip(ppts, st_t):
-                    big = (0.05 + 0.13 * sv) * g
+                    big = (0.05 + 0.1 * sv) * g
                     pts = _ell_pts(x, y, big, big * 0.55, rot)
                     c.drawPath(_path(pts, True), _fill(P.WARN, 0.07 * a))
                     c.drawPath(_path(pts, True), _stroke(P.WARN, 0.75 * a, 0.022))
@@ -1338,7 +1396,8 @@ def beat_mud(st, tl):
             shaker = st.rect(-0.7, 1.3, 0.55, 0.38, "#56667d", 0.22, role="solid")
             shl = st.text("shakers", -0.7, 1.72, 0.13, P.MUTED, 0.3, kind="bold")
             st.fade_in([sea, ground, deck, derrick, shaker, shl] + legs, endM + 0.05, 0.5)
-            skl = tag(st, 0.9, 2.2, "skip of oil-coated cuttings", P.TEXT, 0.15)
+            skl = tag(st, 1.0, 3.3, "skip of oil-coated cuttings", P.TEXT, 0.15, align="c") + \
+                [st.line([(1.35, 3.1), (1.35, 1.62)], P.MUTED, 0.02, 0.3, alpha=0.8)]
             st.fade_in(skl, t_nor + 0.2, 0.4)
             chute = st.dashed((1.85, 0.95), (2.6, sea_y + 0.05), P.MUTED, 0.03, 0.12, 0.08, 0.3)
             st.fade_in(chute, t_dump - 0.6, 0.3)
@@ -1346,14 +1405,14 @@ def beat_mud(st, tl):
             st.draw_on(xm, t_dump - 0.1, t_dump + 0.3, "BEZIER")
             nod = tag(st, 2.75, 0.35, "no dumping at sea", "#ffffff", 0.16, bg=P.BAD)
             st.fade_in(nod, t_dump + 0.1, 0.35)
-            bt = st.text("supply boat", 5.6, sea_y - 0.3, 0.14, P.TEXT, 0.35, kind="bold")
+            bt = st.text("supply boat", 6.0, sea_y - 0.3, 0.14, P.TEXT, 0.35, kind="bold")
             st.fade_in(bt, t_dump + 0.4, 0.4)
             mast = st.rect(1.95, 1.85, 0.12, 1.5, P.STEEL_DK, 0.25)
             st.fade_in(mast, endM + 0.2, 0.4)
             t_lift = t_ship - 1.6
             t_l1, t_s1, t_d1, t_go = t_lift + 0.7, t_lift + 2.0, t_lift + 2.7, t_lift + 2.9
-            px_, py_, Lb, ty_ = 1.95, 2.6, 3.3, 2.95
-            bx0 = 5.25
+            px_, py_, Lb, ty_ = 1.95, 2.6, 3.7, 2.95
+            bx0 = 5.65
 
             def logistics(c, t, look):
                 a = _env(t, endM + 0.1, b.end + 2.0, 0.4)
@@ -1366,9 +1425,9 @@ def beat_mud(st, tl):
                 boat_dx = 1.8 * _ramp(t, t_go, t_go + 2.2)
                 # boat
                 if ab > 0:
-                    hull = [(4.5 + boat_dx, sea_y + 0.02), (6.9 + boat_dx, sea_y + 0.02), (7.3 + boat_dx, sea_y + 0.42), (4.3 + boat_dx, sea_y + 0.42)]
+                    hull = [(4.9 + boat_dx, sea_y + 0.02), (7.3 + boat_dx, sea_y + 0.02), (7.7 + boat_dx, sea_y + 0.42), (4.7 + boat_dx, sea_y + 0.42)]
                     c.drawPath(_path(hull, True), _fill("#c9d4e1", ab))
-                    c.drawRect(skia.Rect.MakeLTRB(6.35 + boat_dx, sea_y + 0.42, 6.9 + boat_dx, sea_y + 0.95), _fill("#98a9bf", ab))
+                    c.drawRect(skia.Rect.MakeLTRB(6.75 + boat_dx, sea_y + 0.42, 7.3 + boat_dx, sea_y + 0.95), _fill("#98a9bf", ab))
                 # crane: slews (seen side-on, the boom tip swings from over the deck to over the boat)
                 ph = math.radians(99.5) * (1 - _ramp(t, t_l1, t_s1))
                 tipx = px_ + Lb * math.cos(ph)
@@ -1422,12 +1481,20 @@ def beat_ecd(st, tl):
         # ================================================================ rig floor (top) + hole cutaway (below a break)
         L, Rr = E_CX - E_HW, E_CX + E_HW
         floor = st.rect(E_CX, 2.35, 2.6, 0.09, P.STEEL_DK, 0.25)
-        td = st.rect(E_CX, 3.42, 0.62, 0.34, P.STEEL_DK, 0.3, role="solid")
-        tdl = st.text("top drive", E_CX + 0.42, 3.42, 0.14, P.MUTED, 0.3, align="l", kind="bold")
-        upipe = st.rect(E_CX, 2.75, 0.2, 0.95, P.STEEL, 0.2)
+        TD0, TD_UP = 2.92, 0.6                     # top drive on the string; it lifts one stand length at the connection
+        t_lift0, t_lift1 = t_stand - 0.6, t_stand + 0.2
+        td = st.rect(E_CX, TD0, 0.62, 0.34, P.STEEL_DK, 0.3, role="solid")
+        tdl = st.text("top drive", E_CX + 0.42, TD0, 0.14, P.MUTED, 0.3, align="l", kind="bold")
+        upipe = st.rect(E_CX, 2.375, 0.2, 0.75, P.STEEL, 0.2)
         pump = st.circle(-5.6, 3.05, 0.27, P.STEEL_DK, 0.3, role="solid")
         pl = st.text("pump", -5.6, 2.62, 0.14, P.MUTED, 0.3, kind="bold")
-        spipe = st.line([(-5.33, 3.05), (-4.95, 3.05), (-4.95, 3.65), (E_CX, 3.65), (E_CX, 3.59)], P.MUD, 0.06, 0.28, role="flat")
+        spipe = st.line([(-5.33, 3.05), (-4.95, 3.05), (-4.95, 3.82), (E_CX, 3.82)], P.MUD, 0.06, 0.28, role="flat")
+
+        def hose(c, t, look):                      # the hose follows the top drive up and down
+            a = _env(t, b.start + 0.05, b.end + 1.0, 0.4)
+            ytop = TD0 + TD_UP * _ramp(t, t_lift0, t_lift1) + 0.17
+            c.drawLine(E_CX, 3.82, E_CX, ytop, _stroke(P.MUD, a, 0.06))
+        st.procedural(b.start, b.end, 0.28, hose)
         zz = [st.line([(L - 0.6, y - 0.05), (Rr + 0.6, y + 0.05)], P.MUTED, 0.03, 0.3) for y in (1.82, 1.97)]
         kml = st.text("kilometres of hole", Rr + 0.7, 1.9, 0.14, P.MUTED, 0.3, align="l")
         rocks = [st.rect(L - 0.3, (E_TOP + E_BOT) / 2, 0.6, E_TOP - E_BOT, P.ROCK, 0.0), st.rect(Rr + 0.3, (E_TOP + E_BOT) / 2, 0.6, E_TOP - E_BOT, P.ROCK, 0.0),
@@ -1459,7 +1526,7 @@ def beat_ecd(st, tl):
                 c.drawLine(-5.6, 3.05, -5.6 + 0.2 * math.cos(q), 3.05 + 0.2 * math.sin(q), _stroke(P.TEXT, 0.8 * a, 0.04))
         st.procedural(b.start, b.end, 0.31, impeller)
         # circulation (pumps on only)
-        st.flow([(-5.33, 3.05), (-4.95, 3.05), (-4.95, 3.65), (E_CX, 3.65), (E_CX, 2.3)], t_on1, t_off1, P.MUD, n=8, speed=1.0, r=0.04, z=0.32)
+        st.flow([(-5.33, 3.05), (-4.95, 3.05), (-4.95, 3.82), (E_CX, 3.82), (E_CX, 2.3)], t_on1, t_off1, P.MUD, n=8, speed=1.0, r=0.04, z=0.32)
         st.flow([(E_CX, E_TOP + 0.05), (E_CX, E_BIT + 0.05)], t_on1, t_off1, P.MUD, n=14, speed=1.1, r=0.045, z=0.25)
         for sx in (-1, 1):
             xa = E_CX + sx * (E_HW - 0.13)
@@ -1538,16 +1605,18 @@ def beat_ecd(st, tl):
         eq = tag(st, 3.3, -3.32, "ECD = MW + annular friction ΔP / (g · TVD)", P.TEXT, 0.2, align="c")
         st.fade_in(eq, t_ecd + 0.6, 0.5)
         # the connection: pumps stop, a stand is added, the pressure drops
-        stand = st.rect(-2.7, 2.95, 0.16, 1.0, P.STEEL, 0.3)
-        st.fade_out(tdl, t_stand - 0.9, 0.3)
-        st.fade_in(stand, t_stand - 0.5, 0.3)
-        st.move(stand, t_stand - 0.4, t_stand + 0.6, dx=-0.7)
-        st.move(td, t_off1 + 0.2, t_off1 + 0.8, dy=0.12)
-        sl_ = tag(st, -3.1, 2.75, "+1 stand ≈ 28 m", P.TEXT, 0.15)
-        st.fade_in(sl_, t_stand, 0.4)
+        # the top drive breaks out and lifts, a new stand swings in on top of the string, the top drive makes it up
+        stand = st.rect(-2.6, TD0 + 0.13, 0.2, 0.6, P.STEEL, 0.3)
+        st.fade_out(tdl, t_lift0 - 0.4, 0.3)
+        st.move(td, t_lift0, t_lift1, dy=TD_UP)
+        st.fade_in(stand, t_lift1 - 0.3, 0.3)
+        st.move(stand, t_lift1 - 0.2, t_lift1 + 0.9, dx=E_CX + 2.6)
+        st.ripple(E_CX, TD0 - 0.17, t_lift1 + 0.9, t_lift1 + 1.8, P.TEXT, period=0.6, r0=0.1, r1=0.5)
+        sl_ = tag(st, E_CX + 0.4, TD0 + 0.13, "+1 stand ≈ 28 m", P.TEXT, 0.15)
+        st.fade_in(sl_, t_lift1 + 0.9, 0.4)
         conn = c.label(t_off1 + 2.2, P_STATIC, "connection", 0.16, P.TEXT, "l", "bold", dy=0.3)
         st.fade_in(conn, t_conn - 0.2, 0.4)
-        st.ripple(c.X(t_off1 + 0.5), c.Y(P_STATIC), t_drop - 0.3, t_drop + 1.0, P.MUD, period=0.6, r0=0.1, r1=0.6)
+        st.ripple(c.X(t_off1 + 0.5), c.Y(P_STATIC), t_drop - 0.4, t_drop + 0.1, P.MUD, period=0.6, r0=0.1, r1=0.6)
 
 
 # ====================================================================================================== 4.06 squeezed window + MPD
@@ -1699,7 +1768,7 @@ def beat_mpd(st, tl):
             zq = 3820
             sq = st.arrow(WX0 + 0.25, YZ(zq), XZ(M.pp(zq)) - 0.15, YZ(zq), P.PORE, 0.07, 0.22, 0.4) + \
                 st.arrow(WX1 - 0.1, YZ(zq), XZ(M.fg(zq)) + 0.14, YZ(zq), P.FRAC, 0.07, 0.22, 0.4)
-            st.fade_in(sq, t_sq - 0.1, 0.35)
+            st.fade_in(sq, tz1 - 0.25, 0.35)
             st.fade_out(sq, t_off - 0.4, 0.35)
             st.ripple(XZ(M.fg(SHOE)), YZ(SHOE), t_weak - 0.1, t_shoe + 1.2, P.FRAC, period=0.8, r0=0.15, r1=0.75)
             hyp = tag(st, WX1, WY1 + 0.3, "HYPOTHETICAL: a narrower window", P.WARN, 0.15, align="r")

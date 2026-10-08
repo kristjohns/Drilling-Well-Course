@@ -826,6 +826,9 @@ def beat_gradients(st, tl):
             arm = st.rect(TXc - 0.15, Yc(z_park) - 0.2, 0.05, 0.05, P.STEEL_DK, 0.31, anchor="r")
             tool = [body, pad, arm]
             st.fade_in([cable] + tool, s[0], 0.4)
+            wl = _lbl(st, 0.3, 1.2, "wireline: logs run on a cable after the section is drilled", P.TEXT, 0.17)
+            st.fade_in(wl, s[0] + 0.8, 0.4)
+            st.fade_out(wl, s[1] - 0.6, 0.35)
 
             def tool_to(z, t0_, t1_):
                 st.move(tool, t0_, t1_, dy=Yc(z) - st.state[body]["loc"][1])
@@ -888,11 +891,12 @@ def beat_gradients(st, tl):
             fpt = (c.X(L.p_water(M.FWL)), c.Y(M.FWL))
             fring = st.ring(fpt[0], fpt[1], 0.16, 0.04, P.TEXT, 0.5)
             st.pop_in(fring, t_meet + 0.5, 0.3)
-            fwl_line = st.dashed((HX0 - 0.95, fpt[1]), (fpt[0] - 0.2, fpt[1]), P.TEXT, 0.022, 0.12, 0.08, 0.36)
+            fwl_line = (st.dashed((HX0 - 0.95, fpt[1]), (-3.45, fpt[1]), P.TEXT, 0.022, 0.12, 0.08, 0.36)
+                        + st.dashed((c.x + 0.05, fpt[1]), (fpt[0] - 0.2, fpt[1]), P.TEXT, 0.022, 0.12, 0.08, 0.36))
             st.fade_in(fwl_line, t_meet + 0.7, 0.4)
-            fwl = _lbl(st, fpt[0] - 0.25, fpt[1] - 0.38, f"free-water level  {FIT['fwl']:,.0f} m", P.TEXT, 0.18, align="r", bg=P.PANEL2)
+            fwl = _lbl(st, fpt[0] - 0.3, fpt[1] - 0.5, f"free-water level\n{FIT['fwl']:,.0f} m", P.TEXT, 0.18, align="r", bg=P.PANEL2)
             st.fade_in(fwl, t_meet + 0.8, 0.4)
-            alone = st.text("from pressures alone", fpt[0] - 0.25, fpt[1] - 0.8, 0.14, P.MUTED, 0.5, align="r")
+            alone = st.text("from pressures alone", fpt[0] - 0.3, fpt[1] - 1.1, 0.14, P.MUTED, 0.5, align="r")
             st.fade_in(alone, _w(b, 5, "pressures alone") - 0.2, 0.4)
             st.ripple(fpt[0], fpt[1], t_meet + 0.5, t_meet + 2.0, P.TEXT, period=0.7, r0=0.15, r1=0.7)
 
@@ -1105,6 +1109,8 @@ def beat_core(st, tl):
         # ---- phase 1: coring with a hollow bit
         CX = -3.8
         Y_TOP = 0.9                      # top of the sand / start of the core run
+        cview = View(st, b.start, b.end, z=0.2, clip=(-6.32, -3.7, 8.0, 3.85))      # clips the barrel as it is pulled
+        cview.__enter__()
         rock = [st.rect(CX, (3.8 + Y_TOP) / 2, 3.0, 3.8 - Y_TOP, P.ROCK2, 0.0), st.rect(CX, (Y_TOP - 3.2) / 2, 3.0, Y_TOP + 3.2, P.SAND, 0.0)]
         hole = st.rect(CX, (3.8 + Y_TOP) / 2, 1.5, 3.8 - Y_TOP, P.BG, 0.02)
         RO, RI = 0.68, 0.36              # outer / inner radius of the crown (kerf between them)
@@ -1123,12 +1129,24 @@ def beat_core(st, tl):
             for kx in range(3):
                 x = CX + sx * (RI + 0.05 + kx * 0.1)
                 cutters.append(st.poly([(x - 0.04, y_c0 - 0.13), (x + 0.04, y_c0 - 0.13), (x, y_c0 - 0.2)], P.TEXT, 0.23))
-        core_l = st.text("core", CX, Y_TOP - 1.6, 0.17, "#5b4a2a", 0.05, kind="bold")
+        core_l = st.text("core", CX, Y_TOP - 1.6, 0.17, "#5b4a2a", 0.3, kind="bold")
         st.fade_in(rock + [hole] + kerf + walls + crown + cutters, t0, 0.5)
         st.scale_to(kerf, t_cut0, t_cut1, sy=cut_len, interp="LINEAR")
         st.scale_to(walls, t_cut0, t_cut1, sy=3.8 - (y_c0 - cut_len) - 0.12, interp="LINEAR")
         st.move(crown + cutters, t_cut0, t_cut1, dy=-cut_len, interp="LINEAR")
+        # the cut core (inside the barrel) and the trip out: barrel + core leave, an empty hole remains
+        core_in = st.rect(CX, y_c0, 2 * RI - 0.04, 0.0001, "#d9bf86", 0.19, anchor="t")
+        st.fade_in(core_in, t_cut0, 0.2)
+        st.scale_to(core_in, t_cut0, t_cut1, sy=cut_len, interp="LINEAR")
+        t_pull = t_cut1 + 0.15
+        hole2 = st.rect(CX, y_c0 - cut_len / 2 - 0.07, 2 * RO + 0.02, cut_len + 0.14, P.BG, 0.025)
+        st.fade_in(hole2, t_pull + 0.05, 0.2)
+        barrel = walls + crown + cutters + [core_in]
+        st.move(barrel, t_pull, t_pull + 1.3, dy=2.6)
+        st.fade_out(barrel, t_pull + 0.8, 0.5)
         st.fade_in(core_l, t_cut0 + 1.2, 0.4)
+        st.fade_out(core_l, t_cut1, 0.2)
+        cview.__exit__()
         lab1 = _lbl(st, CX, 3.35, "hollow bit: the core rises inside", P.TEXT, 0.16)
         st.fade_in(lab1, t_cut0 + 0.2, 0.4)
         lab2 = _lbl(st, CX, -2.98, "cut while drilling the reservoir", P.WARN, 0.16)
@@ -1154,7 +1172,7 @@ def beat_core(st, tl):
         st.fade_in(core + [k_l], t_cmp - 0.6, 0.5)
         only = _lbl(st, 4.9, RY + 0.55, "the only large, intact sample", P.SAFE, 0.19)
         st.fade_in(only, t_cmp - 0.3, 0.4)
-        ph1 = rock + [hole] + kerf + walls + crown + cutters + [core_l] + lab1 + lab2 + chips + [c_l] + plug + [p_l] + core + [k_l] + only
+        ph1 = rock + [hole, hole2] + kerf + [core_l] + lab1 + lab2 + chips + [c_l] + plug + [p_l] + core + [k_l] + only
         t_lab = s[1] - 0.25
         st.fade_out(ph1, t_lab, 0.45)
 
@@ -1307,7 +1325,7 @@ def beat_dst(st, tl):
         cem9 = [st.rect(WX - 0.7, (0.6 + Y_SHOE) / 2, 0.11, 0.6 - Y_SHOE, P.CEMENT, 0.05),
                 st.rect(WX + 0.7, (0.6 + Y_SHOE) / 2, 0.11, 0.6 - Y_SHOE, P.CEMENT, 0.05)]
         sb_l = st.text("seabed", WX - EW / 2 + 0.1, Y_SB + 0.15, 0.13, P.MUTED, 0.3, align="l")
-        res_l = st.text("reservoir", WX - EW / 2 + 0.1, Y_RT - 0.2, 0.13, "#5b4a2a", 0.3, align="l", kind="bold")
+        res_l = st.text("reservoir sand", LX, (Y_RT + Y_RB) / 2 - 0.1, 0.14, P.SAND, 0.3, align="l", kind="bold")
         shoe_lead = st.line([(WX + 0.66, Y_SHOE), (LX - 0.08, Y_SHOE)], P.MUTED, 0.015, 0.3, role="hair")
         shoe_l = st.text("9⅝ in casing shoe", LX, Y_SHOE, 0.14, P.MUTED, 0.3, align="l")
         base = [sea] + earth + [hole_up, hole_dn] + csg + cem9 + [sb_l, res_l, shoe_lead, shoe_l]
@@ -1430,7 +1448,7 @@ def beat_dst(st, tl):
         prl = _lbl(st, cr.X(7.4), cr.Y(0.62), "productivity", P.TEXT, 0.14)
         st.fade_in(prl, t_prod - 0.1, 0.3)
         # log-log diagnostic: Δp and its derivative (right, below the term cards)
-        cd = Chart(st, 4.2, -2.85, 3.3, 2.2, (-2.0, 2.0), (-1.0, 1.25))
+        cd = Chart(st, 4.15, -2.85, 3.15, 2.2, (-2.0, 2.0), (-1.0, 1.25))
         cdf = [st.rect(cd.X(0), cd.Y(-1), cd.w, 0.025, P.MUTED, 0.2), st.rect(cd.X(-2), cd.Y(0.125), 0.025, cd.h, P.MUTED, 0.2),
                st.text("log Δt", cd.X(2), cd.Y(-1) - 0.2, 0.13, P.MUTED, 0.2, align="r"),
                st.text("log-log build-up", cd.X(-2) + 0.08, cd.Y(1.25) + 0.12, 0.13, P.MUTED, 0.2, align="l", kind="bold")]
@@ -1441,10 +1459,10 @@ def beat_dst(st, tl):
         dvc = cd.curve(lx, ld, P.WARN, 0.04, 0.31)
         st.draw_on([dpc, dvc], t_der, t_der + 1.6)
         leg = [st.text("Δp", cd.X(2.0) + 0.08, cd.Y(lp[-1]), 0.13, P.PORE, 0.35, align="l", kind="bold"),
-               st.text("derivative", cd.X(2.0) - 0.05, cd.Y(ld[-1]) - 0.2, 0.13, P.WARN, 0.35, align="r", kind="bold")]
+               st.text("derivative", cd.X(2.0), cd.Y(ld[-1]) - 0.5, 0.13, P.WARN, 0.35, align="r", kind="bold")]
         st.fade_in(leg, t_der + 1.4, 0.3)
-        lb = [(_w(b, 2, "permeability"), cd.X(0.35), cd.Y(-0.3), "flat: permeability", "c"),
-              (_w(b, 2, "near-well damage"), cd.X(-0.95), cd.Y(0.78), "hump:\nnear-well damage", "r"),
+        lb = [(_w(b, 2, "permeability"), cd.X(-0.15), cd.Y(-0.45), "flat: permeability", "c"),
+              (_w(b, 2, "near-well damage"), cd.X(-2.0) + 0.06, cd.Y(0.82), "hump:\nnear-well\ndamage", "l"),
               (_w(b, 2, "boundaries"), cd.X(1.5), cd.Y(0.62), "boundary", "c")]
         lbo = []
         for t, x, y, txt, al in lb:
@@ -1462,7 +1480,7 @@ def beat_dst(st, tl):
         st.fade(test_parts, t_fade - 0.2, t_fade + 0.8, 1.0, 0.1)
         plots = crf + cpf + [rate, dd, bu, flw, bul, si_line, sil] + prl + cdf + [dpc, dvc] + leg + lbo + cst + no
         st.fade_out(plots, t_fade - 0.2, 0.6)
-        oh = callout(-2.5, WX + 0.57, "our well: open hole", _w(b, 4, "our example well") - 0.2)
+        oh = callout(-2.85, WX + 0.57, "our well: open hole", _w(b, 4, "our example well") - 0.2)
         ow = st.text("our well: logs, pressures, samples", 2.6, 1.0, 0.3, P.SAFE, 0.8, kind="bold")
         st.fade_in(ow, _w(b, 4, "exactly") - 0.3, 0.4)
         items = [("logs", _w(b, 4, "logs")), ("pressures", _w(b, 4, "pressures")), ("samples", _w(b, 4, "samples"))]
@@ -1592,7 +1610,7 @@ def beat_verdict(st, tl):
         t_g = _w(b, 1, "forty")
         t_o = _w(b, 1, "fifty-five")
         EX, EY = -3.6, 0.05
-        k_ = 0.016
+        k_ = 0.014
         gas_c = st.rect(EX - 1.0, EY + 0.45, 0.42, 0.0001, P.GAS, 0.5, anchor="t")
         oil_c = st.rect(EX - 1.0, EY + 0.45 - k_ * (M.GOC - M.RES_TOP), 0.42, 0.0001, P.OIL, 0.5, anchor="t")
         st.fade_in(gas_c, t_g - 0.4, 0.1)
