@@ -760,7 +760,7 @@ def _case_collapse(st, b):
         fl = chip(st, x - 0.5, YF - 0.55, "cracked rock", P.FRAC, 0.14, z=0.45)
         st.fade_in(fl, t_lc + 0.4, 0.4)
         t_dr = W(b, 2, "drains away")
-        st.flow([(x, PSHOE + 1.0), (x, YF + 0.05), (wall - 0.6, YF + 0.05)], t_dr - 0.2, W(b, 2, "completely") + 1.6, P.MUD, n=8, speed=1.0, r=0.045, z=0.3)
+        st.flow([(x, PSHOE - 0.1), (x, YF + 0.05), (wall - 0.6, YF + 0.05)], t_dr - 0.2, W(b, 2, "completely") + 1.6, P.MUD, n=5, speed=0.9, r=0.045, z=0.3)
         st.flow([(x, YF + 0.05), (wall - 0.6, YF + 0.05)], W(b, 2, "completely") + 1.0, b.end, P.MUD, n=3, speed=0.5, r=0.04, z=0.3)
         # the level inside falls: partly, then completely
         t_lv, t_part, t_all = W(b, 2, "level inside"), W(b, 2, "partly"), W(b, 2, "completely") + 0.5
