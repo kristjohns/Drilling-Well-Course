@@ -12,6 +12,7 @@ Outputs in build/: <name>_1080p.mp4 (burned-in subtitles), <name>_1080p_nosubs.m
 from __future__ import annotations
 import argparse
 import json
+import math
 import os
 import subprocess
 import sys
@@ -97,11 +98,12 @@ def main():
         small(final if not a.skip_subbed else nosubs, a.out, tl["total"])
 
 
-def small(src, outdir, total, limit_mib=29.0):
-    """720p copy split into parts that each fit the chat upload limit."""
-    parts = 2
+def small(src, outdir, total, limit_mib=29.0, vbr_target=480):
+    """720p copy split into as many parts as needed for each to fit the chat upload limit at a decent bitrate
+    (gradients, grain and particles smear below ~400 kbit/s at 720p)."""
+    abr = 96
+    parts = max(1, math.ceil(total * (vbr_target + abr) / 8 / 1024 / (limit_mib * 0.94)))
     seg = total / parts
-    abr = 64
     vbr = int((limit_mib * 8 * 1024 * 0.94) / seg - abr)     # kbit/s so each part fits
     out = []
     for i in range(parts):
