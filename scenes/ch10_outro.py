@@ -184,7 +184,7 @@ def beat_recap(st, tl):
         t_arg = W(3, "argument")
         dim_objs = A + G + stair + steel + bop + [riser, mud] + BAR + GAUGE
         st.fade(dim_objs, s[3] - 0.1, s[3] + 0.5, 1.0, 0.18)
-        st.fade(dim_objs, s[4] - 0.35, s[4] + 0.2, 0.18, 1.0)
+        st.fade([o for o in dim_objs if o not in BAR + GAUGE], s[4] - 0.35, s[4] + 0.2, 0.18, 1.0)   # barriers + gauge retire
         k1 = st.text("an argument with the Earth", 0.0, 0.75, 0.62, P.TEXT, 2.0, kind="bold")
         k2 = st.text("about pressure", 0.0, -0.2, 0.42, P.PORE, 2.0, kind="bold")
         k3 = st.text("that you win every hour", 0.0, -1.1, 0.42, P.MUD, 2.0, kind="bold")

@@ -169,8 +169,7 @@ def card_times(tl):
         for ch in tl["chapters"]:
             ctl = T.load_chapter(ch["num"])
             for b in ctl.beats:
-                for term in b.terms[:3]:
-                    t0 = min(max(F.spoken_at(b, term["term"]) - 0.3, b.start + 0.3), b.end - 3.0)
+                for _term, _dfn, t0, _d, _yt, _yb in F.card_layout(b):
                     out.append(ch["start"] + t0 + 0.12)
     except Exception as e:   # renderer modules unavailable: fall back to the beat start
         print("mix: term-card times from beat starts (" + str(e) + ")")

@@ -1090,7 +1090,7 @@ def beat_conductor(st, tl):
         soilC = st.rect(-2.0, (Y_SB - 3.6) / 2, 8.4, Y_SB + 3.6, P.SEABED, 0.0)
         lineC = st.rect(-2.0, Y_SB, 8.4, 0.05, SEABED_LINE, 0.02)
         st.fade_in([seaC, soilC, lineC], tC, 0.5)
-        ttl = st.text("A PILE IN THE SOIL", 2.35, 3.4, 0.28, P.TEXT, 1.0, align="l", kind="bold")
+        ttl = st.text("A PILE IN THE SOIL", -5.75, 3.4, 0.28, P.TEXT, 1.0, align="l", kind="bold")
         st.fade_in(ttl, _w(b, 4, "pile"), 0.4)
         t_fric = _w(b, 5, "Soil friction")
         t_in = _w(b, 5, "cemented casing")
@@ -1418,10 +1418,12 @@ def beat_cement(st, tl):
         cap = st.text("ROV camera view", (vx0 + vx1) / 2, vy0 + 0.2, 0.15, P.MUTED, 0.66, kind="bold")
         view = [frame, scr, floor, cam_l, rec, cap] + whv + brk
         st.fade_in(view, t_cam - 0.3, 0.4)
-        for kk in range(12):
+        t_view_out = s[1] + 0.8
+        for kk in range(12):                                  # REC blinks until the view closes
+            if t_cam + kk * 1.0 + 1.0 > t_view_out:
+                break
             st.fade(rec, t_cam + kk * 1.0, t_cam + kk * 1.0 + 0.5, 1.0, 0.15)
             st.fade(rec, t_cam + kk * 1.0 + 0.5, t_cam + kk * 1.0 + 1.0, 0.15, 1.0)
-        t_view_out = s[1] + 0.8
 
         def cam_cloud(c, t, look):
             a = _ramp(t, t_cam, t_cam + 0.6) * (1 - _ramp(t, t_view_out, t_view_out + 0.4))

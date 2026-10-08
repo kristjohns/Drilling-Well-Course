@@ -104,16 +104,21 @@ def well_strip(st, t0, t1, strings=(), marker=None, td=False, plugs=(), cut_belo
 CARD_X0, CARD_X1, CARD_TOP = 3.3, 7.85, 3.92
 
 
+def card_height(definition):
+    """Height of one term card (it sizes itself to its wrapped definition)."""
+    dfn = wrap_to(definition, 0.145, CARD_X1 - CARD_X0 - 0.55, "sans")
+    n = dfn.count("\n") + 1
+    return 0.16 + 0.15 + 0.1 + 0.27 + 0.08 + n * 0.145 * 1.18 * 1.22 + 0.16
+
+
 def term_cards(st, t0, d, terms, y_top=CARD_TOP):
     """Stacked top-right cards for the terms defined in this beat; each card sizes itself to its definition.
     Returns the y of the bottom edge of the last card."""
     y = y_top
     w = CARD_X1 - CARD_X0
-    lh = 0.145 * 1.18 * 1.22
     for term, definition in terms:
         dfn = wrap_to(definition, 0.145, w - 0.55, "sans")
-        n = dfn.count("\n") + 1
-        h = 0.16 + 0.15 + 0.1 + 0.27 + 0.08 + n * lh + 0.16
+        h = card_height(definition)
         cy = y - h / 2
         with st.span(t0, t0 + d):
             parts = [
@@ -173,19 +178,49 @@ def spoken_at(b, term):
     return b.start + 0.5
 
 
+MAX_CARDS = 5        # per beat
+CARD_GAP = 0.12
+CARD_FLOOR = 0.2     # a card never reaches below this y (content and subtitles live below)
+
+
+def card_layout(b):
+    """Where and when each term card of beat b appears: [(term, definition, t0, d, y_top, y_bottom)], in spoken order.
+    A card appears as its term is first spoken and takes the highest free slot among the cards on screen at that moment;
+    if none fits above CARD_FLOOR, the oldest card on screen leaves early to make room."""
+    items = []
+    for t in b.terms[:MAX_CARDS]:
+        t0 = min(max(spoken_at(b, t["term"]) - 0.3, b.start + 0.3), b.end - 3.0)
+        d = max(min(7.5, b.end - t0 - 0.25), 3.0)
+        items.append([t0, t["term"], t["def"], d])
+    items.sort(key=lambda x: x[0])
+    out = []                                   # [term, def, t0, d, y_top, y_bot]
+    for t0, term, dfn, d in items:
+        h = card_height(dfn)
+        while True:
+            live = sorted([c for c in out if c[2] <= t0 + 0.05 and c[2] + c[3] > t0 + 0.2], key=lambda c: -c[4])
+            y = None
+            for cand in [CARD_TOP] + [c[5] - CARD_GAP for c in live]:
+                if cand - h < CARD_FLOOR:
+                    continue
+                if all(cand - h > c[4] + CARD_GAP or cand < c[5] - CARD_GAP + 1e-6 for c in live):
+                    y = cand
+                    break
+            if y is not None or not live:
+                break
+            oldest = min(live, key=lambda c: c[2])
+            oldest[3] = max(t0 - oldest[2] + 0.1, 0.5)   # it leaves as the new one arrives
+        y = CARD_TOP if y is None else y
+        out.append([term, dfn, t0, d, y, y - h])
+    return [tuple(c) for c in out]
+
+
 def auto_overlays(st, tl):
     """Title card, term cards, scope badges and the chapter-end fade, straight from the script (they cannot drift).
     Each term card appears as its term is spoken; badges stay while the beat's narration runs."""
     title_card(st, tl)
     for b in tl.beats:
-        shown = []          # (t_end, y_bottom) of cards already on screen in this beat
-        for t in b.terms[:3]:
-            t0 = min(max(spoken_at(b, t["term"]) - 0.3, b.start + 0.3), b.end - 3.0)
-            d = max(min(7.5, b.end - t0 - 0.25), 3.0)
-            live = [yb for (te, yb) in shown if te > t0 + 0.2]
-            y_top = (min(live) - 0.12) if live else CARD_TOP
-            yb = term_cards(st, t0, d, [(t["term"], t["def"])], y_top)
-            shown.append((t0 + d, yb))
+        for term, dfn, t0, d, y_top, _ in card_layout(b):
+            term_cards(st, t0, d, [(term, dfn)], y_top)
         t_badge_end = min(b.end - 0.2, b.sent_end[-1] + 0.6) if b.vo.strip() else b.end - 0.2
         t_badge_end = max(t_badge_end, b.start + 1.5)
         x_right = 7.85

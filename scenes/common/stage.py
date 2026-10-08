@@ -185,6 +185,7 @@ class Stage:
         self.objs: list[Obj] = []
         self.state: dict = {}
         self._vis: dict = {}
+        self.fade_out_fixes: list = []      # (obj, t, alpha at t, creation alpha): fade-outs of already-faded objects
         self._span_stack: list = []
         self._span_objs: list = []
         self.cam = Obj("camera", -1, None, "#000000", 1.0, (0.0, 0.0, 20.0))
@@ -325,11 +326,17 @@ class Stage:
                 o.entrance = (t, t + max(d, 0.3) * 1.4)
 
     def fade_out(self, objs, t, d=0.35):
+        """Fade from the alpha the object has at t (not its creation alpha) to 0: fading out something that is already
+        invisible keeps it invisible instead of flashing it back."""
         for o in as_list(objs):
             v = self._vis.setdefault(o, {})
             v["out"] = max(v.get("out", -1.0), t + d)
             base = self.state[o]["alpha"]
-            self._alpha_key(o, t, base)
+            tr = o.track("alpha")
+            cur = tr.eval(t) if (tr and tr.keys[0][0] <= t) else base
+            if cur < base - 1e-6:
+                self.fade_out_fixes.append((o, t, cur, base))
+            self._alpha_key(o, t, cur)
             self._alpha_key(o, t + d, 0.0)
 
     def recolor(self, objs, t0, t1, color):
