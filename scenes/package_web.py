@@ -71,7 +71,8 @@ def main():
     lines = ["WEBVTT", ""]
     for i, (s, e, txt) in enumerate(subtitles.expand(cues, 0.0, total)):
         lines += [str(i + 1), f"{vtt_time(s)} --> {vtt_time(e)}", txt, ""]
-    open(os.path.join(a.out, "subtitles.vtt"), "w").write("\n".join(lines))
+    vtt = "\n".join(lines)
+    open(os.path.join(a.out, "subtitles.vtt"), "w").write(vtt)       # kept for reference; the page embeds it
     # page
     playlist = open(os.path.join(a.out, "film.m3u8")).read()
     segs = sorted(glob.glob(os.path.join(a.out, "seg_*.mp4")))
@@ -79,7 +80,7 @@ def main():
     size = sum(os.path.getsize(p) for p in segs + [os.path.join(a.out, "init.mp4")]) / 2**20
     chapters = [{"n": c["num"], "title": c["title"], "t": round(c["start"], 2)} for c in tl["chapters"]]
     page = TEMPLATE
-    for k, v in {"__PLAYLIST__": json.dumps(playlist), "__CHAPTERS__": json.dumps(chapters),
+    for k, v in {"__PLAYLIST__": json.dumps(playlist), "__CHAPTERS__": json.dumps(chapters), "__VTT__": json.dumps(vtt),
                  "__RUNTIME__": html.escape(f"{int(total // 60)} min"),
                  "__CHAPTER_LIST__": "\n".join(
                      f'<li><button type="button" class="ch" data-t="{c["t"]}" data-n="{c["n"]}">'
@@ -170,7 +171,6 @@ h2 { font: 700 22px/1.1 var(--display); letter-spacing: .03em; text-transform: u
   <section aria-label="Film">
     <div class="frame">
       <video id="film" controls playsinline preload="metadata" poster="poster.jpg">
-        <track id="subs" kind="subtitles" srclang="en" label="English" src="subtitles.vtt" default>
       </video>
       <p class="err" id="err" hidden>This browser cannot play the stream here. Try a current Chrome, Edge, Firefox or Safari.</p>
     </div>
@@ -226,8 +226,14 @@ __CHAPTER_LIST__
 <script>
 (function () {
   var PLAYLIST = __PLAYLIST__;
+  var VTT = __VTT__;
   var CHAPTERS = __CHAPTERS__;
   var video = document.getElementById("film");
+  // subtitles: embedded WebVTT, attached as a track through a blob URL (the host serves no .vtt files)
+  var track = document.createElement("track");
+  track.kind = "subtitles"; track.srclang = "en"; track.label = "English"; track.default = true;
+  track.src = URL.createObjectURL(new Blob([VTT], { type: "text/vtt" }));
+  video.appendChild(track);
   var abs = function (name) { return new URL(name, location.href).href; };
   var text = PLAYLIST.replace(/URI="([^"]+)"/g, function (_, n) { return 'URI="' + abs(n) + '"'; })
                      .replace(/^(seg_\d+\.mp4)$/gm, function (n) { return abs(n); });
@@ -236,8 +242,6 @@ __CHAPTER_LIST__
     hls.loadSource(URL.createObjectURL(new Blob([text], { type: "application/vnd.apple.mpegurl" })));
     hls.attachMedia(video);
     hls.on(window.Hls.Events.ERROR, function (_, d) { if (d && d.fatal) document.getElementById("err").hidden = false; });
-  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-    video.src = "film.m3u8";
   } else {
     document.getElementById("err").hidden = false;
   }
@@ -246,6 +250,7 @@ __CHAPTER_LIST__
   var cc = document.getElementById("cc");
   var setCC = function (on) {
     for (var i = 0; i < video.textTracks.length; i++) video.textTracks[i].mode = on ? "showing" : "hidden";
+    track.track && (track.track.mode = on ? "showing" : "hidden");
     cc.setAttribute("aria-pressed", on ? "true" : "false");
     cc.textContent = on ? "Subtitles on" : "Subtitles off";
     try { localStorage.setItem("thtfb-cc", on ? "1" : "0"); } catch (e) {}

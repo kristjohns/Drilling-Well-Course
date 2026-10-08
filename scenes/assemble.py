@@ -52,9 +52,20 @@ def main():
     ap.add_argument("--crf", type=int, default=18)
     ap.add_argument("--small", action="store_true")
     ap.add_argument("--skip-subbed", action="store_true")
+    ap.add_argument("--small-only", action="store_true",
+                    help="only the 720p parts, from an existing no-subs master, burning the subtitles in at 720p")
     a = ap.parse_args()
     tl = json.load(open(os.path.join(ROOT, "script", "timeline.json")))
     os.makedirs(a.out, exist_ok=True)
+    if a.small_only:
+        tmp = os.path.join(a.out, "tmp")
+        os.makedirs(tmp, exist_ok=True)
+        sys.path.insert(0, os.path.join(ROOT, "audio"))
+        import subtitles
+        cues = json.load(open(os.path.join(ROOT, "audio", "cues.json")))
+        subtitles.write(cues, os.path.join(a.out, f"{NAME}_1080p.srt"), os.path.join(tmp, "subs.ass"), 0.0, tl["total"])
+        small(os.path.join(a.out, f"{NAME}_1080p_nosubs.mp4"), a.out, tl["total"], subs_dir=tmp)
+        return
     tmp = os.path.join(a.out, "tmp")
     os.makedirs(tmp, exist_ok=True)
     # 1. chapters -> one video (stream copy)
@@ -98,7 +109,7 @@ def main():
         small(final if not a.skip_subbed else nosubs, a.out, tl["total"])
 
 
-def small(src, outdir, total, limit_mib=29.0, vbr_target=480):
+def small(src, outdir, total, limit_mib=29.0, vbr_target=480, subs_dir=None):
     """720p copy split into as many parts as needed for each to fit the chat upload limit at a decent bitrate
     (gradients, grain and particles smear below ~400 kbit/s at 720p)."""
     abr = 96
@@ -109,9 +120,9 @@ def small(src, outdir, total, limit_mib=29.0, vbr_target=480):
     for i in range(parts):
         p = os.path.join(outdir, f"{NAME}_720p_part{i + 1}of{parts}.mp4")
         run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{i * seg:.3f}", "-t", f"{seg:.3f}", "-i", src,
-             "-vf", "scale=1280:720:flags=lanczos", "-c:v", "libx264", "-preset", "slow", "-b:v", f"{vbr}k",
+             "-vf", "scale=1280:720:flags=lanczos" + (",ass=subs.ass" if subs_dir else ""), "-c:v", "libx264", "-preset", "slow", "-b:v", f"{vbr}k",
              "-maxrate", f"{int(vbr * 1.6)}k", "-bufsize", f"{vbr * 3}k", "-tune", "animation", "-pix_fmt", "yuv420p",
-             "-c:a", "aac", "-b:a", f"{abr}k", "-ac", "2", "-movflags", "+faststart", p])
+             "-c:a", "aac", "-b:a", f"{abr}k", "-ac", "2", "-movflags", "+faststart", p], cwd=subs_dir)
         out.append(p)
         print(f"small part {i + 1}: {os.path.getsize(p) / 2**20:.1f} MiB")
     return out
