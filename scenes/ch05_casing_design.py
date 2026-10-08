@@ -249,7 +249,7 @@ def beat_lining(st, tl):
 
 def _grade(st, b):
     s = b.sent
-    t0, t1 = s[2] - 0.05, s[3] + 0.9
+    t0, t1 = s[2] - 0.05, s[3] + 0.55
     with st.span(t0, t1 + 0.5):
         cut = Cutaway(st, -4.25, 3.3, -3.2, hole_w=1.9, pipe_w=1.15, wall=0.12, rock_w=0.95)
         base = cut.draw()
@@ -299,7 +299,7 @@ def _grade(st, b):
 
 def _sour(st, b):
     s = b.sent
-    t0 = s[3] + 0.5
+    t0 = s[3] + 0.6
     X0, X1, YS, YB = -5.85, -1.0, 1.25, -3.1          # steel lattice box; YS = the steel surface (sour fluid above)
     with st.span(t0, b.end):
         card = st.rect((X0 + X1) / 2, (YB + 2.45) / 2, X1 - X0 + 0.3, 2.45 - YB + 0.3, P.PANEL, 0.0)
@@ -1287,7 +1287,7 @@ def _conn_intro(st, b):
         st.fade_in(l3, b.start + 0.6, 0.4)
         st.move(l3, t_j - 0.5, t_j + 1.2, dx=L1 - L0 + 1.0)
         st.fade_out(l3, t_j + 1.6, 0.4)
-        st.fade_out([lp, cp, rp] + thr + l1 + l2, t1 - 0.2, 0.5)
+        st.fade_out([lp, cp, rp] + thr + l1 + l2, s[1] - 0.85, 0.45)
 
 
 def _conn_api(st, b):
