@@ -16,9 +16,10 @@ animation, voice, music, subtitles, final export) is generated from this repo.
 
 | Output | Where | Notes |
 |---|---|---|
-| Final video, subtitles burned in | `build/the_hole_that_fights_back_1080p.mp4` | 36:42, 1920x1080 @ 30 fps, H.264 + AAC stereo, -16 LUFS (two-pass loudnorm) |
+| Final video, subtitles burned in | `build/the_hole_that_fights_back_1080p.mp4` | 36:45, 1920x1080 @ 30 fps, H.264 + AAC stereo, -16 LUFS (two-pass loudnorm) |
 | Same, no burned-in subtitles | `build/..._1080p_nosubs.mp4` | video stream-copied |
-| 720p copy in parts (< 29 MiB each, for sharing) | `build/..._720p_partN.mp4` | |
+| 720p copy in parts (< 29 MiB each, for sharing in chat) | `build/..._720p_partNofM.mp4` | |
+| Web player (1080p HLS, chapter menu, subtitles on/off, speed) | `build/web/` | `python scenes/package_web.py`; publish `index.html` with the other files beside it |
 | Subtitles | `build/the_hole_that_fights_back_1080p.srt` | one cue per spoken sentence, timed to the voice |
 | Narration script + shot list (real timestamps) | `script/NARRATION.md` | 11 chapters, 72 beats, 5,605 words |
 | Flagged claims ledger | `script/FLAGS.md` | `VERIFY` / `SEEN` / `SIM` |
@@ -38,7 +39,8 @@ cross-chapter consistency, story). Every chapter was then rewritten and re-anima
 * **Look.** The Blender Workbench renderer is replaced by a 2-D motion-graphics engine on Skia (`scenes/common/stage.py`,
   same scene API) with automatic styling by role (`look.py`): gradient backdrops, glass cards, metallic steel, textured
   rock, glowing curves that draw on with a travelling tip, particle flows for fluids, pills, counters, eased camera moves
-  and dissolves at every beat. Term cards appear when a term is first *spoken*. Animation is keyed to the spoken words
+  and dissolves at every beat. A definition card appears for every glossary term when it is first *spoken* (they stack
+  in spoken order and never cover the lower half of the frame). Animation is keyed to the spoken words
   (`beat.word(i, "phrase")`), not to the beat start.
 * **Sound.** A synthesised ambient music bed (ducked under the voice), a whoosh on chapter title cards and a tick when a
   term card appears (`audio/mix.py`; no samples, nothing licensed).
@@ -86,7 +88,7 @@ To change one scene: edit `scenes/chNN_*.py`, check it with `python scenes/rende
 | D1 style | 2-D motion graphics (schematic cutaways, charts), not photoreal 3-D. |
 | D2 example | Fictional composite wildcat (invented numbers, real physics), flagged on screen and in the end card. |
 | D3 voice | Kokoro-82M neural TTS. A human voice-over still beats it: drop a recording in as `audio/narration.wav` (one file, same sentence timings in `audio/sentences.json`) and re-run `make mix assemble`. |
-| D4 length | 36:42, not 30:00: the review added physics the first cut skipped, and at a natural speaking pace it does not fit in 30 minutes without cutting content (Ch 1, 7 and 8 are the longest). |
+| D4 length | 36:45, not 30:00: the review added physics the first cut skipped, and at a natural speaking pace it does not fit in 30 minutes without cutting content (Ch 1, 7 and 8 are the longest). |
 | D5 sources | Hosts stayed blocked; nothing from NORSOK/regulations is verified against the primary text. |
 | D6 incident | Physics-puzzle hooks; one incident (Macondo 2010) in Ch 7. |
 | D7 units | bar / sg / m, casing sizes in inches. |
