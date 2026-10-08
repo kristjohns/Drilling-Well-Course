@@ -249,7 +249,7 @@ def beat_lining(st, tl):
 
 def _grade(st, b):
     s = b.sent
-    t0, t1 = s[2] - 0.3, s[3] + 0.9
+    t0, t1 = s[2] - 0.05, s[3] + 0.9
     with st.span(t0, t1 + 0.5):
         cut = Cutaway(st, -4.25, 3.3, -3.2, hole_w=1.9, pipe_w=1.15, wall=0.12, rock_w=0.95)
         base = cut.draw()
@@ -285,11 +285,11 @@ def _grade(st, b):
         t_psi = W(b, 2, "one hundred and ten thousand")
         t_mpa = W(b, 2, "about")
         counter(st, -0.6, -1.15, t_psi, W(b, 2, "psi", 1.0), 0, 110000, "{:,.0f} psi", t1 - 0.4, 0.36, P.TEXT)
-        counter(st, 2.85, -1.15, t_mpa, W(b, 2, "megapascals", 1.0), 0, 758, "≈ {:.0f} MPa", t1 - 0.4, 0.36, P.WARN)
+        t_tag = W(b, 2, "megapascals") - 0.5
+        counter(st, 2.85, -1.15, t_mpa, t_tag - 0.15, 0, 758, "≈ {:.0f} MPa", t1 - 0.4, 0.36, P.WARN)
         eq = st.text("= 110 ksi", -0.6, -1.75, 0.2, P.MUTED, 0.4, align="l", kind="mono")
         st.fade_in(eq, W(b, 2, "psi", 1.0) - 0.2, 0.4)
-        # the pipe tag
-        t_tag = W(b, 2, "megapascals") - 0.1
+        # the pipe tag (once both numbers have landed)
         tag = chip(st, -0.6, -2.55, "P110: 110 ksi ≈ 758 MPa", P.WARN, 0.26, "l", z=0.55)
         tl_ = leader(st, -0.6, -2.55, x_w + 0.02, -2.0, P.WARN)
         st.fade_in(tag + tl_, t_tag, 0.45)
@@ -353,7 +353,7 @@ def _sour(st, b):
         ok = st.rect(GX, (G0 + YC) / 2, 0.24, YC - G0, P.SAFE, 0.22, alpha=0.75, role="pill")
         bad = st.rect(GX, (YC + G1) / 2, 0.24, G1 - YC, P.BAD, 0.22, alpha=0.45, role="pill")
         cap = st.rect(GX + 0.15, YC, 0.9, 0.05, P.TEXT, 0.3)
-        capl = st.text("sour service: hardness capped", GX + 0.75, YC, 0.2, P.TEXT, 0.35, align="l", kind="bold")
+        capl = st.text("sour grades: hardness capped", GX + 0.75, YC, 0.2, P.TEXT, 0.35, align="l", kind="bold")
         st.fade_in([ok, bad], t_cap - 0.3, 0.4)
         st.fade_in([cap, capl], t_cap, 0.4)
         t_sg = W(b, 3, "sour-service grades")
@@ -542,20 +542,21 @@ def _collapse(st, b):
         dts = [chip(st, TX, TY, "high D/t", P.TEXT, 0.17), chip(st, KX, TY, "low D/t", P.TEXT, 0.17)]
         st.fade_in(dts, t_dt + 0.3, 0.4)
         # slider: D/t from low (yield) to high (elastic buckling); a ring icon below it shows D and t
-        SX0, SX1, SY = -5.0, 3.0, -1.75
+        SX0, SX1, SY = -5.0, 3.0, -2.05
         bands = [(SX0, -2.6, "yield", P.BAD), (-2.6, 0.8, "in between: most casing", P.TEXT), (0.8, SX1, "elastic buckling", L_COLL)]
         bobj = []
         for i, (a, c2, nm, cc) in enumerate(bands):
             bobj.append(st.rect((a + c2) / 2, SY, c2 - a - 0.06, 0.16, cc, 0.3, alpha=0.55, role="pill"))
-            bobj.append(st.text(nm, (a + c2) / 2, SY - 0.4, 0.17, cc, 0.35, kind="bold"))
+            bobj.append(st.text(nm, (a + c2) / 2, SY - 0.68, 0.17, cc, 0.35, kind="bold"))
         sl = st.text("D/t", SX0 - 0.12, SY, 0.2, P.TEXT, 0.35, align="r", kind="bold")
-        ends = [st.text("thick wall", SX0 + 0.05, SY + 0.32, 0.15, P.MUTED, 0.35, align="l"),
-                st.text("thin wall", SX1 - 0.05, SY + 0.32, 0.15, P.MUTED, 0.35, align="r")]
+        ends = [st.text("thick wall", SX0 + 0.05, SY + 0.66, 0.16, P.MUTED, 0.35, align="l"),
+                st.text("thin wall", SX1 - 0.05, SY + 0.66, 0.16, P.MUTED, 0.35, align="r")]
         st.fade_in(bobj + [sl] + ends, t_dt - 0.2, 0.45)
         t_ib = W(b, 5, "in between")
         k0, k1, k2 = -4.3, 2.5, -0.9
 
         def knob(c, t, look):
+            """The knob IS a pipe cross-section: its wall thins as the knob slides from thick-walled to thin-walled."""
             a = _env(t, t_dt, t1, 0.35)
             if a <= 0:
                 return
@@ -564,20 +565,9 @@ def _collapse(st, b):
             g = _sm((t - t_ib + 0.3) / 0.9)
             x = x + (k2 - x) * g
             u = (x - SX0) / (SX1 - SX0)
-            R, wv = 0.36, 0.3 * (1 - u) + 0.03
-            ro = lambda th: R + wv / 2
-            ri = lambda th: R - wv / 2
-            yi = SY - 1.2
-            _stroke(c, [(x, SY - 0.17), (x, yi + R + wv / 2 + 0.03)], P.MUTED, 0.6 * a, 0.02)
-            _draw_ring(c, x, yi, ro, ri, P.STEEL, a)
-            dx = x - R - wv / 2 - 0.2
-            _stroke(c, [(dx, yi - R - wv / 2), (dx, yi + R + wv / 2)], P.MUTED, a, 0.025)
-            for yy in (yi - R - wv / 2, yi + R + wv / 2):
-                _stroke(c, [(dx - 0.07, yy), (dx + 0.07, yy)], P.MUTED, a, 0.025)
-            look.draw_text(c, "D", dx - 0.1, yi, 0.16, P.TEXT, a, "r", "bold")
-            look.draw_text(c, "t", x + R + wv / 2 + 0.12, yi, 0.16, P.TEXT, a, "l", "bold")
-            c.drawCircle(x, SY, 0.17, skia.Paint(Color=col(hex_rgb(P.TEXT), a), AntiAlias=True))
-            c.drawCircle(x, SY, 0.1, skia.Paint(Color=col(hex_rgb(P.BG), a), AntiAlias=True))
+            R, wv = 0.3, 0.26 * (1 - u) + 0.035
+            c.drawCircle(x, SY, R + wv / 2 + 0.05, skia.Paint(Color=col(hex_rgb(P.BG), 0.9 * a), AntiAlias=True))
+            _draw_ring(c, x, SY, lambda th: R + wv / 2, lambda th: R - wv / 2, P.STEEL, a)
         st.procedural(t_dt, t1 + 0.1, 0.5, knob)
         st.fade(bobj[2:4], t_ib + 0.3, t_ib + 0.8, 1.0, 1.8)
         objs = l1 + l2 + [l1b, l2b] + dts[0] + dts[1] + bobj + [sl] + ends
@@ -642,7 +632,9 @@ def _tension(st, b):
                 _fill(c, [(DX, YT), (DX + op, YT), (DX + op, YB), (DX, YB)], L_TENS, 0.42 * a)
             look.draw_text(c, "tension", DX + 0.05, YT + 0.32, 0.18, L_TENS, a, "l", "bold")
             look.draw_text(c, "max at the top", DX + DW * 0.72 + op + 0.12, YT - 0.05, 0.16, P.TEXT, a, "l", "bold")
-            look.draw_text(c, "zero at the bottom", DX + 0.12 + op, YB + 0.05, 0.15, P.MUTED, a, "l")
+            look.draw_text(c, "zero at the free end", DX + 0.12, YB + 0.05, 0.15, P.MUTED, a * (1 - op / 0.5), "l")
+            if op > 0.01:
+                look.draw_text(c, "a pull adds tension all the way down", DX + 0.12 + op, YB + 0.05, 0.15, L_TENS, a * op / 0.5, "l")
         st.procedural(t_w + 0.3, b.end, 0.4, tri)
         # the pull at the hook
         def hook(c, t, look):
@@ -707,8 +699,9 @@ def _case_burst(st, b):
     s = b.sent
     x = PX[0]
     t0 = s[1] - 0.3
-    with st.span(t0, b.end):
-        base = _panel(st, x, "BURST", L_BURST, t0)
+    tp = s[0] + 0.5
+    with st.span(tp, b.end):
+        base = _panel(st, x, "BURST", L_BURST, tp)
         cem = [st.rect(x + sd * 0.49, PSHOE + 0.55, 0.26, 1.1, P.CEMENT, 0.05) for sd in (-1, 1)]
         ann = [st.rect(x + sd * 0.49, (PSEA + PSHOE + 1.1) / 2, 0.26, PSEA - PSHOE - 1.1, P.MUD, 0.05, alpha=0.5) for sd in (-1, 1)]
         walls = [st.rect(x + sd * 0.36, (PSEA + PSHOE) / 2, 0.07, PSEA - PSHOE, P.STEEL, 0.2) for sd in (-1, 1)]
@@ -716,7 +709,7 @@ def _case_burst(st, b):
         oh = st.rect(x, (PSHOE + PBOT) / 2, 0.84, PSHOE - PBOT, P.MUD, 0.055, alpha=0.6)
         bop = st.rect(x, PSEA + 0.2, 1.0, 0.34, P.STEEL_DK, 0.25)
         rams = [st.rect(x - 0.38, PSEA + 0.2, 0.22, 0.16, P.PANEL2, 0.27, role="solid"), st.rect(x + 0.38, PSEA + 0.2, 0.22, 0.16, P.PANEL2, 0.27, role="solid")]
-        st.fade_in(cem + ann + walls + [mud_in, oh, bop] + rams, t0 + 0.1, 0.4)
+        st.fade_in(cem + ann + walls + [mud_in, oh, bop] + rams, tp + 0.1, 0.4)
         # gas kick: bubbles rise, a gas column builds at the top
         t_k = W(b, 1, "gas kick")
         st.flow([(x + 0.05, PBOT + 0.15), (x - 0.05, PSHOE), (x + 0.05, PSEA - 0.2)], t_k - 0.2, t_k + 3.2, P.GAS, n=9, speed=1.5, r=0.05, z=0.3)
@@ -746,15 +739,16 @@ def _case_collapse(st, b):
     s = b.sent
     x = PX[1]
     t0 = s[2] - 0.3
-    with st.span(t0, b.end):
-        base = _panel(st, x, "COLLAPSE", L_COLL, t0)
+    tp = s[0] + 0.8
+    with st.span(tp, b.end):
+        base = _panel(st, x, "COLLAPSE", L_COLL, tp)
         cem = [st.rect(x + sd * 0.49, PSHOE + 0.55, 0.26, 1.1, P.CEMENT, 0.05) for sd in (-1, 1)]
         ann = [st.rect(x + sd * 0.49, (PSEA + PSHOE + 1.1) / 2, 0.26, PSEA - PSHOE - 1.1, P.MUD, 0.05, alpha=0.85) for sd in (-1, 1)]
         walls = [st.rect(x + sd * 0.36, (PSEA + PSHOE) / 2, 0.07, PSEA - PSHOE, P.STEEL, 0.2) for sd in (-1, 1)]
         mud_in = st.rect(x, PSHOE, 0.64, PSEA - PSHOE, P.MUD, 0.06, anchor="b", alpha=0.85)
         YF = -2.2                                  # loss zone (fracture) in the open hole
         oh_lo = st.rect(x, PBOT, 0.84, PSHOE - PBOT, P.MUD, 0.055, anchor="b", alpha=0.85)
-        st.fade_in(cem + ann + walls + [mud_in, oh_lo], t0 + 0.1, 0.4)
+        st.fade_in(cem + ann + walls + [mud_in, oh_lo], tp + 0.1, 0.4)
         al = st.text("full mud column outside", x, PBOT - 0.2, 0.15, P.MUD, 0.3, kind="bold")
         st.fade_in(al, t0 + 0.6, 0.4)
         t_lc = W(b, 2, "lost circulation")
@@ -766,9 +760,10 @@ def _case_collapse(st, b):
         fl = chip(st, x - 0.5, YF - 0.55, "cracked rock", P.FRAC, 0.14, z=0.45)
         st.fade_in(fl, t_lc + 0.4, 0.4)
         t_dr = W(b, 2, "drains away")
-        st.flow([(x, PSHOE + 1.0), (x, YF + 0.05), (wall - 0.6, YF + 0.05)], t_dr - 0.2, b.end, P.MUD, n=8, speed=1.0, r=0.045, z=0.3)
+        st.flow([(x, PSHOE + 1.0), (x, YF + 0.05), (wall - 0.6, YF + 0.05)], t_dr - 0.2, W(b, 2, "completely") + 1.6, P.MUD, n=8, speed=1.0, r=0.045, z=0.3)
+        st.flow([(x, YF + 0.05), (wall - 0.6, YF + 0.05)], W(b, 2, "completely") + 1.0, b.end, P.MUD, n=3, speed=0.5, r=0.04, z=0.3)
         # the level inside falls: partly, then completely
-        t_lv, t_part, t_all = W(b, 2, "level inside"), W(b, 2, "partly"), W(b, 2, "completely")
+        t_lv, t_part, t_all = W(b, 2, "level inside"), W(b, 2, "partly"), W(b, 2, "completely") + 0.5
         H = PSEA - PSHOE
         st.scale_to(mud_in, t_lv - 0.2, t_part + 0.3, sy=H * 0.5)
         st.scale_to(mud_in, t_all - 0.2, t_all + 1.0, sy=0.0001)
@@ -799,10 +794,11 @@ def _case_tension(st, b):
     t_lw, t_sh, t_op = W(b, 3, "lowered in"), W(b, 3, "sudden stops"), W(b, 3, "overpull")
     t_st = W(b, 3, "sticks")
     YTOP, Y_B0, drop = PSEA + 0.4, -0.75, 1.3          # string top (runs on up to the rig), bottom before / after running
-    with st.span(t0, b.end):
-        base = _panel(st, x, "TENSION", L_TENS, t0)
+    tp = s[0] + 1.1
+    with st.span(tp, b.end):
+        base = _panel(st, x, "TENSION", L_TENS, tp)
         mud = st.rect(x, (PSEA + PBOT) / 2, 1.24, PSEA - PBOT, P.MUD, 0.05, alpha=0.3)
-        st.fade_in(mud, t0 + 0.1, 0.4)
+        st.fade_in(mud, tp + 0.1, 0.4)
 
         def ybot(t):
             f = min(max((t - t_lw + 0.3) / (t_sh - t_lw + 0.3), 0.0), 1.0)    # constant running speed, then a sudden stop
@@ -833,15 +829,15 @@ def _case_tension(st, b):
             if a <= 0:
                 return
             ym = (ybot(t) + YTOP) / 2
-            _arrow(c, x - 0.62, ym + 0.4, x - 0.62, ym - 0.45, P.TEXT, a, 0.05, 0.16, look, glow=False)
-            look.draw_text(c, "buoyed\nweight", x - 0.62, ym - 0.78, 0.13, P.TEXT, a, "c", "bold")
+            _arrow(c, x - 0.72, ym + 0.4, x - 0.72, ym - 0.45, P.TEXT, a, 0.05, 0.16, look, glow=False)
+            look.draw_text(c, "buoyed\nweight", x - 0.8, ym - 0.8, 0.13, P.TEXT, a, "c", "bold")
             spike = math.exp(-max(t - t_sh, 0.0) / 0.25) * (1.0 if t >= t_sh else 0.0)
             op = _sm((t - t_op) / 0.6)
             ln = 0.45 + 0.5 * spike + 0.6 * op
             ya = YTOP - 1.1
-            _arrow(c, x + 0.62, ya, x + 0.62, ya + ln, L_TENS, a, 0.06, 0.18, look)
+            _arrow(c, x + 0.68, ya, x + 0.68, ya + ln, L_TENS, a, 0.06, 0.18, look)
             lab = "overpull" if t > t_op else "hook load"
-            look.draw_text(c, lab, x + 0.62, ya - 0.2, 0.13, L_TENS, a, "c", "bold")
+            look.draw_text(c, lab, x + 0.82, ya - 0.22, 0.13, L_TENS, a, "c", "bold")
         st.procedural(t_lw - 0.3, b.end, 0.45, forces)
         sk = chip(st, x, YTOP - 0.25, "shock", P.WARN, 0.15, z=0.5)
         st.fade_in(sk, t_sh, 0.2)
@@ -908,7 +904,7 @@ def beat_vme(st, tl):
             tx = st.text(nm, lx, ly, 0.15, P.MUTED, 0.3, align=al, kind="bold")
             st.fade_in(tx, t_one - 0.4 + 0.35 * k, 0.3)
             rect += [ln, tx]
-        rl = chip(st, _X(-1) + 0.1, _Y(1) + 0.42, "single-load ratings", P.TEXT, 0.17, "l")
+        rl = chip(st, _X(-0.56), _Y(1) + 0.42, "single-load ratings", P.TEXT, 0.16)
         st.fade_in(rl, t_one + 0.6, 0.4)
         st.fade_out(rl, s[3] - 0.4, 0.4)
         # s1: pulled, squeezed and pressurised at once (a pipe element)
@@ -949,7 +945,7 @@ def beat_vme(st, tl):
         dot = st.circle(_X(-0.72), _Y(0.72), 0.12, P.BAD, 0.6)
         t_dot = W(b, 3, "ellipse") + 0.8
         st.pop_in(dot, t_dot, 0.4)
-        dl = chip(st, _X(-0.72) - 0.05, _Y(1.27), "passes the rectangle, fails von Mises", P.BAD, 0.16, "c", z=0.55)
+        dl = chip(st, _X(-0.6), _Y(1.27), "passes the box, fails von Mises", P.BAD, 0.16, "c", z=0.55)
         st.fade_in(dl, t_dot + 0.2, 0.4)
         rip(st, _X(-0.72), _Y(0.72), t_dot + 0.2, t_dot + 2.2, P.BAD, period=0.8, r0=0.15, r1=0.6, end=s[5] - 0.3)
         st.fade_out(eq + dfl + dfld + [ml], s[4] - 0.4, 0.4)
@@ -1225,9 +1221,9 @@ def _pin_pts(kind, d=0.0):
     profile does not move in the section plane while the pin screws in: only the nose advances."""
     if kind == "api":
         xn = XN - d
-        return [(-6.4, PID), (xn, PID), (xn, _pitch_y(xn) - TH / 2)] + _thread(xn, XF - 0.05, "api") + [(XF - 0.05, POD), (-6.4, POD)]
-    return [(-6.4, PID), (NB[0] - d, PID), (NT[0] - d, NT[1]), (CS[0] - d, CS[1])] + _thread(XS - d, XF - 0.05, "prem") + \
-        [(XF - 0.05, POD), (-6.4, POD)]
+        return [(-9.5, PID), (xn, PID), (xn, _pitch_y(xn) - TH / 2)] + _thread(xn, XF - 0.05, "api") + [(XF - 0.05, POD), (-9.5, POD)]
+    return [(-9.5, PID), (NB[0] - d, PID), (NT[0] - d, NT[1]), (CS[0] - d, CS[1])] + _thread(XS - d, XF - 0.05, "prem") + \
+        [(XF - 0.05, POD), (-9.5, POD)]
 
 
 def _box_pts(kind):
@@ -1257,42 +1253,41 @@ def beat_connections(st, tl):
         view = View(st, t0, t1, z=0.2)
         with view:
             with st.span(t0, t1):
-                bore = st.rect((-6.4 + XE) / 2, (AY + PID) / 2, XE + 6.4, PID - AY, P.BG, 0.02)
-                cl = st.dashed((-6.4, AY), (XE + 0.2, AY), P.MUTED, 0.025, 0.4, 0.15, 0.05)
+                bore = st.rect((-9.5 + XE) / 2, (AY + PID) / 2, XE + 9.5, PID - AY, P.BG, 0.02)
+                cl = st.dashed((-9.5, AY), (XE + 0.2, AY), P.MUTED, 0.025, 0.4, 0.15, 0.05)
+                al = st.text("pipe axis", -5.6, AY - 0.2, 0.14, P.MUTED, 0.3, align="l")
                 brk = st.line([(XE, COD + 0.1), (XE - 0.08, (COD + PID) / 2 + 0.3), (XE + 0.08, (COD + PID) / 2 - 0.3), (XE, PID - 0.05)],
                               P.MUTED, 0.025, 0.4)
-                st.fade_in([bore, brk] + cl, t0, 0.4)
-                st.fade_out([bore, brk] + cl, t1 - 0.4, 0.4)
+                st.fade_in([bore, brk, al] + cl, t0, 0.4)
+                st.fade_out([bore, brk, al] + cl, t1 - 0.4, 0.4)
             _conn_api(st, b)
             ctx = _conn_premium(st, b)
-        al = st.text("pipe axis", -6.2, AY - 0.2, 0.14, P.MUTED, 0.3, align="l")
-        st.fade_in(al, t0 + 0.3, 0.4)
-        st.fade_out(al, ctx["t_zoom"] - 0.6, 0.3)
-        st.fade_in(al, ctx["t_out"] + 0.9, 0.4)
-        st.fade_out(al, t1 - 0.4, 0.4)
         _conn_labels(st, b, view, ctx)
         _conn_end(st, b)
 
 
 def _conn_intro(st, b):
+    """Two pipe joints and a coupling at true-ish proportions: the right joint's threaded pin end screws into the coupling."""
     s = b.sent
     t0, t1 = b.start, s[1] - 0.1
-    H = POD - AY
+    Y, H, CH, CW = 0.35, 1.0, 1.36, 1.9          # axis height, pipe OD, coupling OD, coupling length
     with st.span(t0, t1 + 0.5):
-        lp = st.rect(-5.15, AY, 2.3, 2 * H, P.STEEL, 0.2)
-        cp = st.rect(XM, AY, 2 * (XM - XF), 2 * (COD - AY), P.STEEL_DK, 0.25)
-        xr = 2 * XM - XF
-        rp = st.rect(xr + 1.4 + 2.0, AY, 2.4, 2 * H, P.STEEL, 0.2)
-        thr = [st.rect(xr + 0.1 + 2.0, AY, 0.22, 2 * H - 0.3, "#71839c", 0.19)]
+        lp = st.rect(-3.3, Y, 6.6, H, P.STEEL, 0.2)                       # left joint: -6.6 .. 0 (its pin sits in the coupling)
+        cp = st.rect(0.0, Y, CW, CH, P.STEEL_DK, 0.25)
+        L0, L1 = 2.3, 0.0                                                  # right joint's pin end: before / after make-up
+        rp = st.rect(L0 + 3.0, Y, 6.0, H, P.STEEL, 0.2)
+        thr = [st.rect(L0 + 0.12 + 0.15 * k, Y, 0.05, H - 0.04, "#71839c", 0.21) for k in range(6)]
         st.fade_in([lp, cp, rp] + thr, t0 + 0.2, 0.5)
         t_j = W(b, 0, "threaded joints")
-        st.move([rp] + thr, t_j - 0.6, t_j + 0.8, dx=-2.0)
-        l1 = chip(st, -5.15, -2.0, "pipe joint", P.TEXT, 0.2)
-        l2 = chip(st, XM, -3.05, "coupling: threaded both ends", P.TEXT, 0.2)
-        l3 = chip(st, xr + 0.3, 2.15, "threaded pin end", P.TEXT, 0.18)
-        st.fade_in(l1 + l2, t_j, 0.4)
-        st.fade_in(l3, t_j + 0.6, 0.4)
-        st.fade_out([lp, cp, rp] + thr + l1 + l2 + l3, t1 - 0.2, 0.5)
+        st.move([rp] + thr, t_j - 0.5, t_j + 1.2, dx=L1 - L0)
+        l1 = chip(st, -3.3, Y - 0.95, "pipe joint", P.TEXT, 0.2)
+        l2 = chip(st, 0.0, Y - 1.15, "coupling: threaded at both ends", P.TEXT, 0.2)
+        l3 = chip(st, L0 + 0.5, Y + 1.0, "threaded pin end", P.TEXT, 0.18)
+        st.fade_in(l1 + l2, t_j - 0.2, 0.4)
+        st.fade_in(l3, b.start + 0.6, 0.4)
+        st.move(l3, t_j - 0.5, t_j + 1.2, dx=L1 - L0 + 1.0)
+        st.fade_out(l3, t_j + 1.6, 0.4)
+        st.fade_out([lp, cp, rp] + thr + l1 + l2, t1 - 0.2, 0.5)
 
 
 def _conn_api(st, b):
@@ -1304,7 +1299,7 @@ def _conn_api(st, b):
         st.fade_in([box, bo], t0, 0.45)
         _pin_proc(st, t0, t1 + 0.5, "api", lambda t: (0.0, _env(t, t0, t1 + 0.45, 0.45)))
         pl = st.text("pin (pipe end)", -5.3, (PID + POD) / 2, 0.17, P.BG, 0.3, kind="bold")
-        bl = st.text("box (coupling)", -2.0, COD - 0.32, 0.17, P.BG, 0.3, kind="bold")
+        bl = st.text("box (coupling)", -0.6, COD - 0.32, 0.17, P.BG, 0.3, kind="bold")
         st.fade_in([pl, bl], t0 + 0.4, 0.4)
         # the helical gap between pin and box threads: a spiral leak path from the bore to the outside
         gap = [(XN + 0.1, (PID + 0.98) / 2)] + [(x, y + 0.017) for x, y in _thread(XN, XF, "api")] + [(XF - 0.3, POD + 0.3)]
@@ -1324,7 +1319,7 @@ def _conn_premium(st, b):
     t0 = s[2] - 0.1
     t_end = s[4] - 0.1
     t_mu = W(b, 3, "make-up")
-    t_mu1 = b.sent_end[3] - 0.1
+    t_mu1 = W(b, 3, "torque-turn", 1.0) + 0.3
     N_S = 0.9                                     # fraction of the make-up at which the pin nose meets the shoulder
     t_c0 = t_mu + 0.3
     t_sh = t_c0 + N_S * (t_mu1 - t_c0)
@@ -1343,8 +1338,8 @@ def _conn_premium(st, b):
         bo = st.line(_box_pts("prem") + [_box_pts("prem")[0]], "#46536a", 0.018, 0.221)
         st.fade_in([box, bo], t0 + 0.15, 0.45)
         _pin_proc(st, t0, t_end, "prem", dfun)
-        pl = st.text("pin", -5.3, (PID + POD) / 2, 0.17, P.BG, 0.3, kind="bold")
-        bl = st.text("box", -2.0, COD - 0.32, 0.17, P.BG, 0.3, kind="bold")
+        pl = st.text("pin (pipe end)", -5.3, (PID + POD) / 2, 0.17, P.BG, 0.3, kind="bold")
+        bl = st.text("box (coupling)", -0.6, COD - 0.32, 0.17, P.BG, 0.3, kind="bold")
         st.fade_in([pl, bl], t0 + 0.5, 0.4)
         seal = st.line([CS, NT], P.TEXT, 0.035, 0.4, role="glow")
         shld = st.line([NT, NB], P.WARN, 0.04, 0.4)
@@ -1363,7 +1358,8 @@ def _conn_premium(st, b):
                 t_zoom=t_ms - 1.1, t_out=s[3] - 0.1)
 
 
-ZF, ZA, ZK = (0.15, 0.9), (-0.3, 0.3), 2.6      # zoom: world focus, screen point, scale
+ZF, ZA, ZK = (0.15, 0.9), (-1.2, -0.3), 2.0     # zoom: world focus, screen point, scale
+V1F, V1A, V1K = (-2.0, 1.4), (0.6, 0.35), 1.3   # opening view of the half-section (fills the frame)
 
 
 def _zs(p):
@@ -1373,6 +1369,7 @@ def _zs(p):
 def _conn_labels(st, b, view, ctx):
     s = b.sent
     t_zoom, t_out = ctx["t_zoom"], ctx["t_out"]
+    view.camera(s[1] - 0.4, s[1] - 0.35, V1F, V1A, V1K)
     view.camera(t_zoom, t_zoom + 1.1, ZF, ZA, ZK)
     view.camera(t_out, t_out + 1.1, (0.0, 0.0), (0.0, 0.0), 1.0)
     with st.span(b.start, b.end):
@@ -1392,13 +1389,13 @@ def _conn_labels(st, b, view, ctx):
         # zoomed labels (screen space, computed through the zoom)
         p_seal = _zs(((CS[0] + NT[0]) / 2, (CS[1] + NT[1]) / 2))
         p_sh = _zs(((NT[0] + NB[0]) / 2, (NT[1] + NB[1]) / 2))
-        sll = chip(st, -3.3, -1.2, "metal-to-metal seal: cone on cone", P.TEXT, 0.2)
-        sld = leader(st, -1.6, -0.98, p_seal[0], p_seal[1], P.TEXT)
-        tsl = chip(st, 2.7, -1.2, "torque shoulder", P.WARN, 0.2)
-        tsd = leader(st, 2.0, -0.98, p_sh[0], p_sh[1], P.WARN)
+        sll = chip(st, -3.4, -2.55, "metal-to-metal seal: cone on cone", P.TEXT, 0.2)
+        sld = leader(st, -2.2, -2.33, p_seal[0], p_seal[1], P.TEXT)
+        tsl = chip(st, 1.7, -2.55, "torque shoulder", P.WARN, 0.2)
+        tsd = leader(st, 1.0, -2.33, p_sh[0], p_sh[1], P.WARN)
         st.fade_in(sll + sld, ctx["t_ms"] + 0.2, 0.4)
         st.fade_in(tsl + tsd, ctx["t_ts"] + 0.2, 0.4)
-        gt = chip(st, -0.3, -2.65, "✓ gas-tight", P.SAFE, 0.22)
+        gt = chip(st, -0.9, -3.25, "✓ gas-tight", P.SAFE, 0.22)
         st.fade_in(gt, ctx["t_gt"] + 0.1, 0.35)
         st.fade_out(sll + sld + tsl + tsd + gt, t_out - 0.4, 0.35)
         # qualified by test (while the view pulls back), then make-up on the torque-turn plot
