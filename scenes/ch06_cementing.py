@@ -1389,8 +1389,8 @@ def beat_logs(st, tl):
         base = cut.draw()
         fills = [cut.static_gap(sd, P.MUD, YT, YM, 0.05, alpha=0.85) for sd in "lr"] + \
                 [cut.static_gap(sd, P.CEMENT, YM, YB, 0.05) for sd in "lr"] + [cut.static_bore(P.MUD, YT, YB, 0.04, alpha=0.45)]
-        zl = [st.text("free pipe", CXl - 0.1, YT - 0.2, 0.15, P.MUD, 0.5, align="r", kind="bold"),
-              st.text("cemented", CXl - 0.1, YM - 0.22, 0.15, P.CEMENT, 0.5, align="r", kind="bold")]
+        zl = pill(st, CXl, YT - 0.35, "free pipe", P.PANEL2, P.MUD, 0.15, 0.3) + \
+            pill(st, CXl, YM - 0.35, "cemented", P.PANEL2, P.CEMENT, 0.15, 0.3)
         st.fade_in(base + fills + zl, s[2] + 0.1, 0.45)
         t_cbl = W(b, 3, "listens")
         t_damp = W(b, 3, "good cement damps")
