@@ -120,7 +120,9 @@ def small(src, outdir, total, limit_mib=29.0, vbr_target=480, subs_dir=None):
     for i in range(parts):
         p = os.path.join(outdir, f"{NAME}_720p_part{i + 1}of{parts}.mp4")
         run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{i * seg:.3f}", "-t", f"{seg:.3f}", "-i", src,
-             "-vf", "scale=1280:720:flags=lanczos" + (",ass=subs.ass" if subs_dir else ""), "-c:v", "libx264", "-preset", "slow", "-b:v", f"{vbr}k",
+             # input seeking restarts timestamps at 0: shift to film time for the subtitles, then back
+             "-vf", "scale=1280:720:flags=lanczos" + (f",setpts=PTS+{i * seg:.3f}/TB,ass=subs.ass,setpts=PTS-STARTPTS" if subs_dir else ""),
+             "-c:v", "libx264", "-preset", "slow", "-b:v", f"{vbr}k",
              "-maxrate", f"{int(vbr * 1.6)}k", "-bufsize", f"{vbr * 3}k", "-tune", "animation", "-pix_fmt", "yuv420p",
              "-c:a", "aac", "-b:a", f"{abr}k", "-ac", "2", "-movflags", "+faststart", p], cwd=subs_dir)
         out.append(p)
