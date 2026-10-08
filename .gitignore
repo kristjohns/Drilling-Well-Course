@@ -15,3 +15,6 @@ build/
 # Copyrighted standards / papers you drop in for me to cite from (NORSOK, API, ISO)
 sources/*
 !sources/.gitkeep
+
+# local logs
+*.log
