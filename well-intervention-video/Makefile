@@ -10,7 +10,8 @@
 #   make preview CH=1  one chapter at 960x540 -> renders/preview/chNN.mp4
 #   make render        every chapter at 1080p30 -> renders/video/chNN.mp4
 #   make assemble      chapters + mix + subtitles -> build/*.mp4 + .srt (+ 720p parts for sharing)
-#   make final         script -> audio -> mix -> render -> assemble
+#   make web           HLS web player page (needs make assemble first) -> build/web/
+#   make final         script -> audio -> mix -> render -> assemble -> web
 #
 # `make script` rewrites timeline.json from the script budgets; `make audio` then re-times it from the real speech
 # (cached sentences are not re-synthesised), so always run them in that order (`make audio` does it for you).
@@ -23,7 +24,7 @@ JOBS     ?= 2
 CHAPTERS ?= 5 4 2 3 7 1 6 8 0
 CH       ?= 1
 
-.PHONY: help doctor venv script lint-script voice-model audio mix qa preview render assemble final clean
+.PHONY: help doctor venv script lint-script voice-model audio mix qa preview render assemble web final clean
 
 help:
 	@sed -n '3,15p' Makefile
@@ -82,7 +83,10 @@ render:
 assemble:
 	$(VPY) scenes/assemble.py --small
 
-final: script audio mix render assemble
+web:
+	$(VPY) scenes/package_web.py
+
+final: script audio mix render assemble web
 
 clean:
 	rm -rf renders/preview renders/qa build

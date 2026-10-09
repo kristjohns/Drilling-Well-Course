@@ -22,7 +22,8 @@ locally). The music and sound design are synthesised. There are no stock clips, 
 | `into_the_live_well_1080p.mp4` | Full film, 1080p30, subtitles burned in |
 | `into_the_live_well_1080p_nosubs.mp4` | Same, without burned-in subtitles |
 | `into_the_live_well_1080p.srt` | Subtitles (also timed from the real speech) |
-| `into_the_live_well_720p_partNN.mp4` | Compact 720p parts for sharing in chat |
+| `into_the_live_well_720p_partNofM.mp4` | Compact 720p parts for sharing in chat |
+| `web/` | Web player (1080p HLS, chapter menu, subtitles on/off, speed); `make web`, then publish `web/index.html` with the other files beside it |
 
 Plain-text companions, generated from the script:
 
@@ -73,7 +74,7 @@ The numbers on screen come from one place, `scenes/common/model.py`, and the nar
 make venv            # skia-python, kokoro-onnx, onnxruntime, numpy, Pillow, PyYAML (needs ffmpeg with libx264 and libass)
 make voice-model     # downloads the Kokoro voice and checks its SHA-256
 make doctor          # what is missing, if anything
-make final           # script -> audio -> mix -> render -> assemble  (about 2 CPU-hours at 4 cores)
+make final           # script -> audio -> mix -> render -> assemble -> web
 make qa              # 3 stills per beat -> renders/qa/chNN/ for a quick visual check
 make preview CH=5    # one chapter at 960x540
 ```
