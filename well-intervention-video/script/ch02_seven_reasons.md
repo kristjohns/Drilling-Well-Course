@@ -1,0 +1,56 @@
+# Ch 2: Seven reasons to go back in
+BUDGET: 330
+
+## 2.01 | 24.5 | anim
+VO: Wells fail in a handful of ways, so there are only a handful of reasons to go back in. We will walk through seven: to see, to secure, to clear, to stimulate, to lift, to steer, and to finish. For each, ask three questions. What is wrong? How would we know? And what would we do?
+SHOT: Seven numbered chips appear in a column on the left (SEE, SECURE, CLEAR, STIMULATE, LIFT, STEER, FINISH). On the right the composite well, with a small numbered marker dropped at the place in the well where each reason lives: 1 whole well, 2 a leak point, 3 the tubing wall, 4 the perforations, 5 a gas-lift mandrel, 6 the sleeve and plug, 7 the packer region. Three question pills pop up: "What is wrong?" "How would we know?" "What would we do?"
+FLAGS: GEN; SIM: the seven-way split is a teaching grouping, not an industry standard
+TERMS:
+
+## 2.02 | 55.5 | anim
+VO: First, to see. A well is a black box. All we get at the surface is a pressure and a flow rate. To look inside, we lower instruments. A gauge records pressure and temperature while the well is shut in. This is a pressure build-up test, and how the pressure builds back tells a reservoir engineer how easily the rock gives up its oil, and how much damage there is near the well. A production log carries a small spinner, a turbine turned by the flow, and measures the flow past each perforation: which ones produce, which are watering out, which are dead. A caliper feels the tubing wall with thin arms, and finds corrosion before it becomes a hole. Nearly every other job starts with one of these.
+SHOT: Left: the well as a sealed box with only two gauges on top (pressure, rate). Then three instrument panels in turn. (1) Gauge: pressure-versus-time build-up curve rising and flattening after shut-in, annotated "shut in". (2) Production log: tool with a spinner across three perforation zones; flow-contribution bars next to each (e.g. 55 %, 40 %, 5 %; the third labelled "watering out" in blue) as the spinner speeds up or stalls. (3) Caliper: arms feeling a tubing wall with a pit; a wall-thickness profile with a dip.
+FLAGS: GEN; SIM: contribution percentages are illustrative
+TERMS: pressure build-up; production log; caliper
+
+## 2.03 | 45 | anim
+VO: Second, to secure the well. A producing well must keep two independent barriers between the reservoir and the outside world, at all times. Time attacks them. Tubing corrodes. A packer seal leaks. The safety valve fails its periodic test. Pressure shows up in the annulus, the gap between tubing and casing, where there should be none. That is a barrier problem, and the regulations say it must be understood and dealt with, or the well must be shut in. Interventions find the leak with a log, and then restore the barrier: a plug set below it, a patch across it, or a replacement valve.
+SHOT: Well cutaway with two barrier envelope outlines (primary blue, secondary red, barrier panels only) drawn around the tubing/packer/valve and the casing/tree. A small leak appears in the tubing (corrosion pit grows to a hole); fluid sprays into the annulus; an annulus pressure gauge counter climbs from 0 to 40 bar and goes red; the primary envelope outline breaks. A logging tool finds the leak (leak spot glows). Three fixes cycle in the leak region: plug below, patch across, new valve; the envelope outline closes again and the gauge falls.
+FLAGS: NO; SIM: leak path and 40 bar annulus pressure are illustrative; VERIFY: the Norwegian rule that a well with a failed barrier must be restored or shut in (Activities Regulations / NORSOK D-010) is paraphrased from search summaries, not read from the text
+TERMS: barrier; annulus
+
+## 2.04 | 59.5 | anim
+VO: Third, to clear what is in the way. Scale is mineral that falls out of the water: barium sulphate, where injected seawater meets formation water, or calcium carbonate, as pressure and temperature drop. Wax comes out of the oil as it cools, and asphaltenes as it loses pressure. Hydrates are ice-like solids of water and gas that form when it is cold and the pressure is high. Sand and fines settle at the bottom and bury the perforations. Each one narrows the flow path, and the rate falls as the bore closes. The cure is to scrape it, jet it, mill it, dissolve it, or wash it out. And sometimes the obstruction is the debris of an earlier job, a dropped tool or a broken wire. That is called a fish, and getting it out is called fishing.
+SHOT: Tubing cross-section (circle) and long section side by side. Deposits grow on the wall in turn with labels: scale (white crystalline crust, with a tiny chemistry inset: Ba + SO4 -> BaSO4 where two water streams meet), wax (tan layer), hydrate (pale-blue ice), sand fill (gold grains piling up from the bottom over the perforations). A flow-rate counter falls as the bore narrows (e.g. 100 % -> 45 %). Last: a dropped tool lies in the bore with a fishing-neck label and a hook approaching.
+FLAGS: GEN; SIM: the flow-rate fall is illustrative; real loss depends on the deposit and the length affected
+TERMS: scale; wax; hydrate; fishing
+
+## 2.05 | 42.5 | anim
+VO: Fourth, to stimulate. Drilling mud leaves a skin of solids in the pores around the well, and production can leave damage of its own. It restricts the inflow like a clogged filter. Acid pumped into the rock dissolves it, and that is called matrix stimulation. If the problem is that too little rock is connected to the well, we can shoot more perforations, or in some wells crack the rock open with a hydraulic fracture. In every case the treatment has to be placed at a precise depth, which means pumping through a pipe that can be positioned.
+SHOT: Close-up of the rock around one perforation tunnel: pores drawn as dots, a dark damaged halo clogging them; flow arrows thin. Acid (lime-green) pumped in dissolves the halo; arrows thicken and a rate counter climbs. Then a zoom-out showing new perforations added above and a crack (fracture) fanning from a perforation. A target marker "placed at the right depth".
+FLAGS: GEN; SIM: acid treatment applies mainly to carbonate or mineral damage; sandstone treatments use different acid recipes
+TERMS: matrix stimulation
+
+## 2.06 | 49 | anim
+VO: Fifth, to lift. As the reservoir pressure falls, many oil wells can no longer push their fluid to the surface unaided. Gas lift fixes that: gas is injected down the annulus, enters the tubing through valves in the side-pocket mandrels, and lightens the fluid column. Those valves wear out and are changed by wire. In gas wells the opposite problem appears. As the rate drops, the gas moves too slowly to carry droplets of water out, so they fall back and the well drowns in its own liquid. That is liquid loading. A narrower string of coiled tubing hung inside the tubing, a velocity string, speeds the gas up again and restores the flow.
+SHOT: Three mini-wells side by side. (A) Oil well: heavy column, pressure gauge at the bottom high, flow stalls; (B) gas lift: gas (crimson) injected down the annulus enters through a mandrel valve as bubbles; the column lightens (gauge falls) and flow resumes; the valve is highlighted "wears out -> changed by wire". (C) Gas well: water droplets falling back against slow gas, liquid pool grows; a thin string hangs inside; gas speed arrows lengthen, droplets rise out.
+FLAGS: GEN
+TERMS: gas lift; liquid loading; velocity string
+
+## 2.07 | 38 | anim
+VO: Sixth, to steer what the well produces. Reservoirs do not give evenly. Water arrives early through one zone and drowns the oil from the others. The water cut climbs, and the well can die long before the reservoir is empty. To fix it we shut the offending zone off, with a plug, a cement squeeze, or by closing a sliding sleeve, and perhaps open another zone higher up. A few modern wells have valves that do this on command, but most have to be steered by going in.
+SHOT: Cutaway of the reservoir with three zones; the lowest shows blue water rising in a cone. Right: a stacked water-cut chart (oil green, water blue) where the water share climbs to 90 %. Then a plug (steel) is set below the middle zone / the sleeve of the water zone closes, the water cone retreats, the chart steps back down, and new perforations open higher up.
+FLAGS: GEN; SIM: three-zone reservoir and the water-cut curve are illustrative
+TERMS: water cut
+
+## 2.08 | 36 | anim
+VO: Seventh, to finish. When a well reaches the end of its life, it must be permanently plugged, so that it can never leak again. Before the plugs go in, the well is logged, cleaned out, and the pipes may be cut. Some of that work can be done without a rig. Or the well is not finished, only changed: converted from producer to water injector, or a side-track is drilled out of it into fresh reservoir. Either way, an intervention prepares the ground.
+SHOT: Well cutaway shows three cement plugs (grey, green-outlined when verified) building up from the bottom; a cutter in the tubing; then two branches: a producer arrow flipped to an injector (water arrows pointing into the rock), and a new branch hole peeling off from the main bore into a fresh blue-green reservoir lens.
+FLAGS: GEN; SIM: plug count and placement are schematic, and the detailed requirements are not covered here
+TERMS:
+
+## 2.09 | 46 | anim
+VO: Look at what these seven jobs ask of us. To see: carry a sensor to a depth, and bring the answer back. To secure: set a plug, pull a valve, shift a sleeve. To clear: scrape, mill, wash. To stimulate: pump a fluid to an exact spot. To lift: swap a valve, or hang a pipe. To steer: set a plug, shoot a perforation. Put it all together and you get a short list of capabilities: carry and place tools, pull and hammer, pump, push, rotate, and send power and data. Every intervention method is a different bundle of those. Now we can look at the bundles.
+SHOT: A matrix: seven reasons (rows) against seven capability columns (CARRY/PLACE, PULL/HAMMER, PUMP, PUSH, ROTATE, POWER/DATA, STAY LIVE). Dots light up row by row as each job is described. Column totals pulse. The capability columns slide left and become the header of the next chapters' method table.
+FLAGS: GEN; SIM: the matrix is a teaching device; many jobs use more than one capability
+TERMS:

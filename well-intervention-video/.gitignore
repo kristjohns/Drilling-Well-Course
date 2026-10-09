@@ -1,0 +1,20 @@
+# Python / Blender
+.venv/
+__pycache__/
+*.pyc
+*.blend1
+
+# Build products (large, reproducible from scenes/ + script/)
+renders/*
+!renders/.gitkeep
+audio/*
+!audio/.gitkeep
+!audio/*.py
+build/
+
+# Copyrighted standards / papers you drop in for me to cite from (NORSOK, API, ISO)
+sources/*
+!sources/.gitkeep
+
+# local logs
+*.log

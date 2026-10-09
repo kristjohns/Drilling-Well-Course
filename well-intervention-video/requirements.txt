@@ -1,0 +1,7 @@
+# Rendering: skia (2-D vector engine). Voice: Kokoro-82M via kokoro-onnx + onnxruntime (CPU).
+skia-python>=144
+kokoro-onnx==0.6.1
+onnxruntime>=1.20
+numpy
+Pillow
+PyYAML

@@ -1,0 +1,206 @@
+# Term ledger. Key = canonical term. `def` = one-line definition shown as an on-screen term card
+# the first time the term is spoken (the beat lists it under TERMS).
+# `aliases` = other spellings the first-use lint should catch. Keys lower-case.
+# Rule enforced by `make lint-script`: the FIRST beat whose narration contains any alias must list the key in TERMS.
+
+well intervention:
+  def: "Any operation in a well after it is completed to look, measure, clean, repair, change or close it. Not drilling."
+  aliases: [intervention, interventions]
+casing:
+  def: "Steel pipe cemented into the hole to line it and seal the rock from the well."
+  aliases: []
+tubing:
+  def: "The narrower pipe hung inside the casing that carries the produced fluids to the surface."
+  aliases: [production tubing]
+packer:
+  def: "A steel and rubber plug that seals the gap between tubing and casing so flow can only go up the tubing."
+  aliases: [packers]
+downhole safety valve:
+  def: "A fail-safe valve in the tubing, held open by hydraulic pressure, that closes by itself if that pressure is lost."
+  aliases: [safety valve, DHSV]
+Christmas tree:
+  def: "The block of valves on top of the wellhead that controls and isolates the flow."
+  aliases: [tree, trees, xmas tree]
+landing nipple:
+  def: "A short tubing section with a machined internal groove: the seat in which a plug is locked."
+  aliases: [landing nipples, nipple, nipples]
+sliding sleeve:
+  def: "A window in the tubing wall, opened or closed by shifting a sleeve with a tool."
+  aliases: [sliding sleeves]
+side-pocket mandrel:
+  def: "A tubing section with an off-centre pocket that holds a valve (for example a gas-lift valve) beside the main bore."
+  aliases: [side-pocket mandrels, side pocket mandrel, side pocket mandrels]
+perforations:
+  def: "Holes shot through casing and cement into the reservoir rock, where the oil enters the well."
+  aliases: [perforation]
+workover:
+  def: "The older word for heavy well work, typically pulling and replacing the tubing."
+  aliases: [workovers]
+wireline:
+  def: "Cable lowered into a well to carry tools and data; slickline, braided line and electric line are wirelines."
+  aliases: [wirelines]
+coiled tubing:
+  def: "Continuous steel pipe, with no joints, stored on a reel and pushed into the well. It can carry tools and pump fluid."
+  aliases: [coiled tube, coiled tubes]
+live well:
+  def: "A well that holds pressured hydrocarbons and will flow if opened."
+  aliases: [live wells]
+kill fluid:
+  def: "A heavy fluid whose weight holds the formation pressure back, so the well can be opened safely."
+  aliases: [killed, kill-weight fluid, kill weight fluid]
+pressure build-up:
+  def: "A test that records how the pressure recovers after a well is shut in. It reveals rock permeability and damage."
+  aliases: [build-up, buildup, pressure build up]
+production log:
+  def: "A logging run that measures flow rate and fluid type along the well, zone by zone."
+  aliases: [production logs, PLT]
+caliper:
+  def: "A tool with feeler arms that measures the inside diameter of a pipe to find corrosion and deposits."
+  aliases: [calipers]
+barrier:
+  def: "Something that can stop flow from the reservoir to the surroundings. A well must always have two independent ones."
+  aliases: [barriers]
+annulus:
+  def: "The ring-shaped gap between two concentric pipes, here between tubing and casing."
+  aliases: [annuli, annular]
+scale:
+  def: "Hard mineral deposits (for example barium sulphate or calcium carbonate) that precipitate from water on pipe walls."
+  aliases: []
+wax:
+  def: "Paraffin that crystallises out of crude oil as it cools and coats pipe walls."
+  aliases: [paraffin]
+hydrate:
+  def: "An ice-like solid of water and gas that forms at low temperature and high pressure and can block flow."
+  aliases: [hydrates]
+fishing:
+  def: "Retrieving a lost or stuck object (a fish) from a well with special tools."
+  aliases: [fish]
+matrix stimulation:
+  def: "Pumping acid into the pores of the rock around the well, below fracture pressure, to dissolve damage."
+  aliases: []
+gas lift:
+  def: "Injecting gas into the tubing to lighten the fluid column so a weak well can flow."
+  aliases: [gas-lift]
+liquid loading:
+  def: "Liquids collecting in a gas well because the gas is too slow to carry them out, choking the flow."
+  aliases: []
+velocity string:
+  def: "A small-diameter tubing string hung inside the tubing to speed up the gas and carry liquids out."
+  aliases: [velocity strings]
+water cut:
+  def: "The share of water in the total produced liquid."
+  aliases: []
+lubricator:
+  def: "A pressure-tight tube on top of the tree, long enough to hold the toolstring: the airlock into a live well."
+  aliases: [lubricators]
+toolstring:
+  def: "The tools joined end to end on the line or tube and lowered into the well."
+  aliases: [tool string, toolstrings]
+master valve:
+  def: "The main shut-off valves of the tree. There are two, in series, for redundancy."
+  aliases: [master valves]
+wing valve:
+  def: "The tree valve that routes production out to the flowline."
+  aliases: [wing valves]
+swab valve:
+  def: "The topmost tree valve, straight above the tubing. Tools enter the well through it."
+  aliases: [swab valves]
+stuffing box:
+  def: "Hydraulically squeezed packing that seals around a moving solid wire at the top of the lubricator."
+  aliases: [stuffing boxes]
+grease injection head:
+  def: "A seal for stranded cable: grease pumped above well pressure into narrow tubes around the cable."
+  aliases: [grease head, grease injection heads]
+blowout preventer:
+  def: "A stack of valves (rams, annular) that can close around or shut off the well in an emergency. Often BOP."
+  aliases: [BOP, BOPs, blowout preventers]
+ram:
+  def: "A pair of steel blocks that slide in from the sides to close around a line, grip a pipe, cut it, or seal the bore."
+  aliases: [rams]
+well barrier envelope:
+  def: "The set of components that together stop flow from the reservoir to the surroundings. Two independent ones are required."
+  aliases: [barrier envelope, barrier envelopes, envelope, envelopes]
+slickline:
+  def: "Single-strand solid steel wire (about 2.3 to 4 mm) used for mechanical work: pulling, hammering, positioning."
+  aliases: [slick line]
+braided line:
+  def: "Stranded wire rope, stronger than slickline. Used for heavy fishing and pulling. Needs a grease head."
+  aliases: [braided cable]
+electric line:
+  def: "Braided cable with insulated electrical conductors in the core: carries power down and data up. Also e-line."
+  aliases: [e-line, eline, e line]
+stem:
+  def: "Heavy steel weight bars in the toolstring that overcome pressure and friction and add mass for jarring."
+  aliases: [weight bars, sinker bars]
+jar:
+  def: "A sliding joint that delivers a sharp impact, up or down, to free or set tools."
+  aliases: [jars, jarring]
+lock mandrel:
+  def: "The tool with spring-loaded keys that locks a plug in a landing nipple."
+  aliases: [lock mandrels]
+fishing neck:
+  def: "The standard profile on top of a tool or plug that a pulling tool latches onto."
+  aliases: [fishing necks]
+kick-over tool:
+  def: "A wireline tool whose arm swings out to reach a valve in a side pocket and pull or set it."
+  aliases: [kickover tool, kick over tool, KOT]
+casing collar locator:
+  def: "A sensor that detects the casing joints as the tool passes, used to correlate depth. CCL."
+  aliases: [CCL]
+perforating gun:
+  def: "A carrier of shaped charges fired in the well to make perforations."
+  aliases: [perforating guns]
+shaped charge:
+  def: "An explosive charge with a metal-lined cone that collapses into a high-speed jet to punch through steel and rock."
+  aliases: [shaped charges]
+injector head:
+  def: "The machine that drives coiled tubing in and out of the well using two opposed chains with gripper blocks."
+  aliases: [injector heads]
+gooseneck:
+  def: "The curved guide that carries coiled tubing from the reel into the top of the injector head."
+  aliases: []
+stripper:
+  def: "A set of hydraulically energised rubber elements that seal around moving coiled tubing. Also called a packoff."
+  aliases: [packoff, pack-off]
+bottom hole assembly:
+  def: "The tools hung on the end of the coiled tube: connector, valves, disconnect and the working tool. BHA."
+  aliases: [BHA, bottom-hole assembly]
+check valve:
+  def: "A one-way valve (here a pair of flaps) that stops well fluid flowing back up the inside of the tube."
+  aliases: [check valves]
+balance point:
+  def: "The depth at which the weight of tube in the hole equals the pressure force pushing it out."
+  aliases: []
+fatigue life:
+  def: "The number of bend cycles a tube can take before cracks form, shortened by pressure and tracked by software."
+  aliases: [fatigue]
+lock-up:
+  def: "When buckled tubing presses so hard on the wall that no further force can push it deeper."
+  aliases: [lockup, lock up]
+snubbing unit:
+  def: "A hydraulic workover unit that pushes jointed pipe into or out of a live well using two sets of slips and jacks."
+  aliases: [snubbing, hydraulic workover unit, hydraulic workover units]
+bullheading:
+  def: "Pumping fluid down the tubing from the surface to push the well fluids back into the reservoir."
+  aliases: [bullhead, bullheaded]
+riser:
+  def: "A pressure-tight pipe from the vessel to the seabed that carries tools, fluids and returns."
+  aliases: [risers]
+tubing hanger:
+  def: "The fitting that supports the tubing and seals it in the wellhead or tree."
+  aliases: [tubing hangers]
+vertical tree:
+  def: "A subsea tree installed on the wellhead with a straight bore above the hanger; it can be pulled without touching the tubing."
+  aliases: [vertical trees]
+horizontal tree:
+  def: "A subsea tree with the tubing hanger inside it and a side outlet; tubing must be pulled to retrieve it."
+  aliases: [horizontal trees]
+riserless:
+  def: "Without a marine riser: tools run through open water on a line. RLWI is riserless light well intervention."
+  aliases: [RLWI, riser-less]
+moonpool:
+  def: "An opening through the hull of a vessel through which equipment is lowered to the sea."
+  aliases: [moonpools]
+heave compensation:
+  def: "A system that cancels the vessel's up-and-down motion so lowered equipment stays steady."
+  aliases: [heave compensator, heave-compensated, heave compensated]
