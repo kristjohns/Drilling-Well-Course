@@ -1,6 +1,6 @@
 # Into the Live Well
 
-A 35-minute narrated animation on **well intervention**: why we go back into a producing well, and how. It is a companion to
+A 37-minute narrated animation on **well intervention**: why we go back into a producing well, and how. It is a companion to
 the drilling-and-well film ("The Hole That Fights Back") and is written for the same viewer: a mechanical-engineering MSc
 starting a rotation on the Norwegian continental shelf (NCS), who knows statics, fluids and materials but has not yet seen a
 wellhead.
@@ -40,15 +40,41 @@ Plain-text companions, generated from the script:
 |---|---|---|---|
 | 0 | Cold open: a well that is slowly dying, and no way in | 0:00 | 1:11 |
 | 1 | The well, and the work after it (anatomy; intervention vs workover; light vs heavy; value) | 1:11 | 3:15 |
-| 2 | Seven reasons to go back in: see, secure, clear, stimulate, lift, steer, finish | 4:27 | 5:49 |
-| 3 | The airlock: working in a live well (lubricator, tree valves, stuffing box and grease head, the pressure force, barriers) | 10:16 | 3:38 |
-| 4 | Wireline: the thin line that does the work (slickline, braided line, electric line; toolstring; jars; setting plugs; kick-over tool; perforating; the limits in deviated wells) | 13:55 | 6:29 |
-| 5 | Coiled tubing: a pipe on a reel (reel, injector, stripper, BOP; balance point; fatigue; lock-up; cleanouts; nitrogen; acid; milling; other jobs) | 20:25 | 6:58 |
-| 6 | Beyond the coil: snubbing, bullheading, and the rig workover | 27:23 | 2:10 |
-| 7 | Subsea: riserless and riser-based light intervention from a vessel | 29:33 | 3:02 |
-| 8 | Choosing a method, and closing the well (capability matrix; three worked cases; where the field is moving) | 32:36 | 2:27 |
+| 2 | Seven reasons to go back in: see, secure, clear, stimulate, lift (gas lift, the gas-lift valve, unloading), steer, finish | 4:27 | 6:17 |
+| 3 | The airlock: working in a live well (lubricator, tree valves, stuffing box and grease head, the pressure force, barriers) | 10:45 | 3:55 |
+| 4 | Wireline: the thin line that does the work (slickline, braided line, electric line; toolstring; jars; setting plugs; kick-over tool; perforating; the limits in deviated wells) | 14:40 | 7:17 |
+| 5 | Coiled tubing: a pipe on a reel (reel, injector, stripper, BOP; balance point; fatigue; lock-up; cleanouts; nitrogen; acid; milling; other jobs) | 21:57 | 6:57 |
+| 6 | Beyond the coil: snubbing, bullheading, and the rig workover | 28:55 | 2:10 |
+| 7 | Subsea: riserless and riser-based light intervention from a vessel | 31:06 | 3:02 |
+| 8 | Choosing a method, and closing the well (capability matrix; three worked cases; where the field is moving) | 34:09 | 2:27 |
 
-Total runtime 35:04, about 5,400 words of narration.
+Total runtime 36:37, about 5,700 words of narration.
+
+## Version 2: what changed
+
+After the first cut, every beat was reviewed for accuracy and for how well the picture explains the mechanism. The weakest
+animations were rebuilt on a new procedural drawing layer (`scenes/common/pdraw.py`), with mechanisms whose parts move along
+computed paths instead of keyframed rectangles:
+
+* **Gas lift, end to end** (`scenes/common/gaslift.py`). A side-pocket mandrel with its orienting sleeve (helix and slot),
+  latch lug, seal bores and annulus ports; an injection-pressure-operated valve with its nitrogen dome, bellows, ball and seat,
+  packings and reverse-flow check valve; and a kick-over tool with its orienting key, pivot arm and pulling or running tool.
+  - **4.06, changing a valve**: run past the mandrel, pick up, the key rides the helix and turns the tool (plan view), the
+    line tension jumps at the top of the slot, the arm kicks over, slack off onto the latch, jar down, jar up to shear, the
+    arm folds through the sleeve; a live line-tension trace shows what the operator sees. Pulling and setting are two trips.
+  - **2.06, gas lift**: the column too heavy for the reservoir, gas down the annulus through the operating valve; a cutaway of
+    the valve opening; unloading from the top valve down; the check valve.
+  - The same drawings now appear in 1.02 and in the 8.02 worked case.
+* **3.05, barriers during a wireline job**: the production envelopes, then the job envelopes (the open safety valve and tree
+  valves cannot count; the stuffing box closes the primary, the BOP belongs to the secondary, the tree is shared), the stack
+  pressure test, and a failure.
+* **4.04, jars**: a plain jar and a spring-catch jar in a toolstring stuck under sand, with a force-at-the-tool trace.
+* **7.02, subsea trees**: vertical and horizontal trees as cutaways (valves in line vs on the side outlet; crown plugs).
+* **5.10, nitrogen lift**: gas bubbling up through the column instead of a piston.
+* **Narration fixes**: calcium carbonate scale forms as CO2 leaves the water; a valve change is two wireline trips; the lock-up
+  remedies (larger, stiffer tube instead of a taper); the slip change at the snubbing balance point; access to a horizontal tree;
+  the jar description now distinguishes plain and spring-catch jars.
+* The header, term cards and badges now always draw above the content, and the header band hides tools running in from above.
 
 ## How it is built
 
