@@ -308,7 +308,7 @@ def b508(st, tl):
             st.scale_to(bar, tt, tt + 0.8, sx=L * unit)
             K.show(st, [val], tt + 0.7, None, 0.3)
         # remedies
-        rem = [("lubricants", b.word(7, "lubricants")), ("tapered string: lighter at the end", b.word(7, "taper")), ("tractor or vibrating tool", b.word(7, "tractor"))]
+        rem = [("lubricants", b.word(7, "lubricants")), ("larger, stiffer tube", b.word(7, "larger and stiffer")), ("tractor or vibrating tool", b.word(7, "tractor"))]
         for i, (txt, t) in enumerate(rem):
             g = K.tag(st, 3.0, -0.8 - i * 0.7, txt, color=P.SAFE, fg=P.BG, size=0.22, z=0.9, align="l")
             K.show(st, g, t, None, 0.4)

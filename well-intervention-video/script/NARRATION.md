@@ -1,6 +1,6 @@
 # Narration script and shot list (generated: do not edit; edit `chNN_*.md` and run `make script`)
 
-Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[NO]** Norway-specific · **[GEN]** general industry · **[SIM]** deliberate simplification · **[VERIFY]** not confirmed against a primary source · **[SEEN]** seen only in a secondary/web source
+Runtime 36:37 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[NO]** Norway-specific · **[GEN]** general industry · **[SIM]** deliberate simplification · **[VERIFY]** not confirmed against a primary source · **[SEEN]** seen only in a secondary/web source
 
 ## Ch 0: Cold open  (0:00–1:12)
 
@@ -68,7 +68,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** decline curve is an exponential illustration with a 20 % step; cost bars show ordering only, no values (day rates vary hugely with the market)
 
-## Ch 2: Seven reasons to go back in  (4:28–10:17)
+## Ch 2: Seven reasons to go back in  (4:28–10:45)
 
 ### 2.01 · 4:30 · 22.3s · anim **[GEN]** **[SIM]**
 
@@ -99,9 +99,9 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** leak path and 40 bar annulus pressure are illustrative
 - **VERIFY:** the Norwegian rule that a well with a failed barrier must be restored or shut in (Activities Regulations / NORSOK D-010) is paraphrased from search summaries, not read from the text
 
-### 2.04 · 6:20 · 51.7s · anim **[GEN]** **[SIM]**
+### 2.04 · 6:20 · 53.6s · anim **[GEN]** **[SIM]**
 
-**VO:** Third, to clear what is in the way. Scale is mineral that falls out of the water: barium sulphate, where injected seawater meets formation water, or calcium carbonate, as pressure and temperature drop. Wax comes out of the oil as it cools, and asphaltenes as it loses pressure. Hydrates are ice-like solids of water and gas that form when it is cold and the pressure is high. Sand and fines settle at the bottom and bury the perforations. Each one narrows the flow path, and the rate falls as the bore closes. The cure is to scrape it, jet it, mill it, dissolve it, or wash it out. And sometimes the obstruction is the debris of an earlier job, a dropped tool or a broken wire. That is called a fish, and getting it out is called fishing.
+**VO:** Third, to clear what is in the way. Scale is mineral that falls out of the water: barium sulphate, where injected seawater meets formation water, or calcium carbonate, as the pressure drops and carbon dioxide leaves the water. Wax comes out of the oil as it cools, and asphaltenes as it loses pressure. Hydrates are ice-like solids of water and gas that form when it is cold and the pressure is high. Sand and fines settle at the bottom and bury the perforations. Each one narrows the flow path, and the rate falls as the bore closes. The cure is to scrape it, jet it, mill it, dissolve it, or wash it out. And sometimes the obstruction is the debris of an earlier job, a dropped tool or a broken wire. That is called a fish, and getting it out is called fishing.
 
 **SHOT:** Tubing cross-section (circle) and long section side by side. Deposits grow on the wall in turn with labels: scale (white crystalline crust, with a tiny chemistry inset: Ba + SO4 -> BaSO4 where two water streams meet), wax (tan layer), hydrate (pale-blue ice), sand fill (gold grains piling up from the bottom over the perforations). A flow-rate counter falls as the bore narrows (e.g. 100 % -> 45 %). Last: a dropped tool lies in the bore with a fishing-neck label and a hook approaching.
 
@@ -109,7 +109,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** the flow-rate fall is illustrative; real loss depends on the deposit and the length affected
 
-### 2.05 · 7:12 · 36s · anim **[GEN]** **[SIM]**
+### 2.05 · 7:13 · 36s · anim **[GEN]** **[SIM]**
 
 **VO:** Fourth, to stimulate. Drilling mud leaves a skin of solids in the pores around the well, and production can leave damage of its own. It restricts the inflow like a clogged filter. Acid pumped into the rock dissolves it, and that is called matrix stimulation. If the problem is that too little rock is connected to the well, we can shoot more perforations, or in some wells crack the rock open with a hydraulic fracture. In every case the treatment has to be placed at a precise depth, which means pumping through a pipe that can be positioned.
 
@@ -119,15 +119,17 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** acid treatment applies mainly to carbonate or mineral damage; sandstone treatments use different acid recipes
 
-### 2.06 · 7:48 · 43.1s · anim **[GEN]**
+### 2.06 · 7:49 · 70s · anim **[GEN]** **[SIM]**
 
-**VO:** Fifth, to lift. As the reservoir pressure falls, many oil wells can no longer push their fluid to the surface unaided. Gas lift fixes that: gas is injected down the annulus, enters the tubing through valves in the side-pocket mandrels, and lightens the fluid column. Those valves wear out and are changed by wire. In gas wells the opposite problem appears. As the rate drops, the gas moves too slowly to carry droplets of water out, so they fall back and the well drowns in its own liquid. That is liquid loading. A narrower string of coiled tubing hung inside the tubing, a velocity string, speeds the gas up again and restores the flow.
+**VO:** Fifth, to lift. As the reservoir pressure falls, many oil wells can no longer push their fluid to the surface unaided. Gas lift fixes that: gas is injected down the annulus, enters the tubing through valves in the side-pocket mandrels, and lightens the fluid column. Each valve is a small automatic gate. A bellows charged with nitrogen holds a ball on its seat, until the gas pressure in the annulus is high enough to push it open. At start-up the valves work from the top down: each one passes gas until the liquid has been pushed below the next, then closes, until gas enters at the deepest, the operating valve. A check valve stops well fluid from flowing back into the annulus. Valves wear out, and are changed by wire. In gas wells the opposite problem appears. As the rate drops, the gas moves too slowly to carry droplets of water out, so they fall back and the well drowns in its own liquid. That is liquid loading. A narrower string of coiled tubing hung inside the tubing, a velocity string, speeds the gas up again and restores the flow.
 
-**SHOT:** Three mini-wells side by side. (A) Oil well: heavy column, pressure gauge at the bottom high, flow stalls; (B) gas lift: gas (crimson) injected down the annulus enters through a mandrel valve as bubbles; the column lightens (gauge falls) and flow resumes; the valve is highlighted "wears out -> changed by wire". (C) Gas well: water droplets falling back against slow gas, liquid pool grows; a thin string hangs inside; gas speed arrows lengthen, droplets rise out.
+**SHOT:** (1) A tall well cutaway: the heavy liquid column, a bottom-hole pressure bar that is not enough, the flow stalls. Gas (crimson) is injected at the casing head, down the annulus, and enters the tubing through a mandrel valve as bubbles; the column lightens (bar falls) and oil flows. (2) Close-up cutaway of an injection-pressure-operated valve in its pocket: latch, nitrogen dome, bellows, ball and seat, inlet ports between two packing stacks, check valve, nose. Annulus pressure rises, the bellows compress, the ball lifts off the seat, gas streams through the seat, down past the check valve and out of the nose into the tubing. The check valve is shown closing against reverse flow. (3) Unloading: three mandrels; the annulus liquid level is pushed down; valve 1 passes gas, the level passes valve 2, valve 2 opens and valve 1 closes, then valve 3 (operating). (4) Gas well: water droplets falling back against slow gas, liquid pool grows; a velocity string is hung inside; gas speed arrows lengthen and droplets rise out.
 
-**Terms introduced:** gas lift; liquid loading; velocity string
+**Terms introduced:** gas lift; check valve; operating valve; liquid loading; velocity string
 
-### 2.07 · 8:31 · 33.1s · anim **[GEN]** **[SIM]**
+- **SIM:** one valve type shown (injection-pressure operated, nitrogen-charged bellows); spring-loaded and production-pressure-operated valves and orifice valves also exist, and design spacing is not modelled
+
+### 2.07 · 9:00 · 33.1s · anim **[GEN]** **[SIM]**
 
 **VO:** Sixth, to steer what the well produces. Reservoirs do not give evenly. Water arrives early through one zone and drowns the oil from the others. The water cut climbs, and the well can die long before the reservoir is empty. To fix it we shut the offending zone off, with a plug, a cement squeeze, or by closing a sliding sleeve, and perhaps open another zone higher up. A few modern wells have valves that do this on command, but most have to be steered by going in.
 
@@ -137,7 +139,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** three-zone reservoir and the water-cut curve are illustrative
 
-### 2.08 · 9:04 · 32s · anim **[GEN]** **[SIM]**
+### 2.08 · 9:33 · 32s · anim **[GEN]** **[SIM]**
 
 **VO:** Seventh, to finish. When a well reaches the end of its life, it must be permanently plugged, so that it can never leak again. Before the plugs go in, the well is logged, cleaned out, and the pipes may be cut. Some of that work can be done without a rig. Or the well is not finished, only changed: converted from producer to water injector, or a side-track is drilled out of it into fresh reservoir. Either way, an intervention prepares the ground.
 
@@ -145,7 +147,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** plug count and placement are schematic, and the detailed requirements are not covered here
 
-### 2.09 · 9:36 · 40.8s · anim **[GEN]** **[SIM]**
+### 2.09 · 10:05 · 40.8s · anim **[GEN]** **[SIM]**
 
 **VO:** Look at what these seven jobs ask of us. To see: carry a sensor to a depth, and bring the answer back. To secure: set a plug, pull a valve, shift a sleeve. To clear: scrape, mill, wash. To stimulate: pump a fluid to an exact spot. To lift: swap a valve, or hang a pipe. To steer: set a plug, shoot a perforation. Put it all together and you get a short list of capabilities: carry and place tools, pull and hammer, pump, push, rotate, and send power and data. Every intervention method is a different bundle of those. Now we can look at the bundles.
 
@@ -153,9 +155,9 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** the matrix is a teaching device; many jobs use more than one capability
 
-## Ch 3: The airlock: working in a live well  (10:17–13:55)
+## Ch 3: The airlock: working in a live well  (10:45–14:41)
 
-### 3.01 · 10:19 · 44.8s · anim **[GEN]** **[SIM]**
+### 3.01 · 10:48 · 44.8s · anim **[GEN]** **[SIM]**
 
 **VO:** The problem with a live well is simple. Open the top and it flows. So the tools must go in through an airlock. A lubricator is a pressure-tight tube bolted on top of the tree, long enough to hold the whole toolstring, the tools joined end to end. We load the tools into the lubricator while the valve below it is still shut. Then we pressure up the lubricator until it matches the well, so there is no difference across the valve. Now it can be opened, and the toolstring can drop in. To come out, the sequence runs backwards: tools up into the lubricator, valve closed, lubricator bled down, opened. The well never meets the atmosphere.
 
@@ -165,7 +167,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** single-valve airlock shown; the real stack has several valves and a pump-in connection for pressuring and bleeding
 
-### 3.02 · 11:04 · 39.7s · anim **[NO]** **[VERIFY]**
+### 3.02 · 11:33 · 39.7s · anim **[NO]** **[VERIFY]**
 
 **VO:** On a platform or a land well, the tree sits at the top of the well, and it is built from valves. Two master valves are the main shut-off, one above the other for redundancy. The wing valve sends the oil off to the pipeline. And at the very top, straight above the tubing, is the swab valve. That is our door. Bolt the lubricator on top of it, and the swab valve and the master valves are what separate the tools from the well. In Norway the regulations require at least two main valves on a tree, and at least one of them automatic.
 
@@ -175,7 +177,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **VERIFY:** the requirement for at least two main valves, one automatic, is from a search summary of the Facilities Regulations, not read from the text
 
-### 3.03 · 11:44 · 49.1s · anim **[GEN]** **[SIM]**
+### 3.03 · 12:13 · 49.1s · anim **[GEN]** **[SIM]**
 
 **VO:** Now the hard part. The lubricator has a top, and the line has to pass through it, while moving. Solid wire passes through a stuffing box: rubber packing squeezed around the wire by hydraulic pressure, tight enough to seal, loose enough to let the wire slide. Stranded cable has gaps between its strands, so packing cannot seal on it. It uses a grease injection head instead. Grease is pumped at a higher pressure than the well into narrow tubes around the cable, and the grease itself is the seal. Below that sits a blowout preventer, a stack of valves whose rams can close on the line and seal around it in an emergency. And a tool catcher, so that if the line ever breaks, the toolstring cannot fall back into the well.
 
@@ -185,7 +187,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** grease pressure shown 10 percent above well pressure for clarity; real procedures set margins per operator
 
-### 3.04 · 12:33 · 43.7s · anim **[GEN]** **[SIM]**
+### 3.04 · 13:02 · 43.7s · anim **[GEN]** **[SIM]**
 
 **VO:** There is one more invisible force. Pressure pushes on anything that enters the well. A solid wire a little under three millimetres thick, in a well at two hundred bar, is pushed out with about a hundred and twenty newtons. That is the weight of a twelve-kilogram mass. If the toolstring weighs less than that, the well blows it back out, and the wire with it. That is why a wireline toolstring carries a heavy weight. Now think of a coiled tube, two inches across, in the same well. The area is more than three hundred times bigger, and so is the force: about four tonnes. Keep that number. It shapes everything about coiled tubing.
 
@@ -193,20 +195,20 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** wire 0.108 in, coiled tube 2 in OD, 200 bar shut-in tubing head pressure; force is pressure times the outside area at the seal; friction ignored; the ratio of areas is about 340. Slickline is defined in the next chapter
 
-### 3.05 · 13:17 · 38.7s · anim **[NO]** **[SIM]** **[VERIFY]**
+### 3.05 · 13:46 · 55.1s · anim **[NO]** **[SIM]** **[VERIFY]**
 
-**VO:** All of this serves one rule. Whatever we do in a well, there must be two tested barriers between the reservoir and the outside world: two independent envelopes of equipment, each able to hold the pressure by itself. In a live well job the pressure control equipment on top of the tree is part of those envelopes, so everything on the stack is pressure-tested before the well is opened to it. Exactly which element belongs to which envelope is set by the standard, NORSOK D-010, and by the operator's own procedures. And if a barrier fails, the job stops until it is restored.
+**VO:** All of this serves one rule. Whatever we do in a well, there must be two tested barriers between the reservoir and the outside world: two independent envelopes of equipment, each able to hold the pressure by itself. During a wireline job the safety valve and the tree valves stand open, with the line running through them, so they cannot count. The equipment on top takes their place. Typically the stuffing box closes the primary envelope at the top, while the blowout preventer, which can close on the line, belongs to the secondary, and elements such as the tree are shared by both. So everything on the stack is pressure-tested before the well is opened to it. Exactly which element belongs to which envelope is set by the standard, NORSOK D-010, and by the operator's own procedures. And if a barrier fails, the job stops until it is restored.
 
-**SHOT:** Barrier-panel style diagram (outline-only): well elements in a column (reservoir, tubing + packer + safety valve, tree, lubricator stack). A primary envelope outline in blue wraps the tubing/packer/downhole valve; a secondary envelope in red wraps the tree and the lubricator stack, overlapping slightly. A "TESTED" stamp with a gauge ramp and a tick appears on each. Then a barrier fails (outline breaks, red cross) and a "STOP - restore" banner.
+**SHOT:** Well-barrier schematic of a live wireline job: casing and cement, tubing and packer, an open downhole safety valve and open tree valves with the wire through them (greyed, "open: cannot count"), wireline BOP, lubricator, stuffing box. The primary envelope (blue) runs from the packer up the tubing, through the tree and the lubricator to the stuffing box; the secondary envelope (red) runs from the casing and cement through the wellhead and tree to the closed-on-demand BOP rams. Shared elements (tree) are hatched in both colours. TESTED stamps; then a barrier fails and a STOP banner.
 
 **Terms introduced:** well barrier envelope
 
 - **SIM:** the envelope assignment is schematic
-- **VERIFY:** which elements form the primary and secondary envelopes during wireline and coiled tubing operations is set in NORSOK D-010 and was not read; no clause numbers are quoted
+- **VERIFY:** which elements form the primary and secondary envelopes during wireline and coiled tubing operations is set in NORSOK D-010 and was not read; the split shown (stuffing box closing the primary, BOP in the secondary, the tree shared) is from a well-integrity forum summary citing the standard; no clause numbers are quoted
 
-## Ch 4: Wireline: the thin line that does the work  (13:55–20:25)
+## Ch 4: Wireline: the thin line that does the work  (14:41–21:58)
 
-### 4.01 · 13:58 · 45.4s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 4.01 · 14:43 · 45.4s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** Wireline is a family of three. Slickline is a single solid strand of steel, a little under three millimetres thick. It is cheap, light and quick to rig up, and it can only do mechanical work: pull, push by its own weight, and hammer. Braided line is stranded, like a rope, which makes it stronger, and so better for heavy fishing, but it needs the grease head to seal. And electric line, or e-line, is braided cable with insulated conductors at its core. It carries power down and data up, so it can run logging tools and perforate. The thickness of the line decides how hard you can pull, and so how much trouble you can get out of.
 
@@ -217,7 +219,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** strength bars show ordering only; typical slickline break loads are in the low thousands of pounds-force depending on diameter and alloy, e-line and braided cables are larger and stronger
 - **VERIFY:** the exact relative ranking of braided versus electric line depends on construction
 
-### 4.02 · 14:44 · 34.6s · anim **[GEN]** **[SIM]**
+### 4.02 · 15:29 · 34.6s · anim **[GEN]** **[SIM]**
 
 **VO:** Here is a slickline spread. The wire is stored on a drum, thousands of metres of it, driven by a hydraulic motor. It leaves the drum through a measuring head that counts how far it has gone and reads the tension, passes up over a sheave, and drops through the stuffing box into the lubricator. And that tension reading is the operator's only window into the well. They cannot see the tools. They feel them: the weight of the string, the snag at a tight spot, the sudden drop when a pin shears.
 
@@ -225,7 +227,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** layout simplified; real spreads have a separate control cabin and pump-in unit
 
-### 4.03 · 15:18 · 29.3s · anim **[GEN]** **[SIM]**
+### 4.03 · 16:03 · 29.3s · anim **[GEN]** **[SIM]**
 
 **VO:** On the end of the wire hangs the toolstring. At the top, a rope socket ties the wire off. Below it, the stem, or weight bars: heavy steel to overcome the pressure force and the friction, and to give mass for hammering. Then the jars. If the well deviates, a knuckle joint, a hinge that lets the string bend round curves. And at the bottom, the business end: the running tool, pulling tool or whatever the job needs.
 
@@ -235,15 +237,15 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** component order and lengths are typical but vary with the job
 
-### 4.04 · 15:48 · 40.8s · anim **[GEN]** **[SIM]**
+### 4.04 · 16:33 · 49.1s · anim **[GEN]** **[SIM]**
 
-**VO:** Why jars? Because the wire can only pull, and often a tool is stuck, or a pin has to be sheared. A mechanical jar is a sliding joint with a short stroke. To jar up, the operator pulls on the wire. The jar holds until the load builds, and the wire stretches like a spring. Then the jar releases, the stem flies upward, and it strikes the end of its travel with a blow far harder than the pull itself. To jar down, the operator slacks off, and the stem falls onto the tool below. Hundreds of blows, up and down, let a thin wire do heavy work.
+**VO:** Why jars? Because the wire can only pull, and often a tool is stuck, or a pin has to be sheared. The answer is a jar, a sliding joint with a short stroke, set between the stem and the tool. To jar up, the operator pulls the wire in fast. The stem accelerates through the stroke and slams into the top of it, a blow far harder than any steady pull the wire could hold. Many jars add a spring catch: it holds until the pull builds, the wire stretches like a spring, and then it lets go, so the blow is harder still. To jar down, the operator slacks off, and the stem falls onto the tool below. Hundreds of blows, up and down, let a thin wire do heavy work.
 
-**SHOT:** Close-up cutaway of a mechanical jar: outer housing, inner mandrel with a stroke, a latch. Frame sequence: pull (wire arrow up, a spring-like wire-stretch symbol on the left grows), latch releases, stem accelerates up (motion blur lines), impact flash at the stop, shock rings. A force-versus-time inset shows the steady pull ramping and a sharp impact spike ten times higher. Then the downward stroke: stem falls, hits.
+**SHOT:** Cutaway of a toolstring in the tubing: wire, rope socket, stem, a jar (housing with an anvil at each end of the stroke, a mandrel with a hammer collar), a tool stuck in a nipple under packed sand. The plain jar: the stem accelerates up through the stroke and hits the top anvil (flash, shock rings). The spring-catch jar: the catch holds while the wire stretches (coil + tension gauge), then releases: a bigger blow. Jar down: the stem falls onto the bottom anvil. A force-at-the-tool trace shows each blow as a spike far above the steady pull. Repeated blows with a counter; the stuck tool comes free.
 
-- **SIM:** spike height and timing are illustrative; hydraulic jars used on e-line and coiled tubing work differently
+- **SIM:** spike heights and timing are illustrative; spring-jar release settings, hydraulic jars and accelerators are not covered
 
-### 4.05 · 16:28 · 46.9s · anim **[GEN]** **[SIM]**
+### 4.05 · 17:22 · 46.9s · anim **[GEN]** **[SIM]**
 
 **VO:** A typical job is setting a plug. The plug is run in on a lock mandrel, a tool with spring-loaded keys. The string is lowered past the landing nipple, then pulled up gently, so the keys catch the groove. A downward jar locks them in and shears the running tool free of the plug. A pull on the wire confirms it holds. Now the tubing below the plug is isolated, and we can work above it. When the job is done, a pulling tool latches onto the fishing neck at the top of the plug, and an upward jar frees the keys. But first, the pressure across the plug is equalised. Otherwise, as it lets go, it can be blown up the hole.
 
@@ -253,17 +255,17 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** one generic lock; real locks (selective, no-go) and their running tools differ by manufacturer
 
-### 4.06 · 17:15 · 36.9s · anim **[GEN]** **[SIM]**
+### 4.06 · 18:09 · 76.2s · anim **[GEN]** **[SIM]**
 
-**VO:** A subtler job: changing a gas-lift valve. The valve sits in a pocket beside the main bore, so a straight tool would miss it. The kick-over tool solves that. It runs in with its arm folded. At the mandrel, a key rotates the tool to face the pocket. Pull up, then slack off, and the arm kicks over, aligning the tool with the pocket. Jar down, and the tool latches the valve. Pull up, and the old valve is out. The same tool, loaded with a new valve, puts it in. Three pockets, one trip each.
+**VO:** A subtler job: changing a gas-lift valve. The valve sits in a pocket beside the main bore, so a tool run straight down simply passes it by. The answer is the kick-over tool. It is run in with its arm folded, past the mandrel, and then pulled slowly back up. A spring-loaded key catches a helical sleeve at the top of the mandrel, and the helix turns the tool until the key drops into a slot, with the arm facing the pocket. At the top of the slot the operator sees the tension jump. A little more pull, and the arm kicks over and locks, directly above the pocket. Now slack off. The pulling tool on the arm slides down into the pocket and over the valve's latch. Jar down to latch on. Then jar up: a pin shears, the latch lets go, and the valve comes out with the tool. Pulled back through the sleeve, the arm folds flat again. Setting a new valve is the same dance with a running tool: kick over, lower the valve into the pocket, jar down to lock its latch, and jar up to shear free. Pulling and setting are separate runs, so every valve changed costs two trips.
 
-**SHOT:** Cutaway of a side-pocket mandrel (tubing bore with an off-centre pocket holding a latched valve). Sequence in four panels sliding across: (1) kick-over tool descends with its arm folded; (2) orienting key engages the sleeve and rotates the tool (small circular arrow); (3) arm kicks over and its latch engages the valve; (4) pull out with the old valve. Then the arm holding a new valve, run in, jar down to seat. A pill row "3 pockets / 3 trips".
+**SHOT:** Large cutaway of a side-pocket mandrel filling the left half: main bore, an orienting sleeve with a helical (mule-shoe) edge and a slot at the top, the pocket with a latch lug, seal bores and ports, the gas-lift valve latched in it. The kick-over tool (body, spring-loaded orienting key, pivot arm, pulling tool) on the wire. Right: a plan-view inset (tool cross-section turning until the arm faces the pocket) and a live line-tension trace that shows the run past the mandrel, the slow pick-up, the tension jump at the top of the slot, the kick-over, the slack-off as the tool lands, the jar spikes and the overpull. Sequence: run past; pick up; key rides the helix (tool turns); key in slot; tension jump; arm kicks over; slack off; pulling tool engages the latch; jar down; jar up (pin shears, latch ring retracts); valve pulled out of the pocket; arm folds through the sleeve; tool and valve leave upward. Then a fast replay of setting a new valve with a running tool (kick over, lower into pocket, jar down: latch ring snaps under the lug, jar up: running tool shears free). A two-trip counter.
 
-**Terms introduced:** kick-over tool
+**Terms introduced:** kick-over tool; orienting sleeve
 
-- **SIM:** the orienting mechanics are shown schematically; real mandrels and tools differ by manufacturer
+- **SIM:** the orienting and trigger mechanics are shown schematically; real mandrels, kick-over tools and latches differ by manufacturer, and shear values and procedures come from the vendor's running procedure
 
-### 4.07 · 17:52 · 50.6s · anim **[GEN]** **[SIM]**
+### 4.07 · 19:25 · 50.6s · anim **[GEN]** **[SIM]**
 
 **VO:** The same mechanics do many other jobs. A shifting tool opens or closes a sliding sleeve. A bailer scoops up sand and debris. A gauge cutter proves the tubing is open, and a tag run measures how deep the well is. A memory gauge hangs in the well for days, recording, to be fetched later. But slickline has limits. It cannot push, so the tool must fall under its own weight. It cannot pump. And as the well leans over, gravity runs out. Along the hole, the pull of the weight shrinks with the cosine of the angle, while friction grows with the sine. With a friction coefficient of 0.3, a tool stops sliding at about seventy-three degrees, and in practice the wire's own drag brings the limit lower.
 
@@ -271,7 +273,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** the limit comes from a simple block-on-a-plane model using the coefficient stated; the toolstring is treated as a rigid rod and the wire drag is not modelled; real-world limits are lower and depend on string and hole
 
-### 4.08 · 18:43 · 44.7s · anim **[GEN]** **[SIM]**
+### 4.08 · 20:16 · 44.7s · anim **[GEN]** **[SIM]**
 
 **VO:** Electric line adds power and a voice. Electricity goes down the conductor and measurements come back in real time, so the operator watches the log being drawn. To know exactly where the tool is, it carries a casing collar locator, which senses each joint in the casing as it passes, and the log is tied to the known collar depths. The same line can fire a perforating gun. Each shaped charge is a metal cone packed with explosive. When it detonates, the cone collapses into a jet of metal moving at several kilometres per second, which punches through casing, cement and a few tens of centimetres of rock. Fired from the surface, at the depth the collar log gave us.
 
@@ -281,7 +283,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** jet speed and rock penetration are order-of-magnitude values, and depend on charge and rock; the gun is drawn firing from the surface as a hot-wire sequence in principle
 
-### 4.09 · 19:27 · 34.6s · anim **[GEN]** **[SIM]**
+### 4.09 · 21:00 · 34.6s · anim **[GEN]** **[SIM]**
 
 **VO:** E-line also sets bridge plugs and packers with a setting tool driven by a slow-burning powder charge, and cuts pipe with chemical or explosive cutters, work we will need again at the end of a well's life. And when the well is so deviated that tools no longer fall, a downhole tractor can be added: wheels or tracks that grip the wall and drive the string along, powered through the cable. Beyond the reach of the tractor, in long horizontal wells, the answer is no longer a wire at all. It is a pipe that can be pushed.
 
@@ -289,7 +291,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** all three tools drawn schematically
 
-### 4.10 · 20:02 · 23.1s · anim **[GEN]** **[SIM]**
+### 4.10 · 21:35 · 23.1s · anim **[GEN]** **[SIM]**
 
 **VO:** So wireline is quick, light and cheap, and it is superb for mechanical work and measurement in a live well. It is limited by its strength, a few tonnes at the very most. It is limited by gravity in deviated wells. And it can neither push nor pump. When a job needs any of those, we reach for the next method.
 
@@ -297,9 +299,9 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** strength is indicated by order of magnitude only; braided line can pull harder than the stated figure, depending on size and condition
 
-## Ch 5: Coiled tubing: a pipe on a reel  (20:25–27:23)
+## Ch 5: Coiled tubing: a pipe on a reel  (21:58–28:55)
 
-### 5.01 · 20:28 · 43s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 5.01 · 22:01 · 43s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** Coiled tubing is a continuous steel pipe, with no joints, from one to three and a half inches across, wound on a reel. One reel can hold from about one and a half to over seven kilometres. It is made from flat steel strip, rolled into a tube and welded along the seam, and the strips are welded end to end at a slant, so the length is continuous. The steel is strong, with a yield strength of eighty thousand pounds per square inch or more, yet it bends round the reel without breaking. And because it is a pipe, we can pump through it. A wireline can carry. A coiled tube can carry, push, and pump.
 
@@ -308,7 +310,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** manufacturing steps simplified
 - **VERIFY:** reel capacities (about 1.5 to 7.6 km) and size range (0.75 to 3.5 in) are manufacturer-level ranges from search summaries
 
-### 5.02 · 21:11 · 35.6s · anim **[GEN]** **[SIM]**
+### 5.02 · 22:44 · 35.6s · anim **[GEN]** **[SIM]**
 
 **VO:** Here is a coiled tubing spread. The reel stands on the deck. From the reel the tube rises over the gooseneck, a curved guide, and straight down into the injector head, which hangs from a crane or a frame above the tree. Under the injector comes the stripper, which seals around the moving pipe, then a stack of blowout preventers, then the lubricator, then the tree. The operator sits in a control cabin, watching pressure, depth, weight and pump rate. A pump connects to the centre of the reel, and the fluid goes out through the tube.
 
@@ -318,7 +320,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** arrangement schematic; offshore units are skid-mounted and use a crane or a frame to carry the injector
 
-### 5.03 · 21:46 · 31.3s · anim **[GEN]** **[SIM]**
+### 5.03 · 23:19 · 31.3s · anim **[GEN]** **[SIM]**
 
 **VO:** The injector head is the engine. Two endless chains run on opposite sides of the tube, each carrying gripper blocks shaped to its diameter. Hydraulic cylinders squeeze the chains together onto the pipe. Turn the chains one way and the pipe is driven into the well. Turn them the other way and it comes out. The injector can hold the pipe still against the well pressure, or pull the whole weight of a long string, tens of tonnes. Everything depends on the grip.
 
@@ -326,7 +328,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** block count and cylinder positions simplified
 
-### 5.04 · 22:18 · 38.3s · anim **[GEN]** **[VERIFY]**
+### 5.04 · 23:51 · 38.6s · anim **[GEN]** **[VERIFY]**
 
 **VO:** Below the injector, the stripper is a set of rubber elements squeezed around the tube by hydraulic pressure. It is the dynamic seal, the same job as the stuffing box, and like it, it wears. Below the stripper comes the blowout preventer, usually with four sets of rams in a stack. From the top: blind rams, which seal an empty hole; shear rams, which cut the tube; slip rams, which grip it so it cannot fall; and pipe rams, which seal around it. In an emergency they close in sequence: pipe rams to seal, slips to hold, shear to cut, blind to seal the bore.
 
@@ -334,17 +336,17 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **VERIFY:** the conventional quad stack order (blind, shear, slip, pipe from the top) and the closing sequence is from industry-practice summaries, not read from API 16ST
 
-### 5.05 · 22:56 · 35.5s · anim **[GEN]** **[SIM]**
+### 5.05 · 24:29 · 35.5s · anim **[GEN]** **[SIM]**
 
 **VO:** At the end of the tube hangs the bottom hole assembly. First a connector, which fixes it to the tube. Then check valves, two flaps that only open for flow going down, so that well fluid cannot come up the inside of the tube. Then a disconnect, which can release everything below if it gets stuck: drop a ball, pump it down, and pressure parts the tool. Then the working tool itself: a jetting nozzle, a motor and mill, an inflatable packer, a perforating gun, a logging tool. Same tube, different tool on the end.
 
 **SHOT:** Vertical exploded BHA assembling top to bottom: connector (dimple/roll-on), dual flapper check valves (cutaway with flaps closing under upward flow, opening under downward flow), hydraulic disconnect (ball drops, seat shifts, collet parts), then a carousel of working tools swapping on the bottom (nozzle, motor+mill, packer, gun, logging tool).
 
-**Terms introduced:** bottom hole assembly; check valve
+**Terms introduced:** bottom hole assembly
 
 - **SIM:** BHA length and components vary with the job
 
-### 5.06 · 23:32 · 37s · anim **[GEN]** **[SIM]**
+### 5.06 · 25:05 · 37s · anim **[GEN]** **[SIM]**
 
 **VO:** Now the physics. With the well open at two hundred bar, the pressure pushes the tube out with that force of about four tonnes. At first, the tube in the hole weighs almost nothing, so the injector has to push it in. As more goes in, its weight, reduced by buoyancy, grows. About a kilometre of two-inch tube is enough to balance the push. Beyond that, the tube is heavy, and the injector holds it back instead of pushing. That crossover is called the balance point, and the whole operation is planned around it.
 
@@ -354,7 +356,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** vertical well, 1.0 sg fluid, 2 in x 0.156 in tube, 200 bar, friction ignored; real jobs add stripper friction and well deviation
 
-### 5.07 · 24:08 · 43.9s · anim **[GEN]** **[SIM]** **[SEEN]**
+### 5.07 · 25:42 · 43.9s · anim **[GEN]** **[SIM]** **[SEEN]**
 
 **VO:** Coiled tubing has an unusual enemy: it gets tired. Every time it comes off the reel it is bent over the gooseneck, then straightened into the injector. Going in and coming out, that is at least six bends and straightenings every trip. Each bend takes the steel past its yield point, a couple of percent of strain, so the steel flows plastically. A paperclip bent back and forth breaks in a few cycles; steel tubing lasts far longer, but not for ever. Internal pressure makes it worse. So every string has a fatigue life, tracked by software that logs each cycle and each pressure, and the string is retired well before it is used up, commonly at about eighty percent.
 
@@ -365,9 +367,9 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** strain values are elastic estimates (outer fibre radius over bend radius: about 2.3 percent at a 1.1 m radius); the cycle count of six is the commonly cited minimum
 - **SEEN:** the practice of retiring a string at about 80 percent of its estimated fatigue life is from a patent text
 
-### 5.08 · 24:52 · 48.9s · anim **[GEN]** **[SIM]**
+### 5.08 · 26:26 · 47.7s · anim **[GEN]** **[SIM]**
 
-**VO:** The other limit is reach. In a horizontal well, you push the tube along the low side of the hole. Friction builds along its length, and the tube feels a compressive load, like pushing a rope. At a certain load the tube buckles, first into a gentle wave, then into a helix that presses hard against the wall. The friction then climbs steeply, and however hard the injector pushes, no more tube goes in. That is lock-up. How far you get depends strongly on friction: in our example, a friction coefficient of 0.3 gives roughly fourteen hundred metres, and 0.1 gives over four thousand. So engineers add lubricants, taper the string so it is lighter at the end, or add a tractor or a vibrating tool.
+**VO:** The other limit is reach. In a horizontal well, you push the tube along the low side of the hole. Friction builds along its length, and the tube feels a compressive load, like pushing a rope. At a certain load the tube buckles, first into a gentle wave, then into a helix that presses hard against the wall. The friction then climbs steeply, and however hard the injector pushes, no more tube goes in. That is lock-up. How far you get depends strongly on friction: in our example, a friction coefficient of 0.3 gives roughly fourteen hundred metres, and 0.1 gives over four thousand. So engineers add lubricants, run a larger and stiffer tube, or add a tractor or a vibrating tool.
 
 **SHOT:** Horizontal well section (casing tube) with coiled tube being pushed in from the left: initially straight, then sinusoidal waves appear at the far end, then a helix forms and tightens; force and friction arrows; the injector arrow grows but the tube stops. A bar chart: reach vs friction coefficient (0.1: 4,305 m, 0.2: 2,153 m, 0.3: 1,435 m, 0.4: 1,076 m) drawn from the model. Three remedy icons appear: lubricant, tapered wall, tractor/vibrator.
 
@@ -375,7 +377,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** the reach is the length of horizontal hole at which friction alone consumes the helical buckling load (Chen/Cheatham) for a 2 in tube in 5.5 in tubing with 1.0 sg fluid; lock-up reach is longer but the first estimate is the planning number, and tubing grade, curvature and fluid add to the picture
 
-### 5.09 · 25:41 · 39.9s · anim **[GEN]** **[SIM]**
+### 5.09 · 27:13 · 39.9s · anim **[GEN]** **[SIM]**
 
 **VO:** Because the tube is hollow, coiled tubing can circulate. To clean out sand, we run in with a jetting nozzle, pump fluid down the tube, and the fluid returns up the annulus between tube and tubing, carrying the sand. What matters is the speed of that upward flow. Too slow, and the sand falls out again. Fast enough, and it travels to the surface. If the reservoir is too weak to lift the fluid, we add nitrogen to make a foam. And friction in a long, narrow tube limits the pump rate, so the size of the tube is always a trade between strength and flow.
 
@@ -383,7 +385,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** no numbers on velocity; sand transport depends on grain size, fluid viscosity and well angle
 
-### 5.10 · 26:21 · 36.5s · anim **[GEN]** **[SIM]**
+### 5.10 · 27:53 · 36.5s · anim **[GEN]** **[SIM]**
 
 **VO:** Three more jobs. Nitrogen lift: nitrogen pumped down the tube displaces the heavy liquid in the well. The column lightens, and the reservoir can start to flow again. Acid placement: the nozzle sits at the right depth, pumping acid across the perforations while the tube is moved up and down, so every part is treated. And scale removal. A jet of water or acid washes soft scale off the wall; hard scale needs a mill. A mill is turned by a downhole motor, driven by the fluid we pump, so the tube itself never has to rotate.
 
@@ -391,7 +393,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** panels are generic
 
-### 5.11 · 26:58 · 25.4s · anim **[GEN]** **[VERIFY]**
+### 5.11 · 28:30 · 25.4s · anim **[GEN]** **[VERIFY]**
 
 **VO:** Coiled tubing also sets plugs and packers, perforates, and pushes a logging tool into a horizontal well where gravity fails. It places cement, and fishes. Hang a string inside the tubing and it becomes a velocity string. Add a downhole motor and a bit and it will even drill: coiled tubing drilling cuts a side-track out of an existing well, through its tubing, without a rig.
 
@@ -399,11 +401,11 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **VERIFY:** coiled tubing drilling through tubing is shown as a capability; the practicality depends on well and size
 
-## Ch 6: Beyond the coil: snubbing, bullheading and rigs  (27:23–29:33)
+## Ch 6: Beyond the coil: snubbing, bullheading and rigs  (28:55–31:06)
 
-### 6.01 · 27:26 · 43.1s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 6.01 · 28:58 · 46.5s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
-**VO:** Between coiled tubing and a rig sits the snubbing unit, also called a hydraulic workover unit. It runs ordinary jointed pipe into a live well. Because the pipe is stiff and strong, it can be rotated, and it can carry far heavier loads than a coiled tube. The unit uses two sets of slips, one travelling on hydraulic jacks and one fixed. While one grips, the other releases, the jacks stroke, and the pipe is pushed or pulled a few metres at a time. As with coiled tubing, it starts pipe-light, pushed in against the pressure, and becomes pipe-heavy at the balance point, when the slips are reversed.
+**VO:** Between coiled tubing and a rig sits the snubbing unit, also called a hydraulic workover unit. It runs ordinary jointed pipe into a live well. Because the pipe is stiff and strong, it can be rotated, and it can carry far heavier loads than a coiled tube. The unit uses two sets of slips, one travelling on hydraulic jacks and one fixed. While one grips, the other releases, the jacks stroke, and the pipe is pushed or pulled a few metres at a time. As with coiled tubing, it starts pipe-light, pushed in against the pressure, and becomes pipe-heavy at the balance point, where the crew switches from the slips that hold the pipe down to the slips that hold its weight.
 
 **SHOT:** Cutaway of a snubbing unit above the BOP stack: a frame with two hydraulic jacks carrying a travelling slip assembly above a fixed slip assembly, pipe joints with upset collars. Sequence: travelling slip grips and the jacks push down 3 m; the fixed slip grips, the travelling slip releases and the jacks return; repeat. Force bar: pushing early (pipe-light, slips set to hold pipe down), crossing the balance point, then the slips are reversed (pipe-heavy, slips set to hold the weight). A power swivel rotates a string to show rotation.
 
@@ -412,7 +414,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** slip arrangement simplified to two sets with one stroke length
 - **VERIFY:** the North Sea popularity timeline for snubbing (rising in the late 1980s and 1990s, now less offshore as large coiled tubing advanced) is from a summary and should be checked
 
-### 6.02 · 28:09 · 36.4s · anim **[GEN]** **[SIM]**
+### 6.02 · 29:44 · 34.9s · anim **[GEN]** **[SIM]**
 
 **VO:** Sometimes the quickest way into a well is not to go in at all. Bullheading is pumping fluid down the tubing from the surface, hard enough to push the well fluids back into the reservoir ahead of it. It can kill a well, place a scale inhibitor deep in the rock, or squeeze cement and chemicals into leak paths. Nothing enters the well but liquid, so it is cheap and fast. But it cannot be placed at a chosen depth, and the reservoir has to be able to take the fluid.
 
@@ -422,7 +424,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** bullheading limits depend on formation fracture pressure and injectivity, which are not modelled
 
-### 6.03 · 28:45 · 48s · anim **[GEN]** **[SIM]**
+### 6.03 · 30:19 · 46.8s · anim **[GEN]** **[SIM]**
 
 **VO:** Finally, the heavy end. Some problems can only be reached by pulling the completion: a leaking tubing string, a failed packer, a pump to replace, a casing leak. For that, the well is killed. Kill-weight fluid is pumped in, and the well is checked to make sure it holds. Mechanical plugs are set. The tree comes off and a blowout preventer goes on. Then the tubing is unscrewed, joint by joint, and pulled. The repair is made, a new completion is run, the tree goes back on, and the well is brought back in. It can take weeks. And the kill fluid, which sits against the reservoir, may reduce the well's productivity. So it is done only when it must be.
 
@@ -430,9 +432,9 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** steps are generic; the duration is indicated as weeks, not a number, because it varies widely
 
-## Ch 7: Subsea: intervention from a vessel  (29:33–32:36)
+## Ch 7: Subsea: intervention from a vessel  (31:06–34:09)
 
-### 7.01 · 29:36 · 30.8s · anim **[NO]** **[SIM]** **[VERIFY]**
+### 7.01 · 31:09 · 30.8s · anim **[NO]** **[SIM]** **[VERIFY]**
 
 **VO:** Many Norwegian wells are subsea. The tree sits on the seabed, here three hundred metres down, and there is no deck next to it to stand a wireline unit on. So intervention here means a vessel on the surface, connected to a tree it cannot touch. There are two ways to do it. Through open water, without a riser. Or inside a riser, a pipe from the vessel all the way down to the seabed.
 
@@ -443,9 +445,9 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** water depth and proportions compressed
 - **VERIFY:** the share of NCS wells that are subsea is not quoted; the SEEN figure for subsea wells on stream (about 560 in 2018) is not used in the narration
 
-### 7.02 · 30:07 · 40.5s · anim **[GEN]** **[SIM]**
+### 7.02 · 31:40 · 40.9s · anim **[GEN]** **[SIM]**
 
-**VO:** How we get in depends on the tree. A vertical tree has the tubing hanger in the wellhead, below the tree, and a straight bore up through the master valves. Tools go straight down. A horizontal tree turns that inside out. The tubing hanger sits inside the tree, and the oil leaves through a side outlet, so the top is closed by plugs in the hanger, and has to be reached through a blowout preventer and a riser. A vertical tree can be lifted off without disturbing the completion. A horizontal tree cannot be removed without pulling the tubing.
+**VO:** How we get in depends on the tree. A vertical tree has the tubing hanger in the wellhead, below the tree, and a straight bore up through the master valves. Tools go straight down. A horizontal tree turns that inside out. The tubing hanger sits inside the tree, and the oil leaves through a side outlet, so the vertical bore is closed by plugs, which must be pulled through the equipment on top before any tool can go down. A vertical tree can be lifted off without disturbing the completion. A horizontal tree cannot be removed without pulling the tubing.
 
 **SHOT:** Two cutaways of subsea trees side by side. Vertical: wellhead with tubing hanger below, a tree on top with a vertical bore, master valves stacked in line, swab valve and cap, side branch for the wing valve; a tool path arrow straight down. Horizontal: the hanger inside the tree body, flow exits through a side port with a valve; plugs in the hanger bore; a BOP/riser symbol on top for access; the tool path blocked until the plugs are pulled. Labels: retrieve tree alone / needs tubing pulled.
 
@@ -453,7 +455,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** dual-bore details and the internal tree cap are omitted
 
-### 7.03 · 30:48 · 41.6s · anim **[NO]** **[SIM]** **[SEEN]**
+### 7.03 · 32:21 · 41.3s · anim **[NO]** **[SIM]** **[SEEN]**
 
 **VO:** Riserless light well intervention is the cheapest way. A vessel with a hole through its hull, a moonpool, lowers a well control package onto the tree in a single lift, then a lubricator with a pressure control head on top. The line runs through the open sea down to the stack. Valves in the package can close on the line, grease keeps the seal tight, and glycol is injected to keep hydrates away. Heave compensation keeps the whole thing steady while the vessel moves, and an ROV watches. The tools go down on slickline or electric line, exactly as we saw earlier.
 
@@ -464,7 +466,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** component names follow a typical RLWI stack; real stacks are vendor-specific
 - **SEEN:** details (single lift deployment, MEG injection, tool catcher, wireline cutting valve) from vendor descriptions
 
-### 7.04 · 31:29 · 36.4s · anim **[NO]** **[SIM]**
+### 7.04 · 33:02 · 36.4s · anim **[NO]** **[SIM]**
 
 **VO:** When a job needs coiled tubing, or circulation, or larger tools, we need a riser. A riser is a pressure-tight pipe from the vessel to the tree, so the equipment on deck can be much like it would be on a platform: a lubricator, an injector, pumps. At the base of the riser sits a safety package that can close on the tool, shear it, and release the riser if the vessel loses position. This is riser-based light well intervention, and the vessel is a larger, more capable one.
 
@@ -472,7 +474,7 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SIM:** the safety package is shown as a single block; real systems have several valves and a retainer valve
 
-### 7.05 · 32:06 · 30.8s · anim **[NO]** **[SEEN]**
+### 7.05 · 33:38 · 30.8s · anim **[NO]** **[SEEN]**
 
 **VO:** And at the top of the ladder is the drilling rig, with its large blowout preventer and marine riser, which can do the heaviest work. On the Norwegian shelf, light well intervention vessels have worked for about twenty years, and dedicated vessels are now contracted for most days of the year. For the jobs that need a wire or a coiled tube, they are far cheaper than a rig. That is the reason they exist.
 
@@ -480,9 +482,9 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 
 - **SEEN:** "about twenty years" and "contracted most of the year" come from search summaries of Equinor news items and contract announcements, not read from the originals; the 2017 figure of 55 interventions is not used
 
-## Ch 8: Choosing a method, and closing the well  (32:36–35:04)
+## Ch 8: Choosing a method, and closing the well  (34:09–36:37)
 
-### 8.01 · 32:39 · 36s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.01 · 34:12 · 36s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
 **VO:** So how do we choose? Ask what the job needs. Does it need to carry and hammer? Slickline will do. Real-time data, power, or perforating? Electric line. Pumping, pushing, circulating, milling? Coiled tubing. Rotation and heavy loads in a live well? Snubbing. Or does the tubing itself have to come out? Then it is a rig. And at every step, take the lightest method that can do the job, because the lighter methods are cheaper, faster, and keep the well live.
 
@@ -491,16 +493,16 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** ticks are qualitative; real capabilities depend on equipment sizes
 - **VERIFY:** cost ordering of intervention vessels versus rigs depends on market conditions
 
-### 8.02 · 33:15 · 45.4s · anim **[GEN]** **[SIM]** **[VERIFY]**
+### 8.02 · 34:48 · 48s · anim **[GEN]** **[SIM]** **[VERIFY]**
 
-**VO:** Three cases. First, a gas-lift valve has failed in a pocket at two thousand metres. Wireline: a kick-over tool and one trip. Production is back in a day. Second, scale has narrowed the tubing and clogged the perforations in a well leaning at fifty-five degrees. A wire can carry a gauge to see it, but it cannot clean it. Coiled tubing, with a jetting nozzle or a mill, can. Third, the tubing has a leak at eighteen hundred metres. A patch set on electric line, or on coiled tubing, may cover the hole. If it cannot, the tubing has to come out, and that is a rig.
+**VO:** Three cases. First, a gas-lift valve has failed in a pocket at two thousand metres. Wireline and a kick-over tool: one trip to pull it, one to set the new one. Production is back within a day or two. Second, scale has narrowed the tubing and clogged the perforations in a well leaning at fifty-five degrees. A wire can carry a gauge to see it, but it cannot clean it. Coiled tubing, with a jetting nozzle or a mill, can. Third, the tubing has a leak at eighteen hundred metres. A patch set on electric line, or on coiled tubing, may cover the hole. If it cannot, the tubing has to come out, and that is a rig.
 
 **SHOT:** Three mini-case panels in turn, each with a decision path through the matrix: Case A: failed valve at 2,100 m MD in the composite well -> highlight slickline row, KOT icon, "1 trip, 1 day". Case B: scale in the tubing and perfs, well at 55 degrees -> wire row crossed (can't pump), coiled tubing row lit with a nozzle/mill. Case C: tubing leak at 1,800 m -> patch (e-line/CT) branch; "if it cannot" branch to rig with a "weeks" calendar.
 
 - **SIM:** durations and depths are illustrative
 - **VERIFY:** whether a patch can be placed depends on leak size, tubing grade and bore, which are not modelled
 
-### 8.03 · 34:01 · 28.5s · anim **[GEN]** **[SIM]** **[SEEN]**
+### 8.03 · 35:36 · 27.8s · anim **[GEN]** **[SIM]** **[SEEN]**
 
 **VO:** The edges are moving. Tractors push wireline tools into horizontal wells. Coiled tubing carries fibre-optic cable or electric conductors, giving it real-time data. Vessels do work that once needed rigs, and operators are plugging subsea wells with vessels where they can. But the principle is the same as it ever was: a pressure-tight airlock, a way to carry and place tools, and two barriers at all times.
 
@@ -509,10 +511,10 @@ Runtime 35:04 (voice-timed: kokoro-v1.0 af_heart, paced to 172 wpm) · tags: **[
 - **SIM:** no specific products or dates are named
 - **SEEN:** Norwegian plug-and-abandonment campaigns with a drilling unit are in the news and not discussed here
 
-### 8.04 · 34:29 · 34.5s · anim **[GEN]**
+### 8.04 · 36:04 · 33.4s · anim **[GEN]**
 
 **VO:** Why do we intervene? To see, to secure, to clear, to stimulate, to lift, to steer, and to finish. How? With a wire that can carry and hammer, a tube that can also pump and push, a pipe that can rotate, or a rig that can pull the whole well apart. A producing well is only as healthy as the last time someone looked inside it. [pause 1.0] That is well intervention.
 
 **SHOT:** The seven reason chips on the left tick off one by one; on the right the method ladder (wireline, coiled tubing, snubbing, rig) lights in the same cadence; both meet at the well. Fade to the closing card: INTO THE LIVE WELL, the disclaimer (illustrative composite well; simplifications flagged in script/FLAGS.md; Norwegian regulations and NORSOK D-010 not verified against primary sources).
 
-*Total narration: 5395 words ≈ 154 wpm averaged over the runtime.*
+*Total narration: 5678 words ≈ 155 wpm averaged over the runtime.*

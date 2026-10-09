@@ -402,86 +402,7 @@ def b205(st, tl):
 
 
 # ====================================================================================================== 2.06
-def _mini(st, cx, y_top=1.9, y_bot=-2.3, t_in=0.0, tube_color=P.STEEL):
-    """A mini well: tree, casing, tubing, sand at the bottom. Returns NS with geometry."""
-    cas = [st.rect(cx - 0.55, (y_top + y_bot) / 2, 0.08, y_top - y_bot, P.STEEL_DK, 0.3, role="steel"),
-           st.rect(cx + 0.55, (y_top + y_bot) / 2, 0.08, y_top - y_bot, P.STEEL_DK, 0.3, role="steel"),
-           st.rect(cx, (y_top + y_bot) / 2, 1.1, y_top - y_bot, P.BG, 0.2)]
-    tub = [st.rect(cx - 0.2, (y_top + y_bot) / 2 + 0.25, 0.06, y_top - y_bot - 0.5, P.STEEL, 0.4, role="steel"),
-           st.rect(cx + 0.2, (y_top + y_bot) / 2 + 0.25, 0.06, y_top - y_bot - 0.5, P.STEEL, 0.4, role="steel")]
-    sand = [st.rect(cx, y_bot - 0.2, 1.7, 0.5, P.SAND, 0.1), st.rect(cx - 0.5, y_bot, 0.06, 0.07, P.BG, 0.45, role="hole")]
-    tree = [st.rect(cx, y_top + 0.15, 0.7, 0.3, P.STEEL_DK, 0.4), st.rect(cx, y_top + 0.45, 0.4, 0.3, P.STEEL, 0.4),
-            st.rect(cx + 0.45, y_top + 0.45, 0.5, 0.14, P.STEEL, 0.39)]
-    return NS_(cas=cas, tub=tub, sand=sand, tree=tree, cx=cx, y_top=y_top, y_bot=y_bot)
-
-
-def NS_(**kw):
-    return K.NS(**kw)
-
-
-def b206(st, tl):
-    b = tl["2.06"]
-    s = b.sent
-    with st.span(b.start, b.end):
-        reason_head(st, 5, b.start + 0.2)
-        xs = [-5.2, -1.9, 1.4]
-        yt, yb = 1.65, -2.1
-        names = ["falling reservoir pressure", "gas lift", "gas well: liquid loading"]
-        minis = [_mini(st, x, yt, yb) for x in xs]
-        for m in minis:
-            st.fade_in(m.cas + m.tub + m.sand + m.tree, b.start + 0.2, 0.5)
-        tt = [st.text(n, x, 2.62, 0.21, P.TEXT, 0.8, kind="bold") for n, x in zip(names, xs)]
-        st.fade_in(tt[0], s[1] - 0.2, 0.4)
-        st.fade_in(tt[1], s[2] - 0.2, 0.4)
-        st.fade_in(tt[2], s[4] - 0.2, 0.4)
-        A, B, C = minis
-        # ---------------- A: oil well, heavy column outweighs the reservoir pressure
-        oilA = st.rect(A.cx, (yt + yb) / 2 + 0.25, 0.34, yt - yb - 0.5, P.OIL, 0.38, alpha=0.85)
-        K.show(st, oilA, s[1] + 0.3, None, 0.5)
-        ba = [st.rect(A.cx - 0.85, yb - 0.72, 0.2, 0.05, P.WATER, 0.6, anchor="b", role="flat"), st.rect(A.cx - 0.5, yb - 0.72, 0.2, 0.05, P.MUD, 0.6, anchor="b", role="flat")]
-        st.scale_to(ba[0], s[1] + 0.4, s[1] + 1.4, sy=0.5)
-        st.scale_to(ba[1], s[1] + 0.4, s[1] + 1.4, sy=0.68)
-        bl = [st.text("res.", A.cx - 0.85, yb - 0.9, 0.15, P.WATER, 0.6), st.text("column", A.cx - 0.35, yb - 0.9, 0.15, P.MUD, 0.6)]
-        K.show(st, ba + bl, s[1] + 0.4, None, 0.4)
-        stall = K.xmark(st, A.cx + 0.9, yt + 0.45, 0.2, s[1] + 1.6)
-        sl = st.text("flow stalls", A.cx + 0.95, yt + 0.0, 0.18, P.BAD, 0.7, align="l")
-        K.show(st, [sl], s[1] + 1.6, None, 0.4)
-        # ---------------- B: gas lift
-        annB = [st.rect(B.cx - 0.37, (yt + yb) / 2 + 0.25, 0.28, yt - yb - 0.5, P.GAS, 0.15, alpha=0.0), st.rect(B.cx + 0.37, (yt + yb) / 2 + 0.25, 0.28, yt - yb - 0.5, P.GAS, 0.15, alpha=0.0)]
-        oilB = st.rect(B.cx, (yt + yb) / 2 + 0.25, 0.34, yt - yb - 0.5, P.OIL, 0.38, alpha=0.85)
-        K.show(st, oilB, s[2] - 0.3, None, 0.5)
-        gas_in = [st.rect(B.cx - 0.37, (yt + yb) / 2 + 0.25, 0.28, yt - yb - 0.5, P.GAS, 0.16, alpha=0.3), st.rect(B.cx + 0.37, (yt + yb) / 2 + 0.25, 0.28, yt - yb - 0.5, P.GAS, 0.16, alpha=0.3)]
-        K.show(st, gas_in, s[2] + 0.2, None, 0.6)
-        valves = []
-        for yv in (0.7, -0.4, -1.4):
-            valves.append(st.rect(B.cx + 0.3, yv, 0.2, 0.2, P.GAS, 0.5, role="flat"))
-            st.flow([(B.cx + 0.45, yv), (B.cx + 0.1, yv), (B.cx + 0.1, yv + 0.9)], s[2] + 0.8, s[3] + 1.5, P.GAS, n=3, speed=0.5, r=0.04)
-        K.show(st, valves, s[2] + 0.2, None, 0.4)
-        # the column lightens: its bar is shorter than the reservoir bar
-        bb = [st.rect(B.cx - 0.85, yb - 0.72, 0.2, 0.05, P.WATER, 0.6, anchor="b", role="flat"), st.rect(B.cx - 0.5, yb - 0.72, 0.2, 0.68, P.MUD, 0.6, anchor="b", role="flat")]
-        st.scale_to(bb[0], s[2] + 0.2, s[2] + 1.0, sy=0.5)
-        st.scale_to(bb[1], s[2] + 1.2, s[2] + 2.8, sy=0.32)
-        K.show(st, bb + [st.text("res.", B.cx - 0.85, yb - 0.9, 0.15, P.WATER, 0.6), st.text("column", B.cx - 0.35, yb - 0.9, 0.15, P.MUD, 0.6)], s[2] + 0.2, None, 0.4)
-        st.flow([(B.cx, yb + 0.3), (B.cx, yt + 0.4), (B.cx + 0.9, yt + 0.4)], s[2] + 2.4, b.end - 0.3, P.OIL, n=10, speed=0.8, r=0.04)
-        wn = K.callout(st, "valves wear out: changed by wire", B.cx - 1.4, 0.0 + 1.5, B.cx + 0.3, 0.7, color=P.PANEL2, size=0.17, align="l")
-        K.show(st, wn, s[3] + 0.1, s[4], 0.4)
-        # ---------------- C: gas well, liquid loading
-        gasC = st.rect(C.cx, (yt + yb) / 2 + 0.25, 0.34, yt - yb - 0.5, P.GAS, 0.38, alpha=0.5)
-        K.show(st, gasC, s[4] + 0.2, None, 0.5)
-        st.flow([(C.cx, yb + 0.3), (C.cx, yt + 0.4), (C.cx + 0.9, yt + 0.4)], s[4] + 0.6, s[7], P.GAS, n=5, speed=0.2, r=0.04)
-        drops = st.flow([(C.cx, yt - 0.3), (C.cx, yb + 0.9)], s[5], s[7] - 0.4, P.WATER, n=9, speed=0.35, r=0.05, jitter=0.1)
-        pool = st.rect(C.cx, yb + 0.2, 0.34, 0.0001, P.WATER, 0.45, anchor="b")
-        st.scale_to(pool, s[5] + 0.4, s[6] + 1.2, sy=1.5)
-        pl_ = K.tag(st, C.cx + 1.15, yb + 0.7, "liquid pool", color=P.WATER, fg=P.BG, size=0.18, z=0.9)
-        K.show(st, pl_, s[6] - 0.3, s[7], 0.4)
-        # velocity string: thin tube hung inside; the gas speeds up and carries the droplets out
-        vs = [st.rect(C.cx - 0.07, (yt - 0.0) / 2 - 0.6, 0.025, yt - yb - 1.2, P.WIRE, 0.6, role="steel"), st.rect(C.cx + 0.07, (yt - 0.0) / 2 - 0.6, 0.025, yt - yb - 1.2, P.WIRE, 0.6, role="steel")]
-        K.show(st, vs, s[7] + 0.1, None, 0.5)
-        st.fade_out(pool, s[7] + 1.0, 1.0)
-        st.flow([(C.cx, yb + 0.5), (C.cx, yt + 0.4), (C.cx + 0.9, yt + 0.4)], s[7] + 1.0, b.end - 0.3, P.GAS, n=10, speed=0.9, r=0.04)
-        st.flow([(C.cx, yb + 0.6), (C.cx, yt + 0.4), (C.cx + 0.9, yt + 0.4)], s[7] + 1.2, b.end - 0.3, P.WATER, n=4, speed=0.9, r=0.045)
-        vl = K.tag(st, C.cx + 1.25, 0.2, "velocity string", color=P.WIRE, fg=P.BG, size=0.18, z=0.9)
-        K.show(st, vl, s[7] + 0.3, None, 0.4)
+# 2.06 (gas lift, unloading, liquid loading) lives in scenes/x_ch02_lift.py
 
 
 # ====================================================================================================== 2.07
@@ -646,7 +567,8 @@ def build(st, tl):
     b203(st, tl)
     b204(st, tl)
     b205(st, tl)
-    b206(st, tl)
+    from scenes.x_ch02_lift import b206
+    b206(st, tl, reason_head)
     b207(st, tl)
     b208(st, tl)
     b209(st, tl)

@@ -296,44 +296,8 @@ def b304(st, tl):
 
 
 # ====================================================================================================== 3.05
-def b305(st, tl):
-    b = tl["3.05"]
-    s = b.sent
-    with st.span(b.start, b.end):
-        cx = -2.4
-        w, h = 6.0, 0.8
-        items = [("RESERVOIR", -3.0, P.SAND, P.BG), ("TUBING  +  PACKER  +  DOWNHOLE VALVE", -1.55, P.PANEL2, P.TEXT),
-                 ("TREE", -0.2, P.PANEL2, P.TEXT), ("LUBRICATOR  +  BOP  +  STUFFING BOX", 1.15, P.PANEL2, P.TEXT)]
-        for name, y, col, fg in items:
-            r = st.rect(cx, y, w, h, col, 0.4, role="pill" if col != P.SAND else "flat")
-            t = st.text(name, cx, y, 0.23, fg, 0.5, kind="bold")
-            st.fade_in([r, t], b.start + 0.3, 0.5)
-        up = st.arrow(cx + 3.55, -3.0, cx + 3.55, 1.5, P.OIL, 0.08, 0.3, 0.6)
-        K.show(st, up, s[0] + 0.5, None, 0.5)
-        up_l = K.note(st, "reservoir pressure", cx + 3.8, -2.0, 0.19, P.OIL, align="l")
-        K.show(st, up_l, s[0] + 0.7, None, 0.5)
-        e1 = st.line([(cx - 3.2, -2.05), (cx + 3.2, -2.05), (cx + 3.2, -1.05), (cx - 3.2, -1.05)], P.PRIMARY_B, 0.06, 0.9, closed=True)
-        e2 = st.line([(cx - 3.3, -0.65), (cx + 3.3, -0.65), (cx + 3.3, 1.75), (cx - 3.3, 1.75)], P.SECOND_B, 0.06, 0.85, closed=True)
-        t1 = b.word(1, "two tested barriers")
-        st.draw_on(e1, t1, t1 + 1.2, "BEZIER")
-        st.draw_on(e2, t1 + 0.8, t1 + 2.0, "BEZIER")
-        l1 = K.tag(st, -7.6, -1.55, "primary", color=P.PRIMARY_B, fg=P.BG, size=0.21, z=0.9, align="l")
-        l2 = K.tag(st, -7.6, 0.55, "secondary", color=P.SECOND_B, fg=P.BG, size=0.21, z=0.9, align="l")
-        K.show(st, l1, t1 + 1.0, None, 0.4)
-        K.show(st, l2, t1 + 1.8, None, 0.4)
-        tt = b.word(2, "pressure-tested")
-        for i, y in enumerate((-2.05, 1.75)):
-            tg = K.tag(st, cx + 2.55, y, "TESTED", color=P.SAFE, fg=P.BG, size=0.17, z=1.0)
-            K.show(st, tg, tt + 0.5 * i, None, 0.4)
-        pe = K.note(st, "the equipment on top is part of the envelope", cx, 2.6, 0.22, P.WARN, align="c")
-        K.show(st, pe, b.word(2, "pressure control equipment"), s[3] - 0.2, 0.4)
-        nor = K.tag(st, 4.7, 2.55, "NORSOK D-010 + operator procedures", color=P.NO_BADGE, fg=P.TEXT, size=0.2, z=0.9)
-        K.show(st, nor, s[3], None, 0.5)
-        tf = s[4]
-        K.xmark(st, cx + 3.2, -1.55, 0.3, tf + 0.2)
-        st.recolor(e1, tf + 0.3, tf + 0.7, P.BAD)
-        stop = K.tag(st, cx, 3.2, "barrier failed: STOP until it is restored", color=P.BAD, fg=P.BG, size=0.28, z=1.0)
-        K.show(st, stop, tf + 0.3, None, 0.4)
+# 3.05 (the barrier envelopes during a wireline job) lives in scenes/x_ch03_barriers.py
+from scenes.x_ch03_barriers import b305  # noqa: E402
 
 
 def build(st, tl):

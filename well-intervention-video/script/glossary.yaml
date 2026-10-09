@@ -144,6 +144,12 @@ fishing neck:
 kick-over tool:
   def: "A wireline tool whose arm swings out to reach a valve in a side pocket and pull or set it."
   aliases: [kickover tool, kick over tool, KOT]
+orienting sleeve:
+  def: "A helical guide with a slot at the top of a side-pocket mandrel. It turns a kick-over tool until its arm faces the pocket."
+  aliases: [helical sleeve]
+operating valve:
+  def: "The gas-lift valve where gas enters the tubing in steady production, normally the deepest one; the valves above only open during start-up."
+  aliases: [operating valve]
 casing collar locator:
   def: "A sensor that detects the casing joints as the tool passes, used to correlate depth. CCL."
   aliases: [CCL]
@@ -166,7 +172,7 @@ bottom hole assembly:
   def: "The tools hung on the end of the coiled tube: connector, valves, disconnect and the working tool. BHA."
   aliases: [BHA, bottom-hole assembly]
 check valve:
-  def: "A one-way valve (here a pair of flaps) that stops well fluid flowing back up the inside of the tube."
+  def: "A one-way valve. In a gas-lift valve it stops well fluid flowing back into the annulus; on coiled tubing it stops well fluid coming up the tube."
   aliases: [check valves]
 balance point:
   def: "The depth at which the weight of tube in the hole equals the pressure force pushing it out."

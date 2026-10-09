@@ -152,14 +152,26 @@ def b102(st, tl):
         show(header(t0s[1], t1s[1], "sliding sleeve"), t0s[1], t1s[1])
         st.move(sv.inner, t0s[1] + 2.2, t0s[1] + 3.2, dy=sv.y_open - sv.y_closed)
         st.flow([(CX + 1.6, CY - 0.2), (CX, CY - 0.2)], t0s[1] + 3.4, t1s[1], P.OIL, n=5, speed=0.8, r=0.05)
-        # --- side-pocket mandrel with valve
-        md_ = I.mandrel_inset(st, CX - 0.3, CY - 0.2, 1.25)
-        parts = md_.body + md_.bore + md_.pocket + md_.valve + md_.ports
-        lbl = [st.text("off-centre pocket", CX + 1.25, CY - 1.95, 0.2, P.TEXT, 0.9, align="l"),
-               st.text("valve", CX + 1.55, CY + 0.35, 0.22, P.GAS, 0.9, align="l", kind="bold")]
+        # --- side-pocket mandrel with valve (procedural: the same drawing as chapters 2 and 4)
+        from scenes.common import gaslift as G, pdraw as D
+        g = G.SPM(CX - 0.75, CY + 2.25, CY - 2.85, s=0.95)
+        ta, tb = t0s[2], t1s[2]
+
+        def draw_spm(c, t, look, g=g, ta=ta, tb=tb):
+            a = D.vis(t, ta, tb, 0.4)
+            if a <= 0:
+                return
+            G.draw_spm(c, look, g, a, annulus=P.GAS, port_glow=0.6 * D.vis(t, ta + 1.6, tb, 0.5))
+            G.draw_valve(c, look, g.px, g.v_top, g.L, g.vw, a, detail="body")
+        st.procedural(ta, tb + 0.5, 0.92, draw_spm)
+        lbl = [st.text("main bore", g.bx, CY + 0.55, 0.17, P.MUTED, 0.95),
+               st.text("off-centre pocket", g.xO + g.wall + 0.75, g.y_pt + 0.3, 0.2, P.TEXT, 0.95, align="l"),
+               st.text("gas-lift valve", g.xO + g.wall + 0.75, g.v_top - 0.6 * g.L, 0.22, P.GAS, 0.95, align="l", kind="bold")]
         ln, ring = zoom_to(M.GL_MANDRELS[1])
-        show(parts + lbl + [ln, ring], t0s[2], t1s[2])
+        show(lbl + [ln, ring], t0s[2], t1s[2])
         show(header(t0s[2], t1s[2], "side-pocket mandrel"), t0s[2], t1s[2])
+        gas_path = [(g.xO + g.wall + 0.45, g.y_port), (g.px + 0.15, g.y_port), (g.px, g.y_port - 0.1), (g.px, g.y_pb + 0.15), (g.xR + 0.05, g.y_dis),
+                    (g.bx + 0.1, g.y_dis), (g.bx, g.y_dis + 0.5), (g.bx, CY + 2.2)]
         # --- perforations
         pf_ = I.perf_inset(st, CX - 0.5, CY - 0.2, 1.3)
         parts = pf_.rock + pf_.cement + pf_.casing + pf_.bore + pf_.tunnels
@@ -173,7 +185,7 @@ def b102(st, tl):
         for pth in pf_.paths:
             st.flow([(pth[0][0], pth[0][1]), (pth[1][0], pth[1][1])], t0s[3] + 1.0, t1s[3], P.OIL, n=4, speed=0.9, r=0.055)
         # the gas path in the mandrel
-        st.flow(md_.gas_path, t0s[2] + 1.8, t1s[2], P.GAS, n=8, speed=0.9, r=0.045)
+        st.flow(gas_path, t0s[2] + 1.8, t1s[2], P.GAS, n=10, speed=0.9, r=0.045, z=0.95)
 
 
 # ====================================================================================================== 1.03

@@ -72,60 +72,8 @@ def b701(st, tl):
 
 
 # ====================================================================================================== 7.02
-def b702(st, tl):
-    b = tl["7.02"]
-    s = b.sent
-    with st.span(b.start, b.end):
-        # ---------- vertical tree
-        vx = -5.0
-        tub_v = [st.rect(vx - 0.18, -3.1, 0.08, 1.0, P.STEEL, 0.4, role="steel"), st.rect(vx + 0.18, -3.1, 0.08, 1.0, P.STEEL, 0.4, role="steel")]
-        wh_v = [st.rect(vx, -2.3, 1.7, 0.8, P.STEEL_DK, 0.35, role="steel"), st.rect(vx, -2.3, 0.34, 0.8, P.BG, 0.37)]
-        hang_v = [st.rect(vx - 0.4, -2.4, 0.5, 0.3, P.PRIMARY_B, 0.45, role="flat"), st.rect(vx + 0.4, -2.4, 0.5, 0.3, P.PRIMARY_B, 0.45, role="flat")]
-        v1 = K.gate_valve(st, vx, -1.5, 1.0, 0.4)
-        v2 = K.gate_valve(st, vx, -0.8, 1.0, 0.4)
-        v3 = K.gate_valve(st, vx, -0.1, 1.0, 0.4)
-        cap_v = [st.rect(vx, 0.45, 0.6, 0.26, P.STEEL, 0.4, role="steel")]
-        wing_v = [st.rect(vx + 0.9, -0.8, 1.1, 0.24, P.STEEL_DK, 0.38, role="steel")]
-        tree_v = v1.body + v1.stem + v1.gate + v2.body + v2.stem + v2.gate + v3.body + v3.stem + v3.gate + cap_v + wing_v
-        K.show(st, tub_v + wh_v + hang_v + tree_v, b.start + 0.2, None, 0.6)
-        tv = st.text("VERTICAL TREE", vx, 3.3, 0.26, P.TEXT, 0.6, kind="bold")
-        K.show(st, [tv], s[1] - 0.3, None, 0.4)
-        lv = K.callout(st, "tubing hanger in the wellhead", -7.6, -3.3, vx - 0.5, -2.4, size=0.2, align="l")
-        K.show(st, lv, b.word(1, "tubing hanger"), s[2], 0.4)
-        # a straight tool path through the bore
-        arr = st.arrow(vx, 0.9, vx, -3.0, P.SAFE, 0.07, 0.28, 0.8)
-        at = K.note(st, "tools go straight down", vx + 1.0, 1.1, 0.21, P.SAFE, align="l")
-        K.show(st, arr + at, s[2] - 0.2, s[3], 0.4)
-        # ---------- horizontal tree
-        hx = -0.4
-        tub_h = [st.rect(hx - 0.18, -3.1, 0.08, 1.0, P.STEEL, 0.4, role="steel"), st.rect(hx + 0.18, -3.1, 0.08, 1.0, P.STEEL, 0.4, role="steel")]
-        wh_h = [st.rect(hx, -2.65, 1.7, 0.6, P.STEEL_DK, 0.35, role="steel"), st.rect(hx, -2.65, 0.34, 0.6, P.BG, 0.37)]
-        body = [st.rect(hx, -1.2, 1.7, 2.3, P.STEEL_DK, 0.35, role="steel"), st.rect(hx, -1.1, 0.5, 2.1, P.BG, 0.37)]
-        hang_h = [st.rect(hx - 0.35, -1.95, 0.4, 0.5, P.PRIMARY_B, 0.45, role="flat"), st.rect(hx + 0.35, -1.95, 0.4, 0.5, P.PRIMARY_B, 0.45, role="flat")]
-        outlet = [st.rect(hx + 1.3, -1.95, 1.0, 0.22, P.STEEL_DK, 0.34, role="steel"), st.rect(hx + 1.3, -1.95, 1.0, 0.1, P.BG, 0.36)]
-        plugs = [st.rect(hx, -1.45, 0.46, 0.3, P.STEEL, 0.5, role="steel"), st.rect(hx, -0.85, 0.46, 0.3, P.STEEL, 0.5, role="steel")]
-        cap_h = [st.rect(hx, 0.1, 0.55, 0.22, P.STEEL, 0.4, role="steel")]
-        K.show(st, tub_h + wh_h + body + hang_h + outlet + plugs + cap_h, s[3] - 0.3, None, 0.6)
-        th = st.text("HORIZONTAL TREE", hx, 3.3, 0.26, P.TEXT, 0.6, kind="bold")
-        K.show(st, [th], s[3] - 0.3, None, 0.4)
-        lh = K.callout(st, "hanger inside the tree; oil leaves by the side", hx - 1.0, -3.55, hx + 0.3, -1.95, size=0.2, align="l")
-        lp = K.callout(st, "plugs in the hanger close the top", hx + 1.2, 0.8, hx + 0.25, -0.85, size=0.2, align="l")
-        K.show(st, lh, b.word(4, "tubing hanger sits"), None, 0.4)
-        K.show(st, lp, b.word(4, "plugs"), None, 0.4)
-        # BOP and riser to reach the plugs
-        bop = [st.rect(hx, 1.2, 1.2, 1.0, P.STEEL_DK, 0.4, role="steel"), st.rect(hx, 1.2, 0.34, 1.0, P.BG, 0.42), st.rect(hx - 0.4, 1.2, 0.4, 0.22, P.BAD, 0.5), st.rect(hx + 0.4, 1.2, 0.4, 0.22, P.BAD, 0.5),
-               st.rect(hx, 2.6, 0.3, 1.6, P.STEEL, 0.4, role="steel")]
-        K.show(st, bop, b.word(4, "reached through"), None, 0.5)
-        bl = K.note(st, "BOP and riser", hx + 1.3, 1.5, 0.21, P.WARN, align="l")
-        K.show(st, bl, b.word(4, "reached through"), None, 0.4)
-        # sentences 5 and 6: what can be lifted off
-        up = st.arrow(-3.3, -0.6, -3.3, 1.2, P.SAFE, 0.07, 0.26, 0.8)
-        ut = K.note(st, "the tree lifts off\nalone; the\ncompletion stays", -3.1, 0.3, 0.2, P.SAFE, align="l")
-        K.show(st, up + ut, s[5], None, 0.4)
-        st.move(tree_v, s[5] + 0.8, s[5] + 2.2, dy=0.6)
-        xt = K.note(st, "cannot be removed\nwithout pulling\nthe tubing", hx + 1.2, -0.6, 0.2, P.BAD, align="l")
-        K.show(st, xt, s[6], None, 0.4)
-        K.xmark(st, hx + 0.95, 0.8, 0.3, s[6] + 0.3)
+# 7.02 (vertical and horizontal trees) lives in scenes/x_ch07_trees.py
+from scenes.x_ch07_trees import b702  # noqa: E402
 
 
 # ====================================================================================================== 7.03

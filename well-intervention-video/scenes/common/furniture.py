@@ -13,6 +13,7 @@ from . import palette as P
 from .look import wrap_to
 
 HEADER_Y = 4.18
+Z_HUD = 32.0       # header, term cards and badges draw above any content
 
 
 def _intro(tl) -> float:
@@ -26,10 +27,42 @@ def header(st, tl, t0=None, t1=None):
         tag = f"CH {tl.num:02d}"
         tw = st.measure(tag, 0.17, "bold") + 0.3
         x0 = -7.85
-        plate = st.rect(x0 + tw / 2, HEADER_Y, tw, 0.36, P.PORE, 0.5, role="pill", alpha=0.95)
-        a = st.text(tag, x0 + tw / 2, HEADER_Y, 0.17, P.BG, 0.51, kind="bold")
-        b = st.text(tl.title.upper(), x0 + tw + 0.2, HEADER_Y, 0.21, P.TEXT, 0.5, align="l", kind="bold", alpha=0.82)
+        plate = st.rect(x0 + tw / 2, HEADER_Y, tw, 0.36, P.PORE, Z_HUD + 0.5, role="pill", alpha=0.95)
+        a = st.text(tag, x0 + tw / 2, HEADER_Y, 0.17, P.BG, Z_HUD + 0.51, kind="bold")
+        b = st.text(tl.title.upper(), x0 + tw + 0.2, HEADER_Y, 0.21, P.TEXT, Z_HUD + 0.5, align="l", kind="bold", alpha=0.82)
         st.fade_in([plate, a, b], t0 + 0.15, 0.45)
+    top_mask(st, t0, t1)
+
+
+MASK_Y0, MASK_Y1 = 3.84, 4.04      # content fades out under the header band between these heights
+
+
+def top_mask(st, t0, t1):
+    """The header band hides whatever passes under it (a wire or a tool running in from above): the background is redrawn
+    over the band, fully above MASK_Y1 and fading to nothing at MASK_Y0, below the header and the cards."""
+    import skia
+
+    def draw(c, t, look):
+        p0 = look.M.mapXY(0.0, MASK_Y1)
+        p1 = look.M.mapXY(0.0, MASK_Y0)
+        ya, yb = p0.y(), p1.y()
+        c.save()
+        c.resetMatrix()
+        c.save()
+        c.clipRect(skia.Rect(0, 0, look.w, max(ya, 0.0)))
+        c.drawImage(look.background, 0, 0)
+        c.restore()
+        n = 14
+        for i in range(n):
+            y0 = ya + (yb - ya) * i / n
+            y1 = ya + (yb - ya) * (i + 1) / n
+            a = 1.0 - (i + 0.5) / n
+            c.save()
+            c.clipRect(skia.Rect(0, y0, look.w, y1 + 0.6))
+            c.drawImage(look.background, 0, 0, skia.SamplingOptions(), skia.Paint(Alphaf=float(a)))
+            c.restore()
+        c.restore()
+    st.procedural(t0, t1, Z_HUD - 0.5, draw)
 
 
 def title_card(st, tl):
@@ -76,11 +109,11 @@ def term_cards(st, t0, d, terms, y_top=CARD_TOP):
         cy = y - h / 2
         with st.span(t0, t0 + d):
             parts = [
-                st.rect((CARD_X0 + CARD_X1) / 2, cy, w, h, P.PANEL2, 0.6, role="card"),
-                st.rect(CARD_X0 + 0.16, cy, 0.05, h - 0.3, P.PORE, 0.61, role="shaft"),
-                st.text("NEW TERM", CARD_X0 + 0.34, y - 0.16 - 0.075, 0.12, P.PORE, 0.62, align="l", kind="bold"),
-                st.text(term.upper(), CARD_X0 + 0.34, y - 0.16 - 0.15 - 0.1 - 0.12, 0.22, P.TEXT, 0.62, align="l", kind="bold"),
-                st.text(dfn, CARD_X0 + 0.34, y - 0.16 - 0.15 - 0.1 - 0.27 - 0.04, 0.145, P.MUTED, 0.62, align="l", valign="t"),
+                st.rect((CARD_X0 + CARD_X1) / 2, cy, w, h, P.PANEL2, Z_HUD + 0.6, role="card"),
+                st.rect(CARD_X0 + 0.16, cy, 0.05, h - 0.3, P.PORE, Z_HUD + 0.61, role="shaft"),
+                st.text("NEW TERM", CARD_X0 + 0.34, y - 0.16 - 0.075, 0.12, P.PORE, Z_HUD + 0.62, align="l", kind="bold"),
+                st.text(term.upper(), CARD_X0 + 0.34, y - 0.16 - 0.15 - 0.1 - 0.12, 0.22, P.TEXT, Z_HUD + 0.62, align="l", kind="bold"),
+                st.text(dfn, CARD_X0 + 0.34, y - 0.16 - 0.15 - 0.1 - 0.27 - 0.04, 0.145, P.MUTED, Z_HUD + 0.62, align="l", valign="t"),
             ]
             st.fade_in(parts, t0, 0.35)
             st.fade_out(parts, t0 + d - 0.4, 0.35)
@@ -97,8 +130,8 @@ def badge(st, t0, t1, label, color, x_right=7.85, y=HEADER_Y):
     """Scope badge in the header row (top-right), right edge at x_right. Returns its width."""
     w = st.measure(label, 0.15, "bold") + 0.36
     with st.span(t0, t1):
-        parts = [st.rect(x_right - w / 2, y, w, 0.34, color, 0.7, role="pill"),
-                 st.text(label, x_right - w / 2, y, 0.15, P.BG, 0.71, kind="bold")]
+        parts = [st.rect(x_right - w / 2, y, w, 0.34, color, Z_HUD + 0.7, role="pill"),
+                 st.text(label, x_right - w / 2, y, 0.15, P.BG, Z_HUD + 0.71, kind="bold")]
         st.fade_in(parts, t0, 0.3)
     return w
 

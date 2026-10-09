@@ -89,7 +89,7 @@ def b601(st, tl):
         lt1 = st.text("pipe-light: pushed in", 1.7, bar_y, 0.2, P.BG, 0.6, kind="bold")
         lt2 = st.text("pipe-heavy: weight held", 4.8, bar_y, 0.2, P.BG, 0.6, kind="bold")
         mk = st.circle(0.3, bar_y + 0.55, 0.14, P.WARN, 0.8, role="orb")
-        bp = K.note(st, "balance point: slips reversed", 3.25, bar_y - 0.6, 0.22, P.WARN, align="c")
+        bp = K.note(st, "balance point: switch to the other slips", 3.25, bar_y - 0.6, 0.22, P.WARN, align="c")
         K.show(st, [light, heavy, lt1, lt2, mk], s[5] - 0.2, None, 0.4)
         st.move(mk, s[5] + 0.3, s[5] + 4.0, dx=5.9, interp="LINEAR")
         K.show(st, bp, b.word(5, "balance point"), None, 0.4)

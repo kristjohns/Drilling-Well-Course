@@ -12,6 +12,8 @@ from scenes.common import palette as P, model as M
 from scenes.common import kit as K
 from scenes.common import ct as C
 from scenes.common.chart import Chart
+from scenes.common.stage import hex_rgb
+from scenes.common.look import lighten
 
 
 def _tubing(st, cx, top, bot, half=1.3, z=0.3):
@@ -106,22 +108,44 @@ def b510(st, tl):
             g = K.tag(st, 1.3, 2.9 - i * 0.7, txt, color=P.PANEL2, size=0.23, z=0.9, align="l")
             K.show(st, g, t, None, 0.4)
 
-        # ---------------- 1: nitrogen lift
+        # ---------------- 1: nitrogen lift: gas from the nozzle bubbles up through the column and lightens it
         t1a, t1b = s[1] - 0.2, s[3] - 0.3
-        liq = st.rect(cx, (3.0 + bot) / 2, 2.4, 3.0 - bot, P.OIL, 0.2, alpha=0.55)
-        ct1 = st.rect(cx, top + 0.3, 0.3, top + 0.3 + 2.6, P.STEEL, 0.5, anchor="t", role="steel")
-        n2 = st.rect(cx, -2.6, 2.4, 0.001, P.N2, 0.25, anchor="b", alpha=0.7)
-        K.show(st, [liq, ct1], t1a, t1b, 0.4)
-        K.show(st, [n2], t1a, t1b, 0.1)
-        st.scale_to(n2, s[1] + 0.8, s[2] + 1.5, sy=5.0)
-        st.flow([(cx, top), (cx, -2.6)], s[1] + 0.3, t1b, P.N2, n=8, speed=1.6, r=0.055)
-        # the liquid column is displaced out of the top
-        st.move(liq, s[1] + 0.8, s[2] + 1.5, dy=2.2)
-        out = st.arrow(cx + 0.9, 3.7, cx + 2.4, 3.7, P.OIL, 0.07, 0.24, 0.7)
-        K.show(st, out, s[1] + 1.0, t1b, 0.4)
+        from scenes.common import pdraw as D
+        import random
+        rnd = random.Random(11)
+        bub = [(rnd.uniform(-0.95, 0.95), rnd.uniform(0, 1), rnd.uniform(0.6, 1.2), rnd.uniform(0.03, 0.07)) for _ in range(70)]
+        t_g = s[1] + 0.8
+
+        def n2_lift(c, t, look):
+            a = D.vis(t, t1a, t1b, 0.4)
+            if a <= 0:
+                return
+            gas = D.ramp(t, t_g, s[2] + 1.5)                   # how gasified the column is
+            lvl = 3.0
+            D.fluid(c, cx - 1.08, bot, cx + 1.08, lvl, P.OIL, (0.6 - 0.32 * gas) * a)
+            D.gradient_rect_v(c, cx - 1.08, bot, cx + 1.08, lvl, P.N2, P.N2, 0.0 + 0.28 * gas * a)
+            # the coiled tube with the nozzle at the bottom
+            D.steel(c, cx - 0.15, -2.4, cx + 0.15, top + 0.3, P.STEEL, a)
+            D.flat(c, cx - 0.2, -2.6, cx + 0.2, -2.4, P.WARN, a, r=0.03)
+            # bubbles rising from the nozzle: more as the injection builds
+            if t > t_g:
+                n_on = int(len(bub) * min(1.0, (t - t_g) / 2.5))
+                for i, (bx, ph, sp, r) in enumerate(bub[:n_on]):
+                    u = (ph + (t - t_g) * sp * 0.35) % 1.0
+                    y = -2.4 + u * (lvl + 2.4)
+                    x = cx + bx * (0.25 + 0.75 * min(u * 3, 1.0)) + 0.04 * math.sin(7 * u + i)
+                    D.disc(c, x, y, r * (0.8 + 0.6 * u), lighten(hex_rgb(P.N2), 0.35), 0.85 * a * min(1.0, 4 * (1 - u)))
+            # liquid unloaded out of the top
+            if t > t_g + 0.6:
+                D.arrow(c, cx + 1.25, 3.25, cx + 2.6, 3.25, P.OIL, 0.07, 0.22, a * D.lin(t, t_g + 0.6, t_g + 1.0))
+
+        st.procedural(b.start, b.end, 0.22, n2_lift)
+        st.flow([(cx, top), (cx, -2.45)], s[1] + 0.3, t1b, P.N2, n=8, speed=1.6, r=0.05, z=0.55)
         # the reservoir flows in as the column lightens
         inflow = [st.arrow(cx + 2.5, -2.6 - 0.0 + 0.2 * k, cx + 1.4, -2.6 - 0.0 + 0.2 * k, P.OIL, 0.05, 0.18, 0.6) for k in range(3)]
         K.show(st, sum([list(a) for a in inflow], []), s[2] + 1.0, t1b, 0.4)
+        nl = K.callout(st, "nitrogen bubbles lighten the column", cx + 1.6, 0.6, cx + 0.5, 0.6, size=0.18, align="l", z=0.9)
+        K.show(st, nl, t_g + 0.8, t1b, 0.4)
         g1 = K.dial(st, cx + 3.0, 1.9, 0.5, s[2] - 0.2, s[2] + 1.6, 60, 175, color=P.PORE)
         g1l = st.text("column pressure", cx + 3.0, 1.25, 0.18, P.MUTED, 0.6)
         K.show(st, g1 + [g1l], s[2] - 0.3, t1b, 0.4)

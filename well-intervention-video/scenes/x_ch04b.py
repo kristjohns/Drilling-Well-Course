@@ -1,7 +1,7 @@
 """Ch 4, beats 4.05 - 4.07 (called from ch04_wireline.build).
 
 4.05 setting a plug: lock mandrel past the landing nipple, pull up, keys catch the groove, jar down, pull test; retrieval after equalising
-4.06 changing a gas-lift valve with the kick-over tool (orient, kick over, latch, pull, set a new one)
+4.06 changing a gas-lift valve with the kick-over tool: see x_ch04_kot.py
 4.07 other slickline jobs; the limits: cannot push or pump; gravity runs out with inclination (tan i = 1 / friction)
 """
 from __future__ import annotations
@@ -138,103 +138,7 @@ def b405(st, tl):
 
 
 # ====================================================================================================== 4.06
-def b406(st, tl):
-    b = tl["4.06"]
-    s = b.sent
-    with st.span(b.start, b.end):
-        cx, cy, SC = -3.5, -0.3, 1.45
-        md = I.mandrel_inset(st, cx, cy, SC, valve=True, open_top=True)
-        base = md.body + md.bore + md.pocket + md.ports
-        st.fade_in(base + md.valve, b.start + 0.1, 0.5)
-        vx = md.vx
-        valve = md.valve
-        v_neck_y = cy + 1.4 * SC
-        lab_v = K.callout(st, "gas-lift valve in its pocket", 0.2, cy + 0.6, vx + 0.25, cy + 0.6, size=0.21)
-        K.show(st, lab_v, s[0] + 1.0, s[2], 0.4)
-        # sentence 1: a straight tool runs down the bore and misses
-        tool0 = st.rect(cx, 3.6, 0.4, 1.2, P.STEEL_DK, 0.5, role="steel")
-        K.show(st, tool0, s[1] - 0.1, None, 0.3)
-        st.move(tool0, s[1] + 0.2, s[1] + 2.4, dy=-5.4)
-        st.fade_out(tool0, s[1] + 2.2, 0.4)
-        ms = K.tag(st, 0.2, 2.3, "a straight tool misses the valve", color=P.BAD, fg=P.BG, size=0.21, z=0.9)
-        K.show(st, ms, s[1] + 0.8, s[2], 0.4)
-        # the kick-over tool: body in the bore, arm hinged on its right side
-        P_ = (cx + 0.25, cy + 1.18)               # pivot when aligned with the valve neck
-        U = 1.3
-        body = st.rect(cx, P_[1] + 0.15 + U, 0.5, 2.3, P.PRIMARY_B, 0.55, role="flat")
-        key = st.rect(cx - 0.3, P_[1] - 0.6 + U, 0.14, 0.2, P.WARN, 0.57, role="solid")
-        arm = st.rect(P_[0], P_[1] + U, 1.48, 0.16, P.WARN, 0.6, anchor="l", rot=90, role="solid")
-        pivot = st.circle(P_[0], P_[1] + U, 0.1, P.STEEL, 0.62, role="disc")
-        ko = [body, key, arm, pivot]
-        wire = st.rect(cx, 4.4, 0.035, 4.4 - (P_[1] + U + 1.3), P.WIRE, 0.6, anchor="t", role="steel")
-        hw = [4.4 - (P_[1] + U + 1.3)]
-        K.show(st, ko + [wire], s[2] - 0.1, None, 0.5)
-        kt = K.callout(st, "kick-over tool", 0.2, 3.0, cx + 0.3, P_[1] + U + 0.9, size=0.21)
-        K.show(st, kt, s[2], s[4], 0.4)
-
-        def mv(objs, t0, t1, dy, dx=0.0):
-            st.move(objs, t0, t1, dx=dx, dy=dy)
-        def mv_tool(t0, t1, dy):
-            st.move(ko, t0, t1, dy=dy)
-            st.scale_to(wire, t0, t1, sy=hw[0] - dy)
-            hw[0] -= dy
-        # sentence 3: runs in with its arm folded
-        mv_tool(s[3] + 0.2, s[3] + 3.0, -U)
-        # sentence 4: orienting key turns the tool to face the pocket (plan view)
-        px, py = 1.7, -1.6
-        plan = K.card(st, px + 0.8, py, 3.5, 2.8, P.PANEL, 0.2)
-        circ = st.ring(px, py, 0.8, 0.12, P.STEEL, 0.4)
-        bump = st.ring(px + 0.95, py, 0.4, 0.1, P.STEEL, 0.4)
-        tool_pl = st.rect(px, py, 0.7, 0.2, P.WARN, 0.55, anchor="l", rot=215, role="solid")
-        hub = st.circle(px, py, 0.14, P.PRIMARY_B, 0.6, role="disc")
-        ptxt = st.text("plan view", px + 0.8, py + 1.15, 0.18, P.MUTED, 0.5)
-        pk = st.text("pocket", px + 1.2, py - 0.62, 0.18, P.GAS, 0.5)
-        pl = K.note(st, "an orienting key turns\nthe tool to face the pocket", px + 0.8, py - 1.5 + 0.0, 0.19, P.TEXT, align="c")
-        K.show(st, plan + [circ, bump, tool_pl, hub, ptxt, pk] + pl, s[4] - 0.2, s[5] + 0.5, 0.4)
-        st.rotate(tool_pl, s[4] + 0.6, s[4] + 2.0, 360)
-        # sentence 5: pull up, slack off, the arm kicks over to meet the valve
-        t5 = s[5]
-        mv_tool(t5 + 0.1, t5 + 0.7, +0.35)
-        mv_tool(t5 + 0.8, t5 + 1.4, -0.35)
-        st.rotate(arm, t5 + 1.2, t5 + 2.2, 35)
-        # sentence 6: jar down: the tool latches the valve (a latch appears on the neck)
-        t6 = s[6]
-        mv_tool(t6 + 0.2, t6 + 0.35, -0.1)
-        mv_tool(t6 + 0.35, t6 + 0.55, +0.1)
-        latch = st.circle(vx, v_neck_y, 0.14, P.WARN, 0.9, role="disc")
-        K.show(st, [latch], t6 + 0.4, None, 0.2)
-        lk = K.tag(st, 0.2, v_neck_y + 0.9, "latched", color=P.WARN, fg=P.BG, size=0.21, z=0.9)
-        K.show(st, lk, t6 + 0.5, s[7], 0.4)
-        # sentence 7: pull up: the old valve is out through the top of the pocket and swings into the bore
-        t7 = s[7]
-        v_all = valve + [latch]
-        mv(v_all, t7 + 0.2, t7 + 1.3, 1.2)
-        st.rotate(arm, t7 + 1.0, t7 + 1.8, 90)
-        mv(v_all, t7 + 1.3, t7 + 1.9, 0.5, dx=-(vx - cx - 0.62))
-        mv_tool(t7 + 1.9, t7 + 4.2, +U + 1.0)
-        mv(v_all, t7 + 1.9, t7 + 4.2, U + 1.0)
-        ov = K.tag(st, 0.2, 2.6, "old valve out", color=P.SAFE, fg=P.BG, size=0.21, z=0.9)
-        K.show(st, ov, t7 + 1.3, s[8], 0.4)
-        # sentence 8: the same tool with a new valve puts it back
-        t8 = s[8]
-        nv = I.gl_valve(st, cx + 0.62, cy + U + 2.7, SC, 0.52, color=P.PANEL2)
-        K.show(st, nv, t8 - 0.2, None, 0.4)
-        # tool + new valve descend together, the arm kicks over, the valve slides into the pocket, the tool leaves
-        mv_tool(t8 + 0.2, t8 + 2.4, -(U + 1.0))
-        mv(nv, t8 + 0.2, t8 + 2.4, -(U + 1.0))
-        st.rotate(arm, t8 + 2.0, t8 + 2.6, 35)
-        mv(nv, t8 + 2.6, t8 + 3.2, -0.5, dx=(vx - cx - 0.62))
-        mv(nv, t8 + 3.2, t8 + 4.2, -1.2)
-        st.rotate(arm, t8 + 4.3, t8 + 4.8, 90)
-        # gas flows through the new valve
-        st.flow(md.gas_path, t8 + 4.6, b.end - 0.3, P.GAS, n=8, speed=0.9, r=0.045)
-        K.steps_list(st, 3.8, -0.1, ["run in, arm folded", "a key turns the tool to the pocket", "pull up, slack off: arm kicks over", "jar down: latch the valve", "pull up: old valve out",
-                                     "new valve in, jar down: seated"], [s[3], s[4], s[5], s[6], s[7], s[8]], size=0.2, dy=0.5)
-        # sentence 9: three pockets, one trip each
-        t9 = s[9]
-        for i in range(3):
-            g = K.tag(st, 0.2, 2.3 - i * 0.62, f"pocket {i + 1}: one trip", color=P.SAFE, fg=P.BG, size=0.2, z=0.9, align="l")
-            K.show(st, g, t9 + 0.6 * i, None, 0.35)
+# the kick-over job lives in its own module (procedural mandrel, valve and tool): scenes/x_ch04_kot.py
 
 
 # ====================================================================================================== 4.07
@@ -342,5 +246,6 @@ def b407(st, tl):
 
 def build(st, tl):
     b405(st, tl)
+    from scenes.x_ch04_kot import b406
     b406(st, tl)
     b407(st, tl)

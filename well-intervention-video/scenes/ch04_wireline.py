@@ -188,79 +188,8 @@ def b403(st, tl):
 
 
 # ====================================================================================================== 4.04
-def b404(st, tl):
-    b = tl["4.04"]
-    s = b.sent
-    with st.span(b.start, b.end):
-        cx, cy = -4.4, -0.2
-        top_h, bot_h = 2.1, -2.1
-        # housing with a cavity; fixed to the tool below (the "anvil")
-        walls = [st.rect(cx - 0.62, (top_h + bot_h) / 2, 0.26, top_h - bot_h, P.STEEL_DK, 0.3, role="steel"),
-                 st.rect(cx + 0.62, (top_h + bot_h) / 2, 0.26, top_h - bot_h, P.STEEL_DK, 0.3, role="steel"),
-                 st.rect(cx, (top_h + bot_h) / 2, 1.0, top_h - bot_h, P.BG, 0.2),
-                 st.rect(cx, top_h - 0.12, 1.5, 0.24, P.STEEL_DK, 0.32, role="steel"), st.rect(cx, bot_h + 0.1, 1.5, 0.2, P.STEEL_DK, 0.32, role="steel")]
-        anvil = [st.rect(cx, bot_h - 0.6, 0.6, 1.0, P.STEEL, 0.4, role="steel")]
-        # moving parts: stem above, shaft, collar
-        stem = st.rect(cx, 3.0, 0.5, 1.2, P.STEEL, 0.5, role="steel")
-        shaft = st.rect(cx, 1.6, 0.3, 3.0, P.STEEL, 0.45, role="steel")
-        collar = st.rect(cx, -1.2, 0.84, 0.4, P.STEEL, 0.46, role="steel")
-        latch = [st.rect(cx - 0.5, -0.9, 0.14, 0.24, P.WARN, 0.55, role="solid"), st.rect(cx + 0.5, -0.9, 0.14, 0.24, P.WARN, 0.55, role="solid")]
-        wire = st.rect(cx, 4.0, 0.035, 0.6, P.WIRE, 0.6, role="steel")
-        stroke = st.line([(cx + 0.95, -1.2), (cx + 0.95, 0.9)], P.MUTED, 0.03, 0.4, role="hair")
-        st_t = st.text("stroke", cx + 1.2, -0.15, 0.17, P.MUTED, 0.4, align="l")
-        st.fade_in(walls + anvil + [stem, shaft, collar, wire] + latch + [stroke, st_t], b.start + 0.2, 0.5)
-        mov = [stem, shaft, collar, wire]
-        # sentence 3 and 4: pull, the load builds, the wire stretches like a spring
-        t_pull0, t_rel = s[3], b.word(5, "Then the jar releases")
-        pull = st.arrow(cx + 1.15, 3.6, cx + 1.15, 4.4, P.PORE, 0.08, 0.28, 0.7)
-        pl = K.note(st, "pull on the wire", cx + 1.4, 4.0, 0.2, P.PORE, align="l")
-        K.show(st, pull + pl, t_pull0, t_rel, 0.4)
-        stretch = st.rect(cx - 0.6, 3.5, 0.12, 0.001, P.WARN, 0.6, anchor="b", role="flat")
-        sl = K.note(st, "the wire stretches\nlike a spring", cx - 0.9, 3.3, 0.2, P.WARN, align="r")
-        K.show(st, [stretch] + sl, s[4] - 0.1, t_rel + 0.5, 0.3)
-        st.scale_to(stretch, s[4], t_rel, sy=0.9)
-        hold = K.note(st, "the latch holds", cx + 1.2, -0.95, 0.2, P.WARN, align="l")
-        K.show(st, hold, s[4], t_rel, 0.4)
-        # the release: latch opens, the stem flies up and strikes the top of the stroke
-        st.move(latch[0], t_rel - 0.05, t_rel + 0.1, dx=-0.15)
-        st.move(latch[1], t_rel - 0.05, t_rel + 0.1, dx=0.15)
-        st.move(mov, t_rel, t_rel + 0.22, dy=2.0)
-        flash = st.circle(cx, top_h - 0.5, 0.2, P.WARN, 0.9)
-        st.fade_in(flash, t_rel + 0.2, 0.05)
-        st.scale_to(flash, t_rel + 0.22, t_rel + 0.7, sx=1.1, sy=1.1)
-        st.fade_out(flash, t_rel + 0.3, 0.45)
-        st.ripple(cx, top_h - 0.5, t_rel + 0.22, t_rel + 1.2, P.WARN, period=0.5, r0=0.2, r1=1.2)
-        bl = K.tag(st, cx + 3.2, 1.9, "far harder than the pull", color=P.WARN, fg=P.BG, size=0.21, z=0.9)
-        K.show(st, bl, t_rel + 0.3, s[6] - 0.3, 0.3)
-        # jar down: slack off, the stem falls onto the tool below
-        t_dn = s[6]
-        st.move(mov, t_dn + 0.2, t_dn + 1.6, dy=-2.0)
-        flash2 = st.circle(cx, bot_h + 0.45, 0.2, P.WARN, 0.9)
-        st.fade_in(flash2, t_dn + 1.55, 0.05)
-        st.scale_to(flash2, t_dn + 1.6, t_dn + 2.1, sx=1.1, sy=1.1)
-        st.fade_out(flash2, t_dn + 1.7, 0.4)
-        dn = K.note(st, "slack off: the stem falls", cx + 1.2, 0.2, 0.2, P.PORE, align="l")
-        K.show(st, dn, t_dn, t_dn + 2.4, 0.4)
-        # the force trace on the right
-        ch = Chart(st, 0.2, -2.3, 6.6, 4.4, (0, 12), (0, 110))
-        fr = ch.frame(xticks=[], yticks=[], xlabel="time", ylabel="force at the tool", tick_size=0.17)
-        K.show(st, fr, t_pull0, None, 0.5)
-        pts1 = [ch.pt(0.5, 3), ch.pt(1.0, 3)]
-        ramp = st.line([ch.pt(0.8, 3), ch.pt(5.0, 24)], P.PORE, 0.07, 0.5)
-        spike = st.line([ch.pt(5.0, 24), ch.pt(5.15, 100), ch.pt(5.4, 12), ch.pt(5.7, 22), ch.pt(6.0, 6), ch.pt(6.4, 3)], P.WARN, 0.07, 0.5)
-        down = st.line([ch.pt(6.4, 3), ch.pt(9.3, 3), ch.pt(9.4, 62), ch.pt(9.7, 8), ch.pt(10.0, 3), ch.pt(11.8, 3)], P.PORE, 0.07, 0.5)
-        K.show(st, [ramp, spike, down], t_pull0, None, 0.1)
-        st.draw_on(ramp, t_pull0 + 0.2, t_rel, "LINEAR")
-        st.draw_on(spike, t_rel, t_rel + 0.7, "LINEAR")
-        st.draw_on(down, t_dn + 0.1, t_dn + 2.4, "LINEAR")
-        c1 = st.text("steady pull", ch.X(2.4), ch.Y(24) + 0.3, 0.2, P.PORE, 0.6)
-        c2 = st.text("blow ≫ pull", ch.X(6.9), ch.Y(98), 0.22, P.WARN, 0.6, kind="bold")
-        c3 = st.text("downward blow", ch.X(9.4), ch.Y(76), 0.2, P.PORE, 0.6)
-        K.show(st, [c1], s[4], None, 0.4)
-        K.show(st, [c2], t_rel + 0.4, None, 0.4)
-        K.show(st, [c3], t_dn + 1.6, None, 0.4)
-        fin = K.tag(st, 3.5, 3.0, "hundreds of blows, up and down", color=P.SAFE, fg=P.BG, size=0.26, z=0.9)
-        K.show(st, fin, s[7], None, 0.5)
+# 4.04 (jars) lives in scenes/x_ch04_jar.py
+from scenes.x_ch04_jar import b404  # noqa: E402
 
 
 def build(st, tl):

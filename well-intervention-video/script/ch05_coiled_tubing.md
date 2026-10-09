@@ -13,13 +13,13 @@ SHOT: Full side elevation. The reel with a core and turns, a pump-and-swivel at 
 FLAGS: GEN; SIM: arrangement schematic; offshore units are skid-mounted and use a crane or a frame to carry the injector
 TERMS: injector head; gooseneck; stripper
 
-## 5.03 | 40.5 | anim
+## 5.03 | 41 | anim
 VO: The injector head is the engine. Two endless chains run on opposite sides of the tube, each carrying gripper blocks shaped to its diameter. Hydraulic cylinders squeeze the chains together onto the pipe. Turn the chains one way and the pipe is driven into the well. Turn them the other way and it comes out. The injector can hold the pipe still against the well pressure, or pull the whole weight of a long string, tens of tonnes. Everything depends on the grip.
 SHOT: Close-up of the injector: two chain loops with gripper blocks (moving procedurally), a squeezing hydraulic cylinder pair with arrows, the tube between them. Block motion reverses on cue (push in / pull out) with arrows and a force gauge. A red slip marker if the grip is lost (not shown as failing).
 FLAGS: GEN; SIM: block count and cylinder positions simplified
 TERMS:
 
-## 5.04 | 51 | anim
+## 5.04 | 51.5 | anim
 VO: Below the injector, the stripper is a set of rubber elements squeezed around the tube by hydraulic pressure. It is the dynamic seal, the same job as the stuffing box, and like it, it wears. Below the stripper comes the blowout preventer, usually with four sets of rams in a stack. From the top: blind rams, which seal an empty hole; shear rams, which cut the tube; slip rams, which grip it so it cannot fall; and pipe rams, which seal around it. In an emergency they close in sequence: pipe rams to seal, slips to hold, shear to cut, blind to seal the bore.
 SHOT: Cutaway stripper (rubber ring squeezed by a piston around the tube; wear) then the quad BOP stack in the order given with the tube through it. Closing animation, step by step with a number badge: 1 pipe rams close and seal around the tube (rubber faces), 2 slip rams grip, 3 shear rams cut the tube (upper tube lifts away), 4 blind rams close and seal the empty bore.
 FLAGS: GEN; VERIFY: the conventional quad stack order (blind, shear, slip, pipe from the top) and the closing sequence is from industry-practice summaries, not read from API 16ST
@@ -29,7 +29,7 @@ TERMS:
 VO: At the end of the tube hangs the bottom hole assembly. First a connector, which fixes it to the tube. Then check valves, two flaps that only open for flow going down, so that well fluid cannot come up the inside of the tube. Then a disconnect, which can release everything below if it gets stuck: drop a ball, pump it down, and pressure parts the tool. Then the working tool itself: a jetting nozzle, a motor and mill, an inflatable packer, a perforating gun, a logging tool. Same tube, different tool on the end.
 SHOT: Vertical exploded BHA assembling top to bottom: connector (dimple/roll-on), dual flapper check valves (cutaway with flaps closing under upward flow, opening under downward flow), hydraulic disconnect (ball drops, seat shifts, collet parts), then a carousel of working tools swapping on the bottom (nozzle, motor+mill, packer, gun, logging tool).
 FLAGS: GEN; SIM: BHA length and components vary with the job
-TERMS: bottom hole assembly; check valve
+TERMS: bottom hole assembly
 
 ## 5.06 | 46 | anim
 VO: Now the physics. With the well open at two hundred bar, the pressure pushes the tube out with that force of about four tonnes. At first, the tube in the hole weighs almost nothing, so the injector has to push it in. As more goes in, its weight, reduced by buoyancy, grows. About a kilometre of two-inch tube is enough to balance the push. Beyond that, the tube is heavy, and the injector holds it back instead of pushing. That crossover is called the balance point, and the whole operation is planned around it.
@@ -43,13 +43,13 @@ SHOT: Side view of the tube leaving the reel, bending over the gooseneck, straig
 FLAGS: GEN; SIM: strain values are elastic estimates (outer fibre radius over bend radius: about 2.3 percent at a 1.1 m radius); the cycle count of six is the commonly cited minimum; SEEN: the practice of retiring a string at about 80 percent of its estimated fatigue life is from a patent text
 TERMS: fatigue life
 
-## 5.08 | 61.5 | anim
-VO: The other limit is reach. In a horizontal well, you push the tube along the low side of the hole. Friction builds along its length, and the tube feels a compressive load, like pushing a rope. At a certain load the tube buckles, first into a gentle wave, then into a helix that presses hard against the wall. The friction then climbs steeply, and however hard the injector pushes, no more tube goes in. That is lock-up. How far you get depends strongly on friction: in our example, a friction coefficient of 0.3 gives roughly fourteen hundred metres, and 0.1 gives over four thousand. So engineers add lubricants, taper the string so it is lighter at the end, or add a tractor or a vibrating tool.
+## 5.08 | 60 | anim
+VO: The other limit is reach. In a horizontal well, you push the tube along the low side of the hole. Friction builds along its length, and the tube feels a compressive load, like pushing a rope. At a certain load the tube buckles, first into a gentle wave, then into a helix that presses hard against the wall. The friction then climbs steeply, and however hard the injector pushes, no more tube goes in. That is lock-up. How far you get depends strongly on friction: in our example, a friction coefficient of 0.3 gives roughly fourteen hundred metres, and 0.1 gives over four thousand. So engineers add lubricants, run a larger and stiffer tube, or add a tractor or a vibrating tool.
 SHOT: Horizontal well section (casing tube) with coiled tube being pushed in from the left: initially straight, then sinusoidal waves appear at the far end, then a helix forms and tightens; force and friction arrows; the injector arrow grows but the tube stops. A bar chart: reach vs friction coefficient (0.1: 4,305 m, 0.2: 2,153 m, 0.3: 1,435 m, 0.4: 1,076 m) drawn from the model. Three remedy icons appear: lubricant, tapered wall, tractor/vibrator.
 FLAGS: GEN; SIM: the reach is the length of horizontal hole at which friction alone consumes the helical buckling load (Chen/Cheatham) for a 2 in tube in 5.5 in tubing with 1.0 sg fluid; lock-up reach is longer but the first estimate is the planning number, and tubing grade, curvature and fluid add to the picture
 TERMS: lock-up
 
-## 5.09 | 51.5 | anim
+## 5.09 | 52 | anim
 VO: Because the tube is hollow, coiled tubing can circulate. To clean out sand, we run in with a jetting nozzle, pump fluid down the tube, and the fluid returns up the annulus between tube and tubing, carrying the sand. What matters is the speed of that upward flow. Too slow, and the sand falls out again. Fast enough, and it travels to the surface. If the reservoir is too weak to lift the fluid, we add nitrogen to make a foam. And friction in a long, narrow tube limits the pump rate, so the size of the tube is always a trade between strength and flow.
 SHOT: Tubing cutaway with sand fill (gold) over the perforations; coiled tube with nozzle jets stirs the sand into suspension; flow particles go down the tube and up the annulus carrying sand grains to the top (return line to a separator). Annular velocity gauge with a threshold band: grains settle below, rise above. A nitrogen (grey) bubble foam variant. A small inset trade chart: tube ID versus friction pressure.
 FLAGS: GEN; SIM: no numbers on velocity; sand transport depends on grain size, fluid viscosity and well angle

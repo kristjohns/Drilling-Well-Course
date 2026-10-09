@@ -160,8 +160,8 @@ def b802(st, tl):
         y = y_top
         _, h = fact(st, lx, y, "WRONG", "A gas-lift valve in its pocket at 2,100 m MD has failed.", s[1] + 0.5, P.BAD, t1=tA); y -= h
         _, h = fact(st, lx, y, "NEEDS", "Carry a tool down, latch the valve, pull it, set a new one.", s[2] - 0.4, P.PORE, t1=tA); y -= h
-        _, h = fact(st, lx, y, "METHOD", "Slickline with a kick-over tool.", s[2] + 0.4, C_SLICK, t1=tA); y -= h
-        _, h = fact(st, lx, y, "RESULT", "One trip. Production back in about a day.", s[3], P.SAFE, t1=tA)
+        _, h = fact(st, lx, y, "METHOD", "Slickline with a kick-over tool: one trip to pull, one to set.", s[2] + 0.4, C_SLICK, t1=tA); y -= h
+        _, h = fact(st, lx, y, "RESULT", "Production back within a day or two.", s[3], P.SAFE, t1=tA)
         # the toolstring runs down the well to the mandrel
         wire = st.rect(w.cx, wtop, 0.03, 0.001, P.WIRE, 0.9, anchor="t")
         st.scale_to(wire, s[2] - 0.6, s[2] + 1.6, sy=wtop - (mxy + 0.45))
@@ -169,34 +169,57 @@ def b802(st, tl):
         K.show(st, [wire], s[2] - 0.6, tA, 0.2)
         K.show(st, [tool], s[2] + 1.4, tA, 0.3)
         st.flow([(w.cx, w.y(3800)), (w.cx, wtop)], s[3] + 0.5, tA, P.OIL, n=9, speed=0.6, r=0.035)
-        # detail: side-pocket mandrel with the kick-over tool (right)
-        cxd, cyd, sd = 4.6, 0.1, 0.9
-        ins = I.mandrel_inset(st, cxd, cyd, sd, valve=True, open_top=True)
-        K.show(st, ins.body + ins.bore + ins.pocket + ins.valve + ins.ports, s[1] + 0.2, tA, 0.5)
-        K.show(st, K.note(st, "side-pocket mandrel", cxd + 0.3, cyd - 2.05, 0.18, P.MUTED, align="c"), s[1] + 0.4, tA, 0.4)
-        ft = K.tag(st, cxd + 1.6, cyd - 0.4, "failed", color=P.BAD, fg=P.BG, size=0.17, z=1.0, align="l")
-        K.show(st, ft, s[1] + 1.0, s[2] + 3.0, 0.35)
-        neck_y = cyd + 1.4 * sd                                  # the latch (fishing neck) of the valve
-        arm_len = ins.vx - cxd
-        D = 1.0
-        tbar = st.rect(cxd, neck_y + 0.3 + D, 0.16, 0.7, P.STEEL, 0.6, role="steel")
-        tarm = st.rect(cxd, neck_y + D, arm_len, 0.07, P.WARN, 0.62, anchor="l", rot=90, role="solid")
-        t0 = s[2] - 1.0
-        K.show(st, [tbar, tarm], t0, tA - 0.1, 0.3)
-        st.move([tbar, tarm], t0, t0 + 1.3, dy=-D)                       # run in on the wire
-        st.rotate(tarm, t0 + 1.4, t0 + 1.8, 0)                           # the arm kicks over into the pocket
-        old = ins.valve
-        st.move(old + [tbar, tarm], t0 + 2.0, t0 + 2.8, dy=0.95)         # pull the valve out of the pocket
-        st.rotate(tarm, t0 + 2.9, t0 + 3.3, 90)
-        st.move(old, t0 + 2.9, t0 + 3.3, dx=-(ins.vx - cxd))             # across into the bore
-        st.move(old + [tbar, tarm], t0 + 3.4, t0 + 4.3, dy=2.0)          # up and out
-        st.fade_out(old + [tbar, tarm], t0 + 3.7, 0.5)
-        newv = I.gl_valve(st, ins.vx, cyd + 1.4, sd, z=0.3)
-        st.recolor(newv[2], t0, t0 + 0.1, P.SAFE)
-        K.show(st, newv, t0 + 4.2, tA, 0.4)
-        st.move(newv, t0 + 4.3, t0 + 5.1, dy=-1.4)                       # new valve set in the pocket
-        ok = K.tag(st, cxd + 1.6, cyd - 0.4, "new valve set", color=P.SAFE, fg=P.BG, size=0.17, z=1.0, align="l")
-        K.show(st, ok, t0 + 5.1, tA, 0.35)
+        # detail: side-pocket mandrel; trip 1 pulls the failed valve, trip 2 sets a new one (procedural, as in 4.06)
+        from scenes.common import gaslift as G, pdraw as PD
+        g = G.SPM(4.0, 3.0, -3.1, s=0.72)
+        t0 = s[2] - 0.6
+        T1 = (t0, t0 + 4.2)                     # trip 1
+        T2 = (t0 + 4.6, t0 + 8.8)               # trip 2
+        k_hold = g.key_land
+        k_hi = g.key_top
+        rise = (g.y_pt + 0.1) - (g.v_top - g.L)
+
+        def trip_key(t, T):
+            a_, b_ = T
+            pts = [(a_, 5.5), (a_ + 1.0, k_hi), (a_ + 1.6, k_hi), (a_ + 2.2, k_hold), (a_ + 2.7, k_hold), (a_ + 3.4, k_hold + rise), (b_, k_hold + rise + 5)]
+            return PD.keys(t, pts)
+
+        def draw_caseA(c, t, look):
+            a = PD.vis(t, s[1] + 0.2, tA, 0.5)
+            if a <= 0:
+                return
+            G.draw_spm(c, look, g, a, annulus=P.GAS)
+            if t < T1[0] + 2.7:
+                G.draw_valve(c, look, g.px, g.v_top, g.L, g.vw, a, detail="body", outline=P.BAD)
+            if T1[0] < t < T1[1]:
+                ky = trip_key(t, T1)
+                kk = PD.ramp(t, T1[0] + 1.0, T1[0] + 1.5) * (1 - PD.ramp(t, T1[0] + 3.4, T1[0] + 3.9))
+                xy = G.draw_kot(c, look, g, ky, 0.0, kk, a * PD.vis(t, T1[0], T1[1] - 0.4, 0.3), tool="pulling", grip=PD.ramp(t, T1[0] + 2.3, T1[0] + 2.5))
+                if xy and t >= T1[0] + 2.7:
+                    G.draw_valve(c, look, xy[0], xy[1] + 0.12 * g.s, g.L, g.vw, a * PD.vis(t, T1[0], T1[1] - 0.4, 0.3), detail="body", ring=0, pin=0, outline=P.BAD)
+                PD.flash(c, look, g.px, g.v_top, 0.4, P.BAD, (t - (T1[0] + 2.65)) / 0.6)
+            if T2[0] < t < T2[1]:
+                ky = trip_key(t, T2)
+                kk = PD.ramp(t, T2[0] + 1.0, T2[0] + 1.5) * (1 - PD.ramp(t, T2[0] + 2.9, T2[0] + 3.4))
+                xy = G.draw_kot(c, look, g, ky if t < T2[0] + 2.7 else PD.keys(t, [(T2[0] + 2.7, k_hold), (T2[0] + 3.4, k_hold + 0.6), (T2[1], k_hold + 6)]),
+                                0.0, kk, a * PD.vis(t, T2[0], T2[1] - 0.4, 0.3), tool="running")
+                if xy and t < T2[0] + 2.7:
+                    G.draw_valve(c, look, xy[0], xy[1] + 0.12 * g.s, g.L, g.vw, a, detail="body", outline=P.SAFE)
+                PD.flash(c, look, g.px, g.y_lug, 0.4, P.SAFE, (t - (T2[0] + 2.4)) / 0.6)
+            if t >= T2[0] + 2.7:
+                G.draw_valve(c, look, g.px, g.v_top, g.L, g.vw, a, detail="body", outline=P.SAFE)
+
+        st.procedural(b.start, b.end, 0.5, draw_caseA)
+        K.show(st, K.note(st, "side-pocket mandrel", g.bx + 0.3, -3.35, 0.18, P.MUTED, align="c"), s[1] + 0.4, tA, 0.4)
+        xl_ = g.xO + g.wall + 0.25
+        ft = K.tag(st, xl_, g.v_top - 0.4, "failed valve", color=P.BAD, fg=P.BG, size=0.16, z=1.0, align="l")
+        K.show(st, ft, s[1] + 1.0, T1[0] + 3.0, 0.35)
+        tr1 = K.tag(st, xl_, 2.0, "trip 1: pull", color=P.PANEL2, size=0.16, z=1.0, align="l")
+        tr2 = K.tag(st, xl_, 1.55, "trip 2: set", color=P.PANEL2, size=0.16, z=1.0, align="l")
+        K.show(st, tr1, T1[0] + 0.2, tA, 0.3)
+        K.show(st, tr2, T2[0] + 0.2, tA, 0.3)
+        ok = K.tag(st, xl_, g.v_top - 0.4, "new valve set", color=P.SAFE, fg=P.BG, size=0.16, z=1.0, align="l")
+        K.show(st, ok, T2[0] + 3.0, tA, 0.35)
 
         # -------------------------------------------------------------------------- case B: scale in a 55 degree well, coiled tubing
         tB = s[7] - 0.4
