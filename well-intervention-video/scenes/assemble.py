@@ -21,6 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 NAME = "into_the_live_well"
+LIMITER = "alimiter=limit=0.6:level=false:attack=5:release=60,"   # tame peaks so the linear loudness gain stays under -1.5 dBTP
 
 
 def run(cmd, **kw):
@@ -92,7 +93,7 @@ def main():
     n = subtitles.write(cues, srt, ass, 0.0, tl["total"])
     print(f"{n} subtitle cues")
     # 3. audio: measured two-pass loudness normalisation
-    af = loudnorm_filter(a.audio)
+    af = loudnorm_filter(a.audio, pre=LIMITER)
     aac = os.path.join(tmp, "mix.m4a")
     run(["ffmpeg", "-y", "-loglevel", "error", "-i", a.audio, "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "48000", aac])
     nosubs = os.path.join(a.out, f"{NAME}_1080p_nosubs.mp4")
