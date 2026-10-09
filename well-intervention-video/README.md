@@ -25,6 +25,9 @@ locally). The music and sound design are synthesised. There are no stock clips, 
 | `into_the_live_well_720p_partNofM.mp4` | Compact 720p parts for sharing in chat |
 | `web/` | Web player (1080p HLS, chapter menu, subtitles on/off, speed); `make web`, then publish `web/index.html` with the other files beside it |
 
+The 720p parts and the subtitles of the finished film are also committed in `out/` (six parts, about 26 MiB each, subtitles
+burned in; play them in order). The 1080p masters are over GitHub's file-size limit and are rebuilt by `make final`.
+
 Plain-text companions, generated from the script:
 
 * `script/NARRATION.md`: the full narration with real timestamps, chapter by chapter.
