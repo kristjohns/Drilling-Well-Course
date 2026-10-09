@@ -400,1746 +400,1844 @@ valve.
 Third, to clear what is in the way.
 
 91
-00:06:23,166 --> 00:06:27,148
+00:06:23,166 --> 00:06:27,264
 Scale is mineral that falls out of the water: barium
 sulphate,
 
 92
-00:06:27,178 --> 00:06:33,779
-where injected seawater meets formation water, or calcium
-carbonate, as pressure and temperature drop.
+00:06:27,294 --> 00:06:30,327
+where injected seawater meets formation water,
 
 93
-00:06:33,870 --> 00:06:39,191
+00:06:30,357 --> 00:06:35,683
+or calcium carbonate, as the pressure drops and carbon
+dioxide leaves the water.
+
+94
+00:06:35,774 --> 00:06:41,095
 Wax comes out of the oil as it cools, and asphaltenes as
 it loses pressure.
 
-94
-00:06:39,282 --> 00:06:45,768
+95
+00:06:41,186 --> 00:06:47,673
 Hydrates are ice-like solids of water and gas that form
 when it is cold and the pressure is high.
 
-95
-00:06:45,860 --> 00:06:49,811
+96
+00:06:47,764 --> 00:06:51,715
 Sand and fines settle at the bottom and bury the
 perforations.
 
-96
-00:06:49,903 --> 00:06:54,801
+97
+00:06:51,806 --> 00:06:56,704
 Each one narrows the flow path, and the rate falls as the
 bore closes.
 
-97
-00:06:54,892 --> 00:07:00,453
+98
+00:06:56,795 --> 00:07:02,356
 The cure is to scrape it, jet it, mill it, dissolve it, or
 wash it out.
 
-98
-00:07:00,545 --> 00:07:06,792
+99
+00:07:02,447 --> 00:07:08,695
 And sometimes the obstruction is the debris of an earlier
 job, a dropped tool or a broken wire.
 
-99
-00:07:06,884 --> 00:07:11,154
+100
+00:07:08,786 --> 00:07:13,057
 That is called a fish, and getting it out is called
 fishing.
 
-100
-00:07:12,117 --> 00:07:13,626
+101
+00:07:14,017 --> 00:07:15,526
 Fourth, to stimulate.
 
-101
-00:07:13,717 --> 00:07:18,076
+102
+00:07:15,617 --> 00:07:19,976
 Drilling mud leaves a skin of solids in the pores around
 the well,
 
-102
-00:07:18,106 --> 00:07:20,966
+103
+00:07:20,006 --> 00:07:22,866
 and production can leave damage of its own.
 
-103
-00:07:21,058 --> 00:07:24,026
+104
+00:07:22,958 --> 00:07:25,926
 It restricts the inflow like a clogged filter.
 
-104
-00:07:24,118 --> 00:07:28,942
+105
+00:07:26,018 --> 00:07:30,842
 Acid pumped into the rock dissolves it, and that is called
 matrix stimulation.
 
-105
-00:07:29,034 --> 00:07:33,088
+106
+00:07:30,934 --> 00:07:34,988
 If the problem is that too little rock is connected to the
 well,
 
-106
-00:07:33,118 --> 00:07:39,179
+107
+00:07:35,018 --> 00:07:41,079
 we can shoot more perforations, or in some wells crack the
 rock open with a hydraulic fracture.
 
-107
-00:07:39,271 --> 00:07:43,378
+108
+00:07:41,171 --> 00:07:45,278
 In every case the treatment has to be placed at a precise
 depth,
 
-108
-00:07:43,408 --> 00:07:47,158
+109
+00:07:45,308 --> 00:07:49,058
 which means pumping through a pipe that can be positioned.
 
-109
-00:07:48,117 --> 00:07:49,413
+110
+00:07:50,017 --> 00:07:51,313
 Fifth, to lift.
 
-110
-00:07:49,504 --> 00:07:55,768
+111
+00:07:51,405 --> 00:07:57,668
 As the reservoir pressure falls, many oil wells can no
 longer push their fluid to the surface unaided.
 
-111
-00:07:55,859 --> 00:07:59,329
+112
+00:07:57,760 --> 00:08:01,230
 Gas lift fixes that: gas is injected down the annulus,
 
-112
-00:07:59,359 --> 00:08:05,323
+113
+00:08:01,260 --> 00:08:07,223
 enters the tubing through valves in the side-pocket
 mandrels, and lightens the fluid column.
 
-113
-00:08:05,414 --> 00:08:08,638
-Those valves wear out and are changed by wire.
-
 114
-00:08:08,729 --> 00:08:11,422
-In gas wells the opposite problem appears.
+00:08:07,315 --> 00:08:09,847
+Each valve is a small automatic gate.
 
 115
-00:08:11,513 --> 00:08:16,720
+00:08:09,939 --> 00:08:13,771
+A bellows charged with nitrogen holds a ball on its seat,
+
+116
+00:08:13,801 --> 00:08:18,476
+until the gas pressure in the annulus is high enough to
+push it open.
+
+117
+00:08:18,567 --> 00:08:21,524
+At start-up the valves work from the top down:
+
+118
+00:08:21,554 --> 00:08:25,940
+each one passes gas until the liquid has been pushed below
+the next,
+
+119
+00:08:25,970 --> 00:08:30,256
+then closes, until gas enters at the deepest, the
+operating valve.
+
+120
+00:08:30,348 --> 00:08:34,595
+A check valve stops well fluid from flowing back into the
+annulus.
+
+121
+00:08:34,686 --> 00:08:37,495
+Valves wear out, and are changed by wire.
+
+122
+00:08:37,587 --> 00:08:40,280
+In gas wells the opposite problem appears.
+
+123
+00:08:40,371 --> 00:08:45,578
 As the rate drops, the gas moves too slowly to carry
 droplets of water out,
 
-116
-00:08:16,750 --> 00:08:20,661
+124
+00:08:45,608 --> 00:08:49,519
 so they fall back and the well drowns in its own liquid.
 
-117
-00:08:20,753 --> 00:08:22,390
+125
+00:08:49,611 --> 00:08:51,248
 That is liquid loading.
 
-118
-00:08:22,481 --> 00:08:26,103
+126
+00:08:51,339 --> 00:08:54,961
 A narrower string of coiled tubing hung inside the tubing,
 
-119
-00:08:26,133 --> 00:08:30,226
+127
+00:08:54,991 --> 00:08:59,084
 a velocity string, speeds the gas up again and restores
 the flow.
 
-120
-00:08:31,183 --> 00:08:33,845
+128
+00:09:00,050 --> 00:09:02,711
 Sixth, to steer what the well produces.
 
-121
-00:08:33,937 --> 00:08:36,002
+129
+00:09:02,804 --> 00:09:04,869
 Reservoirs do not give evenly.
 
-122
-00:08:36,095 --> 00:08:40,618
+130
+00:09:04,961 --> 00:09:09,485
 Water arrives early through one zone and drowns the oil
 from the others.
 
-123
-00:08:40,710 --> 00:08:45,919
+131
+00:09:09,577 --> 00:09:14,785
 The water cut climbs, and the well can die long before the
 reservoir is empty.
 
-124
-00:08:46,011 --> 00:08:50,806
+132
+00:09:14,878 --> 00:09:19,673
 To fix it we shut the offending zone off, with a plug, a
 cement squeeze,
 
-125
-00:08:50,836 --> 00:08:55,661
+133
+00:09:19,703 --> 00:09:24,527
 or by closing a sliding sleeve, and perhaps open another
 zone higher up.
 
-126
-00:08:55,753 --> 00:09:03,322
+134
+00:09:24,620 --> 00:09:32,188
 A few modern wells have valves that do this on command,
 but most have to be steered by going in.
 
-127
-00:09:04,283 --> 00:09:05,643
+135
+00:09:33,150 --> 00:09:34,510
 Seventh, to finish.
 
-128
-00:09:05,734 --> 00:09:13,555
+136
+00:09:34,601 --> 00:09:42,422
 When a well reaches the end of its life, it must be
 permanently plugged, so that it can never leak again.
 
-129
-00:09:13,646 --> 00:09:19,932
+137
+00:09:42,512 --> 00:09:48,798
 Before the plugs go in, the well is logged, cleaned out,
 and the pipes may be cut.
 
-130
-00:09:20,022 --> 00:09:23,106
+138
+00:09:48,889 --> 00:09:51,973
 Some of that work can be done without a rig.
 
-131
-00:09:23,197 --> 00:09:28,640
+139
+00:09:52,064 --> 00:09:57,506
 Or the well is not finished, only changed: converted from
 producer to water injector,
 
-132
-00:09:28,670 --> 00:09:32,404
+140
+00:09:57,536 --> 00:10:01,270
 or a side-track is drilled out of it into fresh reservoir.
 
-133
-00:09:32,494 --> 00:09:35,330
+141
+00:10:01,361 --> 00:10:04,196
 Either way, an intervention prepares the ground.
 
-134
-00:09:36,283 --> 00:09:39,508
+142
+00:10:05,150 --> 00:10:08,375
 Look at what these seven jobs ask of us.
 
-135
-00:09:39,599 --> 00:09:44,370
+143
+00:10:08,465 --> 00:10:13,237
 To see: carry a sensor to a depth, and bring the answer
 back.
 
-136
-00:09:44,461 --> 00:09:48,749
+144
+00:10:13,328 --> 00:10:17,616
 To secure: set a plug, pull a valve, shift a sleeve.
 
-137
-00:09:48,840 --> 00:09:50,859
+145
+00:10:17,706 --> 00:10:19,726
 To clear: scrape, mill, wash.
 
-138
-00:09:50,950 --> 00:09:54,192
+146
+00:10:19,817 --> 00:10:23,058
 To stimulate: pump a fluid to an exact spot.
 
-139
-00:09:54,283 --> 00:09:57,573
+147
+00:10:23,149 --> 00:10:26,439
 To lift: swap a valve, or hang a pipe.
 
-140
-00:09:57,664 --> 00:10:00,696
+148
+00:10:26,530 --> 00:10:29,562
 To steer: set a plug, shoot a perforation.
 
-141
-00:10:00,787 --> 00:10:06,207
+149
+00:10:29,653 --> 00:10:35,073
 Put it all together and you get a short list of
 capabilities: carry and place tools,
 
-142
-00:10:06,237 --> 00:10:10,194
+150
+00:10:35,103 --> 00:10:39,061
 pull and hammer, pump, push, rotate, and send power and
 data.
 
-143
-00:10:10,285 --> 00:10:13,648
+151
+00:10:39,152 --> 00:10:42,515
 Every intervention method is a different bundle of those.
 
-144
-00:10:13,739 --> 00:10:16,125
+152
+00:10:42,606 --> 00:10:44,992
 Now we can look at the bundles.
 
-145
-00:10:19,883 --> 00:10:22,950
+153
+00:10:48,750 --> 00:10:51,817
 The problem with a live well is simple.
 
-146
-00:10:23,042 --> 00:10:25,298
+154
+00:10:51,908 --> 00:10:54,164
 Open the top and it flows.
 
-147
-00:10:25,389 --> 00:10:28,419
+155
+00:10:54,256 --> 00:10:57,285
 So the tools must go in through an airlock.
 
-148
-00:10:28,510 --> 00:10:32,599
+156
+00:10:57,377 --> 00:11:01,465
 A lubricator is a pressure-tight tube bolted on top of the
 tree,
 
-149
-00:10:32,629 --> 00:10:37,134
+157
+00:11:01,495 --> 00:11:06,000
 long enough to hold the whole toolstring, the tools joined
 end to end.
 
-150
-00:10:37,225 --> 00:10:42,923
+158
+00:11:06,092 --> 00:11:11,790
 We load the tools into the lubricator while the valve
 below it is still shut.
 
-151
-00:10:43,015 --> 00:10:49,524
+159
+00:11:11,881 --> 00:11:18,391
 Then we pressure up the lubricator until it matches the
 well, so there is no difference across the valve.
 
-152
-00:10:49,616 --> 00:10:53,805
+160
+00:11:18,482 --> 00:11:22,671
 Now it can be opened, and the toolstring can drop in.
 
-153
-00:10:53,896 --> 00:10:58,509
+161
+00:11:22,763 --> 00:11:27,376
 To come out, the sequence runs backwards: tools up into
 the lubricator,
 
-154
-00:10:58,539 --> 00:11:01,351
+162
+00:11:27,406 --> 00:11:30,218
 valve closed, lubricator bled down, opened.
 
-155
-00:11:01,443 --> 00:11:03,722
+163
+00:11:30,309 --> 00:11:32,589
 The well never meets the atmosphere.
 
-156
-00:11:04,683 --> 00:11:12,201
+164
+00:11:33,550 --> 00:11:41,068
 On a platform or a land well, the tree sits at the top of
 the well, and it is built from valves.
 
-157
-00:11:12,293 --> 00:11:17,122
+165
+00:11:41,159 --> 00:11:45,989
 Two master valves are the main shut-off, one above the
 other for redundancy.
 
-158
-00:11:17,214 --> 00:11:21,109
+166
+00:11:46,080 --> 00:11:49,975
 The wing valve sends the oil off to the pipeline.
 
-159
-00:11:21,200 --> 00:11:26,146
+167
+00:11:50,067 --> 00:11:55,013
 And at the very top, straight above the tubing, is the
 swab valve.
 
-160
-00:11:26,238 --> 00:11:27,727
+168
+00:11:55,105 --> 00:11:56,594
 That is our door.
 
-161
-00:11:27,819 --> 00:11:30,222
+169
+00:11:56,686 --> 00:11:59,089
 Bolt the lubricator on top of it,
 
-162
-00:11:30,252 --> 00:11:36,373
+170
+00:11:59,119 --> 00:12:05,240
 and the swab valve and the master valves are what separate
 the tools from the well.
 
-163
-00:11:36,465 --> 00:11:43,423
+171
+00:12:05,332 --> 00:12:12,289
 In Norway the regulations require at least two main valves
 on a tree, and at least one of them automatic.
 
-164
-00:11:44,383 --> 00:11:45,955
+172
+00:12:13,250 --> 00:12:14,822
 Now the hard part.
 
-165
-00:11:46,047 --> 00:11:51,657
+173
+00:12:14,913 --> 00:12:20,523
 The lubricator has a top, and the line has to pass through
 it, while moving.
 
-166
-00:11:51,748 --> 00:11:58,380
+174
+00:12:20,615 --> 00:12:27,247
 Solid wire passes through a stuffing box: rubber packing
 squeezed around the wire by hydraulic pressure,
 
-167
-00:11:58,410 --> 00:12:02,061
+175
+00:12:27,277 --> 00:12:30,928
 tight enough to seal, loose enough to let the wire slide.
 
-168
-00:12:02,153 --> 00:12:06,784
+176
+00:12:31,020 --> 00:12:35,651
 Stranded cable has gaps between its strands, so packing
 cannot seal on it.
 
-169
-00:12:06,876 --> 00:12:09,447
+177
+00:12:35,742 --> 00:12:38,313
 It uses a grease injection head instead.
 
-170
-00:12:09,538 --> 00:12:15,284
+178
+00:12:38,405 --> 00:12:44,151
 Grease is pumped at a higher pressure than the well into
 narrow tubes around the cable,
 
-171
-00:12:15,314 --> 00:12:17,571
+179
+00:12:44,181 --> 00:12:46,438
 and the grease itself is the seal.
 
-172
-00:12:17,663 --> 00:12:20,085
+180
+00:12:46,529 --> 00:12:48,952
 Below that sits a blowout preventer,
 
-173
-00:12:20,115 --> 00:12:25,974
+181
+00:12:48,982 --> 00:12:54,841
 a stack of valves whose rams can close on the line and
 seal around it in an emergency.
 
-174
-00:12:26,066 --> 00:12:32,555
+182
+00:12:54,932 --> 00:13:01,422
 And a tool catcher, so that if the line ever breaks, the
 toolstring cannot fall back into the well.
 
-175
-00:12:33,517 --> 00:12:35,724
+183
+00:13:02,383 --> 00:13:04,591
 There is one more invisible force.
 
-176
-00:12:35,816 --> 00:12:38,860
+184
+00:13:04,683 --> 00:13:07,727
 Pressure pushes on anything that enters the well.
 
-177
-00:12:38,952 --> 00:12:44,297
+185
+00:13:07,818 --> 00:13:13,164
 A solid wire a little under three millimetres thick, in a
 well at two hundred bar,
 
-178
-00:12:44,327 --> 00:12:47,867
+186
+00:13:13,194 --> 00:13:16,734
 is pushed out with about a hundred and twenty newtons.
 
-179
-00:12:47,959 --> 00:12:50,907
+187
+00:13:16,825 --> 00:13:19,773
 That is the weight of a twelve-kilogram mass.
 
-180
-00:12:50,998 --> 00:12:57,539
+188
+00:13:19,865 --> 00:13:26,406
 If the toolstring weighs less than that, the well blows it
 back out, and the wire with it.
 
-181
-00:12:57,631 --> 00:13:01,294
+189
+00:13:26,497 --> 00:13:30,161
 That is why a wireline toolstring carries a heavy weight.
 
-182
-00:13:01,386 --> 00:13:06,333
+190
+00:13:30,253 --> 00:13:35,200
 Now think of a coiled tube, two inches across, in the same
 well.
 
-183
-00:13:06,424 --> 00:13:12,428
+191
+00:13:35,291 --> 00:13:41,295
 The area is more than three hundred times bigger, and so
 is the force: about four tonnes.
 
-184
-00:13:12,520 --> 00:13:13,787
+192
+00:13:41,386 --> 00:13:42,654
 Keep that number.
 
-185
-00:13:13,879 --> 00:13:16,219
+193
+00:13:42,745 --> 00:13:45,086
 It shapes everything about coiled tubing.
 
-186
-00:13:17,183 --> 00:13:19,482
+194
+00:13:46,050 --> 00:13:48,348
 All of this serves one rule.
 
-187
-00:13:19,576 --> 00:13:25,773
+195
+00:13:48,439 --> 00:13:54,636
 Whatever we do in a well, there must be two tested
 barriers between the reservoir and the outside world:
 
-188
-00:13:25,803 --> 00:13:30,652
+196
+00:13:54,666 --> 00:13:59,515
 two independent envelopes of equipment, each able to hold
 the pressure by itself.
 
-189
-00:13:30,746 --> 00:13:36,906
-In a live well job the pressure control equipment on top
-of the tree is part of those envelopes,
+197
+00:13:59,606 --> 00:14:03,930
+During a wireline job the safety valve and the tree valves
+stand open,
 
-190
-00:13:36,936 --> 00:13:41,966
-so everything on the stack is pressure-tested before the
+198
+00:14:03,960 --> 00:14:07,505
+with the line running through them, so they cannot count.
+
+199
+00:14:07,596 --> 00:14:10,140
+The equipment on top takes their place.
+
+200
+00:14:10,231 --> 00:14:15,944
+Typically the stuffing box closes the primary envelope at
+the top, while the blowout preventer,
+
+201
+00:14:15,974 --> 00:14:22,262
+which can close on the line, belongs to the secondary, and
+elements such as the tree are shared by both.
+
+202
+00:14:22,353 --> 00:14:27,248
+So everything on the stack is pressure-tested before the
 well is opened to it.
 
-191
-00:13:42,060 --> 00:13:46,945
+203
+00:14:27,339 --> 00:14:32,224
 Exactly which element belongs to which envelope is set by
 the standard,
 
-192
-00:13:46,975 --> 00:13:50,505
+204
+00:14:32,254 --> 00:14:35,784
 NORSOK D-010, and by the operator's own procedures.
 
-193
-00:13:50,600 --> 00:13:54,917
+205
+00:14:35,876 --> 00:14:40,193
 And if a barrier fails, the job stops until it is
 restored.
 
-194
-00:13:58,683 --> 00:14:01,152
+206
+00:14:43,950 --> 00:14:46,419
 Wireline is a family of three.
 
-195
-00:14:01,243 --> 00:14:06,308
+207
+00:14:46,509 --> 00:14:51,575
 Slickline is a single solid strand of steel, a little
 under three millimetres thick.
 
-196
-00:14:06,399 --> 00:14:12,273
+208
+00:14:51,665 --> 00:14:57,540
 It is cheap, light and quick to rig up, and it can only do
 mechanical work:
 
-197
-00:14:12,303 --> 00:14:15,531
+209
+00:14:57,570 --> 00:15:00,798
 pull, push by its own weight, and hammer.
 
-198
-00:14:15,622 --> 00:14:19,583
+210
+00:15:00,889 --> 00:15:04,850
 Braided line is stranded, like a rope, which makes it
 stronger,
 
-199
-00:14:19,613 --> 00:14:24,048
+211
+00:15:04,880 --> 00:15:09,314
 and so better for heavy fishing, but it needs the grease
 head to seal.
 
-200
-00:14:24,138 --> 00:14:29,811
+212
+00:15:09,405 --> 00:15:15,078
 And electric line, or e-line, is braided cable with
 insulated conductors at its core.
 
-201
-00:14:29,902 --> 00:14:35,297
+213
+00:15:15,168 --> 00:15:20,564
 It carries power down and data up, so it can run logging
 tools and perforate.
 
-202
-00:14:35,388 --> 00:14:43,163
+214
+00:15:20,654 --> 00:15:28,430
 The thickness of the line decides how hard you can pull,
 and so how much trouble you can get out of.
 
-203
-00:14:44,117 --> 00:14:46,131
+215
+00:15:29,383 --> 00:15:31,398
 Here is a slickline spread.
 
-204
-00:14:46,221 --> 00:14:52,161
+216
+00:15:31,488 --> 00:15:37,428
 The wire is stored on a drum, thousands of metres of it,
 driven by a hydraulic motor.
 
-205
-00:14:52,252 --> 00:14:58,444
+217
+00:15:37,518 --> 00:15:43,710
 It leaves the drum through a measuring head that counts
 how far it has gone and reads the tension,
 
-206
-00:14:58,474 --> 00:15:03,553
+218
+00:15:43,740 --> 00:15:48,820
 passes up over a sheave, and drops through the stuffing
 box into the lubricator.
 
-207
-00:15:03,643 --> 00:15:07,867
+219
+00:15:48,910 --> 00:15:53,134
 And that tension reading is the operator's only window
 into the well.
 
-208
-00:15:07,957 --> 00:15:10,002
+220
+00:15:53,224 --> 00:15:55,269
 They cannot see the tools.
 
-209
-00:15:10,092 --> 00:15:17,799
+221
+00:15:55,359 --> 00:16:03,065
 They feel them: the weight of the string, the snag at a
 tight spot, the sudden drop when a pin shears.
 
-210
-00:15:18,750 --> 00:15:22,057
+222
+00:16:04,017 --> 00:16:07,323
 On the end of the wire hangs the toolstring.
 
-211
-00:15:22,147 --> 00:15:25,971
+223
+00:16:07,414 --> 00:16:11,238
 At the top, a rope socket ties the wire off.
 
-212
-00:15:26,062 --> 00:15:28,220
+224
+00:16:11,329 --> 00:16:13,487
 Below it, the stem, or weight bars:
 
-213
-00:15:28,250 --> 00:15:34,001
+225
+00:16:13,517 --> 00:16:19,267
 heavy steel to overcome the pressure force and the
 friction, and to give mass for hammering.
 
-214
-00:15:34,091 --> 00:15:35,363
+226
+00:16:19,358 --> 00:16:20,630
 Then the jars.
 
-215
-00:15:35,454 --> 00:15:41,082
+227
+00:16:20,721 --> 00:16:26,349
 If the well deviates, a knuckle joint, a hinge that lets
 the string bend round curves.
 
-216
-00:15:41,173 --> 00:15:47,130
+228
+00:16:26,439 --> 00:16:32,397
 And at the bottom, the business end: the running tool,
 pulling tool or whatever the job needs.
 
-217
-00:15:48,083 --> 00:15:49,219
+229
+00:16:33,350 --> 00:16:34,486
 Why jars?
 
-218
-00:15:49,519 --> 00:15:56,541
+230
+00:16:34,786 --> 00:16:41,807
 Because the wire can only pull, and often a tool is stuck,
 or a pin has to be sheared.
 
-219
-00:15:56,631 --> 00:16:00,579
-A mechanical jar is a sliding joint with a short stroke.
+231
+00:16:41,897 --> 00:16:48,637
+The answer is a jar, a sliding joint with a short stroke,
+set between the stem and the tool.
 
-220
-00:16:00,669 --> 00:16:04,070
-To jar up, the operator pulls on the wire.
+232
+00:16:48,727 --> 00:16:52,203
+To jar up, the operator pulls the wire in fast.
 
-221
-00:16:04,160 --> 00:16:09,087
-The jar holds until the load builds, and the wire
-stretches like a spring.
+233
+00:16:52,294 --> 00:16:57,056
+The stem accelerates through the stroke and slams into the
+top of it,
 
-222
-00:16:09,177 --> 00:16:12,159
-Then the jar releases, the stem flies upward,
+234
+00:16:57,086 --> 00:17:01,184
+a blow far harder than any steady pull the wire could
+hold.
 
-223
-00:16:12,189 --> 00:16:17,612
-and it strikes the end of its travel with a blow far
-harder than the pull itself.
+235
+00:17:01,274 --> 00:17:05,455
+Many jars add a spring catch: it holds until the pull
+builds,
 
-224
-00:16:17,702 --> 00:16:22,881
+236
+00:17:05,485 --> 00:17:11,215
+the wire stretches like a spring, and then it lets go, so
+the blow is harder still.
+
+237
+00:17:11,305 --> 00:17:16,485
 To jar down, the operator slacks off, and the stem falls
 onto the tool below.
 
-225
-00:16:22,972 --> 00:16:27,896
+238
+00:17:16,575 --> 00:17:21,500
 Hundreds of blows, up and down, let a thin wire do heavy
 work.
 
-226
-00:16:28,850 --> 00:16:31,715
+239
+00:17:22,450 --> 00:17:25,315
 A typical job is setting a plug.
 
-227
-00:16:31,806 --> 00:16:36,479
+240
+00:17:25,406 --> 00:17:30,079
 The plug is run in on a lock mandrel, a tool with spring-
 loaded keys.
 
-228
-00:16:36,571 --> 00:16:42,654
+241
+00:17:30,171 --> 00:17:36,254
 The string is lowered past the landing nipple, then pulled
 up gently, so the keys catch the groove.
 
-229
-00:16:42,745 --> 00:16:48,508
+242
+00:17:36,345 --> 00:17:42,108
 A downward jar locks them in and shears the running tool
 free of the plug.
 
-230
-00:16:48,599 --> 00:16:51,592
+243
+00:17:42,199 --> 00:17:45,192
 A pull on the wire confirms it holds.
 
-231
-00:16:51,683 --> 00:16:57,193
+244
+00:17:45,283 --> 00:17:50,793
 Now the tubing below the plug is isolated, and we can work
 above it.
 
-232
-00:16:57,285 --> 00:17:04,337
+245
+00:17:50,885 --> 00:17:57,937
 When the job is done, a pulling tool latches onto the
 fishing neck at the top of the plug,
 
-233
-00:17:04,367 --> 00:17:06,964
+246
+00:17:57,967 --> 00:18:00,564
 and an upward jar frees the keys.
 
-234
-00:17:07,055 --> 00:17:10,408
+247
+00:18:00,655 --> 00:18:04,008
 But first, the pressure across the plug is equalised.
 
-235
-00:17:10,499 --> 00:17:14,789
+248
+00:18:04,099 --> 00:18:08,389
 Otherwise, as it lets go, it can be blown up the hole.
 
-236
-00:17:15,750 --> 00:17:18,560
+249
+00:18:09,350 --> 00:18:12,160
 A subtler job: changing a gas-lift valve.
 
-237
-00:17:18,651 --> 00:17:24,623
-The valve sits in a pocket beside the main bore, so a
-straight tool would miss it.
+250
+00:18:12,251 --> 00:18:19,887
+The valve sits in a pocket beside the main bore, so a tool
+run straight down simply passes it by.
 
-238
-00:17:24,714 --> 00:17:26,645
-The kick-over tool solves that.
+251
+00:18:19,978 --> 00:18:22,338
+The answer is the kick-over tool.
 
-239
-00:17:26,736 --> 00:17:29,434
-It runs in with its arm folded.
+252
+00:18:22,429 --> 00:18:28,442
+It is run in with its arm folded, past the mandrel, and
+then pulled slowly back up.
 
-240
-00:17:29,525 --> 00:17:34,094
-At the mandrel, a key rotates the tool to face the pocket.
+253
+00:18:28,533 --> 00:18:33,237
+A spring-loaded key catches a helical sleeve at the top of
+the mandrel,
 
-241
-00:17:34,185 --> 00:17:39,628
-Pull up, then slack off, and the arm kicks over, aligning
-the tool with the pocket.
+254
+00:18:33,267 --> 00:18:39,469
+and the helix turns the tool until the key drops into a
+slot, with the arm facing the pocket.
 
-242
-00:17:39,718 --> 00:17:42,551
-Jar down, and the tool latches the valve.
+255
+00:18:39,560 --> 00:18:44,186
+At the top of the slot the operator sees the tension jump.
 
-243
-00:17:42,641 --> 00:17:45,302
-Pull up, and the old valve is out.
+256
+00:18:44,277 --> 00:18:49,314
+A little more pull, and the arm kicks over and locks,
+directly above the pocket.
 
-244
-00:17:45,392 --> 00:17:49,629
-The same tool, loaded with a new valve, puts it in.
+257
+00:18:49,405 --> 00:18:50,659
+Now slack off.
 
-245
-00:17:49,720 --> 00:17:51,695
-Three pockets, one trip each.
+258
+00:18:50,750 --> 00:18:56,253
+The pulling tool on the arm slides down into the pocket
+and over the valve's latch.
 
-246
-00:17:52,650 --> 00:17:55,170
+259
+00:18:56,344 --> 00:18:58,417
+Jar down to latch on.
+
+260
+00:18:58,508 --> 00:19:05,283
+Then jar up: a pin shears, the latch lets go, and the
+valve comes out with the tool.
+
+261
+00:19:05,374 --> 00:19:08,950
+Pulled back through the sleeve, the arm folds flat again.
+
+262
+00:19:09,041 --> 00:19:13,788
+Setting a new valve is the same dance with a running tool:
+kick over,
+
+263
+00:19:13,818 --> 00:19:19,773
+lower the valve into the pocket, jar down to lock its
+latch, and jar up to shear free.
+
+264
+00:19:19,864 --> 00:19:24,553
+Pulling and setting are separate runs, so every valve
+changed costs two trips.
+
+265
+00:19:25,517 --> 00:19:28,036
 The same mechanics do many other jobs.
 
-247
-00:17:55,260 --> 00:17:58,599
+266
+00:19:28,127 --> 00:19:31,466
 A shifting tool opens or closes a sliding sleeve.
 
-248
-00:17:58,689 --> 00:18:01,256
+267
+00:19:31,556 --> 00:19:34,123
 A bailer scoops up sand and debris.
 
-249
-00:18:01,347 --> 00:18:08,116
+268
+00:19:34,213 --> 00:19:40,983
 A gauge cutter proves the tubing is open, and a tag run
 measures how deep the well is.
 
-250
-00:18:08,207 --> 00:18:13,254
+269
+00:19:41,073 --> 00:19:46,121
 A memory gauge hangs in the well for days, recording, to
 be fetched later.
 
-251
-00:18:13,344 --> 00:18:15,010
+270
+00:19:46,211 --> 00:19:47,877
 But slickline has limits.
 
-252
-00:18:15,101 --> 00:18:19,696
+271
+00:19:47,967 --> 00:19:52,562
 It cannot push, so the tool must fall under its own
 weight.
 
-253
-00:18:19,786 --> 00:18:21,063
+272
+00:19:52,653 --> 00:19:53,930
 It cannot pump.
 
-254
-00:18:21,154 --> 00:18:24,348
+273
+00:19:54,020 --> 00:19:57,215
 And as the well leans over, gravity runs out.
 
-255
-00:18:24,439 --> 00:18:29,774
+274
+00:19:57,305 --> 00:20:02,641
 Along the hole, the pull of the weight shrinks with the
 cosine of the angle,
 
-256
-00:18:29,804 --> 00:18:32,275
+275
+00:20:02,671 --> 00:20:05,142
 while friction grows with the sine.
 
-257
-00:18:32,365 --> 00:18:38,279
+276
+00:20:05,232 --> 00:20:11,146
 With a friction coefficient of 0.3, a tool stops sliding
 at about seventy-three degrees,
 
-258
-00:18:38,309 --> 00:18:42,295
+277
+00:20:11,176 --> 00:20:15,162
 and in practice the wire's own drag brings the limit
 lower.
 
-259
-00:18:43,250 --> 00:18:45,873
+278
+00:20:16,117 --> 00:20:18,740
 Electric line adds power and a voice.
 
-260
-00:18:45,963 --> 00:18:50,509
+279
+00:20:18,830 --> 00:20:23,376
 Electricity goes down the conductor and measurements come
 back in real time,
 
-261
-00:18:50,539 --> 00:18:53,188
+280
+00:20:23,406 --> 00:20:26,055
 so the operator watches the log being drawn.
 
-262
-00:18:53,278 --> 00:18:57,919
+281
+00:20:26,145 --> 00:20:30,786
 To know exactly where the tool is, it carries a casing
 collar locator,
 
-263
-00:18:57,949 --> 00:19:04,556
+282
+00:20:30,816 --> 00:20:37,423
 which senses each joint in the casing as it passes, and
 the log is tied to the known collar depths.
 
-264
-00:19:04,647 --> 00:19:07,582
+283
+00:20:37,513 --> 00:20:40,449
 The same line can fire a perforating gun.
 
-265
-00:19:07,673 --> 00:19:11,393
+284
+00:20:40,539 --> 00:20:44,260
 Each shaped charge is a metal cone packed with explosive.
 
-266
-00:19:11,483 --> 00:19:17,538
+285
+00:20:44,350 --> 00:20:50,404
 When it detonates, the cone collapses into a jet of metal
 moving at several kilometres per second,
 
-267
-00:19:17,568 --> 00:19:22,225
+286
+00:20:50,434 --> 00:20:55,091
 which punches through casing, cement and a few tens of
 centimetres of rock.
 
-268
-00:19:22,315 --> 00:19:26,998
+287
+00:20:55,182 --> 00:20:59,865
 Fired from the surface, at the depth the collar log gave
 us.
 
-269
-00:19:27,950 --> 00:19:34,307
+288
+00:21:00,817 --> 00:21:07,173
 E-line also sets bridge plugs and packers with a setting
 tool driven by a slow-burning powder charge,
 
-270
-00:19:34,337 --> 00:19:40,787
+289
+00:21:07,203 --> 00:21:13,653
 and cuts pipe with chemical or explosive cutters, work we
 will need again at the end of a well's life.
 
-271
-00:19:40,879 --> 00:19:46,762
+290
+00:21:13,745 --> 00:21:19,628
 And when the well is so deviated that tools no longer
 fall, a downhole tractor can be added:
 
-272
-00:19:46,792 --> 00:19:52,576
+291
+00:21:19,658 --> 00:21:25,443
 wheels or tracks that grip the wall and drive the string
 along, powered through the cable.
 
-273
-00:19:52,668 --> 00:19:59,135
+292
+00:21:25,535 --> 00:21:32,002
 Beyond the reach of the tractor, in long horizontal wells,
 the answer is no longer a wire at all.
 
-274
-00:19:59,227 --> 00:20:01,561
+293
+00:21:32,093 --> 00:21:34,427
 It is a pipe that can be pushed.
 
-275
-00:20:02,517 --> 00:20:09,367
+294
+00:21:35,383 --> 00:21:42,234
 So wireline is quick, light and cheap, and it is superb
 for mechanical work and measurement in a live well.
 
-276
-00:20:09,459 --> 00:20:14,319
+295
+00:21:42,326 --> 00:21:47,185
 It is limited by its strength, a few tonnes at the very
 most.
 
-277
-00:20:14,411 --> 00:20:17,436
+296
+00:21:47,277 --> 00:21:50,303
 It is limited by gravity in deviated wells.
 
-278
-00:20:17,528 --> 00:20:19,960
+297
+00:21:50,395 --> 00:21:52,827
 And it can neither push nor pump.
 
-279
-00:20:20,052 --> 00:20:24,659
+298
+00:21:52,919 --> 00:21:57,525
 When a job needs any of those, we reach for the next
 method.
 
-280
-00:20:28,417 --> 00:20:32,225
+299
+00:22:01,283 --> 00:22:05,091
 Coiled tubing is a continuous steel pipe, with no joints,
 
-281
-00:20:32,255 --> 00:20:36,295
+300
+00:22:05,121 --> 00:22:09,162
 from one to three and a half inches across, wound on a
 reel.
 
-282
-00:20:36,385 --> 00:20:41,879
+301
+00:22:09,252 --> 00:22:14,746
 One reel can hold from about one and a half to over seven
 kilometres.
 
-283
-00:20:41,969 --> 00:20:47,605
+302
+00:22:14,836 --> 00:22:20,472
 It is made from flat steel strip, rolled into a tube and
 welded along the seam,
 
-284
-00:20:47,635 --> 00:20:53,158
+303
+00:22:20,502 --> 00:22:26,025
 and the strips are welded end to end at a slant, so the
 length is continuous.
 
-285
-00:20:53,248 --> 00:20:58,978
+304
+00:22:26,115 --> 00:22:31,845
 The steel is strong, with a yield strength of eighty
 thousand pounds per square inch or more,
 
-286
-00:20:59,008 --> 00:21:01,795
+305
+00:22:31,875 --> 00:22:34,662
 yet it bends round the reel without breaking.
 
-287
-00:21:01,885 --> 00:21:05,496
+306
+00:22:34,752 --> 00:22:38,363
 And because it is a pipe, we can pump through it.
 
-288
-00:21:05,586 --> 00:21:07,202
+307
+00:22:38,453 --> 00:22:40,069
 A wireline can carry.
 
-289
-00:21:07,292 --> 00:21:10,433
+308
+00:22:40,159 --> 00:22:43,300
 A coiled tube can carry, push, and pump.
 
-290
-00:21:11,383 --> 00:21:13,926
+309
+00:22:44,250 --> 00:22:46,793
 Here is a coiled tubing spread.
 
-291
-00:21:14,025 --> 00:21:16,247
+310
+00:22:46,892 --> 00:22:49,113
 The reel stands on the deck.
 
-292
-00:21:16,346 --> 00:21:20,455
+311
+00:22:49,213 --> 00:22:53,322
 From the reel the tube rises over the gooseneck, a curved
 guide,
 
-293
-00:21:20,485 --> 00:21:26,499
+312
+00:22:53,352 --> 00:22:59,366
 and straight down into the injector head, which hangs from
 a crane or a frame above the tree.
 
-294
-00:21:26,599 --> 00:21:30,869
+313
+00:22:59,465 --> 00:23:03,736
 Under the injector comes the stripper, which seals around
 the moving pipe,
 
-295
-00:21:30,899 --> 00:21:35,025
+314
+00:23:03,766 --> 00:23:07,892
 then a stack of blowout preventers, then the lubricator,
 then the tree.
 
-296
-00:21:35,124 --> 00:21:40,071
+315
+00:23:07,991 --> 00:23:12,938
 The operator sits in a control cabin, watching pressure,
 depth, weight and pump rate.
 
-297
-00:21:40,171 --> 00:21:46,019
+316
+00:23:13,037 --> 00:23:18,886
 A pump connects to the centre of the reel, and the fluid
 goes out through the tube.
 
-298
-00:21:47,017 --> 00:21:49,241
+317
+00:23:19,883 --> 00:23:22,108
 The injector head is the engine.
 
-299
-00:21:49,332 --> 00:21:56,049
+318
+00:23:22,199 --> 00:23:28,915
 Two endless chains run on opposite sides of the tube, each
 carrying gripper blocks shaped to its diameter.
 
-300
-00:21:56,140 --> 00:21:59,647
+319
+00:23:29,006 --> 00:23:32,514
 Hydraulic cylinders squeeze the chains together onto the
 pipe.
 
-301
-00:21:59,738 --> 00:22:04,430
+320
+00:23:32,605 --> 00:23:37,297
 Turn the chains one way and the pipe is driven into the
 well.
 
-302
-00:22:04,521 --> 00:22:07,484
+321
+00:23:37,388 --> 00:23:40,351
 Turn them the other way and it comes out.
 
-303
-00:22:07,576 --> 00:22:11,605
+322
+00:23:40,442 --> 00:23:44,472
 The injector can hold the pipe still against the well
 pressure,
 
-304
-00:22:11,635 --> 00:22:15,372
+323
+00:23:44,502 --> 00:23:48,239
 or pull the whole weight of a long string, tens of tonnes.
 
-305
-00:22:15,464 --> 00:22:17,360
+324
+00:23:48,330 --> 00:23:50,226
 Everything depends on the grip.
 
-306
-00:22:18,317 --> 00:22:24,708
+325
+00:23:51,183 --> 00:23:57,574
 Below the injector, the stripper is a set of rubber
 elements squeezed around the tube by hydraulic pressure.
 
-307
-00:22:24,830 --> 00:22:30,565
+326
+00:23:57,743 --> 00:24:03,477
 It is the dynamic seal, the same job as the stuffing box,
 and like it, it wears.
 
-308
-00:22:30,687 --> 00:22:36,352
+327
+00:24:03,645 --> 00:24:09,310
 Below the stripper comes the blowout preventer, usually
 with four sets of rams in a stack.
 
-309
-00:22:36,474 --> 00:22:42,097
+328
+00:24:09,478 --> 00:24:15,101
 From the top: blind rams, which seal an empty hole; shear
 rams, which cut the tube;
 
-310
-00:22:42,127 --> 00:22:47,575
+329
+00:24:15,131 --> 00:24:20,579
 slip rams, which grip it so it cannot fall; and pipe rams,
 which seal around it.
 
-311
-00:22:47,697 --> 00:22:51,783
+330
+00:24:20,747 --> 00:24:24,833
 In an emergency they close in sequence: pipe rams to seal,
 
-312
-00:22:51,813 --> 00:22:55,504
+331
+00:24:24,863 --> 00:24:28,554
 slips to hold, shear to cut, blind to seal the bore.
 
-313
-00:22:56,583 --> 00:23:00,703
+332
+00:24:29,817 --> 00:24:33,937
 At the end of the tube hangs the bottom hole assembly.
 
-314
-00:23:00,794 --> 00:23:04,341
+333
+00:24:34,027 --> 00:24:37,574
 First a connector, which fixes it to the tube.
 
-315
-00:23:04,431 --> 00:23:08,747
+334
+00:24:37,665 --> 00:24:41,981
 Then check valves, two flaps that only open for flow going
 down,
 
-316
-00:23:08,777 --> 00:23:12,648
+335
+00:24:42,011 --> 00:24:45,881
 so that well fluid cannot come up the inside of the tube.
 
-317
-00:23:12,738 --> 00:23:17,134
+336
+00:24:45,972 --> 00:24:50,368
 Then a disconnect, which can release everything below if
 it gets stuck:
 
-318
-00:23:17,164 --> 00:23:20,593
+337
+00:24:50,398 --> 00:24:53,826
 drop a ball, pump it down, and pressure parts the tool.
 
-319
-00:23:20,684 --> 00:23:24,873
+338
+00:24:53,917 --> 00:24:58,106
 Then the working tool itself: a jetting nozzle, a motor
 and mill,
 
-320
-00:23:24,903 --> 00:23:28,538
+339
+00:24:58,136 --> 00:25:01,771
 an inflatable packer, a perforating gun, a logging tool.
 
-321
-00:23:28,629 --> 00:23:31,097
+340
+00:25:01,862 --> 00:25:04,330
 Same tube, different tool on the end.
 
-322
-00:23:32,050 --> 00:23:33,316
+341
+00:25:05,283 --> 00:25:06,550
 Now the physics.
 
-323
-00:23:33,409 --> 00:23:36,141
+342
+00:25:06,642 --> 00:25:09,375
 With the well open at two hundred bar,
 
-324
-00:23:36,171 --> 00:23:41,260
+343
+00:25:09,405 --> 00:25:14,494
 the pressure pushes the tube out with that force of about
 four tonnes.
 
-325
-00:23:41,353 --> 00:23:48,269
+344
+00:25:14,586 --> 00:25:21,502
 At first, the tube in the hole weighs almost nothing, so
 the injector has to push it in.
 
-326
-00:23:48,361 --> 00:23:52,238
+345
+00:25:21,595 --> 00:25:25,471
 As more goes in, its weight, reduced by buoyancy, grows.
 
-327
-00:23:52,330 --> 00:23:56,919
+346
+00:25:25,564 --> 00:25:30,152
 About a kilometre of two-inch tube is enough to balance
 the push.
 
-328
-00:23:57,011 --> 00:24:02,763
+347
+00:25:30,245 --> 00:25:35,996
 Beyond that, the tube is heavy, and the injector holds it
 back instead of pushing.
 
-329
-00:24:02,855 --> 00:24:08,052
+348
+00:25:36,089 --> 00:25:41,285
 That crossover is called the balance point, and the whole
 operation is planned around it.
 
-330
-00:24:09,017 --> 00:24:12,520
+349
+00:25:42,250 --> 00:25:45,753
 Coiled tubing has an unusual enemy: it gets tired.
 
-331
-00:24:12,612 --> 00:24:18,782
+350
+00:25:45,845 --> 00:25:52,015
 Every time it comes off the reel it is bent over the
 gooseneck, then straightened into the injector.
 
-332
-00:24:18,873 --> 00:24:24,224
+351
+00:25:52,107 --> 00:25:57,457
 Going in and coming out, that is at least six bends and
 straightenings every trip.
 
-333
-00:24:24,315 --> 00:24:27,306
+352
+00:25:57,549 --> 00:26:00,539
 Each bend takes the steel past its yield point,
 
-334
-00:24:27,336 --> 00:24:31,320
+353
+00:26:00,569 --> 00:26:04,553
 a couple of percent of strain, so the steel flows
 plastically.
 
-335
-00:24:31,412 --> 00:24:38,381
+354
+00:26:04,645 --> 00:26:11,614
 A paperclip bent back and forth breaks in a few cycles;
 steel tubing lasts far longer, but not for ever.
 
-336
-00:24:38,472 --> 00:24:40,468
+355
+00:26:11,706 --> 00:26:13,701
 Internal pressure makes it worse.
 
-337
-00:24:40,559 --> 00:24:46,529
+356
+00:26:13,793 --> 00:26:19,763
 So every string has a fatigue life, tracked by software
 that logs each cycle and each pressure,
 
-338
-00:24:46,559 --> 00:24:51,991
+357
+00:26:19,793 --> 00:26:25,224
 and the string is retired well before it is used up,
 commonly at about eighty percent.
 
-339
-00:24:52,950 --> 00:24:54,897
+358
+00:26:26,183 --> 00:26:28,131
 The other limit is reach.
 
-340
-00:24:54,987 --> 00:25:00,609
+359
+00:26:28,222 --> 00:26:33,844
 In a horizontal well, you push the tube along the low side
 of the hole.
 
-341
-00:25:00,700 --> 00:25:06,458
+360
+00:26:33,936 --> 00:26:39,694
 Friction builds along its length, and the tube feels a
 compressive load, like pushing a rope.
 
-342
-00:25:06,548 --> 00:25:10,549
+361
+00:26:39,786 --> 00:26:43,787
 At a certain load the tube buckles, first into a gentle
 wave,
 
-343
-00:25:10,579 --> 00:25:14,081
+362
+00:26:43,817 --> 00:26:47,319
 then into a helix that presses hard against the wall.
 
-344
-00:25:14,171 --> 00:25:19,920
+363
+00:26:47,411 --> 00:26:53,160
 The friction then climbs steeply, and however hard the
 injector pushes, no more tube goes in.
 
-345
-00:25:20,010 --> 00:25:21,300
+364
+00:26:53,252 --> 00:26:54,541
 That is lock-up.
 
-346
-00:25:21,390 --> 00:25:25,776
+365
+00:26:54,633 --> 00:26:59,019
 How far you get depends strongly on friction: in our
 example,
 
-347
-00:25:25,806 --> 00:25:33,190
+366
+00:26:59,049 --> 00:27:06,433
 a friction coefficient of 0.3 gives roughly fourteen
 hundred metres, and 0.1 gives over four thousand.
 
-348
-00:25:33,280 --> 00:25:38,329
-So engineers add lubricants, taper the string so it is
-lighter at the end,
+367
+00:27:06,524 --> 00:27:12,954
+So engineers add lubricants, run a larger and stiffer
+tube, or add a tractor or a vibrating tool.
 
-349
-00:25:38,359 --> 00:25:40,899
-or add a tractor or a vibrating tool.
-
-350
-00:25:41,850 --> 00:25:45,261
+368
+00:27:13,917 --> 00:27:17,327
 Because the tube is hollow, coiled tubing can circulate.
 
-351
-00:25:45,352 --> 00:25:50,370
+369
+00:27:17,418 --> 00:27:22,436
 To clean out sand, we run in with a jetting nozzle, pump
 fluid down the tube,
 
-352
-00:25:50,400 --> 00:25:55,645
+370
+00:27:22,466 --> 00:27:27,711
 and the fluid returns up the annulus between tube and
 tubing, carrying the sand.
 
-353
-00:25:55,735 --> 00:25:59,337
+371
+00:27:27,802 --> 00:27:31,404
 What matters is the speed of that upward flow.
 
-354
-00:25:59,428 --> 00:26:02,448
+372
+00:27:31,495 --> 00:27:34,515
 Too slow, and the sand falls out again.
 
-355
-00:26:02,539 --> 00:26:05,716
+373
+00:27:34,605 --> 00:27:37,782
 Fast enough, and it travels to the surface.
 
-356
-00:26:05,806 --> 00:26:12,146
+374
+00:27:37,873 --> 00:27:44,213
 If the reservoir is too weak to lift the fluid, we add
 nitrogen to make a foam.
 
-357
-00:26:12,237 --> 00:26:16,125
+375
+00:27:44,304 --> 00:27:48,192
 And friction in a long, narrow tube limits the pump rate,
 
-358
-00:26:16,155 --> 00:26:20,829
+376
+00:27:48,222 --> 00:27:52,896
 so the size of the tube is always a trade between strength
 and flow.
 
-359
-00:26:21,783 --> 00:26:23,045
+377
+00:27:53,850 --> 00:27:55,112
 Three more jobs.
 
-360
-00:26:23,137 --> 00:26:28,572
+378
+00:27:55,203 --> 00:28:00,639
 Nitrogen lift: nitrogen pumped down the tube displaces the
 heavy liquid in the well.
 
-361
-00:26:28,663 --> 00:26:32,623
+379
+00:28:00,730 --> 00:28:04,689
 The column lightens, and the reservoir can start to flow
 again.
 
-362
-00:26:32,714 --> 00:26:35,900
+380
+00:28:04,781 --> 00:28:07,967
 Acid placement: the nozzle sits at the right depth,
 
-363
-00:26:35,930 --> 00:26:42,173
+381
+00:28:07,997 --> 00:28:14,240
 pumping acid across the perforations while the tube is
 moved up and down, so every part is treated.
 
-364
-00:26:42,265 --> 00:26:43,638
+382
+00:28:14,331 --> 00:28:15,705
 And scale removal.
 
-365
-00:26:43,729 --> 00:26:49,744
+383
+00:28:15,796 --> 00:28:21,810
 A jet of water or acid washes soft scale off the wall;
 hard scale needs a mill.
 
-366
-00:26:49,835 --> 00:26:57,325
+384
+00:28:21,902 --> 00:28:29,391
 A mill is turned by a downhole motor, driven by the fluid
 we pump, so the tube itself never has to rotate.
 
-367
-00:26:58,283 --> 00:27:01,825
+385
+00:28:30,350 --> 00:28:33,892
 Coiled tubing also sets plugs and packers, perforates,
 
-368
-00:27:01,855 --> 00:27:06,420
+386
+00:28:33,922 --> 00:28:38,486
 and pushes a logging tool into a horizontal well where
 gravity fails.
 
-369
-00:27:06,511 --> 00:27:08,448
+387
+00:28:38,578 --> 00:28:40,515
 It places cement, and fishes.
 
-370
-00:27:08,540 --> 00:27:12,701
+388
+00:28:40,606 --> 00:28:44,768
 Hang a string inside the tubing and it becomes a velocity
 string.
 
-371
-00:27:12,793 --> 00:27:16,247
+389
+00:28:44,859 --> 00:28:48,313
 Add a downhole motor and a bit and it will even drill:
 
-372
-00:27:16,277 --> 00:27:22,729
+390
+00:28:48,343 --> 00:28:54,795
 coiled tubing drilling cuts a side-track out of an
 existing well, through its tubing, without a rig.
 
-373
-00:27:26,483 --> 00:27:32,382
+391
+00:28:58,550 --> 00:29:04,449
 Between coiled tubing and a rig sits the snubbing unit,
 also called a hydraulic workover unit.
 
-374
-00:27:32,722 --> 00:27:35,997
+392
+00:29:04,703 --> 00:29:07,977
 It runs ordinary jointed pipe into a live well.
 
-375
-00:27:36,337 --> 00:27:40,231
+393
+00:29:08,231 --> 00:29:12,125
 Because the pipe is stiff and strong, it can be rotated,
 
-376
-00:27:40,261 --> 00:27:44,045
+394
+00:29:12,155 --> 00:29:15,939
 and it can carry far heavier loads than a coiled tube.
 
-377
-00:27:44,385 --> 00:27:49,737
+395
+00:29:16,193 --> 00:29:21,546
 The unit uses two sets of slips, one travelling on
 hydraulic jacks and one fixed.
 
-378
-00:27:50,077 --> 00:27:54,119
+396
+00:29:21,799 --> 00:29:25,841
 While one grips, the other releases, the jacks stroke,
 
-379
-00:27:54,149 --> 00:27:58,371
+397
+00:29:25,871 --> 00:29:30,094
 and the pipe is pushed or pulled a few metres at a time.
 
-380
-00:27:58,711 --> 00:28:03,033
+398
+00:29:30,347 --> 00:29:34,847
 As with coiled tubing, it starts pipe-light, pushed in
 against the pressure,
 
-381
-00:28:03,063 --> 00:28:07,244
-and becomes pipe-heavy at the balance point, when the
-slips are reversed.
+399
+00:29:34,877 --> 00:29:37,469
+and becomes pipe-heavy at the balance point,
 
-382
-00:28:09,617 --> 00:28:14,740
+400
+00:29:37,499 --> 00:29:43,280
+where the crew switches from the slips that hold the pipe
+down to the slips that hold its weight.
+
+401
+00:29:45,050 --> 00:29:50,174
 Sometimes the quickest way into a well is not to go in at
 all.
 
-383
-00:28:15,080 --> 00:28:18,985
+402
+00:29:50,427 --> 00:29:54,332
 Bullheading is pumping fluid down the tubing from the
 surface,
 
-384
-00:28:19,015 --> 00:28:23,584
+403
+00:29:54,362 --> 00:29:58,931
 hard enough to push the well fluids back into the
 reservoir ahead of it.
 
-385
-00:28:23,924 --> 00:28:27,876
+404
+00:29:59,184 --> 00:30:03,135
 It can kill a well, place a scale inhibitor deep in the
 rock,
 
-386
-00:28:27,906 --> 00:28:31,039
+405
+00:30:03,165 --> 00:30:06,298
 or squeeze cement and chemicals into leak paths.
 
-387
-00:28:31,379 --> 00:28:35,644
+406
+00:30:06,552 --> 00:30:10,817
 Nothing enters the well but liquid, so it is cheap and
 fast.
 
-388
-00:28:35,984 --> 00:28:43,262
+407
+00:30:11,070 --> 00:30:18,348
 But it cannot be placed at a chosen depth, and the
 reservoir has to be able to take the fluid.
 
-389
-00:28:46,017 --> 00:28:47,639
+408
+00:30:19,950 --> 00:30:21,572
 Finally, the heavy end.
 
-390
-00:28:47,791 --> 00:28:51,646
+409
+00:30:21,663 --> 00:30:25,518
 Some problems can only be reached by pulling the
 completion:
 
-391
-00:28:51,676 --> 00:28:56,533
+410
+00:30:25,548 --> 00:30:30,405
 a leaking tubing string, a failed packer, a pump to
 replace, a casing leak.
 
-392
-00:28:56,685 --> 00:28:58,842
+411
+00:30:30,495 --> 00:30:32,652
 For that, the well is killed.
 
-393
-00:28:58,995 --> 00:29:04,315
+412
+00:30:32,743 --> 00:30:38,063
 Kill-weight fluid is pumped in, and the well is checked to
 make sure it holds.
 
-394
-00:29:04,467 --> 00:29:06,203
+413
+00:30:38,154 --> 00:30:39,889
 Mechanical plugs are set.
 
-395
-00:29:06,355 --> 00:29:10,290
+414
+00:30:39,980 --> 00:30:43,915
 The tree comes off and a blowout preventer goes on.
 
-396
-00:29:10,442 --> 00:29:14,055
+415
+00:30:44,005 --> 00:30:47,618
 Then the tubing is unscrewed, joint by joint, and pulled.
 
-397
-00:29:14,207 --> 00:29:22,080
+416
+00:30:47,709 --> 00:30:55,582
 The repair is made, a new completion is run, the tree goes
 back on, and the well is brought back in.
 
-398
-00:29:22,233 --> 00:29:24,003
+417
+00:30:55,673 --> 00:30:57,443
 It can take weeks.
 
-399
-00:29:24,156 --> 00:29:29,282
+418
+00:30:57,534 --> 00:31:02,660
 And the kill fluid, which sits against the reservoir, may
 reduce the well's productivity.
 
-400
-00:29:29,435 --> 00:29:32,441
+419
+00:31:02,751 --> 00:31:05,758
 So it is done only when it must be.
 
-401
-00:29:36,817 --> 00:29:38,861
+420
+00:31:09,517 --> 00:31:11,561
 Many Norwegian wells are subsea.
 
-402
-00:29:39,153 --> 00:29:43,771
+421
+00:31:11,853 --> 00:31:16,471
 The tree sits on the seabed, here three hundred metres
 down,
 
-403
-00:29:43,801 --> 00:29:48,449
+422
+00:31:16,501 --> 00:31:21,149
 and there is no deck next to it to stand a wireline unit
 on.
 
-404
-00:29:48,741 --> 00:29:54,361
+423
+00:31:21,441 --> 00:31:27,061
 So intervention here means a vessel on the surface,
 connected to a tree it cannot touch.
 
-405
-00:29:54,654 --> 00:29:56,726
+424
+00:31:27,354 --> 00:31:29,426
 There are two ways to do it.
 
-406
-00:29:57,019 --> 00:29:59,435
+425
+00:31:29,719 --> 00:31:32,135
 Through open water, without a riser.
 
-407
-00:29:59,727 --> 00:30:05,621
+426
+00:31:32,427 --> 00:31:38,321
 Or inside a riser, a pipe from the vessel all the way down
 to the seabed.
 
-408
-00:30:07,583 --> 00:30:10,305
+427
+00:31:40,283 --> 00:31:43,005
 How we get in depends on the tree.
 
-409
-00:30:10,645 --> 00:30:14,090
+428
+00:31:43,345 --> 00:31:46,790
 A vertical tree has the tubing hanger in the wellhead,
 
-410
-00:30:14,120 --> 00:30:18,302
+429
+00:31:46,820 --> 00:31:51,002
 below the tree, and a straight bore up through the master
 valves.
 
-411
-00:30:18,642 --> 00:30:20,286
+430
+00:31:51,342 --> 00:31:52,986
 Tools go straight down.
 
-412
-00:30:20,626 --> 00:30:23,465
+431
+00:31:53,326 --> 00:31:56,165
 A horizontal tree turns that inside out.
 
-413
-00:30:23,805 --> 00:30:29,180
+432
+00:31:56,505 --> 00:32:01,718
 The tubing hanger sits inside the tree, and the oil leaves
 through a side outlet,
 
-414
-00:30:29,210 --> 00:30:36,351
-so the top is closed by plugs in the hanger, and has to be
-reached through a blowout preventer and a riser.
+433
+00:32:01,748 --> 00:32:04,307
+so the vertical bore is closed by plugs,
 
-415
-00:30:36,691 --> 00:30:40,689
+434
+00:32:04,337 --> 00:32:09,386
+which must be pulled through the equipment on top before
+any tool can go down.
+
+435
+00:32:09,726 --> 00:32:13,725
 A vertical tree can be lifted off without disturbing the
 completion.
 
-416
-00:30:41,029 --> 00:30:44,894
+436
+00:32:14,065 --> 00:32:17,929
 A horizontal tree cannot be removed without pulling the
 tubing.
 
-417
-00:30:48,083 --> 00:30:51,452
+437
+00:32:21,183 --> 00:32:24,552
 Riserless light well intervention is the cheapest way.
 
-418
-00:30:51,792 --> 00:30:55,159
+438
+00:32:24,892 --> 00:32:28,259
 A vessel with a hole through its hull, a moonpool,
 
-419
-00:30:55,189 --> 00:30:59,304
+439
+00:32:28,289 --> 00:32:32,404
 lowers a well control package onto the tree in a single
 lift,
 
-420
-00:30:59,334 --> 00:31:03,003
+440
+00:32:32,434 --> 00:32:36,103
 then a lubricator with a pressure control head on top.
 
-421
-00:31:03,343 --> 00:31:07,256
+441
+00:32:36,443 --> 00:32:40,356
 The line runs through the open sea down to the stack.
 
-422
-00:31:07,596 --> 00:31:12,240
+442
+00:32:40,696 --> 00:32:45,340
 Valves in the package can close on the line, grease keeps
 the seal tight,
 
-423
-00:31:12,270 --> 00:31:15,152
+443
+00:32:45,370 --> 00:32:48,252
 and glycol is injected to keep hydrates away.
 
-424
-00:31:15,492 --> 00:31:21,444
+444
+00:32:48,592 --> 00:32:54,544
 Heave compensation keeps the whole thing steady while the
 vessel moves, and an ROV watches.
 
-425
-00:31:21,784 --> 00:31:26,984
+445
+00:32:54,884 --> 00:33:00,084
 The tools go down on slickline or electric line, exactly
 as we saw earlier.
 
-426
-00:31:29,717 --> 00:31:35,022
+446
+00:33:02,450 --> 00:33:07,755
 When a job needs coiled tubing, or circulation, or larger
 tools, we need a riser.
 
-427
-00:31:35,362 --> 00:31:39,368
+447
+00:33:08,095 --> 00:33:12,101
 A riser is a pressure-tight pipe from the vessel to the
 tree,
 
-428
-00:31:39,398 --> 00:31:46,146
+448
+00:33:12,131 --> 00:33:18,879
 so the equipment on deck can be much like it would be on a
 platform: a lubricator, an injector, pumps.
 
-429
-00:31:46,486 --> 00:31:51,643
+449
+00:33:19,219 --> 00:33:24,376
 At the base of the riser sits a safety package that can
 close on the tool,
 
-430
-00:31:51,673 --> 00:31:55,948
+450
+00:33:24,406 --> 00:33:28,682
 shear it, and release the riser if the vessel loses
 position.
 
-431
-00:31:56,288 --> 00:32:02,152
+451
+00:33:29,022 --> 00:33:34,885
 This is riser-based light well intervention, and the
 vessel is a larger, more capable one.
 
-432
-00:32:06,117 --> 00:32:09,358
+452
+00:33:38,850 --> 00:33:42,091
 And at the top of the ladder is the drilling rig,
 
-433
-00:32:09,388 --> 00:32:14,863
+453
+00:33:42,121 --> 00:33:47,596
 with its large blowout preventer and marine riser, which
 can do the heaviest work.
 
-434
-00:32:15,203 --> 00:32:20,391
+454
+00:33:47,936 --> 00:33:53,124
 On the Norwegian shelf, light well intervention vessels
 have worked for about twenty years,
 
-435
-00:32:20,421 --> 00:32:24,263
+455
+00:33:53,154 --> 00:33:56,996
 and dedicated vessels are now contracted for most days of
 the year.
 
-436
-00:32:24,603 --> 00:32:31,037
+456
+00:33:57,336 --> 00:34:03,770
 For the jobs that need a wire or a coiled tube, they are
 far cheaper than a rig.
 
-437
-00:32:31,377 --> 00:32:33,691
+457
+00:34:04,110 --> 00:34:06,424
 That is the reason they exist.
 
-438
-00:32:39,683 --> 00:32:41,391
+458
+00:34:12,417 --> 00:34:14,124
 So how do we choose?
 
-439
-00:32:41,691 --> 00:32:43,733
+459
+00:34:14,425 --> 00:34:16,466
 Ask what the job needs.
 
-440
-00:32:43,824 --> 00:32:46,090
+460
+00:34:16,557 --> 00:34:18,823
 Does it need to carry and hammer?
 
-441
-00:32:46,391 --> 00:32:47,741
+461
+00:34:19,124 --> 00:34:20,475
 Slickline will do.
 
-442
-00:32:47,832 --> 00:32:50,599
+462
+00:34:20,566 --> 00:34:23,332
 Real-time data, power, or perforating?
 
-443
-00:32:50,900 --> 00:32:52,163
+463
+00:34:23,633 --> 00:34:24,896
 Electric line.
 
-444
-00:32:52,253 --> 00:32:54,795
+464
+00:34:24,987 --> 00:34:27,528
 Pumping, pushing, circulating, milling?
 
-445
-00:32:55,095 --> 00:32:56,238
+465
+00:34:27,829 --> 00:34:28,971
 Coiled tubing.
 
-446
-00:32:56,329 --> 00:32:59,305
+466
+00:34:29,062 --> 00:34:32,039
 Rotation and heavy loads in a live well?
 
-447
-00:32:59,606 --> 00:33:00,496
+467
+00:34:32,340 --> 00:34:33,230
 Snubbing.
 
-448
-00:33:00,587 --> 00:33:03,836
+468
+00:34:33,320 --> 00:34:36,569
 Or does the tubing itself have to come out?
 
-449
-00:33:04,136 --> 00:33:05,908
+469
+00:34:36,870 --> 00:34:38,642
 Then it is a rig.
 
-450
-00:33:05,999 --> 00:33:10,074
+470
+00:34:38,732 --> 00:34:42,807
 And at every step, take the lightest method that can do
 the job,
 
-451
-00:33:10,104 --> 00:33:14,723
+471
+00:34:42,837 --> 00:34:47,456
 because the lighter methods are cheaper, faster, and keep
 the well live.
 
-452
-00:33:15,683 --> 00:33:16,847
+472
+00:34:48,417 --> 00:34:49,580
 Three cases.
 
-453
-00:33:17,187 --> 00:33:21,888
+473
+00:34:49,866 --> 00:34:54,566
 First, a gas-lift valve has failed in a pocket at two
 thousand metres.
 
-454
-00:33:22,228 --> 00:33:24,900
-Wireline: a kick-over tool and one trip.
+474
+00:34:54,852 --> 00:35:00,862
+Wireline and a kick-over tool: one trip to pull it, one to
+set the new one.
 
-455
-00:33:25,240 --> 00:33:27,618
-Production is back in a day.
+475
+00:35:01,148 --> 00:35:04,237
+Production is back within a day or two.
 
-456
-00:33:27,958 --> 00:33:34,470
+476
+00:35:04,522 --> 00:35:11,034
 Second, scale has narrowed the tubing and clogged the
 perforations in a well leaning at fifty-five degrees.
 
-457
-00:33:34,810 --> 00:33:39,470
+477
+00:35:11,320 --> 00:35:15,980
 A wire can carry a gauge to see it, but it cannot clean
 it.
 
-458
-00:33:39,810 --> 00:33:43,315
+478
+00:35:16,265 --> 00:35:19,770
 Coiled tubing, with a jetting nozzle or a mill, can.
 
-459
-00:33:43,655 --> 00:33:47,231
+479
+00:35:20,056 --> 00:35:23,632
 Third, the tubing has a leak at eighteen hundred metres.
 
-460
-00:33:47,571 --> 00:33:52,538
+480
+00:35:23,918 --> 00:35:28,885
 A patch set on electric line, or on coiled tubing, may
 cover the hole.
 
-461
-00:33:52,878 --> 00:33:57,414
+481
+00:35:29,171 --> 00:35:33,706
 If it cannot, the tubing has to come out, and that is a
 rig.
 
-462
-00:34:01,083 --> 00:34:02,682
+482
+00:35:36,417 --> 00:35:38,015
 The edges are moving.
 
-463
-00:34:02,880 --> 00:34:06,357
+483
+00:35:38,122 --> 00:35:41,599
 Tractors push wireline tools into horizontal wells.
 
-464
-00:34:06,556 --> 00:34:12,436
+484
+00:35:41,706 --> 00:35:47,586
 Coiled tubing carries fibre-optic cable or electric
 conductors, giving it real-time data.
 
-465
-00:34:12,634 --> 00:34:18,996
+485
+00:35:47,692 --> 00:35:54,055
 Vessels do work that once needed rigs, and operators are
 plugging subsea wells with vessels where they can.
 
-466
-00:34:19,195 --> 00:34:23,972
+486
+00:35:54,161 --> 00:35:58,938
 But the principle is the same as it ever was: a pressure-
 tight airlock,
 
-467
-00:34:24,002 --> 00:34:28,199
+487
+00:35:58,968 --> 00:36:03,166
 a way to carry and place tools, and two barriers at all
 times.
 
-468
-00:34:29,583 --> 00:34:31,218
+488
+00:36:04,183 --> 00:36:05,818
 Why do we intervene?
 
-469
-00:34:31,661 --> 00:34:37,041
+489
+00:36:06,151 --> 00:36:11,531
 To see, to secure, to clear, to stimulate, to lift, to
 steer, and to finish.
 
-470
-00:34:37,274 --> 00:34:38,013
+490
+00:36:11,654 --> 00:36:12,393
 How?
 
-471
-00:34:38,457 --> 00:34:43,968
+491
+00:36:12,727 --> 00:36:18,238
 With a wire that can carry and hammer, a tube that can
 also pump and push,
 
-472
-00:34:43,998 --> 00:34:49,089
+492
+00:36:18,268 --> 00:36:23,359
 a pipe that can rotate, or a rig that can pull the whole
 well apart.
 
-473
-00:34:49,322 --> 00:34:54,589
+493
+00:36:23,482 --> 00:36:28,749
 A producing well is only as healthy as the last time
 someone looked inside it.
 
-474
-00:34:55,823 --> 00:34:57,417
+494
+00:36:29,873 --> 00:36:31,467
 That is well intervention.
 
