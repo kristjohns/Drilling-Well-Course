@@ -242,7 +242,7 @@ def b406(st, tl):
         xs_ = g.xO + g.wall + 0.75
         lab_s = [("orienting sleeve", xs_, g.ys0 - 0.05, g.xR - 0.05, g.ys0 - 0.1, s[4] - 0.2, s[6]),
                  ("helix: turns the tool", xs_, g.ys1 - 0.25, g.bx + 0.1, g.ys1 + 0.12, s[4] + 1.0, s[6]),
-                 ("slot", xs_, g.y_slot + 0.25, g.bx + g.key_r + 0.07, g.y_slot + 0.25, s[4] + 5.5, s[6])]
+                 ("slot", xs_, g.y_slot - 0.12, g.bx + g.key_r + 0.07, g.y_slot + 0.15, s[4] + 5.5, s[6])]
         for text, x, y, tx, ty, t0, t1 in lab_s:
             K.show(st, K.callout(st, text, x, y, tx, ty, size=0.18, align="l", z=1.2), t0, t1, 0.35)
         xr = g.xO + g.wall + 0.75
