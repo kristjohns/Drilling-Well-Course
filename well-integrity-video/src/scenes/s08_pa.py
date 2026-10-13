@@ -320,8 +320,9 @@ class SceneImpl(Scene):
             if kind == "open":
                 c.drawRect(skia.Rect(x - hw - 14, top, x + hw + 14, bot), paint(C.mud, k))
                 # source of inflow (permeable zone) at the bottom
-                c.drawRect(skia.Rect(x - 150, 820, x + 150, 880), paint(C.amber, 0.45 * k))
-                draw_text(c, "source", x + 160, 858, 20, C.amber, 600, k)
+                c.drawRect(skia.Rect(x - 150, 740, x + 150, 880), paint(C.amber, 0.45 * k))
+                draw_text(c, "source of", x + 160, 800, 20, C.amber, 600, k)
+                draw_text(c, "inflow", x + 160, 826, 20, C.amber, 600, k)
                 pt, pb = 520, 830
                 c.drawRect(skia.Rect(x - hw - 14, pt, x + hw + 14, pb), cp)
                 bracket = [(pt, pb, "100 m"), (pt, 820, "")]
@@ -347,8 +348,11 @@ class SceneImpl(Scene):
                 draw_text(c, lab, bx - 16, (b0 + b1) / 2 + 10, 30, C.primary_hi, 700, k, "right", display=True)
             if kind == "open":
                 bx = x + 170
-                c.drawLine(bx, 520, bx, 820, paint(C.amber, k, stroke=2))
-                draw_text(c, "≥ 50 m", bx + 8, 680, 22, C.amber, 700, k)
+                c.drawLine(bx, 520, bx, 740, paint(C.amber, k, stroke=2))
+                c.drawLine(bx - 6, 520, bx + 6, 520, paint(C.amber, k, stroke=2))
+                c.drawLine(bx - 6, 740, bx + 6, 740, paint(C.amber, k, stroke=2))
+                draw_text(c, "≥ 50 m", bx + 12, 620, 22, C.amber, 700, k)
+                draw_text(c, "above", bx + 12, 646, 18, C.amber, 500, k)
             draw_text(c, h1, x, 950, 28, C.text, 600, k, "center", display=True)
             draw_paragraph(c, h2, x - 250, 990, 500, 21, C.muted, 400, k, align="center")
 
@@ -571,7 +575,8 @@ class SceneImpl(Scene):
             for side in (-1, 1):
                 c.drawRect(skia.Rect(min(x + side * (hw + 10), x + side * (hw + 16)), zt + 120, max(x + side * (hw + 10), x + side * (hw + 16)), zb - 120),
                            paint(C.green, 0.8 * a))
-            draw_text(c, "contact: annulus sealed", x + 120, (zt + zb) / 2, 22, C.green, 700, a, shadow=True)
+            draw_text(c, "contact:", x + 275, (zt + zb) / 2 - 6, 22, C.green, 700, a)
+            draw_text(c, "annulus sealed", x + 275, (zt + zb) / 2 + 22, 22, C.green, 700, a)
         items = ["Clay-rich, smectite-bearing shales", "Ductile, low permeability", "Creep under stress until they grip the casing",
                  "Used as a barrier element on the NCS since 2006"]
         kws = ["rich in clay", "ductile", "creep under", "since 2006"]
@@ -580,15 +585,15 @@ class SceneImpl(Scene):
         if k2 > 0:
             ak = a * k2
             # verification by logging + Havtil report
-            draw_panel(c, 1000, 360, 820, 300, ak, r=18)
-            draw_text(c, "Verified by logging", 1040, 420, 34, C.text, 600, ak, display=True)
+            draw_panel(c, 1000, 420, 820, 210, ak, r=18)
+            draw_text(c, "Verified by logging", 1040, 485, 34, C.text, 600, ak, display=True)
             draw_paragraph(c, "Bond-like response where no cement was placed; D-010 element acceptance criteria for creeping "
-                           "formation.", 1040, 470, 740, 25, C.muted, 400, ak)
+                           "formation.", 1040, 535, 740, 25, C.muted, 400, ak)
             kh = ease_out(clamp((t - self.word_time("shale2", "in 2025") + 0.3) / 0.6)) * ak
-            draw_panel(c, 1000, 690, 820, 300, kh, r=18, glow=C.green)
-            draw_text(c, "HAVTIL · 2025", 1040, 740, 20, C.green, 700, kh, tracking=4)
+            draw_panel(c, 1000, 670, 820, 230, kh, r=18, glow=C.green)
+            draw_text(c, "HAVTIL · 2025", 1040, 725, 20, C.green, 700, kh, tracking=4)
             draw_paragraph(c, "Knowledge study on creeping shale: potentially an efficient and cost-effective barrier behind "
-                           "casing; further research and more specific requirements needed.", 1040, 790, 740, 25, C.text, 500, kh)
+                           "casing; further research and more specific requirements needed.", 1040, 775, 740, 25, C.text, 500, kh)
 
     # ------------------------------------------------------------------ new technology
     def draw_newtech(self, c, t):

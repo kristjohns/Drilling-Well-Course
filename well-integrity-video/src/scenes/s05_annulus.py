@@ -388,7 +388,8 @@ class SceneImpl(Scene):
         pl.line(c, xs, ys, C.red, 3.5, a, reveal=f)
         if f > 0.4:
             k = ease_out(clamp((f - 0.4) * 3)) * a
-            draw_text(c, "rising for weeks, not noticed", pl.px(28), pl.py(30), 24, C.red, 600, k)
+            draw_text(c, "rising for weeks, not noticed", pl.px(3), pl.py(64), 24, C.red, 600, k)
+            arrow(c, pl.px(23.5), pl.py(62), pl.px(34.5), pl.py(48), C.red, width=2, alpha=k, head=10)
         kk = ease_out(clamp((t - self.word_time("gullfaks", "hole in the casing")) / 0.6)) * a
         if kk > 0:
             draw_panel(c, 1300, 380, 520, 420, kk, glow=C.red, r=18)

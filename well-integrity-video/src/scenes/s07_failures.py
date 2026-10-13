@@ -379,11 +379,11 @@ class SceneImpl(Scene):
                    ("Technology and methods not qualified for the purpose", "not qualified"),
                    ("Faulty calibration: log data misinterpreted, gas not detected", "calibration"),
                    ("Potential for a major accident", "major accident")]
+            y = 440
             for i, (txt, kw) in enumerate(fnd):
                 kk = ease_out(clamp((t - self.word_time("troll2", kw) + 0.3) / 0.6)) * a * k2
-                y = 440 + i * 100
                 c.drawCircle(1420, y - 8, 7, paint(C.red, kk))
-                draw_paragraph(c, txt, 1440, y, 400, 25, C.text, 500, kk)
+                y += draw_paragraph(c, txt, 1440, y, 400, 25, C.text, 500, kk) + 34
             kk = ease_out(clamp((t - self.word_time("troll2", "major accident") - 0.6) / 0.6)) * a * k2
             draw_text(c, "12 non-conformities · order to Equinor, 2026", 1420, 960, 19, C.muted, 500, kk)
 

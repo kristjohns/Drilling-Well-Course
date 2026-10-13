@@ -23,6 +23,7 @@ import tts  # noqa: E402
 
 VOICE = os.environ.get("VOICE", "af_heart")
 SPEED = float(os.environ.get("SPEED", "0.94"))
+FPS = 30
 SEG_GAP = 0.70          # silence between segments
 SCENE_TAIL = 0.6        # extra air at scene end
 OUT = os.path.join(ROOT, "build", "audio")
@@ -93,7 +94,9 @@ def main(only: set[str] | None = None):
             plog.append(f"[{sc['id']}:{cue}] {text}\n    " + "\n    ".join(phon))
             t += dur + SEG_GAP
         t += SCENE_TAIL
-        timeline[sc["id"]] = dict(duration=round(t, 3), cues=cues, sentences=sentences, files=files,
+        # whole number of video frames, so concatenated scenes stay in sync with the audio
+        t = round(t * FPS) / FPS
+        timeline[sc["id"]] = dict(duration=round(t, 4), cues=cues, sentences=sentences, files=files,
                                   title=sc["title"], chapter=sc["chapter"])
         print(f"{sc['id']}: {t:7.2f} s  ({len(cues)} segments)", flush=True)
     json.dump(timeline, open(tl_path, "w"), indent=1, ensure_ascii=False)

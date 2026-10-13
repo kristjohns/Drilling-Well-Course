@@ -51,7 +51,9 @@ Well geometry, pressures and plotted values in the animations are **illustrative
   https://www.offshore-energy.biz/norway-gullfaks-c-incident-could-have-developed-into-major-disaster/
 - Troll / Deepsea Bollsta, 23 Sep 2025: Havtil investigation and order (2026)
   https://www.havtil.no/en/supervision/investigation-reports/2026/equinor---deepsea-bollsta---investigation-of-well-control-incident/ ;
-  Equinor https://www.equinor.com/news/20260303-investigation-well-control-incident-deepsea-bollsta
+  Equinor https://www.equinor.com/news/20260303-investigation-well-control-incident-deepsea-bollsta ;
+  Offshore magazine https://www.offshore-mag.com/rigs/news/55379138/norwegian-offshore-industry-authority-havtil-equinor-ordered-to-address-well-control-measures-following-north-sea-troll-incident
+  (well Q-21, 13⅜" casing cut at about 510 m, ≈ 930 kg gas released, 12 non-conformities)
 - Macondo (Gulf of Mexico, 2010): US Chemical Safety Board and National Commission reports.
 - Ekofisk subsidence: https://ekofisk.industriminne.no/en/seabed-subsidence/ ; https://geoexpro.com/time-lapse-seismic-and-geomechanics-part-i/
 

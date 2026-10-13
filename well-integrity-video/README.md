@@ -23,7 +23,9 @@ with Skia, and the soundtrack is synthesized in NumPy.
 | 10 | Digital well integrity and key lessons | Monitoring, digital WBS, WIMS, calibration, six lessons |
 
 ## Files
-- `output/` – final video (MP4, 1080p30, AAC audio, embedded English subtitles) and `subtitles.srt`
+- `output/chapters/` – the film as eleven chapter MP4s (1080p30, AAC audio, embedded English subtitles), for use in a course
+- `output/subtitles.srt` – English subtitles for the full film
+- The full film (`output/well_integrity_ncs.mp4`, ~28 min) is rebuilt with the steps below; it is too large for the repository
 - `script/narration.py` – the narration script with cue names
 - `SOURCES.md` – references for all facts and figures
 - `src/` – pipeline: `tts.py` + `build_audio.py` (narration), `engine/` + `scenes/` + `render.py` (animation),
@@ -37,8 +39,10 @@ Requirements: Python 3.11+, `skia-python`, `numpy`, `scipy`, `soundfile`, `onnxr
 python3 src/build_audio.py        # narration + timeline
 python3 src/render.py all 3       # render all scenes (3 parallel jobs)
 python3 src/build_mix.py          # music, SFX, mix, loudness, subtitles
-python3 src/assemble.py           # final MP4
+python3 src/assemble.py           # full film
+python3 src/assemble.py chapters  # one MP4 per chapter
 ```
-Review helpers: `python3 src/render.py sheet <scene> 5` (contact sheet), `python3 src/render.py still <scene> <t>`.
+Review helpers: `python3 src/render.py sheet <scene> 5` (contact sheet), `python3 src/render.py still <scene> <t>`,
+`sh src/review_sheets.sh <video.mp4> <interval>` (timestamped contact sheets of a rendered video).
 
 Values in schematics and plots are illustrative and not for engineering use. Narration voice: Kokoro-82M (Apache-2.0).
