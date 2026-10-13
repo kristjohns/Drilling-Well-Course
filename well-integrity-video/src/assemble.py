@@ -31,15 +31,24 @@ def main(name="well_integrity_ncs.mp4"):
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst,
                     "-c", "copy", joined], check=True)
     out = os.path.join(OUT, name)
+    # the output length comes from the video: -shortest would also stop at the last subtitle cue
+    vdur = video_duration(joined)
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", joined, "-i", os.path.join(AUD, "mix.wav"),
                     "-i", os.path.join(AUD, "subtitles.srt"),
                     "-map", "0:v", "-map", "1:a", "-map", "2:s",
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-c:s", "mov_text",
                     "-metadata", "title=Well Integrity on the Norwegian Continental Shelf",
                     "-metadata:s:a:0", "language=eng", "-metadata:s:s:0", "language=eng",
-                    "-shortest", "-movflags", "+faststart", out], check=True)
+                    "-t", f"{vdur:.3f}", "-movflags", "+faststart", out], check=True)
     shutil.copyfile(os.path.join(AUD, "subtitles.srt"), os.path.join(OUT, "subtitles.srt"))
     print(out)
+
+
+def video_duration(path):
+    """Exact video length from the frame count."""
+    n = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-count_packets", "-show_entries",
+                        "stream=nb_read_packets", "-of", "csv=p=0", path], check=True, capture_output=True, text=True)
+    return int(n.stdout.strip()) / 30.0
 
 
 def fmt_ts(sec):
@@ -106,7 +115,7 @@ def chapters():
                         "-ss", f"{starts[sid]:.3f}", "-t", f"{dur:.3f}", "-i", os.path.join(AUD, "mix.wav"), "-i", srt,
                         "-map", "0:v", "-map", "1:a", "-map", "2:s", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k",
                         "-c:s", "mov_text", "-metadata", f"title=Well Integrity - {tl[sid]['title']}",
-                        "-metadata:s:s:0", "language=eng", "-shortest", "-movflags", "+faststart", out], check=True)
+                        "-metadata:s:s:0", "language=eng", "-t", f"{dur:.3f}", "-movflags", "+faststart", out], check=True)
         print(out, os.path.getsize(out) // 1_000_000, "MB")
 
 

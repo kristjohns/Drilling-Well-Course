@@ -1,0 +1,1995 @@
+1
+00:00:01,200 --> 00:00:03,936
+Two to four kilometers
+beneath the North Sea,
+
+2
+00:00:03,936 --> 00:00:08,010
+oil and gas sit in porous rock at
+pressures of several hundred bar.
+
+3
+00:00:08,710 --> 00:00:13,310
+A well is the only engineered path
+between that energy and the world above.
+
+4
+00:00:14,010 --> 00:00:18,288
+For decades of production, and then,
+once it is plugged, for an eternity,
+
+5
+00:00:18,288 --> 00:00:22,860
+that path must stay closed to everything
+except what we intend to let through.
+
+6
+00:00:23,560 --> 00:00:25,530
+That is the job of well integrity.
+
+7
+00:00:26,830 --> 00:00:31,477
+In this film we look at how it is done
+on the Norwegian Continental Shelf:
+
+8
+00:00:31,477 --> 00:00:34,868
+the regulations and standards,
+the barrier philosophy,
+
+9
+00:00:34,868 --> 00:00:37,380
+how barriers are verified and monitored,
+
+10
+00:00:37,380 --> 00:00:41,964
+how integrity is classified across a
+portfolio of wells, what goes wrong,
+
+11
+00:00:41,964 --> 00:00:45,041
+and what the industry is
+learning as thousands of
+
+12
+00:00:45,041 --> 00:00:47,930
+wells approach permanent
+plug and abandonment.
+
+13
+00:00:53,433 --> 00:00:57,032
+NORSOK D-010, the Norwegian
+well integrity standard,
+
+14
+00:00:57,032 --> 00:01:00,838
+defines well integrity as
+the application of technical,
+
+15
+00:01:00,838 --> 00:01:04,574
+operational and organizational
+solutions to reduce the
+
+16
+00:01:04,574 --> 00:01:09,072
+risk of uncontrolled release of
+formation fluids and well fluids,
+
+17
+00:01:09,072 --> 00:01:11,563
+throughout the life cycle of a well.
+
+18
+00:01:12,263 --> 00:01:17,595
+Technical solutions are the hardware: casing,
+cement, packers, valves and wellheads,
+
+19
+00:01:17,595 --> 00:01:19,943
+designed for the loads they will see.
+
+20
+00:01:20,643 --> 00:01:25,843
+Operational solutions are how the well
+is run: procedures, testing, monitoring,
+
+21
+00:01:25,843 --> 00:01:30,713
+and operating limits that keep every
+component inside its design envelope.
+
+22
+00:01:31,413 --> 00:01:36,491
+And organizational solutions are the people
+and the system around them: competence,
+
+23
+00:01:36,491 --> 00:01:39,244
+clear responsibilities,
+management of change,
+
+24
+00:01:39,244 --> 00:01:43,343
+and documentation that follows the
+well from one owner to the next.
+
+25
+00:01:44,543 --> 00:01:46,123
+The words life cycle matter.
+
+26
+00:01:46,423 --> 00:01:48,933
+A well is designed, drilled and completed.
+
+27
+00:01:49,233 --> 00:01:54,475
+It produces or injects, it is intervened
+on and worked over, it may be suspended,
+
+28
+00:01:54,475 --> 00:01:57,063
+and finally it is permanently abandoned.
+
+29
+00:01:57,763 --> 00:02:03,697
+The international standard ISO sixteen five
+thirty frames this as life-cycle governance,
+
+30
+00:02:03,697 --> 00:02:09,293
+and every handover between phases must
+carry a documented, verified barrier status.
+
+31
+00:02:09,993 --> 00:02:11,123
+Why does this matter?
+
+32
+00:02:11,423 --> 00:02:15,968
+Because a loss of integrity can mean
+a blowout, a release to sea or air,
+
+33
+00:02:15,968 --> 00:02:18,429
+an underground flow between formations,
+
+34
+00:02:18,429 --> 00:02:23,163
+or a slow leak that nobody sees until
+pressure appears where it should not.
+
+35
+00:02:28,467 --> 00:02:31,897
+Norwegian petroleum regulation
+is largely functional.
+
+36
+00:02:32,197 --> 00:02:34,789
+The regulations state what must be achieved,
+
+37
+00:02:34,789 --> 00:02:39,797
+and the guidelines point to recognized
+standards that describe one way to achieve it.
+
+38
+00:02:40,497 --> 00:02:44,977
+The regulator is Havtil, the
+Norwegian Ocean Industry Authority,
+
+39
+00:02:44,977 --> 00:02:49,247
+which until 2024 was known as
+the Petroleum Safety Authority.
+
+40
+00:02:49,947 --> 00:02:53,234
+The Facilities Regulations
+require that well barriers
+
+41
+00:02:53,234 --> 00:02:56,583
+are designed so that well
+integrity is ensured and the
+
+42
+00:02:56,583 --> 00:03:00,367
+barrier functions are safeguarded
+during the well's lifetime.
+
+43
+00:03:00,667 --> 00:03:03,037
+Barrier performance must be verifiable.
+
+44
+00:03:03,737 --> 00:03:05,295
+When a well is abandoned,
+
+45
+00:03:05,295 --> 00:03:08,537
+its barriers must be designed
+for the longest period
+
+46
+00:03:08,537 --> 00:03:11,093
+the well is expected to remain abandoned,
+
+47
+00:03:11,093 --> 00:03:16,267
+and it must be possible to cut the casings
+safely when the well is finally plugged.
+
+48
+00:03:16,967 --> 00:03:20,197
+The Activities Regulations
+add the operational side.
+
+49
+00:03:20,497 --> 00:03:23,442
+During drilling and well
+activities there shall be
+
+50
+00:03:23,442 --> 00:03:26,387
+tested well barriers with
+sufficient independence.
+
+51
+00:03:26,687 --> 00:03:27,797
+If a barrier fails,
+
+52
+00:03:27,797 --> 00:03:32,767
+no other activities may be carried out in
+the well than those intended to restore it.
+
+53
+00:03:33,467 --> 00:03:37,752
+And when a well is handed over,
+its barrier status shall be tested,
+
+54
+00:03:37,752 --> 00:03:39,287
+verified and documented.
+
+55
+00:03:39,987 --> 00:03:41,093
+And above them all,
+
+56
+00:03:41,093 --> 00:03:45,753
+the Management Regulations require that
+barriers are established and maintained,
+
+57
+00:03:45,753 --> 00:03:49,714
+and that it is known which barriers
+exist, what function they serve,
+
+58
+00:03:49,714 --> 00:03:53,617
+what performance is required of
+them, and whether they are working.
+
+59
+00:03:54,317 --> 00:03:57,931
+For all of this, the guidelines
+point to NORSOK D-010,
+
+60
+00:03:57,931 --> 00:04:01,077
+Well integrity in drilling
+and well operations.
+
+61
+00:04:01,377 --> 00:04:04,136
+Revision five was published in 2021,
+
+62
+00:04:04,136 --> 00:04:09,807
+and it is now issued in a consolidated
+edition with corrections from 2024.
+
+63
+00:04:10,507 --> 00:04:15,673
+Revision five reorganized the standard
+and added a barrier requirements matrix,
+
+64
+00:04:15,673 --> 00:04:21,558
+premises for using creeping formation and
+materials other than cement as barrier elements,
+
+65
+00:04:21,558 --> 00:04:24,958
+accepted methods such as
+perforate, wash and cement,
+
+66
+00:04:24,958 --> 00:04:28,162
+an expanded chapter on
+managed pressure drilling,
+
+67
+00:04:28,162 --> 00:04:31,367
+and a formal route for
+qualifying new technology.
+
+68
+00:04:32,067 --> 00:04:35,612
+Around the standard sit the
+Offshore Norge guidelines:
+
+69
+00:04:35,612 --> 00:04:40,010
+guideline one-seventeen on well
+integrity, covering classification,
+
+70
+00:04:40,010 --> 00:04:42,768
+annulus pressure management and handovers,
+
+71
+00:04:42,768 --> 00:04:46,247
+and guideline one-thirty-five
+on how well control and
+
+72
+00:04:46,247 --> 00:04:49,727
+well integrity incidents
+are classified and reported.
+
+73
+00:04:50,427 --> 00:04:53,799
+Operators share experience
+through industry forums for
+
+74
+00:04:53,799 --> 00:04:56,547
+well integrity and for plug and abandonment,
+
+75
+00:04:56,547 --> 00:05:01,357
+so that a lesson learned on one field
+can protect wells on every other field.
+
+76
+00:05:06,667 --> 00:05:09,980
+At the heart of NORSOK
+D-010 is the well barrier:
+
+77
+00:05:09,980 --> 00:05:13,428
+an envelope of one or
+several well barrier elements
+
+78
+00:05:13,428 --> 00:05:16,200
+that together prevent fluids from flowing
+
+79
+00:05:16,200 --> 00:05:19,648
+unintentionally from a
+formation into the wellbore,
+
+80
+00:05:19,648 --> 00:05:23,367
+into another formation, or
+to the external environment.
+
+81
+00:05:24,067 --> 00:05:27,297
+A well barrier element, on
+its own, does not stop flow.
+
+82
+00:05:27,597 --> 00:05:32,310
+A casing joint with no cement behind
+it, or a valve with no body around it,
+
+83
+00:05:32,310 --> 00:05:33,567
+is just a component.
+
+84
+00:05:33,867 --> 00:05:36,737
+Only the complete, closed
+envelope is a barrier.
+
+85
+00:05:37,437 --> 00:05:40,287
+The core principle is
+two independent barriers.
+
+86
+00:05:40,587 --> 00:05:45,207
+The primary well barrier is the first
+envelope that prevents flow from a source.
+
+87
+00:05:45,507 --> 00:05:49,787
+The secondary well barrier is the one
+that takes over if the primary fails.
+
+88
+00:05:50,487 --> 00:05:52,577
+Ideally the two envelopes share nothing.
+
+89
+00:05:52,877 --> 00:05:56,781
+Where an element is part of both,
+a common well barrier element,
+
+90
+00:05:56,781 --> 00:05:59,587
+the extra risk must be
+assessed and mitigated.
+
+91
+00:06:00,887 --> 00:06:02,727
+Look first at a well being drilled.
+
+92
+00:06:03,027 --> 00:06:06,067
+Here the primary barrier is
+the drilling fluid itself.
+
+93
+00:06:06,367 --> 00:06:09,607
+The weight of the mud column
+holds back the formation pressure.
+
+94
+00:06:10,307 --> 00:06:11,497
+The physics is simple.
+
+95
+00:06:11,797 --> 00:06:16,517
+Hydrostatic pressure equals density
+times gravity times true vertical depth.
+
+96
+00:06:16,817 --> 00:06:21,385
+Mud with a specific gravity of one
+point three, at three thousand meters,
+
+97
+00:06:21,385 --> 00:06:26,705
+exerts about three hundred and eighty bar,
+comfortably above a pore pressure of, say,
+
+98
+00:06:26,705 --> 00:06:28,207
+three hundred and fifty.
+
+99
+00:06:28,907 --> 00:06:34,105
+Behind the fluid stands the secondary barrier:
+the formation at the last casing shoe,
+
+100
+00:06:34,105 --> 00:06:38,447
+the casing cement, the casing, the
+wellhead, and the blowout preventer.
+
+101
+00:06:39,147 --> 00:06:44,147
+The formation at the casing shoe is a barrier
+element too, and its strength must be known.
+
+102
+00:06:44,447 --> 00:06:45,990
+After each casing is set,
+
+103
+00:06:45,990 --> 00:06:49,200
+a few meters of new hole
+are drilled and the well is
+
+104
+00:06:49,200 --> 00:06:53,027
+pressured up in a formation
+integrity test or a leak-off test.
+
+105
+00:06:53,327 --> 00:06:56,208
+The pressure at which the
+rock begins to take fluid
+
+106
+00:06:56,208 --> 00:06:58,468
+sets the upper limit for the mud weight,
+
+107
+00:06:58,468 --> 00:07:01,407
+and for the pressure the
+secondary barrier can hold.
+
+108
+00:07:02,107 --> 00:07:03,730
+If the fluid column fails,
+
+109
+00:07:03,730 --> 00:07:08,788
+for example through losses to a weak
+formation or by swabbing while pulling pipe,
+
+110
+00:07:08,788 --> 00:07:10,787
+formation fluid enters the well.
+
+111
+00:07:11,087 --> 00:07:12,847
+Gas expands as it rises.
+
+112
+00:07:13,547 --> 00:07:17,097
+The crew detects the influx and
+closes the blowout preventer.
+
+113
+00:07:17,397 --> 00:07:20,175
+The secondary barrier
+now holds the pressure,
+
+114
+00:07:20,175 --> 00:07:23,386
+while the primary barrier
+is restored by circulating
+
+115
+00:07:23,386 --> 00:07:27,277
+out the influx and replacing the
+mud with a heavier kill fluid.
+
+116
+00:07:27,977 --> 00:07:31,306
+In managed pressure drilling
+the fluid column is lighter,
+
+117
+00:07:31,306 --> 00:07:34,227
+and a closed system adds
+back-pressure at surface.
+
+118
+00:07:34,527 --> 00:07:40,487
+Revision five of D-010 expanded the
+requirements for exactly this kind of operation.
+
+119
+00:07:41,787 --> 00:07:44,297
+Now the same well, completed and producing.
+
+120
+00:07:44,597 --> 00:07:48,077
+The fluid column is gone, so the
+envelopes are made of hardware.
+
+121
+00:07:48,777 --> 00:07:54,196
+The primary barrier is drawn in blue: the
+casing and cement below the production packer,
+
+122
+00:07:54,196 --> 00:07:59,307
+the production packer itself, the production
+tubing, and the downhole safety valve.
+
+123
+00:08:00,007 --> 00:08:02,867
+The downhole safety valve
+deserves a closer look.
+
+124
+00:08:03,167 --> 00:08:08,197
+It is a fail-safe flapper valve, held
+open by hydraulic pressure from surface.
+
+125
+00:08:08,497 --> 00:08:11,158
+If that pressure is
+lost, a spring closes it,
+
+126
+00:08:11,158 --> 00:08:14,707
+shutting in the well even if
+everything above it is damaged.
+
+127
+00:08:15,407 --> 00:08:21,105
+The secondary barrier is drawn in red: the cap
+rock and casing cement above the reservoir,
+
+128
+00:08:21,105 --> 00:08:25,854
+the production casing, the wellhead,
+the tubing hanger, the annulus valves,
+
+129
+00:08:25,854 --> 00:08:28,577
+and the master valve on the Christmas tree.
+
+130
+00:08:29,277 --> 00:08:31,457
+This drawing is a well barrier schematic.
+
+131
+00:08:31,757 --> 00:08:37,509
+D-010 requires one for every well activity
+and phase, showing each element, its status,
+
+132
+00:08:37,509 --> 00:08:43,327
+and the formation strength, so that anyone
+can see at a glance what is holding the well.
+
+133
+00:08:44,027 --> 00:08:49,521
+Each element type has an element acceptance
+table in the standard, stating its function,
+
+134
+00:08:49,521 --> 00:08:54,703
+how it must be designed and selected, how
+it is tested and verified when installed,
+
+135
+00:08:54,703 --> 00:08:57,887
+and how it must be monitored
+and maintained in use.
+
+136
+00:08:58,587 --> 00:09:00,977
+And the envelopes change
+with every activity.
+
+137
+00:09:01,277 --> 00:09:04,309
+During a wireline or
+coiled tubing intervention,
+
+138
+00:09:04,309 --> 00:09:07,721
+the pressure control equipment
+rigged up on top of the
+
+139
+00:09:07,721 --> 00:09:10,438
+tree becomes part of the barrier envelopes,
+
+140
+00:09:10,438 --> 00:09:15,177
+and each change of configuration must
+be reflected in an updated schematic.
+
+141
+00:09:20,467 --> 00:09:23,527
+A barrier that has not been
+verified is an assumption.
+
+142
+00:09:23,827 --> 00:09:27,817
+Verification turns it into a fact,
+recorded for the life of the well.
+
+143
+00:09:28,517 --> 00:09:32,847
+The most common verification is a
+pressure test in the direction of flow.
+
+144
+00:09:33,147 --> 00:09:38,828
+D-010 calls for a low pressure test of fifteen
+to twenty bar for at least five minutes,
+
+145
+00:09:38,828 --> 00:09:40,787
+before the high pressure test.
+
+146
+00:09:41,487 --> 00:09:46,012
+The static test pressure is then observed
+and recorded for at least ten minutes,
+
+147
+00:09:46,012 --> 00:09:47,257
+with a stable reading.
+
+148
+00:09:47,557 --> 00:09:51,092
+Unless the acceptance table for
+that element says otherwise,
+
+149
+00:09:51,092 --> 00:09:53,037
+the acceptable leak rate is zero.
+
+150
+00:09:53,737 --> 00:09:58,607
+A falling curve that never flattens tells
+a different story: something is leaking,
+
+151
+00:09:58,607 --> 00:10:02,527
+and the barrier is not accepted
+until the leak is found and fixed.
+
+152
+00:10:03,227 --> 00:10:05,877
+Some elements are better
+tested from the other side.
+
+153
+00:10:06,177 --> 00:10:09,810
+In an inflow test, the pressure
+above the barrier is reduced,
+
+154
+00:10:09,810 --> 00:10:11,657
+simulating the load from below.
+
+155
+00:10:11,957 --> 00:10:15,997
+If nothing flows and the pressure does
+not build up, the barrier is holding.
+
+156
+00:10:16,297 --> 00:10:19,687
+D-010 calls for at least thirty
+minutes of stable reading.
+
+157
+00:10:20,387 --> 00:10:22,687
+Interpretation is part of the barrier.
+
+158
+00:10:22,987 --> 00:10:26,650
+In the Macondo disaster in
+the Gulf of Mexico in 2010,
+
+159
+00:10:26,650 --> 00:10:32,417
+a negative pressure test was misread as a
+success, and the well blew out hours later.
+
+160
+00:10:33,117 --> 00:10:37,218
+Valves with an allowable leak rate,
+such as the downhole safety valve,
+
+161
+00:10:37,218 --> 00:10:40,617
+are tested by closing the valve
+and bleeding off above it.
+
+162
+00:10:40,917 --> 00:10:44,867
+The pressure build-up in the closed
+volume is converted to a leak rate.
+
+163
+00:10:45,167 --> 00:10:50,827
+In the production phase, D-010 recommends a
+differential of seventy bar for these tests.
+
+164
+00:10:51,527 --> 00:10:57,097
+The blowout preventer is tested too: function
+tested and pressure tested when installed,
+
+165
+00:10:57,097 --> 00:10:58,997
+and then at regular intervals.
+
+166
+00:10:59,297 --> 00:11:04,247
+Revision five of D-010 kept the
+fourteen-day interval for the pressure test.
+
+167
+00:11:04,947 --> 00:11:06,097
+Cement is harder.
+
+168
+00:11:06,397 --> 00:11:10,510
+We cannot see it, so we infer it:
+from the job itself, from volumes,
+
+169
+00:11:10,510 --> 00:11:14,019
+pressures and returns, from a
+pressure test of the casing,
+
+170
+00:11:14,019 --> 00:11:17,347
+from the formation strength
+at the shoe, and from logs.
+
+171
+00:11:18,047 --> 00:11:21,497
+A cement bond log sends a
+sonic pulse along the casing.
+
+172
+00:11:21,797 --> 00:11:24,907
+Free pipe rings like a bell,
+so the amplitude is high.
+
+173
+00:11:25,207 --> 00:11:29,647
+Casing that is well bonded to cement
+is damped, so the amplitude is low.
+
+174
+00:11:30,347 --> 00:11:32,077
+Ultrasonic tools go further.
+
+175
+00:11:32,377 --> 00:11:38,127
+They spin a transducer to map the acoustic
+impedance behind the casing all the way around,
+
+176
+00:11:38,127 --> 00:11:42,727
+and they can reveal a channel of mud
+that a bond log would average away.
+
+177
+00:11:43,427 --> 00:11:47,205
+D-010 sets minimum lengths
+for cement in the annulus,
+
+178
+00:11:47,205 --> 00:11:53,407
+longer when it is verified only by volumes,
+and shorter when bond is confirmed by logs.
+
+179
+00:11:53,707 --> 00:11:55,302
+For permanent abandonment,
+
+180
+00:11:55,302 --> 00:11:58,431
+the external cement must
+be verified over a defined
+
+181
+00:11:58,431 --> 00:12:01,867
+interval before it can be
+credited as a barrier element.
+
+182
+00:12:02,567 --> 00:12:07,021
+Every test is recorded, signed off and
+linked to the well barrier schematic,
+
+183
+00:12:07,021 --> 00:12:11,301
+so that whoever takes over the well
+knows not only what the barriers are,
+
+184
+00:12:11,301 --> 00:12:13,587
+but how and when they were last proven.
+
+185
+00:12:18,900 --> 00:12:21,960
+A producing well is a set
+of nested pressure vessels.
+
+186
+00:12:22,260 --> 00:12:26,000
+Between the tubing and the
+production casing is the A-annulus.
+
+187
+00:12:26,300 --> 00:12:30,553
+Between the production casing and
+the next string out is the B-annulus,
+
+188
+00:12:30,553 --> 00:12:32,350
+and beyond that the C-annulus.
+
+189
+00:12:33,050 --> 00:12:35,950
+Pressure in an annulus can
+come from three places.
+
+190
+00:12:36,650 --> 00:12:39,985
+Heat: when hot production
+fluid flows up the tubing,
+
+191
+00:12:39,985 --> 00:12:42,936
+the trapped fluid in a
+sealed annulus expands,
+
+192
+00:12:42,936 --> 00:12:46,400
+and pressure can rise by
+tens or even hundreds of bar.
+
+193
+00:12:47,100 --> 00:12:52,350
+In subsea wells, the outer annuli are
+often sealed and cannot be bled off at all.
+
+194
+00:12:52,650 --> 00:12:57,861
+Trapped annular pressure must then be
+handled in the design, with stronger casing,
+
+195
+00:12:57,861 --> 00:13:02,500
+burst disks, compressible foam or
+nitrogen cushions, or insulated tubing.
+
+196
+00:13:03,200 --> 00:13:09,130
+Applied pressure: for example lift gas injected
+into the A-annulus of a gas lifted well.
+
+197
+00:13:09,830 --> 00:13:14,843
+And leaks: a connection or packer leak
+that lets the tubing talk to the annulus,
+
+198
+00:13:14,843 --> 00:13:18,290
+a casing leak, or gas migrating
+up through poor cement.
+
+199
+00:13:18,590 --> 00:13:23,469
+Pressure that keeps coming back after it is
+bled off is called sustained casing pressure,
+
+200
+00:13:23,469 --> 00:13:24,840
+and it is a warning sign.
+
+201
+00:13:25,540 --> 00:13:30,770
+Every annulus has a limit, the maximum
+allowable annulus surface pressure, or MAASP.
+
+202
+00:13:31,070 --> 00:13:35,690
+It is the highest pressure the annulus
+may contain, measured at the wellhead,
+
+203
+00:13:35,690 --> 00:13:39,410
+without compromising any well
+barrier element in that annulus.
+
+204
+00:13:40,110 --> 00:13:44,627
+MAASP is found from the weakest point:
+the burst rating of the outer casing,
+
+205
+00:13:44,627 --> 00:13:49,679
+the collapse rating of the inner string,
+the rating of the packer, the tubing hanger,
+
+206
+00:13:49,679 --> 00:13:54,018
+the wellhead and the valves, and,
+where the annulus is open to formation,
+
+207
+00:13:54,018 --> 00:13:56,930
+the strength of the
+formation at the casing shoe.
+
+208
+00:13:57,630 --> 00:13:59,729
+Each limit is evaluated at depth,
+
+209
+00:13:59,729 --> 00:14:03,420
+corrected for the fluids inside
+the annulus and behind it,
+
+210
+00:14:03,420 --> 00:14:06,410
+and derated for temperature
+and design factors.
+
+211
+00:14:06,710 --> 00:14:10,420
+Raise the surface pressure and the
+pressure profile moves to the right.
+
+212
+00:14:10,720 --> 00:14:15,265
+The surface pressure at which it first
+touches a limit, anywhere along the well,
+
+213
+00:14:15,265 --> 00:14:16,970
+is the MAASP for that annulus.
+
+214
+00:14:17,670 --> 00:14:21,581
+Below MAASP the operator sets
+operating limits and alarm levels,
+
+215
+00:14:21,581 --> 00:14:25,370
+so that pressure is managed long
+before a limit is approached.
+
+216
+00:14:26,070 --> 00:14:27,770
+Monitoring is continuous.
+
+217
+00:14:28,070 --> 00:14:30,610
+Here is the A-annulus of a well starting up.
+
+218
+00:14:30,910 --> 00:14:34,850
+The pressure rises with temperature,
+is bled down, and stabilizes.
+
+219
+00:14:35,150 --> 00:14:36,600
+That is thermal behavior.
+
+220
+00:14:37,300 --> 00:14:39,170
+Months later the pattern changes.
+
+221
+00:14:39,470 --> 00:14:43,429
+After every bleed-off the pressure
+climbs back toward tubing pressure,
+
+222
+00:14:43,429 --> 00:14:44,560
+and gas is returned.
+
+223
+00:14:44,860 --> 00:14:49,820
+That is communication between tubing and
+annulus: the primary barrier has failed.
+
+224
+00:14:50,520 --> 00:14:52,890
+The well is now relying on a single barrier.
+
+225
+00:14:53,190 --> 00:14:58,140
+It is reclassified, risk-reducing measures
+are put in place, and the repair is planned.
+
+226
+00:14:58,840 --> 00:15:00,580
+The cost of not watching is real.
+
+227
+00:15:00,880 --> 00:15:02,339
+On Gullfaks C in 2010,
+
+228
+00:15:02,339 --> 00:15:07,247
+pressure in the C-annulus had been
+rising for weeks without being noticed,
+
+229
+00:15:07,247 --> 00:15:11,690
+before a hole in the casing led to
+a serious well control incident.
+
+230
+00:15:17,000 --> 00:15:20,547
+With hundreds of wells on a
+field and thousands on the shelf,
+
+231
+00:15:20,547 --> 00:15:22,990
+operators need a shared language for risk.
+
+232
+00:15:23,290 --> 00:15:27,800
+Offshore Norge guideline one-seventeen
+provides one, using four colors.
+
+233
+00:15:28,500 --> 00:15:29,940
+Green: a healthy well.
+
+234
+00:15:30,240 --> 00:15:34,380
+The barrier philosophy is intact,
+with no or only minor issues.
+
+235
+00:15:35,080 --> 00:15:38,690
+Yellow: one barrier is degraded,
+but the other is intact.
+
+236
+00:15:38,990 --> 00:15:41,940
+The risk is increased, but
+within the regulations.
+
+237
+00:15:42,640 --> 00:15:46,104
+Orange: one barrier has failed
+while the other is intact,
+
+238
+00:15:46,104 --> 00:15:49,750
+or a single further failure
+could lead to a leak to surface.
+
+239
+00:15:50,450 --> 00:15:54,825
+Red: one barrier has failed and the
+other is degraded or not verified,
+
+240
+00:15:54,825 --> 00:15:56,700
+or there is a leak to surface.
+
+241
+00:15:57,400 --> 00:16:02,074
+The category drives priorities: which wells
+are repaired first, which are shut in,
+
+242
+00:16:02,074 --> 00:16:05,380
+and what compensating measures
+are needed in the meantime.
+
+243
+00:16:06,080 --> 00:16:09,727
+Havtil also follows the
+industry over time through its
+
+244
+00:16:09,727 --> 00:16:14,049
+annual survey of trends in risk
+level in the petroleum activity,
+
+245
+00:16:14,049 --> 00:16:20,060
+known as RNNP, where well control incidents
+and well integrity are tracked as indicators.
+
+246
+00:16:21,260 --> 00:16:22,670
+How healthy is the shelf?
+
+247
+00:16:22,970 --> 00:16:28,167
+In a pilot study for the Petroleum Safety
+Authority, published by Vignes and Aadnøy,
+
+248
+00:16:28,167 --> 00:16:33,550
+four hundred and six production and injection
+wells on twelve facilities were reviewed.
+
+249
+00:16:33,850 --> 00:16:38,243
+Eighteen percent had a well integrity
+failure, issue or uncertainty,
+
+250
+00:16:38,243 --> 00:16:42,120
+and production tubing was the
+most common failing component.
+
+251
+00:16:42,820 --> 00:16:46,920
+Temporarily abandoned and inactive
+wells are a particular concern.
+
+252
+00:16:47,220 --> 00:16:52,820
+In Havtil's 2024 survey, four hundred and
+eighty-eight such wells were reported,
+
+253
+00:16:52,820 --> 00:16:54,990
+roughly double the 2022 survey,
+
+254
+00:16:54,990 --> 00:16:58,420
+partly because inactive
+production wells were now
+
+255
+00:16:58,420 --> 00:17:01,290
+included under the EU methane regulation.
+
+256
+00:17:01,990 --> 00:17:07,136
+Even while temporarily abandoned, a well
+must have qualified, independent barriers,
+
+257
+00:17:07,136 --> 00:17:09,120
+designed for the planned period.
+
+258
+00:17:09,420 --> 00:17:13,770
+For subsea wells left for more than twelve
+months, integrity must be monitored.
+
+259
+00:17:14,470 --> 00:17:18,943
+Three were classified red, thirty orange,
+one hundred and ninety-two yellow,
+
+260
+00:17:18,943 --> 00:17:21,180
+and two hundred and sixty-three green.
+
+261
+00:17:21,480 --> 00:17:25,690
+The number of red and orange wells
+rose from seventeen to thirty-three.
+
+262
+00:17:26,390 --> 00:17:30,853
+Havtil's expectation is clear: red
+wells are to be permanently plugged,
+
+263
+00:17:30,853 --> 00:17:35,190
+and orange wells either brought back
+into use or permanently plugged.
+
+264
+00:17:40,500 --> 00:17:43,190
+Barrier elements fail in recognizable ways.
+
+265
+00:17:43,890 --> 00:17:46,390
+Tubing corrodes or leaks at its connections.
+
+266
+00:17:47,090 --> 00:17:50,080
+Safety valves fail to
+close, or close but leak.
+
+267
+00:17:50,780 --> 00:17:56,160
+Casing wears during drilling, corrodes in
+service, or is deformed by the rock around it.
+
+268
+00:17:56,860 --> 00:17:58,832
+Cement is placed with channels,
+
+269
+00:17:58,832 --> 00:18:03,223
+or cracks and debonds under repeated
+pressure and temperature cycles,
+
+270
+00:18:03,223 --> 00:18:04,750
+opening a micro-annulus.
+
+271
+00:18:05,450 --> 00:18:07,420
+Seals in the wellhead and hanger age.
+
+272
+00:18:08,120 --> 00:18:09,950
+And the reservoir itself can move.
+
+273
+00:18:10,250 --> 00:18:13,083
+In the chalk fields of
+the southern North Sea,
+
+274
+00:18:13,083 --> 00:18:17,208
+compaction has lowered the seabed
+at Ekofisk by around nine meters,
+
+275
+00:18:17,208 --> 00:18:20,780
+and casing deformation has
+been a long-standing challenge.
+
+276
+00:18:21,980 --> 00:18:24,580
+Three Norwegian incidents
+show what is at stake.
+
+277
+00:18:24,880 --> 00:18:26,929
+On Snorre A, in November 2004,
+
+278
+00:18:26,929 --> 00:18:32,530
+tubing and casing were being pulled from
+an injection well to prepare a sidetrack.
+
+279
+00:18:32,830 --> 00:18:35,947
+The pulling drew gas from
+the reservoir into the well,
+
+280
+00:18:35,947 --> 00:18:39,815
+and it escaped through a section
+of worn casing into the formation,
+
+281
+00:18:39,815 --> 00:18:42,240
+and up to the seabed beneath the platform.
+
+282
+00:18:42,940 --> 00:18:47,397
+Production was shut down and most of
+the crew were evacuated by helicopter,
+
+283
+00:18:47,397 --> 00:18:51,260
+while a small team brought the
+well under control with heavy mud.
+
+284
+00:18:51,560 --> 00:18:52,900
+The gas could have ignited.
+
+285
+00:18:53,200 --> 00:18:56,972
+Investigations pointed to inadequate
+planning and risk assessment,
+
+286
+00:18:56,972 --> 00:18:59,830
+and to governing documents
+that were not followed.
+
+287
+00:19:00,530 --> 00:19:02,013
+On Gullfaks C, in 2010,
+
+288
+00:19:02,013 --> 00:19:05,365
+a hole in the thirteen and
+three-eighths inch casing
+
+289
+00:19:05,365 --> 00:19:09,490
+during managed pressure drilling
+caused losses to the formation,
+
+290
+00:19:09,490 --> 00:19:11,940
+and then an influx from the reservoir.
+
+291
+00:19:12,240 --> 00:19:16,387
+The investigations found insufficient
+technical integrity in the casing,
+
+292
+00:19:16,387 --> 00:19:19,670
+and it took more than two
+months to restore the barriers.
+
+293
+00:19:20,370 --> 00:19:23,220
+And in September 2025, on the Troll field,
+
+294
+00:19:23,220 --> 00:19:27,700
+a well was being permanently plugged
+from the rig Deepsea Bollsta.
+
+295
+00:19:28,000 --> 00:19:31,297
+When the thirteen and
+three-eighths inch casing was cut,
+
+296
+00:19:31,297 --> 00:19:35,890
+gas from the reservoir that had accumulated
+behind it was released to the rig.
+
+297
+00:19:36,190 --> 00:19:39,749
+Around nine hundred and thirty
+kilograms of gas were released,
+
+298
+00:19:39,749 --> 00:19:42,390
+with one hundred and
+fourteen people on board.
+
+299
+00:19:43,090 --> 00:19:45,975
+Havtil found a failure in
+the well's outer barrier,
+
+300
+00:19:45,975 --> 00:19:49,370
+and a lack of barriers towards
+the reservoir during the cut.
+
+301
+00:19:49,670 --> 00:19:54,411
+Technology and methods had been used
+that were not qualified for the purpose,
+
+302
+00:19:54,411 --> 00:19:59,890
+and faulty calibration led to log data being
+misinterpreted, so the gas was not detected.
+
+303
+00:20:00,190 --> 00:20:05,500
+Havtil described the incident as one with
+the potential to become a major accident.
+
+304
+00:20:06,200 --> 00:20:10,747
+Twenty years apart, the common threads
+are the same: understand your barriers,
+
+305
+00:20:10,747 --> 00:20:14,420
+verify them, plan for what could
+go wrong, and follow the plan.
+
+306
+00:20:19,733 --> 00:20:23,343
+Every well that is drilled must
+one day be permanently plugged.
+
+307
+00:20:23,643 --> 00:20:25,050
+On the Norwegian shelf,
+
+308
+00:20:25,050 --> 00:20:28,292
+Havtil estimates that around
+two thousand two hundred
+
+309
+00:20:28,292 --> 00:20:32,757
+and fifty wells will need permanent
+plug and abandonment sooner or later,
+
+310
+00:20:32,757 --> 00:20:35,815
+and operators plan to plug
+around three hundred of
+
+311
+00:20:35,815 --> 00:20:38,323
+them within the next five to seven years.
+
+312
+00:20:39,023 --> 00:20:40,893
+The work is becoming industrial.
+
+313
+00:20:41,193 --> 00:20:42,710
+Equinor, for example,
+
+314
+00:20:42,710 --> 00:20:48,127
+has contracted a semi-submersible rig
+specially designed for well plugging,
+
+315
+00:20:48,127 --> 00:20:52,533
+to permanently plug fifteen to
+twenty wells a year from 2026.
+
+316
+00:20:53,233 --> 00:20:57,610
+A permanent plug and abandonment
+is often described in three phases:
+
+317
+00:20:57,610 --> 00:21:02,823
+reservoir abandonment, where the deep
+barriers are set; intermediate abandonment,
+
+318
+00:21:02,823 --> 00:21:07,329
+where shallower sources are isolated
+and casing may be cut and pulled;
+
+319
+00:21:07,329 --> 00:21:11,963
+and finally removal of the wellhead
+and conductor, cut below the seabed.
+
+320
+00:21:12,663 --> 00:21:14,293
+The requirement is demanding.
+
+321
+00:21:14,593 --> 00:21:18,090
+D-010 states that a permanently
+abandoned well shall
+
+322
+00:21:18,090 --> 00:21:20,713
+be plugged with an eternal perspective.
+
+323
+00:21:21,013 --> 00:21:25,613
+There will be no one monitoring it, so
+the barriers must last indefinitely,
+
+324
+00:21:25,613 --> 00:21:30,213
+against the pressure the reservoir may
+build up again over geological time.
+
+325
+00:21:30,913 --> 00:21:35,347
+A permanent barrier must extend across
+the full cross section of the well,
+
+326
+00:21:35,347 --> 00:21:37,923
+including every annulus, from rock to rock.
+
+327
+00:21:38,223 --> 00:21:40,885
+And its base must sit where
+the formation is strong
+
+328
+00:21:40,885 --> 00:21:43,443
+enough to withstand the
+potential pressure below.
+
+329
+00:21:43,743 --> 00:21:47,723
+Place a plug too shallow, and the reservoir
+could fracture the rock beneath it.
+
+330
+00:21:48,423 --> 00:21:52,635
+For each source of inflow there is
+a primary and a secondary barrier,
+
+331
+00:21:52,635 --> 00:21:57,823
+and near the surface a final barrier isolates
+the shallow formations from the seabed.
+
+332
+00:21:58,523 --> 00:22:03,851
+For cement plugs, D-010 revision five
+requires one hundred meters in open hole,
+
+333
+00:22:03,851 --> 00:22:07,493
+with at least fifty meters
+above any source of inflow.
+
+334
+00:22:07,793 --> 00:22:08,700
+In cased hole,
+
+335
+00:22:08,700 --> 00:22:13,945
+fifty meters is accepted when the plug
+sits on a mechanical or cement foundation,
+
+336
+00:22:13,945 --> 00:22:15,823
+otherwise one hundred meters.
+
+337
+00:22:16,523 --> 00:22:22,382
+The material must be impermeable, non-shrinking,
+able to withstand mechanical loads,
+
+338
+00:22:22,382 --> 00:22:28,032
+resistant to chemicals such as hydrogen
+sulfide, carbon dioxide and hydrocarbons,
+
+339
+00:22:28,032 --> 00:22:30,473
+and able to bond to steel and rock.
+
+340
+00:22:31,173 --> 00:22:35,724
+And every plug is verified: tagged, to
+confirm that it is where it should be,
+
+341
+00:22:35,724 --> 00:22:37,793
+and in cased hole, pressure tested.
+
+342
+00:22:38,093 --> 00:22:42,393
+The barrier behind the casing must
+be verified too, usually by logging.
+
+343
+00:22:43,593 --> 00:22:45,813
+The hard part is usually the annulus.
+
+344
+00:22:46,113 --> 00:22:51,333
+A cement plug inside the casing does nothing
+if the cement outside the casing is missing.
+
+345
+00:22:51,633 --> 00:22:55,323
+When logs show poor annular cement,
+there are three main options.
+
+346
+00:22:56,023 --> 00:23:00,116
+Section milling grinds away a
+length of casing, exposing the rock,
+
+347
+00:23:00,116 --> 00:23:03,713
+so that a new plug can be set
+from formation to formation.
+
+348
+00:23:04,013 --> 00:23:08,123
+It works, but it is slow and generates
+large volumes of steel swarf.
+
+349
+00:23:08,823 --> 00:23:12,129
+Perforate, wash and cement
+shoots holes in the casing,
+
+350
+00:23:12,129 --> 00:23:14,333
+jets the annulus clean through them,
+
+351
+00:23:14,333 --> 00:23:17,883
+and then squeezes cement behind
+the pipe in a single trip.
+
+352
+00:23:18,183 --> 00:23:21,537
+Revision five of D-010
+recognizes the method,
+
+353
+00:23:21,537 --> 00:23:25,933
+with defined premises and a
+best practice for verification.
+
+354
+00:23:26,633 --> 00:23:28,569
+Or the casing is cut and pulled,
+
+355
+00:23:28,569 --> 00:23:31,655
+which is exactly where the
+Troll incident shows the
+
+356
+00:23:31,655 --> 00:23:34,681
+need to keep well control
+barriers in place and to
+
+357
+00:23:34,681 --> 00:23:37,343
+know what is behind the pipe before you cut.
+
+358
+00:23:38,543 --> 00:23:40,533
+Sometimes the formation does the work.
+
+359
+00:23:40,833 --> 00:23:44,109
+Certain shales, rich in clay
+minerals such as smectite,
+
+360
+00:23:44,109 --> 00:23:49,113
+are ductile and creep under stress until
+they close the annulus and grip the casing.
+
+361
+00:23:49,413 --> 00:23:55,143
+Creeping shale has been used as a barrier
+element on the Norwegian shelf since 2006.
+
+362
+00:23:55,843 --> 00:24:00,733
+It is verified by logging, and D-010
+sets out its acceptance criteria.
+
+363
+00:24:01,033 --> 00:24:05,104
+In 2025 Havtil published a
+knowledge study on creeping shale,
+
+364
+00:24:05,104 --> 00:24:08,107
+describing it as
+potentially an efficient and
+
+365
+00:24:08,107 --> 00:24:11,844
+cost-effective way to establish
+a barrier behind casing,
+
+366
+00:24:11,844 --> 00:24:16,983
+and pointing to the need for further
+research and more specific requirements.
+
+367
+00:24:17,683 --> 00:24:20,793
+New materials and methods
+are being qualified as well.
+
+368
+00:24:21,093 --> 00:24:26,250
+Bismuth alloys are melted in place
+and expand slightly as they solidify;
+
+369
+00:24:26,250 --> 00:24:29,903
+Aker BP has set dozens of
+bismuth plugs on Valhall.
+
+370
+00:24:30,203 --> 00:24:32,593
+Thermite-based tools that melt casing,
+
+371
+00:24:32,593 --> 00:24:37,373
+cement and rock into a single seal have
+been tested at full scale in Norway.
+
+372
+00:24:37,673 --> 00:24:41,349
+And logging through tubing, and
+through two casing strings at once,
+
+373
+00:24:41,349 --> 00:24:43,763
+may let more wells be plugged without a rig.
+
+374
+00:24:44,463 --> 00:24:47,453
+For every new technology,
+the principle is the same.
+
+375
+00:24:47,753 --> 00:24:50,888
+It must be qualified for
+its purpose before it can be
+
+376
+00:24:50,888 --> 00:24:53,253
+credited as a permanent barrier element.
+
+377
+00:24:58,567 --> 00:25:01,346
+Well integrity is now
+protecting something new.
+
+378
+00:25:01,646 --> 00:25:02,665
+In August 2025,
+
+379
+00:25:02,665 --> 00:25:07,826
+Northern Lights began injecting carbon
+dioxide into the Aurora storage site,
+
+380
+00:25:07,826 --> 00:25:12,987
+around two and a half kilometers below
+the seabed, south of the Troll field.
+
+381
+00:25:13,287 --> 00:25:17,123
+Norway has stored carbon
+dioxide offshore since 1996,
+
+382
+00:25:17,123 --> 00:25:19,946
+first at Sleipner and later at Snøhvit.
+
+383
+00:25:20,646 --> 00:25:23,017
+Carbon dioxide changes the load case.
+
+384
+00:25:23,317 --> 00:25:25,856
+Mixed with water it forms carbonic acid,
+
+385
+00:25:25,856 --> 00:25:29,856
+which attacks carbon steel and
+can degrade conventional cement.
+
+386
+00:25:30,557 --> 00:25:36,404
+Impurities in captured carbon dioxide,
+such as water, oxygen and sulfur compounds,
+
+387
+00:25:36,404 --> 00:25:38,757
+can make it even more aggressive,
+
+388
+00:25:38,757 --> 00:25:42,180
+so corrosion resistant
+alloys and carbon dioxide
+
+389
+00:25:42,180 --> 00:25:45,817
+resistant cement systems
+are used where it matters.
+
+390
+00:25:46,517 --> 00:25:49,121
+Injection from ships can be intermittent,
+
+391
+00:25:49,121 --> 00:25:54,267
+so the well sees repeated cooling and
+pressure cycles that can open micro-annuli.
+
+392
+00:25:54,966 --> 00:25:59,779
+And every old well that penetrates the
+storage complex, including plugged ones,
+
+393
+00:25:59,779 --> 00:26:02,946
+becomes a potential leak
+path that must be assessed.
+
+394
+00:26:03,646 --> 00:26:07,279
+A 2024 study by SINTEF for
+Standards Norway concluded
+
+395
+00:26:07,279 --> 00:26:10,774
+that CO₂ wells are built
+much like petroleum wells,
+
+396
+00:26:10,774 --> 00:26:12,077
+but that the fluid,
+
+397
+00:26:12,077 --> 00:26:16,943
+the load pattern and the longer
+lifetime give a different risk picture,
+
+398
+00:26:16,943 --> 00:26:20,986
+and that this should be addressed
+in the revision of D-010.
+
+399
+00:26:26,300 --> 00:26:28,870
+Well integrity is also becoming digital.
+
+400
+00:26:29,170 --> 00:26:30,344
+Annulus pressures,
+
+401
+00:26:30,344 --> 00:26:35,431
+valve tests and barrier status are
+streamed into integrity management systems,
+
+402
+00:26:35,431 --> 00:26:40,910
+where automated analysis flags abnormal
+build-up long before a person would spot it.
+
+403
+00:26:41,610 --> 00:26:46,978
+Digital barrier schematics keep the status
+of every element current, and data from logs,
+
+404
+00:26:46,978 --> 00:26:50,090
+tests and incidents are
+shared across the industry.
+
+405
+00:26:50,790 --> 00:26:54,761
+Behind the software sits a well
+integrity management system:
+
+406
+00:26:54,761 --> 00:26:59,725
+a register of every well and barrier
+element, test intervals based on risk,
+
+407
+00:26:59,725 --> 00:27:05,020
+procedures for handling deviations,
+competence requirements, and regular audits.
+
+408
+00:27:05,720 --> 00:27:10,220
+But the tools are only as good as their
+calibration and the people interpreting them.
+
+409
+00:27:10,520 --> 00:27:15,540
+The Troll incident is a reminder that a
+log can look convincing and still be wrong.
+
+410
+00:27:16,840 --> 00:27:17,840
+So, to sum up.
+
+411
+00:27:18,540 --> 00:27:20,700
+Two independent, tested barriers.
+
+412
+00:27:21,000 --> 00:27:22,970
+Always know your envelopes, and draw them.
+
+413
+00:27:23,670 --> 00:27:26,380
+A barrier that is not
+verified is an assumption.
+
+414
+00:27:26,680 --> 00:27:28,410
+Test, log and document.
+
+415
+00:27:29,110 --> 00:27:30,230
+Respect the limits.
+
+416
+00:27:30,530 --> 00:27:33,370
+Know the MAASP of every
+annulus and watch the trends.
+
+417
+00:27:34,070 --> 00:27:39,580
+Classify honestly, and act on degradation
+early, before a yellow well becomes red.
+
+418
+00:27:40,280 --> 00:27:45,200
+Plug for eternity: rock to rock, with
+qualified materials, verified in place.
+
+419
+00:27:45,900 --> 00:27:51,246
+And remember that most failures begin in
+planning, risk assessment and communication,
+
+420
+00:27:51,246 --> 00:27:54,140
+long before the steel
+or the cement gives way.
+
+421
+00:27:55,440 --> 00:27:59,760
+A well is a promise to the future: that
+what we opened, we can keep closed.

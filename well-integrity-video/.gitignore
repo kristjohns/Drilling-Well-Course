@@ -1,3 +1,4 @@
 build/
 __pycache__/
 *.pyc
+output/well_integrity_ncs.mp4
