@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import sys
 
@@ -37,8 +38,80 @@ def main(name="well_integrity_ncs.mp4"):
                     "-metadata", "title=Well Integrity on the Norwegian Continental Shelf",
                     "-metadata:s:a:0", "language=eng", "-metadata:s:s:0", "language=eng",
                     "-shortest", "-movflags", "+faststart", out], check=True)
+    shutil.copyfile(os.path.join(AUD, "subtitles.srt"), os.path.join(OUT, "subtitles.srt"))
     print(out)
 
 
+def fmt_ts(sec):
+    ms = int(round(max(0.0, sec) * 1000))
+    h, ms = divmod(ms, 3600000)
+    m, ms = divmod(ms, 60000)
+    s, ms = divmod(ms, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+
+
+def parse_srt(path):
+    def ts(x):
+        h, m, rest = x.split(":")
+        sec, ms = rest.split(",")
+        return int(h) * 3600 + int(m) * 60 + int(sec) + int(ms) / 1000
+    cues = []
+    for block in open(path).read().strip().split("\n\n"):
+        lines = block.strip().split("\n")
+        if len(lines) >= 3:
+            a, b = lines[1].split(" --> ")
+            cues.append((ts(a), ts(b), "\n".join(lines[2:])))
+    return cues
+
+
+def chapters():
+    """One MP4 per chapter (credits appended to the last chapter), for course use."""
+    import json
+    from engine.scene import CREDITS_DUR
+    tl = json.load(open(os.path.join(AUD, "timeline.json")))
+    ids = list(tl.keys())
+    starts, acc = {}, 0.0
+    for i in ids:
+        starts[i] = acc
+        acc += tl[i]["duration"]
+    names = {
+        "s00_open": "00_introduction", "s01_definition": "01_what_is_well_integrity", "s02_framework": "02_norwegian_framework",
+        "s03_barriers": "03_barrier_philosophy", "s04_verify": "04_verification_and_testing", "s05_annulus": "05_annulus_pressure_management",
+        "s06_classify": "06_classifying_well_integrity", "s07_failures": "07_when_barriers_fail", "s08_pa": "08_plug_and_abandonment",
+        "s09_ccs": "09_co2_storage", "s10_future": "10_digital_and_key_lessons",
+    }
+    main_cues = parse_srt(os.path.join(AUD, "subtitles.srt"))
+    cdir = os.path.join(OUT, "chapters")
+    os.makedirs(cdir, exist_ok=True)
+    for sid in ids:
+        parts = [os.path.join(VID, f"{sid}.mp4")]
+        dur = tl[sid]["duration"]
+        if sid == ids[-1]:
+            parts.append(os.path.join(VID, "s11_credits.mp4"))
+            dur += CREDITS_DUR
+        lst = os.path.join(VID, f"concat_{sid}.txt")
+        with open(lst, "w") as f:
+            for p in parts:
+                f.write(f"file '{p}'\n")
+        # subtitles for this chapter: entries of the main SRT inside the chapter window, shifted
+        srt = os.path.join(VID, f"{sid}.srt")
+        k = 1
+        with open(srt, "w") as f:
+            for (g0, g1, text) in main_cues:
+                if starts[sid] - 0.01 <= g0 < starts[sid] + dur:
+                    f.write(f"{k}\n{fmt_ts(g0 - starts[sid])} --> {fmt_ts(g1 - starts[sid])}\n{text}\n\n")
+                    k += 1
+        out = os.path.join(cdir, f"{names[sid]}.mp4")
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst,
+                        "-ss", f"{starts[sid]:.3f}", "-t", f"{dur:.3f}", "-i", os.path.join(AUD, "mix.wav"), "-i", srt,
+                        "-map", "0:v", "-map", "1:a", "-map", "2:s", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k",
+                        "-c:s", "mov_text", "-metadata", f"title=Well Integrity - {tl[sid]['title']}",
+                        "-metadata:s:s:0", "language=eng", "-shortest", "-movflags", "+faststart", out], check=True)
+        print(out, os.path.getsize(out) // 1_000_000, "MB")
+
+
 if __name__ == "__main__":
-    main(*(sys.argv[1:]))
+    if len(sys.argv) > 1 and sys.argv[1] == "chapters":
+        chapters()
+    else:
+        main(*(sys.argv[1:]))

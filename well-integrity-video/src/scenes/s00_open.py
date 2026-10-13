@@ -86,14 +86,18 @@ class SceneImpl(Scene):
                 zz = z
                 pp.append((x, zz))
             self.others.append(poly(pp))
+        # (chapter number, title, keyword in the narration, extra delay after the keyword)
         self.agenda = [
-            ("Regulations and standards", "regulations"),
-            ("Barrier philosophy", "barrier philosophy"),
-            ("Verification and monitoring", "verified"),
-            ("Classification", "classified"),
-            ("When barriers fail", "goes wrong"),
-            ("Plug and abandonment", "plug and abandonment"),
-            ("CO₂ storage and the future", "industry is learning"),
+            (1, "What is well integrity?", None, 0.0),
+            (2, "The Norwegian framework", "regulations", 0.0),
+            (3, "Barrier philosophy", "barrier philosophy", 0.0),
+            (4, "Verification and testing", "verified", 0.0),
+            (5, "Annulus pressure management", "monitored", 0.0),
+            (6, "Classifying well integrity", "classified", 0.0),
+            (7, "When barriers fail", "goes wrong", 0.0),
+            (8, "Plug and abandonment", "plug and abandonment", 0.0),
+            (9, "CO\u2082 storage", "plug and abandonment", 1.2),
+            (10, "Digital well integrity and key lessons", "plug and abandonment", 2.0),
         ]
 
     # ------------------------------------------------------------------ camera
@@ -333,26 +337,27 @@ class SceneImpl(Scene):
         if a3 > 0:
             draw_text(c, "A well: the engineered path", 96, H - 150, 20, C.muted, 600, a3, tracking=3)
             draw_text(c, "between the reservoir and the world above", 96, H - 108, 34, C.text, 500, a3, display=True)
-        # life cycle bar
+        # life cycle bar (vertical, left of the well fan)
         a4 = window(t, self.c0("life"), self.c0("title") - 0.2, 0.8, 0.8)
         if a4 > 0:
-            x0, y0, wbar = 480, 150, 960
+            px, py = 70, 250
+            c.drawRoundRect(skia.Rect(px, py, px + 390, py + 580), 18, 18, paint(C.bg0, 0.72 * a4))
+            draw_text(c, "THE LIFE OF A WELL", px + 34, py + 52, 18, C.muted, 600, a4, tracking=5)
             k = ease_out(clamp((t - self.c0("life")) / 6.0))
-            draw_text(c, "THE LIFE OF A WELL", W / 2, y0 - 40, 18, C.muted, 600, a4, "center", tracking=5)
-            c.drawRoundRect(skia.Rect(x0 - 40, y0 - 78, x0 + wbar + 110, y0 + 70), 18, 18, paint(C.bg0, 0.72 * a4))
+            bx, by0, blen = px + 40, py + 90, 400
             segs = [(0.0, 0.14, "Drill & complete", C.teal), (0.14, 0.56, "Production · decades", C.primary),
                     (0.56, 0.70, "Plug & abandon", C.amber), (0.70, 1.0, "Abandoned · forever", rgb("#8E9AF0"))]
             for (f0, f1, lab, col) in segs:
                 kk = clamp((k - f0) / (f1 - f0))
                 if kk <= 0:
                     continue
-                xa = x0 + f0 * wbar
-                xb = x0 + (f0 + (f1 - f0) * kk) * wbar
-                c.drawRoundRect(skia.Rect(xa + 2, y0, xb - 2, y0 + 14), 7, 7, paint(col, 0.9 * a4))
+                ya = by0 + f0 * blen
+                yb = by0 + (f0 + (f1 - f0) * kk) * blen
+                c.drawRoundRect(skia.Rect(bx, ya + 2, bx + 14, yb - 2), 7, 7, paint(col, 0.9 * a4))
                 if kk > 0.5:
-                    draw_text(c, lab, (x0 + (f0 + f1) / 2 * wbar), y0 + 46, 20, C.text, 500, a4 * clamp((kk - 0.5) * 2), "center")
+                    draw_text(c, lab, bx + 42, by0 + (f0 + f1) / 2 * blen + 8, 24, C.text, 500, a4 * clamp((kk - 0.5) * 2))
             if k > 0.9:
-                icon(c, "infinity", x0 + wbar + 50, y0 + 7, 54, C.text, a4 * clamp((k - 0.9) * 10), rgb("#8E9AF0"))
+                icon(c, "infinity", bx + 7, by0 + blen + 42, 50, C.text, a4 * clamp((k - 0.9) * 10), rgb("#8E9AF0"))
         # title
         a5 = window(t, self.c0("title") - 0.3, self.c0("agenda") - 0.1, 1.0, 0.9)
         k5 = ease_out_quint(clamp((t - self.c0("title") + 0.3) / 1.6))
@@ -373,22 +378,14 @@ class SceneImpl(Scene):
             c.drawLine(W / 2 - 160, 176, W / 2 + 160, 176, paint(C.primary, 0.8 * a6, stroke=2))
             draw_text(c, "IN THIS FILM", W / 2, 236, 18, C.muted, 600, a6, "center", tracking=5)
             cols = 2
-            bw, bh = 660, 92
+            bw, bh = 700, 80
             gx = 40
             x_start = W / 2 - (cols * bw + (cols - 1) * gx) / 2
-            for i, (lab, kw) in enumerate(self.agenda):
-                r, k = divmod(i, cols)
-                if i == len(self.agenda) - 1:
-                    k = 0
-                    x = W / 2 - bw / 2
-                else:
-                    x = x_start + k * (bw + gx)
-                y = 290 + r * (bh + 22)
-                ti = self.word_time("agenda", kw) - 0.3
-                if i == len(self.agenda) - 1:
-                    ti = self.word_time("agenda", "plug and abandonment") + 1.6
-                if i == 0:
-                    ti = min(ti, self.c0("agenda") + 0.2)
+            for i, (num, lab, kw, dly) in enumerate(self.agenda):
+                k, r = divmod(i, 5)
+                x = x_start + k * (bw + gx)
+                y = 280 + r * (bh + 18)
+                ti = (self.c0("agenda") + 0.2) if kw is None else self.word_time("agenda", kw) - 0.3 + dly
                 kk = ease_out(clamp((t - ti) / 0.8))
                 hot = window(t, ti, ti + 2.2, 0.3, 0.8)
                 if kk <= 0:
@@ -398,6 +395,6 @@ class SceneImpl(Scene):
                 col = mix(C.panel, C.panel_hi, hot)
                 c.drawRoundRect(skia.Rect(x, y, x + bw, y + bh), 16, 16, paint(col, 0.9 * kk * a6))
                 c.drawRoundRect(skia.Rect(x, y, x + bw, y + bh), 16, 16, paint(mix(C.line, C.primary, hot), kk * a6, stroke=1.5))
-                draw_text(c, f"{i + 1:02d}", x + 34, y + bh / 2 + 12, 32, C.primary, 300, kk * a6, display=True)
-                draw_text(c, lab, x + 100, y + bh / 2 + 11, 32, C.text, 500, kk * a6, display=True)
+                draw_text(c, f"{num:02d}", x + 34, y + bh / 2 + 12, 32, C.primary, 300, kk * a6, display=True)
+                draw_text(c, lab, x + 100, y + bh / 2 + 11, 30, C.text, 500, kk * a6, display=True)
                 c.restore()

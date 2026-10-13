@@ -36,8 +36,8 @@ FIELDS = {
 }
 
 
-LABEL_LEFT = {"Statfjord": True, "Sleipner": True, "Oseberg": True, "Valhall": False}
-LABEL_DY = {"Snorre": -6, "Gullfaks": 22, "Statfjord": 7, "Troll": 0, "Oseberg": 8, "Aurora": 24, "Valhall": 18, "Ekofisk": -4}
+LABEL_LEFT = {"Statfjord": True, "Sleipner": True, "Oseberg": True, "Valhall": False, "Aurora": True}
+LABEL_DY = {"Snorre": -6, "Gullfaks": 22, "Statfjord": 7, "Troll": 0, "Oseberg": 8, "Aurora": 8, "Valhall": 18, "Ekofisk": -4}
 
 
 class MapView:

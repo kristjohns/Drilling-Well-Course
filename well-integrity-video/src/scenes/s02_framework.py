@@ -225,9 +225,9 @@ class SceneImpl(Scene):
             c.save()
             c.translate(0, (1 - k) * 40)
             draw_panel(c, x, y, 730, 560, a * k, glow=col)
-            draw_text(c, num, x + 50, y + 140, 120, col, 300, a * k, display=True)
-            draw_text(c, "GUIDELINE", x + 50, y + 40 + 10, 18, C.muted, 600, a * k, tracking=4)
-            draw_paragraph(c, title, x + 50, y + 210, 630, 32, C.text, 600, a * k, display=True)
+            draw_text(c, num, x + 50, y + 160, 120, col, 300, a * k, display=True)
+            draw_text(c, "GUIDELINE", x + 50, y + 54, 18, C.muted, 600, a * k, tracking=4)
+            draw_paragraph(c, title, x + 50, y + 225, 630, 32, C.text, 600, a * k, display=True)
             tt = [ti + 1.5 + j * 1.6 for j in range(len(items))]
             bullets(c, items, x + 50, y + 360, t, tt, size=27, max_w=600, alpha=a * k, accent=col)
             c.restore()

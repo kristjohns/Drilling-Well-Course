@@ -240,8 +240,9 @@ class SceneImpl(Scene):
         c.drawRect(skia.Rect(x - hw, top, x + hw, bot), paint(C.brine, 0.6 * a))
         c.drawRect(skia.Rect(x - hw, top + (bot - top) * plug[0], x + hw, top + (bot - top) * plug[1]), cp)
         for side in (-1, 1):
-            c.drawRect(skia.Rect(min(x + side * hw, x + side * (hw + 8)), top, max(x + side * hw, x + side * (hw + 8)), bot),
-                       steel_paint(x - hw - 8, x + hw + 8, a))
+            r = skia.Rect(min(x + side * hw, x + side * (hw + 12)), top, max(x + side * hw, x + side * (hw + 12)), bot)
+            c.drawRect(r, steel_paint(r.left(), r.right(), a))
+            c.drawRect(r, paint(C.bg0, 0.5 * a, stroke=1))
         if leak > 0:
             for side in (-1, 1):
                 pth = poly([(x + side * (hw + 20), bot - 10), (x + side * (hw + 20), top + 10)])
@@ -356,20 +357,26 @@ class SceneImpl(Scene):
         if a <= 0:
             return
         draw_text(c, "What a permanent barrier material must do", 120, 250, 50, C.text, 600, a, display=True)
-        props = [("Impermeable", "drop", "impermeable"), ("Non-shrinking", "layers", "non-shrinking"),
-                 ("Withstands mechanical loads", "shield", "mechanical"), ("Resists H₂S, CO₂ and hydrocarbons", "flame", "hydrogen"),
-                 ("Bonds to steel and rock", "lock", "bond"), ("Long-term integrity", "infinity", "impermeable")]
-        for i, (txt, ic, kw) in enumerate(props):
+        props = [("Impermeable", "drop", "impermeable", "No flow path through the material itself"),
+                 ("Non-shrinking", "layers", "non-shrinking", "Stays in tight contact as it sets and ages"),
+                 ("Withstands mechanical loads", "shield", "mechanical", "Pressure, temperature and formation stress"),
+                 ("Resists H₂S, CO₂ and hydrocarbons", "flame", "hydrogen", "Chemically stable in the well fluids"),
+                 ("Bonds to steel and rock", "lock", "bond", "No micro-annulus at the interfaces"),
+                 ("Long-term integrity", "infinity", "impermeable", "Keeps these properties indefinitely")]
+        for i, (txt, ic, kw, sub) in enumerate(props):
             r, k_ = divmod(i, 3)
             ti = self.word_time("material", kw) - 0.3 if i < 5 else self.word_time("material", "bond") + 0.9
             if i == 0:
                 ti = min(ti, self.c0("material") + 0.3)
             k = ease_out(clamp((t - ti) / 0.6)) * a
+            if k <= 0:
+                continue
             x = 140 + k_ * 560
-            y = 360 + r * 280
-            draw_panel(c, x, y, 520, 240, k, r=18, glow=C.primary)
-            icon(c, ic, x + 90, y + 120, 90, C.text, k, C.primary)
-            draw_paragraph(c, txt, x + 170, y + 110, 320, 32, C.text, 600, k, display=True)
+            y = 350 + r * 290
+            draw_panel(c, x, y, 520, 250, k, r=18, glow=C.primary)
+            icon(c, ic, x + 80, y + 95, 80, C.text, k, C.primary)
+            hh = draw_paragraph(c, txt, x + 150, y + 82, 340, 30, C.text, 600, k, display=True)
+            draw_paragraph(c, sub, x + 40, y + 190, 440, 22, C.muted, 400, k)
 
     def draw_verify(self, c, t):
         a = self.vis(t, "verify", "annulus", fi=0.7, fo=0.6, b_off=-0.5)
@@ -636,7 +643,7 @@ class SceneImpl(Scene):
             draw_text(c, h1, x + 40, y + 430, 34, C.text, 600, k, display=True)
             draw_paragraph(c, body, x + 40, y + 476, 460, 24, C.muted, 400, k)
         if kq > 0:
-            c.drawRect(skia.Rect(0, 0, W, H), paint(C.bg0, 0.6 * kq * a))
+            c.drawRect(skia.Rect(0, 0, W, H), paint(C.bg0, 0.88 * kq * a))
             stamp(c, W / 2, H / 2 - 40, "QUALIFIED FOR ITS PURPOSE", C.green, kq * a, size=44)
             draw_text(c, "before it can be credited as a permanent barrier element", W / 2, H / 2 + 80, 32, C.text, 500, kq * a, "center")
             chip(c, W / 2, H / 2 + 120, "Technology qualification: DNV-RP-A203", C.green, kq * a, size=22, align="center")

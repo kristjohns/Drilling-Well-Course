@@ -62,14 +62,22 @@ class SceneImpl(Scene):
         a = self.vis(t, "assume", "ptest", fi=0.8, fo=0.6, b_off=-0.3)
         if a <= 0:
             return
-        draw_text(c, "A barrier that has not been verified", W / 2, 460, 64, C.text, 600, a, "center", display=True)
-        draw_text(c, "is an", W / 2 - 260, 560, 64, C.text, 600, a, "center", display=True)
+        draw_text(c, "A barrier that has not been verified", W / 2, 420, 64, C.text, 600, a, "center", display=True)
+        w1 = font(64, 600, True).measureText("is an ")
+        w2 = font(64, 700, True).measureText("assumption")
+        x0 = W / 2 - (w1 + w2) / 2
+        draw_text(c, "is an ", x0, 520, 64, C.text, 600, a, display=True)
         kf = ease_in_out(clamp((t - self.word_time("assume", "verification") + 0.2) / 1.0))
-        draw_text(c, "assumption", W / 2 + 60, 560, 64, C.amber, 700, a * (1 - kf), "center", display=True)
+        draw_text(c, "assumption.", x0 + w1, 520, 64, C.amber, 700, a, display=True)
         if kf > 0:
-            c.drawLine(W / 2 - 120, 540, W / 2 - 120 + 360 * kf, 540, paint(C.amber, a * (1 - kf * 0.3), stroke=4))
-            draw_text(c, "a fact", W / 2 + 60, 650, 64, C.green, 700, a * kf, "center", display=True)
-            draw_text(c, "recorded for the life of the well", W / 2, 720, 30, C.muted, 400, a * kf, "center")
+            kv = ease_out(clamp((t - self.word_time("assume", "verification") - 0.4) / 0.8)) * a
+            w3 = font(56, 600, True).measureText("Verification turns it into ")
+            w4 = font(56, 700, True).measureText("a fact")
+            x1 = W / 2 - (w3 + w4) / 2
+            draw_text(c, "Verification turns it into ", x1, 660, 56, C.text, 600, kv, display=True)
+            draw_text(c, "a fact", x1 + w3, 660, 56, C.green, 700, kv, display=True)
+            kr = ease_out(clamp((t - self.word_time("assume", "recorded") + 0.2) / 0.8)) * a
+            draw_text(c, "recorded for the life of the well", W / 2, 740, 32, C.muted, 400, kr, "center")
 
     # ------------------------------------------------------------------
     def test_rig(self, c, t, x, y, h, a, plug_kind="mech", leak=0.0, pressure=0.0, inflow=False):
@@ -127,11 +135,12 @@ class SceneImpl(Scene):
         f = clamp((t - tA) / (tB - tA))
         tm = 21 * f
         fail = ease_in_out(clamp((t - self.c0("fail") - 0.2) / 0.8))
-        pr = np.interp(tm, self.tmin, test_curve(self.tmin)) / 345
-        leak = fail
-        self.test_rig(c, t, 330, 400, 560, a, "mech", leak=leak, pressure=pr)
-        pg = np.interp(tm, self.tmin, test_curve(self.tmin, "fail" if fail > 0.5 else "pass"))
-        gauge(c, 560, 330, 56, pg, 0, 400, "", "bar", a, color=C.primary)
+        kf = ease_in_out(clamp((t - self.c0("fail")) / 3.0))
+        p_pass = float(np.interp(tm, self.tmin, test_curve(self.tmin)))
+        p_fail = float(np.interp(9.0 + 12.0 * kf, self.tmin, test_curve(self.tmin, "fail")))
+        pg = lerp(p_pass, p_fail, fail)
+        self.test_rig(c, t, 330, 400, 560, a, "mech", leak=fail, pressure=pg / 345)
+        gauge(c, 560, 330, 56, pg, 0, 400, "", "bar", a, color=mix(C.primary, C.red, fail))
         # chart
         pl = Plot(820, 300, 960, 560, (0, 21), (0, 400), xlabel="Time (minutes)", ylabel="Pressure (bar)",
                   xticks=[0, 5, 10, 15, 20], yticks=[0, 100, 200, 300, 400])
@@ -153,9 +162,9 @@ class SceneImpl(Scene):
             chip(c, 820, 940, "Acceptable leak rate: zero, unless the acceptance table says otherwise", C.green, a * ks * (1 - fail), size=22)
         if fail > 0:
             yf = test_curve(self.tmin, "fail")
-            kf = ease_in_out(clamp((t - self.c0("fail")) / 3.0))
-            pl.line(c, self.tmin[200:], yf[200:], C.red, 3.5, a * fail, reveal=kf)
-            draw_text(c, "never flattens: leak", pl.px(15), pl.py(250), 24, C.red, 700, a * fail)
+            i9 = int(np.searchsorted(self.tmin, 9.0))
+            pl.line(c, self.tmin[i9:], yf[i9:], C.red, 3.5, a * fail, reveal=kf)
+            draw_text(c, "never flattens: leak", pl.px(11), pl.py(240), 24, C.red, 700, a * fail * clamp(kf * 2))
             stamp(c, 600, 820, "NOT ACCEPTED", C.red, ease_out(clamp((t - self.c0("fail") - 2.5) / 0.6)) * a, size=26)
 
     def draw_inflow(self, c, t):
@@ -375,11 +384,20 @@ class SceneImpl(Scene):
             xx = 730 + i * 2.3
             tt = i / 200 * 8
             env = math.exp(-((tt - 2.2) ** 2) / 1.5) if bonded else math.exp(-tt / 3.5)
-            yy = 500 - amp * env * math.sin(tt * 9 + t * 4)
+            yy = 490 - amp * 0.85 * env * math.sin(tt * 9 + t * 4)
             (wf.moveTo if i == 0 else wf.lineTo)(xx, yy)
         c.drawPath(wf, paint(C.primary_hi if not bonded else C.green, a, stroke=2.5))
-        draw_text(c, "HIGH amplitude · free pipe" if not bonded else "LOW amplitude · good bond", 730, 600, 22,
-                  C.amber if not bonded else C.green, 700, a)
+        draw_text(c, "HIGH amplitude · free pipe" if not bonded else "LOW amplitude · good bond", 730, 608, 22,
+                  C.amber if not bonded else C.green, 700, a, shadow=True)
+        # reading guide
+        draw_panel(c, 700, 670, 520, 330, a, r=14)
+        guide = [("Amplitude", "strength of the casing signal: high in free pipe, low where cement is bonded"),
+                 ("VDL", "the full waveform, depth by depth: straight lines are casing arrivals, wavy lines come from the formation")]
+        gy = 720
+        for (h1, body) in guide:
+            draw_text(c, h1, 730, gy, 24, C.primary_hi, 700, a)
+            hb = draw_paragraph(c, body, 730, gy + 34, 460, 22, C.muted, 400, a)
+            gy += 150
         # log track: amplitude vs depth built as the tool passes
         lx, lw = 1300, 220
         draw_panel(c, lx, 330, lw, 670, a, r=10)
@@ -389,7 +407,7 @@ class SceneImpl(Scene):
         y = bot - 40
         while y >= ty:
             val = 0.12 if y > ztoc + 10 else (0.85 if y < ztoc - 10 else 0.5)
-            val += 0.03 * math.sin(y * 0.3)
+            val += 0.018 * math.sin(y * 0.071) + 0.014 * math.sin(y * 0.193 + 1.1) + 0.008 * math.sin(y * 0.47 + 2.3)
             xx = lx + 20 + val * (lw - 40)
             (trace.moveTo if first else trace.lineTo)(xx, y)
             first = False

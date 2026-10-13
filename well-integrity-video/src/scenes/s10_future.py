@@ -6,7 +6,7 @@ import math
 import numpy as np
 import skia
 
-from engine.core import (C, W, H, arrow, chip, clamp, draw_panel, draw_paragraph, draw_text, ease_in_out, ease_out,
+from engine.core import (C, W, H, arrow, chip, dashed, clamp, draw_panel, draw_paragraph, draw_text, ease_in_out, ease_out,
                          ease_out_back, glow_path, lerp, mix, paint, poly, rgb, trim_path, window, with_alpha, rrect)
 from engine.scene import Scene
 from engine.widgets import icon, bullets, Plot, stamp
@@ -97,7 +97,7 @@ class SceneImpl(Scene):
             highlight(c, v, key, col, kk * 0.8, fill=0.35)
 
     def draw_wims(self, c, t):
-        a = self.vis(t, "wims", "caution", fi=0.7, fo=0.6, b_off=-0.5)
+        a = self.vis(t, "wims", "caution", fi=0.7, fo=0.6, b_off=0.7)
         if a <= 0:
             return
         cx, cy = W / 2, 600
@@ -121,27 +121,42 @@ class SceneImpl(Scene):
             draw_paragraph(c, txt, x - 95, y - 4, 280, 25, C.text, 600, kk)
 
     def draw_caution(self, c, t):
-        a = self.vis(t, "caution", "lessons", fi=0.7, fo=0.6, b_off=-0.3)
+        a = self.vis(t, "caution", "lessons", fi=0.7, fo=0.6, a_off=1.2, b_off=-0.3)
         if a <= 0:
             return
         draw_text(c, "Only as good as calibration and interpretation", 120, 240, 46, C.text, 600, a, display=True)
-        # two logs: true vs miscalibrated
+        # the same interval logged twice: correctly calibrated vs miscalibrated
         x0, y0, h = 300, 330, 620
-        for j, (lab, col, off) in enumerate((("calibrated", C.green, 0), ("miscalibrated", C.red, 1))):
+        gz0, gz1 = 0.45, 0.62
+        kw = ease_out(clamp((t - self.word_time("caution", "still be wrong") + 0.2) / 0.8)) * a
+        for j, (lab, col) in enumerate((("calibrated", C.green), ("miscalibrated", C.red))):
             x = x0 + j * 460
             draw_panel(c, x, y0, 380, h, a, r=12)
             draw_text(c, lab, x + 190, y0 - 14, 22, col, 700, a, "center")
+            for g in range(1, 4):
+                c.drawLine(x + 30 + g * 80, y0 + 16, x + 30 + g * 80, y0 + h - 16, paint(C.line, 0.5 * a, stroke=1))
             pth = skia.Path()
-            for k in range(120):
-                yy = y0 + 20 + k * (h - 40) / 119
-                gas = 1.0 if 0.45 < k / 119 < 0.62 else 0.0
-                v = 0.3 + 0.08 * math.sin(k * 0.7) + (0.45 * gas if off == 0 else 0.45 * gas * 0.15)
+            for k in range(200):
+                f = k / 199
+                yy = y0 + 20 + f * (h - 40)
+                gas = clamp((f - gz0) / 0.025) * clamp((gz1 - f) / 0.025)
+                base = 0.30 + 0.07 * math.sin(k * 0.21) + 0.045 * math.sin(k * 0.57 + 1.3) + 0.03 * math.sin(k * 1.37 + 2.1)
+                v = base + 0.42 * gas * (1.0 if j == 0 else 0.1)
                 xx = x + 30 + v * 300
                 (pth.moveTo if k == 0 else pth.lineTo)(xx, yy)
-            c.drawPath(pth, paint(col, a, stroke=3))
-            if off == 0:
-                c.drawRect(skia.Rect(x + 10, y0 + 20 + 0.45 * (h - 40), x + 370, y0 + 20 + 0.62 * (h - 40)), paint(C.gas, 0.12 * a))
-                draw_text(c, "gas", x + 340, y0 + 20 + 0.53 * (h - 40), 22, C.gas, 700, a, "right")
+            reveal = clamp((t - self.c0("caution") - 1.0) / 3.0)
+            c.drawPath(trim_path(pth, 0, reveal), paint(col, a, stroke=3))
+            ya, yb = y0 + 20 + gz0 * (h - 40), y0 + 20 + gz1 * (h - 40)
+            if j == 0:
+                kg = a * clamp((reveal - gz1) / 0.1)
+                c.drawRect(skia.Rect(x + 10, ya, x + 370, yb), paint(C.gas, 0.12 * kg))
+                draw_text(c, "gas", x + 350, (ya + yb) / 2 + 8, 22, C.gas, 700, kg, "right")
+            elif kw > 0:
+                rp = skia.Path()
+                rp.addRect(skia.Rect(x + 10, ya, x + 370, yb))
+                dashed(c, rp, C.gas, 2, 10, 8, alpha=0.8 * kw)
+                draw_text(c, "gas present,", x + 360, (ya + yb) / 2 - 4, 22, C.gas, 700, kw, "right")
+                draw_text(c, "not seen", x + 360, (ya + yb) / 2 + 24, 22, C.gas, 700, kw, "right")
         draw_paragraph(c, "A log can look convincing, and still be wrong.", 1280, 520, 520, 40, C.text, 600, a, display=True)
         draw_text(c, "Troll, 2025", 1280, 700, 24, C.muted, 500, a)
 

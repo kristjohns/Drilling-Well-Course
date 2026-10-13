@@ -45,33 +45,36 @@ class SceneImpl(Scene):
                 q = ((t * 0.18 + k / 8) % 1.0)
                 (px, py), _ = path_point(pipe, q)
                 c.drawCircle(px, py, 5, paint(C.white, 0.9 * a))
-        draw_text(c, "pipeline ≈ 100 km", (x0 + x1) / 2, (y0 + y1) / 2 + 60, 20, C.co2, 600, a * kp, "center", shadow=True)
+        draw_text(c, "pipeline ≈ 100 km", (x0 + x1) / 2 + 30, (y0 + y1) / 2 - 30, 20, C.co2, 600, a * kp, "center", shadow=True)
         # ship arriving at terminal
         ks = ease_out(clamp((t - self.c0("northern") - 0.5) / 3.0))
-        icon(c, "ship", x0 + 140 - 60 * ks, y0 + 120 - 60 * ks, 60, C.text, a * ks, C.co2)
+        icon(c, "ship", x0 - 70 - 90 * (1 - ks), y0 - 70 - 60 * (1 - ks), 54, C.text, a * ks, C.co2)
         # right: facts and injection well section
         draw_text(c, "NORTHERN LIGHTS", 1060, 220, 22, C.co2, 700, a, tracking=5)
         draw_text(c, "First CO₂ injected · August 2025", 1060, 280, 44, C.text, 600, a, display=True)
         # section: seabed, overburden, caprock, Aurora reservoir with plume
-        X0, X1, top = 1060, 1840, 360
+        X0, X1, top = 1060, 1840, 330
         sb = top + 30
-        layers = [(sb, sb + 250, "claystone"), (sb + 250, sb + 330, "caprock"), (sb + 330, sb + 470, "sand"), (sb + 470, sb + 560, "shale")]
+        layers = [(sb, sb + 200, "claystone"), (sb + 200, sb + 270, "caprock"), (sb + 270, sb + 390, "sand"), (sb + 390, sb + 450, "shale")]
+        c.save()
+        c.clipRect(skia.Rect(X0, top, X1, sb + 450))
         c.drawRect(skia.Rect(X0, top, X1, sb), paint(rgb("#0E3550"), a))
         for (y0_, y1_, lith) in layers:
             p = skia.Paint(Shader=image_shader(lith_texture(lith), 0.6))
             p.setAlphaf(a)
             c.drawRect(skia.Rect(X0, y0_, X1, y1_), p)
-        draw_text(c, "cap rock", X1 - 12, sb + 300, 20, C.text, 600, a, "right", shadow=True)
-        draw_text(c, "storage reservoir", X1 - 12, sb + 420, 20, C.text, 600, a, "right", shadow=True)
+        draw_text(c, "cap rock", X1 - 12, sb + 245, 20, C.text, 600, a, "right", shadow=True)
+        draw_text(c, "storage reservoir", X1 - 12, sb + 340, 20, C.text, 600, a, "right", shadow=True)
         wx = 1300
-        c.drawLine(wx, sb - 10, wx, sb + 420, paint(C.steel_hi, a, stroke=6))
+        c.drawLine(wx, sb - 10, wx, sb + 345, paint(C.steel_hi, a, stroke=6))
         kpl = ease_out(clamp((t - self.c0("northern") - 4.0) / 8.0))
         plume = skia.Path()
-        plume.addOval(skia.Rect(wx - 280 * kpl, sb + 335, wx + 330 * kpl, sb + 335 + 70 * max(kpl, 0.05)))
+        plume.addOval(skia.Rect(wx - 230 * kpl, sb + 275, wx + 300 * kpl, sb + 275 + 60 * max(kpl, 0.05)))
         c.drawPath(plume, paint(C.co2, 0.45 * a))
         c.drawPath(plume, paint(C.co2, 0.8 * a, stroke=1.5))
-        c.drawLine(X0 + 20, sb, X0 + 20, sb + 400, paint(C.muted, 0.6 * a, stroke=1.5))
-        draw_text(c, "≈ 2.5 km", X0 + 30, sb + 210, 20, C.muted, 600, a)
+        c.drawLine(X0 + 20, sb, X0 + 20, sb + 300, paint(C.muted, 0.6 * a, stroke=1.5))
+        draw_text(c, "≈ 2.5 km", X0 + 30, sb + 160, 20, C.text, 600, a, shadow=True)
+        c.restore()
         facts = [("Equinor, Shell and TotalEnergies", self.c0("northern") + 1.0), ("1.5 Mt/yr, expanding to at least 5 Mt/yr", self.c0("northern") + 2.5),
                  ("CO₂ stored offshore since 1996: Sleipner, then Snøhvit", self.word_time("northern", "since 1996") - 0.3)]
         for i, (txt, ti) in enumerate(facts):
@@ -102,11 +105,21 @@ class SceneImpl(Scene):
         draw_text(c, "steel", x + 145, y - 14, 20, C.muted, 600, a, "center")
         cp = skia.Paint(Shader=image_shader(cement_texture(), 0.5))
         cp.setAlphaf(a)
-        c.drawRect(skia.Rect(x + 170, y, x + 400, y + 420), cp)
-        c.drawRect(skia.Rect(x + 170, y, x + 170 + 120 * kc, y + 420), paint(rgb("#C96F3A"), 0.35 * a))
-        draw_text(c, "cement", x + 285, y - 14, 20, C.muted, 600, a, "center")
+        c.drawRect(skia.Rect(x + 170, y, x + 370, y + 420), cp)
+        fp = skia.Paint(Shader=image_shader(lith_texture("sand"), 0.5))
+        fp.setAlphaf(a)
+        c.drawRect(skia.Rect(x + 370, y, x + 470, y + 420), fp)
+        c.drawRect(skia.Rect(x + 370, y, x + 470, y + 420), paint(C.co2, 0.25 * a))
+        draw_text(c, "formation", x + 420, y - 14, 20, C.muted, 600, a, "center")
+        draw_text(c, "CO₂-rich brine", x + 420, y + 460, 20, C.muted, 600, a, "center")
+        c.drawRect(skia.Rect(x + 370 - 110 * kc, y, x + 370, y + 420), paint(rgb("#C96F3A"), 0.35 * a))
+        draw_text(c, "cement", x + 270, y - 14, 20, C.muted, 600, a, "center")
         if kc > 0.2:
-            draw_text(c, "carbonation front", x + 170 + 120 * kc + 8, y + 210, 20, rgb("#E2925E"), 700, a)
+            ka = a * clamp((kc - 0.2) / 0.2)
+            fx = x + 370 - 110 * kc
+            c.drawLine(fx, y + 203, x + 482, y + 203, paint(rgb("#E2925E"), ka, stroke=1.5))
+            c.drawCircle(fx, y + 203, 4, paint(rgb("#E2925E"), ka))
+            draw_text(c, "carbonation front", x + 490, y + 210, 22, rgb("#E2925E"), 700, ka)
         # impurities and remedies
         ai = self.vis(t, "impurities", "cycles", fi=0.6, fo=0.5, b_off=-0.5)
         if ai > 0:
@@ -176,19 +189,69 @@ class SceneImpl(Scene):
             if reached:
                 pr = (t * 0.9) % 1.0
                 c.drawCircle(xw, top + 410, 16 + 26 * pr, paint(C.amber, a * (1 - pr), stroke=2.5))
-                draw_text(c, "potential leak path?", xw + 30, top + 370, 22, C.amber, 700, a)
+                if i == 0:
+                    draw_text(c, "potential leak path?", xw + 30, top + 370, 22, C.amber, 700, a)
+                else:
+                    draw_text(c, "potential leak path?", xw - 30, top + 370, 22, C.amber, 700, a, "right")
         draw_text(c, "cap rock", X1 - 12, top + 370, 22, C.text, 600, a, "right", shadow=True)
         draw_text(c, "storage formation", X1 - 12, top + 520, 22, C.text, 600, a, "right", shadow=True)
+
+    def mini_well(self, c, cx, top, bot, fluid, a, label):
+        """Telescoping casing scheme in a small formation panel."""
+        X0, X1 = cx - 150, cx + 150
+        rz = bot - 90
+        for (y0_, y1_, lith) in ((top, rz - 60, "claystone"), (rz - 60, rz, "caprock"), (rz, bot, "sand")):
+            p = skia.Paint(Shader=image_shader(lith_texture(lith), 0.45))
+            p.setAlphaf(a)
+            c.drawRect(skia.Rect(X0, y0_, X1, y1_), p)
+        c.drawRect(skia.Rect(X0, rz + 8, X1, bot - 8), paint(fluid, 0.35 * a))
+        cp = skia.Paint(Shader=image_shader(cement_texture(), 0.4))
+        cp.setAlphaf(a)
+        strings = [(64, 0.30), (48, 0.62), (34, 0.97)]
+        H_ = bot - top
+        for (hw, shoe) in strings:
+            ys = top + shoe * H_
+            for sd in (-1, 1):
+                c.drawRect(skia.Rect(min(cx + sd * hw, cx + sd * (hw + 10)), ys - 0.22 * H_, max(cx + sd * hw, cx + sd * (hw + 10)), ys), cp)
+        for (hw, shoe) in strings:
+            ys = top + shoe * H_
+            for sd in (-1, 1):
+                r = skia.Rect(min(cx + sd * hw, cx + sd * (hw - 5)), top, max(cx + sd * hw, cx + sd * (hw - 5)), ys)
+                c.drawRect(r, steel_paint(r.left(), r.right(), a))
+        c.drawRect(skia.Rect(cx - 10, top, cx + 10, rz - 20), paint(fluid, 0.85 * a))
+        c.drawRect(skia.Rect(cx - 13, top, cx - 10, rz - 20), paint(C.steel_hi, a))
+        c.drawRect(skia.Rect(cx + 10, top, cx + 13, rz - 20), paint(C.steel_hi, a))
+        c.drawRect(skia.Rect(cx - 36, rz - 70, cx + 36, rz - 52), paint(C.steel, a))
+        c.drawRect(skia.Rect(X0, top, X1, bot), paint(C.line, a, stroke=1.5))
+        draw_text(c, label, cx, bot + 44, 26, C.text, 600, a, "center")
 
     def draw_sintef(self, c, t):
         a = self.vis(t, "sintef", self.dur, fi=0.7, fo=0.6)
         if a <= 0:
             return
-        draw_panel(c, 260, 240, 1400, 640, a, glow=C.co2, r=22)
-        draw_text(c, "SINTEF FOR STANDARDS NORWAY · 2024", 320, 310, 22, C.co2, 700, a, tracking=4)
-        draw_text(c, "CCS well design requirements", 320, 380, 52, C.text, 600, a, display=True)
-        items = ["Built much like petroleum wells", "But the fluid, the load pattern and the longer lifetime give a different risk picture",
-                 "To be addressed in the revision of NORSOK D-010"]
-        kws = ["built much like", "different risk", "revision"]
-        times = [self.word_time("sintef", kw) - 0.3 for kw in kws]
-        bullets(c, items, 330, 480, t, times, size=34, max_w=1250, alpha=a, accent=C.co2, gap=1.8)
+        draw_text(c, "SINTEF FOR STANDARDS NORWAY · 2024", 120, 200, 22, C.co2, 700, a, tracking=4)
+        draw_text(c, "CCS well design requirements", 120, 270, 52, C.text, 600, a, display=True)
+        k1 = ease_out(clamp((t - self.word_time("sintef", "built much like") + 0.3) / 0.8)) * a
+        if k1 > 0:
+            self.mini_well(c, 290, 360, 860, C.oil, k1, "Petroleum well")
+            self.mini_well(c, 690, 360, 860, C.co2, k1, "CO\u2082 well")
+            draw_text(c, "\u2248", 490, 640, 72, C.muted, 300, k1, "center")
+            draw_text(c, "Built much like petroleum wells", 490, 975, 28, C.co2, 600, k1, "center")
+        cards = [("the fluid", "drop", "The fluid", "CO\u2082 with water forms acid; impurities add to it"),
+                 ("the load pattern", "wave", "The load pattern", "Cold injection and start-stop cycles"),
+                 ("the longer lifetime", "infinity", "The lifetime", "Containment for far longer than a producing well")]
+        for i, (kw, ic, h1, body) in enumerate(cards):
+            kk = ease_out_back(clamp((t - self.word_time("sintef", kw) + 0.2) / 0.6)) * a
+            if kk <= 0:
+                continue
+            y = 340 + i * 175
+            draw_panel(c, 1000, y, 800, 150, kk, r=18, glow=C.co2)
+            icon(c, ic, 1075, y + 75, 64, C.text, kk, C.co2)
+            draw_text(c, h1, 1140, y + 64, 34, C.text, 600, kk, display=True)
+            draw_text(c, body, 1140, y + 106, 24, C.muted, 400, kk)
+        kd = ease_out(clamp((t - self.word_time("sintef", "different risk") + 0.2) / 0.6)) * a
+        if kd > 0:
+            draw_text(c, "\u2192  a different risk picture", 1000, 900, 30, C.amber, 700, kd)
+        kr = ease_out(clamp((t - self.word_time("sintef", "revision") + 0.2) / 0.7)) * a
+        if kr > 0:
+            chip(c, 1000, 975, "To be addressed in the revision of NORSOK D-010", C.co2, kr, size=24)

@@ -112,14 +112,16 @@ class SceneImpl(Scene):
                 if hot > 0:
                     c.drawCircle(cx, cy, r, paint(col, 0.35 * ar * hot, blur=10, stroke=6))
             # labels
-            labs = [("A-annulus", 92, COL_A, "a-annulus"), ("B-annulus", 156, COL_B, "b-annulus"), ("C-annulus", 208, COL_C, "c-annulus")]
-            for (txt, rr, col, kw) in labs:
+            labs = [("A-annulus", 92, -20, COL_A, "a-annulus"), ("B-annulus", 156, -35, COL_B, "b-annulus"),
+                    ("C-annulus", 208, -48, COL_C, "c-annulus")]
+            for i, (txt, rr, deg, col, kw) in enumerate(labs):
                 k = ease_out(clamp((t - self.word_time("annuli", kw) + 0.2) / 0.6)) * ar
-                ang = math.radians(-35)
+                ang = math.radians(deg)
                 x0, y0 = cx + rr * math.cos(ang), cy + rr * math.sin(ang)
-                c.drawLine(x0, y0, cx + 330, y0 - 80 + (rr - 92) * 0.9, paint(col, k, stroke=2))
+                yl = cy - 130 - i * 64
+                c.drawLine(x0, y0, cx + 330, yl - 9, paint(col, k, stroke=2))
                 c.drawCircle(x0, y0, 5, paint(C.white, k))
-                draw_text(c, txt, cx + 340, y0 - 72 + (rr - 92) * 0.9, 30, col, 700, k, display=True)
+                draw_text(c, txt, cx + 340, yl, 30, col, 700, k, display=True)
             draw_text(c, "Nested pressure vessels", 120, 220, 48, C.text, 600, ar, display=True)
             draw_text(c, "cross-section", cx, cy + 340, 20, C.muted, 500, ar, "center")
 
@@ -269,13 +271,16 @@ class SceneImpl(Scene):
         pl.axes(c, a)
         ds = np.linspace(0, 2800, 60)
         kl = ease_in_out(clamp((t - self.c0("plot") - 0.5) / 2.0))
+        c.save()
+        pl.clip(c)
         pl.line(c, [burst_limit(d) for d in ds], ds, C.red, 3, a, reveal=kl, glow=False, dash=[12, 7])
         pl.line(c, [collapse_limit(d) for d in ds], ds, C.amber, 3, a, reveal=kl, glow=False, dash=[12, 7])
+        c.restore()
         # wellhead rating at surface
         c.drawLine(pl.px(345), pl.py(0) - 2, pl.px(345), pl.py(180), paint(C.common, a * kl, stroke=4))
         draw_text(c, "Wellhead rating", pl.px(345) + 10, pl.py(170), 20, C.common, 600, a * kl)
         draw_text(c, "Casing burst limit", pl.px(burst_limit(900)) + 10, pl.py(900), 20, C.red, 600, a * kl)
-        draw_text(c, "Tubing collapse limit", pl.px(collapse_limit(1500)) - 12, pl.py(1500), 20, C.amber, 600, a * kl, "right")
+        draw_text(c, "Tubing collapse limit", pl.px(collapse_limit(1900)) + 10, pl.py(1900), 18, C.amber, 600, a * kl)
         # sweep surface pressure
         ts = self.word_time("plot", "raise the surface pressure") - 0.2
         ps = 315 * ease_in_out(clamp((t - ts) / 5.5))
@@ -283,7 +288,7 @@ class SceneImpl(Scene):
             ys = [a_internal(ps, d) for d in ds]
             pl.line(c, ys, ds, C.primary, 4, a)
             c.drawCircle(pl.px(ps), pl.py(0), 8, paint(C.primary_hi, a))
-            draw_text(c, f"surface pressure {ps:.0f} bar", pl.px(ps) + 12, pl.py(0) + 64, 22, C.primary_hi, 700, a)
+            draw_text(c, f"surface pressure {ps:.0f} bar", pl.px(a_internal(ps, 420)) - 18, pl.py(420), 22, C.primary_hi, 700, a, "right")
         touch = ease_out(clamp((t - ts - 5.6) / 0.6))
         if touch > 0:
             x, y = pl.px(a_internal(315, 2800)), pl.py(2800)
@@ -306,17 +311,22 @@ class SceneImpl(Scene):
         al = self.vis(t, "limits", "monitor", fi=0.6, fo=0.5, a_off=0.2, b_off=-0.4)
         if al > 0:
             draw_text(c, "Operating limits below MAASP", 120, 220, 48, C.text, 600, al, display=True)
-            x, y0, y1 = 760, 300, 960
-            zones = [(0, 0.62, C.green, "Normal operating range"), (0.62, 0.82, C.yellow, "Alarm and action levels"), (0.82, 1.0, C.red, "Approaching MAASP")]
-            for i, (f0, f1, col, lab) in enumerate(zones):
+            x, y0, y1 = 560, 320, 960
+            zones = [(0, 0.62, C.green, "Normal operating range", "Continuous monitoring and trending"),
+                     (0.62, 0.82, C.yellow, "Alarm and action levels", "Investigate the cause, bleed off and watch the build-up"),
+                     (0.82, 1.0, C.red, "Approaching MAASP", "Escalate: risk assessment and corrective action")]
+            for i, (f0, f1, col, lab, sub) in enumerate(zones):
                 k = ease_out(clamp((t - self.c0("limits") - 0.3 - i * 0.6) / 0.6)) * al
                 ya, yb = y1 - f1 * (y1 - y0), y1 - f0 * (y1 - y0)
-                c.drawRect(skia.Rect(x, ya, x + 120, yb), paint(col, 0.75 * k))
-                draw_text(c, lab, x + 150, (ya + yb) / 2 + 10, 30, C.text, 500, k)
+                c.drawRoundRect(skia.Rect(x, ya + 2, x + 120, yb - 2), 6, 6, paint(col, 0.75 * k))
+                c.drawLine(x + 132, (ya + yb) / 2 - 14, x + 164, (ya + yb) / 2 - 14, paint(col, k, stroke=2.5))
+                draw_text(c, lab, x + 180, (ya + yb) / 2 - 4, 32, C.text, 600, k)
+                draw_text(c, sub, x + 180, (ya + yb) / 2 + 32, 23, C.muted, 400, k)
             c.drawLine(x - 30, y0, x + 150, y0, paint(C.amber, al, stroke=4))
             draw_text(c, "MAASP", x - 40, y0 + 10, 28, C.amber, 700, al, "right")
             val = 0.35 + 0.05 * math.sin(t * 1.3)
             c.drawPath(poly([(x - 20, y1 - val * (y1 - y0) - 12), (x, y1 - val * (y1 - y0)), (x - 20, y1 - val * (y1 - y0) + 12)], close=True), paint(C.white, al))
+            draw_text(c, "annulus pressure", x - 34, y1 - val * (y1 - y0) + 8, 22, C.muted, 500, al, "right")
         am = self.vis(t, "monitor", "gullfaks", fi=0.6, fo=0.6, b_off=-0.4)
         if am > 0:
             draw_text(c, "A-annulus pressure trend", 120, 220, 48, C.text, 600, am, display=True)

@@ -163,7 +163,7 @@ class SceneImpl(Scene):
         k_cnt = ease_in_out(clamp((t - self.c0("tacount") + 0.2) / 1.0))
         k_rules = self.vis(t, "tarules", "tacount", fi=0.5, fo=0.5, b_off=-0.3)
         # bars 2022 vs 2024
-        kb = (1 - k_cnt) * (1 - k_rules)
+        kb = 1 - ease_in_out(clamp((t - self.c0("tarules") + 0.3) / 0.5))
         if kb > 0:
             draw_text(c, "Reported wells", 120, 268, 48, C.text, 600, a * kb, display=True)
             for i, (yr, n, kw) in enumerate([(2022, 227, "double"), (2024, 488, "four hundred")]):
@@ -208,7 +208,7 @@ class SceneImpl(Scene):
                 draw_text(c, "2022 → 2024", 1600, 880, 24, C.muted, 500, kr)
         ke = self.vis(t, "expect", None, fi=0.6, fo=0.5, b_off=3) * a
         if ke > 0:
-            c.drawRect(skia.Rect(0, 0, W, H), paint(C.bg0, 0.75 * ke))
+            c.drawRect(skia.Rect(0, 0, W, H), paint(C.bg0, 0.92 * ke))
             draw_text(c, "Havtil's expectation", W / 2, 330, 50, C.text, 600, ke, "center", display=True)
             rows = [("RED", C.red, "permanently plugged", self.word_time("expect", "red wells")),
                     ("ORANGE", C.orange, "brought back into use, or permanently plugged", self.word_time("expect", "orange wells"))]

@@ -6,7 +6,7 @@ import math
 import numpy as np
 import skia
 
-from engine.core import (C, W, H, arrow, chip, clamp, draw_panel, draw_paragraph, draw_text, ease_in_out, ease_out,
+from engine.core import (font, C, W, H, arrow, chip, clamp, draw_panel, draw_paragraph, draw_text, ease_in_out, ease_out,
                          ease_out_back, glow_path, lerp, mix, paint, poly, rgb, trim_path, window, with_alpha, rrect,
                          image_shader)
 from engine.scene import Scene
@@ -147,7 +147,9 @@ class SceneImpl(Scene):
             kk = (k - 0.6) / 0.4
             pr = (t * 0.9) % 1.0
             c.drawCircle(cx, ytop_res, 18 + 20 * pr, paint(C.red, a * kk * (1 - pr), stroke=2.5))
-            draw_text(c, "casing deformation", cx + 40, ytop_res + 8, 22, C.red, 700, a * kk, shadow=True)
+            c.drawRRect(rrect(cx + 40, ytop_res - 18, font(22, 600).measureText("casing deformation") + 28, 22 * 1.6, 22 * 0.8),
+                        paint(C.bg0, 0.75 * a * kk))
+            chip(c, cx + 40, ytop_res - 18, "casing deformation", C.red, a * kk, size=22)
         # platform on jacket standing on the seabed
         base_y = sb + bowl(cx, sub)
         deck_y = base_y - 250
@@ -163,7 +165,7 @@ class SceneImpl(Scene):
         draw_text(c, "Seabed subsidence", 140, 220, 30, C.text, 600, a)
         counter(c, 9 * k, 520, 222, 64, C.amber, a, fmt="{:.1f}", align="left", suffix=" m")
         kn = ease_out(clamp((t - self.c0("compaction") - 7) / 0.8)) * a
-        draw_text(c, "In 1987 six Ekofisk platforms were jacked up 6 m", 1180, 200, 22, C.muted, 500, kn)
+        draw_text(c, "In 1987 the Ekofisk Complex platforms were jacked up about 6 m", 1180, 200, 22, C.muted, 500, kn)
         draw_text(c, "vertical scale exaggerated", x1 - 10, 1030, 14, C.dim, 500, a, "right", italic=True)
 
     # ------------------------------------------------------------------ incident helpers

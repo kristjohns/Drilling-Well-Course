@@ -183,6 +183,79 @@ def fmt_ts(sec):
     return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
 
 
+def split_caption(text, maxlen=90):
+    """Split a sentence into caption chunks at punctuation, then at word boundaries."""
+    import re
+    pieces = [p.strip() for p in re.split(r"(?<=[,;:])\s+", text) if p.strip()]
+    chunks, cur = [], ""
+    for p in pieces:
+        cand = (cur + " " + p).strip()
+        if len(cand) <= maxlen:
+            cur = cand
+        else:
+            if cur:
+                chunks.append(cur)
+            cur = p
+    if cur:
+        chunks.append(cur)
+    out = []
+    for ch in chunks:
+        while len(ch) > maxlen:
+            words = ch.split()
+            acc = ""
+            i = 0
+            while i < len(words) and len(acc + " " + words[i]) <= maxlen * 0.6:
+                acc = (acc + " " + words[i]).strip()
+                i += 1
+            out.append(acc)
+            ch = " ".join(words[i:])
+        out.append(ch)
+    return out
+
+
+def two_lines(text, width=44):
+    if len(text) <= width:
+        return text
+    words = text.split()
+    best, best_d = None, 1e9
+    for i in range(1, len(words)):
+        a, b = " ".join(words[:i]), " ".join(words[i:])
+        d = abs(len(a) - len(b))
+        if d < best_d:
+            best, best_d = (a, b), d
+    return best[0] + "\n" + best[1]
+
+
+def write_subtitles(tl, ids, starts):
+    lines = []
+    k = 1
+    for sid in ids:
+        for s0, s1, text in tl[sid]["sentences"]:
+            text = text.replace("CO2", "CO\u2082")
+            g0, g1 = starts[sid] + s0, starts[sid] + s1
+            chunks = split_caption(text)
+            tot = sum(len(ch) for ch in chunks)
+            t = g0
+            for ch in chunks:
+                d = (g1 - g0) * len(ch) / tot
+                lines.append(f"{k}\n{fmt_ts(t)} --> {fmt_ts(t + d)}\n{two_lines(ch)}\n")
+                k += 1
+                t += d
+    with open(os.path.join(AUD, "subtitles.srt"), "w") as f:
+        f.write("\n".join(lines))
+    print(f"{k - 1} subtitle cues")
+
+
+def main_subs():
+    tl = json.load(open(os.path.join(AUD, "timeline.json")))
+    ids = list(tl.keys())
+    starts, acc = {}, 0.0
+    for i in ids:
+        starts[i] = acc
+        acc += tl[i]["duration"]
+    write_subtitles(tl, ids, starts)
+
+
 def main():
     tl = json.load(open(os.path.join(AUD, "timeline.json")))
     ids = list(tl.keys())
@@ -256,34 +329,12 @@ def main():
           f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", raw, "-af", af, "-ar", str(SR), out], check=True)
     print("loudness in:", m["input_i"], "LUFS ->", "-16 target")
-    # ---------------------------------------------------------------- subtitles
-    lines = []
-    k = 1
-    for sid in ids:
-        for s0, s1, text in tl[sid]["sentences"]:
-            g0, g1 = starts[sid] + s0, starts[sid] + s1
-            words = text.split()
-            # split long sentences into chunks of ~ 12 words, timed by characters
-            chunks = []
-            cur = []
-            for w in words:
-                cur.append(w)
-                if len(" ".join(cur)) > 70:
-                    chunks.append(" ".join(cur))
-                    cur = []
-            if cur:
-                chunks.append(" ".join(cur))
-            tot = sum(len(ch) for ch in chunks)
-            t = g0
-            for ch in chunks:
-                d = (g1 - g0) * len(ch) / tot
-                lines.append(f"{k}\n{fmt_ts(t)} --> {fmt_ts(t + d)}\n{ch}\n")
-                k += 1
-                t += d
-    with open(os.path.join(AUD, "subtitles.srt"), "w") as f:
-        f.write("\n".join(lines))
-    print(f"total {total:.1f} s, {k - 1} subtitle cues")
+    write_subtitles(tl, ids, starts)
+    print(f"total {total:.1f} s")
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "subs":
+        main_subs()
+    else:
+        main()

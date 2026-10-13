@@ -464,8 +464,9 @@ def stamp(c, x, y, text, color, k, size=36):
     c.rotate(-8)
     c.scale(0.6 + 0.4 * s, 0.6 + 0.4 * s)
     f = font(size, 800)
-    w = f.measureText(text) + 40
+    w = f.measureText(text) + 3 * max(0, len(text) - 1) + 44
     h = size * 1.6
+    c.drawRoundRect(skia.Rect(-w / 2, -h / 2, w / 2, h / 2), 10, 10, paint(C.bg0, 0.55 * k))
     c.drawRoundRect(skia.Rect(-w / 2, -h / 2, w / 2, h / 2), 10, 10, paint(color, k, stroke=4))
     draw_text(c, text, 0, size * 0.36, size, color, 800, k, "center", tracking=3)
     c.restore()

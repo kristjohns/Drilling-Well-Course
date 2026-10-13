@@ -56,7 +56,7 @@ class C:
     gas = rgb("#FFD27A")
     oil = rgb("#B7792B")
     water = rgb("#3E8FC7")
-    brine = rgb("#5FA8D3")
+    brine = rgb("#6F8E99")
     mud = rgb("#8A6A48")
     kill_mud = rgb("#5E4630")
     cement = rgb("#B9B4A8")
