@@ -54,7 +54,7 @@ export async function build(E, T, D) {
     const st = derivation(S, [
       { tex: '\\DM_c = ' + fmt(sc.dMc) + '\\ \\text{kNm}', t: c('9.3', 'screen'), x: 1080, align: 'left' },
       { tex: '\\dfrac{\\DM_c}{\\cg{10}^{1/3}} = ' + fmt(sc.dMc_over_DF) + ' \\;<\\; ' + fmt(sc.dMo) + ' = \\DM_o', t: c('9.3', 'screen') + 2.6, x: 1080, align: 'left', size: 46 },
-      { tex: 'T_f = \\left(\\tfrac{' + fmt(sc.dMc) + '}{' + fmt(sc.dMo) + '}\\right)^{3} = ' + sc.life_linear_m3.toFixed(1) + '\\ \\text{yr} \\;\\Rightarrow\\; ' + (sc.life_linear_m3 / 10).toFixed(2) + '\\ \\text{yr}', t: c('9.3', 'fail') + 1.6, x: 1080, align: 'left', size: 40 },
+      { tex: 'T_f = \\left(\\tfrac{' + fmt(sc.dMc) + '}{' + fmt(sc.dMo) + '}\\right)^{3} = ' + sc.life_linear_m3.toFixed(1) + '\\ \\text{yr} \\;\\Rightarrow\\; \\tfrac{T_f}{\\cg{D_F}} = ' + (sc.life_linear_m3 / 10).toFixed(2) + '\\ \\text{yr}', t: c('9.3', 'fail') + 1.6, x: 1080, align: 'left', size: 40 },
     ], { y0: 280, gap: 150, size: 48 });
     stamp(S, 'SCREENING FAILS', { x: 1430, y: 760, t: c('9.3', 'fail'), kind: 'fail' });
     const np = S.div('…but the screening uses slope 3 for every cycle. Most cycles live on the flatter slope 5.', { x: 1080, y: 850, w: 740, cls: 'small' });
