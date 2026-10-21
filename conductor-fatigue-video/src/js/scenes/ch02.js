@@ -211,6 +211,10 @@ export async function build(E, T, D) {
     const air = cc.curve(snCurve(sn.C1_air, 1e4, 1e9), { color: COL.ink2, width: 4, t: c('2.8', 'air') });
     const cp = cc.curve(snCurve(sn.C1_CP, 1e4, 1e9), { color: COL.amber, width: 5, t: c('2.8', 'cp') });
     const fc = cc.curve(snCurve(sn.C1_FC, 1e4, 1e9), { color: COL.coral, width: 4, dash: '12 8', t: c('2.8', 'fc') });
+    // while the reference is introduced: what the families are (gives way to the parameter table)
+    S.card(`<div class="ref">DNV-RP-C203:2024 · referenced by U-001 B.4.1</div><div style="font-weight:750;font-size:30px;margin-bottom:10px">S-N curves come in families</div>` +
+      `<div class="small">one curve per <b class="c-amber">detail class</b> (B1 … W3), for each <b class="c-amber">environment</b>: in air · seawater with cathodic protection · free corrosion</div>`,
+      { x: 1240, y: 260, w: 560, cls: 'glass' }).in(c('2.8', 'dnv'), 0.6).out(c('2.8', 'c1') - 0.7, 0.5);
     const lab = (txt, N, curve, col, t, dy = -24) => S.div(txt, { x: cc.X(N), y: cc.Y(snS(N, curve)) + dy, cls: 'tiny', anchor: 'cm', style: `color:${col};letter-spacing:0.06em` }).in(t + 0.6, 0.5);
     lab('IN AIR', 4e8, sn.C1_air, COL.ink2, c('2.8', 'air'), -26);
     lab('SEAWATER + CP', 1.6e7, sn.C1_CP, COL.amber, c('2.8', 'cp'), 34);
