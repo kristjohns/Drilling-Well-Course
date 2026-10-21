@@ -1,6 +1,6 @@
 // Chapter 9 — the worked example (illustrative inputs).
 import { E, ease, COL, clamp, smooth, ramp, lerp, fmt } from '../engine/core.js';
-import { Scene } from '../engine/scene.js';
+import { Scene, later } from '../engine/scene.js';
 import { titleCard, clause, step } from '../engine/hud.js';
 import { quoteCard, derivation, table, tx, counter, stamp } from './kit.js';
 import { logTicks, pow10 } from './fatigue.js';
@@ -19,14 +19,17 @@ export async function build(E, T, D) {
   {
     const B = b('9.1');
     const S = new Scene(B.start, B.end);
+    const il = '<span style="color:#7f97aa">illustrative</span>';
     const rows = [
       ['Water depth · mode', '350 m · BOP on WH', 'Table A.7'], ['ΔM<sub>o</sub> · H<sub>LFJ</sub>', '1 436 kNm · 13.7 m', 'Tables A.7, A.3'],
-      ['Conductor · surface casing', '36 in × 2 in · 20 in × 1 in', 'Table A.1'], ['WH datum above mudline', '4.0 m', ''],
-      ['Template rings C, D', '1.6 m and 3.6 m below datum · 200 / 400 MN/m · 2 mm gap', ''], ['Soil · cement shortfall', 'k = 5 MPa (Winkler) · 5 m', ''],
-      ['GW1', '3.0 m below datum · C1 seawater + CP · SCF 1.10 · t = 50.8 mm', '13.3.6.2'], ['TS1', 'class D seawater + CP · 0.156 MPa per kN', ''],
-      ['Design factors', 'D<sub>F</sub> = 10 (permanent) · DFF = 10 (N-001)', 'B.4 · N-001'],
+      ['Conductor · surface casing', '36 in × 2 in · 20 in × 1 in', 'Table A.1'], ['WH datum above mudline', '4.0 m', il],
+      ['Template rings C, D', '1.6 m and 3.6 m below datum · 200 / 400 MN/m · 2 mm gap', il], ['Soil · cement shortfall', 'k = 5 MPa (Winkler) · 5 m', il],
+      ['GW1', '3.0 m below datum · C1 seawater + CP · SCF 1.10 · t = 50.8 mm', '13.3.6.2 · SCF ' + il], ['TS1', 'class D seawater + CP · 0.156 MPa per kN', il],
+      ['Design factors', 'D<sub>F</sub> = 10 (permanent) · DFF = 10 (N-001)', 'Table B.4 · N-001'],
     ];
-    const tb = table(S, ['Input', 'Value', 'Source'], rows, { x: 120, y: 190, w: 1680, t: c('9.1', 'inputs'), stagger: 0.18, colCls: ['l', 'l', 'l'] });
+    const tb = table(S, ['Input', 'Value', 'Source'], rows, { x: 120, y: 230, t: c('9.1', 'inputs'), stagger: 0.18, colCls: ['l', 'l', 'l'] });
+    tb.el.querySelectorAll('th, td').forEach((e) => { e.style.paddingLeft = '22px'; e.style.paddingRight = '22px'; });
+    later(() => { tb.el.style.left = (960 - tb.el.offsetWidth / 2) + 'px'; });
     const fl = S.div('<span class="badge warn">illustrative teaching inputs · not project data</span>', { x: 960, y: 960, anchor: 'cm' });
     fl.in(c('9.1', 'flag'), 0.5, 'pop');
   }
