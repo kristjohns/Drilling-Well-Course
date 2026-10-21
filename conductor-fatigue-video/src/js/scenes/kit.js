@@ -22,6 +22,11 @@ export function derivation(S, steps, { x = 960, y0 = 260, gap = 110, align = 'ce
         ? S.div(s.note, { x: s.x ?? x, y: (s.y ?? y) - (s.size || size) * 0.95, cls: 'tiny', anchor: (s.align || align) === 'left' ? 'lb' : 'cb', style: 'letter-spacing:0.12em;text-transform:uppercase;color:#7f97aa' })
         : S.div(s.note, { x: s.noteX ?? 150, y: (s.y ?? y), cls: 'tiny', anchor: 'lm', style: 'letter-spacing:0.12em;text-transform:uppercase;color:#7f97aa' });
       if (s.t !== undefined) n.in(s.t, 0.5, 'left');
+      // a tall equation (fractions, integrals) reaches above the default note line: lift the note clear of it and its box
+      if (above) later(() => {
+        const top = e.ay - e.h / 2, nh = n.el.offsetHeight;
+        if (top - 6 < parseFloat(n.el.style.top) + nh) n.el.style.top = (top - 18 - nh) + 'px';
+      });
       e.note = n;
     }
     out.push(e);

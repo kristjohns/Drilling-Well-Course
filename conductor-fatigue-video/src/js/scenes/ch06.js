@@ -57,7 +57,7 @@ export async function build(E, T, D) {
     S.div('ring of radius r, width dr: dA = 2πr dr', { x: cx, y: cy + R + 50, cls: 'small', anchor: 'ct', style: 'color:#ffb547' }).in(c('6.2', 'polar') + 0.4, 0.5);
     const st = derivation(S, [
       { tex: 'J = \\int r^2\\,\\dd A = \\int_{r_i}^{r_o} r^2\\, 2\\pi r\\,\\dd r = \\dfrac{\\pi}{2}\\left(r_o^4 - r_i^4\\right)', t: c('6.2', 'polar'), x: 900, align: 'left', size: 44, note: 'polar moment' },
-      { tex: 'I = \\dfrac{J}{2} = \\dfrac{\\pi}{64}\\left(D^4 - d^4\\right)', t: c('6.2', 'sym'), x: 900, align: 'left', size: 54, note: 'symmetry: J = I_x + I_y' },
+      { tex: 'I = \\dfrac{J}{2} = \\dfrac{\\pi}{64}\\left(D^4 - d^4\\right)', t: c('6.2', 'sym'), x: 900, align: 'left', size: 54, note: 'symmetry: <span style="text-transform:none;letter-spacing:0.04em">J = I<sub>x</sub> + I<sub>y</sub></span>' },
       { tex: 'I = \\dfrac{\\pi}{64}\\left(914.4^4 - 812.8^4\\right) = 1.289\\times10^{10}\\ \\text{mm}^4', t: c('6.2', 'num'), x: 900, align: 'left', size: 40 },
       { tex: 'W = \\dfrac{I}{D/2} = 2.820\\times10^{7}\\ \\text{mm}^3', t: c('6.2', 'num') + 2.6, x: 900, align: 'left', size: 44 },
     ], { y0: 280, gap: 170, size: 48, noteAbove: true });
