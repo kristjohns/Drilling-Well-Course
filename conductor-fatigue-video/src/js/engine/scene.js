@@ -72,7 +72,7 @@ export class Scene {
     if (anchor) {
       // centre/right anchored text without a width: measure at its natural width (not squeezed by the stage edge), then fix it
       const free = !w && anchor[0] !== 'l' && !/(^|;)\s*width\s*:/.test(style);
-      if (free) el.style.left = '0px';
+      if (free) { el.style.left = '0px'; el.style.whiteSpace = 'nowrap'; }      // its width is fixed after layout
       later(() => { if (free) el.style.width = (el.offsetWidth + 1) + 'px'; const r = { w: el.offsetWidth, h: el.offsetHeight }; place(el, x, y, r, anchor); });
     }
     return a;

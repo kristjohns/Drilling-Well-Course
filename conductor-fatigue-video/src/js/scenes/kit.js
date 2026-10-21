@@ -73,9 +73,11 @@ export function letter3D(S, pos, ch, { t0, t1, color = COL.amber } = {}) {
 
 // counter text that counts from a to b during [t0, t1]
 export function counter(S, { x, y, a = 0, b, t0, t1, d = 0, fmtf = (v) => fmt(v, d), cls = 'num', size = 64, prefix = '', suffix = '', anchor = 'cm', color = COL.ink } = {}) {
-  const el = S.div(prefix + fmtf(a) + suffix, { x, y, cls, anchor, style: `font-size:${size}px;color:${color}` });
+  // laid out with the final value (so the anchored box fits it), then counts up inside that box
+  const align = anchor[0] === 'l' ? 'left' : anchor[0] === 'r' ? 'right' : 'center';
+  const el = S.div(prefix + fmtf(b) + suffix, { x, y, cls, anchor, style: `font-size:${size}px;color:${color};white-space:nowrap;text-align:${align}` });
   let last = null;
-  E.anim(t0 - 0.05, t1 + 3600, (t) => {
+  E.anim(t0 - 3, t1 + 3600, (t) => {
     const u = ease.out3(clamp((t - t0) / (t1 - t0)));
     const v = a + (b - a) * u;
     const s = prefix + fmtf(v) + suffix;
