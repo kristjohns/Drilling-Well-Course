@@ -172,7 +172,7 @@ export async function build(E, T, D) {
     const blank = S.rect(cc.x - 20, cc.y + cc.h + 8, cc.w + 40, 34, { fill: '#08182a', stroke: 'none', parent: ticks2.el, o: 1 });
     for (const v of [0.5, 1.0, 1.5, 2.0, 2.5, 3.0]) S.svgText(fmt(v * 1436), cc.X(v), cc.y + cc.h + 26, { size: 20, fill: COL.amber, parent: ticks2.el, o: 1 });
     S.div('3 948 892 cycles at r = 0.1', { x: cc.X(0.1) + 20, y: cc.Y(3948892) - 10, cls: 'small', anchor: 'lb', style: 'color:#4fd1ff' }).in(c('3.6', 'small'), 0.5, 'left');
-    S.div('1 cycle at 2.8 and 2.9', { x: cc.X(2.85), y: cc.Y(1) - 70, cls: 'small', anchor: 'cb' }).in(c('3.6', 'big'), 0.5);
+    S.div('1 cycle at 2.8 and 2.9', { x: cc.X(2.95), y: cc.Y(1) - 70, cls: 'small', anchor: 'rb' }).in(c('3.6', 'big'), 0.5);
     const tot = counter(S, { x: 1520, y: 330, a: 0, b: L.n_total, t0: c('3.6', 'total'), t1: c('3.6', 'total') + 2.2, size: 64, color: COL.cyan });
     tot.in(c('3.6', 'total') - 0.1, 0.4);
     S.div('cycles per year in total · one every ≈ 4.2 s', { x: 1520, y: 395, cls: 'small', anchor: 'cm' }).in(c('3.6', 'total') + 0.6, 0.5);
