@@ -21,13 +21,13 @@ export async function build(E, T, D) {
     const S = new Scene(B.start, B.end);
     clause('NORSOK U-001:2026 · B.4.2.1', B.start + 0.3, B.end);
     const mk = (x, ttl, yl, col, t, curve) => {
-      const cc = S.chart({ x, y: 280, w: 620, h: 460, xlog: true, ylog: true, xmin: 1e4, xmax: 1e9, ymin: curve.ymin, ymax: curve.ymax, xticks: logTicks(1e4, 1e9), yticks: curve.yt, xfmt: pow10, yfmt: (v) => fmt(v), xlabel: 'cycles to failure N', ylabel: yl, title: ttl });
+      const cc = S.chart({ x, y: 280, w: 620, h: 460, xlog: true, ylog: true, xmin: 1e4, xmax: 1e9, ymin: curve.ymin, ymax: curve.ymax, xticks: logTicks(1e4, 1e9), yticks: curve.yt, xfmt: pow10, yfmt: (v) => fmt(v), xlabel: 'cycles to failure N', ylabel: yl, ylabelDx: curve.dx || 76, title: ttl });
       cc.show(t); cc.curve(curve.pts, { color: col, width: 5, t: t + 0.4 }); return cc;
     };
     mk(220, 'S-N · STRESS AT THE HOT SPOT', 'Δσ [MPa]', COL.coral, B.start + 0.3, { pts: snCurve(D.sn.C1_CP), ymin: 10, ymax: 1000, yt: [10, 100, 1000] });
-    mk(1100, 'M-N · MOMENT AT THE WH DATUM', 'ΔM [kNm]', COL.amber, c('7.1', 'mn'), { pts: mnCurve(gw), ymin: 100, ymax: 10000, yt: [100, 1000, 10000] });
-    const ar = S.arrow(870, 510, 1060, 510, { color: COL.ink2, width: 5 }); ar.in(c('7.1', 'mn'), 0.5, 'none');
-    S.div('same datum as the load histogram', { x: 1410, y: 880, cls: 'h3', anchor: 'ct', style: 'color:#ffb547' }).in(c('7.1', 'why'), 0.7, 'write');
+    mk(1180, 'M-N · MOMENT AT THE WH DATUM', 'ΔM [kNm]', COL.amber, c('7.1', 'mn'), { pts: mnCurve(gw), ymin: 100, ymax: 10000, yt: [100, 1000, 10000], dx: 104 });
+    const ar = S.arrow(880, 510, 1040, 510, { color: COL.ink2, width: 5 }); ar.in(c('7.1', 'mn'), 0.5, 'none');
+    S.div('same datum as the load histogram', { x: 1490, y: 880, cls: 'h3', anchor: 'ct', style: 'color:#ffb547' }).in(c('7.1', 'why'), 0.7, 'write');
   }
 
   // ------------------------------------------------------------------ 7.2 linear transfer derivation

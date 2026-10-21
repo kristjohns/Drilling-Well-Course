@@ -288,7 +288,7 @@ export function morph(A, B, t0, d = 1.0, names = null) {
 // ------------------------------------------------------------------------------------------- charts
 export class Chart {
   constructor(S, { x, y, w, h, xlog = false, ylog = false, xmin, xmax, ymin, ymax, xticks = [], yticks = [], xfmt = null, yfmt = null,
-    xlabel = '', ylabel = '', grid = true, o = 0, title = '' }) {
+    xlabel = '', ylabel = '', ylabelDx = 76, grid = true, o = 0, title = '' }) {
     Object.assign(this, { S, x, y, w, h, xlog, ylog, xmin, xmax, ymin, ymax });
     this.g = S.g({ o });
     this.xticks = xticks; this.yticks = yticks;
@@ -310,7 +310,7 @@ export class Chart {
     for (const tv of yticks) this.axisParts.push(S.svgText(yfmt ? yfmt(tv) : String(tv), x - 14, Y(tv), { size: 18, anchor: 'end', parent: this.g.el, o: 1 }));
     if (xlabel) this.xl = S.div(xlabel, { x: x + w / 2, y: y + h + 50, cls: 'small', anchor: 'ct', o: 0 });
     if (ylabel) {
-      this.yl = S.div(ylabel, { x: x - 76, y: y + h / 2, cls: 'small', anchor: 'cm', o: 0 });
+      this.yl = S.div(ylabel, { x: x - ylabelDx, y: y + h / 2, cls: 'small', anchor: 'cm', o: 0 });
       this.yl.init.r = -90;
     }
     if (title) this.tl = S.div(title, { x, y: y - 46, cls: 'small', style: 'font-weight:700;color:#b9cad8;letter-spacing:0.04em', o: 0 });
