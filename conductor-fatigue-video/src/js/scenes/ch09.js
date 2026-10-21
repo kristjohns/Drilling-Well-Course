@@ -148,12 +148,13 @@ export async function build(E, T, D) {
     const B = b('9.8');
     const S = new Scene(B.start, B.end);
     const base = g.service;
+    // [row, longer-life case, its value, shorter-life case, its value, cue]
     const ent = [
-      ['SCF 1.0 / 1.2', S9.SCF.find((r) => r[0] === 1.0)[1].gw / 10, S9.SCF.find((r) => r[0] === 1.2)[1].gw / 10, 'scf'],
-      ['water depth 500–1500 / 80–250 m', S9.band['500-1500'].gw / 10, S9.band['80-250'].gw / 10, 'depth'],
-      ['BOP on XT mode (250–500 m)', base, S9.xt_mode['250-500'].gw / 10, 'xt'],
-      ['soil 2 / 20 MPa', S9.k_soil.find((r) => r[0] === 2)[1].gw / 10, S9.k_soil.find((r) => r[0] === 20)[1].gw / 10, 'soil'],
-      ['cement shortfall 0 / 15 m', S9.shortfall.find((r) => r[0] === 0)[1].gw / 10, S9.shortfall.find((r) => r[0] === 15)[1].gw / 10, 'soil'],
+      ['SCF at GW1', 'SCF 1.0', S9.SCF.find((r) => r[0] === 1.0)[1].gw / 10, 'SCF 1.2', S9.SCF.find((r) => r[0] === 1.2)[1].gw / 10, 'scf'],
+      ['water depth', '500–1500 m', S9.band['500-1500'].gw / 10, '80–250 m', S9.band['80-250'].gw / 10, 'depth'],
+      ['BOP mode (250–500 m)', '', base, 'BOP on XT', S9.xt_mode['250-500'].gw / 10, 'xt'],
+      ['soil stiffness', 'k = 2 MPa', S9.k_soil.find((r) => r[0] === 2)[1].gw / 10, 'k = 20 MPa', S9.k_soil.find((r) => r[0] === 20)[1].gw / 10, 'soil'],
+      ['cement shortfall', '0 m', S9.shortfall.find((r) => r[0] === 0)[1].gw / 10, '15 m', S9.shortfall.find((r) => r[0] === 15)[1].gw / 10, 'soil'],
     ];
     const X = (v) => 960 + 560 * Math.log10(v / base);        // log scale: equal factors, equal lengths
     S.div('GW1 fatigue service life [years] · base case · log scale', { x: 960, y: 150, cls: 'small', anchor: 'cm' }).in(c('9.8', 'tornado'), 0.5);
@@ -161,11 +162,18 @@ export async function build(E, T, D) {
     S.div(base.toFixed(2), { x: X(base), y: 920, cls: 'num', anchor: 'ct', style: 'font-size:28px' }).in(c('9.8', 'tornado'), 0.5);
     const one = S.line(X(1), 220, X(1), 900, { stroke: COL.green, width: 2, dash: '8 6' }); one.in(c('9.8', 'tornado'), 0.5, 'none');
     S.div('1 yr', { x: X(1), y: 205, cls: 'tiny', anchor: 'cb', style: 'color:#46d39a' }).in(c('9.8', 'tornado'), 0.5);
-    ent.forEach(([lab, hi, lo, cue], i) => {
+    ent.forEach(([lab, hiCase, hi, loCase, lo, cue], i) => {
       const y = 260 + i * 125, t = c('9.8', cue) - 0.3 + (cue === 'soil' && i === 4 ? 0.6 : 0);
-      S.div(lab, { x: 120, y: y + 30, cls: 'small', style: 'color:#e9f2f9' }).in(t, 0.5, 'left');
-      const seg = (v, col) => { if (Math.abs(v - base) < 0.005) return; const x0 = Math.min(X(base), X(v)), w = Math.abs(X(v) - X(base)); const r = S.div('', { x: x0, y, w: Math.max(w, 2), h: 60, style: `background:${col};border-radius:6px;opacity:0.9` }); r.in(t, 0.5, 'none'); S.div(v.toFixed(2), { x: X(v) + (v > base ? 12 : -12), y: y + 30, cls: 'num', anchor: v > base ? 'lm' : 'rm', style: 'font-size:24px' }).in(t + 0.3, 0.4); };
-      seg(hi, 'rgba(70,211,154,0.75)'); seg(lo, 'rgba(255,77,94,0.8)');
+      S.div(lab, { x: 120, y: y + 30, cls: 'small', anchor: 'lm', style: 'color:#e9f2f9' }).in(t, 0.5, 'left');
+      // each bar end carries its value and the case that gives it
+      const seg = (v, cs, col) => {
+        if (Math.abs(v - base) < 0.005) return;
+        const x0 = Math.min(X(base), X(v)), w = Math.abs(X(v) - X(base)), right = v > base;
+        S.div('', { x: x0, y, w: Math.max(w, 2), h: 60, style: `background:${col};border-radius:6px;opacity:0.9` }).in(t, 0.5, 'none');
+        S.div(`<div class="num" style="font-size:24px">${v.toFixed(2)}</div><div class="tiny" style="color:#9fb3c4;margin-top:2px">${cs}</div>`,
+          { x: X(v) + (right ? 12 : -12), y: y + 30, anchor: right ? 'lm' : 'rm', style: `text-align:${right ? 'left' : 'right'};line-height:1.15;background:rgba(10,21,32,0.9);box-shadow:0 0 10px 6px rgba(10,21,32,0.9);border-radius:6px` }).in(t + 0.3, 0.4);
+      };
+      seg(hi, hiCase, 'rgba(70,211,154,0.75)'); seg(lo, loCase, 'rgba(255,77,94,0.8)');
     });
   }
 
