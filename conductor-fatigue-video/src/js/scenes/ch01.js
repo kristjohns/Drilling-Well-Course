@@ -1,6 +1,6 @@
 // Chapter 1 — the system and the rules: exploded cutaway of the wellhead system, definitions, the map of the standard, the recipe.
 import { E, ease, COL, clamp, smooth, ramp, lerp } from '../engine/core.js';
-import { Scene } from '../engine/scene.js';
+import { Scene, later } from '../engine/scene.js';
 import { titleCard, clause, step, STEPS } from '../engine/hud.js';
 import { camPath, camSpline, DEF, THREE } from '../three/world.js';
 import { updateSnow, revolve } from '../three/models.js';
@@ -99,7 +99,16 @@ export async function build(E, T, D) {
       a.T('s').init = 1;
       return a;
     };
-    card(120, 220, 540, 'Clause 8.1', 'Riser forces', 'Annex A riser loads act on the WH housing, WH extension, conductor housing and conductor extension. Load share WH system ↔ template shall be determined.', c('1.3', 'c81'));
+    // clause 8.1 is read out at length: its card starts large in the centre and settles into the grid before 13.3.6
+    const c81 = S3.card(`<div class="ref" style="color:${COL.cyan}">Clause 8.1</div><div style="font-weight:750;font-size:30px;margin-bottom:8px">Riser forces</div><div class="small">Annex A riser loads act on the WH housing, WH extension, conductor housing and conductor extension. <span style="color:var(--amber)">Load share WH system ↔ template shall be determined.</span></div>`, { x: 120, y: 220, w: 540 });
+    later(() => {
+      const w = c81.el.offsetWidth, h = c81.el.offsetHeight, t81 = c('1.3', 'c81');
+      const dx = 960 - (120 + w / 2), dy = 560 - (220 + h / 2);
+      c81.T('o').init = 0; c81.T('o').add(t81, 0.6, 1, ease.out3);
+      c81.T('x').init = dx; c81.T('y').init = dy + 24; c81.T('y').add(t81, 0.6, dy, ease.out3);
+      c81.T('s').init = 1.6;
+      c81.to(c('1.3', 'c1336') - 1.1, 1.0, { x: 0, y: 0, s: 1 }, ease.inOut3);
+    });
     card(690, 220, 540, 'Clause 13.3.6', 'Structural design', 'Template, conductor and well system; load share; conductor girth welds class C1; 100 mm relative displacement.', c('1.3', 'c1336'));
     card(1260, 220, 540, 'Annex A · A.3.5', 'Fatigue loads', 'Annual single-load moment range ΔM<sub>o</sub> and the bending moment histogram at the WH datum.', c('1.3', 'annA'), COL.amber);
     card(120, 520, 540, 'Annex B · B.2.6, B.4', 'Design format and capacity', 'Service life ≤ fatigue life / D<sub>F</sub>; M-N curves from the S-N method; Miner damage.', c('1.3', 'annB'), COL.amber);
