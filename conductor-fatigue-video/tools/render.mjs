@@ -59,6 +59,8 @@ async function worker(id) {
   if (err) throw new Error('BOOT ERROR ' + err);
   const cdp = await page.context().newCDPSession(page);
   for (;;) {
+    // touch <out>/STOP to let the workers finish their current chunk and quit (resume later via the .done markers)
+    if (fs.existsSync(path.join(opt.out, 'STOP'))) { log(`[w${id}] STOP file found, quitting after the current chunk`); break; }
     const ci = next++;
     if (ci >= chunks.length) break;
     const [a, b] = chunks[ci];
