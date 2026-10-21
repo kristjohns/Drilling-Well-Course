@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Conductor fatigue — NORSOK U-001</title>
+<link rel="stylesheet" href="../node_modules/katex/dist/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": {
+    "three": "../node_modules/three/build/three.module.js",
+    "three/addons/": "../node_modules/three/examples/jsm/",
+    "gsap": "../node_modules/gsap/index.js",
+    "gsap/": "../node_modules/gsap/",
+    "katex": "../node_modules/katex/dist/katex.mjs"
+} }
+</script>
+</head>
+<body>
+<div id="stage">
+  <div id="grid"></div>
+  <canvas id="gl" width="1920" height="1080"></canvas>
+  <div id="layer"></div>
+  <div id="hud"></div>
+  <div id="vignette"></div>
+  <div id="flash"></div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

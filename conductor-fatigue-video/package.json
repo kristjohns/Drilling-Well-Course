@@ -1,0 +1,16 @@
+{
+  "name": "conductor-fatigue-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tutorial video: fatigue analysis of the conductor and conductor/template interface per NORSOK U-001:2026",
+  "type": "module",
+  "scripts": {
+    "serve": "node tools/server.mjs 8080",
+    "render": "node tools/render.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.13.0",
+    "katex": "0.16.22",
+    "three": "0.170.0"
+  }
+}
