@@ -115,17 +115,21 @@ export async function build(E, T, D) {
       const cs = bef.cases[k];
       const pts = cs.x.map((x, i) => [Math.abs(cs.M[i]), x]);
       cc.curve(pts, { color: cols[k], width: k === '5' ? 6 : 3.5, t: k === '5' ? c('5.4', 'tan') + 0.6 : c('5.4', 'soft') + (k === '1' ? 0 : 0.4) });
-      const xl = S.div(`k = ${k} MPa`, { x: cc.X(Math.abs(cs.M[20])) + 14, y: cc.Y(cs.x[20]), cls: 'tiny', anchor: 'lm', style: `color:${cols[k]}` });
-      xl.in(k === '5' ? c('5.4', 'num') : c('5.4', 'soft') + 0.4, 0.5);
     }
+    // legend in the empty lower right of the chart (the curves bunch together near the mudline)
+    ['1', '5', '20'].forEach((k, i) => {
+      const y = cc.Y(29) + i * 46, tl = k === '5' ? c('5.4', 'num') : c('5.4', 'soft') + (k === '1' ? 0 : 0.4);
+      S.path(`M${cc.X(0.72)},${y} L${cc.X(0.86)},${y}`, { stroke: cols[k], width: k === '5' ? 6 : 3.5 }).in(tl, 0.5, 'none');
+      S.div(`k = ${k} MPa`, { x: cc.X(0.86) + 16, y, cls: 'tiny', anchor: 'lm', style: `color:${cols[k]}` }).in(tl, 0.5);
+    });
     const mx = cc.dot(k5.M_max, k5.x_max, { color: COL.coral, r: 11, t: c('5.4', 'num') });
     const tb = table(S, ['k = 5 MPa', ''], [
       ['β', `${k5.beta.toFixed(3)} 1/m`], ['1/β', `${k5.L_char.toFixed(1)} m`],
       ['M<sub>max</sub>', `${k5.M_max.toFixed(2)} M<sub>w</sub>`], ['at depth', `${k5.x_max.toFixed(1)} m`],
-    ], { x: 1000, y: 360, w: 520, t: c('5.4', 'num'), colCls: ['l', ''] });
+    ], { x: 1000, y: 360, t: c('5.4', 'num'), colCls: ['l', ''] });
     const kt = S.eq('\\cy{k_{\\theta,W}} = EI\\,\\beta \\approx ' + fmt(k5.k_theta_free / 1e6) + '\\ \\tfrac{\\text{MNm}}{\\text{rad}}', { x: 1000, y: 760, size: 46, align: 'left' });
     kt.in(c('5.4', 'ktheta'), 0.8, 'write');
-    const cmp = S.div(`vs template ≈ 533 MNm/rad → template would take ≈ ${(100 * 533 / (533 + k5.k_theta_free / 1e6)).toFixed(0)} % without a gap`, { x: 1000, y: 850, w: 820, cls: 'small' });
+    const cmp = S.div(`vs template ≈ 533 MNm/rad<br>→ without a gap the template would take ≈ ${(100 * 533 / (533 + k5.k_theta_free / 1e6)).toFixed(0)} %`, { x: 1000, y: 850, w: 820, cls: 'small' });
     cmp.in(c('5.4', 'compare'), 0.6);
   }
 
