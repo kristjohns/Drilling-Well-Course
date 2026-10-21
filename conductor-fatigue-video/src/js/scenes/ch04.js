@@ -123,6 +123,19 @@ export async function build(E, T, D) {
     const B = b('4.4');
     const S = new Scene(B.start, B.end);
     clause('NORSOK U-001:2026 · Table 4 · 13.3.6.4 · 13.3.7.2', B.start + 0.3, B.end);
+    // vertically: the well and the template foundation are two springs in parallel under the hang-off weight
+    {
+      const gx = 1180, gy0 = 650, gy1 = 880;
+      const sp = S.g(); sp.in(B.start + 0.4, 0.6, 'none');
+      S.rect(gx - 40, gy0 - 22, 440, 22, { fill: '#5d6b78', stroke: COL.ink2, width: 2, parent: sp.el, o: 1, rx: 4 });
+      S.path(springPath(gx + 70, gy0, gy1, { coils: 6, w: 22 }), { stroke: COL.cyan, width: 4, parent: sp.el, o: 1 });
+      S.path(springPath(gx + 290, gy0, gy1, { coils: 6, w: 22 }), { stroke: COL.yellow, width: 4, parent: sp.el, o: 1 });
+      ground(S, gx - 60, gx + 420, gy1, { parent: sp.el });
+      S.arrow(gx + 180, gy0 - 110, gx + 180, gy0 - 30, { color: COL.amber, width: 5, parent: sp.el, o: 1 });
+      S.svgText('hang-off weight', gx + 200, gy0 - 80, { anchor: 'start', size: 22, fill: COL.amber, parent: sp.el, o: 1 });
+      S.svgText('well', gx + 70, gy1 + 36, { size: 22, fill: COL.cyan, parent: sp.el, o: 1 });
+      S.svgText('template foundation', gx + 290, gy1 + 36, { size: 22, fill: COL.yellow, parent: sp.el, o: 1 });
+    }
     const t4 = table(S, ['Concept', 'Load share factor'], D.norsok.table4.map((r) => [r[0], r[1]]), { x: 120, y: 240, w: 720, t: c('4.4', 't4'), title: 'Table 4 · indicative structure vertical load share', colCls: ['l', ''] });
     S.div('a: based on wells with 30 in conductors; may conservatively be used for 36 in · b: corner slot / centre slot', { x: 140, y: 640, w: 700, cls: 'tiny' }).in(c('4.4', 't4') + 1, 0.5);
     const card = S.card(`<div class="ref">13.3.6.4 a) · 13.3.7.2</div><div style="font-weight:750;font-size:32px;margin-bottom:12px">Fully supporting conductor methodology</div><div class="small" style="line-height:1.6">• conductor designed for <b class="c-amber">all</b> vertical hang-off loads<br>• template designed for its <b class="c-amber">stiffness-based share</b> (Table 4, confirm with a spring model)</div>`, { x: 980, y: 260, w: 820 });
