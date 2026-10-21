@@ -248,6 +248,12 @@ export async function build(E, T, D) {
     };
     plate(200, 330, 90, 'thin');
     plate(200, 560, 200, 'thick');
+    // the two reasons, as they are said (they make room for the formula)
+    const why = [['decays', 'the toe stress decays more slowly through a thick wall'], ['volume', 'more stressed volume, so more room for flaws']];
+    why.forEach(([wd, txt], i) => {
+      S.div(`<div style="display:flex;gap:16px;align-items:center"><span style="width:12px;height:12px;border-radius:50%;background:#ff6f61;flex:none"></span><span class="body" style="color:var(--ink)">${txt}</span></div>`,
+        { x: 760, y: 420 + i * 90, w: 1000 }).in(T.w('2.9', wd), 0.6, 'left').out(c('2.9', 'tf') - 0.5, 0.5);
+    });
     const e = S.eq('\\log \\cn N = \\log\\bar a - \\cv m \\log\\!\\left[\\Ds \\p{tf}{\\left(\\frac{t}{t_{\\mathrm{ref}}}\\right)^{k}}\\right]', { x: 1230, y: 330, size: 50 });
     e.in(c('2.9', 'tf'), 0.8, 'write');
     e.hl('tf', c('2.9', 'tf') + 1.6, { color: COL.amber });
@@ -262,7 +268,7 @@ export async function build(E, T, D) {
     const B = b('2.10');
     const S = new Scene(B.start, B.end);
     clause('NORSOK U-001:2026 · 13.3.6.2 and B.10.4', B.start + 0.5, B.end);
-    quoteCard(S, '13.3.6.2 · conductor', '<span class="q">Girth welds on the conductor</span> (e.g. conductor housing to conductor extension) <span class="q">shall meet S–N class C1</span> in accordance with DNV-RP-C203:2024.', { x: 120, y: 260, w: 760, t: c('2.10', 'req'), size: 32 });
+    quoteCard(S, '13.3.6.2 · conductor', '<span class="q">Girth welds on the conductor</span> (e.g. conductor housing to conductor extension) <span class="q">shall meet S–N class C1</span> in accordance with DNV-RP-C203:2024.', { x: 120, y: 260, w: 760, t: B.start + 0.6, size: 32 });
     const cc = S.chart({ x: 1020, y: 230, w: 760, h: 560, xlog: true, ylog: true, xmin: 1e4, xmax: 1e9, ymin: 20, ymax: 600,
       xticks: logTicks(1e4, 1e9), yticks: [20, 50, 100, 200, 500], xfmt: pow10, yfmt: String, xlabel: 'N', ylabel: 'Δσ [MPa]', title: 'IN AIR' });
     cc.show(c('2.10', 'req') + 0.4);
