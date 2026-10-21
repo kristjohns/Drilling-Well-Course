@@ -78,15 +78,17 @@ export async function build(E, T, D) {
     });
     const band = S.rect(cc.X(1000), cc.y, cc.X(2300) - cc.X(1000), cc.h, { fill: 'rgba(255,111,97,0.08)', stroke: 'rgba(255,111,97,0.5)', width: 2, rx: 6 });
     band.in(c('9.4', 'mid'), 0.5, 'none');
-    S.div('1 000 – 2 300 kNm do most of the work', { x: cc.X(1650), y: cc.y + 20, cls: 'small', anchor: 'ct', style: 'color:#ff6f61' }).in(c('9.4', 'mid') + 0.3, 0.5);
-    S.div('3.9 million cycles at 144 kNm: almost nothing', { x: cc.X(180), y: cc.Y(1.5) - 30, cls: 'tiny', anchor: 'lb' }).in(c('9.4', 'where'), 0.5);
+    S.div('← 1 000 – 2 300 kNm do most of the work', { x: cc.X(2330), y: cc.Y(9.5), cls: 'small', anchor: 'lm', style: 'color:#ff6f61' }).in(c('9.4', 'mid') + 0.3, 0.5);
+    const lx = cc.X(143.6), ly = cc.Y(0) + 96;
+    S.path(`M${lx},${cc.Y(0) + 6} L${lx},${ly - 14}`, { stroke: COL.dim, width: 1.5 }).in(c('9.4', 'where'), 0.5, 'none');
+    S.div('3.9 million cycles at 144 kNm do almost nothing', { x: lx - 8, y: ly, cls: 'tiny', anchor: 'lm' }).in(c('9.4', 'where'), 0.5);
     const top = [...rows].sort((a, b2) => b2.d - a.d).slice(0, 6).sort((a, b2) => a.dM - b2.dM);
-    const tb = table(S, ['ΔM<sub>i</sub>', 'n<sub>i</sub>', 'N<sub>i</sub>', 'n<sub>i</sub>/N<sub>i</sub>'], top.map((r) => [fmt(r.dM), fmt(r.n), sciS(r.N), r.d.toFixed(4)]), { x: 1150, y: 200, w: 650, t: c('9.4', 'table') + 1.0, title: 'largest contributions (of 29 bins)' });
-    const e1 = S.eq('D_{\\text{year}} = \\sum_{i=1}^{29}\\dfrac{n_i}{\\cn{N_i}} = ' + g.D.toFixed(4), { x: 1150, y: 690, size: 44, align: 'left' });
+    const tb = table(S, ['ΔM<sub>i</sub>', 'n<sub>i</sub>', 'N<sub>i</sub>', 'n<sub>i</sub>/N<sub>i</sub>'], top.map((r) => [fmt(r.dM), fmt(r.n), sciS(r.N), r.d.toFixed(4)]), { x: 1150, y: 170, w: 650, t: c('9.4', 'table') + 1.0, title: 'largest contributions (of 29 bins)' });
+    const e1 = S.eq('D_{\\text{year}} = \\sum_{i=1}^{29}\\dfrac{n_i}{\\cn{N_i}} = ' + g.D.toFixed(4), { x: 1150, y: 730, size: 40, align: 'left' });
     e1.in(c('9.4', 'total'), 0.7, 'write');
-    const e2 = S.eq('T_f = \\dfrac{1}{' + g.D.toFixed(4) + '} = ' + g.life.toFixed(1) + '\\ \\text{yr}', { x: 1150, y: 800, size: 44, align: 'left' });
+    const e2 = S.eq('T_f = \\dfrac{1}{' + g.D.toFixed(4) + '} = ' + g.life.toFixed(1) + '\\ \\text{yr}', { x: 1150, y: 856, size: 40, align: 'left' });
     e2.in(c('9.4', 'life'), 0.7, 'write');
-    const e3 = S.eq('\\dfrac{T_f}{\\cg{D_F}} = ' + g.service.toFixed(2) + '\\ \\text{yr} \\approx ' + fmt(g.days) + '\\ \\text{days}', { x: 1150, y: 910, size: 46, align: 'left' });
+    const e3 = S.eq('\\dfrac{T_f}{\\cg{D_F}} = ' + g.service.toFixed(2) + '\\ \\text{yr} \\approx ' + fmt(g.days) + '\\ \\text{days}', { x: 1150, y: 972, size: 44, align: 'left' });
     e3.in(c('9.4', 'svc'), 0.7, 'write');
     stamp(S, 'GW1 PASSES · ≥ 1 YEAR', { x: 600, y: 900, t: c('9.4', 'pass'), kind: 'pass' });
   }
@@ -126,7 +128,7 @@ export async function build(E, T, D) {
     const cc = S.chart({ x: 220, y: 200, w: 900, h: 640, ylog: true, xmin: 0, xmax: 8, ymin: 0.1, ymax: 20, xticks: [0, 1, 2, 4, 8], yticks: [0.1, 0.3, 1, 3, 10], xfmt: (v) => v + ' mm', yfmt: String, xlabel: 'radial gap in the template slot', ylabel: 'fatigue service life [years]', title: 'MOVE THE GAP' });
     cc.show(B.start + 0.3);
     const one = S.line(cc.X(0), cc.Y(1), cc.X(8), cc.Y(1), { stroke: COL.green, width: 3, dash: '10 8' }); one.in(B.start + 0.6, 0.5, 'none');
-    S.div('1 year minimum', { x: cc.X(8) - 10, y: cc.Y(1) - 14, cls: 'small', anchor: 'rb', style: 'color:#46d39a' }).in(B.start + 0.8, 0.5);
+    S.div('1 year minimum', { x: cc.X(8) - 10, y: cc.Y(1) + 12, cls: 'small', anchor: 'rt', style: 'color:#46d39a' }).in(B.start + 0.8, 0.5);
     const gwPts = gp.map(([x, v]) => [x, v.gw / 10]), tsPts = gp.map(([x, v]) => [x, v.T / 10]);
     cc.curve(gwPts, { color: COL.amber, width: 5, t: c('9.7', 'gap') });
     cc.curve(tsPts, { color: COL.yellow, width: 5, t: c('9.7', 'gap') + 0.4 });
@@ -153,8 +155,8 @@ export async function build(E, T, D) {
       ['soil 2 / 20 MPa', S9.k_soil.find((r) => r[0] === 2)[1].gw / 10, S9.k_soil.find((r) => r[0] === 20)[1].gw / 10, 'soil'],
       ['cement shortfall 0 / 15 m', S9.shortfall.find((r) => r[0] === 0)[1].gw / 10, S9.shortfall.find((r) => r[0] === 15)[1].gw / 10, 'soil'],
     ];
-    const X = (v) => 960 + 300 * Math.log10(v / base) / Math.log10(2.5);
-    S.div('GW1 fatigue service life [years] · base case', { x: 960, y: 170, cls: 'small', anchor: 'cm' }).in(c('9.8', 'tornado'), 0.5);
+    const X = (v) => 960 + 560 * Math.log10(v / base);        // log scale: equal factors, equal lengths
+    S.div('GW1 fatigue service life [years] · base case · log scale', { x: 960, y: 150, cls: 'small', anchor: 'cm' }).in(c('9.8', 'tornado'), 0.5);
     const axis = S.line(X(base), 220, X(base), 900, { stroke: COL.ink2, width: 3 }); axis.in(c('9.8', 'tornado'), 0.5, 'none');
     S.div(base.toFixed(2), { x: X(base), y: 920, cls: 'num', anchor: 'ct', style: 'font-size:28px' }).in(c('9.8', 'tornado'), 0.5);
     const one = S.line(X(1), 220, X(1), 900, { stroke: COL.green, width: 2, dash: '8 6' }); one.in(c('9.8', 'tornado'), 0.5, 'none');
@@ -162,7 +164,7 @@ export async function build(E, T, D) {
     ent.forEach(([lab, hi, lo, cue], i) => {
       const y = 260 + i * 125, t = c('9.8', cue) - 0.3 + (cue === 'soil' && i === 4 ? 0.6 : 0);
       S.div(lab, { x: 120, y: y + 30, cls: 'small', style: 'color:#e9f2f9' }).in(t, 0.5, 'left');
-      const seg = (v, col) => { const x0 = Math.min(X(base), X(v)), w = Math.abs(X(v) - X(base)); const r = S.div('', { x: x0, y, w: Math.max(w, 2), h: 60, style: `background:${col};border-radius:6px;opacity:0.9` }); r.in(t, 0.5, 'none'); S.div(v.toFixed(2), { x: X(v) + (v > base ? 12 : -12), y: y + 30, cls: 'num', anchor: v > base ? 'lm' : 'rm', style: 'font-size:24px' }).in(t + 0.3, 0.4); };
+      const seg = (v, col) => { if (Math.abs(v - base) < 0.005) return; const x0 = Math.min(X(base), X(v)), w = Math.abs(X(v) - X(base)); const r = S.div('', { x: x0, y, w: Math.max(w, 2), h: 60, style: `background:${col};border-radius:6px;opacity:0.9` }); r.in(t, 0.5, 'none'); S.div(v.toFixed(2), { x: X(v) + (v > base ? 12 : -12), y: y + 30, cls: 'num', anchor: v > base ? 'lm' : 'rm', style: 'font-size:24px' }).in(t + 0.3, 0.4); };
       seg(hi, 'rgba(70,211,154,0.75)'); seg(lo, 'rgba(255,77,94,0.8)');
     });
   }

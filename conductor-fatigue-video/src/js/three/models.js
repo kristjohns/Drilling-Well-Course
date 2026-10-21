@@ -521,6 +521,11 @@ export async function buildModels(world) {
   const SKY0 = { dir: M.sun.dir.value.clone(), col: M.sun.col.value.clone(), i: 0, sky: M.sun.sky.value.clone(), top: M.sky.top.value.clone(), hor: M.sky.hor.value.clone(), low: M.sky.low.value.clone() };
   world.resetModels = () => {
     world.clip.constant = 1e4;
+    DEF.uAmp.value = 0; DEF.uStressMix.value = 0; DEF.uGlow.value = 0; DEF.uGlowY.value = -999;
+    const parts = world.models.wellCut && world.models.wellCut.userData.parts;
+    if (parts) for (const k in parts) parts[k].position.y = 0;
+    if (world.models.connCut) world.models.connCut.position.y = 0;
+    M.cond.emissive.setRGB(0, 0, 0);
     M.sun.dir.value.copy(SKY0.dir); M.sun.col.value.copy(SKY0.col); M.sun.i.value = 0; M.sun.sky.value.copy(SKY0.sky);
     M.sky.top.value.copy(SKY0.top); M.sky.hor.value.copy(SKY0.hor); M.sky.low.value.copy(SKY0.low); M.sky.disc.value = 0;
   };

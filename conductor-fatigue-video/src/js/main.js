@@ -40,7 +40,11 @@ async function boot() {
     runLayout();
     window.__duration = T.duration;
     window.__sfx = E.sfx;
-    window.__seek = (t) => { E.seek(t); return true; };
+    // __seek returns whether the picture can have changed: any DOM mutation or a WebGL draw. The renderer re-uses the
+    // previous screenshot when it has not, which makes the many static holds almost free to render.
+    const mo = new MutationObserver(() => {});
+    mo.observe(E.root, { subtree: true, attributes: true, characterData: true, childList: true });
+    window.__seek = (t) => { E.world.didRender = false; E.seek(t); const changed = mo.takeRecords().length > 0 || E.world.didRender; return changed; };
     E.seek(Number(q.get('t') || 0));
     window.__ready = true;
     if (q.get('play')) play(T, Number(q.get('t') || 0));

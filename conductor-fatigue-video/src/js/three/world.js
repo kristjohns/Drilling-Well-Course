@@ -100,13 +100,14 @@ export class World {
     this.models = {};
   }
   async init() {
-    const r = this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true, preserveDrawingBuffer: true, powerPreference: 'high-performance' });
+    const qp = new URLSearchParams(location.search);          // render tuning switches (aa, pdb, shadow) for benchmarks
+    const r = this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: qp.get('aa') !== '0', preserveDrawingBuffer: qp.get('pdb') !== '0', powerPreference: 'high-performance' });
     r.setPixelRatio(1);
     r.setSize(W, H, false);
     r.outputColorSpace = THREE.SRGBColorSpace;
     r.toneMapping = THREE.ACESFilmicToneMapping;
     r.toneMappingExposure = 1.05;
-    r.shadowMap.enabled = true;
+    r.shadowMap.enabled = qp.get('shadow') !== '0';
     r.shadowMap.type = THREE.PCFShadowMap;
     r.localClippingEnabled = true;
     const scene = this.scene = new THREE.Scene();
@@ -172,6 +173,7 @@ export class World {
     this.scene.fog.density = fog;
     if (s.update) s.update(t);
     this.renderer.render(this.scene, this.camera);
+    this.didRender = true;
   }
   // shots that relight the scene (e.g. dawn) set lights in update(); every new shot starts from the defaults
   resetLights() {
