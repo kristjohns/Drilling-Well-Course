@@ -125,6 +125,7 @@ export async function build(E, T, D) {
         md.rig.position.y = 354 + 1.3 * Math.sin(0.55 * t);
         md.rig.rotation.z = 0.012 * Math.sin(0.55 * t + 0.6);
         md.sky.visible = above > 0.01;
+        md.sea.visible = y > 250; md.rig.visible = y > 250;           // fully fogged out further down
         md.bop.visible = true;
         // dawn light (blended in as the camera breaks the surface)
         M.sun.dir.value.copy(sunDir); M.sun.col.value.copy(dawn.sun); M.sun.i.value = above; M.sun.sky.value.copy(dawn.sea);

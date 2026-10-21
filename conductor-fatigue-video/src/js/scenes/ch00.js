@@ -53,7 +53,7 @@ export async function build(E, T, D) {
       W3.update(t);
       md.rig.position.y = 354 + 1.3 * Math.sin(0.55 * t);
       md.rig.rotation.z = 0.012 * Math.sin(0.55 * t + 0.6);
-      md.sea.visible = true; md.sky.visible = above > 0.01;
+      md.sea.visible = y > 250; md.rig.visible = y > 250; md.sky.visible = above > 0.01;     // fully fogged out below 250 m
       M.sun.dir.value.copy(sunA); M.sun.col.value.copy(day.sun); M.sun.i.value = 0.7 * above; M.sun.sky.value.copy(day.sea);
       M.sky.top.value.copy(day.top); M.sky.hor.value.copy(day.hor); M.sky.low.value.copy(day.low); M.sky.disc.value = 0.8;
       const d0 = W3.lightDefaults;

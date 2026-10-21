@@ -11,7 +11,7 @@ import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import { startServer } from './server.mjs';
 
 const args = process.argv.slice(2);
-const opt = { workers: 3, fps: 30, chunk: 450, crf: 14, preset: 'veryfast', format: 'jpeg', quality: 95, from: 0, to: 0, out: 'build/render' };
+const opt = { workers: 3, fps: 30, chunk: 450, crf: 14, preset: 'veryfast', format: 'jpeg', quality: 95, from: 0, to: 0, out: 'build/render', select: 'all' };
 for (let i = 0; i < args.length; i++) {
   if (!args[i].startsWith('--')) continue;
   const k = args[i].slice(2), v = args[i + 1];
@@ -27,13 +27,27 @@ const tl = JSON.parse(fs.readFileSync('src/data/timeline.json', 'utf8'));
 const dur = tl.duration;
 const t0 = opt.from, t1 = opt.to || dur;
 const f0 = Math.round(t0 * opt.fps), f1 = Math.min(Math.round(dur * opt.fps), Math.round(t1 * opt.fps));
-const chunks = [];
+let chunks = [];
 for (let s = f0; s < f1; s += opt.chunk) chunks.push([s, Math.min(f1, s + opt.chunk)]);
+const allChunks = chunks.slice();
+// --select 3d | 2d: only the chunks that overlap a WebGL shot, or only the others. SwiftShader already spreads one 3D
+// frame over all cores, so 3D chunks render best on one worker while 2D chunks run on the others.
+if (opt.select !== 'all') {
+  const pb = await chromium.launch(LAUNCH);
+  const pg = await (await pb.newContext({ viewport: { width: 1920, height: 1080 } })).newPage();
+  await pg.goto(`${url}/src/index.html?render=1`);
+  await pg.waitForFunction('window.__ready === true || window.__error', null, { timeout: 300000 });
+  const shots = await pg.evaluate('window.__shots');
+  await pb.close();
+  const is3d = ([a, b]) => shots.some(([s0, s1]) => a / opt.fps < s1 && b / opt.fps > s0);
+  chunks = chunks.filter((c) => (opt.select === '3d') === is3d(c));
+}
 log(`duration ${dur.toFixed(3)} s | frames ${f0}..${f1} (${f1 - f0}) | ${chunks.length} chunks | ${opt.workers} workers | ${opt.format}`);
 
 let next = 0, done = 0, framesDone = 0;
 const tStart = Date.now();
-const segPath = (i) => path.join(opt.out, `seg_${String(chunks[i][0]).padStart(6, '0')}.mp4`);
+const segOf = (c) => path.join(opt.out, `seg_${String(c[0]).padStart(6, '0')}.mp4`);
+const segPath = (i) => segOf(chunks[i]);
 
 async function worker(id) {
   const browser = await chromium.launch(LAUNCH);
@@ -87,8 +101,13 @@ async function worker(id) {
 await Promise.all(Array.from({ length: opt.workers }, (_, i) => worker(i)));
 srv.close();
 
-const list = chunks.map((_, i) => `file '${path.resolve(segPath(i))}'`).join('\n');
-fs.writeFileSync(path.join(opt.out, 'list.txt'), list + '\n');
-const name = opt.from || opt.to ? `video_${t0}-${t1}.mp4` : 'video.mp4';
-execFileSync('ffmpeg', ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', path.join(opt.out, 'list.txt'), '-c', 'copy', path.join(opt.out, name)], { stdio: 'inherit' });
-log(`done in ${((Date.now() - tStart) / 60000).toFixed(1)} min -> ${path.join(opt.out, name)}`);
+const missing = allChunks.filter((c) => !fs.existsSync(segOf(c) + '.done')).length;
+if (missing) {
+  log(`${opt.select} pass done in ${((Date.now() - tStart) / 60000).toFixed(1)} min; ${missing} chunks still to render elsewhere`);
+} else {
+  const list = allChunks.map((c) => `file '${path.resolve(segOf(c))}'`).join('\n');
+  fs.writeFileSync(path.join(opt.out, 'list.txt'), list + '\n');
+  const name = opt.from || opt.to ? `video_${t0}-${t1}.mp4` : 'video.mp4';
+  execFileSync('ffmpeg', ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', path.join(opt.out, 'list.txt'), '-c', 'copy', path.join(opt.out, name)], { stdio: 'inherit' });
+  log(`done in ${((Date.now() - tStart) / 60000).toFixed(1)} min -> ${path.join(opt.out, name)}`);
+}

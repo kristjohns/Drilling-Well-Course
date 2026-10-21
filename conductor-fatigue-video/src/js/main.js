@@ -39,6 +39,7 @@ async function boot() {
     runLayout();
     runLayout();
     window.__duration = T.duration;
+    window.__shots = E.world.shots.map((s) => [s.t0, s.t1]);      // 3D shot intervals (the renderer schedules them apart)
     window.__sfx = E.sfx;
     // __seek returns whether the picture can have changed: any DOM mutation or a WebGL draw. The renderer re-uses the
     // previous screenshot when it has not, which makes the many static holds almost free to render.
