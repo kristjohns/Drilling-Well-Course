@@ -171,7 +171,7 @@ export function hexRGB(h) {
 }
 export const COL = {
   ink: '#e9f2f9', ink2: '#b9cad8', dim: '#7f97aa', amber: '#ffb547', coral: '#ff6f61', cyan: '#4fd1ff', violet: '#b794f6',
-  green: '#46d39a', red: '#ff4d5e', yellow: '#f2c14e', steel: '#b8c7d4', soil: '#c9a46c', cement: '#a7b1b9', blue: '#5aa9ff',
+  green: '#46d39a', red: '#ff4d5e', yellow: '#f2c14e', lemon: '#ffe66d', steel: '#b8c7d4', soil: '#c9a46c', cement: '#a7b1b9', blue: '#5aa9ff',
   line: 'rgba(190,220,245,0.16)',
 };
 

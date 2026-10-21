@@ -52,18 +52,23 @@ export async function build(E, T, D) {
     const S = new Scene(B.start, B.end);
     clause('NORSOK U-001:2026 · B.4.1 (nonlinear relation, FEA)', B.start + 0.3, B.end);
     const tr = D.transfer;
-    const cc = S.chart({ x: 220, y: 200, w: 1000, h: 640, xmin: 0, xmax: 6000, ymin: 0, ymax: 210, xticks: [0, 1500, 3000, 4500, 6000], yticks: [0, 50, 100, 150, 200], xfmt: (v) => fmt(v), yfmt: String,
+    // zoomed on the low moments where the contacts change state: the gap closes at ~160 kNm
+    const cc = S.chart({ x: 220, y: 200, w: 1000, h: 640, xmin: 0, xmax: 2000, ymin: 0, ymax: 80, xticks: [0, 500, 1000, 1500, 2000], yticks: [0, 20, 40, 60, 80], xfmt: (v) => fmt(v), yfmt: String,
       xlabel: 'WH moment range ΔM<sub>w</sub> [kNm]', ylabel: 'hot-spot stress range [MPa]' });
     cc.show(B.start + 0.3);
-    const lin = [[0, 0], [6000, tr[0].ds_gw / tr[0].dM * 6000]];
-    cc.curve(lin, { color: COL.dim, width: 2, dash: '8 8', t: c('7.3', 'nonlin') });
-    S.div('proportional', { x: cc.X(5200), y: cc.Y(lin[1][1] * 5200 / 6000) - 18, cls: 'tiny', anchor: 'cb' }).in(c('7.3', 'nonlin') + 0.6, 0.5);
-    cc.curve(tr.map((p) => [p.dM, p.ds_gw]), { color: COL.amber, width: 5, t: c('7.3', 'gwcurve') });
-    cc.curve([[0, 0], ...tr.map((p) => [p.dM, p.ds_T])], { color: COL.yellow, width: 5, dash: null, t: c('7.3', 'tscurve') });
-    S.div('GW1 · conductor girth weld', { x: cc.X(4600), y: cc.Y(tr.find((p) => p.dM > 4500).ds_gw) - 30, cls: 'small', anchor: 'rb', style: 'color:#ffb547' }).in(c('7.3', 'gwcurve') + 0.8, 0.5);
-    S.div('TS1 · template slot weld', { x: cc.X(5900), y: cc.Y(190) , cls: 'small', anchor: 'rb', style: 'color:#f2c14e' }).in(c('7.3', 'tscurve') + 0.8, 0.5);
-    const gapz = S.rect(cc.X(0), cc.y, cc.X(230) - cc.X(0), cc.h, { fill: 'rgba(242,193,78,0.10)', stroke: 'none' }); gapz.in(c('7.3', 'tscurve') + 0.5, 0.5, 'none');
-    S.div('gap open', { x: cc.X(115), y: cc.y + 30, cls: 'tiny', anchor: 'ct', style: 'color:#f2c14e' }).in(c('7.3', 'tscurve') + 0.6, 0.5);
+    const k0 = tr[0].ds_gw / tr[0].dM;
+    cc.curve([[0, 0], [2000, k0 * 2000]], { color: COL.dim, width: 2, dash: '8 8', t: c('7.3', 'nonlin') });
+    S.div('proportional', { x: cc.X(900) - 4, y: cc.Y(k0 * 900) - 10, cls: 'tiny', anchor: 'rb' }).in(c('7.3', 'nonlin') + 0.6, 0.5);
+    cc.curve([[0, 0], ...tr.map((p) => [p.dM, p.ds_gw])], { color: COL.amber, width: 5, t: c('7.3', 'gwcurve') });
+    cc.curve([[0, 0], ...tr.map((p) => [p.dM, p.ds_T])], { color: COL.lemon, width: 5, t: c('7.3', 'tscurve') });
+    // legend in the empty lower right
+    [['GW1 · conductor girth weld', COL.amber, 19, 'gwcurve'], ['TS1 · template slot weld', COL.lemon, 11, 'tscurve']].forEach(([txt, col, yv, cue]) => {
+      S.path(`M${cc.X(1170)},${cc.Y(yv)} L${cc.X(1270)},${cc.Y(yv)}`, { stroke: col, width: 5 }).in(c('7.3', cue) + 0.8, 0.5, 'none');
+      S.div(txt, { x: cc.X(1270) + 14, y: cc.Y(yv), cls: 'small', anchor: 'lm', style: `color:${col}` }).in(c('7.3', cue) + 0.8, 0.5);
+    });
+    const gap0 = 161;
+    const gapz = S.rect(cc.X(0), cc.y, cc.X(gap0) - cc.X(0), cc.h, { fill: 'rgba(255,230,109,0.10)', stroke: 'none' }); gapz.in(c('7.3', 'tscurve') + 0.5, 0.5, 'none');
+    S.div('← gap open: TS1 carries nothing', { x: cc.X(gap0) + 12, y: cc.Y(70), cls: 'tiny', anchor: 'lm', style: `color:${COL.lemon}` }).in(c('7.3', 'tscurve') + 0.6, 0.5);
     quoteCard(S, 'B.4.1', 'For connectors and wellheads there may be a <span class="q">nonlinear relation between load and stress</span>, finite element analysis shall be used to determine fatigue stress ranges at fatigue critical region(s).', { x: 1300, y: 260, w: 500, t: c('7.3', 'nonlin'), size: 25 });
   }
 
@@ -150,9 +155,9 @@ export async function build(E, T, D) {
     cc.show(c('7.6', 'six') + 0.2);
     pts.forEach((p, i) => {
       cc.dot(p.N_gw, p.dM, { color: COL.amber, r: 10, t: c('7.6', 'six') + 0.5 + i * 0.25 });
-      if (p.N_T) cc.dot(p.N_T, p.dM, { color: COL.yellow, r: 8, t: c('7.6', 'tsp') + i * 0.2, stroke: '#3b2a00' });
+      if (p.N_T) cc.dot(p.N_T, p.dM, { color: COL.lemon, r: 8, t: c('7.6', 'tsp') + i * 0.2, stroke: '#3b2a00' });
     });
-    S.div('● GW1 &nbsp; ● TS1', { x: 1180, y: 880, cls: 'small', style: 'color:#ffb547' }).in(c('7.6', 'tsp'), 0.5);
+    S.div(`<span style="color:#ffb547">● GW1</span> &nbsp; <span style="color:${COL.lemon}">● TS1</span>`, { x: 1180, y: 880, cls: 'small' }).in(c('7.6', 'tsp'), 0.5);
     S.div('S-N: DNV-RP-C203 (2016) C1 / D, seawater + CP · thickness factor 1.11 for GW1 · teaching values', { x: 100, y: 990, cls: 'tiny' }).in(c('7.6', 'six') + 1.5, 0.5);
   }
 
