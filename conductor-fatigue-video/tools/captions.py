@@ -162,6 +162,13 @@ def rewrite(tokens):
             out.append({'w': rep + p, 's': tokens[i]['s'], 'e': tokens[i + n - 1]['e']})
             i += n
             continue
+        # S-N class names: "C one" -> C1, "D one" -> D1 (upper-case class letters only)
+        if re.fullmatch(r'[BCDEFGW]', split_punct(tokens[i]['w'])[0]) and i + 1 < len(tokens) and words[i + 1] in DIGIT and not stop[i] \
+                and words[i + 1] != 'oh' and not (i + 2 < len(tokens) and words[i + 2] in ('point', 'hundred', 'thousand')):
+            sep = '.' if tokens[i]['w'] == 'B' else ''            # B followed by a number is always a formula (B.3, B.8)
+            out.append({'w': tokens[i]['w'] + sep + str(DIGIT[words[i + 1]]) + split_punct(tokens[i + 1]['w'])[1], 's': tokens[i]['s'], 'e': tokens[i + 1]['e']})
+            i += 2
+            continue
         num = parse_number(words, i, stop)
         if num:
             txt, j = num
