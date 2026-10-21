@@ -78,17 +78,17 @@ export async function build(E, T, D) {
     const inner = sel.map(([z, i]) => [Math.abs(2 * pr.M_in[i]) / 1e3, z]);
     const free = [[3000, 0], [3000 * (1 + 16 / 13.7), 16]];
     cc.curve(free, { color: COL.dim, width: 2, dash: '8 8', t: c('6.3', 'gw1') - 0.8 });
-    S.div('no load share: M<sub>w</sub>(1 + z/H)', { x: cc.X(3000 * (1 + 10 / 13.7)) + 8, y: cc.Y(10), cls: 'tiny', anchor: 'lm' }).in(c('6.3', 'gw1') - 0.4, 0.5);
+    S.div('no load share: M<sub>w</sub>(1 + z/H)', { x: cc.X(4500) + 12, y: cc.Y(13.7 * (4500 / 3000 - 1)), cls: 'tiny', anchor: 'lm' }).in(c('6.3', 'gw1') - 0.4, 0.5);
     cc.curve(inner, { color: COL.blue, width: 4, t: c('6.3', 'gw1') - 0.4 });
     cc.curve(outer, { color: COL.amber, width: 5, t: c('6.3', 'gw1') });
-    S.div('conductor string', { x: cc.X(3200), y: cc.Y(6.5), cls: 'tiny', anchor: 'lm', style: 'color:#ffb547' }).in(c('6.3', 'gw1') + 1.0, 0.5);
+    S.div('conductor string', { x: cc.X(1400), y: cc.Y(8.5), cls: 'tiny', anchor: 'lm', style: 'color:#ffb547' }).in(c('6.3', 'gw1') + 1.0, 0.5);
     S.div('WH / surface casing string', { x: cc.X(600), y: cc.Y(14.5), cls: 'tiny', anchor: 'lm', style: 'color:#5aa9ff' }).in(c('6.3', 'gw1') + 1.0, 0.5);
     const dot = cc.dot(p3000.dM_gw, 3.0, { color: COL.coral, r: 11, t: c('6.3', 'm') });
     S.line(cc.X(0), cc.Y(3.0), cc.X(4500), cc.Y(3.0), { stroke: 'rgba(255,111,97,0.5)', width: 2, dash: '6 6' }).in(c('6.3', 'gw1'), 0.5, 'none');
-    S.div('GW1 · 3.0 m', { x: cc.X(4400), y: cc.Y(3.0) - 16, cls: 'tiny', anchor: 'rb', style: 'color:#ff6f61' }).in(c('6.3', 'gw1'), 0.5);
-    const e1 = S.eq('\\cm{\\Delta M_{GW1}} = ' + fmt(p3000.dM_gw) + '\\ \\text{kNm}', { x: 960, y: 380, size: 52, align: 'left' });
+    S.div('GW1 · 3.0 m', { x: cc.X(4500) + 12, y: cc.Y(3.0), cls: 'tiny', anchor: 'lm', style: 'color:#ff6f61' }).in(c('6.3', 'gw1'), 0.5);
+    const e1 = S.eq('\\cm{\\Delta M_{GW1}} = ' + fmt(p3000.dM_gw) + '\\ \\text{kNm}', { x: 960, y: 440, size: 52, align: 'left' });
     e1.in(c('6.3', 'm'), 0.7, 'write');
-    const e2 = S.eq('\\cs{\\Delta\\sigma_{\\mathrm{nom}}} = \\dfrac{' + fmt(p3000.dM_gw) + '\\times10^{6}}{2.820\\times10^{7}} = ' + (p3000.ds_gw / ex.inputs.SCF_gw).toFixed(1) + '\\ \\text{MPa}', { x: 960, y: 560, size: 46, align: 'left' });
+    const e2 = S.eq('\\cs{\\Delta\\sigma_{\\mathrm{nom}}} = \\dfrac{' + fmt(p3000.dM_gw) + '\\times10^{6}}{2.820\\times10^{7}} = ' + (p3000.ds_gw / ex.inputs.SCF_gw).toFixed(1) + '\\ \\text{MPa}', { x: 960, y: 620, size: 46, align: 'left' });
     e2.in(c('6.3', 'nom'), 0.8, 'write');
     e2.boxed(c('6.3', 'nom') + 2.0);
   }
