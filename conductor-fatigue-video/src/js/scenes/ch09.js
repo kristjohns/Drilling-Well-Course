@@ -131,11 +131,11 @@ export async function build(E, T, D) {
     S.div('1 year minimum', { x: cc.X(8) - 10, y: cc.Y(1) + 12, cls: 'small', anchor: 'rt', style: 'color:#46d39a' }).in(B.start + 0.8, 0.5);
     const gwPts = gp.map(([x, v]) => [x, v.gw / 10]), tsPts = gp.map(([x, v]) => [x, v.T / 10]);
     cc.curve(gwPts, { color: COL.amber, width: 5, t: c('9.7', 'gap') });
-    cc.curve(tsPts, { color: COL.yellow, width: 5, t: c('9.7', 'gap') + 0.4 });
+    cc.curve(tsPts, { color: COL.lemon, width: 5, t: c('9.7', 'gap') + 0.4 });
     gwPts.forEach((p) => cc.dot(p[0], p[1], { color: COL.amber, r: 7, t: c('9.7', 'gap') + 0.8 }));
-    tsPts.forEach((p) => cc.dot(p[0], p[1], { color: COL.yellow, r: 7, t: c('9.7', 'gap') + 1.0, stroke: '#3b2a00' }));
+    tsPts.forEach((p) => cc.dot(p[0], p[1], { color: COL.lemon, r: 7, t: c('9.7', 'gap') + 1.0, stroke: '#3b2a00' }));
     S.div('GW1 conductor', { x: cc.X(0.2), y: cc.Y(gwPts[0][1]) - 18, cls: 'small', anchor: 'lb', style: 'color:#ffb547' }).in(c('9.7', 'gw'), 0.5);
-    S.div('TS1 template', { x: cc.X(0.25), y: cc.Y(tsPts[0][1]) + 16, cls: 'small', anchor: 'lt', style: 'color:#f2c14e' }).in(c('9.7', 'tsfail'), 0.5);
+    S.div('TS1 template', { x: cc.X(0.25), y: cc.Y(tsPts[0][1]) + 16, cls: 'small', anchor: 'lt', style: `color:${COL.lemon}` }).in(c('9.7', 'tsfail'), 0.5);
     const nt = S9.no_template;
     const card = S.card(`<div class="ref">no template contact at all</div><div class="num" style="font-size:40px">GW1 · <span class="c-red">${(nt.gw / 10).toFixed(2)} yr</span></div>`, { x: 1220, y: 300, w: 560 });
     card.in(c('9.7', 'none'), 0.6);
