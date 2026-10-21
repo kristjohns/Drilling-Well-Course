@@ -100,9 +100,18 @@ export async function build(E, T, D) {
     // crack sketch (left)
     const g = S.g(); g.in(B4.start + 0.3, 0.6, 'none');
     S.rect(170, 330, 460, 330, { fill: '#2c3f52', stroke: '#8fa7bb', width: 2, parent: g.el, o: 1 });
-    S.path('M400,330 L408,420 L400,472', { stroke: COL.coral, width: 5, parent: g.el, o: 1 });
-    S.path('M440,330 L440,472', { stroke: COL.ink2, width: 2, parent: g.el, o: 1 });
-    S.svgText('a', 462, 400, { size: 30, fill: COL.ink, parent: g.el, o: 1, family: 'KaTeX_Math' });
+    // the crack ratchets deeper, a little every cycle, while the Paris law is introduced
+    const crack = S.path('', { stroke: COL.coral, width: 5, parent: g.el, o: 1 });
+    crack.el.setAttribute('filter', 'url(#glow)');
+    const adim = S.path('', { stroke: COL.ink2, width: 2, parent: g.el, o: 1 });
+    const alab = S.svgText('a', 462, 400, { size: 30, fill: COL.ink, parent: g.el, o: 1, family: 'KaTeX_Math' });
+    E.anim(B4.start - 0.1, B5.start + 1, (t) => {
+      const u = Math.floor(14 * smooth(t, B4.start + 0.8, c('2.4', 'dk') + 1.0)) / 14;
+      const L = 36 + 118 * u, y = 330;
+      crack.el.setAttribute('d', `M400,${y} L406,${(y + L * 0.35).toFixed(1)} L399,${(y + L * 0.7).toFixed(1)} L404,${(y + L).toFixed(1)}`);
+      adim.el.setAttribute('d', `M440,${y} L440,${(y + L).toFixed(1)}`);
+      alab.el.setAttribute('y', (y + L / 2).toFixed(1));
+    });
     for (const x of [230, 330, 470, 570]) { S.arrow(x, 300, x, 230, { color: COL.coral, width: 3, parent: g.el, o: 1 }); S.arrow(x, 690, x, 760, { color: COL.coral, width: 3, parent: g.el, o: 1 }); }
     S.svgText('σ', 650, 255, { size: 30, fill: COL.coral, parent: g.el, o: 1 });
     g.out(B5.start + 0.3, 0.6);
