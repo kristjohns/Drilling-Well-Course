@@ -1,6 +1,6 @@
 // Chapter 8 — damage, life and the design check: Miner, B.3/B.4, Table B.4, N-001 DFF, B.14, B.13/B.12, the screening check.
 import { E, ease, COL, clamp, smooth, ramp, lerp, fmt } from '../engine/core.js';
-import { Scene } from '../engine/scene.js';
+import { Scene, later } from '../engine/scene.js';
 import { titleCard, clause, step } from '../engine/hud.js';
 import { quoteCard, derivation, table, tx, counter } from './kit.js';
 import { mnCurve, logTicks, pow10 } from './fatigue.js';
@@ -50,9 +50,15 @@ export async function build(E, T, D) {
     e2.in(c('8.2', 'b3'), 0.8, 'write');
     const e3 = S.eq('\\text{Inspection interval} \\le \\dfrac{\\text{Fatigue life}}{\\cg{D_F}}\\quad\\text{(B.4)}', { x: 1300, y: 430, size: 44 });
     e3.in(c('8.2', 'b4'), 0.8, 'write');
-    const tb = table(S, ['Permanent equipment', 'Temporary equipment', ''], [['Service life', 'Service life', 'Inspection interval'], ['<span class="c-green" style="font-size:40px">10</span>', '<span class="c-green" style="font-size:40px">3</span>', '<span class="c-green" style="font-size:40px">10</span>']],
-      { x: 420, y: 560, w: 1080, t: c('8.2', 'table'), title: 'Table B.4 · S-N method fatigue design factor D<sub>F</sub>', colCls: ['', '', ''] });
-    S.div('a: it is assumed that inspection of all permanent equipment is not performed', { x: 440, y: 880, cls: 'tiny' }).in(c('8.2', 'table') + 0.8, 0.5);
+    const big = (v, sup = '') => `<span class="c-green" style="font-size:40px">${v}${sup ? `<sup style="font-size:20px;margin-left:2px">${sup}</sup>` : ''}</span>`;
+    const tb = table(S, ['Permanent equipment', 'Temporary equipment'], [['Service life', 'Service life', 'Inspection interval'], [big(10, 'a'), big(3), big(10)]],
+      { x: 420, y: 560, t: c('8.2', 'table'), title: 'Table B.4 · S-N method fatigue design factor D<sub>F</sub>', colCls: ['', '', ''] });
+    // as in the standard: "Temporary equipment" spans service life and inspection interval
+    const ths = tb.el.querySelectorAll('thead th');
+    ths[1].colSpan = 2;
+    tb.el.querySelectorAll('th, td').forEach((e) => { e.style.textAlign = 'center'; e.style.minWidth = '230px'; });
+    later(() => { tb.el.style.left = (960 - tb.el.offsetWidth / 2) + 'px'; });
+    S.div('a  It is assumed that inspection of all permanent equipment is not performed.', { x: 960, y: 860, cls: 'tiny', anchor: 'ct' }).in(c('8.2', 'table') + 0.8, 0.5);
   }
 
   // ------------------------------------------------------------------ 8.3 template DFF (N-001)
@@ -106,11 +112,11 @@ export async function build(E, T, D) {
     S.line(cc.X(1e6), cc.Y(100), cc.X(1e6), cc.Y(mo), { stroke: COL.amber, width: 2, dash: '8 6' }).in(c('8.5', 'at6') + 0.4, 0.5, 'none');
     S.line(cc.X(1e4), cc.Y(mo), cc.X(1e6), cc.Y(mo), { stroke: COL.amber, width: 2, dash: '8 6' }).in(c('8.5', 'at6') + 0.4, 0.5, 'none');
     S.div('ΔM<sub>o</sub>', { x: cc.X(1e6) + 16, y: cc.Y(mo) - 22, cls: 'small', anchor: 'lb', style: 'color:#ffb547' }).in(c('8.5', 'at6') + 0.6, 0.5);
-    S.div('(n, ΔM<sub>eq</sub>)', { x: cc.X(n) + 16, y: cc.Y(meq) + 16, cls: 'small', anchor: 'lt', style: 'color:#4fd1ff' }).in(c('8.5', 'through'), 0.5);
+    S.div('(n, ΔM<sub>eq</sub>)', { x: cc.X(n) + 18, y: cc.Y(meq) - 14, cls: 'small', anchor: 'lb', style: 'color:#4fd1ff' }).in(c('8.5', 'through'), 0.5);
     const st = derivation(S, [
       { tex: '\\log\\bar a = \\log n + \\cv m\\,\\log\\DM_{\\mathrm{eq}}\\quad\\text{(B.13)}', t: c('8.5', 'through'), x: 1100, align: 'left', size: 42 },
       { tex: '\\log\\DM_o = \\dfrac{1}{\\cv m}\\left(\\log\\bar a - \\log 10^6\\right)\\quad\\text{(B.12)}', t: c('8.5', 'at6'), x: 1100, align: 'left', size: 42 },
-      { tex: '\\DM_o = ' + fmt(L.dMo_back['3']) + '\\ \\text{kNm}\\;\\; \\text{vs}\\;\\; 1436 \\;\\;(0.93)', t: c('8.5', 'num'), x: 1100, align: 'left', size: 42 },
+      { tex: '\\DM_o = ' + fmt(L.dMo_back['3']) + '\\ \\text{kNm}\\;\\; \\text{vs}\\;\\; ' + fmt(1436) + ' \\;\\;(' + (L.dMo_back['3'] / 1436).toFixed(2) + ')', t: c('8.5', 'num'), x: 1100, align: 'left', size: 42 },
     ], { y0: 300, gap: 160, size: 42 });
     const cons = S.div('Table A.7 is slightly conservative', { x: 1100, y: 790, cls: 'h3', style: 'color:#46d39a' });
     cons.in(c('8.5', 'cons'), 0.7, 'write');
@@ -129,6 +135,7 @@ export async function build(E, T, D) {
     st[2].boxed(c('8.6', 'screen') + 1.2, { color: COL.green });
     const d1 = S.eq('\\cg{D_F}=10,\\;\\cv m=3:\\;\\; 10^{1/3} = 2.15', { x: 960, y: 790, size: 42 });
     d1.in(c('8.6', 'dfm'), 0.7, 'write');
-    const sens = table(S, ['+10 % moment', 'm = 3', 'm = 5'], [['life ×', (1 / 1.1 ** 3).toFixed(2), (1 / 1.1 ** 5).toFixed(2)]], { x: 700, y: 860, w: 520, t: c('8.6', 'sens'), colCls: ['l', '', ''] });
+    const sens = table(S, ['+10 % moment', 'm = 3', 'm = 5'], [['life ×', (1 / 1.1 ** 3).toFixed(2), (1 / 1.1 ** 5).toFixed(2)]], { x: 700, y: 860, t: c('8.6', 'sens'), colCls: ['l', '', ''] });
+    later(() => { sens.el.style.left = (960 - sens.el.offsetWidth / 2) + 'px'; });
   }
 }
