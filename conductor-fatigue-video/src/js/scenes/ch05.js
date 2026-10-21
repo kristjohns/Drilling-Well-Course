@@ -91,7 +91,7 @@ export async function build(E, T, D) {
   {
     const B = b('5.3');
     const S = new Scene(B.start, B.end);
-    clause('stick-up hands over M₀ = M_w (1 + h/H) and P = Q_w at the mudline', B.start + 0.3, B.end);
+    clause('stick-up hands over M<sub>0</sub> = M<sub>w</sub> (1 + h/H) and P = Q<sub>w</sub> at the mudline', B.start + 0.3, B.end);
     const st = derivation(S, [
       { tex: '\\cm M(0) = -EI\\,y\\,\\!\'\'(0) = \\cm{M_0} \\;\\Rightarrow\\; C_2 = \\dfrac{\\cm{M_0}}{2EI\\beta^2}', t: c('5.3', 'm0'), x: 140, align: 'left' },
       { tex: 'V(0) = -EI\\,y\\,\\!\'\'\'(0) = P \\;\\Rightarrow\\; C_1 = -\\dfrac{P}{2EI\\beta^3} - C_2', t: c('5.3', 'm0') + 3.5, x: 140, align: 'left' },

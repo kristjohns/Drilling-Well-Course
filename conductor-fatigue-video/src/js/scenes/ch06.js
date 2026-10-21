@@ -68,7 +68,7 @@ export async function build(E, T, D) {
   {
     const B = b('6.3');
     const S = new Scene(B.start, B.end);
-    clause('simplified local model · ΔM_w = 3000 kNm (±1500)', B.start + 0.3, B.end);
+    clause('simplified local model · ΔM<sub>w</sub> = 3000 kNm (±1500)', B.start + 0.3, B.end);
     const pr = D.profiles.base;
     const cc = S.chart({ x: 220, y: 190, w: 620, h: 720, xmin: 0, xmax: 4500, ymin: 16, ymax: -0.5, xticks: [0, 1500, 3000, 4500], yticks: [0, 4, 8, 12, 16], xfmt: (v) => fmt(v), yfmt: (v) => v + ' m',
       xlabel: 'moment range at depth z [kNm]', title: 'DEPTH BELOW THE WELLHEAD DATUM' });
