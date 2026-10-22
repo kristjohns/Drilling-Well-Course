@@ -42,14 +42,15 @@ export async function build(E, T, D) {
       }
     });
     // slice free body
-    const sl = S.card('', { x: 760, y: 560, w: 300, h: 360 }); sl.in(c('5.1', 'shear') - 0.4, 0.5);
+    // an SVG panel, so it sits behind the SVG drawing (an HTML card would cover and dim it)
+    const sl = S.rect(760, 560, 300, 360, { fill: '#11263b', stroke: 'rgba(190,220,245,0.16)', width: 1.5, rx: 20, opacity: 0.9 }); sl.in(c('5.1', 'shear') - 0.4, 0.5, 'none');
     const sg = S.g(); sg.in(c('5.1', 'shear') - 0.3, 0.5, 'none');
     S.rect(880, 640, 60, 200, { fill: '#8fa3b5', stroke: COL.ink2, width: 2, parent: sg.el, o: 1 });
     S.arrow(990, 640, 945, 640, { color: COL.cyan, width: 3, parent: sg.el, o: 1 }); S.arrow(830, 840, 875, 840, { color: COL.cyan, width: 3, parent: sg.el, o: 1 });
     S.svgText('V', 1000, 620, { size: 26, fill: COL.cyan, parent: sg.el, o: 1, family: 'KaTeX_Math' });
     S.svgText('V + dV', 810, 870, { size: 22, fill: COL.cyan, parent: sg.el, o: 1 });
     for (let k = 0; k < 5; k++) S.arrow(800, 670 + k * 36, 870, 670 + k * 36, { color: COL.soil, width: 2.5, parent: sg.el, o: 1 });
-    S.svgText('k y dz', 790, 600, { size: 22, fill: COL.soil, parent: sg.el, o: 1 });
+    S.svgText('k y dz', 835, 610, { size: 22, fill: COL.soil, parent: sg.el, o: 1 });
     const st = derivation(S, [
       { tex: '\\dfrac{\\dd V}{\\dd z} = -k\\,y', t: c('5.1', 'shear'), note: 'slice equilibrium', x: 1180, align: 'left' },
       { tex: '\\dfrac{\\dd \\cm M}{\\dd z} = V', t: c('5.1', 'mom'), note: 'moment balance', x: 1180, align: 'left' },
