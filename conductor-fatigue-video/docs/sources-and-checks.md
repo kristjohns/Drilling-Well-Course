@@ -24,6 +24,8 @@ What the video states, where it comes from, and what a reviewer should confirm. 
 | Nonlinear relation between load and stress for connectors and wellheads: use FE analysis | B.4.1 | yes |
 | Local response procedure a) to f), fully reversed loading, six load levels 6 000, 3 000, 1 500, 750, 375 and 187.5 kNm | B.4.2.4 | yes |
 | Bilinear M-N curve (B.10), knee (B.11), lower bound over the hot spots, fatigue life reduction factor RF from DNV-RP-C203:2024 section 5.7, ΔM_c at 10⁶ cycles | B.4.4, Tables B.11, B.12 | yes |
+| "Linear and bi-linear M-N curves shall include a fatigue life reduction factor (RF) in accordance with DNV-RP-C203:2024 Section 5.7" (quoted in 7.9) | B.4.4 | yes |
+| Table B.4 layout: permanent equipment service life 10 (footnote a: inspection of permanent equipment assumed not performed); temporary equipment service life 3 and inspection interval 10 | Table B.4 | yes |
 | (B.12) ΔM₀ from ā, (B.13) ā from (n, ΔM_eq), (B.14) ΔM_eq | B.4.4 | yes |
 | Four to six fatigue hot spots with the lowest capacity are typically sufficient | Table B.11 note a | yes |
 | Contact areas A–H and three load paths | Figure J.1, J.2.1 | yes |
@@ -64,6 +66,7 @@ the M-N intercepts are the minimum over the local-model points, so no point lies
 | GW1 single slope full sum | 9.0 years |
 | TS1 full sum | D = 0.0280 per year, 35.7 years, service life 3.57 years |
 | Gap 0 / 1 / 2 / 4 mm | GW1 7.3 / 2.0 / 1.4 / 1.26 years; TS1 0.39 / 2.7 / 3.6 / 6.8 years (service life) |
+| Gap 8 mm (not shown) | TS1 repeats the 4 mm life: the lower-bound fit on the slope-5 branch is set by the largest stress per moment, which in a linear model with a gap depends on M / g, and the load levels halve while the gap doubles |
 | No template contact | GW1 0.98 years |
 | SCF 1.0 / 1.2 | GW1 2.10 / 0.99 years |
 | Water depth 80–250 m / 500–1 500 m | GW1 0.33 / 3.07 years |

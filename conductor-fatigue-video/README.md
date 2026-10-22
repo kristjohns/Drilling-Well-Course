@@ -106,7 +106,9 @@ python3 tools/encode.py               # -> out/*.mp4, poster
 ```
 
 Re-render only what changed: delete the matching `build/render/seg_XXXXXX.mp4.done` markers (450 frames = 15 s each)
-and run `node tools/render.mjs` again. Frames whose DOM and WebGL state did not change re-use the previous screenshot.
+and run `node tools/render.mjs` again (chunk names are frame numbers, multiples of 450). Frames whose DOM and WebGL
+state did not change re-use the previous screenshot. `--select 3d` / `--select 2d` split the WebGL chunks (best on one
+worker) from the others, and `touch build/render/STOP` ends a pass at the next chunk boundary.
 
 Preview in a browser: `node tools/server.mjs 8080`, open `http://127.0.0.1:8080/src/index.html?play=1&t=600` and
 click once (plays the mix from 10:00). `node tools/frame.mjs --chapter 4 --sheet` renders a contact sheet.
