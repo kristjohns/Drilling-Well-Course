@@ -172,15 +172,17 @@ export async function build(E, T, D) {
     const blank = S.rect(cc.x - 20, cc.y + cc.h + 8, cc.w + 40, 34, { fill: '#08182a', stroke: 'none', parent: ticks2.el, o: 1 });
     for (const v of [0.5, 1.0, 1.5, 2.0, 2.5, 3.0]) S.svgText(fmt(v * 1436), cc.X(v), cc.y + cc.h + 26, { size: 20, fill: COL.amber, parent: ticks2.el, o: 1 });
     S.div('3 948 892 cycles at r = 0.1', { x: cc.X(0.1) + 20, y: cc.Y(3948892) - 10, cls: 'small', anchor: 'lb', style: 'color:#4fd1ff' }).in(c('3.6', 'small'), 0.5, 'left');
-    S.div('1 cycle at 2.8 and 2.9', { x: cc.X(2.95), y: cc.Y(1) - 70, cls: 'small', anchor: 'rb' }).in(c('3.6', 'big'), 0.5);
+    // above the tail bars, with a leader down to the two single cycles
+    S.div('1 cycle at 2.8 and 2.9', { x: cc.X(2.95), y: cc.Y(300), cls: 'small', anchor: 'rb' }).in(c('3.6', 'big'), 0.5);
+    S.line(cc.X(2.85), cc.Y(300) + 8, cc.X(2.85), cc.Y(1) - 10, { stroke: COL.ink2, width: 1.5, dash: '4 5' }).in(c('3.6', 'big') + 0.2, 0.5, 'none');
     const tot = counter(S, { x: 1520, y: 330, a: 0, b: L.n_total, t0: c('3.6', 'total'), t1: c('3.6', 'total') + 2.2, size: 64, color: COL.cyan });
     tot.in(c('3.6', 'total') - 0.1, 0.4);
-    S.div('cycles per year in total · one every ≈ 4.2 s', { x: 1520, y: 395, cls: 'small', anchor: 'cm' }).in(c('3.6', 'total') + 0.6, 0.5);
+    S.div('cycles per year in total · one every ≈ 4.2 s', { x: 1520, y: 395, cls: 'small', anchor: 'cm' }).in(c('3.6', 'total') + 0.6, 0.5).out(B7.start, 0.4);
     tot.out(B7.start, 0.4);
     // 3.7 equations
     const e1 = S.eq('\\cm{\\Delta M_i} = r_i \\times \\cm{\\Delta M_o}', { x: 1520, y: 300, size: 56 });
     e1.in(c('3.7', 'mult'), 0.7, 'write');
-    const e2 = S.eq('0.1 \\times 2124 = 212.4\\ \\text{kNm}', { x: 1520, y: 450, size: 46 });
+    const e2 = S.eq('0.1 \\times ' + fmt(2124) + ' = 212.4\\ \\text{kNm}', { x: 1520, y: 450, size: 46 });
     e2.in(c('3.7', 'ex1'), 0.7, 'write');
     S.div('Example 1, A.3.5.1 · 80–250 m · 3 948 892 cycles', { x: 1520, y: 510, cls: 'tiny', anchor: 'cm' }).in(c('3.7', 'ex1') + 0.4, 0.5);
     const e3 = S.card(`<div class="ref">OUR EXAMPLE WELL</div><div style="font-size:28px;font-weight:650;line-height:1.5">350 m · BOP on WH<br><span class="c-amber num" style="font-size:40px">ΔM<sub>o</sub> = 1 436 kNm</span><br><span class="small">bins from 143.6 to 4 164 kNm</span></div>`, { x: 1290, y: 600, w: 470 });
