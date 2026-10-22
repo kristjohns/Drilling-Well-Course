@@ -5,6 +5,7 @@
   python3 tools/encode.py --full        -> also build/conductor-fatigue_full_1080p.mp4 (one file, too big for GitHub)
   TARGET_MB=92 PRESET=slow python3 tools/encode.py
   python3 tools/encode.py --force       -> re-encode parts that are already newer than the render and the mix
+  python3 tools/encode.py --parts=1,3   -> only these parts (VIDEO=... picks another silent render, e.g. a partial concat)
 
 Each part is a two-pass, size-targeted x264 encode that stays below GitHub's 100 MiB file limit, with AAC audio, a soft
 English subtitle track and chapter markers. out/poster.png is a still of the title card.
@@ -23,7 +24,7 @@ NAME = 'conductor-fatigue'
 PRESET = os.environ.get('PRESET', 'slow')
 TARGET_MB = float(os.environ.get('TARGET_MB', '92'))
 AUDIO_K = 160
-V, A = 'build/render/video.mp4', 'build/audio/mix.wav'
+V, A = os.environ.get('VIDEO', 'build/render/video.mp4'), 'build/audio/mix.wav'
 PARTS = [(0, 2), (3, 4), (5, 6), (7, 8), (9, 10)]          # chapter ranges
 
 
@@ -97,7 +98,10 @@ def main():
     os.makedirs('out', exist_ok=True)
     os.makedirs('build/parts', exist_ok=True)
     cues = srt_cues()
+    only = next((a.split('=')[1] for a in sys.argv if a.startswith('--parts=')), None)
     for i, (c0, c1) in enumerate(PARTS, 1):
+        if only and str(i) not in only.split(','):
+            continue
         t0 = CH[c0]['start']
         t1 = CH[c1]['end'] if c1 < max(CH) else DUR
         chs = [CH[k] for k in range(c0, c1 + 1)]
