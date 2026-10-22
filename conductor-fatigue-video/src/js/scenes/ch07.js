@@ -213,6 +213,8 @@ export async function build(E, T, D) {
     const e1 = S.eq('\\cn{N_{\\mathrm{design}}} = \\dfrac{\\cn N}{\\mathrm{RF}} \\;\\Rightarrow\\; \\log\\bar a \\to \\log\\bar a - \\log \\mathrm{RF}', { x: 960, y: 260, size: 46 });
     e1.in(c('7.9', 'rf'), 0.8, 'write');
     S.div('RF from DNV-RP-C203:2024 section 5.7 · RF = 1 in this example · life ∝ 1 / RF', { x: 960, y: 340, cls: 'small', anchor: 'cm' }).in(c('7.9', 'rf') + 1.2, 0.5);
+    const q = quoteCard(S, 'B.4.4', 'Linear and bi-linear M-N curves <span class="q">shall include a fatigue life reduction factor (RF)</span> in accordance with DNV-RP-C203:2024 Section 5.7.', { x: 460, y: 470, w: 1000, t: c('7.9', 'rf') + 2.2, size: 30 });
+    q.out(c('7.9', 'dmc') - 0.7, 0.5);
     const tb = table(S, ['Hot spot', 'log ā<sub>ΔM,1</sub>', 'm<sub>1</sub>', 'log ā<sub>ΔM,2</sub>', 'm<sub>2</sub>', 'ΔM<sub>c</sub> [kNm]', 'ΔM<sub>1,2</sub> [kNm]', 'Environment'], [
       ['GW1 conductor girth weld', gw.loga1.toFixed(2), '3', gw.loga2.toFixed(2), '5', fmt(gw.dMc), fmt(gw.dM12), 'seawater + CP'],
       ['TS1 template slot weld', ts.loga1.toFixed(2), '3', ts.loga2.toFixed(2), '5', fmt(ts.dMc), fmt(ts.dM12), 'seawater + CP'],
