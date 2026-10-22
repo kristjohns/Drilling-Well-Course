@@ -190,7 +190,7 @@ export async function build(E, T, D) {
     c1.in(c('9.9', 'relief'), 0.6);
     const c2 = S.card('<div class="ref">13.2</div><div style="font-weight:750;font-size:30px">Lateral BOP support</div><div class="small">the template may be prepared for, or equipped with, a system for lateral BOP support to extend wellhead fatigue life (OMAE2023-104891)</div>', { x: 980, y: 220, w: 820 });
     c2.in(c('9.9', 'relief') + 0.8, 0.6);
-    const c3 = S.card('<div class="ref">Table J.1 · operational levers</div><div class="small" style="line-height:1.7">• less LMRP overpull · • softer lower flex joint · • riser tally (no buoyancy near the top in shallow water) · • lower drill pipe tension · • lighter stack · • avoid beam seas (DP rigs)</div>', { x: 120, y: 520, w: 820 });
+    const c3 = S.card('<div class="ref">Table J.1 · operational levers</div><div class="small" style="line-height:1.6;display:grid;grid-template-columns:1fr 1fr;column-gap:36px;margin-top:4px"><div class="hang">• less LMRP overpull</div><div class="hang">• lower drill pipe tension</div><div class="hang">• softer lower flex joint</div><div class="hang">• lighter stack</div><div class="hang">• avoid beam seas (DP rigs)</div><div></div><div class="hang" style="grid-column:1 / span 2">• riser tally: no buoyancy near the top in shallow water</div></div>', { x: 120, y: 520, w: 820 });
     c3.in(c('9.9', 'j1'), 0.6);
     const c4 = S.card('<div class="ref">J.4.3 · J.4.4.3 · NORSOK U-009</div><div style="font-weight:750;font-size:30px">Monitor, update, extend</div><div class="small">measure wellhead motion or bending; replace the design histogram with measured loads; update fatigue life calculations and extend life</div>', { x: 980, y: 520, w: 820 });
     c4.in(c('9.9', 'monitor'), 0.6);

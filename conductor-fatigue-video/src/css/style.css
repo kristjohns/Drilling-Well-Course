@@ -122,3 +122,4 @@ table.t tr.dim td { color: var(--dim); }
 /* charts */
 .axis text, .chart text { font-family: var(--sans); font-size: 20px; fill: var(--dim); font-weight: 500; }
 .chart .ttl { font-size: 20px; font-weight: 700; fill: var(--ink2); letter-spacing: 0.04em; }
+.hang { padding-left: 22px; text-indent: -22px; }
