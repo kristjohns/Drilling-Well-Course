@@ -4,6 +4,7 @@
   python3 tools/encode.py               -> out/conductor-fatigue_partN_1080p.mp4 (five parts, cut at chapter boundaries)
   python3 tools/encode.py --full        -> also build/conductor-fatigue_full_1080p.mp4 (one file, too big for GitHub)
   TARGET_MB=92 PRESET=slow python3 tools/encode.py
+  python3 tools/encode.py --force       -> re-encode parts that are already newer than the render and the mix
 
 Each part is a two-pass, size-targeted x264 encode that stays below GitHub's 100 MiB file limit, with AAC audio, a soft
 English subtitle track and chapter markers. out/poster.png is a still of the title card.
@@ -56,6 +57,10 @@ def x264(vk):
 
 def encode(t0, t1, out, title, chapters, cues, target_mb):
     d = t1 - t0
+    # resume after an interruption: a part newer than both inputs is kept (--force re-encodes everything)
+    if '--force' not in sys.argv and os.path.exists(out) and os.path.getmtime(out) > max(os.path.getmtime(V), os.path.getmtime(A)):
+        print(f'{out}: up to date', flush=True)
+        return
     vk = int(target_mb * 8388.608 / d - AUDIO_K - 8)
     base = os.path.splitext(os.path.basename(out))[0]
     srt, meta, log = f'build/parts/{base}.srt', f'build/parts/{base}.ffmeta', f'build/parts/{base}_x264'
