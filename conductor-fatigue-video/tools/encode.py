@@ -67,6 +67,7 @@ def encode(t0, t1, out, title, chapters, cues, target_mb):
     vk = int(target_mb * 8388.608 / d - AUDIO_K - 8)
     base = os.path.splitext(os.path.basename(out))[0]
     srt, meta, log = f'build/parts/{base}.srt', f'build/parts/{base}.ffmeta', f'build/parts/{base}_x264'
+    tmp = f'build/parts/{base}.partial.mp4'
     with open(srt, 'w', encoding='utf-8') as f:
         k = 0
         for a, b, lines in cues:
@@ -89,7 +90,8 @@ def encode(t0, t1, out, title, chapters, cues, target_mb):
                     *x264(vk), '-x264-params', f'aq-mode=3:aq-strength=0.8:pass=2:stats={log}.log',
                     '-c:a', 'aac', '-b:a', f'{AUDIO_K}k', '-ar', '48000', '-af', f'afade=t=in:d=0.3,afade=t=out:st={d - 0.4:.3f}:d=0.4',
                     '-c:s', 'mov_text', '-metadata:s:s:0', 'language=eng', '-metadata:s:s:0', 'title=English', '-metadata:s:a:0', 'language=eng',
-                    '-movflags', '+faststart', out], check=True)
+                    '-movflags', '+faststart', tmp], check=True)
+    os.replace(tmp, out)                     # out/ only ever holds finished files
     size = os.path.getsize(out)
     print(f'  -> {size / 2 ** 20:.1f} MiB', flush=True)
     if size > 100 * 2 ** 20:
