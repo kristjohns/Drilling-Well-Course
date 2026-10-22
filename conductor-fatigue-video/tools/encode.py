@@ -114,8 +114,8 @@ def main():
     if '--full' in sys.argv:
         encode(0, DUR, f'build/{NAME}_full_1080p.mp4', 'Fatigue of the conductor and the conductor-template interface (NORSOK U-001:2026)',
                [CH[k] for k in sorted(CH)], cues, float(os.environ.get('FULL_MB', '700')))
-    # poster: the cold-open title card
-    subprocess.run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-ss', f'{CH[0]["beats"][2]["start"] + 9.0:.2f}', '-i', V, '-frames:v', '1',
+    # poster: the cold-open title card once its subtitle and badge are in
+    subprocess.run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-ss', f'{CH[0]["end"] - 1.1:.2f}', '-i', V, '-frames:v', '1',
                     '-vf', 'scale=in_range=tv:in_color_matrix=bt709,format=rgb24', 'out/poster.png'], check=True)
     for f in sorted(os.listdir('out')):
         print(f'{f:48s} {os.path.getsize(os.path.join("out", f)) / 2 ** 20:8.1f} MiB')
