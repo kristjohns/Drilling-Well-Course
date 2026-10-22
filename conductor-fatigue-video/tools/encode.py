@@ -26,6 +26,8 @@ TARGET_MB = float(os.environ.get('TARGET_MB', '92'))
 AUDIO_K = 160
 V, A = os.environ.get('VIDEO', 'build/render/video.mp4'), 'build/audio/mix.wav'
 PARTS = [(0, 2), (3, 4), (5, 6), (7, 8), (9, 10)]          # chapter ranges
+# what x264's own CLI does for a first pass (x264_param_apply_fastfirstpass): only the stats matter there
+FAST_FIRST = 'ref=1:no-8x8dct=1:partitions=none:me=dia:subme=2:trellis=0:fast-pskip=1'
 
 
 def chap_title(c):
@@ -81,7 +83,7 @@ def encode(t0, t1, out, title, chapters, cues, target_mb):
     print(f'{out}: {d:.1f} s, picture {vk} kbit/s', flush=True)
     common = ['-ss', f'{t0:.3f}', '-to', f'{t1:.3f}', '-i', V]
     subprocess.run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-stats', *common, '-an', *x264(vk),
-                    '-x264-params', f'aq-mode=3:aq-strength=0.8:pass=1:stats={log}.log', '-f', 'null', '/dev/null'], check=True)
+                    '-x264-params', f'aq-mode=3:aq-strength=0.8:pass=1:stats={log}.log:{FAST_FIRST}', '-f', 'null', '/dev/null'], check=True)
     subprocess.run(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-stats', *common, '-ss', f'{t0:.3f}', '-to', f'{t1:.3f}', '-i', A,
                     '-i', srt, '-i', meta, '-map', '0:v', '-map', '1:a', '-map', '2:s', '-map_metadata', '3', '-map_chapters', '3',
                     *x264(vk), '-x264-params', f'aq-mode=3:aq-strength=0.8:pass=2:stats={log}.log',
