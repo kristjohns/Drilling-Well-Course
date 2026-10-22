@@ -113,10 +113,10 @@ export async function build(E, T, D) {
     S.div('fatigue life of GW1 (D<sub>F</sub> = 1) · each step removes a layer of conservatism', { x: x0, y: 690, cls: 'small' }).in(c('9.5', 'lesson'), 0.6);
     // 9.6 TS1
     const card = S.card(`<div class="ref">TS1 · template slot weld · DFF = 10 (N-001)</div>
-      <div style="display:flex;gap:60px;align-items:baseline;margin-top:6px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;padding-right:30px">
       <div><div class="tiny">damage per year</div><div class="num" style="font-size:44px">${ts.D.toFixed(4)}</div></div>
       <div><div class="tiny">fatigue life</div><div class="num" style="font-size:44px">${ts.life.toFixed(1)} yr</div></div>
-      <div><div class="tiny">service life</div><div class="num c-green" style="font-size:44px">${ts.service.toFixed(2)} yr</div></div></div>`, { x: 560, y: 780, w: 1100 });
+      <div><div class="tiny">service life</div><div class="num c-green" style="font-size:44px">${ts.service.toFixed(2)} yr</div></div></div>`, { x: 560, y: 780, w: 900 });
     card.in(c('9.6', 'ts'), 0.6);
     stamp(S, 'TS1 PASSES', { x: 1720, y: 860, t: c('9.6', 'pass'), kind: 'pass' });
   }
