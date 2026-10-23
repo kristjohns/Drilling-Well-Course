@@ -1,0 +1,1395 @@
+WEBVTT
+
+1
+00:00:00.550 --> 00:00:05.918
+350 metres down, a drilling
+rig has lost its position.
+
+2
+00:00:05.958 --> 00:00:09.448
+The riser drags the
+blowout preventer sideways,
+
+3
+00:00:09.578 --> 00:00:14.288
+and the wellhead below it takes
+more than 12 MNm of bending,
+
+4
+00:00:14.328 --> 00:00:16.214
+on top of the well pressure.
+
+5
+00:00:16.254 --> 00:00:20.654
+The engineer opens the finite element
+model of the wellhead housing,
+
+6
+00:00:20.754 --> 00:00:22.362
+and there it is.
+
+7
+00:00:22.742 --> 00:00:24.193
+A red spot.
+
+8
+00:00:24.233 --> 00:00:27.433
+793 MPa.
+
+9
+00:00:27.473 --> 00:00:30.136
+50 % above the yield strength.
+
+10
+00:00:31.083 --> 00:00:32.920
+So, has it failed?
+
+11
+00:00:32.960 --> 00:00:37.380
+Is the acceptance criterion the
+yield strength of the material?
+
+12
+00:00:37.660 --> 00:00:42.714
+Or is it a strain limit, from
+an elastic plastic analysis?
+
+13
+00:00:42.754 --> 00:00:48.813
+And what exactly should we take out of
+the FE model, and compare with what?
+
+14
+00:00:49.750 --> 00:00:57.240
+In this video we answer those questions
+the way NORSOK U-001, the 2026 edition,
+
+15
+00:00:57.280 --> 00:00:59.158
+does it in its Annex B.
+
+16
+00:00:59.198 --> 00:01:04.618
+We will read the stress strain diagram,
+extract stresses from an FE model,
+
+17
+00:01:04.658 --> 00:01:10.421
+run the elastic plastic check, and at
+the end, give the red spot its verdict.
+
+18
+00:01:14.583 --> 00:01:17.296
+First, which rules apply to what.
+
+19
+00:01:17.336 --> 00:01:19.189
+Annex B is normative.
+
+20
+00:01:19.229 --> 00:01:23.937
+It covers the pressure containing and
+primary structural components in the riser
+
+21
+00:01:23.977 --> 00:01:27.579
+load path: the wellhead
+housing and its extension,
+
+22
+00:01:27.619 --> 00:01:31.905
+the conductor housing and its
+extension, the connectors, the tree,
+
+23
+00:01:31.945 --> 00:01:34.648
+and the workover riser equipment.
+
+24
+00:01:34.688 --> 00:01:37.438
+Straight pipe, like the conductor itself,
+
+25
+00:01:37.478 --> 00:01:40.969
+has its own capacity
+formulas in clause B.9.
+
+26
+00:01:41.249 --> 00:01:46.985
+And the template is designed to
+NORSOK N-001, outside Annex B.
+
+27
+00:01:47.950 --> 00:01:53.123
+Annex B asks us to design against
+failure modes, not against a stress.
+
+28
+00:01:53.163 --> 00:01:57.843
+The structural ones are brittle
+fracture, yielding, local failure,
+
+29
+00:01:57.883 --> 00:02:00.489
+buckling and mechanical disengagement.
+
+30
+00:02:00.529 --> 00:02:04.629
+The functional ones include hub
+face separation, leak tightness,
+
+31
+00:02:04.669 --> 00:02:06.726
+galling and loss of function.
+
+32
+00:02:06.766 --> 00:02:11.106
+Brittle fracture and environmental
+cracking are prevented by the material
+
+33
+00:02:11.146 --> 00:02:14.183
+requirements, not by analysis.
+
+34
+00:02:14.463 --> 00:02:17.339
+And the static capacity
+of a component is the
+
+35
+00:02:17.379 --> 00:02:20.775
+lowest capacity over
+all the remaining modes.
+
+36
+00:02:21.717 --> 00:02:25.046
+Then comes the design format, formula B.2.
+
+37
+00:02:25.086 --> 00:02:30.766
+The load, or load effect, shall not
+exceed the static design factor, Fd,
+
+38
+00:02:30.806 --> 00:02:32.703
+times the static capacity.
+
+39
+00:02:32.743 --> 00:02:35.765
+Fd comes from Table B.3.
+
+40
+00:02:36.045 --> 00:02:41.765
+0.67 for normal conditions,
+0.8 for extreme,
+
+41
+00:02:41.805 --> 00:02:46.419
+and 0.9 or 1.0 for accidental conditions.
+
+42
+00:02:46.459 --> 00:02:54.223
+Pressure design on its own uses 0.6, and
+functional failure modes always use 1.0.
+
+43
+00:02:54.263 --> 00:02:57.620
+Now look at both sides of that inequality.
+
+44
+00:02:57.900 --> 00:02:59.353
+Both are loads.
+
+45
+00:02:59.393 --> 00:03:04.098
+The acceptance criterion is
+not a stress, and not a strain.
+
+46
+00:03:04.138 --> 00:03:07.621
+It is a load, compared with a capacity.
+
+47
+00:03:08.583 --> 00:03:12.764
+So the real question is:
+how do we find the capacity?
+
+48
+00:03:12.804 --> 00:03:16.357
+Clause B.3.3 gives three ways.
+
+49
+00:03:16.397 --> 00:03:20.260
+By formulas, for simple
+shapes like pipes and flanges.
+
+50
+00:03:20.300 --> 00:03:23.400
+For pipe, the yield
+strength enters directly:
+
+51
+00:03:23.600 --> 00:03:27.090
+the fully plastic section
+for seamless riser pipe,
+
+52
+00:03:27.130 --> 00:03:31.006
+and first yield at the outer
+fibre for conductors and casing.
+
+53
+00:03:31.046 --> 00:03:34.576
+Second, by elastic
+finite element analysis,
+
+54
+00:03:34.616 --> 00:03:37.507
+which NORSOK limits to preliminary design.
+
+55
+00:03:37.547 --> 00:03:42.954
+And third, by elastic plastic finite
+element analysis, the direct method.
+
+56
+00:03:42.994 --> 00:03:48.354
+The yield strength enters all three,
+but in a different way each time,
+
+57
+00:03:48.394 --> 00:03:51.726
+and strain only appears in the last one.
+
+58
+00:03:52.006 --> 00:03:55.876
+To see why, we need the
+stress strain diagram.
+
+59
+00:04:00.017 --> 00:04:02.655
+Everything starts with a tensile test.
+
+60
+00:04:02.695 --> 00:04:07.536
+A specimen is pulled, and we plot the
+force divided by the original area,
+
+61
+00:04:07.576 --> 00:04:12.051
+against the elongation divided
+by the original length.
+
+62
+00:04:12.091 --> 00:04:14.277
+First the line is straight.
+
+63
+00:04:14.557 --> 00:04:20.236
+Stress is proportional to strain, the
+slope is Young's modulus, and if we unload,
+
+64
+00:04:20.276 --> 00:04:22.141
+the specimen springs back.
+
+65
+00:04:22.181 --> 00:04:25.912
+Then the line bends: the
+steel starts to yield.
+
+66
+00:04:25.952 --> 00:04:29.896
+It hardens, up to a maximum,
+the tensile strength.
+
+67
+00:04:29.936 --> 00:04:33.785
+After that the specimen
+necks, and finally it breaks.
+
+68
+00:04:34.750 --> 00:04:36.988
+Where exactly does yielding start?
+
+69
+00:04:37.028 --> 00:04:40.552
+There is no sharp point,
+so we agree on one.
+
+70
+00:04:40.592 --> 00:04:46.521
+Draw a line parallel to the elastic
+line, starting at 0.2 % strain.
+
+71
+00:04:46.561 --> 00:04:49.988
+Where it crosses the curve
+is the yield strength.
+
+72
+00:04:50.028 --> 00:04:55.693
+Unload from there, and the specimen
+keeps 0.2 % of permanent strain.
+
+73
+00:04:55.733 --> 00:04:58.100
+NORSOK uses exactly this.
+
+74
+00:04:58.380 --> 00:05:03.000
+The yield strength is the
+stress at a 0.2 % offset,
+
+75
+00:05:03.200 --> 00:05:06.819
+and the failure mode called
+yielding is defined as exceeding
+
+76
+00:05:06.859 --> 00:05:11.810
+that elastic limit of
+0.2 % plastic strain.
+
+77
+00:05:12.750 --> 00:05:16.786
+The design does not use
+the result of one test.
+
+78
+00:05:16.826 --> 00:05:22.667
+Formula B.5 takes the specified minimum
+yield strength, de-rated for temperature,
+
+79
+00:05:22.707 --> 00:05:27.825
+but never more than 90 % of the
+de-rated minimum tensile strength.
+
+80
+00:05:27.865 --> 00:05:30.976
+Formula B.6 gives the tensile strength.
+
+81
+00:05:31.016 --> 00:05:34.450
+De-rating is needed above 40 °C.
+
+82
+00:05:34.490 --> 00:05:43.150
+Our example is a wellhead housing forged
+in 75K material: 517 MPa minimum yield,
+
+83
+00:05:43.190 --> 00:05:46.473
+and 655 tensile.
+
+84
+00:05:46.753 --> 00:05:54.306
+Below 40 degrees, σy
+is 517, and σu is 655.
+
+85
+00:05:55.250 --> 00:05:56.738
+One more step.
+
+86
+00:05:56.778 --> 00:06:02.150
+The engineering curve divides by the
+original area, but the specimen gets thinner.
+
+87
+00:06:02.190 --> 00:06:08.540
+Divide by the actual area and you get the
+true stress, sigma times one plus epsilon,
+
+88
+00:06:08.580 --> 00:06:13.136
+against the true strain, the
+natural log of one plus epsilon.
+
+89
+00:06:13.176 --> 00:06:15.593
+The true curve keeps rising.
+
+90
+00:06:15.633 --> 00:06:22.084
+For our steel it reaches
+743 MPa at 13 % true strain.
+
+91
+00:06:22.124 --> 00:06:25.675
+FE programs with large
+strains need this true curve,
+
+92
+00:06:25.715 --> 00:06:28.524
+and if no test curve is available,
+
+93
+00:06:28.564 --> 00:06:35.710
+NORSOK points to the material model in
+ASME Section VIII, Division 3, KM-620.
+
+94
+00:06:36.650 --> 00:06:42.397
+From the test curve, NORSOK builds three
+material models for the FE analysis.
+
+95
+00:06:42.437 --> 00:06:45.519
+A straight line, for the elastic analysis.
+
+96
+00:06:45.559 --> 00:06:50.129
+The true curve, cut off at the
+yield strength with no hardening,
+
+97
+00:06:50.169 --> 00:06:52.121
+for the limit load method.
+
+98
+00:06:52.161 --> 00:06:59.831
+A tiny slope is allowed to help the solver:
+no more than 5 % at 20 % plastic strain.
+
+99
+00:06:59.871 --> 00:07:03.901
+And the true curve cut off at
+the true ultimate strength,
+
+100
+00:07:04.121 --> 00:07:09.017
+for the plastic collapse method
+and for the local failure check.
+
+101
+00:07:09.057 --> 00:07:11.728
+Keep these three curves in mind.
+
+102
+00:07:12.008 --> 00:07:15.592
+Each one belongs to a
+different acceptance check.
+
+103
+00:07:19.750 --> 00:07:23.060
+Here is our wellhead housing, cut in half.
+
+104
+00:07:23.100 --> 00:07:26.926
+The FE model divides
+it into small elements.
+
+105
+00:07:26.966 --> 00:07:31.846
+At the wellhead datum we apply the
+accidental loads from Table A.4,
+
+106
+00:07:31.906 --> 00:07:34.561
+plus the rated working pressure inside.
+
+107
+00:07:34.601 --> 00:07:39.623
+A linear elastic analysis gives six
+stress components at every point.
+
+108
+00:07:39.663 --> 00:07:45.378
+To plot them, we combine them into one
+number: the von Mises equivalent stress.
+
+109
+00:07:46.317 --> 00:07:51.351
+The von Mises stress takes the three
+principal stresses and measures how much they
+
+110
+00:07:51.391 --> 00:07:54.612
+distort the material,
+rather than squeeze it.
+
+111
+00:07:54.652 --> 00:07:59.935
+When it reaches the yield strength
+from the tensile test, yielding starts.
+
+112
+00:07:59.975 --> 00:08:04.566
+NORSOK allows von Mises or
+Tresca for elastic analysis.
+
+113
+00:08:05.517 --> 00:08:07.434
+Now, the red spot.
+
+114
+00:08:07.474 --> 00:08:14.604
+793 MPa sits in a thin skin at the
+fillet, about a centimetre deep.
+
+115
+00:08:14.644 --> 00:08:17.540
+If that skin yields, nothing collapses.
+
+116
+00:08:17.580 --> 00:08:21.153
+The load just moves to
+the material next to it.
+
+117
+00:08:21.193 --> 00:08:27.277
+A peak stress like this matters for
+fatigue, because that is where cracks start.
+
+118
+00:08:27.557 --> 00:08:30.691
+For static strength,
+comparing the peak with
+
+119
+00:08:30.731 --> 00:08:33.913
+the yield strength is the wrong question.
+
+120
+00:08:34.850 --> 00:08:39.510
+Instead, we cut through the wall
+with a stress classification line,
+
+121
+00:08:39.580 --> 00:08:43.451
+from the bore to the outside,
+at the critical section.
+
+122
+00:08:43.491 --> 00:08:46.671
+Along that line we read
+the stress components:
+
+123
+00:08:46.891 --> 00:08:49.238
+the axial stress from bending and tension,
+
+124
+00:08:49.278 --> 00:08:52.954
+and the hoop and radial
+stresses from the pressure.
+
+125
+00:08:53.917 --> 00:08:59.852
+Then we linearise, as described in ASME
+Section VIII, Division 2, Annex 5-A.
+
+126
+00:08:59.892 --> 00:09:03.765
+The membrane stress is
+the average over the wall.
+
+127
+00:09:03.805 --> 00:09:08.361
+The bending stress is the linear
+part with the same moment.
+
+128
+00:09:08.401 --> 00:09:10.837
+What is left over is the peak.
+
+129
+00:09:10.877 --> 00:09:16.118
+Do that for every component, and
+combine them with von Mises again.
+
+130
+00:09:16.398 --> 00:09:23.735
+Here the membrane stress is 482
+MPa, membrane plus bending is 613,
+
+131
+00:09:23.775 --> 00:09:30.233
+and the peak adds about
+180, to the total of 793.
+
+132
+00:09:31.183 --> 00:09:33.632
+Each part gets a category.
+
+133
+00:09:33.672 --> 00:09:38.548
+Primary stress is what the
+component needs to carry the load.
+
+134
+00:09:38.588 --> 00:09:41.889
+It does not go away when
+the material yields.
+
+135
+00:09:41.929 --> 00:09:48.733
+General membrane stress is Pm, local
+membrane stress near a discontinuity is PL,
+
+136
+00:09:48.773 --> 00:09:50.254
+and bending is Pb.
+
+137
+00:09:50.294 --> 00:09:56.324
+Secondary stress, Q, comes from constraint,
+like thermal expansion or preload,
+
+138
+00:09:56.364 --> 00:09:59.078
+and it relaxes once the material yields.
+
+139
+00:09:59.118 --> 00:10:02.616
+And the peak, F, only counts for fatigue.
+
+140
+00:10:02.656 --> 00:10:07.216
+For preloaded equipment, if you cannot
+separate primary from secondary,
+
+141
+00:10:07.256 --> 00:10:09.090
+treat it all as primary.
+
+142
+00:10:10.050 --> 00:10:11.504
+Now we compare.
+
+143
+00:10:11.544 --> 00:10:15.744
+Table B.7 sets the membrane
+stress against the yield strength,
+
+144
+00:10:15.914 --> 00:10:20.024
+membrane plus bending against
+1.5 times the yield strength,
+
+145
+00:10:20.184 --> 00:10:26.588
+the primary plus secondary range against
+two times, shear against 0.57 times,
+
+146
+00:10:26.628 --> 00:10:29.299
+and bearing against the yield strength.
+
+147
+00:10:29.339 --> 00:10:31.658
+Why 1.5 for bending?
+
+148
+00:10:31.938 --> 00:10:37.610
+When the wall first yields at its
+surface, the inside is still elastic.
+
+149
+00:10:37.650 --> 00:10:41.944
+It can carry more, until the
+whole thickness has yielded.
+
+150
+00:10:41.984 --> 00:10:45.654
+For a rectangular wall,
+that fully plastic moment
+
+151
+00:10:45.694 --> 00:10:49.513
+is exactly 1.5 times
+the first yield moment.
+
+152
+00:10:49.553 --> 00:10:56.377
+And 0.57 is 1/√3, the shear
+yield stress of von Mises.
+
+153
+00:10:57.317 --> 00:11:00.368
+The design factor scales
+the allowable stress.
+
+154
+00:11:00.408 --> 00:11:04.520
+For the accidental load, Fd is 0.9.
+
+155
+00:11:04.560 --> 00:11:15.061
+So the membrane stress of 482 must
+stay below 0.9 times 517, which is 465.
+
+156
+00:11:15.101 --> 00:11:16.616
+It does not.
+
+157
+00:11:16.656 --> 00:11:19.620
+The elastic route fails, by 4 %.
+
+158
+00:11:19.660 --> 00:11:21.985
+Membrane plus bending would pass.
+
+159
+00:11:22.025 --> 00:11:24.153
+But read the fine print.
+
+160
+00:11:24.533 --> 00:11:28.823
+NORSOK limits elastic analysis
+to preliminary design,
+
+161
+00:11:28.953 --> 00:11:34.448
+and for pressure containing parts, to
+a diameter to thickness ratio above 10.
+
+162
+00:11:34.488 --> 00:11:37.213
+Our neck has 6.25.
+
+163
+00:11:37.253 --> 00:11:41.368
+So this result cannot be
+used for acceptance at all.
+
+164
+00:11:41.408 --> 00:11:43.802
+We need the direct method.
+
+165
+00:11:47.950 --> 00:11:52.395
+An elastic plastic analysis
+follows the material past yield.
+
+166
+00:11:52.435 --> 00:11:57.975
+The FE model needs the von Mises
+yield function with associated flow,
+
+167
+00:11:58.015 --> 00:12:02.555
+large deformations and large
+strains, and a hardening rule:
+
+168
+00:12:02.935 --> 00:12:08.765
+isotropic for static capacities, kinematic
+if the loading reverses beyond yield.
+
+169
+00:12:08.805 --> 00:12:14.252
+The loads are applied in the real sequence:
+preload, pressure and tension first.
+
+170
+00:12:14.532 --> 00:12:17.832
+Then one load, here the bending moment,
+
+171
+00:12:17.882 --> 00:12:22.868
+is increased step by step until
+the component can take no more.
+
+172
+00:12:23.817 --> 00:12:29.164
+First, the limit load method, with the
+curve cut off at the yield strength.
+
+173
+00:12:29.204 --> 00:12:31.827
+At first the neck is elastic.
+
+174
+00:12:31.867 --> 00:12:39.424
+At close to 90 % of the final load, the
+outer surface reaches 0.2 % plastic strain.
+
+175
+00:12:39.464 --> 00:12:40.948
+It has yielded.
+
+176
+00:12:40.988 --> 00:12:45.648
+With every step, the yielded zone
+grows inwards from both sides,
+
+177
+00:12:45.728 --> 00:12:48.588
+and the rotation grows
+faster than the load.
+
+178
+00:12:48.628 --> 00:12:53.490
+When the whole section has yielded,
+it acts as a plastic hinge.
+
+179
+00:12:53.530 --> 00:12:58.707
+The next load step finds no equilibrium,
+and the solution does not converge.
+
+180
+00:12:58.747 --> 00:13:02.423
+The last converged load is the limit load.
+
+181
+00:13:02.703 --> 00:13:06.049
+For our neck, 20.3 MNm.
+
+182
+00:13:06.089 --> 00:13:10.669
+That is the yielding capacity,
+at a design factor of one.
+
+183
+00:13:11.617 --> 00:13:15.405
+The second option is the
+factored plastic collapse method.
+
+184
+00:13:15.445 --> 00:13:20.136
+Now the material hardens, up
+to the true ultimate strength.
+
+185
+00:13:20.176 --> 00:13:26.231
+The moment climbs past the limit
+load and peaks at 25.2 MNm.
+
+186
+00:13:26.271 --> 00:13:29.205
+That maximum is the plastic collapse load.
+
+187
+00:13:29.245 --> 00:13:35.939
+It is divided by the
+larger of 1.2, and σu/σy.
+
+188
+00:13:35.979 --> 00:13:42.409
+For our steel that is
+1.27, which gives 19.9 MNm.
+
+189
+00:13:42.449 --> 00:13:44.460
+Why 1.2?
+
+190
+00:13:44.739 --> 00:13:50.835
+ASME Section VIII, Division 3, uses
+a margin of 1.8 on plastic collapse,
+
+191
+00:13:50.875 --> 00:13:55.769
+and the workover riser
+standard uses 1.5 on yielding.
+
+192
+00:13:55.809 --> 00:14:03.101
+1.8 over 1.5 is 1.2, so the
+two methods are meant to agree.
+
+193
+00:14:03.141 --> 00:14:05.951
+Here they do, within 2 %.
+
+194
+00:14:06.917 --> 00:14:11.604
+For a connector, the same curve
+carries more than one limit.
+
+195
+00:14:11.644 --> 00:14:16.906
+Preload exceedance, seal leak tightness,
+mechanical disengagement, the limit load,
+
+196
+00:14:16.946 --> 00:14:19.149
+and the plastic collapse load.
+
+197
+00:14:19.189 --> 00:14:24.415
+The static capacity is the lowest of the
+structural and functional capacities.
+
+198
+00:14:24.455 --> 00:14:27.708
+That is why NORSOK recommends
+that you always plot
+
+199
+00:14:27.748 --> 00:14:31.487
+the load against the
+rotation or displacement.
+
+200
+00:14:32.450 --> 00:14:36.741
+Single load capacities are
+combined in a capacity chart.
+
+201
+00:14:36.781 --> 00:14:41.950
+For linear behaviour, formula B.7 adds
+the true wall tension over the tension
+
+202
+00:14:41.990 --> 00:14:49.023
+capacity, and the moment over the bending
+capacity, and the sum shall not exceed Fd.
+
+203
+00:14:49.063 --> 00:14:54.700
+That gives one envelope per load
+condition: normal, extreme, and accidental.
+
+204
+00:14:54.740 --> 00:14:58.470
+Where pressure or tension
+changes the bending capacity,
+
+205
+00:14:58.580 --> 00:15:05.380
+NORSOK asks for nonlinear charts,
+analysed with all the loads divided by Fd.
+
+206
+00:15:09.517 --> 00:15:12.900
+So, is the acceptance
+criterion a strain limit?
+
+207
+00:15:12.940 --> 00:15:15.124
+For the yielding capacity, no.
+
+208
+00:15:15.164 --> 00:15:19.716
+It is a load, and you do not
+read off a strain to find it.
+
+209
+00:15:19.756 --> 00:15:23.920
+Strain becomes the criterion
+in exactly two places.
+
+210
+00:15:24.883 --> 00:15:28.875
+The first is studs in a
+flange, segments in a clamp,
+
+211
+00:15:28.915 --> 00:15:33.203
+and locking segments in a
+connector, when they are bent.
+
+212
+00:15:33.243 --> 00:15:38.515
+For these parts, NORSOK does not wait
+for the structure to become unstable.
+
+213
+00:15:38.555 --> 00:15:43.524
+The yielding capacity is the load at which
+the whole root cross section has reached
+
+214
+00:15:43.564 --> 00:15:47.434
+0.2 % equivalent plastic strain.
+
+215
+00:15:47.474 --> 00:15:51.224
+A stud that has yielded right
+through is permanently stretched,
+
+216
+00:15:51.264 --> 00:15:53.894
+and its preload is gone.
+
+217
+00:15:54.850 --> 00:15:57.139
+The second is local failure.
+
+218
+00:15:57.179 --> 00:16:02.779
+NORSOK defines it as a ductile crack that
+starts at a point of high triaxial stress,
+
+219
+00:16:02.899 --> 00:16:06.355
+as tiny voids form, grow, and join.
+
+220
+00:16:06.395 --> 00:16:11.321
+Triaxiality is the mean stress
+divided by the von Mises stress.
+
+221
+00:16:11.361 --> 00:16:14.412
+In a tensile test it is one third.
+
+222
+00:16:14.452 --> 00:16:19.182
+At a notch, where the material
+is held back in every direction,
+
+223
+00:16:19.282 --> 00:16:21.299
+it can be well above one.
+
+224
+00:16:21.339 --> 00:16:25.382
+ASME Section VIII,
+Division 3, clause KD-232,
+
+225
+00:16:25.422 --> 00:16:30.719
+gives the strain limit as an
+exponential function of triaxiality.
+
+226
+00:16:30.759 --> 00:16:36.641
+At a triaxiality of 1.2, a
+steel has only about 18 %
+
+227
+00:16:36.681 --> 00:16:40.023
+of the ductility it
+shows in a tensile test.
+
+228
+00:16:40.063 --> 00:16:44.943
+The plastic strain is summed over the
+load history, preload, pressure test,
+
+229
+00:16:44.983 --> 00:16:49.369
+and the yielding capacity, and
+the damage shall not exceed one.
+
+230
+00:16:49.648 --> 00:16:55.077
+NORSOK sets the ASME load
+factor for this check to 1.0,
+
+231
+00:16:55.117 --> 00:17:00.427
+and runs the history all the
+way up to the yielding capacity.
+
+232
+00:17:01.383 --> 00:17:04.083
+In practice there is a shortcut.
+
+233
+00:17:04.123 --> 00:17:09.001
+Carbon and low alloy steels that meet
+the ductility requirements need no local
+
+234
+00:17:09.041 --> 00:17:15.475
+failure check: an elongation of at least
+17 % and a reduction of area of at least
+
+235
+00:17:15.515 --> 00:17:22.356
+35 %, for a minimum yield
+strength up to 655 MPa.
+
+236
+00:17:22.396 --> 00:17:26.263
+Studs and nuts made to
+annex D are exempt too.
+
+237
+00:17:26.303 --> 00:17:29.085
+Our 75K forging meets this.
+
+238
+00:17:29.125 --> 00:17:32.795
+In the elastic route, the
+same idea is a simple sum:
+
+239
+00:17:32.835 --> 00:17:36.175
+the three principal
+stresses together shall stay
+
+240
+00:17:36.215 --> 00:17:40.046
+below 2.5 times the
+minimum yield strength.
+
+241
+00:17:41.283 --> 00:17:44.399
+The remaining modes are load based again.
+
+242
+00:17:44.439 --> 00:17:49.335
+The buckling capacity is the
+maximum load divided by 1.10,
+
+243
+00:17:49.375 --> 00:17:56.085
+the mechanical disengagement capacity is
+the load at disengagement divided by 1.1,
+
+244
+00:17:56.125 --> 00:18:01.225
+and ratcheting only needs
+checking above 180 degrees.
+
+245
+00:18:01.265 --> 00:18:06.335
+Functional capacities, like seal leak
+tightness and hub face separation,
+
+246
+00:18:06.375 --> 00:18:11.735
+use an Fd of one, with acceptance
+criteria from the manufacturer,
+
+247
+00:18:11.775 --> 00:18:13.615
+validated by testing.
+
+248
+00:18:17.750 --> 00:18:19.711
+Back to the red spot.
+
+249
+00:18:19.751 --> 00:18:27.124
+Our well is in 350 metres of water, with
+the blowout preventer on the wellhead.
+
+250
+00:18:27.164 --> 00:18:32.239
+Table A.4 gives the design
+loads at the wellhead datum.
+
+251
+00:18:32.279 --> 00:18:40.800
+The accidental case is 12 217
+kNm of bending, 892 kN of shear,
+
+252
+00:18:40.840 --> 00:18:45.630
+and 3424 kN of tension.
+
+253
+00:18:45.670 --> 00:18:54.629
+The neck is 0.6 metres below the datum, so
+the shear adds to the moment: 12.75 MNm.
+
+254
+00:18:55.583 --> 00:18:59.209
+The well pressure also
+pulls on the housing.
+
+255
+00:18:59.249 --> 00:19:02.276
+Formula B.7 uses the true wall tension:
+
+256
+00:19:02.316 --> 00:19:08.176
+the applied tension plus the pressure
+end load on the gasket sealing diameter.
+
+257
+00:19:08.216 --> 00:19:16.126
+With 690 bar on a sealing diameter of
+half a metre, the end load is 13.5 MN,
+
+258
+00:19:16.236 --> 00:19:20.732
+and the true wall tension becomes 17.0 MN.
+
+259
+00:19:21.683 --> 00:19:23.169
+Now the check.
+
+260
+00:19:23.209 --> 00:19:28.929
+The limit load analysis gave a
+bending capacity of 20.3 MNm,
+
+261
+00:19:29.079 --> 00:19:35.630
+and the tension capacity, σy
+times the area, is 107 MN.
+
+262
+00:19:35.670 --> 00:19:46.020
+For the accidental case: 17 over 107,
+plus 12.75 over 20.3, divided by 0.9,
+
+263
+00:19:46.060 --> 00:19:48.150
+gives 0.88.
+
+264
+00:19:48.190 --> 00:19:49.409
+It passes.
+
+265
+00:19:49.449 --> 00:19:56.429
+The extreme case, with a design
+factor of 0.8, gives 0.61.
+
+266
+00:19:56.469 --> 00:20:01.039
+The same neck failed the
+elastic check by 4 %,
+
+267
+00:20:01.209 --> 00:20:05.219
+because that check stops at the
+first yield through the wall,
+
+268
+00:20:05.339 --> 00:20:08.689
+and ignores the reserve
+of the full section.
+
+269
+00:20:09.950 --> 00:20:14.263
+To finish the job, we tick
+off the other failure modes.
+
+270
+00:20:14.303 --> 00:20:19.787
+Local failure: exempt, because the
+forging meets the ductility requirements.
+
+271
+00:20:19.827 --> 00:20:23.192
+Buckling: not an issue
+for a wall this thick.
+
+272
+00:20:23.232 --> 00:20:25.832
+The functional capacities
+of the connector,
+
+273
+00:20:25.912 --> 00:20:30.852
+like hub face separation and gasket
+leak tightness at minimum preload,
+
+274
+00:20:30.972 --> 00:20:34.624
+come from the supplier, and
+connector capacities from
+
+275
+00:20:34.664 --> 00:20:39.039
+FE analysis must be validated
+by a full scale test.
+
+276
+00:20:39.079 --> 00:20:44.939
+So, the verdict on the red
+spot: 793 MPa of peak stress,
+
+277
+00:20:44.979 --> 00:20:47.726
+and the wellhead is still acceptable.
+
+278
+00:20:52.183 --> 00:20:54.969
+Let's put the answers on one page.
+
+279
+00:20:55.009 --> 00:20:57.777
+Is the criterion the yield strength?
+
+280
+00:20:57.817 --> 00:21:00.939
+The yield strength is the
+anchor of every check,
+
+281
+00:21:00.979 --> 00:21:04.964
+but it is never compared
+with a peak stress.
+
+282
+00:21:05.004 --> 00:21:08.754
+In the elastic route it
+limits linearised stresses,
+
+283
+00:21:08.874 --> 00:21:11.597
+and in the elastic plastic
+route it shapes the
+
+284
+00:21:11.637 --> 00:21:14.728
+material curve that produces the capacity.
+
+285
+00:21:14.768 --> 00:21:16.677
+Is it a strain limit?
+
+286
+00:21:16.717 --> 00:21:18.190
+Not for yielding.
+
+287
+00:21:18.230 --> 00:21:22.640
+Strain is the criterion only for
+studs and segments in bending,
+
+288
+00:21:22.780 --> 00:21:26.707
+and for local failure, unless
+the material is ductile enough.
+
+289
+00:21:26.747 --> 00:21:32.515
+And from the FE model we extract linearised
+stresses along classification lines,
+
+290
+00:21:32.555 --> 00:21:36.145
+or a load rotation curve to instability.
+
+291
+00:21:36.185 --> 00:21:41.185
+Whichever route you take, the
+final check is always the same.
+
+292
+00:21:41.465 --> 00:21:46.183
+The load shall not exceed
+Fd times the capacity.
+
+293
+00:21:47.150 --> 00:21:51.936
+The rules are in NORSOK U-001, Annex B.
+
+294
+00:21:51.976 --> 00:21:54.616
+The details of the linearisation,
+
+295
+00:21:54.696 --> 00:21:59.493
+the material curve and the strain
+limit are in the ASME code.
+
+296
+00:21:59.533 --> 00:22:02.081
+The worked example used
+illustrative inputs,
+
+297
+00:22:02.121 --> 00:22:05.621
+so take your design values
+from your own project.
+
+298
+00:22:05.661 --> 00:22:07.302
+Thanks for watching.
+
