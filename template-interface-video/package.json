@@ -1,0 +1,16 @@
+{
+  "name": "template-interface-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tutorial video: when has the wellhead-template interface failed? NORSOK U-001:2026, N-001, N-004 and EN 1993-1-5 Annex C",
+  "type": "module",
+  "scripts": {
+    "serve": "node tools/server.mjs 8080",
+    "render": "node tools/render.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.13.0",
+    "katex": "0.16.22",
+    "three": "0.170.0"
+  }
+}

@@ -1,0 +1,125 @@
+/* Design system for the conductor fatigue tutorial (1920 x 1080 stage). */
+:root {
+  --bg0: #050d15;
+  --bg1: #0a1a28;
+  --ink: #e9f2f9;
+  --ink2: #b9cad8;
+  --dim: #7f97aa;
+  --line: rgba(190, 220, 245, 0.16);
+  --card: rgba(16, 36, 54, 0.82);
+  --card2: rgba(22, 46, 68, 0.9);
+  --amber: #ffb547;   /* moments, loads */
+  --coral: #ff6f61;   /* stresses, hot spots */
+  --cyan: #4fd1ff;    /* cycles N, life */
+  --violet: #b794f6;  /* slopes m */
+  --green: #46d39a;   /* design factors, pass */
+  --red: #ff4d5e;     /* fail */
+  --yellow: #f2c14e;  /* template steel */
+  --steel: #b8c7d4;
+  --soil: #c9a46c;
+  --cement: #a7b1b9;
+  --blue: #5aa9ff;    /* path 1 */
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #000; overflow: hidden; }
+body { font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+#stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0;
+  background: radial-gradient(1400px 900px at 30% 25%, #0f2a40 0%, var(--bg1) 45%, var(--bg0) 100%); }
+#grid { position: absolute; inset: 0; opacity: 0.55;
+  background-image: linear-gradient(rgba(120,170,210,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(120,170,210,0.055) 1px, transparent 1px);
+  background-size: 48px 48px; }
+#vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); z-index: 6; }
+#gl { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 1; visibility: hidden; }
+#layer { position: absolute; inset: 0; z-index: 2; }
+#hud { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+#flash { position: absolute; inset: 0; z-index: 8; background: #000; opacity: 0; visibility: hidden; }
+
+.scene { position: absolute; inset: 0; visibility: hidden; opacity: 0; }
+.abs { position: absolute; }
+.svg { position: absolute; left: 0; top: 0; overflow: visible; }
+
+/* ---------- text ---------- */
+.h1 { font-weight: 800; font-size: 76px; letter-spacing: -0.02em; line-height: 1.02; }
+.h2 { font-weight: 750; font-size: 52px; letter-spacing: -0.015em; line-height: 1.08; }
+.h3 { font-weight: 700; font-size: 36px; letter-spacing: -0.01em; }
+.kicker { font-weight: 700; font-size: 20px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); }
+.body { font-weight: 450; font-size: 30px; line-height: 1.4; color: var(--ink2); }
+.small { font-weight: 500; font-size: 25px; color: var(--ink2); line-height: 1.35; }
+.tiny { font-weight: 650; font-size: 19px; letter-spacing: 0.06em; color: var(--dim); }
+.mono { font-family: var(--mono); }
+.num { font-family: var(--mono); font-weight: 600; }
+.c-amber { color: var(--amber); } .c-coral { color: var(--coral); } .c-cyan { color: var(--cyan); }
+.c-violet { color: var(--violet); } .c-green { color: var(--green); } .c-red { color: var(--red); }
+.c-yellow { color: var(--yellow); } .c-dim { color: var(--dim); } .c-ink2 { color: var(--ink2); } .c-blue { color: var(--blue); }
+
+/* ---------- cards ---------- */
+.card { position: absolute; background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05); padding: 28px 34px; }
+.card.glass { background: linear-gradient(160deg, rgba(30,62,90,0.85), rgba(12,28,44,0.88)); }
+.card .title { font-weight: 700; font-size: 26px; letter-spacing: 0.02em; color: var(--ink); margin-bottom: 14px; }
+.card .ref { font-family: var(--mono); font-size: 17px; color: var(--cyan); letter-spacing: 0.04em; margin-bottom: 10px; }
+.quote { font-weight: 500; font-size: 30px; line-height: 1.42; color: var(--ink); }
+.quote .q { color: var(--amber); font-weight: 650; }
+.badge { display: inline-block; font-weight: 750; font-size: 18px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 7px 14px; border-radius: 999px; background: rgba(79,209,255,0.14); color: var(--cyan); border: 1px solid rgba(79,209,255,0.35); }
+.badge.warn { background: rgba(255,181,71,0.14); color: var(--amber); border-color: rgba(255,181,71,0.4); }
+.badge.pass { background: rgba(70,211,154,0.16); color: var(--green); border-color: rgba(70,211,154,0.45); }
+.badge.fail { background: rgba(255,77,94,0.16); color: var(--red); border-color: rgba(255,77,94,0.5); }
+.pill { position: absolute; font-weight: 650; font-size: 22px; padding: 8px 16px; border-radius: 999px; white-space: nowrap;
+  background: rgba(8,20,32,0.86); border: 1px solid var(--line); color: var(--ink); }
+.pill .k { color: var(--dim); font-weight: 600; margin-right: 8px; }
+
+/* labels pointing at things */
+.label { position: absolute; white-space: nowrap; font-weight: 650; font-size: 25px; color: var(--ink);
+  padding: 7px 14px; border-radius: 10px; background: rgba(6,16,26,0.84); border: 1px solid var(--line); }
+.label .sub { display: block; font-weight: 500; font-size: 19px; color: var(--dim); margin-top: 2px; }
+.dot { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--ink);
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.15); }
+
+/* letter badges for contact areas */
+.letter { position: absolute; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-weight: 800; font-size: 24px; color: #06121c; background: var(--amber); box-shadow: 0 0 24px rgba(255,181,71,0.55); }
+
+/* ---------- equations ---------- */
+.eq { position: absolute; white-space: nowrap; color: var(--ink); }
+.eq .katex { font-size: 1em; }
+.eq .katex-display { margin: 0; }
+.eq.left { transform-origin: 0 50%; }
+.eqbox { position: absolute; border: 2px solid var(--amber); border-radius: 14px; box-shadow: 0 0 34px rgba(255,181,71,0.28); }
+.v-mom { color: var(--amber); } .v-str { color: var(--coral); } .v-cyc { color: var(--cyan); }
+.v-slope { color: var(--violet); } .v-df { color: var(--green); } .v-k { color: var(--yellow); } .v-geo { color: #9fd3ff; }
+.hl { position: absolute; border-radius: 10px; background: rgba(255,181,71,0.18); border: 2px solid rgba(255,181,71,0.75); }
+
+/* ---------- tables ---------- */
+table.t { border-collapse: separate; border-spacing: 0; font-size: 22px; }
+table.t th { font-weight: 700; color: var(--dim); text-align: right; padding: 8px 16px; border-bottom: 1px solid var(--line); font-size: 18px; letter-spacing: 0.04em; }
+table.t td { font-family: var(--mono); font-weight: 500; text-align: right; padding: 7px 16px; color: var(--ink); white-space: nowrap; }
+table.t td.l, table.t th.l { text-align: left; font-family: var(--sans); }
+table.t tr.hi td { color: var(--amber); }
+table.t tr.dim td { color: var(--dim); }
+
+/* ---------- HUD ---------- */
+.chip { position: absolute; display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 17px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink2); padding: 9px 16px; border-radius: 999px; background: rgba(5,14,22,0.66); border: 1px solid var(--line); }
+.chip .n { color: #06121c; background: var(--cyan); border-radius: 999px; padding: 2px 9px; letter-spacing: 0.04em; }
+.steps { position: absolute; display: flex; gap: 8px; }
+.step { font-weight: 700; font-size: 15px; letter-spacing: 0.08em; color: var(--dim); padding: 6px 10px; border-radius: 8px;
+  background: rgba(5,14,22,0.6); border: 1px solid rgba(190,220,245,0.12); white-space: nowrap; }
+.step.on { color: #06121c; background: var(--amber); border-color: var(--amber); }
+.step.done { color: var(--ink2); border-color: rgba(255,181,71,0.35); }
+.clause { position: absolute; font-family: var(--mono); font-size: 17px; color: var(--cyan); letter-spacing: 0.04em; padding: 7px 14px;
+  border-radius: 8px; background: rgba(5,14,22,0.66); border: 1px solid rgba(79,209,255,0.28); }
+
+/* ---------- chapter title card ---------- */
+.ctitle { position: absolute; left: 160px; top: 380px; }
+.ctitle .no { font-family: var(--mono); font-weight: 700; font-size: 30px; color: var(--cyan); letter-spacing: 0.1em; }
+.ctitle .t { font-weight: 800; font-size: 96px; letter-spacing: -0.03em; line-height: 1.0; margin-top: 10px; }
+.ctitle .s { font-weight: 500; font-size: 30px; color: var(--ink2); margin-top: 22px; }
+.bar { position: absolute; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--cyan), var(--amber)); }
+
+/* charts */
+.axis text, .chart text { font-family: var(--sans); font-size: 20px; fill: var(--dim); font-weight: 500; }
+.chart .ttl { font-size: 20px; font-weight: 700; fill: var(--ink2); letter-spacing: 0.04em; }
+.hang { padding-left: 22px; text-indent: -22px; }

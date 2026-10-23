@@ -1,0 +1,674 @@
+WEBVTT
+
+1
+00:00:00.550 --> 00:00:03.462
+This is where the well meets the template.
+
+2
+00:00:03.502 --> 00:00:10.143
+The conductor housing lands in a slot of
+the template structure, and lower down,
+
+3
+00:00:10.202 --> 00:00:15.153
+the conductor is guided by a ring
+in the bottom of the structure.
+
+4
+00:00:15.193 --> 00:00:20.483
+When the riser pulls on the wellhead,
+the conductor pushes on that ring.
+
+5
+00:00:21.717 --> 00:00:25.854
+So when has this interface
+failed, according to the standard?
+
+6
+00:00:25.894 --> 00:00:31.042
+When the steel reaches 0.2 %
+plastic strain, the yield strength?
+
+7
+00:00:31.082 --> 00:00:38.192
+Or at a strain limit, like the 5 %, or the
+2 %, that people attribute to Eurocode 3,
+
+8
+00:00:38.232 --> 00:00:39.654
+part 1-5?
+
+9
+00:00:40.617 --> 00:00:44.067
+In this follow-up to the
+acceptance criteria video,
+
+10
+00:00:44.107 --> 00:00:47.107
+we find out which standard
+owns the interface,
+
+11
+00:00:47.227 --> 00:00:52.337
+what failure means on each side of
+it, what Eurocode 3 actually says,
+
+12
+00:00:52.377 --> 00:00:54.908
+and we check the slot ring both ways.
+
+13
+00:00:59.050 --> 00:01:04.019
+NORSOK U-001 names the
+contacts in Figure J.1.
+
+14
+00:01:04.059 --> 00:01:09.009
+Contact C is between the template
+structure and the conductor housing,
+
+15
+00:01:09.159 --> 00:01:12.389
+and contact D is at the
+bottom of the structure.
+
+16
+00:01:12.429 --> 00:01:18.229
+When the template is in the load path,
+load path three runs from the wellhead,
+
+17
+00:01:18.279 --> 00:01:23.557
+through the conductor, into the guide
+structure and down to the seabed.
+
+18
+00:01:23.837 --> 00:01:27.367
+How much load goes that
+way is the load share.
+
+19
+00:01:27.407 --> 00:01:31.847
+It depends on the tolerances and
+on the relative stiffness of well,
+
+20
+00:01:31.887 --> 00:01:33.477
+template and soil.
+
+21
+00:01:34.417 --> 00:01:39.865
+The interface has two sides, and
+each side has its own rule book.
+
+22
+00:01:39.905 --> 00:01:43.995
+The wellhead side, the conductor
+housing and the conductor,
+
+23
+00:01:44.045 --> 00:01:50.629
+is checked to Annex B of U-001 and
+the pipe formulas of clause B.9.
+
+24
+00:01:50.669 --> 00:01:56.379
+That was the first video: the yield
+strength at 0.2 % plastic strain,
+
+25
+00:01:56.419 --> 00:01:58.786
+and capacities found as loads.
+
+26
+00:01:58.826 --> 00:02:01.352
+The template side is different.
+
+27
+00:02:01.632 --> 00:02:13.022
+Clause 13.3.6.1 says that structural design
+shall follow ISO 13628-15, clause 5.4,
+
+28
+00:02:13.062 --> 00:02:15.617
+and NORSOK N-001.
+
+29
+00:02:15.657 --> 00:02:24.636
+N-001 sends steel design on to N-004,
+and N-004 builds on Eurocode 3.
+
+30
+00:02:24.676 --> 00:02:31.178
+So U-001 has no failure criterion
+of its own for the template steel.
+
+31
+00:02:31.458 --> 00:02:33.343
+It hands it over.
+
+32
+00:02:34.283 --> 00:02:38.969
+Before any stress, the interface
+can fail as a mechanism.
+
+33
+00:02:39.009 --> 00:02:42.949
+The well grows with temperature,
+and the template settles.
+
+34
+00:02:42.989 --> 00:02:49.993
+Clause 13.3.6.2 asks the template design
+to account for a relative vertical
+
+35
+00:02:50.033 --> 00:02:55.469
+displacement of 100 millimetres
+between template and conductor,
+
+36
+00:02:55.599 --> 00:02:57.603
+unless otherwise specified.
+
+37
+00:02:57.643 --> 00:03:04.433
+Note d of Table A.2 makes this a
+serviceability check, with load factor 1.0:
+
+38
+00:03:04.643 --> 00:03:08.322
+the margins to the upper and
+lower end stops are checked.
+
+39
+00:03:08.362 --> 00:03:12.152
+If an end stop is reached,
+the template is preloaded,
+
+40
+00:03:12.192 --> 00:03:16.545
+and that force goes into separate
+ultimate limit state load cases.
+
+41
+00:03:16.585 --> 00:03:21.575
+And the installed template may
+not lean more than 0.3 degrees,
+
+42
+00:03:21.635 --> 00:03:24.084
+unless the tolerance loops allow it.
+
+43
+00:03:28.550 --> 00:03:32.611
+On the template side there
+are no design factors.
+
+44
+00:03:32.651 --> 00:03:35.646
+It is load and resistance factor design.
+
+45
+00:03:35.686 --> 00:03:42.536
+The loads are multiplied by the load
+factors of N-001, which Table A.2 lists:
+
+46
+00:03:42.736 --> 00:03:47.416
+1.3 on the extreme riser loads
+in the ultimate limit state,
+
+47
+00:03:47.476 --> 00:03:50.508
+1.0 in the accidental case.
+
+48
+00:03:50.548 --> 00:03:53.828
+The resistance is divided
+by a material factor:
+
+49
+00:03:54.058 --> 00:03:59.861
+1.15 for steel in the ultimate
+limit state, in N-004,
+
+50
+00:03:59.901 --> 00:04:03.954
+and 1.0 in the accidental limit state.
+
+51
+00:04:04.917 --> 00:04:06.783
+And the yield strength?
+
+52
+00:04:06.823 --> 00:04:16.467
+For a 40 millimetre plate of S355, the
+nominal yield strength, fy, is 345 MPa.
+
+53
+00:04:16.507 --> 00:04:21.317
+Eurocode 3 takes it from the product
+standard: the upper yield strength,
+
+54
+00:04:21.357 --> 00:04:27.313
+or the 0.2 % proof strength when the
+steel shows no distinct yield point.
+
+55
+00:04:27.353 --> 00:04:33.358
+So yes, it is the same
+idea as the 0.2 % offset.
+
+56
+00:04:33.398 --> 00:04:38.725
+And it is reached at a
+strain of only 0.16 %.
+
+57
+00:04:39.683 --> 00:04:42.433
+The first Eurocode check is elastic.
+
+58
+00:04:42.473 --> 00:04:47.633
+Clause 6.2.1, paragraph five, of part 1-1:
+
+59
+00:04:47.873 --> 00:04:54.762
+the von Mises stress at the critical
+point shall not exceed fy divided by γM0.
+
+60
+00:04:54.802 --> 00:04:58.545
+Here is the lower slot
+ring, cut from that plate,
+
+61
+00:04:58.585 --> 00:05:02.995
+with the conductor pushing
+on it between two struts.
+
+62
+00:05:03.275 --> 00:05:07.445
+At the design contact force of 1.6 MN,
+
+63
+00:05:07.535 --> 00:05:13.035
+the outer edge behind the
+contact reaches 416 MPa.
+
+64
+00:05:13.075 --> 00:05:15.286
+The limit is 300.
+
+65
+00:05:15.326 --> 00:05:18.065
+Utilisation, 1.39.
+
+66
+00:05:18.105 --> 00:05:21.848
+So by the elastic check,
+the ring has failed.
+
+67
+00:05:22.128 --> 00:05:25.783
+But that check stops at the
+first point that yields.
+
+68
+00:05:25.823 --> 00:05:30.415
+It is the most conservative
+option, not the only one.
+
+69
+00:05:34.550 --> 00:05:40.630
+For a plated detail in a finite element
+model, Eurocode 3 offers another route:
+
+70
+00:05:40.910 --> 00:05:45.714
+Annex C of part 1-5, finite
+element methods of analysis.
+
+71
+00:05:45.754 --> 00:05:49.162
+It is an informative annex,
+so the National Annex
+
+72
+00:05:49.202 --> 00:05:52.785
+and your design basis
+decide whether it is used.
+
+73
+00:05:52.825 --> 00:05:56.445
+For a stocky part that cannot
+buckle, like this ring,
+
+74
+00:05:56.485 --> 00:05:59.644
+a materially non-linear
+analysis is enough.
+
+75
+00:05:59.684 --> 00:06:03.099
+Where buckling is possible,
+the geometric non-linearity
+
+76
+00:06:03.139 --> 00:06:06.667
+and the imperfections
+must be included as well.
+
+77
+00:06:07.617 --> 00:06:13.577
+Clause C.6 gives the material models:
+elastic plastic without strain hardening,
+
+78
+00:06:13.617 --> 00:06:17.457
+with a nominal plateau slope,
+with linear strain hardening,
+
+79
+00:06:17.497 --> 00:06:20.402
+or a true stress strain curve from tests.
+
+80
+00:06:20.442 --> 00:06:26.842
+They use characteristic values: fy itself,
+not divided by the material factor.
+
+81
+00:06:26.882 --> 00:06:31.182
+Clause C.7 puts the factored
+design loads into the model,
+
+82
+00:06:31.322 --> 00:06:34.420
+multiplied by one load multiplier, α,
+
+83
+00:06:34.460 --> 00:06:39.062
+which the analysis increases
+until a limit state is reached.
+
+84
+00:06:40.317 --> 00:06:46.326
+And here is the clause you heard
+about: C.8, the limit state criteria.
+
+85
+00:06:46.366 --> 00:06:48.976
+Where the structure is
+susceptible to buckling,
+
+86
+00:06:49.036 --> 00:06:52.052
+the criterion is reaching
+the maximum load.
+
+87
+00:06:52.092 --> 00:06:55.204
+In regions in tension,
+it is reaching a limiting
+
+88
+00:06:55.244 --> 00:06:58.134
+value of the principal membrane strain.
+
+89
+00:06:58.174 --> 00:07:04.318
+Note one: the National Annex may specify
+that value, and 5 % is recommended.
+
+90
+00:07:04.358 --> 00:07:09.988
+Note two: other criteria may be used,
+for example reaching the yield criterion,
+
+91
+00:07:10.028 --> 00:07:12.101
+or limiting the yielded zone.
+
+92
+00:07:12.141 --> 00:07:16.021
+Membrane means the strain at
+mid thickness of the shell,
+
+93
+00:07:16.201 --> 00:07:20.227
+not the surface value with
+plate bending added on top.
+
+94
+00:07:21.483 --> 00:07:22.947
+Let's run it.
+
+95
+00:07:22.987 --> 00:07:28.259
+Up to 83 % of the design
+load, the ring is elastic.
+
+96
+00:07:28.299 --> 00:07:31.399
+Then the outer edge
+behind the contact yields,
+
+97
+00:07:31.519 --> 00:07:38.566
+and at 1.25 times the design
+load it has 0.2 % plastic strain.
+
+98
+00:07:38.606 --> 00:07:43.075
+The plastic zones spread, behind
+the contact and at the struts.
+
+99
+00:07:43.115 --> 00:07:49.449
+Without strain hardening, the curve
+flattens at 1.54: a plastic mechanism.
+
+100
+00:07:49.489 --> 00:07:52.122
+With linear hardening, it keeps rising.
+
+101
+00:07:52.162 --> 00:07:57.102
+There is no peak and no buckling,
+so the 5 % strain decides:
+
+102
+00:07:57.292 --> 00:08:00.821
+at 1.76 times the design load.
+
+103
+00:08:01.783 --> 00:08:04.573
+Clause C.9 sets the margin.
+
+104
+00:08:04.613 --> 00:08:11.758
+The multiplier at the limit state,
+αu, shall be at least α1 times α2.
+
+105
+00:08:11.798 --> 00:08:17.682
+α1 covers the uncertainty of the
+FE model, calibrated against tests.
+
+106
+00:08:17.722 --> 00:08:24.492
+α2 covers the scatter of loads and
+resistance: γM1 where instability governs,
+
+107
+00:08:24.532 --> 00:08:27.208
+γM2 where fracture governs.
+
+108
+00:08:27.248 --> 00:08:34.770
+With α1 equal to one, for a benchmarked
+model, and α2 no more than 1.3,
+
+109
+00:08:34.810 --> 00:08:41.479
+αu of 1.76 passes, and so
+does 1.53 without hardening.
+
+110
+00:08:41.519 --> 00:08:47.109
+So the ring that failed the elastic
+check is accepted by the non-linear one,
+
+111
+00:08:47.169 --> 00:08:48.503
+with margin.
+
+112
+00:08:52.950 --> 00:08:54.850
+Now the 2 %.
+
+113
+00:08:54.890 --> 00:08:59.464
+Annex C contains one strain
+value, the recommended 5 %.
+
+114
+00:08:59.504 --> 00:09:03.625
+We found no 2 % criterion in part 1-5.
+
+115
+00:09:03.665 --> 00:09:10.054
+If someone quotes one, ask which document
+it comes from, and which strain it limits.
+
+116
+00:09:10.094 --> 00:09:12.262
+And what would it change here?
+
+117
+00:09:12.542 --> 00:09:18.822
+With hardening, stopping at 2 % instead
+of five lowers the capacity by 10 %.
+
+118
+00:09:18.862 --> 00:09:23.865
+Without hardening, by only 2 %,
+because the curve is already flat.
+
+119
+00:09:24.817 --> 00:09:27.823
+There is a catch with every strain limit.
+
+120
+00:09:27.863 --> 00:09:33.013
+Without hardening, the same
+load, 1.5 times the design load,
+
+121
+00:09:33.083 --> 00:09:39.636
+gives 1.4 % strain with coarse
+elements, and 2.4 % with fine ones.
+
+122
+00:09:39.676 --> 00:09:43.840
+The load at the limit hardly
+moves, but the strain does.
+
+123
+00:09:43.880 --> 00:09:46.891
+With hardening, the
+mesh no longer matters.
+
+124
+00:09:46.931 --> 00:09:52.141
+So a strain limit always comes
+with a material model, a mesh,
+
+125
+00:09:52.191 --> 00:09:54.675
+and a definition of the strain.
+
+126
+00:09:54.955 --> 00:10:00.472
+The second generation of Eurocode 3
+develops this into a part of its own,
+
+127
+00:10:00.512 --> 00:10:05.934
+EN 1993-1-14, published in 2025.
+
+128
+00:10:05.974 --> 00:10:09.457
+Check which edition your
+design basis calls for.
+
+129
+00:10:13.617 --> 00:10:16.715
+So, when has the template
+interface failed?
+
+130
+00:10:16.755 --> 00:10:22.740
+As a mechanism, when the relative displacement
+uses up the margin to the end stops.
+
+131
+00:10:22.780 --> 00:10:28.790
+On the wellhead side, when the load
+exceeds Fd times the capacity of Annex B,
+
+132
+00:10:28.960 --> 00:10:33.454
+with the yield strength
+at 0.2 % plastic strain.
+
+133
+00:10:33.494 --> 00:10:37.122
+On the template side,
+by the elastic route,
+
+134
+00:10:37.162 --> 00:10:41.981
+when the von Mises stress at
+a point reaches fy over γM.
+
+135
+00:10:42.021 --> 00:10:43.811
+And by the non-linear route,
+
+136
+00:10:43.851 --> 00:10:49.385
+at the maximum load or at 5
+% principal membrane strain,
+
+137
+00:10:49.425 --> 00:10:52.457
+with αu at least α1 times α2.
+
+138
+00:10:52.497 --> 00:10:57.364
+Two percent is not a criterion
+of Eurocode 3, part 1-5.
+
+139
+00:10:58.317 --> 00:11:03.734
+The ring, its load and the factors
+in this video are teaching inputs.
+
+140
+00:11:03.774 --> 00:11:06.946
+The clauses are on
+screen, and the notes list
+
+141
+00:11:06.986 --> 00:11:09.966
+what was checked and against which source.
+
+142
+00:11:10.006 --> 00:11:14.940
+Use the editions and the National
+Annex of your own design basis.
+
