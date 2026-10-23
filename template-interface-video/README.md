@@ -8,9 +8,9 @@ NORSOK U-001:2026 to the documents it calls up and checks a slot ring of the 3D 
 
 | File | What it is |
 | --- | --- |
-| `out/template-interface_part1_1080p.mp4` | Cold open, 01 Who owns the interface, 02 The template steel: the elastic check |
-| `out/template-interface_part2_1080p.mp4` | 03 Non-linear FE: EN 1993-1-5 Annex C, 04 Five percent, and the two, 05 Summary |
-| `out/template-interface_full_720p.mp4` | The whole film in one file, 720p, with subtitles and chapters |
+| `out/template-interface_part1_1080p.mp4` | Cold open, 01 Who owns the interface, 02 The template steel: the elastic check (5:31, 92 MiB) |
+| `out/template-interface_part2_1080p.mp4` | 03 Non-linear FE: EN 1993-1-5 Annex C, 04 Five percent, and the two, 05 Summary (5:49, 92 MiB) |
+| `out/template-interface_full_720p.mp4` | The whole film in one file, 720p (94 MiB), with subtitles and chapters |
 | `out/template-interface.srt` / `.vtt` | Captions (numbers and symbols written the way they are read) |
 | `out/template-interface_transcript.md` | Full transcript with chapter and beat timestamps |
 | `out/poster.png` | Title-card still |
