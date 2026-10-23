@@ -1,5 +1,5 @@
 // Chapter 3 — non-linear FE to EN 1993-1-5 Annex C: the annex, material models (C.6), load multiplier (C.7), the limit
-// state criteria (C.8, the 5 %), the ring analysis (curves + 3D strain contour), the margin alpha_u >= alpha_1 alpha_2 (C.9).
+// state criteria (C.8, the 5 %), the ring analysis (curves + 3D strain contour), the margin alpha_u > alpha_1 alpha_2 (C.9, formula C.2).
 import { E, ease, COL, clamp, smooth, lerp, fmt, Actor } from '../engine/core.js';
 import { Scene, later } from '../engine/scene.js';
 import { titleCard, clause } from '../engine/hud.js';
@@ -15,7 +15,7 @@ export async function build(E, T, D) {
   const W3 = E.world, md = W3.models;
   const b = (id) => T.b(id), c = (id, n) => T.c(id, n);
   const I = D.inputs, MK = D.marks, CK = D.check;
-  const Ca = D.curves.a, Cc = D.curves.c;
+  const Cb = D.curves.b, Cc = D.curves.c;
 
   // ------------------------------------------------------------------ 3.1 Annex C
   {
@@ -45,19 +45,19 @@ export async function build(E, T, D) {
   {
     const B = b('3.2');
     const S = new Scene(B.start, B.end);
-    clause('EN 1993-1-5 · C.6 material properties · C.7 loads', B.start + 0.3, B.end);
+    clause('NS-EN 1993-1-5:2006+A2:2019 · C.6, Figure C.2 · C.7', B.start + 0.3, B.end);
     const ch2 = S.chart({ x: 200, y: 200, w: 800, h: 560, xmin: 0, xmax: 5, ymin: 0, ymax: 1.6, xticks: [0, 1, 2, 3, 4, 5], yticks: [0, 0.4, 0.8, 1.2, 1.6],
-      yfmt: (v) => v.toFixed(1), xlabel: 'Strain · %', ylabel: 'σ / f<sub>y</sub>', title: 'MATERIAL MODELS OF C.6 (SCHEMATIC)' });
+      yfmt: (v) => v.toFixed(1), xlabel: 'Strain · %', ylabel: 'σ / f<sub>y</sub>', title: 'MATERIAL MODELS · C.6, FIGURE C.2' });
     ch2.show(B.start + 0.4);
     const ey = 345 / 210000 * 100;
     const mods = [
       ['a', '(a) without strain hardening', COL.cyan, [[0, 0], [ey, 1], [5, 1]]],
-      ['b', '(b) nominal plateau slope', '#9fb2c2', [[0, 0], [ey, 1], [5, 1.05]]],
-      ['c', '(c) linear strain hardening', COL.amber, [[0, 0], [ey, 1], [5, 1 + (5 - ey) / 100 * 210000 / 100 / 345]]],
+      ['b', '(b) nominal plateau slope · tan⁻¹(E/10 000)', '#9fb2c2', [[0, 0], [ey, 1], [5, 1 + (5 - ey) / 100 * 210000 / 10000 / 345]]],
+      ['c', '(c) linear strain hardening · tan⁻¹(E/100)', COL.amber, [[0, 0], [ey, 1], [5, 1 + (5 - ey) / 100 * 210000 / 100 / 345]]],
       ['d', '(d) true stress-strain curve from tests', COL.coral, [[0, 0], [ey, 1], [1.4, 1.0], ...Array.from({ length: 20 }, (_, k) => { const x = 1.4 + 3.6 * (k + 1) / 20; return [x, 1.0 + 0.48 * (1 - Math.exp(-(x - 1.4) / 1.6))]; })]],
     ];
     mods.forEach(([cue, name, col, pts], i) => {
-      ch2.curve(pts, { color: col, width: 4, t: c('3.2', cue), d: 0.7 });
+      ch2.curve(pts, { color: col, width: cue === 'b' ? 3 : 4, dash: cue === 'b' ? '9 7' : null, t: c('3.2', cue), d: 0.7 });
       const lb = S.div(name, { x: 1040, y: 260 + i * 56, cls: 'small', style: `color:${col};font-size:25px;font-weight:650` });
       lb.in(c('3.2', cue), 0.4, 'left');
     });
@@ -73,13 +73,13 @@ export async function build(E, T, D) {
   {
     const B = b('3.3');
     const S = new Scene(B.start, B.end);
-    clause('EN 1993-1-5 · C.8 limit state criteria', B.start + 0.3, B.end);
-    const card = S.card(`<div class="ref">EN 1993-1-5 · C.8 (1) · WORDING ABRIDGED</div>
-      <div class="quote" style="font-size:28px">The ultimate limit state criteria:</div>
-      <div class="quote p1" style="font-size:28px;margin-top:10px">1. structures susceptible to buckling: attainment of the <span class="q">maximum load</span></div>
-      <div class="quote p2" style="font-size:28px;margin-top:10px">2. regions subjected to tensile stresses: attainment of a limiting value of the <span class="q">principal membrane strain</span></div>
-      <div class="small p3" style="font-size:24px;margin-top:18px;color:#e9f2f9">NOTE 1 · The National Annex may specify the limiting value of a principal strain. <span class="c-amber" style="font-weight:750">A value of 5 % is recommended.</span></div>
-      <div class="small p4" style="font-size:24px;margin-top:12px;color:#e9f2f9">NOTE 2 · Other criteria may be used, e.g. attainment of the yielding criterion or limitation of the yielding zone.</div>`,
+    clause('NS-EN 1993-1-5:2006+A2:2019 · C.8 limit state criteria', B.start + 0.3, B.end);
+    const card = S.card(`<div class="ref">NS-EN 1993-1-5:2006+A2:2019 · C.8 LIMIT STATE CRITERIA</div>
+      <div class="quote" style="font-size:28px">(1) The ultimate limit state criteria should be used as follows:</div>
+      <div class="quote p1" style="font-size:28px;margin-top:10px">1. for structures susceptible to buckling: attainment of the <span class="q">maximum load</span>.</div>
+      <div class="quote p2" style="font-size:28px;margin-top:10px">2. for regions subjected to tensile stresses: attainment of a limiting value of the <span class="q">principal membrane strain</span>.</div>
+      <div class="small p3" style="font-size:24px;margin-top:18px;color:#e9f2f9">NOTE 1: The National Annex may specify the limiting of principal strain. <span class="c-amber" style="font-weight:750">A value of 5% is recommended.</span></div>
+      <div class="small p4" style="font-size:24px;margin-top:12px;color:#e9f2f9">NOTE 2: Other criteria may be used, e.g. attainment of the yielding criterion or limitation of the yielding zone.</div>`,
     { x: 110, y: 170, w: 1060, cls: 'glass' });
     card.in(B.start + 0.4, 0.6, 'rise');
     later(() => {
@@ -107,7 +107,7 @@ export async function build(E, T, D) {
   }
 
   // ------------------------------------------------------------------ 3.4 running the ring
-  const aU = CK.alpha_u, aPl = MK.a.plateau;
+  const aU = CK.alpha_u, aPl = MK.b.plateau;
   {
     const B = b('3.4');
     const panel = { x: 40, y: 140, w: 900, h: 800 };
@@ -134,7 +134,7 @@ export async function build(E, T, D) {
       },
     });
     const S = new Scene(B.start, B.end);
-    clause('EN 1993-1-5 · C.6 (a), (c) · C.7 · C.8 — slot ring D', B.start + 0.3, B.end);
+    clause('EN 1993-1-5 · Figure C.2 (b), (c) · C.7 · C.8 — slot ring D', B.start + 0.3, B.end);
     const chc = S.chart({ x: 1060, y: 190, w: 780, h: 520, xmin: 0, xmax: 12, ymin: 0, ymax: 2.0, xticks: [0, 2, 4, 6, 8, 10, 12], yticks: [0, 0.5, 1.0, 1.5, 2.0],
       yfmt: (v) => v.toFixed(1), xlabel: 'Radial displacement at the contact · mm', ylabel: 'Load multiplier α', title: 'MATERIALLY NON-LINEAR ANALYSIS · LOAD-DISPLACEMENT' });
     chc.show(B.start + 0.3);
@@ -150,8 +150,8 @@ export async function build(E, T, D) {
       pts.push([dOf(Cc, a), a]);
       pc.el.setAttribute('d', chc.pathD(pts.filter(([x]) => x <= 12.5)));
     });
-    chc.curve(Ca.filter(([x]) => x <= 12).map(([x, y]) => [x, y]), { color: COL.cyan, width: 4, t: K.flat - 1.0, d: 1.6 });
-    const la = S.div('(a) no hardening', { x: chc.X(4.2), y: chc.Y(aPl) + 34, cls: 'small c-cyan', style: 'font-size:22px' });
+    chc.curve(Cb.filter(([x]) => x <= 12).map(([x, y]) => [x, y]), { color: COL.cyan, width: 4, t: K.flat - 1.0, d: 1.6 });
+    const la = S.div('(b) nominal plateau, no hardening', { x: chc.X(3.6), y: chc.Y(aPl) + 34, cls: 'small c-cyan', style: 'font-size:22px' });
     la.in(K.flat + 0.4, 0.5);
     const lc = S.div('(c) linear hardening', { x: chc.X(8.6), y: chc.Y(1.93), cls: 'small c-amber', style: 'font-size:22px' });
     lc.in(K.hard, 0.5);
@@ -182,32 +182,32 @@ export async function build(E, T, D) {
     al.in(K.lin, 0.5);
     probe3D(S, () => ringPoint(44, I.ro, RING_D.y1, fNow, DEFS), 'tension · behind the contact', { t0: K.y + 0.6, t1: K.spread + 4, dx: 110, dy: 140, color: '#ffffff' });
     probe3D(S, () => ringPoint(2, I.ri, RING_D.y1, fNow, DEFS), 'at the strut', { t0: K.spread + 0.4, t1: K.five, dx: -60, dy: -160, color: '#ffffff' });
-    note(S, `Fibre beam model of the ring (C.6 (c): hardening E/100; (a): nominal slope E/10 000); 3D shows model (c), displacements ×${DEFS}`, { t0: B.start + 1.2, t1: B.end - 0.4 });
+    note(S, `Fibre beam model of the ring · Figure C.2 (c): tan⁻¹(E/100), (b): tan⁻¹(E/10 000) · 3D shows model (c), displacements ×${DEFS}`, { t0: B.start + 1.2, t1: B.end - 0.4 });
   }
 
   // ------------------------------------------------------------------ 3.5 the margin (C.9)
   {
     const B = b('3.5');
     const S = new Scene(B.start, B.end);
-    clause('EN 1993-1-5 · C.9 partial factors', B.start + 0.3, B.end);
-    const eq = S.eq('\\alpha_u \\;\\ge\\; \\alpha_1\\,\\alpha_2', { x: 960, y: 230, size: 84 });
+    clause('NS-EN 1993-1-5:2006+A2:2019 · C.9 partial factors · (C.2)', B.start + 0.3, B.end);
+    const eq = S.eq('\\alpha_u \\;>\\; \\alpha_1\\,\\alpha_2 \\qquad \\text{(C.2)}', { x: 960, y: 230, size: 84 });
     eq.in(c('3.5', 'au'), 0.9, 'write');
-    const d1 = S.card('<div style="font-weight:750;font-size:29px"><span class="c-amber">α<sub>1</sub></span> · model uncertainty of the FE modelling</div><div class="small" style="font-size:22px">from evaluations of test calibrations (EN 1990, Annex D)</div>', { x: 160, y: 360, w: 760, cls: 'glass' });
+    const d1 = S.card('<div style="font-weight:750;font-size:29px"><span class="c-amber">α<sub>1</sub></span> · model uncertainty of the FE-modelling used</div><div class="small" style="font-size:22px">obtained from evaluations of test calibrations (Annex D to EN 1990)</div>', { x: 160, y: 360, w: 760, cls: 'glass' });
     d1.in(c('3.5', 'a1') - 0.2, 0.6, 'left');
-    const d2 = S.card('<div style="font-weight:750;font-size:29px"><span class="c-amber">α<sub>2</sub></span> · scatter of loading and resistance</div><div class="small" style="font-size:22px">γ<sub>M1</sub> if instability governs · γ<sub>M2</sub> if fracture governs</div>', { x: 1000, y: 360, w: 760, cls: 'glass' });
+    const d2 = S.card('<div style="font-weight:750;font-size:29px"><span class="c-amber">α<sub>2</sub></span> · scatter of the loading and resistance models</div><div class="small" style="font-size:22px">γ<sub>M1</sub> if instability governs · γ<sub>M2</sub> if fracture governs</div>', { x: 1000, y: 360, w: 760, cls: 'glass' });
     d2.in(c('3.5', 'a2') - 0.2, 0.6, 'right');
     const e1 = S.eq('\\alpha_1 = 1.0\\ \\text{(benchmarked model)}, \\quad \\alpha_2 \\le 1.3', { x: 960, y: 560, size: 40 });
     e1.in(c('3.5', 'ex'), 0.8, 'write');
-    const e2 = S.eq(`\\text{(c) hardening:}\\quad \\alpha_u = ${aU.toFixed(2)} \\;\\ge\\; 1.0\\times1.3 = 1.30`, { x: 960, y: 650, size: 42 });
+    const e2 = S.eq(`\\text{(c) linear hardening:}\\quad \\alpha_u = ${aU.toFixed(2)} \\;>\\; 1.0\\times1.3 = 1.30`, { x: 960, y: 650, size: 42 });
     e2.in(c('3.5', 'pass'), 0.8, 'write');
     stamp(S, 'pass', { x: 1640, y: 650, t: c('3.5', 'pass') + 0.8, kind: 'pass', size: 26 });
-    const e3 = S.eq(`\\text{(a) no hardening:}\\quad \\alpha_u = ${MK.a.e5.alpha.toFixed(2)} \\;\\ge\\; 1.30`, { x: 960, y: 730, size: 42 });
+    const e3 = S.eq(`\\text{(b) nominal plateau:}\\quad \\alpha_u = ${MK.b.e5.alpha.toFixed(2)} \\;>\\; 1.30`, { x: 960, y: 730, size: 42 });
     e3.in(c('3.5', 'passa'), 0.8, 'write');
     stamp(S, 'pass', { x: 1640, y: 730, t: c('3.5', 'passa') + 0.8, kind: 'pass', size: 26 });
     const v1 = S.card(`<div class="tiny">ELASTIC CHECK · 6.2.1(5)</div><div style="font-weight:750;font-size:30px">utilisation <span class="num c-red">${D.elastic.util.toFixed(2)}</span> → fails</div>`, { x: 300, y: 830, w: 600, cls: 'glass', style: 'border-color:rgba(255,77,94,0.6)' });
     v1.in(c('3.5', 'verdict'), 0.6, 'rise');
-    const v2 = S.card(`<div class="tiny">NON-LINEAR · ANNEX C</div><div style="font-weight:750;font-size:30px">α<sub>u</sub> <span class="num c-green">${aU.toFixed(2)}</span> ≥ 1.30 → accepted</div>`, { x: 1020, y: 830, w: 600, cls: 'glass', style: 'border-color:rgba(70,211,154,0.6)' });
+    const v2 = S.card(`<div class="tiny">NON-LINEAR · ANNEX C</div><div style="font-weight:750;font-size:30px">α<sub>u</sub> <span class="num c-green">${aU.toFixed(2)}</span> &gt; 1.30 → accepted</div>`, { x: 1020, y: 830, w: 600, cls: 'glass', style: 'border-color:rgba(70,211,154,0.6)' });
     v2.in(c('3.5', 'verdict') + 0.6, 0.6, 'rise');
-    note(S, 'α₁ = 1.0 is an assumption for the example; take α₂ (γM1, γM2) from the governing code and National Annex', { t0: c('3.5', 'ex') + 1, t1: B.end - 0.4 });
+    note(S, 'C.9 NOTE: γM1 and γM2 as specified in the relevant parts of EN 1993 (and the NA) · α₁ = 1.0 is an assumption of the example', { t0: c('3.5', 'ex') + 1, t1: B.end - 0.4 });
   }
 }

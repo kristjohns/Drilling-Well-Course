@@ -8,9 +8,10 @@ Teaching inputs, not project data:
 
 Checks:
   1. elastic: von Mises at the critical point <= fy / gamma_M0          (EN 1993-1-1 6.2.1(5))
-  2. non-linear FE (EN 1993-1-5 Annex C): material models of C.6 (a) no hardening, (c) linear hardening;
+  2. non-linear FE (EN 1993-1-5 Annex C): material models of C.6 / Figure C.2 (b) nominal plateau slope E/10 000
+     (no strain hardening), (c) linear strain hardening E/100;
      load multiplier alpha on the design load (C.7); limit states of C.8: maximum load (buckling) or 5 % principal
-     membrane strain (tension); C.9: alpha_u >= alpha_1 * alpha_2.
+     membrane strain (tension); C.9, formula (C.2): alpha_u > alpha_1 * alpha_2.
   3. what a 2 % strain limit would change, and how the strain at a point depends on the mesh.
 Writes src/data/model.json.
 """
@@ -34,7 +35,7 @@ N_FINE = 288
 N_VIEW = 360                 # samples around the ring for the 3D contour (1 degree)
 EPS_Y = FY / E
 
-MODELS = {'a': E / 10000, 'c': E / 100}       # (a) "no hardening" with a nominal slope for the solver, (c) E/100
+MODELS = {'b': E / 10000, 'c': E / 100}       # Figure C.2: (b) nominal plateau slope E/10 000 (no hardening), (c) linear hardening E/100
 
 
 def steps(dmax):
@@ -120,7 +121,7 @@ def main():
             'last': {'alpha': float(rows[-1, 1]), 'delta': float(rows[-1, 0]), 'eps': float(rows[-1, 2])},
         }
         print(f'model {m}: ' + ', '.join(f'{k} {v["alpha"]:.3f}' for k, v in marks[m].items() if v))
-    marks['a']['plateau'] = marks['a']['last']['alpha']
+    marks['b']['plateau'] = marks['b']['last']['alpha']
     # ------------------------------------------------------------------ mesh study
     mesh = {}
     for m, Et in MODELS.items():
@@ -139,17 +140,17 @@ def main():
     D = {
         'inputs': {'E': E, 'fy': FY, 'fu': FU, 'gM0': GM0, 'a12_hi': A2_HI, 'ri': RI, 'w': WR, 't': TR, 'R': R, 'ro': RI + WR,
                    'load_deg': LOAD_DEG, 'spread_deg': SPREAD, 'PD': PD, 'struts_deg': [0, 90, 180, 270], 'n_fine': N_FINE,
-                   'n_view': N_VIEW, 'eps_y': EPS_Y, 'models': {'a': 'E/10000', 'c': 'E/100'}},
+                   'n_view': N_VIEW, 'eps_y': EPS_Y, 'models': {'b': 'E/10000', 'c': 'E/100'}},
         'elastic': elastic, 'curves': curves, 'marks': marks, 'mesh': mesh, 'fields': fields,
         'check': {'alpha_u': a_u, 'alpha_1': 1.0, 'alpha_2_hi': A2_HI, 'ok': a_u >= A2_HI,
-                  'e2_vs_e5_c': marks['c']['e2']['alpha'] / a_u - 1, 'e2_vs_e5_a': marks['a']['e2']['alpha'] / marks['a']['e5']['alpha'] - 1,
-                  'pl_over_y': marks['a']['plateau'] / elastic['alpha_y']},
+                  'e2_vs_e5_c': marks['c']['e2']['alpha'] / a_u - 1, 'e2_vs_e5_b': marks['b']['e2']['alpha'] / marks['b']['e5']['alpha'] - 1,
+                  'pl_over_y': marks['b']['plateau'] / elastic['alpha_y']},
     }
     with open(OUT, 'w') as f:
         json.dump(D, f, separators=(',', ':'))
     print(f'elastic: sigma {sig_unit:.1f} MPa/MN, sigma_d {sig_d:.0f} MPa vs fyd {FY / GM0:.0f} -> util {sig_d / (FY / GM0):.2f}; '
           f'P_y {P_y:.3f} MN (alpha {P_y / PD:.3f}); crit {crit}')
-    print(f'alpha_u (c, 5 %) {a_u:.3f} vs alpha1*alpha2 <= {A2_HI}; plateau (a) {marks["a"]["plateau"]:.3f}')
+    print(f'alpha_u (c, 5 %) {a_u:.3f} vs alpha1*alpha2 <= {A2_HI}; plateau (b) {marks["b"]["plateau"]:.3f}')
     print(f'wrote {OUT} ({os.path.getsize(OUT) / 1024:.0f} kB) in {time.time() - t0:.0f} s')
 
 

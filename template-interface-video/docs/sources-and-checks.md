@@ -40,24 +40,33 @@ to ISO 13628-15 clause 5.4 and NORSOK N-001.
   (a NORSOK N-006 extract found in the search refers to them). The video does not quote numbers from it.
 * ISO 13628-15:2011 clause 5.4 was not read.
 
-## 3. Eurocode 3 (secondary / not verified here)
+## 3. Eurocode 3
+
+EN 1993-1-5 Annex C, clauses C.6 (Figure C.2), C.7, C.8 and C.9, was **read** from pages 48–49 of
+NS-EN 1993-1-5:2006+AC+A1:2017+A2:2019+NA:2019 (screenshot provided by the user). The on-screen C.8 card quotes it.
 
 | Statement | Source | Level |
 | --- | --- | --- |
-| EN 1993-1-5 Annex C, C.8(1): structures susceptible to buckling → attainment of the maximum load; regions subjected to tensile stresses → attainment of a limiting value of the principal membrane strain. NOTE 1: the National Annex may specify the limiting value; **a value of 5 % is recommended** | IDEA StatiCa support centre ("Why is 5 % plastic strain limit used…", citing Annex C, C.8, Note 1); Hilti PROFIS technical background (5 % default under the same clause, engineer to check national rules); Cyprus National Annex to EN 1993-1-5, NA 2.13 for C.8(1) (adopts the recommended 5 %); Dlubal knowledge base; a 2025 Alexandria Engineering Journal paper on design plastic strain limits ("Annex C of EN 1993-1-5 sets the design plastic strain limit at 5 %") | Secondary |
-| C.8 NOTE 2: other criteria may be used, e.g. attainment of the yielding criterion or limitation of the yielding zone | general knowledge of EN 1993-1-5:2006 | Not verified here; the on-screen card says "wording abridged" |
-| Annex C is informative | general knowledge | Not verified here |
-| C.6 material models (a) without strain hardening, (b) with a nominal plateau slope, (c) with linear strain hardening, (d) true stress-strain curve from tests; characteristic values | general knowledge | Not verified here. The slopes of Figure C.2 are deliberately not quoted (IDEA StatiCa cites tan⁻¹(E/1000) for the plateau slope, memory said E/10 000) |
-| C.7 single load multiplier α on the factored design loads | general knowledge | Not verified here |
-| C.9: αu ≥ α1·α2; α1 model uncertainty from test calibrations (EN 1990 Annex D); α2 = γM1 if instability governs, γM2 if fracture governs | general knowledge | Not verified here |
+| C.6, Figure C.2: (a) without strain hardening; (b) with a nominal plateau slope tan⁻¹(E/10000) "(or similarly small value)"; (c) with linear strain hardening tan⁻¹(E/100); (d) true stress-strain curve and stress-strain curve from tests. NOTE: for E the nominal value is relevant | NS-EN 1993-1-5 p. 48–49 | Read |
+| C.7 (1): "The loads applied to the structures should include relevant load factors and load combination factors. For simplicity a single load multiplier α may be used." | NS-EN 1993-1-5 p. 49 | Read |
+| C.8 (1): "1. for structures susceptible to buckling: attainment of the maximum load. 2. for regions subjected to tensile stresses: attainment of a limiting value of the principal membrane strain." NOTE 1: "The National Annex may specify the limiting of principal strain. A value of 5% is recommended." NOTE 2: "Other criteria may be used, e.g. attainment of the yielding criterion or limitation of the yielding zone." | NS-EN 1993-1-5 p. 49; also IDEA StatiCa, Hilti, Cyprus NA (NA 2.13 adopts 5 %), Dlubal, a 2025 journal paper | Read |
+| C.9: αu sufficient for the required reliability; αu = α1·α2 with α1 the model uncertainty of the FE-modelling used (from test calibrations, Annex D to EN 1990) and α2 the scatter of the loading and resistance models (γM1 if instability governs, γM2 if fracture governs); verify **αu > α1·α2 (C.2)**; NOTE: γM1 and γM2 as specified in the relevant parts of EN 1993 | NS-EN 1993-1-5 p. 49 | Read |
+| The value Norway's National Annex (NA:2019) gives for C.8 NOTE 1 | not seen | Open: check NA.2 of NS-EN 1993-1-5 |
+| Annex C is informative | general knowledge (heading not on the pages seen) | Not verified here |
+| C.6 (1)–(2): characteristic material values; the list of models (a)–(d) | general knowledge; the models themselves are in Figure C.2 | Partly read |
 | EN 1993-1-1 6.2.1(5): von Mises yield criterion at the critical point with fy/γM0 (formula 6.1) | general knowledge | Not verified here |
 | EN 1993-1-1 3.2.1: fy = ReH and fu = Rm from the product standard | general knowledge | Not verified here |
 | EN 10025-2: S355 nominal yield strength 355 / 345 / 335 MPa for t ≤ 16 / 16–40 / 40–63 mm; Rp0.2 when there is no distinct yield point | general knowledge | Not verified here |
 | EN 1993-1-14:2025 "Design assisted by finite element analysis" exists (second generation), developed from Annex C of EN 1993-1-5 | CEN / national catalogue listings (ELOT, SIS, DIN 2025-10); Dunai et al., *Structures* (2026), "Structural steel design assisted by finite element analysis – an introduction to EN 1993-1-14 and TR 1993-1-141" | Secondary |
 
+The first cut of the video said "αu ≥ α1·α2" and labelled the analysis without hardening "(a)"; after reading the
+pages it says "αu > α1·α2" (formula C.2) and labels that analysis "(b)", because the solver used the nominal plateau
+slope tan⁻¹(E/10 000) of Figure C.2 (b).
+
 ## 4. The 2 % (what was found, and what was not)
 
-* **No 2 % strain criterion was found in EN 1993-1-5.** Annex C has one strain value, the recommended 5 % (NDP).
+* **No 2 % strain criterion was found in EN 1993-1-5.** Annex C has one strain value, the recommended 5 % (NDP);
+  the pages read (C.6–C.9) contain no other strain limit.
   U-001:2026 contains no 2 % strain limit either.
 * Places where a 2 % appears in offshore practice, **none of them verified here and none of them in EN 1993-1-5**:
   * DNV-RP-C208 (non-linear FE capacity) has a "gross yielding" check in addition to local ductile fracture; a forum
@@ -83,7 +92,7 @@ to ISO 13628-15 clause 5.4 and NORSOK N-001.
 | Supports | four struts at 0°, 90°, 180°, 270°, pinned (radial and tangential restraint, free rotation) |
 | Load | contact pressure of the conductor on the inner face, cosine distribution over ±20°, centred at 45° (between two struts) |
 | Design contact force | 1.6 MN, ULS, load factor 1.3 included (assumed result of a load-share analysis) |
-| Material | E 210 000 MPa, fy 345 MPa; (a) no hardening (nominal slope E/10 000 for the solver), (c) linear hardening E/100 |
+| Material | E 210 000 MPa, fy 345 MPa; Figure C.2 (b) nominal plateau slope E/10 000 (no hardening), (c) linear hardening E/100 |
 | Analysis | 2D frame of 288 straight fibre beam elements (3 Gauss points, 40 fibres over the 200 mm depth), materially non-linear, geometrically linear, displacement control at the loaded node |
 
 | Result | Value |
@@ -92,10 +101,10 @@ to ISO 13628-15 clause 5.4 and NORSOK N-001.
 | Elastic check | 416 / (345/1.15 = 300) = 1.39 → fails |
 | First yield | α = 0.83 (1.33 MN) |
 | 0.2 % plastic strain at the edge | α = 1.25 |
-| Model (a): plateau (mechanism) / 5 % / 2 % | 1.54 / 1.53 / 1.49 |
+| Model (b): plateau (mechanism) / 5 % / 2 % | 1.54 / 1.53 / 1.49 |
 | Model (c): 5 % (αu) / 2 % | 1.76 / 1.59 |
-| C.9 | αu = 1.76 ≥ α1·α2 = 1.0 × 1.3 (α1 assumed 1.0 for a benchmarked model, α2 taken no larger than 1.3) |
-| Mesh study, model (a), strain at α = 1.50 | 1.41 % (5°), 1.98 % (2.5°), 2.27 % (1.25°), 2.40 % (0.625°); α at 5 %: 1.54 … 1.52 |
+| C.9 (C.2) | αu = 1.76 > α1·α2 = 1.0 × 1.3 (α1 assumed 1.0 for a benchmarked model, α2 taken no larger than 1.3) |
+| Mesh study, model (b), strain at α = 1.50 | 1.41 % (5°), 1.98 % (2.5°), 2.27 % (1.25°), 2.40 % (0.625°); α at 5 %: 1.54 … 1.52 |
 | Mesh study, model (c), strain at α = 1.50 | 0.98 %, 1.07 %, 1.09 %, 1.10 % (converged) |
 
 Limitations: the ring is a beam model, not a shell model; struts are pins; the stocky ring is assumed not to buckle

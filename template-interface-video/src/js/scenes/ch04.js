@@ -31,7 +31,7 @@ export async function build(E, T, D) {
     const axis = S.path(`M${X0 - 30},${Y0} L${X0 + 760},${Y0}`, { stroke: 'rgba(200,225,245,0.55)', width: 2 });
     axis.in(c('4.1', 'cmp'), 0.5, 'none');
     S.div('load multiplier α at the strain limit', { x: X0 - 30, y: 220, cls: 'tiny' }).in(c('4.1', 'cmp'), 0.5);
-    const grp = [['c', 'with hardening (c)', MK.c.e2.alpha, MK.c.e5.alpha, COL.amber], ['a', 'no hardening (a)', MK.a.e2.alpha, MK.a.e5.alpha, COL.cyan]];
+    const grp = [['c', 'linear hardening (c)', MK.c.e2.alpha, MK.c.e5.alpha, COL.amber], ['a', 'nominal plateau (b)', MK.b.e2.alpha, MK.b.e5.alpha, COL.cyan]];
     grp.forEach(([cue, name, a2, a5, col], i) => {
       const x = X0 + i * 380, t = c('4.1', cue);
       for (const [k, a, op, lab] of [[0, a2, 0.55, '2 %'], [1, a5, 1, '5 %']]) {
@@ -61,19 +61,19 @@ export async function build(E, T, D) {
       D.mesh[m].forEach((ms, i) => chm.curve(ms.curve.map(([a, e]) => [e, a]).filter(([e]) => e <= 6.2), { color: cols[i], width: 3.5, t: t + 0.4 + i * 0.5, d: 1.0 }));
       return chm;
     };
-    const ca = mkChart(140, 'a', 1.2, 1.6, '(a) NO HARDENING · FOUR ELEMENT SIZES', c('4.2', 'mesh') - 1.0);
+    const ca = mkChart(140, 'b', 1.2, 1.6, '(b) NOMINAL PLATEAU · FOUR ELEMENT SIZES', c('4.2', 'mesh') - 1.0);
     const cc = mkChart(1020, 'c', 1.2, 1.8, '(c) LINEAR HARDENING · FOUR ELEMENT SIZES', c('4.2', 'harden') - 0.4);
-    const lg = S.div(D.mesh.a.map((ms, i) => `<span style="display:inline-flex;align-items:center;gap:8px;margin-right:22px"><span style="width:26px;height:4px;background:${cols[i]}"></span>${ms.deg.toFixed(ms.deg < 1 ? 3 : ms.deg < 2 ? 2 : 1).replace(/0+$/, '').replace(/\.$/, '')}° · ${Math.round(ms.L_mm)} mm</span>`).join(''),
+    const lg = S.div(D.mesh.b.map((ms, i) => `<span style="display:inline-flex;align-items:center;gap:8px;margin-right:22px"><span style="width:26px;height:4px;background:${cols[i]}"></span>${ms.deg.toFixed(ms.deg < 1 ? 3 : ms.deg < 2 ? 2 : 1).replace(/0+$/, '').replace(/\.$/, '')}° · ${Math.round(ms.L_mm)} mm</span>`).join(''),
       { x: 960, y: 92, cls: 'small', anchor: 'ct', style: 'font-size:21px' });
     lg.in(c('4.2', 'mesh') - 0.6, 0.5);
     // alpha = 1.50 marker with the strains of the four meshes
     const yl = S.path(`M${ca.X(0)},${ca.Y(1.5)} L${ca.X(6)},${ca.Y(1.5)}`, { stroke: '#ffffff', width: 2, dash: '5 6' });
     yl.in(c('4.2', 'mesh') + 2.5, 0.5, 'none');
-    D.mesh.a.forEach((ms, i) => { if (ms.eps_at_150 !== null) ca.dot(ms.eps_at_150, 1.5, { color: cols[i], r: 8, t: c('4.2', 'mesh') + 3.0 + i * 0.3 }); });
-    const e0 = D.mesh.a[0].eps_at_150, e3 = D.mesh.a[3].eps_at_150;
+    D.mesh.b.forEach((ms, i) => { if (ms.eps_at_150 !== null) ca.dot(ms.eps_at_150, 1.5, { color: cols[i], r: 8, t: c('4.2', 'mesh') + 3.0 + i * 0.3 }); });
+    const e0 = D.mesh.b[0].eps_at_150, e3 = D.mesh.b[3].eps_at_150;
     const ml = S.div(`same load α 1.50: <span class="num">${e0.toFixed(1)}</span> % coarse … <span class="num">${e3.toFixed(1)}</span> % fine`, { x: ca.X(0.2), y: ca.Y(1.5) + 70, cls: 'label', style: 'font-size:23px' });
     ml.in(c('4.2', 'mesh') + 4.2, 0.5, 'rise');
-    const a5 = D.mesh.a.map((ms) => ms.e5.alpha);
+    const a5 = D.mesh.b.map((ms) => ms.e5.alpha);
     const ll = S.div(`α at 5 %: <span class="num">${Math.max(...a5).toFixed(2)}</span> … <span class="num">${Math.min(...a5).toFixed(2)}</span> — the load hardly moves`, { x: ca.X(0.2), y: ca.Y(1.5) + 115, cls: 'label c-amber', style: 'font-size:23px' });
     ll.in(c('4.2', 'load'), 0.5, 'rise');
     const hl = S.div('the four curves lie on top of each other', { x: cc.X(0.3), y: cc.Y(1.3), cls: 'label c-green', style: 'font-size:23px' });
