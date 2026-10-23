@@ -1,6 +1,6 @@
 # The template interface: when has it failed? — transcript
 
-NORSOK U-001:2026, Annex B. Running time 11:18. Timestamps are mm:ss.
+NORSOK U-001:2026 → N-001 → N-004 → EN 1993-1-5 Annex C. Running time 11:18. Timestamps are mm:ss.
 
 
 ## 00:00  Cold open

@@ -326,7 +326,7 @@ def main():
     def mmss(t):
         return f'{int(t // 60):02d}:{int(t % 60):02d}'
     tr = ['# The template interface: when has it failed? — transcript', '',
-          f'NORSOK U-001:2026, Annex B. Running time {mmss(DUR)}. Timestamps are mm:ss.', '']
+          f'NORSOK U-001:2026 → N-001 → N-004 → EN 1993-1-5 Annex C. Running time {mmss(DUR)}. Timestamps are mm:ss.', '']
     cur = None
     for c, b, s, shown in sents:
         if c['no'] != cur:
