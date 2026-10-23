@@ -11,12 +11,13 @@ limit-load and plastic-collapse checks, and ends with a worked example on the 3D
 | `out/acceptance-criteria_part1_1080p.mp4` | Cold open, 01 Load against capacity, 02 The stress-strain diagram |
 | `out/acceptance-criteria_part2_1080p.mp4` | 03 The elastic route: extracting stress, 04 The elastic-plastic route |
 | `out/acceptance-criteria_part3_1080p.mp4` | 05 Where strain is the criterion, 06 Worked example: the red spot, 07 Summary |
+| `out/acceptance-criteria_full_720p.mp4` | The whole film in one file, 720p (94 MiB), with subtitles and chapters |
 | `out/acceptance-criteria.srt` / `.vtt` | Captions for the full running time (numbers and symbols written the way they are read) |
 | `out/acceptance-criteria_transcript.md` | Full transcript with chapter and beat timestamps |
 | `out/poster.png` | Title-card still |
 
-The video is split into parts at chapter boundaries so that every file stays below GitHub's 100 MiB limit. Each part
-carries its own subtitle track and chapter markers.
+The 1080p video is split into parts at chapter boundaries so that every file stays below GitHub's 100 MiB limit; the
+720p file holds the whole film. Every file carries a subtitle track and chapter markers.
 
 ## The short answer
 
